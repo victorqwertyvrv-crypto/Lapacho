@@ -4357,6 +4357,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-25-b", fecha:"2026-10-25", items:[
+    "Google Drive revisa el ID de cliente antes de abrir la ventana de Google: si no tiene el formato correcto, avisa y te deja corregirlo o borrarlo, en lugar de mostrar el error 401 de Google.",
+    "La aplicación instalada busca siempre la versión más nueva cuando hay internet y no vuelve a descargar la lectura de fotos si ya la tenía."
+  ]},
   {id:"2026-10-25", fecha:"2026-10-25", items:[
     "Nuevo: «Feria de ciencias», en Inicio y en Herramientas › Para la escuela. Toma la materia, el año y el tema de tu planificación, propone una pregunta investigable situada en tu localidad y descarga en Word o PDF el proyecto completo: cronograma hasta la fecha de la feria, informe, carpeta de campo, tabla de datos, registro pedagógico, stand, guion del video y criterios de valoración.",
     "La estructura sigue los documentos 2026 del Programa Nacional de Ferias de Ciencias y Tecnología (foco principal STEAM, focos complementarios y Lengua como foco transversal). Si una idea no te convence, «Ver otra idea» propone la siguiente."
@@ -12832,7 +12836,7 @@ const GD = {token:"", vence:0, cliente:null, ocupado:false, pendiente:false, tim
 function gdCfg(){ const w = window.LAPACHO_GD || {}, p = leerPref().gdCfg || {}; return {clientId:w.clientId || p.clientId || "", apiKey:w.apiKey || p.apiKey || "", appId:w.appId || p.appId || "", forzar:!!w.forzar}; }
 function gdEstado(){ return leerPref().gd || {}; }
 function gdGuardarEstado(o){ prefSet("gd", {...gdEstado(), ...o}); }
-function gdDisponible(){
+function gdDisponibleBase(){
   const c = gdCfg();
   if (c.forzar) return {ok:true};
   if (!/^https:$/.test(location.protocol) || window.top !== window || /(^|\.)claude\.ai$|claudeusercontent|claude\.site/.test(location.hostname)) return {ok:false, motivo:"lugar"};
@@ -12976,7 +12980,7 @@ function avisosGD(){
   if (GD.error) return [{f:"0", t:GD.error, act:"gdrive"}];
   return [];
 }
-function renderGD(){
+function renderGDBase(){
   const P = $("gd-panel"); if (!P || !$("gdrive").open) return;
   const d = gdDisponible(), st = gdEstado(), c = gdCfg();
   if (!d.ok){
@@ -13008,7 +13012,7 @@ function bindGD(){
     const b = e.target.closest("[data-gd]"); if (!b) return;
     const v = b.dataset.gd;
     if (v === "respaldo"){ cerrarDialogo("gdrive"); abrirRespaldo(); return; }
-    if (v === "guardarcfg"){ prefSet("gdCfg", {clientId:$("gd-cid").value.trim(), apiKey:$("gd-key").value.trim(), appId:$("gd-app").value.trim()}); renderGD(); toast("Configuración guardada en este dispositivo."); return; }
+    if (v === "guardarcfg"){ gdGuardarCfg(); return; }
     if (v === "conectar"){
       if (!$("gd-ok").checked){ toast("Marcá que entendés dónde se guardan los datos."); return; }
       try { await gdPedirToken(false); gdGuardarEstado({activo:true, cuenta:true}); renderGD(); await gdSincronizar(true); }
@@ -15934,7 +15938,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "40 (25/10/2026)";
+const LAPACHO_VERSION = "40.1 (25/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -17779,6 +17783,43 @@ function bindFeria(){
   });
 }
 function init40(){ try { bindFeria(); } catch (e) { registrarError("init40", e, "aviso"); } }
+
+/* ============================================================
+   Versión 40.1: el ID de cliente de Google se revisa antes de usarlo
+   ============================================================ */
+const GD_ID_RE = /^\d{6,}-[a-z0-9_-]+\.apps\.googleusercontent\.com$/i;
+const gdLimpiarId = id => String(id || "").trim().replace(/^["'«“]+|["'»”]+$/g, "").trim();
+function gdIdValido(id){ return GD_ID_RE.test(gdLimpiarId(id)); }
+function gdDisponible(){
+  const d = gdDisponibleBase();
+  if (!d.ok) return d;
+  const c = gdCfg();
+  if (!c.forzar && !gdIdValido(c.clientId)) return {ok:false, motivo:"id"};
+  return d;
+}
+function renderGD(){
+  const P = $("gd-panel"); if (!P || !$("gdrive").open) return;
+  const d = gdDisponible();
+  if (!d.ok && d.motivo === "id"){
+    P.innerHTML = `<p class="aviso-c" role="alert">El ID de cliente guardado no tiene el formato de Google, así que no se abre la conexión. Un ID válido es un número largo, un guion y un texto, y termina en «.apps.googleusercontent.com». Corregilo o borralo en «Configurar el acceso a Google».</p>${htmlGDConfig(gdCfg())}`;
+    const det = P.querySelector("details"); if (det) det.open = true;
+    const inp = $("gd-cid"); if (inp){ inp.setAttribute("aria-invalid", "true"); inp.setAttribute("aria-describedby", "gd-cid-err"); inp.insertAdjacentHTML("afterend", `<p class="hint campo-err" id="gd-cid-err">Tiene que terminar en .apps.googleusercontent.com</p>`); }
+    return;
+  }
+  renderGDBase();
+}
+function gdGuardarCfg(){
+  const id = gdLimpiarId($("gd-cid").value), key = $("gd-key").value.trim(), app = $("gd-app").value.trim();
+  if (id && !gdIdValido(id)){
+    const inp = $("gd-cid"); inp.setAttribute("aria-invalid", "true"); inp.focus();
+    toast("Ese ID no parece válido: tiene que terminar en .apps.googleusercontent.com. No se guardó.");
+    return;
+  }
+  if (app && !/^\d+$/.test(app)){ $("gd-app").focus(); toast("El número de proyecto lleva solo números. No se guardó."); return; }
+  prefSet("gdCfg", {clientId:id, apiKey:key, appId:app});
+  renderGD();
+  toast(id ? "Configuración guardada en este dispositivo." : "Se borró el ID de cliente de este dispositivo.");
+}
 
 /* ============================================================
    Inicio
