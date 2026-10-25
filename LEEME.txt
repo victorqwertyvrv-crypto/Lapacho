@@ -1,0 +1,63 @@
+LAPACHO (PLANIFICADOR DE CLASES) PARA ANDROID
+Archivos para publicar en GitHub Pages e instalar como aplicación.
+
+Qué hay en esta carpeta
+- index.html: el planificador completo (funciona sin internet).
+- manifest.json: nombre, colores e íconos de la aplicación.
+- sw.js: hace que funcione sin conexión una vez abierta.
+- icon-192.png, icon-512.png, icon-maskable-512.png: íconos.
+- lapacho-config.js: configuración de Google Drive (sin claves: solo el ID de cliente).
+- ocr/: lectura de texto en fotos sin internet (Tesseract.js 5.1.1 y el modelo en español, unos 10 MB).
+  Subí la carpeta completa, con sus subcarpetas core/ y lang/. Si no la subís, la lectura de fotos
+  igual funciona, pero necesita internet.
+
+1. Subir los archivos a GitHub (desde Chrome, con «Sitio para computadoras»)
+   - Abrí: https://github.com/victorqwertyvrv-crypto/planificador-docente-/upload/main
+   - Arrastrá todos los archivos y la carpeta ocr/ de este paquete (no subas LEEME.txt si no querés).
+   - Abajo, tocá «Commit changes».
+
+2. Activar GitHub Pages
+   - En el repositorio: Settings > Pages.
+   - Source: «Deploy from a branch». Branch: main, carpeta / (root). Save.
+   - En uno o dos minutos aparece la dirección:
+     https://victorqwertyvrv-crypto.github.io/planificador-docente-/
+
+3. Instalarla en el celular (sin Google Play)
+   - Abrí esa dirección con Chrome en el celular.
+   - Menú de tres puntos > «Instalar aplicación» (o «Agregar a la pantalla de inicio»).
+   - Queda con su ícono y se abre a pantalla completa, también sin internet.
+
+4. Generar el APK (opcional, para compartirlo o subirlo a Google Play)
+   - Entrá a https://www.pwabuilder.com y pegá la dirección del paso 2.
+   - Elegí «Package for stores» > Android > «Generate». Descargás un .zip con el APK
+     (para instalar directo) y el AAB (para Google Play).
+   - Guardá el archivo de firma (signing key) que viene en el .zip: lo vas a necesitar
+     para cada actualización. Google Play pide una cuenta de desarrollador (pago único de USD 25).
+
+Para actualizar la aplicación
+   - Subí el index.html nuevo (reemplaza al anterior) y en sw.js cambiá la línea VERSION
+     (por ejemplo, poné la fecha del día). Los celulares toman la versión nueva al abrirla con internet.
+
+Importante sobre los datos
+   - El repositorio es público: subí solo estos archivos. Nunca subas planillas, fotos,
+     copias de seguridad ni datos de estudiantes.
+   - Los datos que cargues en la aplicación quedan en el celular, aparte de los de la página
+     publicada en Claude. Para pasarlos, usá «Ajustes > Copia de seguridad» y después «Recuperar».
+
+
+SINCRONIZAR CON GOOGLE DRIVE (una sola vez, lo hace quien publica la app)
+Para que los docentes entren con su cuenta de Google, la app necesita un «ID de cliente».
+1. Entrá a https://console.cloud.google.com con tu cuenta y creá un proyecto llamado Lapacho.
+2. «APIs y servicios > Biblioteca»: habilitá «Google Drive API» (y «Google Picker API» si querés
+   que puedan elegir la carpeta de la cátedra).
+3. «Pantalla de consentimiento de OAuth» (o «Google Auth Platform»): tipo Externo, nombre Lapacho,
+   tu correo de contacto. En permisos agregá solo «.../auth/drive.file». Mientras esté «En prueba»,
+   sumá como usuarios de prueba los correos de los docentes (hasta 100). Para abrirla a todos,
+   tocá «Publicar app»: con el permiso drive.file alcanza con la verificación de marca.
+4. «Credenciales > Crear credenciales > ID de cliente de OAuth > Aplicación web».
+   En «Orígenes autorizados de JavaScript» poné: https://victorqwertyvrv-crypto.github.io
+   Copiá el ID de cliente (termina en .apps.googleusercontent.com).
+5. (Opcional) «Crear credenciales > Clave de API», restringida al sitio github.io y a la Picker API.
+6. En GitHub, abrí lapacho-config.js, tocá el lápiz para editarlo, pegá el ID entre las comillas de
+   clientId (y la clave en apiKey) y guardá con «Commit changes». No hace falta tocar nada más.
+La sincronización funciona en la app instalada desde GitHub, no dentro de claude.ai.
