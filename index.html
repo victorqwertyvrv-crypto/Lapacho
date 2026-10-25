@@ -1463,6 +1463,18 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .aviso-version p{margin:0;flex:1 1 320px}
 .aviso-version div{display:flex;gap:8px;flex-wrap:wrap}
 /* Tamaños táctiles mínimos en el celular */
+/* Versión 40: feria de ciencias */
+.fe-card{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--surface);margin:12px 0}
+.fe-card h3{margin:2px 0 2px;font-size:18px;line-height:1.3}
+.fe-k{margin:0;font-size:12.5px;font-weight:600;color:var(--accent)}
+.fe-sub{margin:0 0 8px;color:var(--muted)}
+.fe-lista{margin:8px 0 6px;padding-left:18px;font-size:14px;line-height:1.5}
+.fe-lista li{margin:2px 0}
+.fe-acc{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+#feria textarea{min-height:64px}
+.pn-tile.pn-ancho{grid-column:1/-1}
+.pn-tile.pn-ancho small{max-width:60ch}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -1520,6 +1532,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <button type="button" role="menuitem" id="btn-ia"><b>IA en el aula</b><small>Criterios y actividades listas para usar</small></button>
           <button type="button" role="menuitem" id="btn-coher"><b>Revisar la coherencia</b><small>Objetivos, actividades y evaluación: avisa vacíos y contradicciones</small></button>
           <span class="menu-g">Para la escuela</span>
+          <button type="button" role="menuitem" id="btn-feria"><b>Feria de ciencias</b><small>Proyecto, informe, carpeta de campo, registro pedagógico y stand</small></button>
           <button type="button" role="menuitem" id="btn-salidas"><b>Salidas educativas</b><small>Autorizaciones y planilla del día</small></button>
           <button type="button" role="menuitem" id="btn-actos"><b>Actos y efemérides</b><small>Calendario y guion del acto</small></button>
           <button type="button" role="menuitem" id="btn-actas"><b>Actas de reunión</b><small>Con familias, de área o institucionales</small></button>
@@ -1756,7 +1769,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo la paso a otra computadora o a un colega?</summary><p>En «Mis planificaciones», tocá «Descargar copia». En la otra computadora abrí el planificador y usá «Importar».</p></details>
       <details class="faq"><summary>¿Para qué sirve «Mi curso»?</summary><p>Es tu libreta de cada curso: lista, asistencia con un toque, notas por trimestre o cuatrimestre (vos elegís), conducta, libro de temas, agenda de evaluaciones, notas para las familias y el cierre con recuperatorios y acta de examen. En «Para entregar» descargás la planilla para preceptoría en Excel o PDF; con «Copiar las notas en orden» las pegás en el sistema de la escuela.</p></details>
       <details class="faq"><summary>¿Qué es el modo aula?</summary><p>Una pantalla pensada para el celular durante la clase: la planificación del día por momentos, la lista para tomar asistencia, un temporizador, elegir a alguien al azar, armar grupos y, al final, guardar lo que se dio en el libro de temas. Si cargás tu horario, «Tu día» te muestra arriba las clases de hoy.</p></details>
-      <details class="faq"><summary>¿Qué hay en «Más herramientas»?</summary><p>Para la clase: el banco de actividades, un banco de preguntas que arma pruebas con versión A y B y la clave, rutinas de pensamiento y actividades para usar la IA en el aula. Para la escuela: autorizaciones de salidas educativas, guiones de actos, actas de reunión y el PPI. Para vos: tu legajo docente.</p></details>
+      <details class="faq"><summary>¿Qué hay en «Más herramientas»?</summary><p>Para la clase: el banco de actividades, un banco de preguntas que arma pruebas con versión A y B y la clave, rutinas de pensamiento y actividades para usar la IA en el aula. Para la escuela: el proyecto para la feria de ciencias, autorizaciones de salidas educativas, guiones de actos, actas de reunión y el PPI. Para vos: tu legajo docente.</p></details>
       <details class="faq"><summary>¿Puedo guardar la asistencia y las notas en Google Drive?</summary><p>Sí, en la aplicación instalada: «Ajustes › Sincronizar con Google Drive». Entrás con tu cuenta de Google y Lapacho guarda en tu Drive una planilla por curso (asistencia, notas, conducta y libro de temas) y una copia completa. Se actualiza sola cuando hacés cambios, y podés elegir la carpeta de la cátedra para compartirla. Lapacho solo ve los archivos que crea o la carpeta que elegís, y nunca guarda tu contraseña.</p></details>
       <details class="faq"><summary>¿Qué es la devolución didáctica?</summary><p>Debajo del documento ves cuántos criterios de didáctica cumple lo que estás armando (la planificación, la ficha o los instrumentos, según lo que estés viendo). Al tocar «Ver la devolución y el prompt» aparece qué está logrado, qué falta y qué conviene mejorar, con un botón para ir al campo, y un prompt listo para copiar en Claude que trae los problemas, tus criterios y el contenido actual. Dentro de claude.ai, «Corregir con Claude» aplica las correcciones y se puede deshacer.</p></details>
       <details class="faq"><summary>¿Con qué criterios se arma una secuencia?</summary><p>Cada secuencia trae una fundamentación epistemológica (solo el saber a enseñar, con enfoque CTS y la ciencia como construcción humana) y una didáctica (cómo se pasa de las ideas previas al conflicto cognitivo), un objetivo general y objetivos específicos. Cada clase empieza con la intención docente y tiene inicio, desarrollo y cierre, preguntas exactas para el docente y recursos concretos. La clase 1 abre con un disparador visual de tu localidad; las intermedias trabajan los conceptos con experiencias, simulaciones o analogías; y el caso o problema de cierre se analiza en la última clase, nunca al empezar, separando lo que explica la disciplina del diseño o las decisiones humanas. Escribí el lugar y el caso en «Clases de la secuencia».</p></details>
@@ -1930,6 +1943,23 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
         <div class="cfg-grid" id="sal-form"></div>
         <div class="lib-foot"><button type="button" class="btn btn-sm btn-primary" id="sal-aut">Autorizaciones (Word)</button><button type="button" class="btn btn-sm" id="sal-plan">Planilla de la salida</button><button type="button" class="btn btn-sm" id="sal-ag">Agregar a la agenda del curso</button></div>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="lib bancodlg" id="feria" aria-labelledby="feria-t">
+    <div class="lib-in">
+      <div class="lib-head"><h2 id="feria-t">Feria de ciencias</h2><button type="button" class="linkbtn" data-cerrar="feria">Cerrar</button></div>
+      <p class="hint">Arma el proyecto completo a partir de tu planificación, con la estructura de la Feria Nacional 2026: proyecto, cronograma, informe, carpeta de campo, registro pedagógico, stand, video y criterios de valoración. Si la feria de tu escuela o de la provincia pide algo distinto, ajustalo en el Word.</p>
+      <div class="cfg-grid">
+        <div class="f"><label for="fe-mat">Espacio curricular</label><select id="fe-mat"></select></div>
+        <div class="f"><label for="fe-anio">Año</label><select id="fe-anio"></select></div>
+        <div class="f full"><label for="fe-tema">Tema</label><input id="fe-tema" placeholder="Ej.: energía mecánica, residuos, historia del pueblo"></div>
+        <div class="f full"><label for="fe-q">Pregunta del proyecto</label><textarea id="fe-q" rows="2"></textarea></div>
+        <div class="f"><label for="fe-cur">Curso</label><input id="fe-cur" placeholder="Ej.: 3.º B"></div>
+        <div class="f"><label for="fe-fecha">Fecha de la feria</label><input id="fe-fecha" type="date"></div>
+      </div>
+      <div id="fe-res" aria-live="polite"></div>
+      <div class="fe-acc"><button type="button" class="btn btn-sm btn-primary" data-fe="docx">Descargar en Word</button><button type="button" class="btn btn-sm" data-fe="pdf">Descargar en PDF</button></div>
     </div>
   </dialog>
 
@@ -4327,6 +4357,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-25", fecha:"2026-10-25", items:[
+    "Nuevo: «Feria de ciencias», en Inicio y en Herramientas › Para la escuela. Toma la materia, el año y el tema de tu planificación, propone una pregunta investigable situada en tu localidad y descarga en Word o PDF el proyecto completo: cronograma hasta la fecha de la feria, informe, carpeta de campo, tabla de datos, registro pedagógico, stand, guion del video y criterios de valoración.",
+    "La estructura sigue los documentos 2026 del Programa Nacional de Ferias de Ciencias y Tecnología (foco principal STEAM, focos complementarios y Lengua como foco transversal). Si una idea no te convence, «Ver otra idea» propone la siguiente."
+  ]},
   {id:"2026-10-24-c", fecha:"2026-10-24", items:[
     "Nuevo diseño: menú lateral en azul con íconos y un buscador de herramientas (también en «Más», en el celular). El panel de inicio tiene accesos para empezar una clase, una secuencia, un proyecto o la planificación anual, continuar la que estás haciendo y ver lo pendiente.",
     "La revisión de la coherencia suma más controles: contenidos sin actividad, criterios que evalúan algo que no se enseñó, criterios difíciles de observar, falta de evidencias, recursos que no se usan, secuencias sin evaluación de cierre y atención a la diversidad pensada desde barreras y apoyos. Para los verbos que no se pueden observar, propone un cambio que aplicás con un toque (y podés deshacer).",
@@ -15900,7 +15934,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "39 (24/10/2026)";
+const LAPACHO_VERSION = "40 (25/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -16995,6 +17029,7 @@ function renderPanel(){
         ${tile("notas", "Notas y evaluaciones", hayCurso ? "Cargar notas del período" : "Primero cargá un curso", 'data-pncurso="notas"')}
         ${tile("curso", "Mi curso", hayCurso ? "Lista, informes y documentos" : "Cargá tu primer curso", 'data-proxy="btn-curso"')}
         ${tile("carpeta", "Mis planificaciones", "Abrir, duplicar o exportar", 'data-proxy="btn-lib"')}
+        <button type="button" class="pn-tile pn-ancho" data-proxy="btn-feria">${ico("proyecto")}<span><b>Feria de ciencias</b><small>El proyecto completo en dos toques: informe, carpeta de campo, registro pedagógico, stand y video</small></span></button>
       </div>
       ${hayCurso || libLeer().length ? "" : `<ol class="pn-pasos"><li>Cargá tu curso en «Mi curso»: lista, horario y períodos.</li><li>Elegí qué querés planificar: clase, secuencia, proyecto o anual.</li><li>Revisá la sugerencia, editala y descargala en Word o PDF.</li></ol>`}
     </section>
@@ -17236,6 +17271,516 @@ function init39(){
 }
 
 /* ============================================================
+   Versión 40: proyecto para la feria de ciencias en dos toques.
+   Estructura de los documentos y criterios de valoración según el
+   Programa Nacional de Ferias de Ciencias y Tecnología, FN 2026
+   (documentos 1, 2 y 4). Las ideas son propias de la app.
+   ============================================================ */
+const FERIA_FUENTES = [
+  {f:"Programa Nacional de Ferias de Ciencias y Tecnología, Ministerio de Capital Humano (2026)", t:"Documento 1: Sobre las ferias de ciencias", u:"https://chubut.edu.ar/wp-content/uploads/2026/04/fn2026_doc1_sobre_las_ferias_de_ciencias.pdf"},
+  {f:"Programa Nacional de Ferias de Ciencias y Tecnología, Ministerio de Capital Humano (2026)", t:"Documento 2: Sobre los proyectos de ferias de ciencias", u:"https://chubut.edu.ar/wp-content/uploads/2026/04/fn2026_doc2_sobre_los_proyectos_de_ferias_de_ciencias.pdf"},
+  {f:"Programa Nacional de Ferias de Ciencias y Tecnología, Ministerio de Capital Humano (2026)", t:"Documento 4: Sobre la valoración de los proyectos de ferias de ciencias", u:"https://chubut.edu.ar/wp-content/uploads/2026/04/fn2026_doc4_sobre_la_valoracion_de_los_proyectos_de_ferias_de_ciencias.pdf"}
+];
+/* Ideas de proyecto. k: palabras del tema; a: áreas; eje: foco principal STEAM; vi/vd/vc: variables (indagación experimental);
+   fu/cat: fuentes y categorías (indagación con fuentes); cols: columnas de la tabla de datos; comp: focos complementarios. */
+const FERIA_IDEAS = [
+  {k:"energia cinetica movimiento velocidad frenado frenar rozamiento friccion plano inclinado", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Frenar a tiempo", sub:"La velocidad y la distancia de frenado en {ruta}",
+   q:"¿De qué depende la distancia que recorre un vehículo hasta detenerse?", h:"Cuanto mayor es la velocidad con que llega, más distancia recorre hasta frenar, y la distancia crece más rápido que la velocidad.",
+   vi:"la altura desde la que se suelta el autito en la rampa (que fija la velocidad al llegar abajo)", vd:"la distancia que recorre sobre el piso hasta detenerse", vc:"el mismo autito, la misma rampa, el mismo piso y la misma forma de soltarlo",
+   mat:["Un autito de juguete", "Una tabla o carpeta rígida como rampa", "Libros para dar altura", "Cinta métrica", "Cinta de papel para marcar"],
+   proc:["Armar la rampa y marcar en el piso el punto donde termina.", "Soltar el autito desde cinco alturas distintas, sin empujarlo.", "Medir la distancia hasta que se detiene y repetir tres veces cada altura.", "Calcular el promedio de cada altura y graficar distancia en función de la altura.", "Repetir con otra superficie (baldosa, cartón, tela) para ver el efecto del rozamiento."],
+   cols:["Altura de la rampa (cm)", "Distancia 1 (cm)", "Distancia 2 (cm)", "Distancia 3 (cm)", "Promedio (cm)"],
+   comp:["Matemática: promedios, gráficos y relación entre magnitudes", "Tecnología: seguridad vial y diseño de frenos"]},
+  {k:"calor temperatura aislante conductor termico transferencia conduccion equilibrio termico", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"El agua del mate", sub:"Qué materiales conservan mejor el calor",
+   q:"¿Qué material de uso cotidiano conserva mejor el calor del agua caliente?", h:"Los materiales que encierran aire, como la lana o el telgopor, conservan mejor el calor que el papel o el aluminio solo.",
+   vi:"el material que envuelve el frasco", vd:"la temperatura del agua cada cinco minutos", vc:"la misma cantidad de agua, la misma temperatura inicial, frascos iguales y el mismo lugar",
+   mat:["Cuatro frascos iguales con tapa", "Agua caliente (la sirve un adulto)", "Termómetro de cocina", "Lana, telgopor, papel de diario y papel de aluminio", "Cronómetro del celular"],
+   proc:["Envolver cada frasco con un material distinto y dejar uno sin envolver para comparar.", "Un adulto llena todos los frascos con la misma cantidad de agua caliente.", "Medir la temperatura al comienzo y cada cinco minutos durante media hora.", "Registrar los datos en la tabla y graficar la temperatura en función del tiempo para cada material.", "Comparar cuántos grados bajó cada frasco."],
+   cols:["Tiempo (min)", "Sin envolver (°C)", "Lana (°C)", "Telgopor (°C)", "Diario (°C)", "Aluminio (°C)"],
+   seg:"El agua caliente la manipula un adulto. Usar agua caliente, no hirviendo.",
+   comp:["Matemática: gráficos de temperatura en función del tiempo", "Tecnología: aislación de viviendas y conservadoras"]},
+  {k:"energia solar radiacion renovable sol colector calentador absorcion color", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Agua caliente con el sol de {lugar}", sub:"El color y la orientación de un colector solar casero",
+   q:"¿Cómo influyen el color y la orientación de una botella en cuánto se calienta el agua al sol?", h:"La botella pintada de negro y orientada hacia el norte se calienta más que las claras o las orientadas hacia otro lado.",
+   vi:"el color de la botella (negra, blanca, transparente) y su orientación", vd:"la temperatura del agua cada quince minutos", vc:"la misma cantidad de agua, botellas iguales, la misma hora y el mismo día",
+   mat:["Tres botellas plásticas iguales", "Pintura negra y blanca", "Termómetro de cocina", "Agua de la canilla", "Brújula del celular"],
+   proc:["Pintar una botella de negro, otra de blanco y dejar una transparente.", "Llenarlas con la misma cantidad de agua y medir la temperatura inicial.", "Colocarlas al sol, orientadas hacia el norte, y medir cada quince minutos durante una hora y media.", "Repetir otro día con la botella negra orientada hacia el sur.", "Graficar y comparar."],
+   cols:["Hora", "Negra (°C)", "Blanca (°C)", "Transparente (°C)", "Nubosidad"],
+   comp:["Tecnología: calefones solares y energías renovables", "Matemática: variación de la temperatura por intervalo de tiempo"]},
+  {k:"electricidad corriente circuito pila voltaje tension electroquimica generador electrica", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Limones con energía", sub:"Pilas caseras con frutas y verduras de Tucumán",
+   q:"¿Qué frutas o verduras de la zona generan más voltaje en una pila casera?", h:"Los limones, por ser más ácidos, generan más voltaje que las papas o las naranjas.",
+   vi:"la fruta o verdura usada", vd:"el voltaje medido con el multímetro", vc:"los mismos electrodos (clavo galvanizado y moneda o alambre de cobre), la misma distancia entre ellos y la misma profundidad",
+   mat:["Limones, naranjas y papas", "Clavos galvanizados", "Alambre o monedas de cobre", "Multímetro", "Cables con pinzas cocodrilo", "Un led pequeño"],
+   proc:["Clavar en cada fruta un clavo y un trozo de cobre separados unos tres centímetros.", "Medir el voltaje con el multímetro y repetir con tres ejemplares de cada fruta.", "Conectar varias frutas en serie e intentar encender el led.", "Registrar cuántas hacen falta para que encienda.", "Comparar con el voltaje de una pila común."],
+   cols:["Fruta o verdura", "Voltaje 1 (V)", "Voltaje 2 (V)", "Voltaje 3 (V)", "Promedio (V)"],
+   seg:"Las frutas usadas no se comen después: el metal de los electrodos queda en la pulpa.",
+   comp:["Matemática: promedios y conexión en serie", "Tecnología: pilas, baterías y su desecho responsable"]},
+  {k:"luz optica imagen camara oscura sombra lente propagacion rectilinea vision ojo", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"La cámara oscura", sub:"Cómo viaja la luz y cómo se forman las imágenes",
+   q:"¿Cómo cambia el tamaño de la imagen en una cámara oscura al alejarla del objeto?", h:"Cuanto más lejos está el objeto, más chica se ve la imagen, porque la luz viaja en línea recta.",
+   vi:"la distancia entre la cámara y el objeto iluminado", vd:"el tamaño de la imagen en la pantalla de papel manteca", vc:"la misma cámara, el mismo agujero y el mismo objeto",
+   mat:["Una caja de zapatos o un tubo de cartón", "Papel manteca", "Papel de aluminio y un alfiler", "Una vela led o una linterna", "Regla y cinta métrica"],
+   proc:["Armar la cámara: agujero pequeño en un extremo y papel manteca en el otro.", "Apuntar a la linterna desde distintas distancias.", "Medir el tamaño de la imagen en cada caso.", "Probar con un agujero más grande y comparar la nitidez.", "Relacionar con el funcionamiento del ojo y de la cámara del celular."],
+   cols:["Distancia al objeto (cm)", "Tamaño de la imagen (mm)", "¿Derecha o invertida?", "Nitidez"],
+   comp:["Matemática: proporcionalidad inversa y semejanza de triángulos", "Artes: historia de la fotografía y uso de la cámara oscura en la pintura"]},
+  {k:"sonido onda ondas frecuencia vibracion tono musica acustica", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Botellas que suenan", sub:"La frecuencia del sonido y la columna de aire",
+   q:"¿Cómo cambia el sonido de una botella al soplar sobre ella según la cantidad de agua que tiene?", h:"Cuanta más agua tiene la botella, más corta es la columna de aire y más agudo es el sonido.",
+   vi:"la altura de la columna de aire", vd:"la frecuencia del sonido medida con una app afinadora", vc:"botellas iguales y la misma forma de soplar",
+   mat:["Seis botellas de vidrio iguales", "Agua", "Regla", "Celular con una app afinadora o de espectro de sonido"],
+   proc:["Llenar las botellas con distintas cantidades de agua.", "Medir la altura de la columna de aire de cada una.", "Soplar sobre el pico y medir la frecuencia con la app, tres veces por botella.", "Graficar la frecuencia en función de la altura de la columna de aire.", "Intentar armar una escala musical con las botellas."],
+   cols:["Columna de aire (cm)", "Frecuencia 1 (Hz)", "Frecuencia 2 (Hz)", "Frecuencia 3 (Hz)", "Promedio (Hz)"],
+   comp:["Artes: escala musical e instrumentos de viento del NOA", "Matemática: relación inversa entre magnitudes"]},
+  {k:"densidad flotacion presion fluidos empuje arquimedes hidrostatica", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"¿Flota o se hunde?", sub:"La densidad y el empuje en agua dulce y salada",
+   q:"¿Cuánta sal hace falta agregar al agua para que flote un huevo?", h:"Al agregar sal aumenta la densidad del agua y, a partir de cierta cantidad, el huevo flota.",
+   vi:"la cantidad de sal disuelta", vd:"si el huevo flota, queda a media agua o se hunde", vc:"la misma cantidad de agua, el mismo huevo y la misma temperatura",
+   mat:["Un vaso grande transparente", "Agua", "Sal fina y una cucharita", "Un huevo crudo", "Balanza de cocina"],
+   proc:["Poner el huevo en el agua sin sal y observar.", "Agregar sal de a una cucharadita, revolver y observar.", "Registrar en qué cucharada el huevo queda a media agua y en cuál flota.", "Pesar la sal usada y calcular la concentración en gramos por litro.", "Relacionar con por qué se flota más en el mar que en el dique."],
+   cols:["Cucharadas de sal", "Sal (g)", "Concentración (g/L)", "Posición del huevo"],
+   comp:["Matemática: concentración y proporcionalidad", "Tecnología: cómo flotan los barcos"]},
+  {k:"pendulo oscilacion periodo gravedad movimiento armonico", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"El ritmo del péndulo", sub:"De qué depende el tiempo de una oscilación",
+   q:"¿De qué depende el tiempo que tarda un péndulo en ir y volver?", h:"El período depende del largo del hilo y no del peso que cuelga.",
+   vi:"el largo del hilo (y, en otra serie, la masa que cuelga)", vd:"el tiempo de diez oscilaciones", vc:"el mismo ángulo inicial y el mismo hilo",
+   mat:["Hilo resistente", "Tuercas o arandelas", "Soporte (una silla o el borde de la mesa)", "Cinta métrica", "Cronómetro del celular"],
+   proc:["Colgar una tuerca de un hilo de 100 cm.", "Soltarla desde un ángulo pequeño y medir el tiempo de diez idas y vueltas.", "Repetir con 80, 60, 40 y 20 cm de hilo.", "Cambiar la cantidad de tuercas con el mismo largo y comparar.", "Calcular el período y graficar."],
+   cols:["Largo (cm)", "Tuercas", "Tiempo de 10 oscilaciones (s)", "Período (s)"],
+   comp:["Matemática: raíz cuadrada y gráficos", "Tecnología: relojes de péndulo"]},
+  {k:"acido base acidez ph indicador neutralizacion acidos bases", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"El repollo que cambia de color", sub:"La acidez de lo que comemos y usamos todos los días",
+   q:"¿Qué tan ácidos o básicos son los productos que usamos todos los días en casa?", h:"Los productos de limpieza son básicos y las bebidas y frutas son ácidas.",
+   vi:"el producto analizado", vd:"el color que toma el indicador de repollo colorado", vc:"la misma cantidad de indicador y de producto en cada vaso",
+   mat:["Repollo colorado y agua caliente para preparar el indicador", "Vasos transparentes", "Jugo de limón, vinagre, leche, agua, bicarbonato y jabón blanco disuelto", "Cucharitas", "Tabla de colores impresa"],
+   proc:["Preparar el indicador: un adulto hierve repollo colorado picado y se cuela el líquido.", "Poner la misma cantidad de indicador en cada vaso.", "Agregar una cucharadita de cada producto y observar el color.", "Ordenar los productos de más ácido a más básico con la tabla de colores.", "Neutralizar el vinagre agregando bicarbonato de a poco."],
+   cols:["Producto", "Color observado", "pH aproximado", "Ácido, neutro o básico"],
+   seg:"Solo productos de cocina y jabón. No usar lavandina, quitasarro ni destapacañerías.",
+   comp:["Matemática: escala de pH", "Artes: tintas naturales con indicadores"]},
+  {k:"mezcla mezclas separacion filtracion agua potable decantacion sustancias", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Agua más clara", sub:"Filtros caseros con agua de {rio}",
+   q:"¿Qué combinación de capas de un filtro casero deja más clara el agua turbia?", h:"El filtro con arena fina, arena gruesa y carbón deja el agua más clara que el que tiene solo una capa.",
+   vi:"las capas del filtro", vd:"la turbidez del agua filtrada (comparada con una escala de referencia) y el tiempo de filtrado", vc:"la misma cantidad de agua turbia y botellas iguales",
+   mat:["Botellas plásticas cortadas", "Algodón, arena fina, arena gruesa, piedritas y carbón vegetal", "Agua turbia (de un charco o del río, en frasco cerrado)", "Frascos transparentes", "Cronómetro"],
+   proc:["Armar tres filtros con distintas combinaciones de capas.", "Pasar la misma cantidad de agua turbia por cada uno.", "Medir el tiempo de filtrado y comparar la claridad con una escala de cinco frascos.", "Fotografiar los resultados con el mismo fondo y la misma luz.", "Investigar cómo se potabiliza el agua en {lugar}."],
+   cols:["Filtro", "Capas", "Tiempo (s)", "Claridad (1 a 5)", "Observaciones"],
+   seg:"El agua filtrada no se toma: el filtro saca partículas, no microbios.",
+   comp:["Tecnología: plantas potabilizadoras", "Ciencias Sociales: acceso al agua segura en la provincia"]},
+  {k:"reaccion quimica velocidad reaccion temperatura cinetica efervescente disolucion catalizador", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Reacciones con apuro", sub:"La temperatura y la velocidad de una reacción química",
+   q:"¿Cómo influye la temperatura del agua en el tiempo que tarda en disolverse una pastilla efervescente?", h:"Cuanto más caliente está el agua, más rápido ocurre la reacción.",
+   vi:"la temperatura del agua", vd:"el tiempo hasta que la pastilla desaparece", vc:"la misma cantidad de agua, el mismo tipo de pastilla y vasos iguales",
+   mat:["Pastillas efervescentes (antiácido o vitamina C)", "Vasos iguales", "Agua fría, natural y tibia", "Termómetro de cocina", "Cronómetro"],
+   proc:["Preparar agua a cuatro temperaturas distintas.", "Medir la temperatura y tirar la pastilla al mismo tiempo que se pone en marcha el cronómetro.", "Detener el cronómetro cuando no quedan restos sólidos.", "Repetir tres veces cada temperatura.", "Probar con la pastilla molida para ver el efecto de la superficie de contacto."],
+   cols:["Temperatura (°C)", "Tiempo 1 (s)", "Tiempo 2 (s)", "Tiempo 3 (s)", "Promedio (s)"],
+   comp:["Matemática: gráficos y promedios", "Tecnología: conservación de alimentos en frío"]},
+  {k:"suelo erosion vegetacion lluvia ambiente deforestacion cuenca escorrentia", a:["cn", "cs"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Raíces que sostienen", sub:"La vegetación y la erosión del suelo en las crecidas de {rio}",
+   q:"¿Cómo protege la vegetación al suelo de la erosión que produce la lluvia?", h:"El suelo con pasto pierde mucho menos tierra que el suelo desnudo cuando llueve.",
+   vi:"la cobertura del suelo (desnudo, con hojarasca, con pasto)", vd:"la cantidad y el color del agua que escurre", vc:"la misma cantidad de suelo, la misma inclinación y la misma lluvia simulada",
+   mat:["Tres botellas plásticas cortadas a lo largo", "Tierra, hojarasca y pasto con raíces", "Una regadera o botella con agujeros", "Vasos para juntar el agua que escurre", "Jarra medidora"],
+   proc:["Llenar las tres botellas con el mismo suelo y la misma inclinación; una queda desnuda, otra con hojarasca y otra con pasto.", "Regar cada una con un litro de agua de la misma forma.", "Juntar el agua que escurre y comparar su volumen y su color.", "Dejar decantar y estimar la tierra arrastrada.", "Relacionar con los desmontes y las crecidas de la zona."],
+   cols:["Cobertura", "Agua escurrida (mL)", "Color del agua", "Tierra arrastrada (estimada)"],
+   comp:["Ciencias Sociales: desmonte y uso del suelo en Tucumán", "Matemática: porcentajes de agua retenida"]},
+  {k:"planta plantas germinacion crecimiento fotosintesis semilla luz seres vivos nutricion vegetal", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Porotos a la luz", sub:"La luz, el agua y el crecimiento de las plantas",
+   q:"¿Cómo influye la cantidad de luz en el crecimiento de plantines de poroto?", h:"Los plantines con más luz crecen más fuertes y verdes, y los que están a oscuras se estiran pero quedan pálidos.",
+   vi:"la cantidad de luz que reciben (sol, media sombra, oscuridad)", vd:"la altura del tallo, la cantidad de hojas y el color", vc:"el mismo tipo de semilla, la misma tierra, el mismo riego y la misma temperatura",
+   mat:["Semillas de poroto", "Vasos o macetas iguales con tierra", "Regadera o jarra medidora", "Una caja para hacer sombra", "Regla y cámara del celular"],
+   proc:["Sembrar tres porotos en cada vaso y regar con la misma cantidad de agua.", "Ubicar los vasos al sol, a media sombra y dentro de una caja cerrada.", "Medir la altura y contar las hojas día por medio durante tres semanas.", "Fotografiar siempre desde el mismo lugar.", "Graficar el crecimiento de cada grupo."],
+   cols:["Día", "Al sol (cm)", "Media sombra (cm)", "Oscuridad (cm)", "Observaciones"],
+   comp:["Matemática: gráficos de crecimiento", "Tecnología: huerta escolar"]},
+  {k:"microorganismos levadura fermentacion hongos bacterias celula respiracion", a:["cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"Globos que se inflan solos", sub:"La fermentación de las levaduras y la temperatura",
+   q:"¿A qué temperatura producen más gas las levaduras?", h:"Las levaduras producen más gas en agua tibia que en agua fría o muy caliente.",
+   vi:"la temperatura del agua", vd:"el contorno del globo a los treinta minutos", vc:"la misma cantidad de levadura, azúcar y agua, y botellas iguales",
+   mat:["Levadura seca", "Azúcar", "Botellas pequeñas iguales", "Globos", "Agua a tres temperaturas y termómetro", "Cinta métrica"],
+   proc:["Poner en cada botella la misma cantidad de agua, azúcar y levadura.", "Colocar un globo en cada pico.", "Ubicar las botellas en recipientes con agua fría, tibia y caliente.", "Medir el contorno del globo cada diez minutos durante media hora.", "Relacionar con la elaboración del pan y del vino."],
+   cols:["Tiempo (min)", "Fría (cm)", "Tibia (cm)", "Caliente (cm)"],
+   comp:["Matemática: comparación de crecimientos", "Tecnología: producción de alimentos fermentados"]},
+  {k:"alimentacion nutricion azucar salud alimentos etiqueta dieta bebidas energia alimentaria", a:["cn", "mat"], eje:"Ciencias", tipo:"descriptiva",
+   titulo:"Dulce de más", sub:"El azúcar de las bebidas que tomamos en la escuela",
+   q:"¿Cuánta azúcar tienen las bebidas que más consumen los estudiantes de la escuela?", h:"Una botella de gaseosa o de jugo listo tiene más azúcar que la recomendada para todo un día.",
+   vi:"la bebida", vd:"los gramos de azúcar por porción y por envase", vc:"leer siempre la misma información de la etiqueta (hidratos de carbono, azúcares) y el tamaño del envase",
+   mat:["Envases vacíos de bebidas que consumen los estudiantes", "Azúcar y una cucharita de té", "Balanza de cocina", "Bolsitas transparentes", "Planilla de encuesta"],
+   proc:["Encuestar a los cursos sobre qué bebidas toman en la semana.", "Leer las etiquetas de las cinco más consumidas y anotar los azúcares por envase.", "Pesar esa cantidad de azúcar y ponerla en una bolsita junto a cada envase.", "Comparar con la recomendación diaria de la Organización Mundial de la Salud.", "Relacionar con la producción de azúcar en Tucumán y la ley de etiquetado frontal."],
+   cols:["Bebida", "Envase (mL)", "Azúcares por envase (g)", "Cucharaditas", "Sello de exceso"],
+   comp:["Matemática: encuestas, porcentajes y proporciones", "Lengua: lectura crítica de publicidades"]},
+  {k:"residuos basura reciclaje ambiente contaminacion plastico compost sustentabilidad", a:["cn", "cs"], eje:"Ciencias", tipo:"descriptiva",
+   titulo:"Lo que tiramos", sub:"Los residuos que genera la escuela en una semana",
+   q:"¿Cuántos residuos genera la escuela en una semana y qué parte se podría reciclar o compostar?", h:"Más de la mitad de lo que tira la escuela es papel, plástico u orgánico que se podría separar.",
+   vi:"el día de la semana y el sector de la escuela", vd:"el peso de cada tipo de residuo", vc:"pesar siempre a la misma hora, con la misma balanza y las mismas categorías",
+   mat:["Guantes descartables", "Bolsas de colores para separar", "Balanza de baño o de cocina", "Planilla de registro"],
+   proc:["Acordar con la dirección y el personal de maestranza cómo se juntan los residuos.", "Separar en papel, plástico, orgánico y otros, siempre con guantes.", "Pesar cada tipo durante cinco días.", "Calcular el total semanal y el porcentaje de cada tipo.", "Proponer un plan de separación y compostaje para la escuela."],
+   cols:["Día", "Papel (kg)", "Plástico (kg)", "Orgánico (kg)", "Otros (kg)", "Total (kg)"],
+   seg:"Siempre con guantes; no se tocan vidrios rotos ni residuos sanitarios.",
+   comp:["Matemática: porcentajes y gráficos circulares", "Ciencias Sociales: gestión de residuos en el municipio"]},
+  {k:"clima tiempo meteorologia lluvia temperatura humedad atmosfera pluviometro", a:["cn", "cs"], eje:"Ciencias", tipo:"descriptiva",
+   titulo:"Estación meteorológica escolar", sub:"El tiempo en {lugar} semana a semana",
+   q:"¿Cómo varían la temperatura y las lluvias en {lugar} a lo largo de las semanas?", h:"Las lluvias se concentran en pocos días de tormenta y la temperatura máxima sube a medida que se acerca el verano.",
+   vi:"el día y la hora de la medición", vd:"la temperatura, los milímetros de lluvia y la nubosidad", vc:"medir siempre en el mismo lugar, a la misma hora y con los mismos instrumentos",
+   mat:["Termómetro ambiental a la sombra", "Pluviómetro casero (botella con regla)", "Veleta de cartón", "Planilla diaria"],
+   proc:["Construir el pluviómetro y la veleta.", "Elegir un lugar fijo en el patio.", "Medir todos los días a la misma hora durante el proyecto.", "Comparar con los datos del Servicio Meteorológico Nacional para Tucumán.", "Graficar y buscar patrones."],
+   cols:["Fecha", "Hora", "Temperatura (°C)", "Lluvia (mm)", "Viento", "Nubosidad"],
+   comp:["Matemática: estadística, promedios y gráficos", "Tecnología: diseño de instrumentos de medición"]},
+  {k:"estadistica probabilidad encuesta datos grafico media mediana moda frecuencia porcentaje", a:["mat"], eje:"Matemática", tipo:"descriptiva",
+   titulo:"Así llegamos a la escuela", sub:"Estadística de los traslados de los estudiantes",
+   q:"¿Cómo se trasladan los estudiantes a la escuela y cuánto tiempo tardan?", h:"La mayoría llega caminando o en moto, y quienes viajan en colectivo tardan más del doble.",
+   vi:"el medio de transporte y el barrio o paraje de origen", vd:"el tiempo de viaje", vc:"preguntar a todos lo mismo, en el mismo formato y la misma semana",
+   mat:["Planilla de encuesta impresa o formulario digital", "Planilla de cálculo", "Mapa de {lugar}"],
+   proc:["Diseñar la encuesta con preguntas cerradas y probarla en un curso.", "Encuestar a una muestra de cada curso, sin pedir nombres.", "Organizar los datos en tablas de frecuencia.", "Calcular media, mediana y moda del tiempo de viaje por medio de transporte.", "Representar en gráficos y en un mapa, y discutir qué propuestas surgen."],
+   cols:["Encuesta n.º", "Curso", "Medio de transporte", "Tiempo de viaje (min)", "Barrio o paraje"],
+   comp:["Ciencias Sociales: movilidad y transporte en el sur tucumano", "Lengua: diseño de preguntas sin sesgo"]},
+  {k:"funcion funciones lineal proporcionalidad pendiente grafico costo tarifa ecuacion", a:["mat"], eje:"Matemática", tipo:"modelizacion",
+   titulo:"¿Cuánto cuesta la luz?", sub:"Funciones para leer la boleta de electricidad",
+   q:"¿Cómo cambia el importe de la boleta de luz según el consumo de una casa?", h:"El importe crece con el consumo, pero no de forma proporcional, porque hay cargos fijos y precios por tramos.",
+   vi:"la energía consumida (kWh)", vd:"el importe de la boleta", vc:"la misma categoría de usuario y el mismo período de facturación",
+   mat:["Boletas de luz de distintas familias (sin datos personales)", "Cuadro tarifario vigente", "Planilla de cálculo o papel milimetrado", "Medidor de la escuela"],
+   proc:["Recolectar boletas tapando nombre, dirección y número de cliente.", "Identificar el cargo fijo y el precio por kWh de cada tramo.", "Armar la tabla consumo–importe y graficarla.", "Escribir la fórmula de la función para cada tramo.", "Estimar el consumo de artefactos de la casa y proponer formas de ahorrar."],
+   cols:["Consumo (kWh)", "Cargo fijo ($)", "Cargo variable ($)", "Importe total ($)"],
+   comp:["Ciencias: energía eléctrica y potencia de los artefactos", "Ciencias Sociales: tarifas y acceso a la energía"]},
+  {k:"geometria area volumen superficie perimetro envase optimizacion cuerpos", a:["mat"], eje:"Matemática", tipo:"modelizacion",
+   titulo:"El envase que gasta menos", sub:"Área y volumen en los envases que usamos",
+   q:"¿Qué forma de envase usa menos material para guardar el mismo volumen?", h:"El cilindro con altura igual a su diámetro usa menos material que los envases altos y finos o las cajas.",
+   vi:"la forma y las dimensiones del envase", vd:"el área de material necesaria", vc:"el mismo volumen (por ejemplo, un litro)",
+   mat:["Envases de distintas formas", "Cartulina", "Regla, compás y tijera", "Agua y jarra medidora", "Planilla de cálculo"],
+   proc:["Medir envases reales y calcular su volumen y su área.", "Comprobar el volumen con agua.", "Construir en cartulina envases de un litro con distintas formas.", "Calcular el área de cada uno y graficar área en función de la altura.", "Discutir por qué la industria no siempre elige la forma óptima."],
+   cols:["Envase", "Dimensiones (cm)", "Volumen (cm³)", "Área (cm²)"],
+   comp:["Tecnología: diseño de envases", "Ciencias: residuos y reciclado de envases"]},
+  {k:"historia local patrimonio ingenio ferrocarril memoria pueblo fundacion inmigracion zafra", a:["cs"], eje:"Ciencias", tipo:"fuentes",
+   titulo:"Memorias de {lugar}", sub:"Cómo cambió la vida del pueblo a lo largo del siglo XX",
+   q:"¿Cómo cambió la vida cotidiana en {lugar} con la llegada y las transformaciones de {ingenio} y el ferrocarril?", h:"El trabajo en el ingenio y el tren organizaron el crecimiento del pueblo, y su cierre o transformación cambió el empleo y la población.",
+   fu:["Entrevistas a vecinos y vecinas mayores", "Fotografías familiares y del archivo municipal", "Diarios de época (La Gaceta, archivo digital)", "Censos nacionales de población", "Bibliografía de historia de Tucumán"],
+   cat:["Trabajo y empleo", "Vida cotidiana y vivienda", "Transporte", "Población y migraciones", "Festividades y tradiciones"],
+   mat:["Grabador del celular", "Guía de entrevista", "Planilla de registro de fuentes", "Mapa del pueblo"],
+   proc:["Elaborar la guía de entrevista y el consentimiento para grabar.", "Entrevistar a por lo menos cinco vecinos de distintas edades.", "Relevar fotografías y documentos con fecha y procedencia.", "Ordenar la información en una línea de tiempo por categorías.", "Contrastar los testimonios con datos de censos y bibliografía."],
+   cols:["Fuente", "Tipo", "Fecha", "Qué dice", "Categoría"],
+   comp:["Matemática: evolución de la población en los censos", "Artes: muestra fotográfica y línea de tiempo"]},
+  {k:"poblacion migracion migraciones trabajo cosecha economia regional golondrina empleo territorio", a:["cs"], eje:"Ciencias", tipo:"fuentes",
+   titulo:"Trabajar en la cosecha", sub:"Trabajo estacional y migraciones en el sur tucumano",
+   q:"¿Cómo influye el trabajo estacional de la cosecha en las familias de {lugar}?", h:"La zafra y las cosechas de limón y arándanos hacen que muchas familias se trasladen o cambien su rutina durante varios meses.",
+   fu:["Entrevistas a trabajadores y familias (con su consentimiento)", "Datos del INDEC y de la provincia sobre empleo rural", "Notas periodísticas recientes", "Bibliografía sobre economías regionales"],
+   cat:["Calendario de cosechas", "Condiciones de trabajo", "Escolaridad de hijos e hijas", "Traslados y vivienda", "Cambios en el tiempo"],
+   mat:["Guía de entrevista", "Grabador del celular", "Mapa de la provincia", "Planilla de registro de fuentes"],
+   proc:["Armar el calendario anual de las cosechas de la provincia.", "Elaborar una encuesta anónima para las familias del curso.", "Realizar entrevistas con consentimiento.", "Analizar la información por categorías y contrastarla con datos oficiales.", "Comunicar los resultados con mapas y gráficos."],
+   cols:["Fuente", "Tipo", "Fecha", "Dato o testimonio", "Categoría"],
+   comp:["Matemática: encuestas y porcentajes", "Lengua: entrevista y crónica"]},
+  {k:"lengua lexico palabras habla variedad regional oralidad dialecto vocabulario narrativa leyenda", a:["lengua"], eje:"Artes", tipo:"fuentes",
+   titulo:"Así hablamos en {lugar}", sub:"Palabras y expresiones de jóvenes y adultos mayores",
+   q:"¿Qué palabras y expresiones propias de {lugar} usan los jóvenes y cuáles se están dejando de usar?", h:"Los adultos mayores usan muchas palabras de origen quichua y rural que los jóvenes entienden pero ya no usan.",
+   fu:["Entrevistas grabadas a jóvenes y adultos mayores", "Diccionarios de regionalismos del NOA", "Leyendas y relatos de la zona", "Canciones del folklore tucumano"],
+   cat:["Palabras de origen quichua", "Expresiones del trabajo rural", "Palabras nuevas de los jóvenes", "Significado y uso"],
+   mat:["Grabador del celular", "Fichas de registro de palabras", "Guía de entrevista"],
+   proc:["Elaborar una lista inicial de palabras y expresiones con el curso.", "Entrevistar a jóvenes y a adultos mayores con la misma guía.", "Registrar cada palabra en una ficha con significado, ejemplo y quién la usa.", "Buscar el origen en diccionarios de regionalismos.", "Armar un glosario ilustrado para la biblioteca de la escuela."],
+   cols:["Palabra o expresión", "Significado", "Ejemplo de uso", "¿Quién la usa?", "Origen"],
+   comp:["Ciencias Sociales: historia y cultura del NOA", "Matemática: frecuencia de uso por grupo de edad"]},
+  {k:"tecnologia maquina maquinas simples robotica riego automatizacion sensor diseño prototipo energia agua huerta", a:["tec"], eje:"Tecnología e Ingeniería", tipo:"tecnologico",
+   titulo:"Riego por goteo para la huerta", sub:"Un sistema con materiales reciclados",
+   q:"¿Cómo diseñar un sistema de riego por goteo con materiales reciclados que ahorre agua en la huerta de la escuela?", h:"Un sistema por goteo bien regulado usa menos de la mitad del agua que el riego con regadera.",
+   vi:"el tipo de riego (goteo o regadera) y el caudal del gotero", vd:"el agua usada por semana y la humedad del suelo", vc:"el mismo cantero, el mismo cultivo y los mismos días",
+   mat:["Botellas plásticas y mangueras finas", "Válvulas de suero o goteros", "Baldes y jarra medidora", "Palitos para medir la humedad del suelo", "Cronómetro"],
+   proc:["Relevar cómo se riega hoy la huerta y cuánta agua se usa.", "Diseñar bocetos de tres sistemas y elegir uno con criterios acordados.", "Construir el prototipo y calibrar el caudal de los goteros.", "Comparar durante dos semanas con un cantero regado con regadera.", "Evaluar costos, durabilidad y mejoras posibles."],
+   cols:["Día", "Agua con goteo (L)", "Agua con regadera (L)", "Humedad del suelo", "Estado de las plantas"],
+   comp:["Ciencias: el agua en el suelo y las plantas", "Matemática: caudal y proporcionalidad"]},
+  {k:"actividad fisica frecuencia cardiaca pulso ejercicio deporte salud corazon resistencia", a:["ef", "cn"], eje:"Ciencias", tipo:"experimental",
+   titulo:"El corazón en movimiento", sub:"La frecuencia cardíaca y la actividad física",
+   q:"¿Cómo cambia la frecuencia cardíaca con distintos tipos de actividad física y cuánto tarda en volver a la normalidad?", h:"La frecuencia sube más en las actividades intensas, y quienes hacen actividad física con regularidad se recuperan más rápido.",
+   vi:"el tipo de actividad (caminar, trotar, saltar la soga)", vd:"las pulsaciones por minuto antes, durante y después", vc:"la misma duración de la actividad y la misma forma de tomar el pulso",
+   mat:["Cronómetro", "Planilla de registro", "Soga", "Patio o cancha"],
+   proc:["Aprender a tomar el pulso en la muñeca o el cuello durante 15 segundos.", "Tomar el pulso en reposo.", "Realizar cada actividad durante tres minutos y tomar el pulso al terminar.", "Medir cada minuto hasta que vuelva al valor de reposo.", "Comparar los datos del grupo sin identificar a nadie."],
+   cols:["Actividad", "Reposo (ppm)", "Al terminar (ppm)", "A 1 min (ppm)", "A 3 min (ppm)"],
+   seg:"Cada estudiante participa según sus posibilidades; quien tenga indicación médica no hace las actividades intensas.",
+   comp:["Matemática: promedios y gráficos", "Educación Física: planificación del entrenamiento"]}
+];
+/* Ideas generales, cuando el tema no coincide con ninguna del banco */
+function feriaGenerica(area, tema){
+  const T = temaArt(tema || "el tema");
+  const base = {k:"", a:[area], generica:true, titulo:capitalizar(tema || "Proyecto de feria"), sub:"Una indagación en {lugar}"};
+  const G = {
+    cn:{eje:"Ciencias", tipo:"experimental", q:`¿Qué factores modifican ${T} y cómo podemos medirlos con materiales del aula?`, h:"Si cambiamos un solo factor y mantenemos los demás iguales, el resultado cambia de una forma que se puede medir.",
+      vi:"el factor que el grupo decida modificar", vd:"lo que se mide en cada prueba (tiempo, distancia, temperatura, masa o volumen)", vc:"todo lo demás: materiales, cantidades, lugar y forma de medir",
+      mat:["Materiales sencillos y seguros que el grupo elija", "Instrumentos de medición (regla, balanza, termómetro, cronómetro)", "Planilla de registro"],
+      proc:["Observar la situación y anotar las ideas previas del grupo.", "Elegir un factor para modificar y uno para medir.", "Hacer una prueba piloto y ajustar el procedimiento.", "Medir por lo menos cinco valores distintos y repetir tres veces cada uno.", "Graficar y comparar con la hipótesis."],
+      cols:["Prueba", "Valor del factor", "Medición 1", "Medición 2", "Medición 3", "Promedio"],
+      comp:["Matemática: registro y análisis de datos", "Tecnología: aplicaciones en la vida cotidiana"]},
+    mat:{eje:"Matemática", tipo:"modelizacion", q:`¿Cómo podemos usar ${T} para describir y anticipar una situación real de {lugar}?`, h:"Un modelo matemático sencillo permite anticipar lo que pasa en la situación con un margen de error aceptable.",
+      vi:"la magnitud que se modifica en la situación", vd:"la magnitud que se calcula o se predice", vc:"las condiciones de la situación elegida",
+      mat:["Datos reales relevados por el grupo", "Planilla de cálculo o calculadora", "Papel milimetrado"],
+      proc:["Elegir una situación de la escuela o del barrio que se pueda medir.", "Relevar datos reales.", "Construir una tabla y un gráfico.", `Proponer un modelo usando ${T}.`, "Comparar lo que predice el modelo con nuevos datos y discutir sus límites."],
+      cols:["Dato n.º", "Variable 1", "Variable 2", "Valor del modelo", "Diferencia"],
+      comp:["Ciencias: el fenómeno que se modeliza", "Lengua: explicar el modelo con palabras"]},
+    cs:{eje:"Ciencias", tipo:"fuentes", q:`¿Qué características tiene ${T} en {lugar} y qué cambió en los últimos años?`, h:"La situación en la localidad muestra rasgos propios que no aparecen en la explicación general del tema.",
+      fu:["Entrevistas a personas de la comunidad", "Documentos, fotografías y mapas", "Datos oficiales (censos, organismos provinciales)", "Notas periodísticas y bibliografía"],
+      cat:["Actores sociales", "Cambios en el tiempo", "Relación con lo regional y lo nacional", "Problemas y propuestas"],
+      mat:["Guía de entrevista", "Grabador del celular", "Planilla de registro de fuentes", "Mapa de la zona"],
+      proc:["Formular la pregunta y las categorías de análisis.", "Relevar y fichar fuentes de distinto tipo.", "Realizar entrevistas con consentimiento.", "Contrastar fuentes entre sí y con la bibliografía.", "Elaborar conclusiones y una propuesta para la comunidad."],
+      cols:["Fuente", "Tipo", "Fecha", "Qué aporta", "Categoría"],
+      comp:["Matemática: datos de censos y encuestas", "Artes: muestra con mapas y fotografías"]},
+    lengua:{eje:"Artes", tipo:"fuentes", q:`¿Qué rasgos de ${T} encontramos en los textos que leemos y en la forma de hablar de {lugar}?`, h:"Los textos y los hablantes de la zona muestran rasgos propios que se pueden describir y comparar.",
+      fu:["Textos literarios y no literarios seleccionados", "Entrevistas grabadas", "Diccionarios y gramáticas"], cat:["Rasgos del género o del uso", "Ejemplos", "Comparación entre textos o hablantes"],
+      mat:["Corpus de textos", "Grabador del celular", "Fichas de análisis"],
+      proc:["Seleccionar el corpus de textos o de hablantes.", "Acordar las categorías de análisis.", "Fichar los ejemplos.", "Comparar y sacar conclusiones.", "Producir un texto propio que use lo aprendido."],
+      cols:["Texto o hablante", "Ejemplo", "Categoría", "Comentario"], comp:["Ciencias Sociales: contexto de los textos", "Artes: lectura en voz alta o puesta en escena"]},
+    tec:{eje:"Tecnología e Ingeniería", tipo:"tecnologico", q:`¿Qué dispositivo podemos diseñar con materiales accesibles para resolver un problema de la escuela vinculado con ${T}?`, h:"Un prototipo sencillo, diseñado a partir del problema, puede mejorar la situación de forma medible.",
+      vi:"el diseño del prototipo", vd:"el resultado medido antes y después de usarlo", vc:"la misma situación de uso y la misma forma de medir",
+      mat:["Materiales reciclados", "Herramientas de mano", "Planilla de registro de pruebas"],
+      proc:["Identificar el problema y quiénes lo sufren.", "Producir ideas y elegir una con criterios acordados.", "Planificar y construir el prototipo.", "Probarlo, medir y corregir.", "Evaluar costos, impacto y mejoras."],
+      cols:["Prueba", "Versión del prototipo", "Resultado", "Problema detectado", "Cambio realizado"], comp:["Ciencias: el fenómeno en el que se basa el dispositivo", "Matemática: mediciones y costos"]},
+    art:{eje:"Artes", tipo:"artistico", q:`¿Cómo podemos comunicar ${T} con una producción artística para la comunidad de {lugar}?`, h:"Una producción artística colectiva permite que el público comprenda y se interese por el tema.",
+      fu:["Obras y artistas de referencia", "Registro fotográfico del proceso", "Opiniones del público"], cat:["Lenguaje artístico", "Recursos expresivos", "Recepción del público"],
+      mat:["Materiales del lenguaje elegido", "Cámara del celular", "Cuaderno de bocetos"],
+      proc:["Investigar el tema y obras de referencia.", "Bocetar propuestas y elegir una.", "Producir la obra registrando el proceso.", "Mostrarla a otro curso y recoger opiniones.", "Ajustar y preparar la muestra."],
+      cols:["Fecha", "Etapa", "Decisión tomada", "Por qué"], comp:["Ciencias o Ciencias Sociales: el tema que se comunica", "Lengua: textos de sala y presentación oral"]},
+    ef:{eje:"Ciencias", tipo:"experimental", q:`¿Qué efectos tiene ${T} en el rendimiento y el bienestar de los estudiantes?`, h:"Con una práctica planificada, el rendimiento mejora de forma medible en pocas semanas.",
+      vi:"la práctica realizada", vd:"una medida del rendimiento (tiempo, distancia, repeticiones, pulso)", vc:"la misma prueba, el mismo lugar y la misma hora",
+      mat:["Cronómetro", "Cinta métrica", "Planilla de registro"], proc:["Acordar la prueba y medir el punto de partida.", "Planificar la práctica de varias semanas.", "Medir una vez por semana.", "Comparar el inicio y el final.", "Reflexionar sobre hábitos saludables."],
+      cols:["Semana", "Prueba", "Resultado", "Observaciones"], comp:["Matemática: promedios y gráficos", "Ciencias: el cuerpo humano en movimiento"]}
+  };
+  return {...base, ...(G[area] || G.cn)};
+}
+const capitalizar = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+function feriaArea(m){
+  return LB_AREA(m) || ({tecnologia:"tec", informatica:"tec", artistica:"art", educacion_fisica:"ef", etica:"cs", filosofia:"cs", psicologia:"cs", comunicacion:"lengua", ingles:"lengua", taller:"cn"})[m] || "cn";
+}
+function feriaCandidatas(materia, tema){
+  const area = feriaArea(materia), terms = [tema || ""];
+  const ok = FERIA_IDEAS.map(x => ({x, s:puntajePalabras(terms, x.k) + (x.a.includes(area) ? 0.5 : 0)})).filter(o => o.s >= 1).sort((a, b) => b.s - a.s).map(o => o.x);
+  const delArea = FERIA_IDEAS.filter(x => x.a.includes(area) && !ok.includes(x));
+  return [...ok, feriaGenerica(area, tema), ...delArea];
+}
+const FER = {lista:[], idx:0, clave:"", qEditada:false};
+function feriaCtx(){
+  const g = id => { const el = $(id); return el ? el.value.trim() : ""; };
+  const lugarTxt = val("lugar") || val("institucion") || "";
+  const I = lugarInfo(lugarTxt), R = lugarRefs(I);
+  return {materia:g("fe-mat"), anio:g("fe-anio"), tema:g("fe-tema"), curso:g("fe-cur"), fecha:g("fe-fecha"), q:g("fe-q"),
+    escuela:val("institucion"), docente:val("docente"), R};
+}
+function feriaIdea(){
+  const c = feriaCtx(), clave = `${c.materia}|${norm(c.tema)}`;
+  if (clave !== FER.clave){ FER.clave = clave; FER.lista = feriaCandidatas(c.materia, c.tema); FER.idx = 0; }
+  return FER.lista[FER.idx % FER.lista.length];
+}
+const feriaTxt = (s, R) => contraer(ctxRellenar(s, R));
+/* Cronograma por etapas desde hoy hasta la fecha de la feria */
+const FERIA_ETAPAS = [
+  {t:"Explorar y preguntar", d:"Recuperar ideas previas, observar la situación y acordar la pregunta.", r:"Primeras entradas de la carpeta de campo: ideas previas y pregunta.", w:1},
+  {t:"Buscar antecedentes", d:"Leer fuentes confiables, tomar notas y formular la hipótesis.", r:"Fichas de lectura, hipótesis y bibliografía.", w:1},
+  {t:"Diseñar la indagación", d:"Definir variables o fuentes, materiales y procedimiento; hacer una prueba piloto.", r:"Plan de trabajo, tabla de datos y prueba piloto.", w:1},
+  {t:"Obtener datos", d:"Medir, encuestar o entrevistar, repitiendo para tener datos confiables.", r:"Tablas de datos, fotos y observaciones con fecha.", w:2},
+  {t:"Analizar y discutir", d:"Ordenar los datos, hacer gráficos y compararlos con la hipótesis y con las fuentes.", r:"Gráficos, primeras conclusiones y nuevas preguntas.", w:1},
+  {t:"Escribir y comunicar", d:"Redactar el informe y el resumen; preparar el stand, el cartel y el video.", r:"Borrador del informe, resumen, guion del video y boceto del stand.", w:1},
+  {t:"Ensayar y presentar", d:"Ensayar la exposición, recibir devoluciones del curso y ajustar.", r:"Versión final y devoluciones registradas.", w:1}
+];
+function feriaCronograma(fechaIso){
+  const hoy = fechaDe(hoyIso()), f = fechaDe(fechaIso);
+  const dias = f ? Math.round((f - hoy) / 864e5) : 0;
+  const N = f && dias >= 7 ? Math.max(1, Math.ceil(dias / 7)) : 8;
+  const W = FERIA_ETAPAS.reduce((a, e) => a + e.w, 0);
+  const fmt = d => `${pad2(d.getDate())}/${pad2(d.getMonth() + 1)}`;
+  const ini = k => { const d = new Date(hoy); d.setDate(d.getDate() + 7 * (k - 1)); return d; };
+  let acum = 0;
+  const filas = FERIA_ETAPAS.map(e => {
+    const a = Math.min(N, Math.floor(acum * N / W) + 1); acum += e.w; const b = Math.max(a, Math.floor(acum * N / W));
+    const fin = new Date(ini(b)); fin.setDate(fin.getDate() + 6);
+    const finReal = f && fin > f ? f : fin;
+    return [a === b ? `Semana ${a}` : `Semanas ${a} a ${b}`, `${fmt(ini(a))} al ${fmt(finReal)}`, e.t, e.d, e.r];
+  });
+  return {filas, semanas:N, conFecha:!!(f && dias >= 7), dias};
+}
+function feriaCurricular(c){
+  const out = {nap:[], saberes:[]};
+  try {
+    const N = napDe(c.materia, c.anio);
+    if (N && N.grupos){
+      const items = N.grupos.flatMap(g => g.items.map(i => i.t));
+      const pun = items.map(t => ({t, s:puntajePalabras([c.tema], t)})).filter(x => x.s > 0), mejor = Math.max(0, ...pun.map(x => x.s));
+      out.nap = pun.filter(x => x.s === mejor).slice(0, 2).map(x => x.t);
+    }
+  } catch (e) { logSilencioso(e); }
+  try {
+    const L = (CURRICULUM[c.materia] || {})[c.anio] || [];
+    out.saberes = autoSaberes(L, c.tema).slice(0, 2).map(i => L[i]);
+  } catch (e) { logSilencioso(e); }
+  if (!out.nap.length && val("nap") && norm(val("tema")) === norm(c.tema)) out.nap = [val("nap").split("\n")[0]];
+  return out;
+}
+const FERIA_TIPO = {
+  experimental:"Indagación escolar experimental: se modifica una variable, se mide otra y se controlan las demás.",
+  descriptiva:"Indagación escolar descriptiva: se relevan y se analizan datos de una situación real, sin modificarla.",
+  modelizacion:"Modelización matemática: se construye un modelo a partir de datos reales y se ponen a prueba sus predicciones.",
+  fuentes:"Indagación con fuentes: se relevan, se contrastan y se analizan testimonios, documentos y datos.",
+  tecnologico:"Proyecto tecnológico: se identifica un problema, se diseña una solución, se construye un prototipo y se evalúa.",
+  artistico:"Producción artística: se investiga el tema, se produce una obra colectiva y se registra el proceso."
+};
+function modeloFeria(){
+  const c = feriaCtx(), I = feriaIdea(), R = c.R, T = s => feriaTxt(s, R);
+  const q = c.q || T(I.q), tit = T(I.titulo), sub = T(I.sub || "");
+  const tema = c.tema || "el tema elegido", Tm = temaArt(tema);
+  const exp = !!I.vi, cron = feriaCronograma(c.fecha), cur = feriaCurricular(c);
+  const mat = nombreMateria(c.materia) || "el espacio curricular", anio = anioSec(c.anio) || "";
+  const comp = (I.comp || []).slice(0, 2);
+  const objGen = contraer(`Que los estudiantes diseñen y lleven adelante una indagación escolar para responder «${sinPunto(q)}», registren y analicen datos y comuniquen sus conclusiones con argumentos basados en evidencias.`);
+  const objEsp = [
+    `Formular una hipótesis o una anticipación fundamentada sobre ${Tm}.`,
+    exp ? "Identificar la variable que se modifica, la que se mide y las que se mantienen constantes." : "Seleccionar, fichar y contrastar fuentes de distinto tipo.",
+    "Registrar el trabajo de cada día en la carpeta de campo y organizar los datos en tablas y gráficos.",
+    `Explicar los resultados usando los conceptos de ${Tm} y vincularlos con situaciones de ${R.lugar}.`,
+    "Comunicar el proyecto por escrito (informe y resumen) y oralmente (exposición en el stand y video de registro)."
+  ].map(contraer);
+  const curTxt = [cur.nap.length ? `NAP: ${cur.nap.join(" ")}` : "", cur.saberes.length ? `Diseño curricular de Tucumán: ${cur.saberes.join(" ")}` : ""].filter(Boolean).join("\n");
+  const steam = `- Foco principal: ${I.eje}.\n${comp.map(x => `- Foco complementario: ${x}.`).join("\n")}\n- Foco transversal: Lengua y Prácticas del Lenguaje (carpeta de campo, informe, resumen y exposición oral).`;
+  const variables = exp ? `- Variable que se modifica: ${T(I.vi)}.\n- Variable que se mide: ${T(I.vd)}.\n- Se mantienen constantes: ${T(I.vc)}.` : `Fuentes:\n${(I.fu || []).map(x => `- ${T(x)}`).join("\n")}\nCategorías de análisis:\n${(I.cat || []).map(x => `- ${x}`).join("\n")}`;
+  const ant = typeof anticipaDe === "function" ? anticipaDe([tema]) : null;
+  const vacias = n => Array.from({length:n}, () => []);
+  const resumen = contraer(`Este proyecto fue realizado por estudiantes de ${c.curso || anio || "______"}${c.escuela ? ` de ${c.escuela}` : ""} en ${mat}. Partimos de la pregunta «${sinPunto(q)}» y de la hipótesis de que ${lcFirst(sinPunto(T(I.h)))}. Para responderla, ${exp ? "diseñamos una indagación en la que modificamos " + T(I.vi) + " y medimos " + T(I.vd) : "relevamos y contrastamos " + listaNatural((I.fu || []).slice(0, 3).map(x => lcFirst(T(x))))}. Los resultados mostraron que ______. Concluimos que ______.`);
+  const intro = [
+    `En ${R.lugar} ______ (situación que dio origen al proyecto).`,
+    `Antecedentes: ______ (qué se sabe del tema según las fuentes consultadas).`,
+    `Problema: ${q}`,
+    `Hipótesis: ${T(I.h)}`,
+    `Objetivo: responder esa pregunta ${exp ? "con una experiencia en la que controlamos las variables" : "a partir del análisis de distintas fuentes"}, registrando y analizando los datos.`,
+    `El proyecto se vincula con ${Tm}${anio ? `, contenido de ${mat} de ${anio}` : ""}.`
+  ].join("\n");
+  const rows = (I.cols || ["Fecha", "Dato", "Observaciones"]);
+  const M = {inst:c.escuela, titulo:"Proyecto para la feria de ciencias", subtitulo:sub ? `${tit}: ${lcFirst(sub)}` : tit, faltaSub:"Título del proyecto",
+    datos:[["Docente orientador", c.docente], ["Espacio curricular", mat], ["Curso", c.curso || anio], ["Nivel", `Secundario${+c.anio >= 10 ? ", Ciclo Orientado" : c.anio ? ", Ciclo Básico" : ""}`], ["Foco principal", I.eje], ["Fecha de la feria", c.fecha ? fechaCortaIso(c.fecha) : ""]],
+    secs:[
+      {h:"El proyecto", sub:[
+        {h:"Pregunta de investigación", body:q},
+        {h:"Hipótesis", body:T(I.h)},
+        {h:"Objetivo general", body:objGen},
+        {h:"Objetivos específicos", body:objEsp.map(x => `- ${x}`).join("\n")},
+        {h:"Tipo de indagación", body:FERIA_TIPO[I.tipo] || FERIA_TIPO.experimental},
+        {h:exp ? "Variables" : "Fuentes y categorías de análisis", body:variables},
+        {h:"Materiales", body:(I.mat || []).map(x => `- ${T(x)}`).join("\n")},
+        {h:"Procedimiento", body:(I.proc || []).map((x, i) => `${i + 1}. ${T(x)}`).join("\n")},
+        ...(I.seg ? [{h:"Cuidados", body:I.seg}] : []),
+        {h:"Relación con el currículo", body:curTxt || `${capitalizar(Tm)}, contenido de ${mat}${anio ? ` de ${anio}` : ""}.`},
+        {h:"Enfoque STEAM", body:steam}
+      ]},
+      {h:"Cronograma", lead:cron.conFecha ? `${cron.semanas} ${cron.semanas === 1 ? "semana" : "semanas"} hasta la feria.` : "Cronograma de ocho semanas; las fechas se ajustan cuando se conozca la de la feria.",
+        table:{head:["Semanas", "Fechas", "Etapa", "Qué hacen los estudiantes", "Qué queda registrado"], rows:cron.filas, w:[1350, 1300, 1500, 2720, 2200]}, tableOnly:true},
+      {h:"Informe del proyecto", pageBreak:true, sub:[
+        {h:"Fecha", lineas:1},
+        {h:"Título y subtítulo", body:sub ? `${tit}\n${sub}` : tit},
+        {h:"Índice", lineas:3},
+        {h:"Resumen (hasta 500 palabras)", body:resumen},
+        {h:"Introducción", body:intro},
+        {h:"Desarrollo: materiales y metodología", body:`${FERIA_TIPO[I.tipo] || ""}\nMateriales:\n${(I.mat || []).map(x => `- ${T(x)}`).join("\n")}\nProcedimiento:\n${(I.proc || []).map((x, i) => `${i + 1}. ${T(x)}`).join("\n")}`},
+        {h:"Resultados obtenidos", body:"¿Qué datos obtuvimos? ¿Qué muestran las tablas y los gráficos?", lineas:6},
+        {h:"Discusión", body:"¿Los resultados confirman la hipótesis? ¿Qué pudo influir en las mediciones? ¿Coinciden con lo que dicen las fuentes consultadas?", lineas:6},
+        {h:"Conclusiones", body:"¿Cuál es la respuesta a la pregunta? ¿Qué nuevas preguntas surgieron?", lineas:5},
+        {h:"Bibliografía consultada", body:"En orden alfabético. En los sitios web, el enlace y la fecha de consulta.", lineas:4},
+        {h:"Agradecimientos", lineas:2}
+      ]},
+      {h:"Carpeta de campo", pageBreak:true, lead:"Registro diario del equipo, escrito a mano. No se pasa en limpio: muestra cómo se trabajó.",
+        table:{head:["Fecha", "Qué hicimos", "Qué observamos o medimos", "Dudas y próximos pasos"], rows:vacias(12), w:[1150, 2640, 2640, 2640]}, tableOnly:true},
+      {h:"Tabla de datos", table:{head:rows, rows:vacias(10)}, tableOnly:true},
+      {h:"Registro pedagógico", pageBreak:true, sub:[
+        {h:"Propuesta curricular y planificación", body:contraer(`El proyecto se desarrolla en ${mat}${anio ? `, ${anio}` : ""}, a partir de ${Tm}. Surge del trabajo en el aula y lo lleva adelante todo el curso.${curTxt ? "\n" + curTxt : ""}`)},
+        {h:"Ideas previas de los estudiantes", body:ant && ant.q ? `Pregunta usada para recuperarlas: ${ant.q}\nRespuestas más frecuentes:` : "Preguntas usadas para recuperarlas y respuestas más frecuentes:", lineas:4},
+        {h:"Objetivos disciplinares y didácticos", body:`${objGen}\n${objEsp.map(x => `- ${x}`).join("\n")}`},
+        {h:"Integración de los ejes STEAM", body:steam},
+        {h:"Organización del trabajo y tiempos", body:`Cronograma previsto: ${cron.semanas} ${cron.semanas === 1 ? "semana" : "semanas"}, en siete etapas. Cambios realizados durante el proyecto:`, lineas:3},
+        {h:"Evaluación de los aprendizajes", body:["Formulación de la pregunta y la hipótesis", "Registro sistemático en la carpeta de campo", exp ? "Control de variables y repetición de mediciones" : "Selección y contraste de fuentes", "Organización de los datos en tablas y gráficos", "Uso del vocabulario específico en el informe y en la exposición", "Participación y trabajo en equipo"].map(x => `- ${x}`).join("\n")},
+        {h:"Cómo se eligieron los estudiantes expositores", lineas:3},
+        {h:"Lo que aprendimos y cómo cambió la planificación", lineas:5},
+        {h:"Devoluciones recibidas en cada instancia", lineas:4},
+        {h:"Fotografías del proceso", lineas:2}
+      ]},
+      {h:"Stand y cartel", pageBreak:true, sub:[
+        {h:"Tríptico", body:`- Panel izquierdo: la situación de ${R.lugar}, la pregunta y la hipótesis.\n- Panel central: el procedimiento con fotos y el gráfico principal de resultados.\n- Panel derecho: conclusiones, nuevas preguntas y bibliografía.`},
+        {h:"Cartel del título (60 × 22 cm)", body:`${tit}\nLetras grandes, legibles a tres metros; el exterior del tríptico queda libre.`},
+        {h:"Sobre la mesa", body:`- La carpeta de campo, visible y abierta.\n- Una copia impresa del informe.\n${exp ? "- Los materiales de la experiencia, armados para mostrarla.\n" : "- Fotografías, documentos o grabaciones relevadas.\n"}- La tabla de datos y los gráficos en tamaño grande.`}
+      ]},
+      {h:"Video de registro (hasta 5 minutos)", table:{head:["Tiempo", "Qué se muestra", "Quién habla"], rows:[
+        ["0:00 a 0:30", "Título, escuela y pregunta del proyecto", "Estudiante 1"],
+        ["0:30 a 1:15", `La situación de ${R.lugar} que originó el proyecto e ideas previas`, "Estudiante 2"],
+        ["1:15 a 2:30", exp ? "La experiencia y la toma de datos, con imágenes del aula" : "El relevamiento de fuentes y las entrevistas", "Todo el curso"],
+        ["2:30 a 3:45", "Resultados: tablas y gráficos explicados", "Estudiante 1"],
+        ["3:45 a 4:30", "Conclusiones y nuevas preguntas", "Estudiante 2"],
+        ["4:30 a 5:00", "Agradecimientos y créditos", "Docente orientador"]], w:[1500, 5070, 2500]}, tableOnly:true},
+      {h:"Exposición en el stand", sub:[
+        {h:"Guion para los dos expositores", body:["Saludar, presentarse y decir el título del proyecto.", "Contar la situación que dio origen a la pregunta.", "Explicar la hipótesis y cómo se puso a prueba.", "Mostrar los resultados con el gráfico.", "Responder la pregunta con las conclusiones y contar qué nuevas preguntas surgieron.", "Invitar a mirar la carpeta de campo."].map((x, i) => `${i + 1}. ${x}`).join("\n")},
+        {h:"Preguntas que suelen hacer los evaluadores", body:["¿Cómo surgió la idea del proyecto?", "¿Qué pensaban antes de empezar y qué piensan ahora?", exp ? "¿Por qué repitieron las mediciones? ¿Qué mantuvieron igual en cada prueba?" : "¿Cómo eligieron las fuentes? ¿Encontraron testimonios que se contradicen?", "¿Qué fue lo más difícil y cómo lo resolvieron?", "¿Qué harían distinto si empezaran de nuevo?", "¿Qué aprendieron que no sabían?", "¿Para qué le sirve este trabajo a la comunidad?"].map(x => `- ${x}`).join("\n")}
+      ]},
+      {h:"Criterios de valoración", pageBreak:true, lead:"Para revisar el proyecto antes de cada instancia. Basados en los criterios del Programa Nacional de Ferias de Ciencias y Tecnología.",
+        table:{head:["Aspecto", "Qué se mira", "Logrado", "En proceso", "Falta"], rows:[
+          ["Pregunta e hipótesis", "El problema está bien delimitado; la hipótesis se relaciona con la pregunta y los objetivos", "", "", ""],
+          ["Marco teórico", "Antecedentes pertinentes, actualizados y adecuados al curso; vínculo con los NAP y el diseño curricular", "", "", ""],
+          ["Metodología", "Procedimiento claro, instrumentos adecuados, datos suficientes y repetidos", "", "", ""],
+          ["Resultados", "Relación clara entre datos y objetivos; tablas y gráficos con título y unidades", "", "", ""],
+          ["Discusión y conclusiones", "Vinculan hipótesis, objetivos y resultados; abren nuevas preguntas", "", "", ""],
+          ["Carpeta de campo", "Refleja el trabajo real del curso, con fechas y etapas sucesivas", "", "", ""],
+          ["Informe y resumen", "Corrección formal, índice, componentes pedidos y bibliografía", "", "", ""],
+          ["Video de registro", "Sintetiza las ideas y muestra la secuencia de actividades, en 5 minutos o menos", "", "", ""],
+          ["Enfoque STEAM", "Integra el foco principal con al menos otro eje; Lengua presente en todo el proyecto", "", "", ""],
+          ["Registro pedagógico", "Tema acorde al currículo, actividades y tiempos adecuados, apertura y cierre", "", "", ""],
+          ["Exposición y stand", "Dominio del tema, claridad, vocabulario adecuado; stand coherente con la carpeta y el informe", "", "", ""],
+          ["Impacto", "Repercusión en la escuela y en la comunidad", "", "", ""]
+        ], w:[1550, 3720, 1300, 1400, 1100]}, tableOnly:true},
+      {h:"Fuentes de la estructura", links:FERIA_FUENTES, body:""}
+    ],
+    firmas:[[c.docente, "Docente orientador"], ["", "Dirección"]]};
+  return M;
+}
+/* ---------- Diálogo ---------- */
+function feriaResumenHtml(){
+  const c = feriaCtx(), I = feriaIdea(), T = s => feriaTxt(s, c.R), cron = feriaCronograma(c.fecha);
+  const otras = FER.lista.length > 1;
+  return `<div class="fe-card"><p class="fe-k">${esc(I.eje)} · ${esc((FERIA_TIPO[I.tipo] || "").split(":")[0])}</p>
+    <h3>${esc(T(I.titulo))}</h3>${I.sub ? `<p class="fe-sub">${esc(T(I.sub))}</p>` : ""}
+    <ul class="fe-lista">
+      <li><b>Cronograma:</b> ${cron.conFecha ? `${cron.semanas} ${cron.semanas === 1 ? "semana" : "semanas"} hasta la feria` : "8 semanas (elegí la fecha de la feria para ajustarlo)"}${cron.conFecha && cron.semanas < 4 ? ". Queda poco tiempo: conviene una pregunta acotada." : ""}</li>
+      <li><b>Focos complementarios:</b> ${esc((I.comp || []).slice(0, 2).join("; "))}</li>
+      <li><b>Incluye:</b> proyecto, cronograma, informe, carpeta de campo, tabla de datos, registro pedagógico, stand, guion del video, exposición y criterios de valoración.</li>
+    </ul>${otras ? `<button type="button" class="linkbtn" id="fe-otra">Ver otra idea (${(FER.idx % FER.lista.length) + 1} de ${FER.lista.length})</button>` : ""}</div>`;
+}
+function renderFeria(soloResumen){
+  const I = feriaIdea(), c = feriaCtx();
+  if (!FER.qEditada || !soloResumen){ if (!FER.qEditada) $("fe-q").value = feriaTxt(I.q, c.R); }
+  $("fe-res").innerHTML = feriaResumenHtml();
+}
+function abrirFeria(){
+  const m = $("fe-mat"), a = $("fe-anio");
+  if (!m.options.length){
+    m.innerHTML = `<option value="">Elegí el espacio curricular</option>` + MATERIAS.map(([k, n]) => `<option value="${k}">${esc(n)}</option>`).join("");
+    const F = FORM.flatMap(s => s.campos || s.fields || []).find(x => x && x.id === "anio");
+    const opts = (F && F.opts) || [["7", "1.º año"], ["8", "2.º año"], ["9", "3.º año"], ["10", "4.º año"], ["11", "5.º año"], ["12", "6.º año"]];
+    a.innerHTML = `<option value="">Elegí el año</option>` + opts.map(([k, n]) => `<option value="${k}">${esc(n)}</option>`).join("");
+  }
+  m.value = val("materia") || m.value || "fisica";
+  a.value = val("anio") || a.value;
+  if (temaVisible()) $("fe-tema").value = temaVisible();
+  if (val("curso") && !$("fe-cur").value) $("fe-cur").value = val("curso");
+  FER.clave = ""; FER.qEditada = false;
+  renderFeria();
+  abrirDialogo("feria");
+}
+async function bajarFeria(formato){
+  const c = feriaCtx();
+  if (!c.tema){ $("fe-tema").focus(); toast("Escribí el tema del proyecto."); return; }
+  const I = feriaIdea(), nombre = `Feria de ciencias - ${feriaTxt(I.titulo, c.R)}`.replace(/[\\/:*?"<>|]+/g, " ").slice(0, 80);
+  await bajarDoc(modeloFeria(), nombre, formato, formato === "pdf" ? "PDF del proyecto descargado." : "Proyecto de feria descargado en Word.");
+}
+function bindFeria(){
+  const D = $("feria"); if (!D || D.dataset.ok) return; D.dataset.ok = "1";
+  $("btn-feria").addEventListener("click", abrirFeria);
+  ["fe-mat", "fe-tema"].forEach(id => $(id).addEventListener("input", () => { FER.qEditada = false; renderFeria(); }));
+  ["fe-anio", "fe-fecha", "fe-cur"].forEach(id => $(id).addEventListener("input", () => renderFeria(true)));
+  $("fe-q").addEventListener("input", () => { FER.qEditada = true; });
+  D.addEventListener("click", e => {
+    if (e.target.closest("#fe-otra")){ FER.idx++; FER.qEditada = false; renderFeria(); return; }
+    const b = e.target.closest("[data-fe]"); if (!b) return;
+    bajarFeria(b.dataset.fe);
+  });
+}
+function init40(){ try { bindFeria(); } catch (e) { registrarError("init40", e, "aviso"); } }
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -17293,7 +17838,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
