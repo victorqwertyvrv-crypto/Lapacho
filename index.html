@@ -1591,6 +1591,45 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .gp-regb{display:flex;gap:6px}
 .gp-regb .btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
 
+/* Versión 42: dinámicas, proyección de preguntas y actividades para cuando no estás */
+.dn-ev{font-size:13px;color:var(--muted);margin:6px 0 0}
+.dn-fuente{margin-top:14px}
+.pc-bar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.pc-bar select{flex:1 1 220px;width:auto}
+.pc-list{margin:0 0 10px;padding-left:22px;display:flex;flex-direction:column;gap:12px;font-size:14px}
+.pc-sel{display:flex;gap:8px;align-items:flex-start;font-weight:600;cursor:pointer}
+.pc-sel input{margin-top:3px;flex:none}
+.pc-op{margin:6px 0 4px;padding-left:22px;font-size:13.5px}
+.pc-ok{font-weight:600}
+.pc-tick{color:var(--accent);font-weight:600}
+.pc-por summary{cursor:pointer;font-size:13px;color:var(--accent)}
+.pc-por p{margin:4px 0;font-size:13px}
+.grande-in .pi-n{font-size:clamp(14px,2vw,18px);color:var(--muted)}
+.grande-in .pi-q{max-width:1000px;line-height:1.25}
+.pi-op{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;width:min(900px,100%);text-align:left}
+.pi-op li{display:flex;gap:14px;align-items:baseline;border:2px solid var(--line);border-radius:14px;padding:10px 16px;font-size:clamp(17px,2.6vw,26px)}
+.pi-op li b{font-size:1.1em;color:var(--accent)}
+.pi-op li.pi-ok{border-color:var(--accent);background:var(--accent-soft)}
+.pi-op li.pi-no{opacity:.55}
+.pi-ctrl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.pi-ctrl .btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.pi-lbl{font-size:15px;color:var(--muted)}
+.grande-in .pi-sub{font-size:clamp(14px,2vw,19px);color:var(--muted);max-width:900px}
+.grande-in .pi-por{max-width:900px}
+.grande-in .pi-reloj{font-size:clamp(40px,8vw,84px);font-weight:700;font-variant-numeric:tabular-nums}
+.grande-in .pi-reloj.pi-cero{color:var(--warn)}
+.pi-tab{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;font-size:clamp(15px,2vw,20px)}
+.aus-form .cond-check{align-self:center}
+.aus-prev{max-height:60vh;overflow:auto;border:1px solid var(--line);border-radius:12px;margin:10px 0}
+.aus-prev .paper{margin:0;box-shadow:none}
+.aus-av{background:var(--flag);color:var(--flag-ink);border-radius:10px;padding:8px 12px;font-size:13.5px;margin:6px 0}
+.aus-msg{margin:8px 0}
+.aus-msg summary{cursor:pointer;font-weight:600;padding:6px 0}
+.aus-msg textarea{width:100%;font-size:14px}
+.aus-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.aus-l li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px;background:var(--surface)}
+.aus-lb{display:flex;gap:8px;align-items:center}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -1642,10 +1681,12 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <button type="button" role="menuitem" id="btn-fotoia"><b>Subir una foto</b><small>Programa, curso, evaluaciones, SIME o documento: la app reconoce qué es</small></button>
           <span class="menu-g">Para la clase</span>
           <button type="button" role="menuitem" id="btn-repaso"><b>Repasar la clase</b><small>El libreto de tu planificación: qué hacer y qué decir, minuto a minuto</small></button>
+          <button type="button" role="menuitem" id="btn-ausencia"><b>Actividades para cuando no estés</b><small>Si adelantás una hora o faltás: una hoja para que el curso avance solo</small></button>
           <button type="button" role="menuitem" id="btn-libreto"><b>Clases desde un libreto</b><small>Pegá el texto o subí PDF, Word o fotos: arma la secuencia con los NAP</small></button>
           <button type="button" role="menuitem" id="btn-banco"><b>Banco de actividades</b><small>Las actividades que guardaste</small></button>
           <button type="button" role="menuitem" id="btn-preg"><b>Preguntas y pruebas</b><small>Armá evaluaciones con versión A y B y la clave</small></button>
           <button type="button" role="menuitem" id="btn-rutinas"><b>Rutinas de pensamiento</b><small>Para empezar, desarrollar o cerrar una clase</small></button>
+          <button type="button" role="menuitem" id="btn-dinam"><b>Dinámicas que funcionan</b><small>Instrucción entre pares, recuperación, minipizarras y preguntas para proyectar</small></button>
           <button type="button" role="menuitem" id="btn-ia"><b>IA en el aula</b><small>Criterios y actividades listas para usar</small></button>
           <button type="button" role="menuitem" id="btn-coher"><b>Revisar la coherencia</b><small>Objetivos, actividades y evaluación: avisa vacíos y contradicciones</small></button>
           <span class="menu-g">Para la escuela</span>
@@ -1813,6 +1854,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <div class="seg tabs" role="group" aria-label="Sección" data-tabs="banco">
         <button type="button" data-tab="mias" aria-pressed="true">Mis actividades</button>
         <button type="button" data-tab="rutinas" aria-pressed="false">Rutinas de pensamiento</button>
+        <button type="button" data-tab="dinam" aria-pressed="false">Dinámicas</button>
         <button type="button" data-tab="ia" aria-pressed="false">IA en el aula</button>
       </div>
       <section class="tab-panel" data-panel="banco:mias">
@@ -1835,6 +1877,9 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <button type="button" data-rutf="cierre" aria-pressed="false">Para cerrar</button>
         </div>
         <div class="lib-list" id="rut-list"></div>
+      </section>
+      <section class="tab-panel" data-panel="banco:dinam" hidden="">
+        <div id="dinam-panel"></div>
       </section>
       <section class="tab-panel" data-panel="banco:ia" hidden="">
         <p class="hint">Criterios para usar la inteligencia artificial con estudiantes y actividades para aprender a usarla con juicio crítico. Para que figure en el documento, sumá el eje «Educación digital e IA» en Ejes transversales.</p>
@@ -1904,7 +1949,9 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
-      <details class="faq"><summary>¿Cómo armo grupos para que se ayuden entre ellos?</summary><p>En «Mi curso › Notas», tocá «Armar grupos con estas notas». Elegís con qué nota ordenar (la del período, el promedio o una evaluación) y de cuántos integrantes. Lapacho dobla la lista al medio: cada grupo tiene quien acompaña (de la mitad de arriba) y quien es acompañado (de la mitad de abajo), cerca en el orden, para que nadie quede muy lejos. Podés pedir otra combinación, intercambiar a dos estudiantes y mostrarlo al curso sin notas. También arma rompecabezas, piensa-discute-comparte, cabezas numeradas, lápices al centro y tutoría recíproca, evita repetir parejas, separa a quienes marcaste para no juntar y muestra si los acompañados mejoraron en la evaluación siguiente. En el modo aula, elegí «Para acompañarse».</p></details>
+      <details class="faq"><summary>¿Qué le dejo al curso si adelanto una hora o falto?</summary><p>En «Herramientas › Para la clase», tocá «Actividades para cuando no estés». Elegís el curso, cuándo y desde qué tema. Lapacho toma los temas que siguen de tu planificación y arma una hoja para que trabajen en parejas sin explicación: recordar sin mirar la carpeta, un texto para leer (de Física, Química y Biología lo trae Lapacho; para otros temas indicá libro y páginas), actividades y preguntas para resolver y un cierre con su duda y un semáforo. Aparte descargás las indicaciones para quien queda a cargo y las respuestas para vos. Si vas a faltar varios días, desde «Licencias y feriados» tocá «Dejar actividades para esos días». Lapacho no envía nada: el mensaje para preceptoría lo copiás y lo mandás vos.</p></details>
+        <details class="faq"><summary>¿Qué dinámicas tienen evidencia de que funcionan?</summary><p>En «Herramientas › Para la clase › Dinámicas que funcionan» están la instrucción entre pares, la práctica de recuperación, el vaciado de memoria, las minipizarras, las preguntas para antes, durante y después de resolver, predecir-observar-explicar y el juego por equipos, cada una con por qué funciona y su fuente. Las preguntas conceptuales se proyectan: el curso vota y Lapacho te dice qué hacer según cuántos acertaron.</p></details>
+        <details class="faq"><summary>¿Cómo armo grupos para que se ayuden entre ellos?</summary><p>En «Mi curso › Notas», tocá «Armar grupos con estas notas». Elegís con qué nota ordenar (la del período, el promedio o una evaluación) y de cuántos integrantes. Lapacho dobla la lista al medio: cada grupo tiene quien acompaña (de la mitad de arriba) y quien es acompañado (de la mitad de abajo), cerca en el orden, para que nadie quede muy lejos. Podés pedir otra combinación, intercambiar a dos estudiantes y mostrarlo al curso sin notas. También arma rompecabezas, piensa-discute-comparte, cabezas numeradas, lápices al centro y tutoría recíproca, evita repetir parejas, separa a quienes marcaste para no juntar y muestra si los acompañados mejoraron en la evaluación siguiente. En el modo aula, elegí «Para acompañarse».</p></details>
       <details class="faq"><summary>¿Puedo cargar la lista del curso con una foto?</summary><p>Sí. En «Mi curso › Datos del curso», tocá «Cargar desde una foto» al lado de la lista (o elegí «Lista de alumnos» en «Subir una foto»). La foto se lee en tu celular, sin mandarla a ningún lado; después revisás los nombres, los corregís si hace falta y, al crear el curso, queda lista la planilla de asistencia. Las listas impresas se leen mucho mejor que las escritas a mano.</p></details>
       <details class="faq"><summary>¿Puedo repasar la clase antes de darla?</summary><p>Sí. En «Herramientas › Repasar la clase», o eligiendo «Libreto para repasar» en la vista del documento, Lapacho arma con tu planificación un libreto: qué llevar, qué hacer y qué decir en cada momento con los minutos (y la hora, si cargaste el horario del curso), las preguntas, las ideas previas que suelen aparecer y cómo retomarlas, el pizarrón y qué hacer si sobra o falta tiempo. Se actualiza solo cuando cambiás la planificación y se descarga en Word o PDF.</p></details>
       <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
@@ -2066,6 +2113,14 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
         <div class="cfg-grid" id="sal-form"></div>
         <div class="lib-foot"><button type="button" class="btn btn-sm btn-primary" id="sal-aut">Autorizaciones (Word)</button><button type="button" class="btn btn-sm" id="sal-plan">Planilla de la salida</button><button type="button" class="btn btn-sm" id="sal-ag">Agregar a la agenda del curso</button></div>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="lib bancodlg" id="ausdlg" aria-labelledby="ausdlg-t">
+    <div class="lib-in">
+      <div class="lib-head"><h2 id="ausdlg-t">Actividades para cuando no estés</h2><button type="button" class="linkbtn" data-cerrar="ausdlg">Cerrar</button></div>
+      <p class="hint">Si adelantás una hora, faltás un día o vas a estar de licencia, Lapacho arma una hoja para que el curso avance solo con los temas que siguen de tu planificación: algo para recordar sin mirar la carpeta, un texto para leer, actividades para resolver en parejas y un cierre. Aparte, las indicaciones para quien queda a cargo y las respuestas para vos.</p>
+      <div id="aus-panel"></div>
     </div>
   </dialog>
 
@@ -4508,6 +4563,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-26-i", fecha:"2026-10-26", items:[
+    "Nuevo: «Actividades para cuando no estés» (Herramientas › Para la clase). Si adelantás una hora, faltás o estás de licencia, Lapacho arma una hoja para que el curso avance solo con los temas que siguen de tu planificación: recordar sin mirar la carpeta, un texto para leer, actividades y preguntas para resolver en parejas y un cierre con su duda y un semáforo. Aparte, las indicaciones para quien queda a cargo, las respuestas para vos y el mensaje para preceptoría.",
+    "Desde «Licencias y feriados», «Dejar actividades para esos días» arma una hoja por cada clase que perdés. Al volver, «Tu día» te recuerda retomarlas.",
+    "Nuevo: «Dinámicas que funcionan», con instrucción entre pares, práctica de recuperación, vaciado de memoria, minipizarras, preguntas para resolver problemas, predecir-observar-explicar y juego por equipos, cada una con su fuente. Incluye 45 preguntas conceptuales para proyectar: el curso vota y Lapacho te dice si conviene que discutan de a dos, retomar la idea o seguir."
+  ]},
   {id:"2026-10-26-h", fecha:"2026-10-26", items:[
     "Grupos: ahora elegís la estrategia. Además de los grupos de trabajo, arma rompecabezas (con los grupos de expertos por parte), piensa-discute-comparte, cabezas numeradas (con sorteo de número y de grupo), lápices al centro y tutoría recíproca, cada una con su guion para mostrar al curso o descargar.",
     "El armado evita repetir las parejas de los últimos agrupamientos, separa a quienes marcaste para no juntar y cuida a quien necesita apoyo (marcado por vos o con PPI): queda con alguien que acompaña y nunca con otra persona que también lo necesita. También podés ordenar por un criterio de la rúbrica.",
@@ -7568,7 +7628,7 @@ function setTab(grupo, valor){
   try { const act = document.querySelector(`[data-tabs="${grupo}"] [data-tab="${valor}"]`); if (act && act.parentElement.scrollWidth > act.parentElement.clientWidth) act.scrollIntoView({block:"nearest", inline:"nearest"}); } catch (e) { logSilencioso(e); }
   if (grupo === "cur") renderCurTab(valor);
   if (grupo === "aula") renderAula(valor);
-  if (grupo === "banco"){ if (valor === "rutinas") renderRutinas(); else if (valor === "ia") renderIA(); else renderBanco(); }
+  if (grupo === "banco"){ if (valor === "rutinas") renderRutinas(); else if (valor === "dinam") renderDinam(); else if (valor === "ia") renderIA(); else renderBanco(); }
 }
 function abrirBanco(tab){ abrirDialogo("banco"); setTab("banco", tab || state.tabs.banco || "mias"); }
 
@@ -9764,6 +9824,7 @@ function avisosLegajo(){
   try { av.push(...avisosAula22()); } catch (e) { logSilencioso(e); }
   try { av.push(...avisoMemoria()); } catch (e) { logSilencioso(e); }
   try { av.push(...avisosGD()); } catch (e) { logSilencioso(e); }
+  try { av.push(...avisosAusencia()); } catch (e) { logSilencioso(e); }
   return av;
 }
 function modeloLegajo(){
@@ -16129,7 +16190,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "41.6 (26/10/2026)";
+const LAPACHO_VERSION = "42 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18272,7 +18333,7 @@ function htmlCalcLic(r){
     ${lcTira(r)}
     ${r.avisos.length ? `<ul class="lc-av">${r.avisos.map(a => `<li class="lc-${a.k}">${esc(a.t)}</li>`).join("")}</ul>` : ""}
     <p class="hint">${esc(l.nota)}</p>
-    <div class="cur-bar"><button type="button" class="btn btn-sm" data-lc="reg">Registrar como pedida en Mi legajo</button></div>
+    <div class="cur-bar"><button type="button" class="btn btn-sm" data-lc="reg">Registrar como pedida en Mi legajo</button>${(cdatos().cursos || []).length ? `<button type="button" class="btn btn-sm" data-ausdesde="${r.ini}" data-aushasta="${r.hasta}">Dejar actividades para esos días</button>` : ""}</div>
   </div>`;
 }
 function htmlMejores(l, n){
@@ -19393,6 +19454,885 @@ function htmlAulaHerr(c){
 }
 
 /* ============================================================
+   Versión 42: dinámicas con evidencia y actividades para cuando el
+   docente no está.
+   - Banco de preguntas conceptuales (opciones armadas con las ideas
+     previas más frecuentes) para instrucción entre pares,
+     minipizarras y juego por equipos, con proyección.
+   - Dinámicas nuevas: instrucción entre pares, práctica de
+     recuperación, vaciado de memoria, minipizarras, preguntas
+     metacognitivas para resolver problemas, predecir-observar-
+     explicar y juego de preguntas.
+   - Actividades para cuando el docente adelanta una hora, falta o
+     está de licencia: una hoja para que el curso avance solo con los
+     temas que siguen, indicaciones para quien queda a cargo y las
+     respuestas para el docente.
+   ============================================================ */
+const PC_L = ["A", "B", "C", "D"];
+/* g: grupo; a: área (cn o mat); k: palabras clave; ok: opción correcta; por: explicación; err: la idea que suele llevar a la opción equivocada */
+const PREG_CONC = [
+  {id:"inercia1", g:"Fuerzas y movimiento", a:"cn", k:"inercia newton primera ley movimiento fuerza espacio",
+   q:"Un astronauta empuja una caja en el espacio, lejos de cualquier planeta, y la suelta. ¿Qué hace la caja?",
+   op:["Se detiene enseguida.", "Sigue moviéndose en línea recta con la misma velocidad.", "Se frena de a poco hasta quedarse quieta.", "Vuelve hacia el astronauta."], ok:1,
+   por:"Sin fuerzas que la frenen o la desvíen, la caja mantiene su velocidad: es la inercia (primera ley de Newton).",
+   err:"La opción C sale de pensar que el movimiento «se gasta». En la Tierra los objetos se frenan por el rozamiento, no porque se les acabe la fuerza."},
+  {id:"fuerza1", g:"Fuerzas y movimiento", a:"cn", k:"fuerza fuerzas peso lanzamiento tiro vertical dinamica newton",
+   q:"Una pelota sube después de que la lanzaron hacia arriba. Mientras sube, sin contar el aire, ¿qué fuerzas actúan sobre ella?",
+   op:["Solo el peso, hacia abajo.", "La fuerza del lanzamiento hacia arriba y el peso hacia abajo.", "Ninguna fuerza.", "Solo la fuerza del lanzamiento, hacia arriba."], ok:0,
+   por:"Una vez que la pelota se separa de la mano, la única fuerza es el peso. La pelota sigue subiendo por su velocidad, que el peso va disminuyendo.",
+   err:"La opción B es la más elegida: se piensa que la fuerza de la mano viaja con la pelota. La mano dejó de empujar cuando la pelota se soltó."},
+  {id:"caida1", g:"Fuerzas y movimiento", a:"cn", k:"caida libre gravedad aceleracion galileo peso",
+   q:"Se sueltan a la vez, desde la misma altura, dos bolitas de acero del mismo tamaño: una de 50 g y otra de 200 g. Sin tener en cuenta el aire, ¿cuál llega primero al piso?",
+   op:["La de 200 g.", "La de 50 g.", "Llegan juntas.", "Depende de la altura."], ok:2,
+   por:"Sin aire, todos los cuerpos caen con la misma aceleración (unos 9,8 m/s²), sin importar su masa.",
+   err:"La opción A sale de la idea de que lo más pesado cae más rápido. La diferencia que vemos en la vida diaria la produce el aire, sobre todo en objetos livianos y anchos."},
+  {id:"masa1", g:"Fuerzas y movimiento", a:"cn", k:"masa peso gravedad luna kilogramo",
+   q:"Una astronauta tiene 60 kg de masa en la Tierra. En la Luna, donde la gravedad es unas seis veces menor, ¿cuál es su masa?",
+   op:["10 kg.", "60 kg.", "360 kg.", "0 kg."], ok:1,
+   por:"La masa es la cantidad de materia y no cambia de un lugar a otro. Lo que cambia es el peso: en la Luna pesa unas seis veces menos.",
+   err:"La opción A confunde la masa con el peso."},
+  {id:"accion1", g:"Fuerzas y movimiento", a:"cn", k:"accion reaccion tercera ley newton choque interaccion fuerzas",
+   q:"Un camión choca de frente contra un auto chico. Durante el choque, ¿quién hace más fuerza sobre el otro?",
+   op:["El camión sobre el auto.", "El auto sobre el camión.", "Los dos hacen la misma fuerza.", "Ninguno hace fuerza."], ok:2,
+   por:"Por la tercera ley de Newton, las fuerzas son iguales y de sentido contrario. El auto, con mucha menos masa, cambia mucho más su velocidad: por eso sufre más daño.",
+   err:"La opción A confunde la fuerza con su efecto."},
+  {id:"veloc1", g:"Fuerzas y movimiento", a:"cn", k:"velocidad rapidez movimiento rectilineo uniforme mru distancia tiempo cinematica",
+   q:"Un colectivo recorre 60 km en 1 hora y 30 minutos a velocidad constante. ¿Cuál es su velocidad?",
+   op:["60 km/h.", "40 km/h.", "90 km/h.", "Unos 46 km/h."], ok:1,
+   por:"1 hora y 30 minutos son 1,5 h. v = d / t = 60 km / 1,5 h = 40 km/h.",
+   err:"La opción D sale de escribir 1 h 30 min como 1,30 h: media hora es 0,5 h."},
+  {id:"acel1", g:"Fuerzas y movimiento", a:"cn", k:"aceleracion mruv movimiento variado velocidad cinematica",
+   q:"Un auto pasa de 0 a 20 m/s en 10 segundos. ¿Cuál es su aceleración media?",
+   op:["200 m/s².", "2 m/s².", "0,5 m/s².", "20 m/s."], ok:1,
+   por:"a = cambio de velocidad / tiempo = 20 m/s ÷ 10 s = 2 m/s²: cada segundo gana 2 m/s.",
+   err:"La opción A multiplica en lugar de dividir; la D confunde la aceleración con la velocidad."},
+  {id:"roza1", g:"Fuerzas y movimiento", a:"cn", k:"rozamiento friccion fuerza movimiento velocidad constante",
+   q:"Empujás una caja por el piso y se mueve a velocidad constante. ¿Cómo es la fuerza con que la empujás comparada con el rozamiento?",
+   op:["Mayor que el rozamiento.", "Igual al rozamiento.", "Menor que el rozamiento.", "No hay rozamiento si la caja se mueve."], ok:1,
+   por:"Si la velocidad no cambia, las fuerzas están equilibradas: el empuje es igual al rozamiento. Hace falta más fuerza solo para acelerarla.",
+   err:"La opción A sale de pensar que para que algo se mueva tiene que haber una fuerza mayor en ese sentido."},
+  {id:"energ1", g:"Energía", a:"cn", k:"energia conservacion transformacion rebote mecanica disipacion",
+   q:"Una pelota rebota y cada vez sube menos, hasta quedarse quieta. ¿Qué pasó con su energía?",
+   op:["Desapareció.", "Se transformó, sobre todo en calor y sonido.", "Quedó guardada en la pelota como energía potencial.", "Se la llevó la gravedad."], ok:1,
+   por:"La energía no se crea ni se destruye: en cada rebote una parte se transforma en energía térmica y sonido que se dispersan en el ambiente.",
+   err:"La opción A sale de la idea de que la energía se gasta y desaparece."},
+  {id:"cinet1", g:"Energía", a:"cn", k:"energia cinetica velocidad frenado masa",
+   q:"Si un auto duplica su velocidad, ¿cómo cambia su energía cinética?",
+   op:["Se duplica.", "Se cuadruplica.", "No cambia.", "Se reduce a la mitad."], ok:1,
+   por:"Ec = ½ · m · v². Como la velocidad está al cuadrado, al doble de velocidad hay cuatro veces más energía. Por eso la distancia para frenar crece tanto con la velocidad.",
+   err:"La opción A supone que la energía es proporcional a la velocidad."},
+  {id:"potenc1", g:"Energía", a:"cn", k:"energia potencial gravitatoria altura rampa trabajo",
+   q:"Se sube una caja de 10 kg al primer piso por la escalera y otra igual por una rampa larga, hasta la misma altura. ¿Cuál gana más energía potencial?",
+   op:["La de la escalera.", "La de la rampa.", "Las dos ganan lo mismo.", "Depende de cuánto se tarde."], ok:2,
+   por:"La energía potencial gravitatoria depende de la masa y de la altura (Ep = m · g · h), no del camino.",
+   err:"La opción B sale de pensar que un camino más largo da más energía. La rampa permite hacer menos fuerza, pero a lo largo de más distancia."},
+  {id:"calor1", g:"Calor y temperatura", a:"cn", k:"calor temperatura energia termica termodinamica",
+   q:"Una taza y una olla llenas de agua están a 80 °C. ¿Cuál puede derretir más hielo?",
+   op:["La taza.", "La olla.", "Las dos igual, porque están a la misma temperatura.", "Ninguna de las dos."], ok:1,
+   por:"A la misma temperatura, la olla tiene mucha más agua y puede ceder mucha más energía. Temperatura y calor no son lo mismo.",
+   err:"La opción C confunde la temperatura con la energía que un cuerpo puede transferir."},
+  {id:"calor2", g:"Calor y temperatura", a:"cn", k:"conduccion conductores aislantes calor equilibrio termico temperatura metal",
+   q:"A la mañana tocás una baranda de metal y un banco de madera que estuvieron toda la noche afuera. El metal se siente más frío. ¿Por qué?",
+   op:["El metal está a menor temperatura que la madera.", "El metal conduce mejor el calor y le saca energía a tu mano más rápido.", "La madera produce calor.", "El metal guarda el frío."], ok:1,
+   por:"Los dos están a la misma temperatura (la del ambiente). La sensación depende de qué tan rápido el material conduce la energía desde la mano.",
+   err:"La opción A es la más elegida: confunde la sensación térmica con la temperatura."},
+  {id:"calor3", g:"Calor y temperatura", a:"cn", k:"abrigo aislante calor transmision conduccion",
+   q:"¿Por qué un abrigo de lana nos mantiene calientes?",
+   op:["Porque produce calor.", "Porque frena la pérdida de la energía de nuestro cuerpo.", "Porque absorbe el frío.", "Porque sube la temperatura del aire."], ok:1,
+   por:"La lana y el aire que queda atrapado entre sus fibras son aislantes: frenan la transferencia de energía desde el cuerpo hacia el ambiente.",
+   err:"La opción A sale de la experiencia cotidiana de «abrigarse para darse calor»."},
+  {id:"hierve1", g:"Calor y temperatura", a:"cn", k:"ebullicion cambio estado temperatura hervir calor",
+   q:"Mientras el agua hierve en la pava, ¿qué pasa con su temperatura?",
+   op:["Sube sin parar mientras siga en el fuego.", "Se mantiene constante, cerca de 100 °C.", "Baja.", "Sube y baja todo el tiempo."], ok:1,
+   por:"Durante el cambio de estado, la energía que recibe el agua se usa para pasar de líquido a vapor y la temperatura se mantiene constante (cerca de 100 °C; un poco menos en lugares altos).",
+   err:"La opción A supone que mientras se entrega calor la temperatura siempre sube."},
+  {id:"burbu1", g:"Materia y presión", a:"cn", k:"estados agregacion ebullicion evaporacion vapor particulas cambio estado",
+   q:"¿Qué hay dentro de las burbujas grandes que se forman cuando el agua hierve?",
+   op:["Aire.", "Vapor de agua.", "Oxígeno e hidrógeno separados.", "Nada: están vacías."], ok:1,
+   por:"Las burbujas son agua en estado gaseoso: vapor de agua. Es un cambio de estado, no una descomposición del agua.",
+   err:"La opción A es la más frecuente. La C confunde un cambio de estado con una reacción química."},
+  {id:"part1", g:"Materia y presión", a:"cn", k:"particulas modelo estados materia gas liquido evaporacion",
+   q:"Cuando el agua pasa de líquido a vapor, ¿qué cambia en sus partículas?",
+   op:["Se hacen más grandes.", "Se separan más y se mueven más rápido.", "Se transforman en otra sustancia.", "Desaparecen."], ok:1,
+   por:"Las partículas siguen siendo de agua y del mismo tamaño: lo que cambia es la distancia entre ellas y qué tan rápido se mueven.",
+   err:"La opción A traslada al mundo de las partículas lo que vemos a simple vista (el gas ocupa más lugar)."},
+  {id:"presion1", g:"Materia y presión", a:"cn", k:"presion superficie fuerza",
+   q:"Una persona parada en la arena se hunde más con tacos finos que con ojotas. ¿Por qué?",
+   op:["Con tacos pesa más.", "Su peso se reparte en menos superficie y la presión es mayor.", "Las ojotas empujan hacia arriba.", "La arena se pone más blanda."], ok:1,
+   por:"Presión = fuerza / superficie. El peso es el mismo, pero con tacos se apoya en una superficie mucho menor.",
+   err:"La opción A confunde la fuerza con la presión."},
+  {id:"presion2", g:"Materia y presión", a:"cn", k:"presion atmosferica aire sorbete",
+   q:"Tomás jugo con un sorbete. ¿Qué hace subir el jugo?",
+   op:["La boca tira del jugo hacia arriba.", "La presión del aire sobre el jugo del vaso lo empuja hacia el sorbete, donde la presión es menor.", "El sorbete lo absorbe.", "La gravedad."], ok:1,
+   por:"Al sacar el aire del sorbete, la presión adentro baja. La presión atmosférica sobre la superficie del jugo lo empuja hacia arriba.",
+   err:"La opción A es la más elegida: el aire no «tira»; empuja desde donde hay más presión."},
+  {id:"dens1", g:"Materia y presión", a:"cn", k:"densidad flotacion hundimiento empuje arquimedes barco",
+   q:"Un barco de acero flota y un clavo de acero se hunde. ¿Por qué?",
+   op:["El barco es más liviano que el clavo.", "El barco es hueco: el acero y el aire de adentro, en conjunto, son menos densos que el agua.", "El barco está hecho de otro acero.", "El agua solo empuja a los objetos grandes."], ok:1,
+   por:"Flota lo que, en conjunto, es menos denso que el agua. El barco desaloja mucha agua y recibe un empuje igual a su peso.",
+   err:"La opción A sale de pensar que flotar depende solo del peso."},
+  {id:"dens2", g:"Materia y presión", a:"cn", k:"densidad flotacion masa volumen",
+   q:"Un trozo de madera flota en el agua. Si lo cortás por la mitad, ¿qué pasa con cada mitad?",
+   op:["Se hunden.", "Flotan, porque la densidad no cambia.", "Una flota y la otra se hunde.", "Flotan, pero más hundidas."], ok:1,
+   por:"Al cortarlo se reducen la masa y el volumen en la misma proporción: la densidad es la misma y cada mitad flota igual que antes.",
+   err:"La opción D supone que flotar depende del tamaño."},
+  {id:"circ1", g:"Electricidad y magnetismo", a:"cn", k:"corriente electrica circuito electricidad lamparita intensidad",
+   q:"En un circuito con una pila y una lamparita, ¿cómo es la corriente antes y después de la lamparita?",
+   op:["Menor después de la lamparita.", "Igual antes y después.", "Mayor después de la lamparita.", "No hay corriente después de la lamparita."], ok:1,
+   por:"La corriente no se gasta: es la misma en todo el circuito. Lo que se transforma en la lamparita es la energía, en luz y calor.",
+   err:"La opción A es la más frecuente: se piensa que la lamparita «consume» corriente."},
+  {id:"circ2", g:"Electricidad y magnetismo", a:"cn", k:"circuito serie paralelo electricidad instalacion",
+   q:"En una casa, si se quema la lamparita del comedor, las demás siguen encendidas. ¿Cómo están conectadas?",
+   op:["En serie.", "En paralelo.", "No están conectadas entre sí.", "Cada una a una pila distinta."], ok:1,
+   por:"En paralelo, cada artefacto está en su propia rama: si uno se abre, los demás siguen recibiendo corriente.",
+   err:"La opción A no explica lo que se observa: en serie, si una se quema, se apagan todas."},
+  {id:"circ3", g:"Electricidad y magnetismo", a:"cn", k:"circuito cerrado pila lamparita electricidad",
+   q:"Tenés una pila, cables y una lamparita. ¿Qué hace falta para que se encienda?",
+   op:["Que un cable una un polo de la pila con la base de la lamparita.", "Un circuito cerrado: que la corriente pueda ir de un polo de la pila a la lamparita y volver al otro polo.", "Solo que la pila sea nueva.", "Apoyar la lamparita sobre la pila."], ok:1,
+   por:"La corriente necesita un camino cerrado de ida y vuelta entre los dos polos de la pila.",
+   err:"La opción A es la más frecuente: se piensa que la corriente «llega» por un solo cable."},
+  {id:"iman1", g:"Electricidad y magnetismo", a:"cn", k:"iman imanes magnetismo metales atraccion",
+   q:"¿Qué objetos atrae un imán?",
+   op:["Todos los metales.", "Algunos metales, como el hierro, el níquel y el cobalto.", "Cualquier objeto.", "Los plásticos y el vidrio."], ok:1,
+   por:"Solo los materiales ferromagnéticos son atraídos. El aluminio y el cobre, por ejemplo, no.",
+   err:"La opción A generaliza a partir de los objetos de hierro de la vida cotidiana."},
+  {id:"luz1", g:"Luz y sonido", a:"cn", k:"luz vision ojo optica reflexion",
+   q:"¿Por qué podés ver un libro que está sobre la mesa?",
+   op:["Porque tus ojos lanzan algo hacia el libro.", "Porque la luz rebota en el libro y llega a tus ojos.", "Porque el libro tiene luz propia.", "Porque para ver no hace falta luz."], ok:1,
+   por:"Vemos los objetos que no tienen luz propia porque reflejan la luz que les llega y parte de esa luz entra en nuestros ojos.",
+   err:"La opción A es una idea muy antigua y muy frecuente: si fuera así, veríamos en una habitación totalmente oscura."},
+  {id:"luz2", g:"Luz y sonido", a:"cn", k:"luz sombra propagacion rectilinea opaco",
+   q:"¿Por qué se forma una sombra?",
+   op:["Porque el objeto suelta oscuridad.", "Porque la luz viaja en línea recta y el objeto la bloquea.", "Porque el objeto refleja toda la luz hacia atrás.", "Porque la luz rodea el objeto."], ok:1,
+   por:"La sombra es la zona a la que no llega la luz: como la luz viaja en línea recta, un objeto opaco la bloquea.",
+   err:"La opción A trata la sombra como si fuera algo que el objeto produce."},
+  {id:"refr1", g:"Luz y sonido", a:"cn", k:"refraccion luz agua optica",
+   q:"Un lápiz dentro de un vaso con agua parece quebrado. ¿Por qué?",
+   op:["El agua dobla el lápiz.", "La luz cambia de dirección al pasar del agua al aire.", "El vidrio del vaso deforma el lápiz.", "Es una ilusión del ojo, sin causa física."], ok:1,
+   por:"Es la refracción: la luz cambia de dirección al pasar de un medio a otro, y el lápiz se ve en otro lugar.",
+   err:"La opción C le atribuye el efecto al vaso; con un recipiente de paredes finas pasa lo mismo."},
+  {id:"son1", g:"Luz y sonido", a:"cn", k:"sonido vacio propagacion ondas medio",
+   q:"Dos astronautas en la Luna, donde no hay aire, golpean dos piedras cerca uno del otro. ¿Qué escuchan?",
+   op:["Un golpe fuerte.", "Nada, porque el sonido necesita un medio para propagarse.", "Un sonido más agudo.", "Un eco."], ok:1,
+   por:"El sonido es una vibración que se transmite por un material (aire, agua, sólidos). En el vacío no se propaga; por eso los astronautas usan radio.",
+   err:"La opción A supone que el sonido viaja como la luz."},
+  {id:"son2", g:"Luz y sonido", a:"cn", k:"sonido velocidad luz trueno relampago tormenta",
+   q:"En una tormenta ves el relámpago y el trueno se escucha 3 segundos después. ¿Por qué?",
+   op:["El trueno se produce después del relámpago.", "La luz viaja muchísimo más rápido que el sonido.", "El sonido se demora en las nubes.", "El ojo funciona más rápido que el oído."], ok:1,
+   por:"Se producen al mismo tiempo. La luz llega casi al instante y el sonido recorre unos 340 m por segundo: 3 segundos son cerca de 1 km.",
+   err:"La opción A es la explicación más frecuente."},
+  {id:"son3", g:"Luz y sonido", a:"cn", k:"sonido tono frecuencia agudo grave intensidad",
+   q:"Una cuerda de guitarra suena más aguda cuando…",
+   op:["vibra más rápido (mayor frecuencia).", "vibra con más fuerza.", "es más larga.", "se toca más despacio."], ok:0,
+   por:"El tono depende de la frecuencia: cuantas más vibraciones por segundo, más agudo el sonido. La fuerza de la vibración cambia el volumen.",
+   err:"La opción B confunde el tono (agudo o grave) con la intensidad (fuerte o suave)."},
+  {id:"onda1", g:"Luz y sonido", a:"cn", k:"ondas onda propagacion perturbacion corcho olas",
+   q:"Pasa una ola por donde flota un corcho. ¿Qué hace el corcho?",
+   op:["Viaja con la ola hasta la orilla.", "Sube y baja casi en el mismo lugar.", "Se hunde.", "Se queda quieto."], ok:1,
+   por:"Una onda transporta energía, no materia: el agua y el corcho oscilan en su lugar mientras la perturbación avanza.",
+   err:"La opción A supone que la onda arrastra la materia."},
+  {id:"estac1", g:"La Tierra y el universo", a:"cn", k:"estaciones tierra sol traslacion inclinacion eje astronomia",
+   q:"¿Por qué en enero hace calor en Tucumán?",
+   op:["Porque la Tierra está más cerca del Sol.", "Porque, por la inclinación del eje terrestre, el Sol llega más directo al hemisferio sur y los días son más largos.", "Porque el Sol calienta más en enero.", "Porque hay menos nubes."], ok:1,
+   por:"Las estaciones se deben a la inclinación del eje. Si se debieran a la distancia, sería verano en todo el planeta a la vez, y en enero es invierno en el hemisferio norte.",
+   err:"La opción A es la más elegida. De hecho, a principios de enero la Tierra está en el punto de su órbita más cercano al Sol."},
+  {id:"luna1", g:"La Tierra y el universo", a:"cn", k:"luna fases astronomia sistema solar",
+   q:"¿Por qué la Luna cambia de forma a lo largo del mes?",
+   op:["Porque la sombra de la Tierra la tapa.", "Porque vemos distintas partes de su cara iluminada por el Sol, según dónde está en su órbita.", "Por las nubes.", "Porque la Luna cambia de tamaño."], ok:1,
+   por:"La mitad de la Luna está siempre iluminada por el Sol. Mientras gira alrededor de la Tierra, vemos una parte mayor o menor de esa mitad.",
+   err:"La opción A confunde las fases con los eclipses de Luna, que son mucho menos frecuentes."},
+  {id:"sol1", g:"Química", a:"cn", k:"mezcla solucion disolucion soluto solvente conservacion masa",
+   q:"Se disuelven 20 g de sal en 200 g de agua. ¿Cuánto pesa la mezcla?",
+   op:["200 g.", "220 g.", "Menos de 200 g.", "180 g."], ok:1,
+   por:"Al disolverse, la sal no desaparece: sus partículas se reparten entre las del agua. La masa se conserva.",
+   err:"La opción A sale de pensar que lo que no se ve ya no está."},
+  {id:"comb1", g:"Química", a:"cn", k:"reaccion quimica combustion conservacion masa lavoisier",
+   q:"Cuando se quema un papel, ¿qué pasa con su materia?",
+   op:["Desaparece.", "Se transforma: una parte queda como cenizas y la mayor parte se va como gases.", "Se convierte en energía.", "Queda toda en las cenizas."], ok:1,
+   por:"En la combustión, el papel reacciona con el oxígeno y se forman dióxido de carbono y vapor de agua, que no vemos. Los átomos se conservan.",
+   err:"La opción A es la más frecuente: lo que no se ve parece haber desaparecido."},
+  {id:"pura1", g:"Química", a:"cn", k:"sustancia pura mezcla sistemas materiales",
+   q:"¿Cuál de estas es una sustancia pura?",
+   op:["El agua de la canilla.", "El aire.", "El agua destilada.", "El jugo de naranja."], ok:2,
+   por:"El agua destilada es solo agua. El agua de la canilla tiene sales disueltas; el aire y el jugo son mezclas.",
+   err:"La opción A sale de ver el agua de la canilla como «agua sola»."},
+  {id:"atomo1", g:"Química", a:"cn", k:"atomo atomos materia modelo particulas propiedades",
+   q:"¿De qué color es un átomo de cobre?",
+   op:["Color cobre, como el metal.", "Los átomos no tienen color: el color aparece por cómo muchísimos átomos juntos interactúan con la luz.", "Negro.", "Transparente, como el vidrio."], ok:1,
+   por:"Propiedades como el color o el brillo son del material, no de cada átomo.",
+   err:"La opción A traslada a las partículas las propiedades de lo que vemos."},
+  {id:"foto1", g:"Biología", a:"cn", k:"fotosintesis plantas nutricion vegetal",
+   q:"¿De dónde sale la mayor parte de la materia con la que crece un árbol?",
+   op:["Del suelo.", "Del dióxido de carbono del aire, junto con el agua.", "Solo del agua.", "Del abono."], ok:1,
+   por:"Con la fotosíntesis, la planta usa la energía de la luz para fabricar glucosa a partir de dióxido de carbono y agua. Del suelo toma agua y pocos minerales.",
+   err:"La opción A es la más elegida. El experimento de Van Helmont mostró que la tierra de la maceta casi no cambia de peso."},
+  {id:"cel1", g:"Biología", a:"cn", k:"celula celulas seres vivos",
+   q:"¿Qué seres vivos están formados por células?",
+   op:["Solo los animales.", "Todos los seres vivos.", "Solo las plantas y los animales.", "Solo los organismos grandes."], ok:1,
+   por:"Todos los seres vivos están formados por una o muchas células: bacterias, hongos, plantas y animales.",
+   err:"La opción A sale de asociar las células solo con el cuerpo humano."},
+  {id:"resp1", g:"Biología", a:"cn", k:"respiracion plantas fotosintesis respiratorio",
+   q:"¿Las plantas respiran?",
+   op:["No, solo hacen fotosíntesis.", "Sí, todo el tiempo, de día y de noche.", "Solo de noche.", "Solo cuando no hay luz."], ok:1,
+   por:"Las plantas respiran siempre, como todos los seres vivos. De día, además, hacen fotosíntesis.",
+   err:"La opción C sale de pensar que la respiración reemplaza a la fotosíntesis cuando no hay luz."},
+  {id:"frac1", g:"Matemática", a:"mat", k:"fracciones fraccion numeros racionales",
+   q:"¿Qué es más grande: 1/8 o 1/4 de la misma pizza?",
+   op:["1/8.", "1/4.", "Son iguales.", "No se puede saber."], ok:1,
+   por:"Cuantas más partes iguales, más chica es cada una: 1/4 es el doble de 1/8.",
+   err:"La opción A compara los denominadores como si fueran números naturales."},
+  {id:"dec1", g:"Matemática", a:"mat", k:"multiplicacion division decimales numeros",
+   q:"¿Cuánto es 8 × 0,5?",
+   op:["16.", "4.", "8,5.", "40."], ok:1,
+   por:"Multiplicar por 0,5 es tomar la mitad: 8 × 0,5 = 4. Multiplicar no siempre agranda.",
+   err:"La opción A sale de la idea de que multiplicar siempre da un número mayor."},
+  {id:"prob1", g:"Matemática", a:"mat", k:"probabilidad azar estadistica",
+   q:"Con una moneda común salió cara tres veces seguidas. En el próximo tiro…",
+   op:["seguro sale ceca.", "es más probable que salga ceca.", "cara y ceca tienen la misma probabilidad.", "es más probable que salga cara."], ok:2,
+   por:"Cada tiro es independiente de los anteriores: la probabilidad sigue siendo 1/2.",
+   err:"La opción B es la «falacia del jugador»: la moneda no recuerda los tiros anteriores."},
+  {id:"ecu1", g:"Matemática", a:"mat", k:"ecuacion ecuaciones igualdad algebra",
+   q:"Si 3x = 12, ¿cuánto vale 3x + 3?",
+   op:["15.", "7.", "39.", "12."], ok:0,
+   por:"No hace falta despejar: si 3x vale 12, 3x + 3 vale 12 + 3 = 15.",
+   err:"La opción B suma 3 al valor de x (4 + 3) en lugar de a 3x."}
+];
+const PC_GRUPOS = [...new Set(PREG_CONC.map(x => x.g))];
+const pcPorId = id => PREG_CONC.find(x => x.id === id);
+/* Ordena un banco por coincidencia con los textos: cuentan las palabras propias del tema; las genéricas (energía, materia, sistema…) solo si no hay otras */
+function bancoOrden(banco, textos){
+  const todas = [...new Set(palabrasDe(textos.filter(Boolean).join(" ")))];
+  const fuertes = todas.filter(w => !LBQ_GEN.has(w));
+  const pun = W => banco.map(x => ({x, s:W.filter(a => palabrasDe(x.k).some(b => mismaPalabra(a, b))).length})).filter(o => o.s > 0).sort((a, b) => b.s - a.s).map(o => o.x);
+  return fuertes.length ? pun(fuertes) : pun(todas);
+}
+/* Qué grupos de preguntas y qué lecturas corresponden a cada materia (en Ciencias Naturales sin especificar, todas) */
+const PC_MAT = {fisica:["Fuerzas y movimiento", "Energía", "Calor y temperatura", "Materia y presión", "Electricidad y magnetismo", "Luz y sonido", "La Tierra y el universo"], quimica:["Química", "Materia y presión", "Calor y temperatura"], biologia:["Biología"], matematica:["Matemática"]};
+const LEC_MAT = {fisica:"fis", quimica:"qui", biologia:"bio"};
+function pcDe(textos, area, max, mat){
+  const G = PC_MAT[mat || ""];
+  const B = PREG_CONC.filter(x => (!area || x.a === area) && (!G || G.includes(x.g)));
+  return bancoOrden(B, textos).slice(0, max || 6);
+}
+const pcOpciones = p => p.op.map((o, j) => `${PC_L[j]}) ${o}`).join("\n");
+
+/* Textos breves para leer (en las actividades para cuando el docente no está) */
+const LECTURAS = [
+  {k:"fuerza fuerzas interaccion dinamometro newton contacto distancia", t:"Las fuerzas", d:"fis",
+   txt:"Una fuerza es una interacción entre dos cuerpos: uno empuja o tira del otro. Las fuerzas pueden cambiar la velocidad de un cuerpo (ponerlo en movimiento, frenarlo o desviarlo) o deformarlo, como cuando apretamos una pelota. Algunas fuerzas actúan por contacto, como el empujón de una mano o el rozamiento del piso, y otras a distancia, como el peso, que es la fuerza con que la Tierra atrae a los cuerpos. Para describir una fuerza no alcanza con decir cuánto vale: también hay que indicar su dirección y su sentido. Por eso se la representa con una flecha. Las fuerzas se miden en newtons (N) con un instrumento llamado dinamómetro.",
+   preg:["¿Qué puede hacer una fuerza sobre un cuerpo? Escribí dos ejemplos.", "¿Por qué se representa una fuerza con una flecha?"]},
+  {k:"inercia primera ley newton movimiento rozamiento", t:"La inercia", d:"fis",
+   txt:"Si una pelota rueda por el piso, termina frenándose. Durante siglos se pensó que los objetos se detienen solos porque «se les acaba la fuerza». Galileo y después Newton mostraron otra cosa: un cuerpo en movimiento sigue moviéndose en línea recta y con la misma velocidad mientras ninguna fuerza lo frene o lo desvíe. Esa tendencia a mantener el estado de movimiento se llama inercia y es la primera ley de Newton. La pelota se frena por el rozamiento con el piso y con el aire. Por la inercia, cuando un colectivo frena de golpe, los pasajeros siguen hacia adelante: por eso es tan importante el cinturón de seguridad.",
+   preg:["¿Por qué se frena una pelota que rueda por el piso?", "Explicá con la inercia qué le pasa a un pasajero cuando el colectivo frena de golpe."]},
+  {k:"masa peso gravedad luna kilogramo", t:"Masa y peso", d:"fis",
+   txt:"En la vida cotidiana decimos «peso 60 kilos», pero en Física masa y peso son cosas distintas. La masa es la cantidad de materia de un cuerpo y se mide en kilogramos (kg); no cambia si el cuerpo viaja a otro lugar. El peso es la fuerza con que un planeta atrae a ese cuerpo y se mide en newtons (N). En la Tierra, un cuerpo de 1 kg pesa aproximadamente 9,8 N. En la Luna la atracción es unas seis veces menor: la misma persona tendría la misma masa, pero pesaría seis veces menos. Por eso los astronautas pueden dar saltos tan grandes.",
+   preg:["¿Qué diferencia hay entre masa y peso?", "Una mochila tiene 6 kg de masa. ¿Cuánta masa tendría en la Luna? ¿Su peso sería mayor o menor que en la Tierra?"]},
+  {k:"caida libre gravedad aceleracion galileo", t:"La caída de los cuerpos", d:"fis",
+   txt:"Si soltás al mismo tiempo una hoja de papel abierta y un cuaderno, el cuaderno llega antes. Parece que lo más pesado cae más rápido, pero la diferencia la produce el aire, que frena mucho más a la hoja: si la abollás, llegan casi juntos. Galileo estudió este problema hace unos 400 años y concluyó que, sin aire, todos los cuerpos caen con la misma aceleración, sin importar su masa. Cerca de la superficie de la Tierra esa aceleración es de unos 9,8 m/s²: en cada segundo de caída, la velocidad aumenta casi 10 m/s. En 1971, un astronauta soltó un martillo y una pluma en la Luna, donde no hay aire, y llegaron juntos al suelo.",
+   preg:["¿Por qué en la Tierra una hoja abierta cae más despacio que un cuaderno?", "¿Qué pasó con el martillo y la pluma en la Luna? ¿Por qué?"]},
+  {k:"velocidad rapidez movimiento rectilineo uniforme mru cinematica distancia tiempo", t:"La velocidad", d:"fis",
+   txt:"Para saber qué tan rápido se mueve algo, comparamos la distancia que recorre con el tiempo que tarda. Esa relación es la velocidad: v = d / t. Si un colectivo recorre 120 km en 2 horas, su velocidad media es de 60 km/h. En el sistema internacional la velocidad se expresa en metros por segundo (m/s); 1 m/s equivale a 3,6 km/h. Cuando un cuerpo se mueve en línea recta y recorre distancias iguales en tiempos iguales, decimos que tiene movimiento rectilíneo uniforme (MRU): su velocidad no cambia. En un gráfico de posición en función del tiempo, ese movimiento se ve como una recta: cuanto más inclinada, mayor es la velocidad.",
+   preg:["¿Cómo se calcula la velocidad media? Explicalo con un ejemplo propio.", "¿Cómo se ve un movimiento rectilíneo uniforme en un gráfico de posición y tiempo?"]},
+  {k:"aceleracion mruv movimiento variado segunda ley newton", t:"La aceleración", d:"fis",
+   txt:"Cuando un auto arranca en un semáforo, su velocidad aumenta; cuando frena, disminuye. La aceleración indica cuánto cambia la velocidad en cada unidad de tiempo: a = (velocidad final − velocidad inicial) / tiempo. Si una moto pasa de 0 a 20 m/s en 4 segundos, su aceleración es de 5 m/s²: cada segundo gana 5 m/s. Si la velocidad disminuye, la aceleración es negativa y decimos que el cuerpo frena. Un cuerpo también acelera si cambia la dirección de su movimiento, aunque vaya igual de rápido, como un auto en una curva. Según la segunda ley de Newton, para acelerar un cuerpo hace falta una fuerza: F = m · a.",
+   preg:["¿Qué indica la aceleración?", "Una bicicleta pasa de 2 m/s a 8 m/s en 3 segundos. ¿Cuál es su aceleración?"]},
+  {k:"accion reaccion tercera ley newton interaccion", t:"Acción y reacción", d:"fis",
+   txt:"Las fuerzas siempre aparecen de a pares. Si empujás una pared, la pared te empuja a vos con una fuerza igual y de sentido contrario: es la tercera ley de Newton, también llamada principio de acción y reacción. Las dos fuerzas actúan sobre cuerpos distintos; por eso no se anulan. Un nadador empuja el agua hacia atrás y el agua lo empuja hacia adelante; un cohete expulsa gases hacia abajo y los gases lo empujan hacia arriba. Cuando chocan un camión y un auto, las fuerzas que se hacen son iguales, pero el auto, que tiene mucha menos masa, cambia mucho más su velocidad.",
+   preg:["¿Por qué la acción y la reacción no se anulan?", "Explicá con este principio cómo avanza un nadador."]},
+  {k:"energia formas transformacion transformaciones conservacion fuentes", t:"La energía y sus transformaciones", d:"fis",
+   txt:"La energía es la capacidad de producir cambios: mover algo, calentarlo, iluminarlo o hacerlo sonar. Se presenta de distintas formas: cinética (la de los cuerpos en movimiento), potencial (la almacenada, por ejemplo por la altura o en un resorte estirado), térmica, eléctrica, química (la de los alimentos y los combustibles) y luminosa, entre otras. La energía no se crea ni se destruye: se transforma de una forma en otra. En una central hidroeléctrica, la energía potencial del agua del dique se transforma en cinética y después en eléctrica. En cada transformación una parte se disipa como calor; por eso decimos que se «pierde», aunque en realidad sigue en el ambiente.",
+   preg:["¿Qué quiere decir que la energía se conserva?", "Describí las transformaciones de la energía en un ejemplo de tu casa."]},
+  {k:"energia cinetica potencial gravitatoria mecanica", t:"Energía cinética y energía potencial", d:"fis",
+   txt:"Un cuerpo que se mueve tiene energía cinética, que depende de su masa y de su velocidad: Ec = ½ · m · v². Como la velocidad está al cuadrado, un auto que va al doble de velocidad tiene cuatro veces más energía cinética y necesita mucha más distancia para frenar. Un cuerpo ubicado a cierta altura tiene energía potencial gravitatoria: Ep = m · g · h. Cuanto mayores son la masa y la altura, mayor es esa energía. Cuando una pelota cae, la energía potencial se transforma en cinética; al subir, pasa lo contrario. La suma de las dos se llama energía mecánica y, si no hubiera rozamiento, se mantendría constante.",
+   preg:["¿De qué depende la energía cinética? ¿Y la potencial?", "¿Qué transformaciones de energía ocurren cuando una pelota cae y rebota?"]},
+  {k:"calor temperatura termometro equilibrio termico termodinamica", t:"Calor y temperatura", d:"fis",
+   txt:"Temperatura y calor no son lo mismo. La temperatura indica qué tan caliente o frío está un cuerpo y está relacionada con la agitación de sus partículas: cuanto más rápido se mueven, mayor es la temperatura. Se mide con un termómetro, en grados Celsius (°C). El calor, en cambio, es energía que pasa de un cuerpo a otro cuando tienen distinta temperatura, siempre del más caliente al más frío. Cuando tocás un vaso con agua helada, tu mano le cede energía al vaso. El paso de energía termina cuando los dos cuerpos llegan a la misma temperatura: se dice que alcanzaron el equilibrio térmico.",
+   preg:["¿Qué diferencia hay entre calor y temperatura?", "¿Qué es el equilibrio térmico? Escribí un ejemplo."]},
+  {k:"conduccion conveccion radiacion transmision calor conductores aislantes", t:"Cómo se transmite el calor", d:"fis",
+   txt:"El calor puede pasar de un lugar a otro de tres maneras. Por conducción, a través de un material, partícula a partícula: por eso se calienta el mango de una cuchara metálica dentro de una taza de té. Los metales son buenos conductores; la madera, el plástico, la lana y el aire son aislantes. Por convección, en líquidos y gases, que se mueven: el agua caliente del fondo de una olla sube y la fría baja. Por radiación, sin necesidad de un material, como la energía del Sol, que llega a la Tierra atravesando el espacio vacío. Un abrigo no da calor: es un aislante que frena la pérdida de la energía de nuestro cuerpo.",
+   preg:["Nombrá las tres formas de transmisión del calor y un ejemplo de cada una.", "¿Por qué un abrigo nos mantiene calientes si no produce calor?"]},
+  {k:"estados agregacion solido liquido gaseoso cambios estado particulas fusion evaporacion ebullicion", t:"Los estados de la materia", d:"fis qui",
+   txt:"La materia puede estar en estado sólido, líquido o gaseoso. Según el modelo de partículas, toda la materia está formada por partículas muy pequeñas que están en movimiento. En los sólidos, las partículas están muy juntas y solo vibran en su lugar: por eso tienen forma propia. En los líquidos están juntas pero pueden desplazarse unas sobre otras: toman la forma del recipiente. En los gases están muy separadas y se mueven en todas las direcciones: ocupan todo el espacio disponible. Cuando se calienta una sustancia, sus partículas se mueven más rápido y puede cambiar de estado: el hielo se funde y el agua se evapora. Las burbujas del agua que hierve son vapor de agua, no aire.",
+   preg:["¿Cómo están las partículas en un sólido, en un líquido y en un gas?", "¿Qué hay dentro de las burbujas del agua que hierve?"]},
+  {k:"presion atmosferica superficie hidrostatica", t:"La presión", d:"fis",
+   txt:"La presión indica cómo se reparte una fuerza sobre una superficie: P = F / S. La misma fuerza produce más presión si actúa sobre una superficie chica. Por eso un cuchillo afilado corta mejor y una persona con tacos finos se hunde más en la arena que con ojotas. El aire también hace presión sobre todo lo que nos rodea: es la presión atmosférica. No la notamos porque actúa en todas las direcciones. Cuando tomamos con un sorbete, sacamos aire del sorbete y la presión del aire sobre el jugo del vaso lo empuja hacia arriba. En los líquidos, la presión aumenta con la profundidad: por eso los diques son más anchos abajo.",
+   preg:["¿Por qué un cuchillo afilado corta mejor que uno sin filo?", "Explicá cómo sube el jugo por un sorbete."]},
+  {k:"densidad flotacion empuje arquimedes hundimiento", t:"Densidad y flotación", d:"fis",
+   txt:"La densidad relaciona la masa de un cuerpo con el volumen que ocupa: d = m / V. Un kilo de plumas y un kilo de hierro tienen la misma masa, pero las plumas ocupan muchísimo más lugar: son menos densas. El agua tiene una densidad de 1 g/cm³. Los objetos menos densos que el agua flotan y los más densos se hunden. Un barco de acero flota porque es hueco: el acero y el aire de su interior, en conjunto, son menos densos que el agua. Cuando un objeto se sumerge, el agua lo empuja hacia arriba con una fuerza llamada empuje, igual al peso del agua que desaloja (principio de Arquímedes).",
+   preg:["¿Por qué flota un barco de acero si un clavo de acero se hunde?", "¿Qué es el empuje?"]},
+  {k:"corriente electrica circuito circuitos electricidad serie paralelo conductores", t:"La corriente eléctrica y los circuitos", d:"fis",
+   txt:"La corriente eléctrica es un movimiento ordenado de cargas eléctricas a través de un material conductor, como el cobre de los cables. Para que circule hace falta un circuito cerrado: una fuente (una pila o la red eléctrica), cables y uno o más receptores, como una lamparita o un motor. Si el circuito se abre en algún punto, la corriente deja de circular. Los receptores pueden conectarse en serie, uno detrás de otro: si uno se quema, se apagan todos. O en paralelo, cada uno en su propia rama: si uno falla, los demás siguen funcionando, como en las casas. La corriente no se gasta en la lamparita: lo que se transforma es la energía, en luz y calor.",
+   preg:["¿Qué hace falta para que circule la corriente eléctrica?", "¿Qué diferencia hay entre un circuito en serie y uno en paralelo?"]},
+  {k:"iman imanes magnetismo brujula polos electromagnetismo", t:"Los imanes", d:"fis",
+   txt:"Los imanes atraen algunos metales, como el hierro, el níquel y el cobalto, pero no todos: el aluminio y el cobre no son atraídos. Todo imán tiene dos polos, norte y sur. Los polos iguales se repelen y los distintos se atraen. Si un imán se parte, cada pedazo vuelve a tener sus dos polos. La Tierra se comporta como un gran imán: por eso la aguja de una brújula, que es un pequeño imán, se orienta hacia el norte. En 1820, Oersted descubrió que una corriente eléctrica desvía una brújula: electricidad y magnetismo están relacionados. Ese descubrimiento permitió construir motores, timbres y generadores.",
+   preg:["¿Qué materiales atrae un imán?", "¿Por qué una brújula señala el norte?"]},
+  {k:"luz vision optica reflexion refraccion sombra espejos", t:"La luz y la visión", d:"fis",
+   txt:"La luz viaja en línea recta y a una velocidad enorme: unos 300.000 km por segundo. Algunos cuerpos producen luz propia, como el Sol o una lamparita; la mayoría solo la reflejan. Vemos un objeto porque la luz rebota en él y llega a nuestros ojos: en una habitación totalmente oscura no se ve nada. Cuando un objeto opaco bloquea la luz, detrás se forma una sombra. Al pasar de un material a otro, por ejemplo del agua al aire, la luz cambia de dirección: es la refracción, y por eso un lápiz dentro de un vaso con agua parece quebrado. Los espejos reflejan la luz de manera ordenada y por eso forman imágenes.",
+   preg:["¿Por qué podemos ver un objeto que no produce luz propia?", "¿Qué es la refracción? Escribí un ejemplo."]},
+  {k:"sonido acustica vibracion frecuencia tono", t:"El sonido", d:"fis",
+   txt:"El sonido se produce cuando algo vibra: las cuerdas de una guitarra, el parche de un bombo o nuestras cuerdas vocales. Esa vibración se transmite a las partículas del aire y viaja como una onda hasta nuestros oídos. Por eso el sonido necesita un medio material para propagarse: viaja por el aire, el agua o los sólidos, pero no por el vacío. En el aire recorre unos 340 metros por segundo, mucho menos que la luz: por eso en una tormenta primero vemos el relámpago y después oímos el trueno. Un sonido es más agudo cuanto más rápido vibra la fuente (mayor frecuencia) y más fuerte cuanto mayor es la amplitud de la vibración.",
+   preg:["¿Por qué el sonido no puede viajar por el vacío?", "¿Qué diferencia hay entre un sonido agudo y un sonido fuerte?"]},
+  {k:"ondas onda electromagneticas frecuencia longitud amplitud perturbacion", t:"Las ondas", d:"fis",
+   txt:"Una onda es una perturbación que se propaga y transporta energía sin transportar materia. Si tirás una piedra a un estanque, se forman ondas que avanzan, pero un corcho que flota solo sube y baja en el mismo lugar. Algunas ondas necesitan un medio material, como el sonido o las olas: son ondas mecánicas. Otras, como la luz, las ondas de radio o las microondas, pueden viajar por el vacío: son ondas electromagnéticas. Para describir una onda se usan la longitud de onda (la distancia entre dos crestas), la frecuencia (cuántas oscilaciones hay por segundo, en hertz) y la amplitud (qué tan grande es la oscilación).",
+   preg:["¿Qué transporta una onda? ¿Qué no transporta?", "¿Qué diferencia hay entre una onda mecánica y una electromagnética?"]},
+  {k:"tierra luna sol estaciones fases rotacion traslacion astronomia sistema solar", t:"El día, las estaciones y las fases de la Luna", d:"fis",
+   txt:"La Tierra gira sobre sí misma una vez por día: eso produce el día y la noche. Además, da una vuelta alrededor del Sol por año. Su eje está inclinado, y por eso durante una parte del año el hemisferio sur recibe los rayos del Sol más directos y tiene días más largos: es nuestro verano. Las estaciones no se deben a la distancia al Sol: en enero, cuando aquí es verano, en el hemisferio norte es invierno. La Luna no tiene luz propia; refleja la del Sol. Mientras gira alrededor de la Tierra, cerca de un mes por vuelta, vemos una parte distinta de su cara iluminada: son las fases de la Luna.",
+   preg:["¿Por qué en enero es verano en Tucumán y es invierno en el hemisferio norte?", "¿Por qué la Luna cambia de forma a lo largo del mes?"]},
+  {k:"atomo atomos modelo atomico elementos tabla periodica particulas", t:"La materia y los átomos", d:"qui",
+   txt:"Todo lo que tiene masa y ocupa un lugar es materia. La materia está formada por partículas muy pequeñas llamadas átomos, que se unen y forman moléculas. Hay alrededor de 118 tipos de átomos distintos, los elementos químicos, ordenados en la tabla periódica. Cada átomo tiene un núcleo, con protones y neutrones, y electrones que se mueven alrededor. El modelo atómico fue cambiando a lo largo de la historia, a medida que nuevos experimentos mostraban cosas que el modelo anterior no explicaba: así se construye el conocimiento científico. Los átomos no tienen el color ni el brillo del material: esas propiedades aparecen por cómo se ordenan muchísimos átomos juntos.",
+   preg:["¿De qué está formado un átomo?", "¿Por qué el modelo atómico fue cambiando con el tiempo?"]},
+  {k:"mezcla mezclas solucion soluciones sustancia pura sistemas materiales separacion soluto solvente", t:"Sustancias puras y mezclas", d:"qui",
+   txt:"Una sustancia pura tiene siempre la misma composición y propiedades fijas, como el agua destilada o la sal. Una mezcla está formada por dos o más sustancias. En las mezclas heterogéneas se distinguen los componentes a simple vista, como en el agua con arena. En las homogéneas, o soluciones, no: el agua con azúcar se ve como una sola cosa. En una solución, la sustancia que se disuelve es el soluto y la que disuelve es el solvente. Cuando el azúcar se disuelve no desaparece: sus partículas se reparten entre las del agua, y la masa total se conserva. Las mezclas se pueden separar por métodos físicos, como el filtrado, la decantación o la evaporación.",
+   preg:["¿Qué diferencia hay entre una mezcla homogénea y una heterogénea?", "¿Qué pasa con el azúcar cuando se disuelve en agua?"]},
+  {k:"reaccion reacciones quimicas combustion reactivos productos conservacion masa", t:"Las reacciones químicas", d:"qui",
+   txt:"En una reacción química, unas sustancias (los reactivos) se transforman en otras distintas (los productos). Lo que cambia es cómo se unen los átomos: los átomos no se crean ni se destruyen. Por eso la masa se conserva, como mostró Lavoisier en el siglo XVIII trabajando en recipientes cerrados. Algunas señales de que ocurrió una reacción son el cambio de color, la formación de gases, la aparición de un sólido o la liberación de energía como luz y calor. La combustión es una reacción: un combustible, como la madera o el gas, reacciona con el oxígeno del aire y se forman dióxido de carbono y vapor de agua. Que no veamos los gases no significa que la materia haya desaparecido.",
+   preg:["¿Qué cambia y qué se conserva en una reacción química?", "¿Qué pasa con la materia de un papel cuando se quema?"]},
+  {k:"celula celulas seres vivos eucariota procariota", t:"La célula", d:"bio",
+   txt:"Todos los seres vivos están formados por células: algunos por una sola, como las bacterias, y otros por millones, como las plantas y los animales. La célula es la unidad más pequeña con vida: se nutre, crece, responde a estímulos y se reproduce. Todas las células tienen una membrana que las rodea, un citoplasma y material genético. En las células eucariotas, como las nuestras, el material genético está dentro de un núcleo; en las procariotas, como las bacterias, no. Las células vegetales tienen además una pared celular y cloroplastos, donde se realiza la fotosíntesis. Las células se descubrieron gracias al microscopio, en el siglo XVII.",
+   preg:["¿Qué tienen en común todas las células?", "¿Qué diferencias hay entre una célula vegetal y una animal?"]},
+  {k:"fotosintesis plantas nutricion vegetal clorofila", t:"La fotosíntesis", d:"bio",
+   txt:"Las plantas fabrican su propio alimento. En las hojas, gracias a la clorofila de los cloroplastos, usan la energía de la luz para transformar el dióxido de carbono del aire y el agua que absorben por las raíces en glucosa, y liberan oxígeno. Ese proceso se llama fotosíntesis. La mayor parte de la materia de una planta viene, entonces, del aire y del agua, y no del suelo: del suelo toma agua y pequeñas cantidades de minerales. En el siglo XVII, Van Helmont plantó un sauce en una maceta y, cinco años después, el árbol había aumentado muchísimo su peso mientras la tierra casi no había cambiado. Las plantas también respiran, de día y de noche.",
+   preg:["¿Qué necesita una planta para hacer la fotosíntesis y qué produce?", "¿Qué mostró el experimento de Van Helmont?"]}
+];
+
+/* ---------- Dinámicas con evidencia ---------- */
+const DINAM_FUENTES = "Fuentes: Teaching and Learning Toolkit de la Education Endowment Foundation (Reino Unido); Crouch y Mazur (2001), American Journal of Physics 69; Freeman y otros (2014), PNAS 111; Adesope, Trevisan y Sundararajan (2017), Review of Educational Research 87; White y Gunstone (1992), Probing Understanding. Revisado el 26/10/2026.";
+const DINAM = [
+  {id:"pares", n:"Instrucción entre pares", m:"desarrollo", min:"15 a 20 min", proy:true,
+   para:"Que todos piensen un concepto, se comprometan con una respuesta y aprendan discutiendo con un compañero.",
+   pasos:["Se proyecta una pregunta conceptual de opción múltiple", "Cada uno vota solo, sin hablar", "Si aciertan entre 3 y 7 de cada 10: discuten de a dos y vuelven a votar", "Si aciertan menos, se retoma la idea con otro ejemplo; si aciertan más, se explica breve y se sigue", "Se muestra la respuesta y por qué las otras no son correctas"],
+   ev:"Es la dinámica más estudiada en Física: Mazur la usa en Harvard desde 1991 y reporta mejoras en el razonamiento conceptual y en la resolución de problemas (Crouch y Mazur, 2001).",
+   c:"Instrucción entre pares sobre {t}: se proyecta una pregunta conceptual de opción múltiple y cada estudiante vota solo, sin hablar (con tarjetas A, B, C y D o levantando la mano). Si aciertan entre 3 y 7 de cada 10, discuten de a dos durante dos minutos tratando de convencer al compañero y se vota de nuevo; si aciertan menos, el docente retoma la idea con otro ejemplo; si aciertan más, se explica brevemente y se sigue. Al final se muestra la respuesta y por qué las otras opciones no son correctas."},
+  {id:"recu", n:"Práctica de recuperación", m:"inicio", min:"5 a 8 min",
+   para:"Que recuerden lo trabajado antes, sin mirar la carpeta: recordar fortalece la memoria mucho más que releer.",
+   pasos:["Sin carpeta ni libro", "Una pregunta de la clase anterior y otra de hace unas semanas", "Corrección entre todos", "Cada uno marca qué no recordaba"],
+   ev:"Un metaanálisis de 118 trabajos encontró que practicar respondiendo preguntas rinde mucho más que releer (Adesope y otros, 2017). Funciona mejor espaciada en el tiempo y con devolución.",
+   c:""},
+  {id:"vaciado", n:"Vaciado de memoria", m:"cierre", min:"3 a 5 min",
+   para:"Cerrar la clase recuperando todo lo que se recuerda, y descubrir qué se olvidó.",
+   pasos:["Tres minutos para escribir todo lo que recuerdan", "Comparar con la carpeta", "Marcar con otro color lo olvidado"],
+   ev:"Es otra forma de práctica de recuperación (Adesope y otros, 2017): rinde más que repasar leyendo.",
+   c:"Vaciado de memoria: sin mirar la carpeta, cada estudiante escribe durante tres minutos todo lo que recuerda de {t} (ideas, ejemplos, dibujos o fórmulas). Después compara con su carpeta y marca con otro color lo que se había olvidado: eso es lo que conviene repasar."},
+  {id:"minipiz", n:"Minipizarras", m:"desarrollo", min:"5 a 10 min",
+   para:"Ver en el momento qué entendió cada uno y corregir antes de seguir.",
+   pasos:["Una hoja dentro de un folio plástico y un fibrón al agua", "Pregunta corta", "Todos escriben y levantan a la vez", "Si hay muchas respuestas distintas, se retoma en ese momento"],
+   ev:"La devolución durante la clase es de lo que más rinde y con la evidencia más sólida, a muy bajo costo (Toolkit de la Education Endowment Foundation).",
+   c:"Minipizarras: cada estudiante tiene una hoja dentro de un folio plástico y un fibrón al agua. El docente plantea una pregunta corta sobre {t}, todos escriben la respuesta y la levantan al mismo tiempo. Si hay muchas respuestas distintas, se retoma en ese momento antes de seguir."},
+  {id:"meta", n:"Antes, durante y después de resolver", m:"desarrollo", min:"durante la resolución",
+   para:"Que aprendan a planificar, controlar y revisar su propia resolución de problemas.",
+   pasos:["El docente resuelve el primero pensando en voz alta", "Antes: ¿qué me piden?, ¿qué datos tengo?, ¿qué sé que me sirve?", "Durante: ¿tienen sentido los pasos y las unidades?", "Después: ¿el resultado es razonable?, ¿dónde me trabé?"],
+   ev:"Enseñar estrategias metacognitivas es lo que más progreso produce en el Toolkit de la Education Endowment Foundation, con evidencia sólida y bajo costo.",
+   c:"Resolución con preguntas metacognitivas sobre {t}: el docente resuelve el primer problema pensando en voz alta. Después, en cada problema, los estudiantes anotan antes de empezar qué les piden, qué datos tienen y qué saben que les sirve; mientras resuelven, si los pasos y las unidades tienen sentido; y al terminar, si el resultado es razonable y dónde se trabaron."},
+  {id:"poe", n:"Predecir, observar, explicar", m:"inicio", min:"15 a 20 min",
+   para:"Poner a prueba las ideas previas y generar el conflicto cognitivo con una experiencia.",
+   pasos:["Cada uno escribe qué cree que va a pasar y por qué", "Se observa la experiencia o la simulación", "Comparan lo que pasó con lo que predijeron y explican la diferencia"],
+   ev:"Es una estrategia clásica de la didáctica de las ciencias para trabajar las ideas previas (White y Gunstone, 1992).",
+   c:""},
+  {id:"juego", n:"Juego de preguntas por equipos", m:"cierre", min:"15 min", proy:true,
+   para:"Repasar con preguntas en un formato que motiva, sin cuentas ni internet.",
+   pasos:["El curso se divide en equipos", "Se proyectan preguntas de a una", "Cada equipo discute y anota su respuesta", "Se explica la correcta y se suma un punto por acierto"],
+   ev:"Lo que produce el aprendizaje es la recuperación que hay detrás, no el juego en sí (Adesope y otros, 2017): conviene usarlo como práctica, no como premio.",
+   c:"Juego de preguntas sobre {t}: el curso se divide en equipos y se proyectan preguntas conceptuales de a una. Cada equipo discute y anota su respuesta en un papel; se muestran todas a la vez, se explica la correcta y se suma un punto por acierto. Lo que importa es la explicación de cada respuesta, más que el puntaje."}
+];
+const DN = {g:"plan", sel:null};
+function dnCurso(){ try { return cdatos().cursos.find(x => norm(x.curso || "") === norm(val("curso") || "")) || null; } catch (e) { logSilencioso(e); return null; } }
+function dnTerms(){ return consignasDe(val("contenidos")).map(x => lcFirst(sinPunto(x))).filter(x => !esProced(x)).slice(0, 8); }
+function dnArea(){ try { return LB_AREA(val("materia")) || ""; } catch (e) { logSilencioso(e); return ""; } }
+const dnAreaPc = a => a === "mat" ? "mat" : a === "cn" ? "cn" : "";
+/* Temas para recuperar: la clase anterior y una de hace unas semanas (libro de temas del curso o clase anterior de la secuencia) */
+function recuTemas(dest){
+  const out = [];
+  const m = /^sc(\d+)_a$/.exec(dest || "");
+  if (m && +m[1] > 1){ const t = val(`sc${+m[1] - 1}_t`); if (t) out.push({t}); }
+  try {
+    const c = dnCurso(), ref = val("fecha") || hoyIso();
+    const T = c ? (c.temas || []).filter(x => x.f && x.f < ref && x.tema).sort((a, b) => b.f.localeCompare(a.f)) : [];
+    if (!out.length && T[0]) out.push({t:T[0].tema, f:T[0].f});
+    const viejo = T.find(x => (fechaDe(ref) - fechaDe(x.f)) / 864e5 >= 21);
+    if (viejo && !out.some(o => norm(o.t) === norm(viejo.tema))) out.push({t:viejo.tema, f:viejo.f, viejo:true});
+  } catch (e) { logSilencioso(e); }
+  return out;
+}
+function recuConsigna(dest){
+  const R = recuTemas(dest), area = dnAreaPc(dnArea());
+  const L = [];
+  const reciente = R.find(r => !r.viejo), viejo = R.find(r => r.viejo);
+  L.push(reciente ? `¿Qué recordás de «${sinPunto(reciente.t)}»? Escribí dos ideas y un ejemplo.` : "Escribí con tus palabras la idea más importante de la clase anterior y un ejemplo.");
+  const pq = reciente ? pcDe([reciente.t], area, 1, val("materia"))[0] : null;
+  if (pq) L.push(`${pq.q} ${pq.op.map((o, j) => `${PC_L[j]}) ${sinPunto(o)}`).join("; ")}.`);
+  L.push(viejo ? `De hace unas semanas: ¿qué recordás de «${sinPunto(viejo.t)}»?` : "¿Qué te acordás de lo que trabajamos hace unas semanas? Escribí una idea.");
+  return `Práctica de recuperación (5 minutos, al empezar): sin mirar la carpeta ni el libro, cada estudiante responde por escrito: ${L.map((x, i) => `${i + 1}) ${x}`).join(" ")} Después se corrige entre todos, cada uno marca con otro color lo que no recordaba y se conecta con el tema de hoy.`;
+}
+function poeConsigna(){
+  const t = temaParaRutina(), A = dnArea() === "cn" ? lbBuscar(ANTICIPA, [t, ...dnTerms()]) : null;
+  if (A && A.q && A.exp) return `Predecir, observar, explicar: el docente plantea «${A.q}». Cada estudiante escribe su predicción y por qué, sin hablar. Después se observa: ${A.exp}. Por último, cada uno compara lo que pasó con lo que predijo y explica la diferencia por escrito; en la puesta en común se retoman las predicciones que no se cumplieron.`;
+  return `Predecir, observar, explicar sobre ${temaArt(t) || t}: el docente presenta una situación, una experiencia o una simulación y, antes de mostrar qué pasa, cada estudiante escribe su predicción y por qué. Después se observa y cada uno compara lo que pasó con lo que predijo y explica la diferencia por escrito.`;
+}
+function dinamTexto(d, dest){
+  if (d.id === "recu") return recuConsigna(dest);
+  if (d.id === "poe") return poeConsigna();
+  return fill([d.c], temaParaRutina())[0];
+}
+/* Preguntas conceptuales que se muestran según el filtro */
+function pcLista(){
+  if (DN.g === "plan") return pcDe([temaVisible(), ...dnTerms()], dnAreaPc(dnArea()), 8, val("materia"));
+  return PREG_CONC.filter(x => x.g === DN.g);
+}
+function pcSeleccion(){ const L = pcLista(); if (!DN.sel) DN.sel = new Set(L.map(x => x.id)); return L.filter(x => DN.sel.has(x.id)).map(x => x.id); }
+function renderDinam(){
+  const box = $("dinam-panel"); if (!box) return;
+  const sinDest = !destinosBanco().length, t = temaParaRutina();
+  const cards = DINAM.map(d => `<div class="lib-item banco-item rut"><div class="lib-txt"><b>${esc(d.n)}</b><small>${esc(MOM_RUT[d.m])} · ${esc(d.min)}</small>
+      <p class="rut-para">${esc(d.para)}</p><ol class="rut-pasos">${d.pasos.map(p => `<li>${esc(p)}</li>`).join("")}</ol>
+      <p class="dn-ev"><b>Por qué funciona.</b> ${esc(d.ev)}</p>
+      <pre>${esc(dinamTexto(d, destinoSugerido(d.m)))}</pre></div>
+      <div class="lib-act">${selDestino("dd-" + d.id, d.m)}${sinDest ? "" : `<button type="button" class="btn btn-sm" data-dnadd="${d.id}">Agregar a la planificación</button>`}<button type="button" class="linkbtn" data-dnbanco="${d.id}">Guardar en mi banco</button>${d.proy ? `<button type="button" class="linkbtn" data-piabrir="${d.id === "juego" ? "juego" : "pares"}">Proyectar preguntas</button>` : ""}</div></div>`).join("");
+  const L = pcLista(); if (!DN.sel) DN.sel = new Set(L.map(x => x.id));
+  const ops = `<option value="plan"${DN.g === "plan" ? " selected" : ""}>Del tema de tu planificación</option>` + PC_GRUPOS.map(g => `<option value="${esc(g)}"${DN.g === g ? " selected" : ""}>${esc(g)}</option>`).join("");
+  const lista = L.length ? `<ol class="pc-list">${L.map(p => `<li><label class="pc-sel"><input type="checkbox" data-pcsel="${p.id}"${DN.sel.has(p.id) ? " checked" : ""}> <span>${esc(p.q)}</span></label>
+      <ol class="pc-op" type="A">${p.op.map((o, j) => `<li${j === p.ok ? ` class="pc-ok"` : ""}>${esc(o)}${j === p.ok ? ` <span class="pc-tick">(correcta)</span>` : ""}</li>`).join("")}</ol>
+      <details class="pc-por"><summary>Por qué</summary><p>${esc(p.por)}</p><p>${esc(p.err)}</p></details></li>`).join("")}</ol>`
+    : `<p class="lib-empty">No hay preguntas cargadas para ${esc(t === "el tema" ? "este tema" : `«${t}»`)}. Elegí un tema de la lista.</p>`;
+  box.innerHTML = `<p class="hint">Dinámicas con evidencia de que mejoran los aprendizajes. En ciencias, la clase activa redujo la desaprobación del 34 % al 22 % frente a la clase expositiva (Freeman y otros, 2014, 225 estudios). La consigna ya viene adaptada al tema de tu planificación${sinDest ? "" : " y se agrega en la clase que elijas"}.</p>
+    ${sinDest ? `<p class="lib-empty">En la planificación anual no hay actividades por clase: abrí una unidad como secuencia para agregar dinámicas.</p>` : ""}
+    <div class="lib-list">${cards}</div>
+    <h3 class="lic-h" id="pc-h">Preguntas conceptuales para proyectar</h3>
+    <p class="hint">Para instrucción entre pares, minipizarras o el juego por equipos. Las opciones equivocadas salen de las ideas previas más frecuentes, así cada error dice qué idea hay que retomar.</p>
+    <div class="pc-bar"><label class="sr-only" for="pc-g">Tema de las preguntas</label><select id="pc-g">${ops}</select></div>
+    ${lista}
+    ${L.length ? `<div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-piabrir="pares">Proyectar: instrucción entre pares</button><button type="button" class="btn btn-sm" data-piabrir="juego">Proyectar: juego por equipos</button><button type="button" class="btn btn-sm" data-pcdoc="0">Hoja para el curso en Word</button><button type="button" class="linkbtn" data-pcdoc="1">Con las respuestas</button></div>` : ""}
+    <p class="hint dn-fuente">${esc(DINAM_FUENTES)}</p>`;
+}
+function modeloPregConc(ids, clave){
+  const Q = ids.map(pcPorId).filter(Boolean), tema = temaVisible();
+  const secs = [{h:"Preguntas", sub:Q.map((p, i) => ({h:`${i + 1}. ${p.q}`, body:pcOpciones(p) + "\nExplicá por qué elegiste esa opción.", lineas:2}))}];
+  if (clave) secs.push({h:"Respuestas (para el docente)", pageBreak:true, body:Q.map((p, i) => `- ${i + 1}: ${PC_L[p.ok]}) ${sinPunto(p.op[p.ok])}. ${p.por} ${p.err}`).join("\n")});
+  return {inst:val("institucion"), titulo:"Preguntas para pensar", subtitulo:tema || (Q[0] ? Q[0].g : ""), faltaSub:"", datos:[["Espacio curricular", labelOf("materia")], ["Curso", val("curso") || anioSec(val("anio"))], ["Nombre y apellido", BLANCO], ["Fecha", BLANCO]], secs, firmas:null};
+}
+function bindDinam(){
+  const box = $("dinam-panel"); if (!box || box.dataset.ok) return; box.dataset.ok = "1";
+  box.addEventListener("click", e => {
+    const a = e.target.closest("[data-dnadd]"), g = e.target.closest("[data-dnbanco]");
+    if (a || g){
+      const d = DINAM.find(x => x.id === (a ? a.dataset.dnadd : g.dataset.dnbanco)); if (!d) return;
+      const sel = $("dd-" + d.id), dest = sel ? sel.value : "";
+      const texto = dinamTexto(d, dest);
+      if (a){ if (agregarEnCampo(dest, texto)) toast(`Agregada en «${etiquetaCampo(dest)}».`); return; }
+      const b = bancoLeer();
+      if (b.some(x => x.texto.trim() === texto.trim())){ toast("Ya está en tu banco."); return; }
+      b.unshift({id:"b" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), texto, tema:val("tema") || val("nombre"), materia:val("materia"), origen:d.n, fecha:Date.now()});
+      if (bancoGuardar(b)) toast("Guardada en tu banco de actividades."); return;
+    }
+    const p = e.target.closest("[data-piabrir]"); if (p){ piAbrir(p.dataset.piabrir); return; }
+    const dc = e.target.closest("[data-pcdoc]");
+    if (dc){ const ids = pcSeleccion(); if (!ids.length){ toast("Elegí al menos una pregunta."); return; } bajarDoc(modeloPregConc(ids, dc.dataset.pcdoc === "1"), `preguntas-${slug(temaVisible() || "conceptuales")}${dc.dataset.pcdoc === "1" ? "-con-respuestas" : ""}`, "docx", "Preguntas descargadas en Word."); }
+  });
+  box.addEventListener("change", e => {
+    if (e.target.id === "pc-g"){ DN.g = e.target.value; DN.sel = null; renderDinam(); const h = $("pc-h"); if (h && h.scrollIntoView) h.scrollIntoView({block:"start"}); return; }
+    const c = e.target.closest("[data-pcsel]"); if (c){ if (!DN.sel) DN.sel = new Set(); if (c.checked) DN.sel.add(c.dataset.pcsel); else DN.sel.delete(c.dataset.pcsel); }
+  });
+}
+
+/* ---------- Proyección: instrucción entre pares y juego por equipos ---------- */
+const PI = {qs:[], i:0, fase:"voto", modo:"pares", pts:[], ac:new Set(), vuelta:1, tm:null, fin:0, res:[]};
+function piAbrir(modo){
+  const ids = pcSeleccion();
+  if (!ids.length){ toast("Elegí al menos una pregunta."); return; }
+  Object.assign(PI, {qs:ids, i:0, modo, fase:modo === "juego" ? "equipos" : "voto", pts:[], ac:new Set(), vuelta:1, res:[]});
+  try { cerrarDialogo("banco"); } catch (e) { logSilencioso(e); }
+  pantallaGrande(piHTML());
+  piTiempo();
+}
+function piReloj(seg){
+  clearInterval(PI.tm); PI.fin = Date.now() + seg * 1000;
+  const tick = () => {
+    const el = $("pi-reloj");
+    if (!el || $("grande").hidden){ clearInterval(PI.tm); return; }
+    const r = Math.max(0, Math.ceil((PI.fin - Date.now()) / 1000));
+    el.textContent = `${Math.floor(r / 60)}:${pad2(r % 60)}`;
+    if (!r){ clearInterval(PI.tm); el.classList.add("pi-cero"); }
+  };
+  tick(); PI.tm = setInterval(tick, 250);
+}
+function piTiempo(){ clearInterval(PI.tm); if (PI.fase === "discute") piReloj(120); else if (PI.fase === "voto" && PI.modo === "juego") piReloj(60); }
+function piTablero(){ return PI.modo === "juego" && PI.pts.length ? `<ul class="pi-tab">${PI.pts.map((p, k) => `<li>Equipo ${k + 1}: <b>${p}</b></li>`).join("")}</ul>` : ""; }
+function piHTML(){
+  const N = PI.qs.length;
+  if (PI.fase === "equipos") return `<h2>Juego de preguntas</h2><p>¿Cuántos equipos juegan?</p><div class="pi-ctrl">${[2, 3, 4, 5, 6].map(n => `<button type="button" class="btn" data-pieqn="${n}">${n} equipos</button>`).join("")}</div>`;
+  if (PI.fase === "fin"){
+    if (PI.modo === "juego"){
+      const max = Math.max(...PI.pts), gan = PI.pts.map((p, k) => p === max ? k + 1 : 0).filter(Boolean);
+      return `<h2>Resultados</h2>${piTablero()}<p>${gan.length > 1 ? `Empate entre los equipos ${gan.join(" y ")}.` : `Ganó el equipo ${gan[0]}.`}</p><p class="pi-sub">¿Qué pregunta les costó más? ¿Por qué?</p><div class="pi-ctrl"><button type="button" class="btn" data-gcerrar>Salir</button></div>`;
+    }
+    return `<h2>Terminamos</h2><p>¿Qué pregunta les costó más? ¿Qué idea cambiaron después de discutir?</p><div class="pi-ctrl"><button type="button" class="btn" data-gcerrar>Salir</button></div>`;
+  }
+  const p = pcPorId(PI.qs[PI.i]); if (!p) return "";
+  const rev = PI.fase === "revela";
+  let h = `<p class="pi-n">Pregunta ${PI.i + 1} de ${N}${PI.vuelta > 1 && !rev ? " · segunda votación" : ""}</p>${piTablero()}<h2 class="pi-q">${esc(p.q)}</h2>
+    <ol class="pi-op">${p.op.map((o, j) => `<li class="${rev ? (j === p.ok ? "pi-ok" : "pi-no") : ""}"><b>${PC_L[j]}</b><span>${esc(o)}</span></li>`).join("")}</ol>`;
+  const sig = PI.i + 1 < N ? `<button type="button" class="btn btn-primary" data-pi="sig">Siguiente pregunta</button>` : `<button type="button" class="btn btn-primary" data-pi="fin">${PI.modo === "juego" ? "Ver resultados" : "Terminar"}</button>`;
+  if (PI.fase === "voto"){
+    if (PI.modo === "juego") h += `<p>Cada equipo discute y anota su respuesta.</p><p class="pi-reloj" id="pi-reloj" aria-live="off">1:00</p><div class="pi-ctrl"><button type="button" class="btn btn-primary" data-pi="revela">Mostrar la respuesta</button></div>`;
+    else if (PI.vuelta > 1) h += `<p>Volvé a votar: ¿cambiaste tu respuesta?</p><div class="pi-ctrl"><button type="button" class="btn btn-primary" data-pi="revela">Mostrar la respuesta</button></div>`;
+    else h += `<p>Pensá solo y elegí tu respuesta. Cuando se indique, todos votan a la vez.</p><div class="pi-ctrl"><span class="pi-lbl">¿Cuántos acertaron?</span><button type="button" class="btn" data-pi="bajo">Menos de 3 de cada 10</button><button type="button" class="btn" data-pi="medio">Entre 3 y 7 de cada 10</button><button type="button" class="btn" data-pi="alto">Más de 7 de cada 10</button></div>`;
+  } else if (PI.fase === "discute"){
+    h += `<p>Buscá a alguien que haya votado distinto y tratá de convencerlo con argumentos.</p><p class="pi-reloj" id="pi-reloj" aria-live="off">2:00</p><div class="pi-ctrl"><button type="button" class="btn btn-primary" data-pi="otra">Votar de nuevo</button></div>`;
+  } else if (PI.fase === "retoma"){
+    h += `<p>Antes de votar de nuevo, volvamos a pensar la idea con otro ejemplo.</p><p class="pi-sub">Para el docente: retomá el concepto con un caso distinto, sin decir cuál es la respuesta.</p><div class="pi-ctrl"><button type="button" class="btn btn-primary" data-pi="otra">Votar de nuevo</button><button type="button" class="btn" data-pi="revela">Mostrar la respuesta</button></div>`;
+  } else if (rev){
+    h += `<p class="pi-por">${esc(p.por)}</p><p class="pi-sub">${esc(p.err)}</p>`;
+    if (PI.modo === "juego") h += `<div class="pi-ctrl"><span class="pi-lbl">¿Qué equipos acertaron?</span>${PI.pts.map((_, k) => `<button type="button" class="btn" data-pieq="${k}" aria-pressed="${PI.ac.has(k)}">Equipo ${k + 1}</button>`).join("")}</div>`;
+    h += `<div class="pi-ctrl">${sig}</div>`;
+  }
+  return h;
+}
+function piRender(){ const b = $("grande-in"); if (b) b.innerHTML = piHTML(); piTiempo(); }
+function piSumar(){ if (PI.modo === "juego") PI.ac.forEach(k => { PI.pts[k] = (PI.pts[k] || 0) + 1; }); PI.ac = new Set(); }
+function bindPI(){
+  const G = $("grande"); if (!G || G.dataset.pi) return; G.dataset.pi = "1";
+  G.addEventListener("click", e => {
+    const n = e.target.closest("[data-pieqn]"); if (n){ PI.pts = Array(+n.dataset.pieqn).fill(0); PI.fase = "voto"; piRender(); return; }
+    const q = e.target.closest("[data-pieq]"); if (q){ const k = +q.dataset.pieq; if (PI.ac.has(k)) PI.ac.delete(k); else PI.ac.add(k); q.setAttribute("aria-pressed", String(PI.ac.has(k))); return; }
+    const b = e.target.closest("[data-pi]"); if (!b) return;
+    const a = b.dataset.pi;
+    if (a === "bajo"){ PI.res[PI.i] = "bajo"; PI.fase = "retoma"; }
+    else if (a === "medio"){ PI.res[PI.i] = "medio"; PI.fase = "discute"; }
+    else if (a === "alto"){ PI.res[PI.i] = "alto"; PI.fase = "revela"; }
+    else if (a === "otra"){ PI.vuelta = 2; PI.fase = "voto"; }
+    else if (a === "revela") PI.fase = "revela";
+    else if (a === "sig"){ piSumar(); PI.i++; PI.vuelta = 1; PI.fase = "voto"; }
+    else if (a === "fin"){ piSumar(); PI.fase = "fin"; }
+    piRender();
+  });
+}
+
+/* ---------- Actividades para cuando el docente no está ---------- */
+const AUS = {cid:"", motivo:"hora", fecha:"", n:1, min:0, desde:null, otro:"", leer:"", cel:false, entrega:true, vista:"hoja"};
+const AUS_VERBOS = {resuelven:"resolvé", completan:"completá", responden:"respondé", leen:"leé", escriben:"escribí", dibujan:"dibujá", analizan:"analizá", calculan:"calculá", comparan:"compará", observan:"observá", explican:"explicá", identifican:"identificá", clasifican:"clasificá", elaboran:"elaborá", registran:"registrá", describen:"describí", buscan:"buscá", anotan:"anotá", arman:"armá", construyen:"construí", grafican:"graficá", justifican:"justificá", ordenan:"ordená", relacionan:"relacioná", investigan:"investigá", subrayan:"subrayá", marcan:"marcá", definen:"definí", reconocen:"reconocé", proponen:"proponé", predicen:"predecí", anticipan:"anticipá", formulan:"formulá", representan:"representá", interpretan:"interpretá", aplican:"aplicá", realizan:"realizá", corrigen:"corregí", diseñan:"diseñá", copian:"copiá", unen:"uní", estiman:"estimá", resumen:"resumí", sintetizan:"sintetizá", eligen:"elegí", piensan:"pensá", completen:"completá", resuelvan:"resolvé", respondan:"respondé", lean:"leé", escriban:"escribí", expliquen:"explicá", calculen:"calculá", comparen:"compará", dibujen:"dibujá", busquen:"buscá", armen:"armá", identifiquen:"identificá", resolver:"resolvé", completar:"completá", responder:"respondé", leer:"leé", escribir:"escribí", explicar:"explicá", calcular:"calculá", comparar:"compará", dibujar:"dibujá", buscar:"buscá", armar:"armá", identificar:"identificá", clasificar:"clasificá", elaborar:"elaborá", analizar:"analizá", graficar:"graficá", justificar:"justificá", ordenar:"ordená", relacionar:"relacioná", describir:"describí", definir:"definí"};
+const AUS_NO = /docente|profesor|proyect|puesta en com[uú]n|pizarr[oó]n|exposici[oó]n|plenario|toda la clase|experien|experiment|laboratorio|mechero|vela|fuego|encend|socializ|exponen|presentan al grupo|entre todos/i;
+/* Pasa una actividad escrita para el docente a una consigna para el estudiante; null si necesita al docente o materiales */
+function ausImperativo(s, cel){
+  let x = lbSinVineta(s).replace(/^«|»$/g, "").replace(/^(los|las)\s+estudiantes\s+/i, "").replace(/^(en (parejas|grupos|pequeños grupos)|individualmente|de a dos)\s*,?\s*/i, "").trim();
+  if (!x || x.length < 6 || AUS_NO.test(x)) return null;
+  if (!cel && /simulaci|phet|video|celular|computadora|internet|https?:|geogebra|aplicaci/i.test(x)) return null;
+  if (/^¿/.test(x)) return `Respondé: ${x}`;
+  const m = /^([a-záéíóúñ]+)\b(.*)$/i.exec(x); if (!m) return null;
+  const vb = AUS_VERBOS[m[1].toLowerCase()];
+  if (!vb) return /^[A-ZÁÉÍÓÚ][a-záéíóúñ]+[áéí](?=[\s,.;:]|$)/.test(x) ? (/[.?!]$/.test(x) ? x : x + ".") : null;
+  const r = (vb + m[2]).replace(/\ben (pequeños )?grupos\b/gi, "con tu compañero o compañera").replace(/\s+/g, " ").trim();
+  return cap(/[.?!]$/.test(r) ? r : r + ".");
+}
+const ausCursoDe = id => { try { return cdatos().cursos.find(c => c.id === id) || null; } catch (e) { logSilencioso(e); return null; } };
+function ausBloqueHora(c, iso){
+  const d = fechaDe(iso); if (!c || !d) return null;
+  return (c.horario || []).filter(h => +h.dia === d.getDay() && h.ini).sort((a, b) => String(a.ini).localeCompare(String(b.ini)))[0] || null;
+}
+function ausEsClase(c, iso){
+  const d = fechaDe(iso); if (!d) return false;
+  try { if (lcFeriado(iso) || lcReceso(iso)) return false; } catch (e) { logSilencioso(e); }
+  if (c && (c.horario || []).length) return (c.horario || []).some(h => +h.dia === d.getDay());
+  return d.getDay() >= 1 && d.getDay() <= 5;
+}
+function ausProxima(c, desde){ let iso = desde || hoyIso(); for (let k = 0; k < 60; k++){ if (ausEsClase(c, iso)) return iso; iso = lcMas(iso, 1); } return desde || hoyIso(); }
+function ausFechas(c){
+  const out = [AUS.fecha || hoyIso()]; let iso = out[0];
+  for (let k = 0; out.length < Math.max(1, AUS.n) && k < 120; k++){ iso = lcMas(iso, 1); if (ausEsClase(c, iso)) out.push(iso); }
+  return out;
+}
+function ausClasesEntre(c, desde, hasta){ let n = 0, iso = desde; for (let k = 0; iso <= hasta && k < 400; k++){ if (ausEsClase(c, iso)) n++; iso = lcMas(iso, 1); } return n; }
+function ausMinDe(c, iso, P){
+  const b = ausBloqueHora(c, iso);
+  if (b && b.fin){ const m = lbMin(b.fin) - lbMin(b.ini); if (m >= 20) return m; }
+  const t = P && P.v ? minutos(P.v.tiempo) : null;
+  return t && t >= 20 && t <= 240 ? t : 40;
+}
+/* De dónde salen los temas: la planificación abierta si es de ese curso; si no, la última guardada para ese curso */
+function ausFuente(c){
+  const okP = d => d && d.v && (d.modo === "secuencia" || d.modo === "clase") && (d.v.tema || d.v.sc1_t);
+  let F = null; try { F = foto(); } catch (e) { logSilencioso(e); }
+  if (c && okP(F) && norm(F.v.curso || "") === norm(c.curso || "")) return {P:F, origen:"abierta"};
+  if (c){ const e = libLeer().filter(x => okP(x.data) && norm(x.data.v.curso || "") === norm(c.curso || "")).sort((a, b) => (b.upd || 0) - (a.upd || 0))[0]; if (e) return {P:e.data, origen:"guardada"}; }
+  if (okP(F)) return {P:F, origen:c ? "otra" : "abierta"};
+  return {P:null, origen:"ninguna"};
+}
+function ausTemas(P){
+  if (!P) return [];
+  const v = P.v;
+  if (P.modo === "secuencia"){
+    const N = +v.nclases || 5, L = [];
+    for (let n = 1; n <= N; n++){ const t = v[`sc${n}_t`] || `Clase ${n}`; L.push({t, n, S:lbParseSecuencia(v[`sc${n}_a`] || ""), raw:v[`sc${n}_a`] || "", repaso:/^evaluaci[oó]n/i.test(t)}); }
+    return L;
+  }
+  const L = [{t:v.tema || "el tema", S:{momentos:[{k:"desarrollo", items:consignasDe(v.desarrollo)}], preguntas:lbPreguntas(v.pregunta), recursos:v.recursos || "", casa:[]}, ficha:consignasDe(v.ficha)}];
+  consignasDe(v.contenidos).map(x => sinPunto(x)).filter(x => x && !esProced(x) && norm(x) !== norm(v.tema || "")).slice(0, 6)
+    .forEach(x => L.push({t:cap(x.replace(/^[^:]{2,40}:\s*/, "")), S:{momentos:[], preguntas:[], recursos:"", casa:[]}}));
+  return L;
+}
+function ausDesdeDefault(c, L){
+  if (!L.length) return 0;
+  const vistos = ((c && c.temas) || []).map(x => norm(x.tema || "")).filter(x => x.length > 3);
+  /* Un tema ya se dio si el libro de temas lo nombra igual o casi igual (no alcanza con que comparta una parte del título) */
+  const parecido = (a, b) => a === b || ((a.includes(b) || b.includes(a)) && Math.min(a.length, b.length) / Math.max(a.length, b.length) >= 0.8);
+  const i = L.findIndex(T => { const t = norm(sinPunto(T.t)); return !vistos.some(v => parecido(v, t)); });
+  return i < 0 ? 0 : i;
+}
+function ausLectura(textos, usados, mat){ const d = LEC_MAT[mat || ""]; return bancoOrden(LECTURAS.filter(x => !d || x.d.split(" ").includes(d)), textos).find(x => !usados.has(x.t)) || null; }
+const ausURL = t => (String(t || "").match(/https?:\/\/[^\s)»"]+/) || [""])[0].replace(/[.,;]$/, "");
+const ausDia = (iso, hb) => { const d = fechaDe(iso); return d ? `${cap(DIAS_SEM[d.getDay()])} ${fechaCortaIso(iso)}${hb && hb.fin ? `, de ${hb.ini} a ${hb.fin}` : hb && hb.ini ? `, a las ${hb.ini}` : ""}` : ""; };
+const ausLimpio = t => sinPunto(String(t || "").replace(/^(Presentación y saberes previos|Integración|Aplicación|Evaluación y cierre de la secuencia)\s*:\s*/i, "")).replace(/^./, m => m.toUpperCase());
+const AUS_NOMBRE = "Nombre y apellido: ______________________________   Fecha: ____________";
+function ausBloque(T, k, ctx){
+  const sub = [], clave = [];
+  let num = 0;
+  const min = ctx.min, tE = 5, tC = 5, rest = Math.max(10, min - 10), tL = Math.min(15, Math.max(5, Math.round(rest * 0.35 / 5) * 5)), tR = Math.max(5, rest - tL);
+  const tit = ausLimpio(T.t);
+  sub.push({h:"Antes de empezar", body:`Hoy no estoy en el aula, pero seguimos avanzando${T.repaso ? " con un repaso de lo que vimos" : ` con «${tit}»`}. Trabajá con tu compañero o compañera de banco: pueden pensar juntos, pero cada uno completa su hoja. Tienen ${min} minutos.${ctx.entrega ? " Al terminar, entregá esta hoja a quien esté a cargo del curso." : " Al terminar, pegá la hoja en la carpeta: la revisamos en la próxima clase."}`});
+  /* Para empezar: recuperar sin mirar */
+  sub.push({h:`Para empezar (${tE} minutos)`, body:"Sin mirar la carpeta ni el libro."});
+  if (ctx.prev) sub.push({h:`${++num}. Escribí dos ideas que recuerdes de «${ausLimpio(ctx.prev)}» y un ejemplo.`, lineas:3});
+  else sub.push({h:`${++num}. Escribí qué sabés o qué te imaginás sobre «${tit}».`, lineas:3});
+  if (ctx.viejo) sub.push({h:`${++num}. De hace unas semanas: ¿qué recordás de «${sinPunto(ctx.viejo)}»?`, lineas:2});
+  /* Para leer */
+  const lec = T.repaso ? null : (ausLectura([T.t], ctx.usadosL, ctx.mat) || (k === 0 && ctx.temaGral ? ausLectura([ctx.temaGral], ctx.usadosL, ctx.mat) : null));
+  if (T.repaso){
+    sub.push({h:`Para repasar (${tL} minutos)`, body:`Releé en tu carpeta lo que trabajamos en las clases anteriores${ctx.todos.length ? ` (${ctx.todos.map(x => `«${sinPunto(x)}»`).join(", ")})` : ""} y subrayá las ideas principales.`});
+    sub.push({h:`${++num}. Armá un cuadro con dos columnas: cada tema y su idea más importante, con un ejemplo.`, lineas:5});
+  } else {
+    let body;
+    if (lec){ ctx.usadosL.add(lec.t); body = lec.txt + (ctx.leer ? `\nSi tenés el material, leé también: ${sinPunto(ctx.leer)}.` : ""); }
+    else body = ctx.leer ? `Leé ${sinPunto(ctx.leer)}. Buscá la parte que habla de «${tit}» y subrayá las ideas principales.` : `Buscá en tu carpeta o en el libro de la materia lo que dice sobre «${tit}». Leelo con atención y subrayá las ideas principales.`;
+    sub.push({h:`Para leer (${tL} minutos)${lec ? `: ${lec.t}` : ""}`, body});
+    (lec ? lec.preg : ["Explicá con tus palabras la idea principal de lo que leíste.", "Escribí un ejemplo de la vida cotidiana relacionado con lo que leíste."]).forEach(q => sub.push({h:`${++num}. ${q}`, lineas:3}));
+  }
+  /* Para resolver */
+  sub.push({h:`Para resolver (${tR} minutos)`, body:"Resuelvan juntos, pero escribí las respuestas con tus palabras."});
+  const acts = [];
+  const plan = [];
+  if (!T.repaso){
+    (T.ficha || []).filter(x => !AUS_NO.test(x) && !/tu docente|que te (entrega|propone|muestra)|la imagen|esta imagen|propuest[oa]s?\b|aprendiste hoy|pregunta que te qued/i.test(x)).slice(0, 4).forEach(x => plan.push(/[.?!]$/.test(x) ? x : x + "."));
+    if (plan.length < 3) (T.S.momentos || []).filter(m => m.k !== "inicio").flatMap(m => m.items).map(x => ausImperativo(x, ctx.cel)).filter(Boolean).forEach(x => { if (plan.length < 3 && !plan.includes(x)) plan.push(x); });
+    const W = palabrasDe([T.t, ctx.temaGral].join(" "));
+    (T.S.preguntas || []).filter(q => palabrasDe(q).some(a => W.some(b => mismaPalabra(a, b))) && !/\best[ae]s? (imagen|foto|video|situaci)/i.test(q) && !AUS_NO.test(q) && !/observamos|observaron|anticip|vimos|hicimos|simulaci|video|\bahora\b|\besto\b|\beso\b|^¿(c[oó]mo|por qu[eé]) lo\b/i.test(q) && q.length >= 40).slice(0, 2).forEach(q => { const x = `Respondé: ${q}`; if (plan.length < 4 && !plan.includes(x)) plan.push(x); });
+    (T.S.casa || []).map(x => ausImperativo(x, ctx.cel)).filter(Boolean).slice(0, 1).forEach(x => { if (!plan.includes(x)) plan.push(x); });
+  }
+  plan.slice(0, 4).forEach(x => acts.push({h:x, lineas:4}));
+  const qs = (T.repaso ? pcDe([ctx.temaGral, ...ctx.todos], ctx.areaPc, 8, ctx.mat) : [...pcDe([T.t], ctx.areaPc, 4, ctx.mat), ...(k === 0 && ctx.temaGral ? pcDe([ctx.temaGral], ctx.areaPc, 4, ctx.mat) : [])]).filter((p, i, a) => !ctx.usadosQ.has(p.id) && a.findIndex(o => o.id === p.id) === i).slice(0, T.repaso ? 3 : 2);
+  qs.forEach(p => { ctx.usadosQ.add(p.id); acts.push({h:p.q, body:pcOpciones(p) + "\nExplicá por qué elegiste esa opción.", lineas:2, p}); });
+  if (!T.repaso && ctx.area === "cn"){
+    const A = lbBuscar(ANTICIPA, [T.t]);
+    if (A && A.q && !ctx.usadosA.has(A.q) && !plan.some(x => norm(x).includes(norm(A.q).slice(0, 40)))){ ctx.usadosA.add(A.q); acts.push({h:`Pensá y respondé, explicando por qué: ${A.q}`, lineas:4}); }
+  }
+  if (ctx.cel && !T.repaso){ const u = ausURL(T.S.recursos) || ausURL(ctx.recursos); if (u) acts.push({h:`Si pueden usar el celular, abrí este recurso: ${u}. Anotá qué observaste y qué relación tiene con lo que leíste.`, lineas:3}); }
+  if (acts.length < 2){
+    const sobre = T.repaso ? (ctx.todos.length ? ctx.todos.map(x => `«${ausLimpio(x)}»`).join(", ") : ctx.temaGral ? `«${ausLimpio(ctx.temaGral)}»` : "lo que trabajamos") : `«${tit}»`;
+    acts.push({h:`Explicá con tus palabras qué aprendiste sobre ${sobre} y escribí un ejemplo.`, lineas:4});
+    if (acts.length < 2) acts.push({h:`Escribí una pregunta sobre ${sobre} que le harías a tu docente y cómo intentarías responderla.`, lineas:3});
+  }
+  acts.slice(0, 6).forEach(a => { const n = ++num; sub.push({h:`${n}. ${a.h}`, body:a.body, lineas:a.lineas}); if (a.p) clave.push({n, p:a.p}); });
+  /* Para cerrar */
+  sub.push({h:`Para cerrar (${tC} minutos)`, body:"Pensá en cómo te fue con esta clase."});
+  sub.push({h:`${++num}. Lo que aprendí hoy, en una oración:`, lineas:2});
+  sub.push({h:`${++num}. Lo que me costó, o la pregunta que le haría a mi docente:`, lineas:2});
+  sub.push({h:`${++num}. ¿Cuánto entendí? Rodeá una opción.`, body:"Verde: lo puedo explicar · Amarillo: tengo dudas · Rojo: necesito ayuda"});
+  return {sub, clave, t:tit, lec:!!lec || !!ctx.leer || T.repaso};
+}
+/* Arma todo: hoja, indicaciones, respuestas y mensaje */
+function ausArmar(){
+  const c = ausCursoDe(AUS.cid), F = ausFuente(c), P = F.P, L = ausTemas(P);
+  const fechas = ausFechas(c), nB = fechas.length;
+  const min = AUS.min || ausMinDe(c, fechas[0], P);
+  let temas;
+  if (AUS.desde === "otro") temas = [{t:AUS.otro.trim() || (P && P.v.tema) || "el tema", S:{momentos:[], preguntas:[], recursos:"", casa:[]}}];
+  else { const i = AUS.desde == null ? ausDesdeDefault(c, L) : +AUS.desde; temas = L.slice(i, i + nB); }
+  if (!temas.length) temas = [{t:(P && P.v.tema) || "el tema", S:{momentos:[], preguntas:[], recursos:"", casa:[]}}];
+  while (temas.length < nB) temas.push({t:"Repaso de lo trabajado", repaso:true, S:{momentos:[], preguntas:[], recursos:"", casa:[]}});
+  const mat = P ? P.v.materia : (c ? c.materia : val("materia"));
+  const area = (() => { try { return LB_AREA(mat) || ""; } catch (e) { logSilencioso(e); return ""; } })();
+  /* Recuperación: la última clase anterior a la fecha (libro de temas o clase anterior de la secuencia) y una de hace unas semanas */
+  const T0 = c ? (c.temas || []).filter(x => x.f && x.f < fechas[0] && x.tema).sort((a, b) => b.f.localeCompare(a.f)) : [];
+  const iDesde = AUS.desde === "otro" ? -1 : (AUS.desde == null ? ausDesdeDefault(c, L) : +AUS.desde);
+  const prev0 = iDesde > 0 && L[iDesde - 1] ? L[iDesde - 1].t : (T0[0] ? T0[0].tema : "");
+  const viejo = T0.find(x => (fechaDe(fechas[0]) - fechaDe(x.f)) / 864e5 >= 21);
+  const ctx = {mat, min, cel:AUS.cel, entrega:AUS.entrega, leer:AUS.leer.trim(), area, areaPc:area === "mat" ? "mat" : area === "cn" ? "cn" : "", temaGral:AUS.desde === "otro" ? "" : (P && P.v.tema) || "", todos:temas.filter(x => !x.repaso).map(x => x.t), recursos:P ? P.v.recursos || "" : "", usadosL:new Set(), usadosQ:new Set(), usadosA:new Set(), prev:"", viejo:""};
+  /* Los textos de temas que ya se dieron (libro de temas) no se vuelven a proponer para leer */
+  T0.slice(0, 10).forEach(x => { const l = ausLectura([x.tema], new Set(), mat); if (l) ctx.usadosL.add(l.t); });
+  const bloques = temas.map((T, k) => {
+    ctx.prev = k === 0 ? prev0 : (temas[k - 1].repaso ? "" : temas[k - 1].t);
+    ctx.viejo = k === 0 && viejo && norm(viejo.tema) !== norm(prev0) ? viejo.tema : "";
+    return {...ausBloque(T, k, ctx), f:fechas[k], hb:ausBloqueHora(c, fechas[k])};
+  });
+  const curso = c ? c.curso : (P ? P.v.curso : "") || "", matTxt = mat ? nombreMateria(mat) : "", docente = (c && c.docente) || val("docente") || "", escuela = (c && c.escuela) || (P ? P.v.institucion : "") || val("institucion") || "";
+  const alumnos = c ? alumnosActivos(c).length : 0;
+  const cuando = nB === 1 ? ausDia(fechas[0], bloques[0].hb) : `Del ${fechaCortaIso(fechas[0])} al ${fechaCortaIso(fechas[nB - 1])} (${nB} clases)`;
+  const hoja = {inst:escuela, titulo:"Actividades para trabajar en clase", subtitulo:nB === 1 ? bloques[0].t : (ctx.temaGral || bloques[0].t), faltaSub:"", datos:[["Espacio curricular", matTxt], ["Curso", curso], ["Docente", docente]].filter(d => d[1]),
+    secs:bloques.map((b, k) => ({h:`${nB > 1 ? `Clase ${k + 1}. ` : ""}${ausDia(b.f, b.hb)}`, pageBreak:k > 0, lead:AUS_NOMBRE, sub:b.sub})), firmas:null};
+  const cop = alumnos ? alumnos + 2 : 0;
+  const ind = {inst:escuela, titulo:"Indicaciones para acompañar al curso", subtitulo:[curso, matTxt].filter(Boolean).join(" · "), faltaSub:"", datos:[["Docente", docente], ["Cuándo", cuando]],
+    secs:[
+      {h:"Para quien acompaña al curso", body:`Gracias por acompañar ${curso ? `a ${curso}` : "al curso"}${matTxt ? ` en la hora de ${matTxt}` : ""}. Dejé una hoja de actividades para que trabajen en parejas: cada parte dice qué hacer y cuánto tiempo lleva, así que no hace falta explicar el tema.`},
+      {h:"Cómo organizar la hora", body:toList([`Repartir una hoja por estudiante${nB > 1 ? " (la que corresponde a ese día)" : ""} y pedir que trabajen con su compañero o compañera de banco.`, "Leer en voz alta «Antes de empezar» y anotar en el pizarrón los tiempos de cada parte: para empezar, para leer, para resolver y para cerrar.", "Recordar la hora a mitad de la clase y cinco minutos antes del final, para que completen «Para cerrar».", "Si alguien termina antes, que revise sus respuestas o ayude a su compañero sin hacerle la tarea."])},
+      {h:"Si tienen dudas", body:"Que vuelvan a leer la consigna y lo intenten con su compañero. Si siguen con dudas, que las anoten en la parte «Para cerrar»: las retomo en la próxima clase."},
+      {h:"Al terminar", body:toList([...(AUS.entrega ? ["Recoger las hojas y dejarlas en preceptoría, en un sobre con el curso y la fecha."] : ["Pedir que peguen la hoja en la carpeta."]), "Anotar quiénes estuvieron ausentes.", "Si algo no se pudo hacer, dejarlo anotado: lo retomo en la próxima clase."])},
+      ...(cop ? [{h:"Copias", body:`${cop} copias de la hoja${nB > 1 ? " de cada clase" : ""} (${alumnos} estudiantes y 2 de reserva).`}] : [])
+    ], firmas:null};
+  const resp = {inst:docente || "Documento personal", titulo:"Respuestas y cómo retomar", subtitulo:[curso, matTxt].filter(Boolean).join(" · "), faltaSub:"", datos:[["Cuándo", cuando]],
+    secs:[
+      ...bloques.map((b, k) => ({h:`${nB > 1 ? `Clase ${k + 1}: ` : ""}${b.t}`, body:b.clave.length ? b.clave.map(x => `- Pregunta ${x.n}: ${PC_L[x.p.ok]}) ${sinPunto(x.p.op[x.p.ok])}. ${x.p.por} ${x.p.err}`).join("\n") + "\n- Las demás respuestas son abiertas: revisalas en la próxima clase." : "Todas las respuestas son abiertas: revisalas en la próxima clase."})),
+      {h:"Para retomar en la próxima clase", body:toList([`Pedí las hojas${AUS.entrega ? " a preceptoría" : " o las carpetas"} y empezá por las preguntas de «Para cerrar»: las dudas más repetidas son el punto de partida.`, ...(bloques.some(b => b.clave.length) ? ["Corregí las preguntas de opción múltiple con votación (instrucción entre pares): si aciertan entre 3 y 7 de cada 10, que discutan de a dos y vuelvan a votar."] : []), "Mirá el semáforo de cada hoja: trabajá primero con quienes marcaron rojo.", "Registrá en el libro de temas lo trabajado en tu ausencia."])}
+    ], firmas:null};
+  const hb0 = bloques[0].hb, d0 = fechaDe(fechas[0]);
+  const msg = `Hola, buen día. ${nB === 1 ? `El ${d0 ? DIAS_SEM[d0.getDay()] : ""} ${fechaCortaIso(fechas[0])}${hb0 && hb0.fin ? ` (de ${hb0.ini} a ${hb0.fin})` : ""}` : `Del ${fechaCortaIso(fechas[0])} al ${fechaCortaIso(fechas[nB - 1])}`} no voy a estar en la hora de ${matTxt || "mi materia"}${curso ? ` con ${curso}` : ""}. Les dejo actividades para que avancen con el tema${cop ? `: son ${cop} copias de la hoja${nB > 1 ? " por clase" : ""}` : ""}. Trabajan en parejas y${AUS.entrega ? " al final entregan la hoja" : " al final la pegan en la carpeta"}. Te paso también las indicaciones. ¡Muchas gracias!${docente ? `\n${docente}` : ""}`;
+  return {c, F, L, temas, fechas, bloques, hoja, ind, resp, msg, min, sinLec:bloques.filter(b => !b.lec).map(b => b.t)};
+}
+const AUS_VISTAS = [["hoja", "Hoja del curso"], ["ind", "Indicaciones"], ["resp", "Respuestas"]];
+function ausNombre(R, v){ return `${v === "hoja" ? "actividades" : v === "ind" ? "indicaciones" : "respuestas"}-${slug((R.c && R.c.curso) || "curso")}-${R.fechas[0]}`; }
+/* Guarda en el curso las actividades que se dejaron (para el aviso de retomarlas) */
+function ausUsar(R){
+  const c = R.c; if (!c) return;
+  c.ausencias = Array.isArray(c.ausencias) ? c.ausencias : [];
+  const key = R.fechas.join(",") + "|" + R.bloques.map(b => b.t).join("|");
+  if (c.ausencias.some(a => a.key === key)) return;
+  c.ausencias.push({id:nuevoIdC("au"), key, f:R.fechas[0], h:R.fechas[R.fechas.length - 1], temas:R.bloques.map(b => b.t), hecho:false});
+  if (c.ausencias.length > 20) c.ausencias = c.ausencias.slice(-20);
+  cguardar();
+  try { renderTuDia(); } catch (e) { logSilencioso(e); }
+}
+function avisosAusencia(){
+  const hoy = hoyIso(), out = [];
+  (cdatos().cursos || []).forEach(c => (c.ausencias || []).forEach(a => {
+    if (a.hecho) return;
+    const dias = Math.round((fechaDe(hoy) - fechaDe(a.h)) / 864e5), antes = Math.round((fechaDe(a.f) - fechaDe(hoy)) / 864e5);
+    if (dias > 0 && dias <= 21) out.push({f:a.h, act:"ausencia", cid:c.id, t:`${c.curso}: retomá las actividades que dejaste el ${fechaCortaIso(a.f)} (${a.temas[0] || "el tema"}). Pedí las hojas y empezá por las dudas.`});
+    else if (antes >= 0 && antes <= 1) out.push({f:a.f, act:"ausencia", cid:c.id, t:`${c.curso}: ${antes === 0 ? "hoy" : "mañana"} no estás. Confirmá que las copias de las actividades estén en preceptoría.`});
+  }));
+  return out.sort((a, b) => a.f.localeCompare(b.f)).slice(0, 2);
+}
+function htmlAusLista(c){
+  const L = (c && c.ausencias) || [];
+  if (!L.length) return "";
+  return `<h3 class="lic-h">Actividades que dejaste</h3><ul class="aus-l">${L.slice().reverse().map(a => `<li><span><b>${esc(a.f === a.h ? fechaCortaIso(a.f) : `${fechaCortaIso(a.f)} al ${fechaCortaIso(a.h)}`)}</b> · ${esc(a.temas.join(", "))}${a.hecho ? " <small>(revisadas)</small>" : ""}</span><span class="aus-lb">${a.hecho ? "" : `<button type="button" class="btn btn-sm" data-ausok="${a.id}">Ya las revisé</button>`}<button type="button" class="linkbtn" data-ausdel="${a.id}">Quitar</button></span></li>`).join("")}</ul>`;
+}
+function renderAus(){
+  const box = $("aus-panel"); if (!box) return;
+  const cs = cdatos().cursos || [];
+  if (!cs.some(c => c.id === AUS.cid)){ const m = cs.find(c => norm(c.curso || "") === norm(val("curso") || "")) || cursoSel(); AUS.cid = m ? m.id : ""; }
+  const c = ausCursoDe(AUS.cid);
+  if (!AUS.fecha) AUS.fecha = ausProxima(c, hoyIso());
+  const F = ausFuente(c), L = ausTemas(F.P);
+  if (AUS.desde == null || (AUS.desde !== "otro" && +AUS.desde >= L.length)) AUS.desde = L.length ? ausDesdeDefault(c, L) : "otro";
+  const minAuto = ausMinDe(c, AUS.fecha, F.P);
+  const ops = L.map((T, i) => `<option value="${i}"${String(AUS.desde) === String(i) ? " selected" : ""}>${esc(T.n ? `Clase ${T.n}: ${sinPunto(T.t)}` : sinPunto(T.t))}</option>`).join("") + `<option value="otro"${AUS.desde === "otro" ? " selected" : ""}>Otro tema</option>`;
+  const origen = {abierta:"Los temas salen de la planificación abierta.", guardada:"Los temas salen de la última planificación guardada para este curso.", otra:"Los temas salen de la planificación abierta, que es de otro curso: revisá que sean los que siguen.", ninguna:"No hay una planificación de clase o secuencia abierta ni guardada para este curso: escribí el tema."}[F.origen];
+  box.innerHTML = `<div class="cfg-grid aus-form">
+      <div class="f"><label for="aus-curso">Curso</label><select id="aus-curso">${cs.length ? cs.map(x => `<option value="${x.id}"${x.id === AUS.cid ? " selected" : ""}>${esc(x.curso || "Curso")}${x.materia ? " · " + esc(nombreMateria(x.materia)) : ""}</option>`).join("") : `<option value="">Sin cursos cargados</option>`}</select></div>
+      <div class="f"><label for="aus-motivo">Cuánto tiempo</label><select id="aus-motivo"><option value="hora"${AUS.motivo === "hora" ? " selected" : ""}>Una hora</option><option value="dia"${AUS.motivo === "dia" ? " selected" : ""}>Un día</option><option value="varios"${AUS.motivo === "varios" ? " selected" : ""}>Varios días o una licencia</option></select></div>
+      <div class="f"><label for="aus-fecha">${AUS.motivo === "varios" ? "Desde" : "Fecha"}</label><input type="date" id="aus-fecha" value="${esc(AUS.fecha)}"></div>
+      <div class="f"${AUS.motivo === "varios" ? "" : " hidden"}><label for="aus-n">Clases con este curso</label><input type="number" id="aus-n" min="1" max="10" value="${AUS.n}"></div>
+      <div class="f"><label for="aus-min">Minutos de la clase</label><input type="number" id="aus-min" min="20" max="240" step="5" value="${AUS.min || minAuto}"></div>
+      <div class="f full"><label for="aus-desde">Desde qué tema</label><select id="aus-desde">${ops}</select></div>
+      <div class="f full"${AUS.desde === "otro" ? "" : " hidden"}><label for="aus-otro">Tema</label><input id="aus-otro" autocomplete="off" value="${esc(AUS.otro)}" placeholder="Ej.: la presión atmosférica"></div>
+      <div class="f full"><label for="aus-leer">Material para leer (opcional)</label><input id="aus-leer" autocomplete="off" value="${esc(AUS.leer)}" placeholder="Ej.: libro de Física, páginas 34 a 36, o el cuadernillo de la unidad 2"></div>
+      <label class="cond-check"><input type="checkbox" id="aus-cel"${AUS.cel ? " checked" : ""}> Pueden usar el celular con internet</label>
+      <label class="cond-check"><input type="checkbox" id="aus-entrega"${AUS.entrega ? " checked" : ""}> Entregan la hoja al terminar</label>
+    </div>
+    <p class="hint">${esc(origen)} Si el curso tiene horario cargado, la fecha y los minutos salen de ahí, y se saltean feriados y receso.</p>
+    <div id="aus-res" aria-live="polite"></div>
+    ${htmlAusLista(c)}`;
+  ausPrev();
+}
+function ausPrev(){
+  const box = $("aus-res"); if (!box) return;
+  let R;
+  try { R = ausArmar(); } catch (e) { registrarError("ausArmar", e, "aviso"); box.innerHTML = `<p class="lib-empty">No se pudieron armar las actividades. Quedó anotado en Ajustes › Diagnóstico.</p>`; return; }
+  AUS.R = R;
+  const M = R[AUS.vista] || R.hoja;
+  const share = (() => { try { return !!(navigator.canShare && navigator.canShare({files:[new File(["x"], "a.docx", {type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})]})); } catch (e) { return false; } })();
+  box.innerHTML = `${R.sinLec.length ? `<p class="aus-av">No hay un texto de Lapacho para ${R.sinLec.map(t => `«${esc(t)}»`).join(", ")}: indicá qué leer en «Material para leer» (libro y páginas) para que tengan de dónde aprender.</p>` : ""}
+    <div class="seg" role="group" aria-label="Qué documento ver">${AUS_VISTAS.map(([k, t]) => `<button type="button" data-ausv="${k}" aria-pressed="${AUS.vista === k}">${t}</button>`).join("")}</div>
+    <div class="aus-prev"><article class="paper">${docHTML(false, M).replace(/ data-goto="[^"]*"/g, "").replace(/ class="goto"/g, "")}</article></div>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-aus="docx">Descargar en Word</button><button type="button" class="btn btn-sm" data-aus="pdf">PDF</button>${share ? `<button type="button" class="btn btn-sm" data-aus="share">Compartir</button>` : ""}</div>
+    <details class="aus-msg"><summary>Mensaje para preceptoría</summary><label class="sr-only" for="aus-msgt">Mensaje</label><textarea id="aus-msgt" rows="5">${esc(R.msg)}</textarea><div class="cur-bar"><button type="button" class="btn btn-sm" data-aus="copiar">Copiar el mensaje</button></div><p class="hint">Lapacho no manda nada: copiá el mensaje y envialo vos por donde uses.</p></details>`;
+}
+async function ausDescargar(formato){
+  const R = AUS.R; if (!R) return;
+  const M = R[AUS.vista] || R.hoja;
+  ausUsar(R);
+  await bajarDoc(M, ausNombre(R, AUS.vista), formato, AUS.vista === "hoja" ? "Actividades descargadas. Imprimilas o compartilas con preceptoría." : "Documento descargado.");
+}
+async function ausCompartir(){
+  const R = AUS.R; if (!R) return;
+  try {
+    const M = R[AUS.vista] || R.hoja, blob = zipStore(await docxArchivos(M));
+    const file = new File([blob], ausNombre(R, AUS.vista) + ".docx", {type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
+    ausUsar(R);
+    await navigator.share({files:[file], title:M.titulo});
+  } catch (e) { if (!(e && e.name === "AbortError")){ registrarError("ausCompartir", e, "aviso"); toast("No se pudo compartir. Descargalo en Word y envialo desde tus archivos."); } }
+}
+function abrirAus(o){
+  o = o || {};
+  if (o.cid) AUS.cid = o.cid;
+  if (o.desde){
+    const c = ausCursoDe(AUS.cid) || cursoSel();
+    if (c) AUS.cid = c.id;
+    AUS.motivo = "varios"; AUS.fecha = o.desde; AUS.n = Math.max(1, Math.min(10, ausClasesEntre(c, o.desde, o.hasta || o.desde))); AUS.desde = null; AUS.min = 0;
+  }
+  renderAus();
+  abrirDialogo("ausdlg");
+  if (o.lista){ const l = document.querySelector("#aus-panel .aus-l"); if (l && l.scrollIntoView) l.scrollIntoView({block:"center"}); }
+}
+function bindAus(){
+  const D = $("ausdlg"); if (!D || D.dataset.ok) return; D.dataset.ok = "1";
+  const b = $("btn-ausencia"); if (b) b.addEventListener("click", () => abrirAus());
+  D.addEventListener("change", e => {
+    const id = e.target.id;
+    if (id === "aus-curso"){ AUS.cid = e.target.value; AUS.fecha = ""; AUS.desde = null; AUS.min = 0; renderAus(); return; }
+    if (id === "aus-motivo"){ AUS.motivo = e.target.value; if (AUS.motivo !== "varios") AUS.n = 1; else if (AUS.n < 2) AUS.n = 2; renderAus(); return; }
+    if (id === "aus-fecha"){ AUS.fecha = e.target.value || hoyIso(); AUS.min = 0; renderAus(); return; }
+    if (id === "aus-desde"){ AUS.desde = e.target.value === "otro" ? "otro" : +e.target.value; renderAus(); return; }
+    if (id === "aus-cel"){ AUS.cel = e.target.checked; ausPrev(); return; }
+    if (id === "aus-entrega"){ AUS.entrega = e.target.checked; ausPrev(); return; }
+  });
+  let tm = null;
+  D.addEventListener("input", e => {
+    const id = e.target.id;
+    if (id === "aus-n") AUS.n = Math.max(1, Math.min(10, +e.target.value || 1));
+    else if (id === "aus-min") AUS.min = Math.max(20, Math.min(240, +e.target.value || 40));
+    else if (id === "aus-otro") AUS.otro = e.target.value;
+    else if (id === "aus-leer") AUS.leer = e.target.value;
+    else return;
+    clearTimeout(tm); tm = setTimeout(ausPrev, 300);
+  });
+  D.addEventListener("click", e => {
+    const v = e.target.closest("[data-ausv]"); if (v){ AUS.vista = v.dataset.ausv; ausPrev(); return; }
+    const a = e.target.closest("[data-aus]");
+    if (a){
+      const k = a.dataset.aus;
+      if (k === "docx" || k === "pdf") ausDescargar(k);
+      else if (k === "share") ausCompartir();
+      else if (k === "copiar"){ const ta = $("aus-msgt"); ausUsar(AUS.R); try { navigator.clipboard.writeText(ta.value).then(() => toast("Mensaje copiado."), () => { ta.select(); toast("Seleccioná el texto y copialo."); }); } catch (err) { logSilencioso(err); ta.select(); } }
+      return;
+    }
+    const ok = e.target.closest("[data-ausok]"), dl = e.target.closest("[data-ausdel]");
+    if (ok || dl){
+      const c = ausCursoDe(AUS.cid); if (!c) return;
+      if (ok){ const x = (c.ausencias || []).find(y => y.id === ok.dataset.ausok); if (x) x.hecho = true; }
+      else c.ausencias = (c.ausencias || []).filter(y => y.id !== dl.dataset.ausdel);
+      cguardar(); renderAus(); try { renderTuDia(); } catch (err) { logSilencioso(err); }
+    }
+  });
+  document.addEventListener("click", e => {
+    const t = e.target.closest('[data-tdact="ausencia"]');
+    if (t){ e.stopImmediatePropagation(); abrirAus({cid:t.dataset.cid, lista:true}); return; }
+    const l = e.target.closest("[data-ausdesde]");
+    if (l){ try { cerrarDialogo("licalc"); } catch (err) { logSilencioso(err); } abrirAus({desde:l.dataset.ausdesde, hasta:l.dataset.aushasta}); }
+  }, true);
+}
+function init50(){
+  try { bindDinam(); bindPI(); const b = $("btn-dinam"); if (b) b.addEventListener("click", () => abrirBanco("dinam")); } catch (e) { registrarError("init50", e, "aviso"); }
+  try { bindAus(); } catch (e) { registrarError("init50", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -19450,7 +20390,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
