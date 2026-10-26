@@ -4362,7 +4362,8 @@ function sugerenciasProyecto(ctx, g, t, L){
 const NOVEDADES = [
   {id:"2026-10-26", fecha:"2026-10-26", items:[
     "Copia de seguridad: nuevo botón «Compartir la copia». En el celular abre el menú de compartir: elegí Drive y la copia queda guardada en tu Google Drive, sin configurar nada. También podés mandártela por Gmail o WhatsApp. Para recuperarla, elegí ese archivo en Ajustes › Copia de seguridad.",
-    "La sincronización automática con Google Drive queda oculta mientras no haya un ID de cliente de Google configurado. Si una semana no guardaste la copia, «Tu día» te lo recuerda."
+    "La sincronización automática con Google Drive queda oculta mientras no haya un ID de cliente de Google configurado. Si una semana no guardaste la copia, «Tu día» te lo recuerda.",
+    "En la aplicación instalada ya no aparece «Usar sin internet» (descargar el planificador como archivo): la aplicación funciona sin conexión por sí sola."
   ]},
   {id:"2026-10-25-b", fecha:"2026-10-25", items:[
     "Google Drive revisa el ID de cliente antes de abrir la ventana de Google: si no tiene el formato correcto, avisa y te deja corregirlo o borrarlo, en lugar de mostrar el error 401 de Google.",
@@ -15945,7 +15946,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "40.2 (26/10/2026)";
+const LAPACHO_VERSION = "40.3 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -16656,7 +16657,7 @@ async function autodiagnostico(){
   } catch (e) { ok(false, "Copia de seguridad", "No se pudo armar una copia de prueba."); }
   const pdfIn = !!(window.jspdf || window.jsPDF || document.getElementById("jspdf-lib"));
   ok(pdfIn || navigator.onLine, "Descarga en PDF", pdfIn ? "La librería de PDF está disponible." : navigator.onLine ? "Se descarga al pedir el primer PDF." : "Sin internet y sin la librería de PDF: usá Word o «Imprimir».");
-  ok(true, "Conexión", navigator.onLine ? "Hay conexión. Para usar Lapacho sin internet, descargalo desde «Ajustes › Usar sin internet»." : "Sin conexión: funcionan la planificación, Mi curso, Word y las copias.");
+  ok(true, "Conexión", navigator.onLine ? (esAppInstalada() ? "Hay conexión. La aplicación instalada también funciona sin internet." : "Hay conexión. Para usar Lapacho sin internet, descargalo desde «Ajustes › Usar sin internet».") : "Sin conexión: funcionan la planificación, Mi curso, Word y las copias.");
   const L = $("dg-auto"); if (L) L.innerHTML = out.map(x => `<li class="${x.b ? "dg-ok" : "dg-mal"}"><b>${x.b ? "✓" : "✕"} ${esc(x.t)}</b><span>${esc(x.d)}</span></li>`).join("");
   if (out.some(x => !x.b)) registrarError("autodiagnóstico", "Fallas: " + out.filter(x => !x.b).map(x => x.t).join(", "), "aviso");
   return out;
@@ -17909,6 +17910,23 @@ function init41(){
 }
 
 /* ============================================================
+   Versión 40.3: en la aplicación instalada no se ofrece descargar el
+   planificador como archivo HTML (ya funciona sin internet).
+   ============================================================ */
+function esAppInstalada(){
+  try { return matchMedia("(display-mode: standalone)").matches || (/^https?:$/.test(location.protocol) && !/claude/.test(location.hostname) && window.top === window); }
+  catch (e) { logSilencioso(e); return false; }
+}
+function ocultarHtmlEnApp(){
+  if (!esAppInstalada()) return;
+  const b = $("btn-offline"); if (b) b.hidden = true;
+  const r = $("resp-offline"), sec = r && r.closest("section"); if (sec) sec.hidden = true;
+  document.querySelectorAll("#respaldo .resp-card h3").forEach(h => { if (/Tenerlo a mano en el celular/.test(h.textContent)) h.closest("section").hidden = true; });
+  document.querySelectorAll(".faq summary").forEach(s => { if (/Funciona sin internet/.test(s.textContent)){ const p = s.parentElement.querySelector("p"); if (p) p.textContent = "Sí. La aplicación instalada funciona sin conexión: planificar, Mi curso, Word, PDF, las copias de seguridad y la lectura de fotos. Cuando vuelve la señal, toma sola la versión más nueva."; } });
+}
+function init42(){ try { ocultarHtmlEnApp(); } catch (e) { registrarError("init42", e, "aviso"); } }
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -17966,7 +17984,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
