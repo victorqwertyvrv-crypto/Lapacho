@@ -1506,6 +1506,30 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lc-rec{background:#2A3350;border-color:#4A5880;color:#DDE3F5}}
 :root[data-theme="dark"] .lc-rec{background:#2A3350;border-color:#4A5880;color:#DDE3F5}
 .lc-mej b::first-letter{text-transform:uppercase}
+.lc-sc{background:var(--surface);border-style:dashed;color:var(--muted)}
+
+/* Versión 41.1: plan de descanso */
+.lc-tabs{align-self:flex-start;max-width:100%}
+.lc-tabs button{font-size:13.5px;padding:8px 14px}
+.lc-horw{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}
+.lc-horw input{width:auto;margin-top:3px}
+.lc-horw small,.pl-lics small{display:block;font-size:12px;color:var(--muted)}
+#lc-calc,#lc-plan{display:flex;flex-direction:column;gap:12px}
+#lc-calc[hidden],#lc-plan[hidden]{display:none}
+.pl-lics label{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}
+.pl-lics input{width:auto;margin-top:3px}
+.pl-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pl-it{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:10px 12px;background:var(--surface);display:flex;flex-direction:column;gap:4px}
+.pl-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.pl-h b{font-size:14.5px}
+.pl-h b::first-letter{text-transform:uppercase}
+.pl-h span{font-weight:700;color:var(--accent);white-space:nowrap}
+.pl-lic{margin:0;padding-left:18px;font-size:13.5px}
+.pl-it>small{font-size:12px;color:var(--muted)}
+.pl-act{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:2px}
+.pl-act .linkbtn{font-size:13px;min-height:24px}
+.pl-ok{font-size:12.5px;color:var(--accent);font-weight:600}
+.pl-sum{margin:4px 0}
 
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
@@ -1577,7 +1601,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <button type="button" role="menuitem" id="btn-cargos"><b>Cargos disponibles</b><small>Vacantes del SIME filtradas por tus materias</small></button>
           <button type="button" role="menuitem" id="btn-capac"><b>Capacitaciones con puntaje</b><small>Cursos que suman en la Junta y cuánto subís</small></button>
           <button type="button" role="menuitem" id="btn-legajo"><b>Mi legajo</b><small>Títulos, capacitaciones, Junta, cargos y licencias</small></button>
-          <button type="button" role="menuitem" id="btn-licalc"><b>Licencias y feriados</b><small>Contá los días con los feriados y encontrá las mejores fechas</small></button>
+          <button type="button" role="menuitem" id="btn-licalc"><b>Licencias y feriados</b><small>Contá los días con los feriados y armá tu plan de descanso</small></button>
           <button type="button" role="menuitem" id="btn-carpeta"><b>Mi carpeta digital</b><small>Tus documentos en el celular, CV e impresión en dos toques</small></button>
           <button type="button" role="menuitem" id="btn-cole"><b>Colectivos TESA y Exprebus</b><small>Horarios y pasajes entre la Capital y el sur</small></button>
         </div>
@@ -1818,7 +1842,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
-      <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
+      <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
       <details class="faq"><summary>¿Cómo no perder los datos de mis cursos?</summary><p>En «Ajustes › Copia de seguridad» descargás un archivo con todo, incluidas las fotos. Guardalo en tu Drive una vez por semana: si cambiás de celular o se borra el navegador, lo abrís ahí mismo y recuperás todo. «Tu día» te recuerda cuando pasó una semana sin copia.</p></details>
       <details class="faq"><summary>¿Funciona sin internet?</summary><p>Sí. En «Ajustes › Usar sin internet» descargás el planificador como un archivo y lo abrís con el navegador del celular o la computadora aunque no haya señal. Esa versión guarda sus datos aparte: para pasarlos de una a otra usá la copia de seguridad.</p></details>
       <details class="faq"><summary>¿Y si otra persona usa mi computadora?</summary><p>En «Ajustes › Proteger con PIN» elegís un número que se pide para abrir Mi curso, el modo aula, el PPI, las actas y tu legajo.</p></details>
@@ -1983,6 +2007,9 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
   <dialog class="lib bancodlg" id="licalc" aria-labelledby="licalc-t">
     <div class="lib-in">
       <div class="lib-head"><h2 id="licalc-t">Licencias y feriados</h2><button type="button" class="linkbtn" data-cerrar="licalc">Cerrar</button></div>
+      <div class="seg lc-tabs" role="group" aria-label="Qué querés hacer"><button type="button" data-lctab="calc" aria-pressed="true">Calcular una licencia</button><button type="button" data-lctab="plan" aria-pressed="false">Plan de descanso</button></div>
+      <label class="lc-horw" id="lc-horw" hidden=""><input type="checkbox" id="lc-hor"><span>Contar como libres los días en que no tenés clases<small>Según tu horario de Mi curso y tus cargos, tenés clases el <span id="lc-hor-d"></span>.</small></span></label>
+      <div id="lc-calc">
       <p class="hint">Elegí la licencia y el día en que empieza. Lapacho cuenta los días como dice la norma (corridos o hábiles), salta los feriados cuando corresponde y te dice qué día volvés. En las que podés ubicar vos, como asuntos particulares o la donación de sangre, te muestra las fechas que dan más días seguidos sin clases.</p>
       <div class="cfg-grid">
         <div class="f full"><label for="lc-tipo">Licencia</label><select id="lc-tipo"></select></div>
@@ -1991,6 +2018,8 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       </div>
       <div id="lc-res" aria-live="polite"></div>
       <div id="lc-mej"></div>
+      </div>
+      <div id="lc-plan" hidden=""></div>
       <p class="hint" id="lc-fuente"></p>
     </div>
   </dialog>
@@ -4406,6 +4435,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-26-c", fecha:"2026-10-26", items:[
+    "Nuevo: «Plan de descanso», en Tu carrera › Licencias y feriados. Elegís el período y las licencias que querés usar, y Lapacho arma el plan que te da más días de descanso: combina asuntos particulares (y, si vas a donar, la donación de sangre) con feriados, fines de semana largos y el receso, respetando una por mes, cinco por año y los 90 días entre donaciones.",
+    "Podés guardar el plan, pasarlo al calendario del celular con un aviso antes de cada plazo y registrar cada licencia como pedida. «Tu día» te recuerda una semana antes cuándo pedir cada una.",
+    "Si cargaste tu horario en Mi curso, la calculadora y el plan pueden contar como libres los días en que no tenés clases."
+  ]},
   {id:"2026-10-26-b", fecha:"2026-10-26", items:[
     "Nuevo: «Licencias y feriados», en Tu carrera y en Mi legajo › Licencias. Elegís la licencia y el día en que empieza, y Lapacho cuenta los días corridos o hábiles con los feriados de Tucumán, te dice qué día volvés y cuántos días seguidos quedás sin ir a la escuela.",
     "Para las licencias que ubicás vos (asuntos particulares, donación de sangre, razones particulares) muestra las fechas pegadas a feriados y fines de semana largos. Avisa si hay que pedirla con anticipación, si ya usaste la del mes o si no pasaron 90 días desde la última donación.",
@@ -10803,7 +10837,7 @@ function htmlSaldoLicenciasBase(){
     <p class="hint">Fuente: Régimen de Licencias, Justificaciones y Franquicias para el personal docente de Tucumán, ${LIC_FUENTE}, y Ley 5806. Es una guía: ante cualquier duda, consultá en la dirección de tu escuela o en Recursos Humanos del Ministerio. Las licencias rechazadas no descuentan días.</p>
     <h3 class="lic-h">Registrar una licencia</h3>`;
 }
-function avisosLicencias(){
+function avisosLicenciasBase(){
   const av = [], S = saldoLicencias();
   S.filter(s => s.conTope && s.disp && s.usados > 0).forEach(s => {
     if (s.quedan === 0) av.push({f:"4", t:`Ya usaste todos los días de «${s.l.n}» de este año.`, act:"legajo"});
@@ -15997,7 +16031,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "41 (26/10/2026)";
+const LAPACHO_VERSION = "41.1 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18008,7 +18042,9 @@ const lcFinde = d => d.getDay() === 0 || d.getDay() === 6;
 const lcHabil = d => !lcFinde(d) && !lcFeriado(isoDe(d));
 /* Sin ir a la escuela: fin de semana, feriado o receso invernal */
 const lcJuevesSanto = iso => /Viernes Santo/.test(lcFeriado(lcMas(iso, 1)));
-const lcLibre = iso => { const d = fechaDe(iso); return lcFinde(d) || !!lcFeriado(iso) || lcReceso(iso); };
+/* Con «contar mi horario», los días de semana sin clases también son libres */
+const lcSinClase = d => !!(LC.hor && !lcFinde(d) && !LC.hor.has(d.getDay()));
+const lcLibre = iso => { const d = fechaDe(iso); return lcFinde(d) || !!lcFeriado(iso) || lcReceso(iso) || lcSinClase(d); };
 function lcAnticipacion(l){ const m = /con (\d+) días de anticipación/.exec(l.nota || ""); return m ? +m[1] : 0; }
 const lcSaldoVisible = () => !leerPref().pin || pinOk;
 function lcRegistradas(l){
@@ -18075,7 +18111,7 @@ function mejoresFechas(l0, n, max){
   const desde = lcMas(hoy, Math.max(1, ant)), cand = [];
   for (let i = 0; i < 366; i++){
     const iso = lcMas(desde, i), d = fechaDe(iso), c = CAL[d.getFullYear()];
-    if (!c || !lcHabil(d) || lcReceso(iso)) continue;
+    if (!c || !lcHabil(d) || lcLibre(iso)) continue;
     if (c.inicio && iso < c.inicio) continue;
     if (c.fin && iso > c.fin) continue;
     if (!c.inicio && (d.getMonth() < 2 || (d.getMonth() === 11 && d.getDate() > 18))) continue;
@@ -18115,16 +18151,16 @@ function lcTira(r){
   const cel = [];
   for (let i = 0; i < N; i++){
     const iso = lcMas(ini, i), d = fechaDe(iso), enLic = iso >= r.ini && iso <= r.hasta, x = r.dias.find(y => y.iso === iso);
-    const k = enLic && x && x.k === "lic" ? "lic" : lcFeriado(iso) ? "fer" : lcFinde(d) ? "fin" : lcReceso(iso) ? "rec" : "lab";
-    const t = k === "lic" ? "Licencia" : k === "fer" ? lcFeriado(iso) : k === "fin" ? "Fin de semana" : k === "rec" ? "Receso invernal" : "Día de clases";
+    const k = enLic && x && x.k === "lic" ? "lic" : lcFeriado(iso) ? "fer" : lcFinde(d) ? "fin" : lcReceso(iso) ? "rec" : lcSinClase(d) ? "sc" : "lab";
+    const t = k === "lic" ? "Licencia" : k === "fer" ? lcFeriado(iso) : k === "fin" ? "Fin de semana" : k === "rec" ? "Receso invernal" : k === "sc" ? "Sin clases según tu horario" : "Día de clases";
     cel.push(`<span class="lc-d lc-${k}" title="${esc(t)}"><small>${DIAS_SEM[d.getDay()].slice(0, 2)}</small>${d.getDate()}</span>`);
   }
-  return `<div class="lc-tira" aria-label="Días del período">${cel.join("")}</div><p class="lc-ley"><span class="lc-d lc-lic"></span>Licencia <span class="lc-d lc-fer"></span>Feriado <span class="lc-d lc-fin"></span>Fin de semana${cel.some(c => c.includes("lc-rec")) ? ' <span class="lc-d lc-rec"></span>Receso' : ""}</p>`;
+  return `<div class="lc-tira" aria-label="Días del período">${cel.join("")}</div><p class="lc-ley"><span class="lc-d lc-lic"></span>Licencia <span class="lc-d lc-fer"></span>Feriado <span class="lc-d lc-fin"></span>Fin de semana${cel.some(c => c.includes("lc-rec")) ? ' <span class="lc-d lc-rec"></span>Receso' : ""}${cel.some(c => c.includes("lc-sc")) ? ' <span class="lc-d lc-sc"></span>Sin clases' : ""}</p>`;
 }
 function lcTiposLibres(r){
   const t = new Set();
-  for (let i = 0; i < r.bloque.total; i++){ const iso = lcMas(r.bloque.desde, i); if (iso >= r.ini && iso <= r.hasta) continue; if (lcFeriado(iso)) t.add("feriado"); else if (lcFinde(fechaDe(iso))) t.add("fin de semana"); else if (lcReceso(iso)) t.add("receso"); }
-  const L = ["fin de semana", "feriado", "receso"].filter(x => t.has(x));
+  for (let i = 0; i < r.bloque.total; i++){ const iso = lcMas(r.bloque.desde, i); if (iso >= r.ini && iso <= r.hasta) continue; if (lcFeriado(iso)) t.add("feriado"); else if (lcFinde(fechaDe(iso))) t.add("fin de semana"); else if (lcReceso(iso)) t.add("receso"); else if (lcSinClase(fechaDe(iso))) t.add("días sin clases"); }
+  const L = ["fin de semana", "feriado", "receso", "días sin clases"].filter(x => t.has(x));
   return L.length > 1 ? L.slice(0, -1).join(", ") + " y " + L.slice(-1) : L[0] || "días sin clases";
 }
 function htmlCalcLic(r){
@@ -18150,7 +18186,11 @@ function htmlMejores(l, n){
     <ul class="lc-mej">${M.map(c => `<li><button type="button" data-lcfecha="${c.iso}"><b>${esc(lcDia(c.iso))}${c.r.hasta !== c.iso ? ` al ${esc(lcDia(c.r.hasta))}` : ""}</b><span>${c.r.bloque.total} días seguidos sin clases, del ${esc(lcDia(c.r.bloque.desde))} al ${esc(lcDia(c.r.bloque.hasta))}</span><small>${esc(lcMotivo(c.r))}${c.r.dias.some(x => x.k === "lic" && lcJuevesSanto(x.iso)) ? ". Es Jueves Santo: confirmá si hay clases ese día" : ""}</small></button></li>`).join("")}</ul>
     <p class="hint">Solo se proponen días de clases dentro del ciclo lectivo. Pedila siempre por los canales formales: la otorga la dirección de tu escuela.</p>`;
 }
+/* Días de la semana con clases (Mi curso y cargos asignados); null si no hay horario o si el docente no quiere usarlo */
+function lcDiasConClase(){ try { const s = new Set(bloquesSemana(juntaLeer()).map(b => b.dia).filter(d => d >= 1 && d <= 5)); return s.size ? s : null; } catch (e) { logSilencioso(e); return null; } }
+function lcActualizarHor(){ const s = lcDiasConClase(); LC.hor = s && leerPref().licHor !== false ? s : null; const w = $("lc-horw"); if (w){ w.hidden = !s; $("lc-hor").checked = !!LC.hor; if (s) $("lc-hor-d").textContent = [...s].sort().map(d => DIAS_SEM[d]).join(", "); } return s; }
 function renderLicCalc(){
+  lcActualizarHor();
   const l = licPorId($("lc-tipo").value); if (!l) return;
   const n = +$("lc-n").value || lcDefault(l);
   let d = $("lc-desde").value; if (!d){ d = hoyIso(); $("lc-desde").value = d; }
@@ -18169,7 +18209,7 @@ function abrirLicCalc(id){
   S.value = l.id; $("lc-n").value = lcDefault(l);
   if (!$("lc-desde").value || $("lc-desde").value < hoyIso()) $("lc-desde").value = lcSiguienteHabil();
   $("lc-fuente").textContent = `Licencias: Régimen de Licencias, Justificaciones y Franquicias para el personal docente de Tucumán, ${LIC_FUENTE}; las marcadas «a confirmar», Ley 9056. ${LIC_FER_FUENTE}. Datos revisados el 26/10/2026. Es una guía: ante dudas, consultá en la dirección de tu escuela o en Recursos Humanos del Ministerio.`;
-  renderLicCalc();
+  if ($("lc-calc")) lcTab("calc"); else renderLicCalc();
   abrirDialogo("licalc");
 }
 async function registrarLicCalc(){
@@ -18199,6 +18239,208 @@ function htmlSaldoLicencias(){
   return `<div class="cp-banner"><button type="button" class="btn btn-sm btn-primary" data-licalc="">Calcular con feriados y ver las mejores fechas</button></div>` + htmlSaldoLicenciasBase();
 }
 function init43(){ try { bindLicCalc(); } catch (e) { registrarError("init43", e, "aviso"); } }
+
+/* ============================================================
+   Versión 41.1: plan de descanso.
+   Combina las licencias que el docente puede ubicar (asuntos particulares,
+   donación de sangre si va a donar, Día femenino a confirmar) con feriados,
+   fines de semana, receso y los días sin clases de su horario, respetando
+   los topes: una por mes y cinco por año en asuntos particulares, 90 días
+   entre donaciones, anticipación para pedirlas. Se guarda en el legajo
+   (entra en la copia de seguridad) y «Tu día» avisa cuándo pedir cada una.
+   ============================================================ */
+const PLAN_LIC = [
+  {id:"asuntos", def:true, sub:"Con goce. Una por mes y hasta 5 por año."},
+  {id:"sangre", def:false, sub:"Solo si vas a donar: el día de licencia es el de la donación, con el certificado. Entre una y otra, 90 días."},
+  {id:"femenino", def:false, sub:"A confirmar si alcanza a docentes (Ley 9056)."}
+];
+const PL = {res:null};
+/* Fecha con el año cuando no es el año en curso */
+const lcDiaA = iso => lcDia(iso) + (iso.slice(0, 4) !== String(new Date().getFullYear()) ? `/${iso.slice(0, 4)}` : "");
+function lcLimitePedido(l, iso){
+  const ant = lcAnticipacion(l); if (!ant) return iso;
+  let lim = lcMas(iso, -ant); for (let k = 0; k < 20 && !lcHabil(fechaDe(lim)); k++) lim = lcMas(lim, -1);
+  return lim;
+}
+function lcEnCiclo(iso){
+  const d = fechaDe(iso), c = CAL[d.getFullYear()];
+  if (!c) return false;
+  if (c.inicio && iso < c.inicio) return false;
+  if (c.fin && iso > c.fin) return false;
+  if (!c.inicio && (d.getMonth() < 2 || (d.getMonth() === 11 && d.getDate() > 18))) return false;
+  return true;
+}
+function lcBloque(dias){
+  let bd = dias[0], bh = dias[dias.length - 1];
+  for (let k = 0; k < 60 && lcLibre(lcMas(bd, -1)); k++) bd = lcMas(bd, -1);
+  for (let k = 0; k < 60 && lcLibre(lcMas(bh, 1)); k++) bh = lcMas(bh, 1);
+  return {desde:bd, hasta:bh, total:Math.round((fechaDe(bh) - fechaDe(bd)) / 864e5) + 1};
+}
+function planHasta(per){
+  const y = new Date().getFullYear(), c = CAL[y];
+  if (per === "ciclo" && c && c.fin && c.fin > hoyIso()) return c.fin;
+  return lcMas(hoyIso(), 365);
+}
+/* Arma el plan: candidatos de 1 o 2 días de licencia, ordenados por días de descanso por día de licencia */
+function armarPlanDescanso(o){
+  const hoy = hoyIso(), fin = o.hasta, usar = (o.lics || []).map(licPorId).filter(Boolean);
+  if (!usar.length) return {items:[], lic:0, descanso:0};
+  const L = lcSaldoVisible() ? leerLista(LEG_KEY, {}) : {};
+  const reg = (L.licencias || []).filter(x => x.estado !== "Rechazada" && x.desde);
+  const tomadas = []; /* {id, iso} ya registradas o elegidas en el plan */
+  usar.forEach(l => reg.filter(x => norm(x.tipo || "") === norm(l.n)).forEach(x => tomadas.push({id:l.id, iso:x.desde})));
+  const puede = (l, iso, extra) => {
+    if (lcLimitePedido(l, iso) < hoy) return false;
+    const fs = [...tomadas, ...extra].filter(x => x.id === l.id).map(x => x.iso);
+    if (l.mes && fs.filter(f => f.slice(0, 7) === iso.slice(0, 7)).length >= l.mes) return false;
+    if (l.tope && l.per === "anio" && fs.filter(f => f.slice(0, 4) === iso.slice(0, 4)).length >= l.tope) return false;
+    if (l.id === "sangre" && fs.some(f => Math.abs(fechaDe(f) - fechaDe(iso)) / 864e5 < 90)) return false;
+    return true;
+  };
+  const vaALaEscuela = iso => lcHabil(fechaDe(iso)) && !lcLibre(iso) && lcEnCiclo(iso);
+  const cand = [];
+  for (let iso = lcMas(hoy, 1); iso <= fin; iso = lcMas(iso, 1)){
+    if (!vaALaEscuela(iso)) continue;
+    const b1 = lcBloque([iso]);
+    if (b1.total >= 3) cand.push({dias:[iso], b:b1});
+    let nx = lcMas(iso, 1); for (let k = 0; k < 20 && lcLibre(nx); k++) nx = lcMas(nx, 1);
+    if (nx <= fin && vaALaEscuela(nx)){ const b2 = lcBloque([iso, nx]); if (b2.total >= 4) cand.push({dias:[iso, nx], b:b2}); }
+  }
+  cand.sort((a, b) => b.b.total / b.dias.length - a.b.total / a.dias.length || b.b.total - a.b.total || a.dias[0].localeCompare(b.dias[0]));
+  const items = [];
+  for (const c of cand){
+    if (items.some(x => !(c.b.hasta < x.b.desde || c.b.desde > x.b.hasta))) continue;
+    const asig = [];
+    for (const iso of c.dias){ const l = usar.find(l => puede(l, iso, asig)); if (!l) break; asig.push({id:l.id, iso}); }
+    if (asig.length !== c.dias.length) continue;
+    tomadas.push(...asig);
+    items.push({dias:c.dias, b:c.b, lic:asig});
+  }
+  items.sort((a, b) => a.b.desde.localeCompare(b.b.desde));
+  return {items, lic:items.reduce((s, x) => s + x.dias.length, 0), descanso:items.reduce((s, x) => s + x.b.total, 0), hasta:fin, lics:usar.map(l => l.id)};
+}
+function lcMotivoBloque(b){
+  const fs = [];
+  for (let i = 0; i < b.total; i++){ const iso = lcMas(b.desde, i), f = lcFeriado(iso); if (f && !fs.includes(f)) fs.push(f); }
+  if (lcReceso(b.desde) || lcReceso(b.hasta)) fs.push("receso invernal");
+  let sc = false; for (let i = 0; i < b.total; i++){ const d = fechaDe(lcMas(b.desde, i)); if (lcSinClase(d) && !lcFeriado(isoDe(d))) sc = true; }
+  if (sc) fs.push("días sin clases de tu horario");
+  return fs.length ? `Junto con: ${fs.join(", ")}` : "Junto con el fin de semana";
+}
+function htmlLicItem(x){
+  const l = licPorId(x.id), lim = lcLimitePedido(l, x.iso);
+  return `<li><b>${esc(l.n)}</b> el ${esc(lcDia(x.iso))}${l.id === "sangre" ? " (el día de la donación)" : lim !== x.iso ? `. Pedila a más tardar el ${esc(lcDia(lim))}` : ""}${l.conf ? ". A confirmar si alcanza a docentes" : ""}${lcJuevesSanto(x.iso) ? ". Es Jueves Santo: confirmá si ese día hay clases" : ""}.</li>`;
+}
+function htmlPlanRes(P, guardado){
+  if (!P.items.length) return `<p class="hint">En el período elegido no quedan fechas que sumen días de descanso con estas licencias${lcSaldoVisible() ? " y lo que ya registraste" : ""}. Probá con otro período o sumá otra licencia.</p>`;
+  const L = lcSaldoVisible() ? leerLista(LEG_KEY, {}) : {}, reg = (L.licencias || []).map(x => x.desde);
+  return `<div class="lc-card pl-sum">
+      <p class="lc-big"><b>${P.descanso}</b> días de descanso con ${P.lic} ${P.lic === 1 ? "día" : "días"} de licencia, en ${P.items.length} ${P.items.length === 1 ? "salida" : "salidas"}.</p>
+      <p class="hint">Hasta el ${esc(lcDiaA(P.hasta))}.${P.items.some(it => (CAL[+it.b.desde.slice(0, 4)] || {}).provisorio) ? ` Las fechas de ${[...new Set(P.items.filter(it => (CAL[+it.b.desde.slice(0, 4)] || {}).provisorio).map(it => it.b.desde.slice(0, 4)))].join(" y ")} son provisorias: faltan el calendario escolar y los días no laborables que fija el Gobierno.` : ""}${LC.hor ? " Cuenta como libres los días en que no tenés clases según tu horario." : ""}${guardado ? ` Plan guardado el ${esc(fechaCortaIso(guardado))}.` : ""}</p>
+    </div>
+    <ol class="pl-l">${P.items.map((it, i) => `<li class="pl-it">
+      <div class="pl-h"><b>${esc(lcDia(it.b.desde))} al ${esc(lcDiaA(it.b.hasta))}</b><span>${it.b.total} días</span></div>
+      <ul class="pl-lic">${it.lic.map(htmlLicItem).join("")}</ul>
+      <small>${esc(lcMotivoBloque(it.b))}</small>
+      <div class="pl-act"><button type="button" class="linkbtn" data-plver="${i}">Ver en la calculadora</button>${it.lic.every(x => reg.includes(x.iso)) ? '<span class="pl-ok">Registrada en Mi legajo</span>' : `<button type="button" class="linkbtn" data-plreg="${i}">Registrar como pedida</button>`}</div>
+    </li>`).join("")}</ol>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-pl="guardar">${guardado ? "Volver a guardar" : "Guardar el plan y avisarme"}</button><button type="button" class="btn btn-sm" data-pl="ics">Pasar al calendario (.ics)</button></div>
+    <p class="hint">Es una guía para organizarte. Cada licencia se pide por los canales formales y la otorga la dirección de tu escuela. Al guardar el plan, «Tu día» te avisa una semana antes del plazo para pedir cada una.</p>`;
+}
+function planGuardado(){ if (!lcSaldoVisible()) return null; const P = leerLista(LEG_KEY, {}).planDescanso; return P && Array.isArray(P.items) ? P : null; }
+function renderPlan(){
+  lcActualizarHor();
+  const Z = $("lc-plan"), G = planGuardado();
+  if (!Z.dataset.ok){
+    Z.dataset.ok = "1";
+    Z.innerHTML = `<p class="hint">Lapacho combina tus licencias con los feriados, los fines de semana, el receso y, si querés, los días en que no tenés clases, para que tengas la mayor cantidad de días de descanso. Respeta los topes de cada licencia y lo que ya registraste en Mi legajo.</p>
+      <div class="cfg-grid"><div class="f"><label for="pl-per">Período</label><select id="pl-per"><option value="12">Los próximos 12 meses</option><option value="ciclo">Lo que queda del ciclo lectivo</option></select></div></div>
+      <fieldset class="cfg-reg pl-lics"><legend>Licencias a usar</legend>${PLAN_LIC.map(p => { const l = licPorId(p.id); return `<label class="cond-check"><input type="checkbox" data-pllic="${p.id}"${p.def ? " checked" : ""}><span><b>${esc(l.n)}</b><small>${esc(p.sub)}</small></span></label>`; }).join("")}</fieldset>
+      <div class="cur-bar"><button type="button" class="btn btn-primary" id="pl-armar">Armar el plan</button></div>
+      <div id="pl-res" aria-live="polite"></div>`;
+    if (G){ $("pl-per").value = G.per || "12"; Z.querySelectorAll("[data-pllic]").forEach(c => { c.checked = (G.lics || []).includes(c.dataset.pllic); }); }
+  }
+  if (PL.res) $("pl-res").innerHTML = htmlPlanRes(PL.res, PL.res.guardado);
+  else if (G){ PL.res = planDesdeGuardado(G); $("pl-res").innerHTML = htmlPlanRes(PL.res, G.creado); }
+}
+function planDesdeGuardado(G){
+  const items = G.items.filter(it => it.b && it.b.hasta >= hoyIso());
+  return {items, lic:items.reduce((s, x) => s + x.dias.length, 0), descanso:items.reduce((s, x) => s + x.b.total, 0), hasta:G.hasta, lics:G.lics, per:G.per, guardado:G.creado};
+}
+function armarPlanUI(){
+  const lics = [...document.querySelectorAll("#lc-plan [data-pllic]:checked")].map(c => c.dataset.pllic);
+  if (!lics.length){ toast("Elegí al menos una licencia."); return; }
+  const per = $("pl-per").value;
+  PL.res = {...armarPlanDescanso({hasta:planHasta(per), lics}), per};
+  $("pl-res").innerHTML = htmlPlanRes(PL.res, null);
+}
+async function guardarPlan(){
+  const P = PL.res; if (!P || !P.items.length) return;
+  if (!(await exigirPIN())) return;
+  const L = leerLista(LEG_KEY, {});
+  L.planDescanso = {creado:hoyIso(), per:P.per || "12", hasta:P.hasta, lics:P.lics, items:P.items.map(it => ({dias:it.dias, b:it.b, lic:it.lic}))};
+  guardarLista(LEG_KEY, L); P.guardado = L.planDescanso.creado;
+  $("pl-res").innerHTML = htmlPlanRes(P, P.guardado);
+  try { renderTuDia(); } catch (e) { logSilencioso(e); }
+  toast("Plan guardado. «Tu día» te avisa cuándo pedir cada licencia.");
+}
+async function registrarItemPlan(i){
+  const it = PL.res && PL.res.items[i]; if (!it) return;
+  if (!(await exigirPIN())) return;
+  const L = leerLista(LEG_KEY, {}), op = LEG.licencias.campos[0][3];
+  it.lic.forEach(x => { const l = licPorId(x.id); if ((L.licencias || []).some(r => r.desde === x.iso && norm(r.tipo || "") === norm(l.n))) return; L.licencias = [...(L.licencias || []), {id:nuevoIdC("l"), tipo:op.includes(l.n) ? l.n : "Otra", desde:x.iso, hasta:x.iso, dias:"1", articulo:l.art, estado:"Pedida"}]; });
+  guardarLista(LEG_KEY, L);
+  $("pl-res").innerHTML = htmlPlanRes(PL.res, PL.res.guardado);
+  try { if ($("legajo").open) renderLegajo(); renderTuDia(); } catch (e) { logSilencioso(e); }
+  toast("Registrada en Mi legajo › Licencias como pedida.");
+}
+async function planIcs(){
+  const P = PL.res; if (!P || !P.items.length) return;
+  const ev = [];
+  P.items.forEach((it, i) => it.lic.forEach((x, k) => {
+    const l = licPorId(x.id), lim = lcLimitePedido(l, x.iso);
+    ev.push({uid:`plan-${x.iso}-${x.id}`, f:x.iso, t:`Licencia: ${l.n}`, desc:`Plan de descanso: ${it.b.total} días seguidos, del ${lcDia(it.b.desde)} al ${lcDia(it.b.hasta)}. ${l.art}.`});
+    if (lim !== x.iso && lim >= hoyIso()) ev.push({uid:`plan-pedir-${x.iso}-${x.id}`, f:lim, t:`Pedir ${l.n.toLowerCase()} para el ${lcDia(x.iso)}`, desc:`Último día para pedirla con anticipación (${l.art}).`, aviso:true});
+  }));
+  await guardarArchivo("plan-de-descanso.ics", new Blob([icsArchivo(ev)], {type:"text/calendar"}), "Plan descargado. Abrilo con Google Calendar o el calendario del celular: trae un aviso el día antes de cada plazo.");
+}
+/* «Tu día»: cuándo pedir cada licencia del plan guardado */
+function avisosPlanDescanso(){
+  const G = planGuardado(); if (!G) return [];
+  const hoy = hoyIso(), reg = (leerLista(LEG_KEY, {}).licencias || []).map(x => x.desde), out = [];
+  G.items.forEach(it => (it.lic || []).forEach(x => {
+    const l = licPorId(x.id); if (!l || x.iso < hoy || reg.includes(x.iso)) return;
+    const sangre = l.id === "sangre", lim = sangre ? x.iso : lcLimitePedido(l, x.iso), falta = Math.round((fechaDe(lim) - fechaDe(hoy)) / 864e5);
+    if (falta < 0 || falta > 7) return;
+    out.push({f:lim, act:"licalc", t:sangre ? `Plan de descanso: el ${lcDia(x.iso)} es tu día para donar sangre (${it.b.total} días seguidos de descanso). Avisá en la escuela y guardá el certificado.` : `Plan de descanso: pedí «${l.n}» para el ${lcDia(x.iso)} ${lim === hoy ? "hoy" : `a más tardar el ${lcDia(lim)}`}. Te da ${it.b.total} días seguidos de descanso.`});
+  }));
+  return out.sort((a, b) => a.f.localeCompare(b.f)).slice(0, 1);
+}
+function avisosLicencias(){
+  let p = [];
+  try { p = avisosPlanDescanso(); } catch (e) { logSilencioso(e); }
+  return [...p, ...avisosLicenciasBase()].slice(0, 3);
+}
+function lcTab(t){
+  document.querySelectorAll("#licalc [data-lctab]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lctab === t)));
+  $("lc-calc").hidden = t !== "calc"; $("lc-plan").hidden = t !== "plan";
+  if (t === "plan") renderPlan(); else renderLicCalc();
+}
+function bindPlan(){
+  const D = $("licalc"); if (!D || D.dataset.okp) return; D.dataset.okp = "1";
+  $("lc-hor").addEventListener("change", e => { prefSet("licHor", e.target.checked); PL.res = PL.res && PL.res.guardado ? null : PL.res; if (!$("lc-plan").hidden){ if (PL.res && !PL.res.guardado) armarPlanUI(); else renderPlan(); } else renderLicCalc(); });
+  D.addEventListener("click", e => {
+    const t = e.target.closest("[data-lctab]"); if (t){ lcTab(t.dataset.lctab); return; }
+    if (e.target.closest("#pl-armar")){ armarPlanUI(); return; }
+    const a = e.target.closest("[data-pl]"); if (a){ if (a.dataset.pl === "guardar") guardarPlan(); else planIcs(); return; }
+    const r = e.target.closest("[data-plreg]"); if (r){ registrarItemPlan(+r.dataset.plreg); return; }
+    const v = e.target.closest("[data-plver]");
+    if (v){ const it = PL.res.items[+v.dataset.plver], x = it.lic[0]; $("lc-tipo").value = x.id; $("lc-n").value = it.lic.filter(y => y.id === x.id).length; $("lc-desde").value = x.iso; lcTab("calc"); return; }
+  });
+  /* Desde «Tu día» abre directo el plan */
+  document.addEventListener("click", e => { const b = e.target.closest('[data-tdact="licalc"]'); if (!b) return; e.stopImmediatePropagation(); abrirLicCalc(); lcTab("plan"); }, true);
+}
+function init44(){ try { bindPlan(); } catch (e) { registrarError("init44", e, "aviso"); } }
 
 /* ============================================================
    Inicio
@@ -18258,7 +18500,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
