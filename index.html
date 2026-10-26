@@ -1547,6 +1547,14 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .td-c4 .td-cbar i{background:var(--flag-ink)}
 @media (max-width:480px){.td-head .td-cuenta{margin-left:0;width:100%}}
 
+/* Versión 41.4: lista del curso desde una foto */
+.ls-rev{display:flex;flex-direction:column;gap:8px;margin-top:8px;padding:12px 14px;border:1px solid var(--accent);border-radius:12px;background:var(--accent-soft)}
+.ls-rev p{margin:0;font-size:13.5px}
+.ls-rev textarea{background:var(--field);font-size:15px;line-height:1.5}
+#cf-foto-box .aviso-c{margin-top:8px}
+.f-head .ls-acc{display:flex;gap:14px;flex-wrap:wrap}
+.cfg-intro .ls-top{margin-top:8px}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -1860,6 +1868,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
+      <details class="faq"><summary>¿Puedo cargar la lista del curso con una foto?</summary><p>Sí. En «Mi curso › Datos del curso», tocá «Cargar desde una foto» al lado de la lista (o elegí «Lista de alumnos» en «Subir una foto»). La foto se lee en tu celular, sin mandarla a ningún lado; después revisás los nombres, los corregís si hace falta y, al crear el curso, queda lista la planilla de asistencia. Las listas impresas se leen mucho mejor que las escritas a mano.</p></details>
       <details class="faq"><summary>¿Puedo repasar la clase antes de darla?</summary><p>Sí. En «Herramientas › Repasar la clase», o eligiendo «Libreto para repasar» en la vista del documento, Lapacho arma con tu planificación un libreto: qué llevar, qué hacer y qué decir en cada momento con los minutos (y la hora, si cargaste el horario del curso), las preguntas, las ideas previas que suelen aparecer y cómo retomarlas, el pizarrón y qué hacer si sobra o falta tiempo. Se actualiza solo cuando cambiás la planificación y se descarga en Word o PDF.</p></details>
       <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
       <details class="faq"><summary>¿Cómo no perder los datos de mis cursos?</summary><p>En «Ajustes › Copia de seguridad» descargás un archivo con todo, incluidas las fotos. Guardalo en tu Drive una vez por semana: si cambiás de celular o se borra el navegador, lo abrís ahí mismo y recuperás todo. «Tu día» te recuerda cuando pasó una semana sin copia.</p></details>
@@ -4454,6 +4463,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-26-f", fecha:"2026-10-26", items:[
+    "Nuevo: la lista del curso desde una foto. En «Mi curso › Datos del curso», «Cargar desde una foto» lee la lista impresa de preceptoría, saca números de orden, DNI y encabezados, y te deja revisar y corregir los nombres antes de usarlos. Al crear el curso, la planilla de asistencia queda lista. También desde «Subir una foto › Lista de alumnos».",
+    "La foto se lee en tu celular: ni la imagen ni los nombres de tus estudiantes salen del dispositivo."
+  ]},
   {id:"2026-10-26-e", fecha:"2026-10-26", items:[
     "Nuevo: «Libreto para repasar la clase». Se arma solo con tu planificación (clase o secuencia) y se actualiza cuando la cambiás: qué llevar, qué hacer y qué decir en cada momento con los minutos y la hora, las preguntas, las ideas previas que suelen aparecer y cómo retomarlas, el pizarrón, qué mirar mientras trabajan y qué hacer si sobra o falta tiempo.",
     "Lo encontrás en «Herramientas › Repasar la clase» o eligiendo «Libreto para repasar» en la vista del documento, y se descarga en Word o PDF."
@@ -8123,7 +8136,7 @@ function htmlConfig(c){
   const DIAS = [[1, "Lunes"], [2, "Martes"], [3, "Miércoles"], [4, "Jueves"], [5, "Viernes"], [6, "Sábado"]];
   const filaH = (h, i) => `<div class="hor-fila" data-hor="${i}"><select data-hk="dia">${DIAS.map(([v, l]) => `<option value="${v}"${+h.dia === v ? " selected" : ""}>${l}</option>`).join("")}</select><input type="time" data-hk="ini" value="${esc(h.ini || "")}" aria-label="Hora de inicio"><input type="time" data-hk="fin" value="${esc(h.fin || "")}" aria-label="Hora de fin"><button type="button" class="seg-x" data-act="hor-del" data-i="${i}" aria-label="Quitar">×</button></div>`;
   return `<div class="cfg">
-    ${nuevo ? `<div class="cfg-intro"><b>${cdatos().cursos.length ? "Nuevo curso" : "Creá tu primer curso"}</b><p class="hint">Con la lista y el régimen ya podés tomar asistencia, cargar notas y descargar la planilla para preceptoría. Lo demás se puede completar después.</p></div>` : ""}
+    ${nuevo ? `<div class="cfg-intro"><b>${cdatos().cursos.length ? "Nuevo curso" : "Creá tu primer curso"}</b><p class="hint">Con la lista y el régimen ya podés tomar asistencia, cargar notas y descargar la planilla para preceptoría. Lo demás se puede completar después.</p><button type="button" class="btn btn-sm ls-top" data-act="lista-foto">Cargar la lista desde una foto</button></div>` : ""}
     <div class="cfg-grid">
       <div class="f"><label for="cf-curso">Curso y división</label><input id="cf-curso" value="${esc(base.curso || "")}" placeholder="Ej.: 2.º A"></div>
       <div class="f"><label for="cf-materia">Espacio curricular</label><select id="cf-materia">${opcMaterias(base.materia)}</select></div>
@@ -8137,8 +8150,9 @@ function htmlConfig(c){
       <div class="per-fechas" id="cf-periodos">${ps.map((p, i) => `<div class="per-f"><span>${ORD[i]} ${base.regimen === "cuatri" ? "cuatrimestre" : "trimestre"}</span><input type="date" data-pf="${i}:ini" value="${p.ini}" aria-label="Inicio"><span>al</span><input type="date" data-pf="${i}:fin" value="${p.fin}" aria-label="Fin"></div>`).join("")}</div>
       <p class="hint">Las fechas salen del calendario escolar cargado. Cambialas si tu escuela usa otras.</p>
     </fieldset>
-    <div class="f full"><div class="f-head"><label for="cf-lista">Lista del curso, una persona por línea</label><button type="button" class="linkbtn" data-act="lista-orden">Ordenar alfabéticamente</button></div>
-      <textarea id="cf-lista" rows="6" placeholder="Pegá la lista desde la planilla de preceptoría. Si la computadora es compartida, podés usar números de lista o iniciales.">${esc(lista)}</textarea></div>
+    <div class="f full"><div class="f-head"><label for="cf-lista">Lista del curso, una persona por línea</label><span class="ls-acc"><button type="button" class="linkbtn" data-act="lista-foto">Cargar desde una foto</button><button type="button" class="linkbtn" data-act="lista-orden">Ordenar alfabéticamente</button></span></div>
+      <textarea id="cf-lista" rows="6" placeholder="Pegá la lista desde la planilla de preceptoría o cargala desde una foto. Si la computadora es compartida, podés usar números de lista o iniciales.">${esc(lista)}</textarea>
+      <input type="file" id="cf-foto" accept="image/*,application/pdf" multiple hidden aria-label="Foto de la lista del curso"><div id="cf-foto-box" aria-live="polite"></div></div>
     <details class="cur-sub"${nuevo ? "" : " open"}><summary>Notas, faltas y horario</summary>
       <div class="cfg-grid">
         <div class="f"><label for="cf-aprob">Nota de aprobación</label><input id="cf-aprob" type="number" min="1" max="10" step="0.5" value="${(base.escala || {}).aprob || 6}"></div>
@@ -11910,6 +11924,7 @@ const TIPOS_FOTO = [
   ["programa", "Programa de la materia", "Arma la planificación anual con sus unidades"],
   ["libreto", "Libreto o cuadernillo", "Arma la secuencia o las clases con los NAP"],
   ["curso", "Curso o capacitación", "Te dice si suma puntaje y cuánto"],
+  ["lista", "Lista de alumnos", "Arma el curso con la planilla de asistencia"],
   ["evaluacion", "Evaluaciones de alumnos", "Las guarda en la carpeta de cada alumno"],
   ["sime", "Captura del SIME", "Carga las vacantes en «Cargos disponibles»"],
   ["documento", "Documento para mi carpeta", "Título, DNI, constancias y certificados"]
@@ -11918,6 +11933,7 @@ const PALABRAS_FOTO = {
   libreto:[["libreto", 3], ["cuadernillo", 3], ["capitulo", 2], ["para pensar", 2], ["sabias que", 3], ["experiencia", 2], ["experimento", 2], ["glosario", 2], ["leemos", 2], ["actividades", 1], ["manos a la obra", 3], ["para resolver", 2]],
   programa:[["programa", 3], ["unidad", 2], ["contenidos", 2], ["fundamentacion", 2], ["objetivos", 1], ["bibliografia", 2], ["expectativas de logro", 2], ["espacio curricular", 1], ["eje", 1], ["saberes", 1], ["ciclo lectivo", 1]],
   curso:[["puntaje", 3], ["capacitacion", 2], ["inscripcion", 2], ["horas reloj", 2], ["destinatarios", 2], ["certificado", 1], ["cupos", 2], ["modalidad virtual", 2], ["infod", 3], ["res ", 1], ["docentes de", 1], ["webinar", 2]],
+  lista:[["apellido y nombre", 4], ["apellidos y nombres", 4], ["nomina", 3], ["listado", 2], ["alumnos", 2], ["asistencia", 2], ["division", 1], ["dni", 1], ["preceptor", 2]],
   evaluacion:[["evaluacion", 2], ["nombre", 2], ["apellido", 2], ["division", 1], ["consigna", 2], ["resolve", 2], ["responde", 2], ["calificacion", 2], ["trabajo practico", 2], ["ejercicio", 1], ["prueba", 2], ["alumno", 1], ["nota", 1]],
   sime:[["vacante", 3], ["horas catedra", 2], ["establecimiento", 1], ["revista", 2], ["suplente", 2], ["interino", 2], ["sime", 3], ["postula", 2], ["cierre", 1]],
   documento:[["republica argentina", 2], ["documento nacional de identidad", 4], ["registro nacional de las personas", 4], ["cuil", 3], ["titulo de", 2], ["otorga", 2], ["obra social", 3], ["apto", 2], ["aptitud", 2], ["certifica que", 2], ["analitico", 2]]
@@ -12017,6 +12033,7 @@ async function leerFotosIA(files){
 }
 async function seguirFotoIA(){
   const tipo = FI.tipo || FI.sug; FI.tipo = tipo;
+  if (tipo === "lista"){ await listaDesdeSubirFoto(FI.files); return; }
   if (tipo === "libreto"){
     if (FI.files.length > 1 && FI.textos.length < FI.files.length){ FI.leyendo = true; renderFotoIA(); for (let i = FI.textos.length; i < FI.files.length; i++){ const e = $("fi-est"); if (e) e.textContent = `Leyendo la página ${i + 1} de ${FI.files.length}…`; try { FI.textos[i] = await leerConTesseract([FI.files[i]]); } catch (err) { FI.textos[i] = ""; } } FI.leyendo = false; }
     cerrarDialogo("fotoia");
@@ -16058,7 +16075,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "41.3 (26/10/2026)";
+const LAPACHO_VERSION = "41.4 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18720,6 +18737,166 @@ function irALibreto(){
 function init46(){ try { const b = $("btn-repaso"); if (b) b.addEventListener("click", irALibreto); } catch (e) { registrarError("init46", e, "aviso"); } }
 
 /* ============================================================
+   Versión 41.4: la lista del curso desde una foto.
+   La foto se lee solo en el dispositivo (Tesseract), porque tiene
+   nombres de estudiantes: nunca se manda a Claude ni a ningún servidor.
+   Se mejora la imagen (escala de grises, contraste, tamaño), se leen
+   los nombres, se descartan encabezados, números de orden, DNI y
+   fechas, y el docente revisa la lista antes de usarla. Con la lista,
+   «Crear curso» arma la planilla de asistencia.
+   ============================================================ */
+const LS = {nombres:null, leyendo:false};
+const LS_ENC = /^(apellidos?( y nombres?)?|nombres?( y apellidos?)?|n[°º]|nro\b|orden\b|nomina|listado|lista\b|alumnos?\b|estudiantes?\b|curso\b|division\b|ano\b|turno\b|escuela\b|colegio\b|instituto\b|profesora?\b|docente\b|preceptora?\b|asistencia|observaciones|firma\b|fecha\b|total\b|dni\b|d n i|ciclo lectivo|materia\b|espacio curricular|pagina\b|hoja\b)/;
+const LS_MIN = new Set(["de", "del", "la", "las", "los", "y", "da", "dos", "van", "von"]);
+function lsCapitalizar(s){
+  const letras = s.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/g, ""), may = letras.replace(/[^A-ZÁÉÍÓÚÜÑ]/g, "").length;
+  if (!letras || may / letras.length < 0.6) return s;
+  return s.toLowerCase().split(" ").map((w, i) => (i > 0 && LS_MIN.has(w.replace(/,$/, ""))) ? w : w.replace(/(^|[-'])([a-záéíóúüñ])/g, (m, a, b) => a + b.toUpperCase())).join(" ");
+}
+/* Del texto leído a una lista de nombres */
+function nombresDeTexto(t){
+  const out = [], vistos = new Set();
+  String(t || "").split(/\n/).forEach(l0 => {
+    const l = l0.replace(/[|_¦]+/g, "  ").replace(/\t/g, "  ");
+    const cols = l.split(/\s{2,}/).map(s => s.trim()).filter(Boolean);
+    const ci = cols.findIndex(s => /[a-záéíóúñ]{2,}/i.test(s.replace(/^\d+\s*[.)\-°º:]?\s*/, "")));
+    let c = ci < 0 ? "" : cols[ci];
+    /* Si el apellido y el nombre quedaron en columnas separadas, se juntan */
+    if (ci >= 0 && !/[\s,]/.test(c.replace(/^\d+\s*[.)\-°º:]?\s*/, "").trim()) && cols[ci + 1] && /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]{2,}$/.test(cols[ci + 1])) c = c + " " + cols[ci + 1];
+    c = c.replace(/^\s*\d+\s*[.)\-°º:]?\s*/, "")
+      .replace(/\b\d{1,2}\.?\d{3}\.?\d{3}\b/g, " ")
+      .replace(/\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b/g, " ")
+      .replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ,.' -]/g, " ").replace(/\s+/g, " ").trim()
+      .replace(/^[,.\-' ]+|[,.\-' ]+$/g, "").replace(/\s+,/g, ",");
+    if (!c || LS_ENC.test(norm(c))) return;
+    const pal = c.split(/[ ,]+/).filter(w => w.replace(/[.'-]/g, "").length > 1);
+    if (pal.length < 2 || pal.length > 6 || c.length < 5 || c.length > 60) return;
+    const letras = c.replace(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/g, "").length;
+    if (letras / c.replace(/\s/g, "").length < 0.85) return;
+    const n = lsCapitalizar(c), k = norm(n).replace(/[^a-zñ]/g, "");
+    if (vistos.has(k)) return; vistos.add(k); out.push(n);
+  });
+  return out;
+}
+/* Mejora la foto antes de leerla: más grande, en grises, derecha, en blanco y negro y sin las líneas de la tabla */
+function lsOtsu(gris){
+  const h = new Array(256).fill(0); for (let i = 0; i < gris.length; i++) h[gris[i] | 0]++;
+  let sum = 0; for (let t = 0; t < 256; t++) sum += t * h[t];
+  let sB = 0, wB = 0, best = 0, th = 128; const tot = gris.length;
+  for (let t = 0; t < 256; t++){ wB += h[t]; if (!wB) continue; const wF = tot - wB; if (!wF) break; sB += t * h[t]; const mB = sB / wB, mF = (sum - sB) / wF, v = wB * wF * (mB - mF) * (mB - mF); if (v > best){ best = v; th = t; } }
+  return th;
+}
+function lsInclinacion(gris, W, H, th){
+  /* Busca el ángulo (de -6° a 6°) en que los renglones quedan más marcados */
+  const pts = [], paso = Math.max(1, Math.round(Math.sqrt(W * H / 400000)));
+  for (let y = 0; y < H; y += paso) for (let x = 0; x < W; x += paso) if (gris[y * W + x] < th) pts.push(x, y);
+  if (pts.length < 200) return 0;
+  let mejor = 0, mejorS = -1;
+  for (let a = -6; a <= 6.001; a += 0.2){
+    const t = Math.tan(a * Math.PI / 180), hist = new Float64Array(H + W + 2);
+    for (let k = 0; k < pts.length; k += 2){ const yy = Math.round(pts[k + 1] - pts[k] * t) + W; if (yy >= 0 && yy < hist.length) hist[yy]++; }
+    let sc = 0; for (let k = 0; k < hist.length; k++) sc += hist[k] * hist[k];
+    if (sc > mejorS){ mejorS = sc; mejor = a; }
+  }
+  return mejor;
+}
+async function lsPreparar(file){
+  try {
+    const bmp = await createImageBitmap(file);
+    const k = Math.min(3, Math.max(1, 2000 / Math.max(bmp.width, 1))), W = Math.min(4000, Math.round(bmp.width * k)), H = Math.round(bmp.height * (W / bmp.width));
+    const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+    let g = cv.getContext("2d", {willReadFrequently:true}); g.drawImage(bmp, 0, 0, W, H);
+    const gris = imd => { const d = imd.data, out = new Uint8ClampedArray(imd.width * imd.height); for (let i = 0, j = 0; i < d.length; i += 4, j++) out[j] = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]; return out; };
+    let G = gris(g.getImageData(0, 0, W, H)), th = lsOtsu(G);
+    /* Enderezar */
+    const ang = lsInclinacion(G, W, H, th);
+    if (Math.abs(ang) >= 0.3){
+      const cv2 = document.createElement("canvas"); cv2.width = W; cv2.height = H;
+      const g2 = cv2.getContext("2d", {willReadFrequently:true}); g2.fillStyle = "#fff"; g2.fillRect(0, 0, W, H);
+      g2.translate(W / 2, H / 2); g2.rotate(-ang * Math.PI / 180); g2.drawImage(cv, -W / 2, -H / 2);
+      g = g2; G = gris(g2.getImageData(0, 0, W, H)); th = lsOtsu(G);
+    }
+    /* Blanco y negro */
+    const neg = new Uint8Array(W * H); for (let i = 0; i < G.length; i++) neg[i] = G[i] < th ? 1 : 0;
+    /* Borrar líneas largas (bordes de la tabla); las letras son más cortas */
+    const LH = Math.round(W * 0.12), LV = Math.round(Math.min(H * 0.06, W * 0.06));
+    const borrar = new Uint8Array(W * H);
+    for (let y = 0; y < H; y++){ let x0 = -1; for (let x = 0; x <= W; x++){ const on = x < W && neg[y * W + x]; if (on && x0 < 0) x0 = x; if (!on && x0 >= 0){ if (x - x0 >= LH) for (let z = x0; z < x; z++){ borrar[y * W + z] = 1; if (y > 0) borrar[(y - 1) * W + z] = 1; if (y < H - 1) borrar[(y + 1) * W + z] = 1; } x0 = -1; } } }
+    for (let x = 0; x < W; x++){ let y0 = -1; for (let y = 0; y <= H; y++){ const on = y < H && neg[y * W + x]; if (on && y0 < 0) y0 = y; if (!on && y0 >= 0){ if (y - y0 >= LV) for (let z = y0; z < y; z++){ borrar[z * W + x] = 1; if (x > 0) borrar[z * W + x - 1] = 1; if (x < W - 1) borrar[z * W + x + 1] = 1; } y0 = -1; } } }
+    const out = g.createImageData(W, H), d = out.data;
+    for (let i = 0, j = 0; j < neg.length; i += 4, j++){ const v = neg[j] && !borrar[j] ? 0 : 255; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
+    g.setTransform(1, 0, 0, 1, 0, 0); g.putImageData(out, 0, 0);
+    return g.canvas;
+  } catch (e) { logSilencioso(e); return file; }
+}
+async function leerListaTesseract(files, avance){
+  const RT = await rutasTesseract();
+  if (!window.Tesseract) await cargarScript(RT.script);
+  const w = await window.Tesseract.createWorker("spa", 1, {langPath:RT.langPath, workerPath:RT.workerPath, corePath:RT.corePath, logger:m => { if (m.status === "recognizing text" && avance) avance(m.progress); }});
+  try {
+    try { await w.setParameters({tessedit_pageseg_mode:"4", preserve_interword_spaces:"1"}); } catch (e) { logSilencioso(e); }
+    let texto = "";
+    for (let i = 0; i < files.length; i++){ if (avance) avance(0, i, files.length); const r = await w.recognize(await lsPreparar(files[i])); texto += "\n" + ((r.data && r.data.text) || ""); }
+    return texto;
+  } finally { try { await w.terminate(); } catch (e) { logSilencioso(e); } }
+}
+function lsBox(html){ const b = $("cf-foto-box"); if (!b) return; b.innerHTML = html; if (html && b.scrollIntoView) b.scrollIntoView({block:"nearest", behavior:"smooth"}); }
+async function procesarListaFotos(files){
+  if (!files || !files.length || LS.leyendo) return;
+  LS.leyendo = true; LS.nombres = null;
+  lsBox(`<p class="aviso-c" role="status"><span id="cf-foto-est">Preparando la foto…</span></p>`);
+  try {
+    const fs = (await expandirPDFs([...files], 6)).slice(0, 6);
+    const t = await leerListaTesseract(fs, (p, i, n) => { const e = $("cf-foto-est"); if (e) e.textContent = `Leyendo ${n > 1 ? `la foto ${(i || 0) + 1} de ${n}` : "la foto"}… ${Math.round((p || 0) * 100)} %`; });
+    LS.nombres = nombresDeTexto(t);
+  } catch (e) { registrarError("lista-foto", e, "aviso"); LS.nombres = []; }
+  finally { LS.leyendo = false; }
+  renderListaFoto();
+}
+function renderListaFoto(){
+  const N = LS.nombres || [];
+  if (!N.length){ lsBox(`<div class="ls-rev"><p><b>No encontré nombres en la foto.</b></p><p class="hint">Probá con otra foto: la hoja derecha, con buena luz y sin sombras, que se vea la lista entera. Las listas impresas se leen mucho mejor que las escritas a mano.</p><div class="cur-bar"><button type="button" class="btn btn-sm" data-ls="otra">Elegir otra foto</button><button type="button" class="btn btn-sm" data-ls="cerrar">Cerrar</button></div></div>`); return; }
+  const hay = !!$("cf-lista").value.trim();
+  lsBox(`<div class="ls-rev"><p><b>Leí ${N.length} ${N.length === 1 ? "nombre" : "nombres"}.</b> Revisalos antes de usarlos: corregí lo que se haya leído mal, borrá lo que no sea un nombre y agregá a quien falte.</p>
+    <label class="sr-only" for="cf-foto-lista">Nombres leídos de la foto</label><textarea id="cf-foto-lista" rows="${Math.min(14, N.length + 1)}">${esc(N.join("\n"))}</textarea>
+    <p class="hint">La foto se leyó en este dispositivo: ni la imagen ni los nombres salieron de tu celular.</p>
+    <div class="cur-bar">${hay ? `<button type="button" class="btn btn-sm btn-primary" data-ls="agregar">Agregar a la lista</button><button type="button" class="btn btn-sm" data-ls="reemplazar">Reemplazar la lista</button>` : `<button type="button" class="btn btn-sm btn-primary" data-ls="usar">Usar esta lista</button>`}<button type="button" class="btn btn-sm" data-ls="otra">Otra foto</button><button type="button" class="btn btn-sm" data-ls="cerrar">Descartar</button></div></div>`);
+}
+function usarListaFoto(modo){
+  const nuevos = $("cf-foto-lista").value.split("\n").map(x => x.trim()).filter(Boolean);
+  if (!nuevos.length){ toast("La lista está vacía."); return; }
+  const ta = $("cf-lista"), prev = ta.value.split("\n").map(x => x.trim()).filter(Boolean);
+  const vistos = new Set(modo === "agregar" ? prev.map(x => norm(x)) : []);
+  const sum = nuevos.filter(x => { const k = norm(x); if (vistos.has(k)) return false; vistos.add(k); return true; });
+  ta.value = (modo === "agregar" ? [...prev, ...sum] : sum).join("\n");
+  ta.dispatchEvent(new Event("input", {bubbles:true}));
+  LS.nombres = null; lsBox("");
+  const total = ta.value.split("\n").filter(x => x.trim()).length;
+  toast(CUR.creando || !cursoSel() ? `Lista cargada: ${total} estudiantes. Completá el curso y tocá «Crear curso» para tener la planilla de asistencia.` : `Lista cargada: ${total} estudiantes. Tocá «Guardar cambios».`);
+  ta.focus();
+}
+function bindListaFoto(){
+  document.addEventListener("click", e => {
+    const b = e.target.closest('[data-act="lista-foto"]');
+    if (b){ e.stopImmediatePropagation(); const i = $("cf-foto"); if (i){ i.value = ""; i.click(); } return; }
+    const a = e.target.closest("[data-ls]"); if (!a) return;
+    const k = a.dataset.ls;
+    if (k === "otra"){ const i = $("cf-foto"); if (i){ i.value = ""; i.click(); } }
+    else if (k === "cerrar"){ LS.nombres = null; lsBox(""); }
+    else usarListaFoto(k === "usar" ? "reemplazar" : k);
+  }, true);
+  document.addEventListener("change", e => { if (e.target && e.target.id === "cf-foto" && e.target.files && e.target.files.length) procesarListaFotos(e.target.files); });
+}
+/* Desde «Subir una foto»: abre un curso nuevo y lee la lista */
+async function listaDesdeSubirFoto(files){
+  cerrarDialogo("fotoia");
+  await abrirMiCurso();
+  CUR.creando = true; renderCurTab("config");
+  await procesarListaFotos(files);
+}
+function init47(){ try { bindListaFoto(); } catch (e) { registrarError("init47", e, "aviso"); } }
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -18777,7 +18954,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
