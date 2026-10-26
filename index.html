@@ -1569,6 +1569,28 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .gp-nota{font-size:12.5px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
 .gp-rol{display:inline-block;font-size:11.5px;font-weight:600;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:0 8px}
 
+/* Versión 41.6: estrategias de grupos */
+.gp-fijo{font-size:14px;color:var(--ink);padding:9px 0}
+.gp-apoyo{background:var(--flag);border-color:var(--flag);color:var(--flag-ink)}
+.gp-exp{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.gp-exp li{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--surface);font-size:13.5px;display:flex;flex-direction:column;gap:2px}
+.gp-sorteo{font-weight:700;color:var(--accent);font-size:15px;align-self:center}
+.gp-pasos ol{margin:8px 14px 12px;padding-left:20px;font-size:13.5px;display:flex;flex-direction:column;gap:4px}
+.gp-nj{display:flex;flex-direction:column;gap:8px;margin:10px 14px}
+.gp-njf{display:flex;flex-wrap:wrap;gap:8px}
+.gp-njf select{flex:1 1 150px;width:auto;font-size:14px;padding:7px 10px}
+.gp-njl{margin:0;padding-left:18px;font-size:13.5px}
+.gp-ap{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:4px 12px}
+.gp-seg{margin:10px 14px;display:flex;flex-direction:column;gap:6px;font-size:13.5px}
+.gp-seg p{margin:0}
+.gp-t{border-collapse:collapse;font-size:13px;width:100%}
+.gp-t th,.gp-t td{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
+.gp-up{color:var(--accent);font-weight:700}
+.gp-down{color:var(--warn);font-weight:700}
+.gp-reg li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}
+.gp-regb{display:flex;gap:6px}
+.gp-regb .btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -1882,7 +1904,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
-      <details class="faq"><summary>¿Cómo armo grupos para que se ayuden entre ellos?</summary><p>En «Mi curso › Notas», tocá «Armar grupos con estas notas». Elegís con qué nota ordenar (la del período, el promedio o una evaluación) y de cuántos integrantes. Lapacho dobla la lista al medio: cada grupo tiene quien acompaña (de la mitad de arriba) y quien es acompañado (de la mitad de abajo), cerca en el orden, para que nadie quede muy lejos. Podés pedir otra combinación, intercambiar a dos estudiantes y mostrarlo al curso sin notas. En el modo aula, elegí «Para acompañarse».</p></details>
+      <details class="faq"><summary>¿Cómo armo grupos para que se ayuden entre ellos?</summary><p>En «Mi curso › Notas», tocá «Armar grupos con estas notas». Elegís con qué nota ordenar (la del período, el promedio o una evaluación) y de cuántos integrantes. Lapacho dobla la lista al medio: cada grupo tiene quien acompaña (de la mitad de arriba) y quien es acompañado (de la mitad de abajo), cerca en el orden, para que nadie quede muy lejos. Podés pedir otra combinación, intercambiar a dos estudiantes y mostrarlo al curso sin notas. También arma rompecabezas, piensa-discute-comparte, cabezas numeradas, lápices al centro y tutoría recíproca, evita repetir parejas, separa a quienes marcaste para no juntar y muestra si los acompañados mejoraron en la evaluación siguiente. En el modo aula, elegí «Para acompañarse».</p></details>
       <details class="faq"><summary>¿Puedo cargar la lista del curso con una foto?</summary><p>Sí. En «Mi curso › Datos del curso», tocá «Cargar desde una foto» al lado de la lista (o elegí «Lista de alumnos» en «Subir una foto»). La foto se lee en tu celular, sin mandarla a ningún lado; después revisás los nombres, los corregís si hace falta y, al crear el curso, queda lista la planilla de asistencia. Las listas impresas se leen mucho mejor que las escritas a mano.</p></details>
       <details class="faq"><summary>¿Puedo repasar la clase antes de darla?</summary><p>Sí. En «Herramientas › Repasar la clase», o eligiendo «Libreto para repasar» en la vista del documento, Lapacho arma con tu planificación un libreto: qué llevar, qué hacer y qué decir en cada momento con los minutos (y la hora, si cargaste el horario del curso), las preguntas, las ideas previas que suelen aparecer y cómo retomarlas, el pizarrón y qué hacer si sobra o falta tiempo. Se actualiza solo cuando cambiás la planificación y se descarga en Word o PDF.</p></details>
       <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
@@ -2050,7 +2072,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
   <dialog class="lib bancodlg" id="grdlg" aria-labelledby="grdlg-t">
     <div class="lib-in">
       <div class="lib-head"><h2 id="grdlg-t">Grupos para acompañarse</h2><button type="button" class="linkbtn" data-cerrar="grdlg">Cerrar</button></div>
-      <p class="hint">Lapacho ordena el curso por la nota que elijas y lo dobla al medio: cada grupo junta estudiantes de la mitad de arriba con los de la mitad de abajo que están cerca en el orden. Quien acompaña sabe un poco más, pero no tanto como para que la distancia desaliente: el mejor promedio queda con estudiantes del medio y nunca con el más bajo.</p>
+      <p class="hint">Elegí la estrategia. Lapacho ordena el curso por la nota que elijas y lo dobla al medio: cada grupo junta estudiantes de la mitad de arriba con los de la mitad de abajo que están cerca en el orden. Quien acompaña sabe un poco más, pero no tanto como para que la distancia desaliente: el mejor promedio queda con estudiantes del medio y nunca con el más bajo.</p>
       <div id="gp-panel" aria-live="polite"></div>
     </div>
   </dialog>
@@ -4486,6 +4508,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-26-h", fecha:"2026-10-26", items:[
+    "Grupos: ahora elegís la estrategia. Además de los grupos de trabajo, arma rompecabezas (con los grupos de expertos por parte), piensa-discute-comparte, cabezas numeradas (con sorteo de número y de grupo), lápices al centro y tutoría recíproca, cada una con su guion para mostrar al curso o descargar.",
+    "El armado evita repetir las parejas de los últimos agrupamientos, separa a quienes marcaste para no juntar y cuida a quien necesita apoyo (marcado por vos o con PPI): queda con alguien que acompaña y nunca con otra persona que también lo necesita. También podés ordenar por un criterio de la rúbrica.",
+    "Seguimiento: cada agrupamiento que usás queda guardado y Lapacho muestra si los acompañados mejoraron en la evaluación siguiente. En el modo aula marcás con un toque qué grupo pidió ayuda o trabajó bien, y hay una autoevaluación del grupo para descargar."
+  ]},
   {id:"2026-10-26-g", fecha:"2026-10-26", items:[
     "Nuevo: grupos para acompañarse, en «Mi curso › Notas › Armar grupos con estas notas». Lapacho ordena el curso por la nota que elijas y lo dobla al medio: cada grupo junta a quien acompaña (de la mitad de arriba) con quien es acompañado (de la mitad de abajo), cerca en el orden, sin juntar nunca al mejor promedio con el más bajo. En parejas o de 3, 4 o 5, con roles.",
     "Podés pedir otra combinación, intercambiar a dos estudiantes, mostrarlo al curso o descargarlo: lo que ven los chicos no tiene notas ni dice quién acompaña a quién. En el modo aula, la opción «Para acompañarse» arma los grupos de la misma forma con los presentes."
@@ -8856,7 +8883,7 @@ async function abrirAula(cid){
   if (!c){ abrirMiCurso("config"); return; }
   if (!alumnosActivos(c).length){ toast("Primero cargá la lista del curso."); abrirMiCurso("config"); return; }
   if ($("micurso").open) cerrarDialogo("micurso");
-  AULA.cid = c.id; AULA.f = hoyIso(); AULA.azar = ""; AULA.grupos = [];
+  const llevados = AULA.llevados && AULA.cid === c.id && AULA.grupos.length; AULA.llevados = false; AULA.cid = c.id; AULA.f = hoyIso(); AULA.azar = ""; if (!llevados){ AULA.grupos = []; AULA.gref = ""; }
   const sug = claseDeHoy(c);
   AULA.planId = sug.planId; AULA.n = sug.n;
   $("aula").hidden = false; document.body.style.overflow = "hidden";
@@ -8940,7 +8967,7 @@ function presentesHoy(c){
   const p = als.filter(a => m[a.id] === "P" || m[a.id] === "T" || m[a.id] === "R");
   return p.length ? p : als;
 }
-function htmlAulaHerr(c){
+function htmlAulaHerrBase(c){
   return `<section class="herr"><h3>Elegir al azar</h3><p class="hint">Entre quienes están presentes hoy.</p><div class="azar" id="azar">${esc(AULA.azar || "")}</div><button type="button" class="btn btn-primary" data-aact="azar">Elegir</button></section>
     <section class="herr"><h3>Armar grupos</h3><div class="aula-bar"><label>Integrantes por grupo <input type="number" id="gr-n" min="2" max="10" value="${AULA.grN || 4}"></label><select id="gr-modo" aria-label="Cómo armarlos"><option value="azar">Al azar</option><option value="eq"${AULA.grModo === "eq" ? " selected" : ""}>Equilibrados según las notas</option><option value="acomp"${AULA.grModo === "acomp" ? " selected" : ""}>Para acompañarse (sin extremos)</option></select><button type="button" class="btn btn-sm" data-aact="grupos">Armar</button>${AULA.grupos.length ? `<button type="button" class="btn btn-sm" data-aact="grupos-ver">Pantalla completa</button>` : ""}</div>
       <ol class="grupos">${AULA.grupos.map(g => `<li>${g.map(esc).join(", ")}</li>`).join("")}</ol></section>
@@ -16102,7 +16129,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "41.5 (26/10/2026)";
+const LAPACHO_VERSION = "41.6 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18980,7 +19007,7 @@ function gpAlumnos(c){
   if (GP.pres){ const m = (c.asis || {})[hoyIso()] || {}, p = al.filter(a => m[a.id] === "P" || m[a.id] === "T" || m[a.id] === "R"); if (p.length) al = p; }
   return al.map(a => ({id:a.id, n:a.n, nota:gpNota(c, a.id, GP.base)}));
 }
-function gpArmar(){
+function gpArmar48(){
   const c = cursoSel(); if (!c) return;
   const al = gpAlumnos(c);
   GP.sinNota = al.filter(a => a.nota == null).length;
@@ -18990,7 +19017,7 @@ function gpArmar(){
 }
 const gpNum = v => v == null ? "sin nota" : coma(Math.round(v * 10) / 10);
 function gpNombre(n){ try { return nombreNatural(n); } catch (e) { return n; } }
-function htmlGrupos(){
+function htmlGrupos48(){
   const c = cursoSel(); if (!c) return `<p class="hint">Elegí un curso.</p>`;
   const evs = evalsDe(c, periodoActual(c));
   const hoyAsis = Object.keys((c.asis || {})[hoyIso()] || {}).length > 0;
@@ -19018,7 +19045,7 @@ function htmlGrupos(){
 }
 function renderGrupos(){ const P = $("gp-panel"); if (P) P.innerHTML = htmlGrupos(); }
 /* Lo que ven los estudiantes: nombres en orden alfabético y roles */
-function gpParaCurso(){
+function gpParaCurso48(){
   const roles = GP.k > 2 && GP.roles;
   return GP.grupos.map(g => { const R = roles ? gpConRoles(g) : {}; return [...g.acomp, ...g.acompanados].map(a => ({s:a.n, n:gpNombre(a.n), rol:R[a.id] || ""})).sort((x, y) => x.s.localeCompare(y.s, "es")); });
 }
@@ -19033,16 +19060,16 @@ function gpIntercambiar(id){
   toast(`Intercambiados: ${gpNombre(GP.sel.n)} y ${gpNombre(a.n)}.`);
   GP.sel = null; renderGrupos();
 }
-function modeloGruposAula(){
+function modeloGruposAula48(){
   const c = cursoSel(), G = gpParaCurso();
   return {inst:c.escuela || val("institucion") || "", titulo:"Grupos de trabajo", subtitulo:`${c.curso}${c.materia ? " · " + nombreMateria(c.materia) : ""}`, faltaSub:"", datos:[["Fecha", fechaCortaIso(hoyIso())]],
     secs:[{h:"Grupos", tableOnly:true, table:{head:["Grupo", "Integrantes", "Rol"], w:[1300, 4800, 2970], rows:G.flatMap((g, i) => g.map((a, j) => [j === 0 ? `Grupo ${i + 1}` : "", a.n, a.rol]))}}], firmas:null};
 }
-function abrirGrupos(){
+function abrirGrupos48(){
   const c = cursoSel(); if (!c){ toast("Elegí un curso."); return; }
   GP.var = 0; gpArmar(); abrirDialogo("grdlg");
 }
-function bindGrupos(){
+function bindGrupos48(){
   const D = $("grdlg"); if (!D || D.dataset.ok) return; D.dataset.ok = "1";
   D.addEventListener("change", e => {
     const t = e.target;
@@ -19066,13 +19093,304 @@ function bindGrupos(){
   document.addEventListener("click", e => { if (e.target.closest("[data-act=\"grupos-notas\"]")){ e.stopImmediatePropagation(); abrirGrupos(); } }, true);
 }
 /* Modo aula: la opción «Para acompañarse» usa el mismo armado */
-function armarGrupos(c, n, modo){
+function armarGrupos48(c, n, modo){
   if (modo !== "acomp") return armarGruposBase(c, n, modo);
   const pres = presentesHoy(c).map(a => ({id:a.id, n:a.n, nota:gpNota(c, a.id, "per")}));
   const k = Math.max(2, n || 4);
   return armarAcompanamiento(pres, k, 0).map(g => { const R = k > 2 ? gpConRoles(g) : {}; return [...g.acomp, ...g.acompanados].map(a => ({n:a.n, rol:R[a.id] || ""})).sort((x, y) => x.n.localeCompare(y.n, "es")).map(a => a.n + (a.rol ? ` (${a.rol})` : "")); });
 }
 function init48(){ try { bindGrupos(); } catch (e) { registrarError("init48", e, "aviso"); } }
+
+/* ============================================================
+   Versión 41.6: estrategias de trabajo en grupo.
+   Armado: no repetir parejas recientes, no juntar a quienes el docente
+   marcó, cuidar a quien necesita apoyo (marcado o con PPI) y ordenar por
+   una evaluación o por un criterio de la rúbrica.
+   Estructuras: grupos de trabajo, rompecabezas, piensa-discute-comparte,
+   cabezas numeradas, lápices al centro y tutoría recíproca, cada una con
+   su guion para el curso.
+   Seguimiento: antes y después de cada agrupamiento, autoevaluación del
+   grupo y registro rápido desde el modo aula.
+   Todo se guarda en el curso (c.grupos) y entra en la copia de seguridad.
+   ============================================================ */
+const GP_EST = {
+  trabajo:{t:"Grupos de trabajo", k:null, d:"Grupos con roles para resolver una tarea juntos."},
+  rompe:{t:"Rompecabezas", k:null, d:"Cada integrante se vuelve experto en una parte del tema, la estudia con los expertos de otros grupos y vuelve a enseñarla a su grupo."},
+  pds:{t:"Piensa, discute, comparte", k:2, d:"Primero cada uno solo, después en pareja y al final con todo el curso."},
+  cabezas:{t:"Cabezas numeradas", k:null, d:"El grupo resuelve junto y se asegura de que todos puedan explicar: el docente sortea qué número responde."},
+  lapices:{t:"Lápices al centro", k:null, d:"Se discute con los lápices en el centro de la mesa; nadie escribe hasta que el grupo se pone de acuerdo."},
+  tutoria:{t:"Tutoría recíproca", k:2, d:"En parejas, uno explica y el otro pregunta; a mitad de tiempo cambian."}
+};
+const GP_PASOS = {
+  trabajo:["Cada grupo lee la consigna y reparte los roles.", "Resuelven juntos: quien coordina se asegura de que todos opinen.", "Quien registra anota lo que acordaron.", "Quien comunica lo presenta al curso."],
+  rompe:["Grupo base (5 min): cada integrante recibe una parte distinta del tema.", "Grupo de expertos (15 a 20 min): se juntan quienes tienen la misma parte, la estudian y preparan cómo explicarla.", "Vuelta al grupo base (15 a 20 min): cada experto enseña su parte y el grupo arma una síntesis con todas.", "Cierre: preguntas individuales sobre todas las partes."],
+  pds:["Piensa (2 min): cada uno responde solo, por escrito.", "Discute (4 min): en pareja comparan respuestas y acuerdan una.", "Comparte (5 min): algunas parejas, elegidas al azar, cuentan lo que acordaron."],
+  cabezas:["Cada integrante tiene un número.", "El grupo resuelve la consigna y se asegura de que todos puedan explicar la respuesta.", "El docente sortea un número: responde quien lo tiene, en nombre de su grupo."],
+  lapices:["Los lápices van al centro de la mesa.", "Cada integrante lee en voz alta una pregunta, por turnos.", "Discuten hasta ponerse de acuerdo: nadie escribe mientras tanto.", "Cuando todos entendieron, toman los lápices y cada uno escribe la respuesta en su carpeta."],
+  tutoria:["Ronda 1 (10 min): el primero explica y el segundo pregunta.", "Ronda 2 (10 min): cambian los roles.", "Para preguntar: ¿por qué hiciste ese paso?, ¿cómo lo explicarías con un ejemplo?, ¿cómo sabés que está bien?, ¿qué pasaría si cambiamos un dato?"]
+};
+Object.assign(GP, {est:"trabajo", partes:"", sorteo:"", guardado:false, avisos:[]});
+/* ---------- Datos del curso ---------- */
+function gpDatos(c){ c.grupos = c.grupos || {}; const g = c.grupos; g.hist = g.hist || []; g.noJuntar = g.noJuntar || []; g.apoyo = g.apoyo || []; return g; }
+const gpPar = (a, b) => a < b ? a + "|" + b : b + "|" + a;
+function gpApoyos(c){
+  const s = new Set(gpDatos(c).apoyo);
+  try {
+    const cur = norm(c.curso || "");
+    ppiLeer().forEach(p => { const est = norm((p.v || {}).est || ""), pc = norm((p.v || {}).curso || ""); if (!est || (pc && cur && pc.replace(/\W/g, "") !== cur.replace(/\W/g, ""))) return; (c.alumnos || []).forEach(a => { const n = norm(a.n); if (n === est || n.includes(est) || est.includes(n.replace(/,/g, ""))) s.add(a.id); }); });
+  } catch (e) { logSilencioso(e); }
+  return s;
+}
+/* ---------- Ordenar por un criterio de la rúbrica ---------- */
+function gpCriterios(c){
+  const out = [], rb = (() => { try { return rubricasDelCurso(c)[0]; } catch (e) { return null; } })(); if (!rb) return out;
+  const p = periodoActual(c);
+  evalsDe(c, p).forEach(e => { const hay = Object.values(c.rub || {}).some(x => x && Array.isArray(x[e.id]) && x[e.id].some(v => v != null)); if (hay) rb.r.rows.forEach((row, j) => out.push({v:`rc:${e.id}:${j}`, t:`${e.t || "Evaluación"}: ${row[0]}`, L:rb.r.head.length - 1})); });
+  return out;
+}
+function gpNotaX(c, aid, base){
+  if (base.startsWith("rc:")){
+    const [, eid, j] = base.split(":"), lv = (((c.rub || {})[aid] || {})[eid]) || [], k = lv[+j];
+    const cr = gpCriterios(c).find(x => x.v === base), L = cr ? cr.L : 4;
+    return k == null ? null : Math.round((L - 1 - k) / Math.max(1, L - 1) * 100) / 10;
+  }
+  return gpNota(c, aid, base);
+}
+/* ---------- Mejora del armado: menos repeticiones, sin pares prohibidos, apoyos repartidos ---------- */
+function gpPenalidad(g, H, NJ, AP){
+  const ids = [...g.acomp, ...g.acompanados].map(a => a.id); let p = 0, ap = 0;
+  for (let i = 0; i < ids.length; i++){ if (AP.has(ids[i])) ap++; for (let j = i + 1; j < ids.length; j++){ const k = gpPar(ids[i], ids[j]); if (NJ.has(k)) p += 1000; p += (H.get(k) || 0) * 10; } }
+  if (ap > 1) p += 60 * (ap - 1);
+  if (ap && !g.acomp.length) p += 40;
+  return p;
+}
+function gpOptimizar(grupos, c, pos){
+  const D = gpDatos(c), H = new Map(), NJ = new Set(D.noJuntar.map(x => gpPar(x[0], x[1]))), AP = gpApoyos(c);
+  D.hist.slice(-6).forEach((h, i, arr) => { const w = i === arr.length - 1 ? 3 : 1; (h.g || []).forEach(gr => { const ids = [...(gr.a || []), ...(gr.b || [])]; for (let x = 0; x < ids.length; x++) for (let y = x + 1; y < ids.length; y++){ const k = gpPar(ids[x], ids[y]); H.set(k, (H.get(k) || 0) + w); } }); });
+  const n = pos.size, lim = Math.max(2, Math.round(n / 4));
+  /* Tope de distancia dentro de un grupo: nunca más que el armado base, con un margen chico */
+  const span = g => { const r = [...g.acomp, ...g.acompanados].map(a => pos.get(a.id) || 0); return r.length ? Math.max(...r) - Math.min(...r) : 0; };
+  const tope = Math.max(...grupos.map(span), Math.ceil(n / 2)) + Math.max(1, Math.round(n / 12));
+  for (let vuelta = 0; vuelta < 60; vuelta++){
+    let mejoro = false;
+    for (let a = 0; a < grupos.length; a++) for (let b = a + 1; b < grupos.length; b++) for (const lado of ["acomp", "acompanados"]){
+      const A = grupos[a], B = grupos[b];
+      for (let i = 0; i < A[lado].length; i++) for (let j = 0; j < B[lado].length; j++){
+        const x = A[lado][i], y = B[lado][j];
+        if (Math.abs((pos.get(x.id) || 0) - (pos.get(y.id) || 0)) > lim) continue;
+        const antes = gpPenalidad(A, H, NJ, AP) + gpPenalidad(B, H, NJ, AP);
+        A[lado][i] = y; B[lado][j] = x;
+        const desp = gpPenalidad(A, H, NJ, AP) + gpPenalidad(B, H, NJ, AP);
+        if (desp < antes && span(A) <= tope && span(B) <= tope) mejoro = true; else { A[lado][i] = x; B[lado][j] = y; }
+      }
+    }
+    if (!mejoro) break;
+  }
+  grupos.forEach(g => { g.pares = g.acomp.map((x, j) => ({de:x, a:g.acompanados[j] ? [g.acompanados[j]] : []})); g.acompanados.slice(g.acomp.length).forEach((x, j) => (g.pares[j % Math.max(1, g.pares.length)] || {a:[]}).a.push(x)); });
+  /* Lo que no se pudo evitar */
+  const av = [], nombre = id => { const a = (c.alumnos || []).find(x => x.id === id); return a ? gpNombre(a.n) : id; };
+  grupos.forEach((g, i) => { const ids = [...g.acomp, ...g.acompanados].map(a => a.id); D.noJuntar.forEach(([x, y]) => { if (ids.includes(x) && ids.includes(y)) av.push(`No se pudo separar a ${nombre(x)} y ${nombre(y)} (grupo ${i + 1}).`); }); });
+  let rep = 0; grupos.forEach(g => { const ids = [...g.acomp, ...g.acompanados].map(a => a.id); for (let x = 0; x < ids.length; x++) for (let y = x + 1; y < ids.length; y++) if (H.has(gpPar(ids[x], ids[y]))) rep++; });
+  if (rep && D.hist.length) av.push(`${rep} ${rep === 1 ? "pareja ya trabajó junta" : "parejas ya trabajaron juntas"} en los últimos agrupamientos. Para no alejar demasiado a quien acompaña de quien es acompañado, no siempre se pueden evitar todas.`);
+  return av;
+}
+function gpK(){ const e = GP_EST[GP.est]; if (e && e.k) return e.k; if (GP.est === "rompe"){ const p = gpPartes().length; return Math.min(5, Math.max(3, p || GP.k)); } return GP.k; }
+function gpPartes(){ return String(GP.partes || "").split("\n").map(x => x.trim()).filter(Boolean).slice(0, 5); }
+function gpArmar(){
+  const c = cursoSel(); if (!c) return;
+  const al = gpAlumnos(c).map(a => ({...a, nota:gpNotaX(c, a.id, GP.base)}));
+  GP.sinNota = al.filter(a => a.nota == null).length;
+  const k = gpK();
+  GP.grupos = armarAcompanamiento(al, k, GP.var);
+  const ord = GP.grupos.flatMap(g => g.acomp).concat(GP.grupos.flatMap(g => g.acompanados)), pos = new Map();
+  [...al].sort((a, b) => (b.nota ?? 5) - (a.nota ?? 5)).forEach((a, i) => pos.set(a.id, i));
+  GP.avisos = ord.length ? gpOptimizar(GP.grupos, c, pos) : [];
+  GP.sel = null; GP.guardado = false; GP.sorteo = "";
+  renderGrupos();
+}
+/* ---------- Lo que ve el curso ---------- */
+function gpParaCurso(){
+  const roles = gpK() > 2 && GP.roles && (GP.est === "trabajo" || GP.est === "lapices");
+  return GP.grupos.map(g => {
+    const R = roles ? gpConRoles(g) : {};
+    let L = [...g.acomp, ...g.acompanados].map(a => ({id:a.id, s:a.n, n:gpNombre(a.n), rol:R[a.id] || ""}));
+    if (GP.est === "tutoria" || GP.est === "pds") return L;   /* en parejas: primero quien empieza explicando */
+    L = L.sort((x, y) => x.s.localeCompare(y.s, "es"));
+    if (GP.est === "cabezas") L.forEach((a, i) => { a.rol = `N.º ${i + 1}`; });
+    if (GP.est === "rompe"){ const P = gpPartes(); L.forEach((a, i) => { a.rol = P[i] ? `Parte ${i + 1}: ${P[i]}` : `Parte ${i + 1}`; }); }
+    return L;
+  });
+}
+function gpExpertos(){
+  const G = gpParaCurso(), P = gpPartes(), K = Math.max(...G.map(g => g.length));
+  const out = [];
+  for (let i = 0; i < K; i++){
+    const miembros = G.map(g => g[i]).filter(Boolean);
+    const nGr = Math.ceil(miembros.length / 5);
+    for (let s = 0; s < nGr; s++) out.push({t:`Expertos en la parte ${i + 1}${P[i] ? `: ${P[i]}` : ""}${nGr > 1 ? ` (${String.fromCharCode(65 + s)})` : ""}`, m:miembros.filter((_, j) => j % nGr === s).map(a => a.n)});
+  }
+  return out;
+}
+function gpProyectar(){
+  const G = gpParaCurso(), E = GP_EST[GP.est];
+  let h = `<h2>${esc(E.t)}</h2><ol class="g-grupos">${G.map(g => `<li>${g.map(a => esc(a.n) + (a.rol ? ` <small>(${esc(a.rol)})</small>` : "")).join(", ")}</li>`).join("")}</ol>`;
+  if (GP.est === "rompe") h += `<h2>Grupos de expertos</h2><ul class="g-grupos">${gpExpertos().map(x => `<li><b>${esc(x.t)}</b>: ${x.m.map(esc).join(", ")}</li>`).join("")}</ul>`;
+  h += `<h2>Cómo trabajamos</h2><ol class="g-grupos">${GP_PASOS[GP.est].map(p => `<li>${esc(p)}</li>`).join("")}</ol>`;
+  pantallaGrande(h);
+}
+function modeloGruposAula(){
+  const c = cursoSel(), G = gpParaCurso(), E = GP_EST[GP.est];
+  const secs = [{h:GP.est === "pds" || GP.est === "tutoria" ? "Parejas" : "Grupos", tableOnly:true, table:{head:["Grupo", "Integrantes", GP.est === "rompe" ? "Parte" : GP.est === "cabezas" ? "Número" : "Rol"], w:[1300, 4300, 3470], rows:G.flatMap((g, i) => g.map((a, j) => [j === 0 ? `${GP.est === "pds" || GP.est === "tutoria" ? "Pareja" : "Grupo"} ${i + 1}` : "", a.n, a.rol]))}}];
+  if (GP.est === "rompe") secs.push({h:"Grupos de expertos", tableOnly:true, table:{head:["Grupo", "Integrantes"], w:[3600, 5470], rows:gpExpertos().map(x => [x.t, x.m.join(", ")])}});
+  secs.push({h:"Cómo trabajamos", body:toList(GP_PASOS[GP.est])});
+  return {inst:c.escuela || val("institucion") || "", titulo:E.t, subtitulo:`${c.curso}${c.materia ? " · " + nombreMateria(c.materia) : ""}`, faltaSub:"", datos:[["Fecha", fechaCortaIso(hoyIso())]], secs, firmas:null};
+}
+/* Autoevaluación del grupo: una hoja por grupo */
+function modeloAutoevalGrupo(){
+  const c = cursoSel(), G = gpParaCurso();
+  const preg = [["¿Participaron todos los integrantes?", "Sí · Más o menos · No"], ["¿Qué aprendiste de un compañero o compañera hoy?", ""], ["¿Qué pudiste explicar vos?", ""], ["¿Qué harían distinto la próxima vez?", ""]];
+  return {inst:c.escuela || "", titulo:"Autoevaluación del grupo", subtitulo:`${c.curso}${c.materia ? " · " + nombreMateria(c.materia) : ""}`, faltaSub:"", datos:[["Fecha", BLANCO]],
+    secs:G.map((g, i) => ({h:`${GP.est === "pds" || GP.est === "tutoria" ? "Pareja" : "Grupo"} ${i + 1}`, pageBreak:i > 0, lead:`Integrantes: ${g.map(a => a.n).join(", ")}`, sub:preg.map(([q, op]) => ({h:q, body:op, lineas:op ? 0 : 3}))})), firmas:null};
+}
+/* ---------- Guardar el agrupamiento (para no repetir y para el seguimiento) ---------- */
+function gpGuardarHist(c, grupos, est, base){
+  const D = gpDatos(c);
+  const h = {id:nuevoIdC("gh"), f:hoyIso(), est, base, g:grupos.map(g => ({a:g.acomp.map(x => x.id), b:g.acompanados.map(x => x.id)})), reg:{}};
+  D.hist.push(h); if (D.hist.length > 12) D.hist = D.hist.slice(-12);
+  cguardar(); return h;
+}
+function gpUsar(){ const c = cursoSel(); if (!c || !GP.grupos || GP.guardado) return; GP.hist = gpGuardarHist(c, GP.grupos, GP.est, GP.base); GP.guardado = true; }
+/* ---------- Seguimiento: antes y después ---------- */
+function gpAntesDespues(c, h){
+  const evs = (c.evals || []).filter(e => e.f).sort((a, b) => a.f.localeCompare(b.f));
+  const antes = evs.filter(e => e.f < h.f), despues = evs.filter(e => e.f > h.f);
+  const nota = (aid, lista) => { for (const e of lista){ const n = notaEval(c, aid, e.id); if (n != null) return {n, e}; } return null; };
+  const filas = [];
+  h.g.forEach((g, i) => g.b.forEach(aid => {
+    const a = (c.alumnos || []).find(x => x.id === aid); if (!a) return;
+    const x = nota(aid, [...antes].reverse()), y = nota(aid, despues);
+    filas.push({g:i + 1, n:gpNombre(a.n), antes:x ? x.n : null, despues:y ? y.n : null});
+  }));
+  const comp = filas.filter(f => f.antes != null && f.despues != null);
+  return {filas, comp, mejoraron:comp.filter(f => f.despues > f.antes).length, hayDespues:despues.length > 0};
+}
+function htmlSeguimiento(c){
+  const D = gpDatos(c); if (!D.hist.length) return `<p class="hint">Cuando uses un agrupamiento (mostrarlo, descargarlo o llevarlo al modo aula), queda guardado acá para no repetir parejas y para ver cómo les fue a quienes fueron acompañados.</p>`;
+  return D.hist.slice(-4).reverse().map(h => {
+    const R = gpAntesDespues(c, h), reg = Object.entries(h.reg || {}), ayuda = {}, bien = {};
+    reg.forEach(([, m]) => Object.entries(m || {}).forEach(([i, v]) => { (v === "ayuda" ? ayuda : bien)[i] = ((v === "ayuda" ? ayuda : bien)[i] || 0) + 1; }));
+    return `<div class="gp-seg"><b>${esc(GP_EST[h.est] ? GP_EST[h.est].t : "Grupos")} del ${esc(fechaCortaIso(h.f))}</b>
+      ${R.comp.length ? `<p>${R.mejoraron} de ${R.comp.length} acompañados mejoraron su nota en la evaluación siguiente.</p><table class="gp-t"><thead><tr><th>Grupo</th><th>Acompañado</th><th>Antes</th><th>Después</th></tr></thead><tbody>${R.comp.map(f => `<tr><td>${f.g}</td><td>${esc(f.n)}</td><td>${esc(gpNum(f.antes))}</td><td class="${f.despues > f.antes ? "gp-up" : f.despues < f.antes ? "gp-down" : ""}">${esc(gpNum(f.despues))}${f.despues > f.antes ? " ↑" : f.despues < f.antes ? " ↓" : ""}</td></tr>`).join("")}</tbody></table>` : `<p class="hint">${R.hayDespues ? "No hay notas antes y después para comparar." : "Todavía no hay una evaluación posterior para comparar."}</p>`}
+      ${reg.length ? `<p class="hint">Registro en clase: ${Object.keys(ayuda).length ? `pidieron ayuda los grupos ${Object.keys(ayuda).map(i => +i + 1).join(", ")}` : "ningún grupo pidió ayuda"}${Object.keys(bien).length ? `; trabajaron bien los grupos ${Object.keys(bien).map(i => +i + 1).join(", ")}` : ""}.</p>` : ""}</div>`;
+  }).join("");
+}
+/* ---------- No juntar y apoyos ---------- */
+function htmlRestricciones(c){
+  const D = gpDatos(c), al = alumnosActivos(c), nom = id => { const a = al.find(x => x.id === id) || (c.alumnos || []).find(x => x.id === id); return a ? gpNombre(a.n) : "—"; };
+  const opts = al.map(a => `<option value="${esc(a.id)}">${esc(gpNombre(a.n))}</option>`).join(""), AP = gpApoyos(c), ppi = [...AP].filter(id => !D.apoyo.includes(id));
+  return `<div class="gp-nj"><p class="hint">Solo lo ves vos. Lapacho evita juntar a estas personas en el mismo grupo.</p>
+      <div class="gp-njf"><select id="gp-nj1" aria-label="Primera persona"><option value="">Elegí</option>${opts}</select><select id="gp-nj2" aria-label="Segunda persona"><option value="">Elegí</option>${opts}</select><button type="button" class="btn btn-sm" data-gp="nj-add">No juntar</button></div>
+      ${D.noJuntar.length ? `<ul class="gp-njl">${D.noJuntar.map((p, i) => `<li>${esc(nom(p[0]))} y ${esc(nom(p[1]))} <button type="button" class="linkbtn" data-gpnjdel="${i}">Quitar</button></li>`).join("")}</ul>` : ""}
+    </div>
+    <div class="gp-nj"><p class="hint">Quien necesita apoyo queda con alguien que acompaña y nunca con otra persona que también lo necesita.${ppi.length ? ` Con PPI cargado: ${ppi.map(nom).map(esc).join(", ")}.` : ""}</p>
+      <div class="gp-ap">${al.map(a => `<label class="cond-check"><input type="checkbox" data-gpap="${esc(a.id)}"${D.apoyo.includes(a.id) || AP.has(a.id) ? " checked" : ""}${ppi.includes(a.id) ? " disabled" : ""}> ${esc(gpNombre(a.n))}</label>`).join("")}</div></div>`;
+}
+/* ---------- Pantalla ---------- */
+function htmlGrupos(){
+  const c = cursoSel(); if (!c) return `<p class="hint">Elegí un curso.</p>`;
+  const evs = evalsDe(c, periodoActual(c)), crs = gpCriterios(c), E = GP_EST[GP.est], k = gpK();
+  const hoyAsis = Object.keys((c.asis || {})[hoyIso()] || {}).length > 0;
+  const ctrl = `<div class="cfg-grid">
+      <div class="f full"><label for="gp-est">Estrategia</label><select id="gp-est">${Object.entries(GP_EST).map(([v, e]) => `<option value="${v}"${GP.est === v ? " selected" : ""}>${esc(e.t)}</option>`).join("")}</select><p class="hint">${esc(E.d)}</p></div>
+      <div class="f"><label for="gp-base">Ordenar por</label><select id="gp-base"><option value="per"${GP.base === "per" ? " selected" : ""}>Nota del período (${esc(perCorto(c, periodoActual(c)))})</option><option value="anual"${GP.base === "anual" ? " selected" : ""}>Promedio de los períodos</option>${evs.map(e => `<option value="ev:${esc(e.id)}"${GP.base === "ev:" + e.id ? " selected" : ""}>${esc(e.t || "Evaluación")}</option>`).join("")}${crs.map(x => `<option value="${esc(x.v)}"${GP.base === x.v ? " selected" : ""}>Criterio · ${esc(x.t)}</option>`).join("")}</select></div>
+      ${E.k ? `<div class="f"><span class="lbl">Integrantes</span><p class="hint gp-fijo">En parejas</p></div>` : GP.est === "rompe" ? `<div class="f"><label for="gp-partes">Partes del tema, una por línea (3 a 5)</label><textarea id="gp-partes" rows="3" placeholder="Ej.: Primera ley\nSegunda ley\nTercera ley">${esc(GP.partes)}</textarea></div>` : `<div class="f"><label for="gp-k">Integrantes</label><select id="gp-k">${[[2, "En parejas"], [3, "De a 3"], [4, "De a 4"], [5, "De a 5"]].map(([v, l]) => `<option value="${v}"${GP.k === v ? " selected" : ""}>${l}</option>`).join("")}</select></div>`}
+    </div>
+    <div class="gp-op">${hoyAsis ? `<label class="cond-check"><input type="checkbox" id="gp-pres"${GP.pres ? " checked" : ""}> Solo los que vinieron hoy</label>` : ""}${k > 2 && (GP.est === "trabajo" || GP.est === "lapices") ? `<label class="cond-check"><input type="checkbox" id="gp-roles"${GP.roles ? " checked" : ""}> Asignar roles</label>` : ""}<label class="cond-check"><input type="checkbox" id="gp-ver"${GP.ver ? " checked" : ""}> Mostrar las notas (solo para vos)</label></div>`;
+  if (!GP.grupos || !GP.grupos.length) return ctrl + `<p class="hint">Este curso todavía no tiene estudiantes cargados.</p>`;
+  const roles = k > 2 && GP.roles && (GP.est === "trabajo" || GP.est === "lapices"), AP = gpApoyos(c), PC = gpParaCurso();
+  const card = (g, i) => {
+    const R = roles ? gpConRoles(g) : {}, pc = {}; PC[i].forEach(x => { pc[x.id] = x.rol; });
+    const fila = (a, esAc) => {
+      const ac = esAc ? (g.pares.find(p => p.de.id === a.id) || {a:[]}).a : [], rol = R[a.id] || ((GP.est === "rompe" || GP.est === "cabezas") ? pc[a.id] : "");
+      return `<li><button type="button" class="gp-al${GP.sel && GP.sel.id === a.id ? " on" : ""}" data-gpal="${esc(a.id)}" aria-pressed="${!!(GP.sel && GP.sel.id === a.id)}">${esc(gpNombre(a.n))}</button>${GP.ver ? ` <span class="gp-nota">${esc(gpNum(a.nota))}</span>` : ""}${rol ? ` <span class="gp-rol">${esc(rol)}</span>` : ""}${AP.has(a.id) ? ` <span class="gp-rol gp-apoyo">Apoyo</span>` : ""}${ac.length ? `<small>${GP.est === "tutoria" || GP.est === "pds" ? "Empieza explicando a" : "Acompaña a"} ${esc(ac.map(x => gpNombre(x.n).split(" ")[0]).join(" y "))}</small>` : ""}</li>`;
+    };
+    return `<li class="gp-g"><h3>${GP.est === "pds" || GP.est === "tutoria" ? "Pareja" : "Grupo"} ${i + 1}</h3><ul>${g.acomp.map(a => fila(a, true)).join("")}${g.acompanados.map(a => fila(a, false)).join("")}</ul></li>`;
+  };
+  return ctrl + `${GP.avisos.length ? `<ul class="lc-av">${GP.avisos.map(t => `<li class="lc-alerta">${esc(t)}</li>`).join("")}</ul>` : ""}
+    <ol class="gp-l">${GP.grupos.map(card).join("")}</ol>
+    ${GP.est === "rompe" ? `<h3 class="lic-h">Grupos de expertos</h3><ul class="gp-exp">${gpExpertos().map(x => `<li><b>${esc(x.t)}</b><span>${x.m.map(esc).join(", ")}</span></li>`).join("")}</ul>` : ""}
+    ${GP.est === "cabezas" ? `<div class="cur-bar"><button type="button" class="btn btn-sm" data-gp="sortear">Sortear un número</button><button type="button" class="btn btn-sm" data-gp="sortear-g">Sortear un grupo</button><span class="gp-sorteo" aria-live="polite">${esc(GP.sorteo)}</span></div>` : ""}
+    ${GP.sinNota ? `<p class="hint">${GP.sinNota} ${GP.sinNota === 1 ? "estudiante sin nota quedó" : "estudiantes sin nota quedaron"} en el medio de la lista.</p>` : ""}
+    <p class="hint">${GP.sel ? `Elegiste a ${esc(gpNombre(GP.sel.n))}: tocá a otra persona para intercambiarlos.` : "Para cambiar a alguien de grupo, tocá su nombre y después el de la persona con quien lo querés intercambiar."}</p>
+    <details class="cur-sub gp-pasos"><summary>Cómo se trabaja: ${esc(E.t.toLowerCase())}</summary><ol>${GP_PASOS[GP.est].map(p => `<li>${esc(p)}</li>`).join("")}</ol></details>
+    <div class="cur-bar"><button type="button" class="btn btn-sm" data-gp="otra">Otra combinación</button><button type="button" class="btn btn-sm btn-primary" data-gp="proyectar">Mostrar al curso</button><button type="button" class="btn btn-sm" data-gp="aula">Llevar al modo aula</button><button type="button" class="btn btn-sm" data-gp="word">Descargar para el aula</button><button type="button" class="btn btn-sm" data-gp="autoeval">Autoevaluación del grupo</button></div>
+    <p class="hint">Lo que se muestra al curso o se descarga lleva solo los nombres y los roles: ni notas ni quién acompaña a quién.</p>
+    <details class="cur-sub" id="gp-restr"${GP.abrirRestr ? " open" : ""}><summary>No juntar y apoyos</summary>${htmlRestricciones(c)}</details>
+    <details class="cur-sub"${GP.abrirSeg ? " open" : ""} id="gp-seg"><summary>Seguimiento: ¿les sirvió?</summary>${htmlSeguimiento(c)}</details>`;
+}
+function bindGrupos(){
+  const D = $("grdlg"); if (!D || D.dataset.ok) return; D.dataset.ok = "1";
+  D.addEventListener("toggle", e => { if (e.target.id === "gp-restr") GP.abrirRestr = e.target.open; if (e.target.id === "gp-seg") GP.abrirSeg = e.target.open; }, true);
+  D.addEventListener("change", e => {
+    const t = e.target, c = cursoSel();
+    if (t.dataset && t.dataset.gpap){ const L = gpDatos(c).apoyo; const i = L.indexOf(t.dataset.gpap); if (t.checked && i < 0) L.push(t.dataset.gpap); if (!t.checked && i >= 0) L.splice(i, 1); cguardar(); GP.var = 0; gpArmar(); return; }
+    if (t.id === "gp-est"){ GP.est = t.value; if (GP.est === "rompe" && !GP.partes){ const cont = consignasDe(val("contenidos")).slice(0, 4); GP.partes = (cont.length >= 3 ? cont : ["Parte 1", "Parte 2", "Parte 3", "Parte 4"]).join("\n"); } }
+    else if (t.id === "gp-base") GP.base = t.value;
+    else if (t.id === "gp-k") GP.k = +t.value;
+    else if (t.id === "gp-partes") GP.partes = t.value;
+    else if (t.id === "gp-pres") GP.pres = t.checked;
+    else if (t.id === "gp-roles"){ GP.roles = t.checked; renderGrupos(); return; }
+    else if (t.id === "gp-ver"){ GP.ver = t.checked; renderGrupos(); return; }
+    else return;
+    GP.var = 0; gpArmar();
+  });
+  D.addEventListener("click", e => {
+    const a = e.target.closest("[data-gpal]"); if (a){ gpIntercambiar(a.dataset.gpal); return; }
+    const del = e.target.closest("[data-gpnjdel]"); if (del){ gpDatos(cursoSel()).noJuntar.splice(+del.dataset.gpnjdel, 1); cguardar(); GP.var = 0; gpArmar(); return; }
+    const b = e.target.closest("[data-gp]"); if (!b) return;
+    const k = b.dataset.gp, c = cursoSel();
+    if (k === "otra"){ GP.var++; gpArmar(); }
+    else if (k === "nj-add"){ const x = $("gp-nj1").value, y = $("gp-nj2").value; if (!x || !y || x === y){ toast("Elegí dos personas distintas."); return; } const D2 = gpDatos(c); if (!D2.noJuntar.some(p => gpPar(p[0], p[1]) === gpPar(x, y))) D2.noJuntar.push([x, y]); cguardar(); GP.abrirRestr = true; GP.var = 0; gpArmar(); }
+    else if (k === "proyectar"){ gpUsar(); gpProyectar(); }
+    else if (k === "aula"){ gpUsar(); AULA.cid = c.id; AULA.llevados = true; AULA.gref = GP.hist ? GP.hist.id : ""; AULA.grupos = gpParaCurso().map(g => g.map(a => a.n + (a.rol ? ` (${a.rol})` : ""))); toast("Grupos listos en el modo aula, en «Herramientas»."); }
+    else if (k === "word"){ gpUsar(); bajarDoc(modeloGruposAula(), `grupos-${slug(c.curso || "curso")}`, "docx", "Grupos descargados."); }
+    else if (k === "autoeval") bajarDoc(modeloAutoevalGrupo(), `autoevaluacion-grupos-${slug(c.curso || "curso")}`, "docx", "Autoevaluación descargada.");
+    else if (k === "sortear"){ GP.sorteo = `Responde el número ${1 + Math.floor(Math.random() * gpK())}`; const s = D.querySelector(".gp-sorteo"); if (s) s.textContent = GP.sorteo; }
+    else if (k === "sortear-g"){ GP.sorteo = `Le toca al grupo ${1 + Math.floor(Math.random() * GP.grupos.length)}`; const s = D.querySelector(".gp-sorteo"); if (s) s.textContent = GP.sorteo; }
+  });
+  document.addEventListener("click", e => { if (e.target.closest("[data-act=\"grupos-notas\"]")){ e.stopImmediatePropagation(); abrirGrupos(); } }, true);
+  /* Registro rápido en el modo aula */
+  document.addEventListener("click", e => {
+    const r = e.target.closest("[data-greg]"); if (!r) return;
+    const c = (cdatos().cursos || []).find(x => x.id === AULA.cid) || cursoSel(); if (!c) return;
+    const h = gpDatos(c).hist.find(x => x.id === AULA.gref); if (!h) return;
+    const [i, v] = r.dataset.greg.split(":"), f = hoyIso(); h.reg = h.reg || {}; h.reg[f] = h.reg[f] || {};
+    h.reg[f][i] = h.reg[f][i] === v ? undefined : v; if (h.reg[f][i] === undefined) delete h.reg[f][i];
+    cguardar(); try { renderAula("herr"); } catch (err) { logSilencioso(err); }
+  });
+}
+function abrirGrupos(){
+  const c = cursoSel(); if (!c){ toast("Elegí un curso."); return; }
+  GP.var = 0; GP.hist = null; gpArmar(); abrirDialogo("grdlg");
+}
+/* Modo aula: «Para acompañarse» guarda el agrupamiento y muestra el registro rápido */
+function armarGrupos(c, n, modo){
+  if (modo !== "acomp"){ AULA.gref = ""; return armarGruposBase(c, n, modo); }
+  const pres = presentesHoy(c).map(a => ({id:a.id, n:a.n, nota:gpNota(c, a.id, "per")}));
+  const k = Math.max(2, n || 4), gs = armarAcompanamiento(pres, k, 0), pos = new Map();
+  [...pres].sort((a, b) => (b.nota ?? 5) - (a.nota ?? 5)).forEach((a, i) => pos.set(a.id, i));
+  gpOptimizar(gs, c, pos);
+  const h = gpGuardarHist(c, gs, "trabajo", "per"); AULA.gref = h.id;
+  return gs.map(g => { const R = k > 2 ? gpConRoles(g) : {}; return [...g.acomp, ...g.acompanados].map(a => ({s:a.n, n:a.n, rol:R[a.id] || ""})).sort((x, y) => x.s.localeCompare(y.s, "es")).map(a => a.n + (a.rol ? ` (${a.rol})` : "")); });
+}
+function htmlAulaHerr(c){
+  const h = htmlAulaHerrBase(c);
+  const H = AULA.gref && c ? gpDatos(c).hist.find(x => x.id === AULA.gref) : null;
+  if (!H || !AULA.grupos.length) return h;
+  const m = ((H.reg || {})[hoyIso()]) || {};
+  const ol = `<ol class="grupos gp-reg">${AULA.grupos.map((g, i) => `<li><span>${g.map(esc).join(", ")}</span><span class="gp-regb"><button type="button" class="btn btn-sm" data-greg="${i}:ayuda" aria-pressed="${m[i] === "ayuda"}">Pidió ayuda</button><button type="button" class="btn btn-sm" data-greg="${i}:bien" aria-pressed="${m[i] === "bien"}">Trabajó bien</button></span></li>`).join("")}</ol><p class="hint">Marcá cómo trabaja cada grupo: lo ves después en «Grupos › Seguimiento».</p>`;
+  return h.replace(/<ol class="grupos">[\s\S]*?<\/ol>/, ol);
+}
 
 /* ============================================================
    Inicio
