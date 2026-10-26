@@ -1475,6 +1475,8 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .pn-tile.pn-ancho{grid-column:1/-1}
 .pn-tile.pn-ancho small{max-width:60ch}
 
+.resp-btns{display:flex;flex-wrap:wrap;gap:8px}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -1852,15 +1854,16 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
   <dialog class="lib" id="respaldo" aria-labelledby="respaldo-t">
     <div class="lib-in">
       <div class="lib-head"><h2 id="respaldo-t">Copia de seguridad</h2><button type="button" class="linkbtn" data-cerrar="respaldo">Cerrar</button></div>
-      <p class="hint">Todo lo que cargás queda solo en este navegador. Una vez por semana conviene descargar una copia y guardarla en tu Drive o en el celular: si se borran los datos del navegador o cambiás de dispositivo, la abrís acá y recuperás todo.</p>
+      <p class="hint">Todo lo que cargás queda solo en este navegador. Una vez por semana conviene guardar una copia en tu Drive o en el celular: si se borran los datos del navegador o cambiás de dispositivo, la abrís acá y recuperás todo.</p>
       <section class="resp-card">
-        <h3>Descargar una copia</h3>
+        <h3>Guardar una copia</h3>
         <p class="hint" id="resp-ult"></p>
         <label class="cond-check"><input type="checkbox" id="resp-fotos" checked=""> Incluir las fotos de las clases</label>
         <label class="cond-check"><input type="checkbox" id="resp-cifrar"> Proteger la copia con contraseña (cifrado AES-256)</label>
         <div id="resp-cifra-f" hidden=""><div class="cfg-grid"><div class="f"><label for="resp-pass">Contraseña (mínimo 8 caracteres)</label><input type="password" id="resp-pass" autocomplete="new-password"></div><div class="f"><label for="resp-pass2">Repetí la contraseña</label><input type="password" id="resp-pass2" autocomplete="new-password"></div></div><p class="hint">Recomendado si la copia sale de este dispositivo (Drive, correo, pendrive). Si olvidás la contraseña, la copia no se puede abrir: nadie puede recuperarla.</p></div>
         <p class="pin-err" id="resp-err" role="alert"></p>
-        <div><button type="button" class="btn btn-sm btn-primary" id="resp-bajar">Descargar la copia</button></div>
+        <div class="resp-btns"><button type="button" class="btn btn-sm btn-primary" id="resp-compartir" hidden="">Compartir la copia</button><button type="button" class="btn btn-sm" id="resp-bajar">Descargar la copia</button></div>
+        <p class="hint">«Compartir la copia» abre el menú del celular: elegí Drive para guardarla en tu Google Drive, o Gmail o WhatsApp para mandártela.</p>
       </section>
       <section class="resp-card">
         <h3>Recuperar una copia</h3>
@@ -1869,7 +1872,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <select id="resp-modo"><option value="agregar">Sumar lo de la copia a lo que ya hay</option><option value="reemplazar">Reemplazar todo por la copia</option></select>
         </label>
         <div><button type="button" class="btn btn-sm" id="resp-subir">Elegir el archivo…</button></div>
-        <input type="file" id="resp-file" accept="application/json,.json" hidden="">
+        <input type="file" id="resp-file" accept="application/json,.json,text/plain,.txt" hidden="">
         <div id="resp-paso" class="resp-paso" hidden="" aria-live="polite"></div>
       </section>
       <section class="resp-card" id="resp-previas" hidden=""></section>
@@ -4357,6 +4360,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-26", fecha:"2026-10-26", items:[
+    "Copia de seguridad: nuevo botón «Compartir la copia». En el celular abre el menú de compartir: elegí Drive y la copia queda guardada en tu Google Drive, sin configurar nada. También podés mandártela por Gmail o WhatsApp. Para recuperarla, elegí ese archivo en Ajustes › Copia de seguridad.",
+    "La sincronización automática con Google Drive queda oculta mientras no haya un ID de cliente de Google configurado. Si una semana no guardaste la copia, «Tu día» te lo recuerda."
+  ]},
   {id:"2026-10-25-b", fecha:"2026-10-25", items:[
     "Google Drive revisa el ID de cliente antes de abrir la ventana de Google: si no tiene el formato correcto, avisa y te deja corregirlo o borrarlo, en lugar de mostrar el error 401 de Google.",
     "La aplicación instalada busca siempre la versión más nueva cuando hay internet y no vuelve a descargar la lectura de fotos si ya la tenía."
@@ -8665,7 +8672,7 @@ function avisosDelDia(){
   });
   const y = new Date().getFullYear();
   [y, y + 1].forEach(yy => Object.entries((CAL[yy] || {}).feriados || {}).forEach(([f, n]) => { if (f >= hoy && f <= lim7 && fechaDe(f).getDay() % 6) av.push({f, t:`${dm(fechaDe(f))}: ${n}. No hay clases.`}); }));
-  const ult = (leerPref().respaldo || 0), hayDatos = cdatos().cursos.some(c => alumnosActivos(c).length);
+  const ult = (leerPref().respaldo || 0), hayDatos = cdatos().cursos.some(c => alumnosActivos(c).length) || libLeer().length > 0;
   if (hayDatos && Date.now() - ult > 7 * 864e5) av.push({f:"0", t:ult ? `Hace ${Math.floor((Date.now() - ult) / 864e5)} días que no guardás una copia de seguridad.` : "Todavía no guardaste una copia de seguridad de tus cursos.", act:"respaldo"});
   av.push(...avisosLegajo(), ...avisosCargos());
   return av.sort((a, b) => a.f.localeCompare(b.f)).slice(0, 7);
@@ -15938,7 +15945,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "40.1 (25/10/2026)";
+const LAPACHO_VERSION = "40.2 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -16195,7 +16202,7 @@ async function armarContenidoRespaldo(conFotos){
   if (conFotos){ try { fotos = await fotosTodas(); } catch (e) { registrarError("respaldo", e); toast("No se pudieron leer las fotos: la copia sale sin fotos."); } }
   return {datos, fotos};
 }
-async function descargarRespaldo(){
+async function descargarRespaldo37(){
   if (!(await exigirPIN())) return;
   const cif = $("resp-cifrar") && $("resp-cifrar").checked;
   let pass = "";
@@ -16225,7 +16232,7 @@ function respPaso(html){ const P = $("resp-paso"); P.hidden = !html; P.innerHTML
 async function restaurarRespaldo(file){
   if (!file) return;
   respPaso("");
-  if (!/\.json$/i.test(file.name || "") && !/json/.test(file.type || "")){ toast("Elegí un archivo .json de copia de Lapacho."); return; }
+  if (!/\.(json|txt)$/i.test(file.name || "") && !/json|text\/plain/.test(file.type || "")){ toast("Elegí el archivo de la copia de Lapacho (.json o .txt)."); return; }
   if (file.size === 0){ toast("El archivo está vacío."); return; }
   if (file.size > RESP_MAX){ toast(`El archivo es demasiado grande (${tamLegible(file.size)}). El máximo es ${tamLegible(RESP_MAX)}.`); return; }
   let o;
@@ -17822,6 +17829,86 @@ function gdGuardarCfg(){
 }
 
 /* ============================================================
+   Versión 40.2: compartir la copia de seguridad (por ejemplo, a la
+   app de Google Drive del celular) y Google Drive oculto mientras no
+   haya un ID de cliente válido.
+   ============================================================ */
+function gdMostrar(){ const c = gdCfg(); return !!c.forzar || gdIdValido(c.clientId); }
+function actualizarGDVisible(){ const b = $("btn-gdrive"); if (b) b.hidden = !gdMostrar(); }
+function puedeCompartirArchivos(){
+  try { return !!(navigator.canShare && window.File && navigator.canShare({files:[new File(["{}"], "copia.txt", {type:"text/plain"})]})); }
+  catch (e) { return false; }
+}
+/* Arma el archivo de la copia (con contraseña si se pidió). Devuelve null si falta algo. */
+async function prepararRespaldo(btn, ext){
+  if (!(await exigirPIN())) return null;
+  const cif = $("resp-cifrar") && $("resp-cifrar").checked;
+  let pass = "";
+  if (cif){
+    pass = $("resp-pass").value; const p2 = $("resp-pass2").value;
+    if (pass.length < 8){ $("resp-err").textContent = "Usá una contraseña de al menos 8 caracteres."; $("resp-pass").focus(); return null; }
+    if (pass !== p2){ $("resp-err").textContent = "Las dos contraseñas no coinciden."; $("resp-pass2").focus(); return null; }
+  }
+  $("resp-err").textContent = "";
+  const txtBtn = btn.textContent; btn.disabled = true; btn.textContent = cif ? "Cifrando la copia…" : "Armando la copia…";
+  try {
+    const contenido = await armarContenidoRespaldo($("resp-fotos").checked);
+    const cab = {app:"planificador-clases", tipo:"respaldo", version:2, fecha:new Date().toISOString(), appVersion:LAPACHO_VERSION};
+    let o;
+    if (cif) o = {...cab, cifrado:true, ...(await cifrarRespaldo(JSON.stringify(contenido), pass))};
+    else { const txt = JSON.stringify(contenido); o = {...cab, cifrado:false, integridad:{alg:"SHA-256", valor:await sha256Hex(txt)}, contenido}; }
+    const nombre = `copia-lapacho-${hoyIso()}${cif ? "-cifrada" : ""}.${ext}`;
+    return {cif, nombre, blob:new Blob([JSON.stringify(o)], {type:ext === "txt" ? "text/plain" : "application/json"})};
+  } finally { btn.disabled = false; btn.textContent = txtBtn; }
+}
+function respaldoHecho(){
+  prefSet("respaldo", Date.now());
+  $("resp-ult").textContent = `Última copia: ${new Date().toLocaleDateString("es-AR")}.`;
+  $("resp-pass").value = ""; $("resp-pass2").value = "";
+  try { renderTuDia(); espejoGuardar(); } catch (e) { logSilencioso(e); }
+}
+async function descargarRespaldo(){
+  try {
+    const r = await prepararRespaldo($("resp-bajar"), "json"); if (!r) return;
+    await guardarArchivo(r.nombre, r.blob, r.cif ? "Copia cifrada descargada. Sin la contraseña no se puede abrir: anotala en un lugar seguro." : "Copia descargada. Guardala en tu Drive o en el celular.");
+    respaldoHecho();
+  } catch (e) { registrarError("descargarRespaldo", e); toast("No se pudo armar la copia. Quedó anotado en Ajustes › Diagnóstico."); }
+}
+async function compartirRespaldo(){
+  try {
+    /* Android solo deja compartir algunos tipos de archivo: la copia va como .txt (por dentro es la misma) */
+    const r = await prepararRespaldo($("resp-compartir"), "txt"); if (!r) return;
+    const file = new File([r.blob], r.nombre, {type:"text/plain"});
+    if (!(navigator.canShare && navigator.canShare({files:[file]}))){
+      await guardarArchivo(r.nombre, r.blob, "Este navegador no deja compartir archivos: la copia se descargó. Subila a Drive desde la app de Drive.");
+      respaldoHecho(); return;
+    }
+    try { await navigator.share({files:[file], title:"Copia de seguridad de Lapacho"}); }
+    catch (e) {
+      if (e && e.name === "AbortError"){ toast("No se compartió la copia."); return; }
+      throw e;
+    }
+    respaldoHecho();
+    toast(r.cif ? "Copia cifrada compartida. Sin la contraseña no se puede abrir: anotala en un lugar seguro." : "Copia compartida. Si la guardaste en Drive, la encontrás ahí con la fecha de hoy.");
+  } catch (e) { registrarError("compartirRespaldo", e); toast("No se pudo compartir la copia. Probá con «Descargar la copia»."); }
+}
+function prepararDialogoRespaldo(){
+  const b = $("resp-compartir"); if (!b) return;
+  const si = puedeCompartirArchivos();
+  b.hidden = !si;
+  b.classList.toggle("btn-primary", si);
+  $("resp-bajar").classList.toggle("btn-primary", !si);
+}
+function init41(){
+  try {
+    actualizarGDVisible();
+    $("resp-compartir").addEventListener("click", compartirRespaldo);
+    $("btn-respaldo").addEventListener("click", () => setTimeout(prepararDialogoRespaldo, 0));
+    prepararDialogoRespaldo();
+  } catch (e) { registrarError("init41", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -17879,7 +17966,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
