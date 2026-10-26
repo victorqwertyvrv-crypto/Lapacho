@@ -1597,6 +1597,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
         <div class="menu-pop menu-grupos" role="menu" hidden="">
           <button type="button" role="menuitem" id="btn-fotoia"><b>Subir una foto</b><small>Programa, curso, evaluaciones, SIME o documento: la app reconoce qué es</small></button>
           <span class="menu-g">Para la clase</span>
+          <button type="button" role="menuitem" id="btn-repaso"><b>Repasar la clase</b><small>El libreto de tu planificación: qué hacer y qué decir, minuto a minuto</small></button>
           <button type="button" role="menuitem" id="btn-libreto"><b>Clases desde un libreto</b><small>Pegá el texto o subí PDF, Word o fotos: arma la secuencia con los NAP</small></button>
           <button type="button" role="menuitem" id="btn-banco"><b>Banco de actividades</b><small>Las actividades que guardaste</small></button>
           <button type="button" role="menuitem" id="btn-preg"><b>Preguntas y pruebas</b><small>Armá evaluaciones con versión A y B y la clave</small></button>
@@ -1720,6 +1721,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
         <label class="vista-sel"><span class="vista-lbl">Ver</span>
           <select id="vista">
             <option value="plan">Planificación</option>
+            <option value="libreto">Libreto para repasar</option>
             <option value="ficha">Ficha para estudiantes</option>
             <option value="inst">Instrumentos de evaluación</option>
             <option value="registro">Registro de clase</option>
@@ -1858,6 +1860,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
+      <details class="faq"><summary>¿Puedo repasar la clase antes de darla?</summary><p>Sí. En «Herramientas › Repasar la clase», o eligiendo «Libreto para repasar» en la vista del documento, Lapacho arma con tu planificación un libreto: qué llevar, qué hacer y qué decir en cada momento con los minutos (y la hora, si cargaste el horario del curso), las preguntas, las ideas previas que suelen aparecer y cómo retomarlas, el pizarrón y qué hacer si sobra o falta tiempo. Se actualiza solo cuando cambiás la planificación y se descarga en Word o PDF.</p></details>
       <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
       <details class="faq"><summary>¿Cómo no perder los datos de mis cursos?</summary><p>En «Ajustes › Copia de seguridad» descargás un archivo con todo, incluidas las fotos. Guardalo en tu Drive una vez por semana: si cambiás de celular o se borra el navegador, lo abrís ahí mismo y recuperás todo. «Tu día» te recuerda cuando pasó una semana sin copia.</p></details>
       <details class="faq"><summary>¿Funciona sin internet?</summary><p>Sí. En «Ajustes › Usar sin internet» descargás el planificador como un archivo y lo abrís con el navegador del celular o la computadora aunque no haya señal. Esa versión guarda sus datos aparte: para pasarlos de una a otra usá la copia de seguridad.</p></details>
@@ -4451,6 +4454,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-26-e", fecha:"2026-10-26", items:[
+    "Nuevo: «Libreto para repasar la clase». Se arma solo con tu planificación (clase o secuencia) y se actualiza cuando la cambiás: qué llevar, qué hacer y qué decir en cada momento con los minutos y la hora, las preguntas, las ideas previas que suelen aparecer y cómo retomarlas, el pizarrón, qué mirar mientras trabajan y qué hacer si sobra o falta tiempo.",
+    "Lo encontrás en «Herramientas › Repasar la clase» o eligiendo «Libreto para repasar» en la vista del documento, y se descarga en Word o PDF."
+  ]},
   {id:"2026-10-26-d", fecha:"2026-10-26", items:[
     "«Tu día» muestra cuántos días de clase quedan hasta el cierre del ciclo lectivo (sin fines de semana, feriados ni receso) y, si cargaste tu horario, cuántos son con tus cursos. Una carita se pone más contenta a medida que se acerca el final: seis caritas distintas, hasta el festejo del último día."
   ]},
@@ -4811,10 +4818,11 @@ function consignasClase(c, n, N, t){
 /* ============================================================
    Vistas del documento: planificación, ficha, instrumentos y registro
    ============================================================ */
-const VISTAS = {plan:"Planificación", ficha:"Ficha para estudiantes", inst:"Instrumentos de evaluación", registro:"Registro de clase", slides:"Presentación para el aula"};
+const VISTAS = {plan:"Planificación", libreto:"Libreto para repasar la clase", ficha:"Ficha para estudiantes", inst:"Instrumentos de evaluación", registro:"Registro de clase", slides:"Presentación para el aula"};
 function vistaEfectiva(){
   const v = state.vista || "plan";
   if (state.modo === "anual" && (v === "ficha" || v === "registro" || v === "slides")) return "plan";
+  if ((state.modo === "anual" || state.modo === "proyecto") && v === "libreto") return "plan";
   return VISTAS[v] ? v : "plan";
 }
 const consignasDe = txt => (txt || "").split("\n").map(l => l.replace(/^\s*(?:[-•*·]|\d+[.)])\s+/, "").trim()).filter(Boolean);
@@ -4823,7 +4831,7 @@ const INST_DEF = ["rubrica", "ticket"];
 const BLANCO = " ";
 function modeloActual(){
   const v = vistaEfectiva();
-  return v === "ficha" ? modeloFicha() : v === "inst" ? modeloInstrumentos() : v === "registro" ? modeloRegistro() : modelo();
+  return v === "libreto" ? modeloLibreto() : v === "ficha" ? modeloFicha() : v === "inst" ? modeloInstrumentos() : v === "registro" ? modeloRegistro() : modelo();
 }
 function temaVisible(){ return state.modo === "proyecto" ? (val("nombre") || val("tema")) : val("tema"); }
 function modeloFicha(){
@@ -5454,7 +5462,7 @@ async function descargarPDF(){
     await Promise.all(state.images.map(rasterize));
     const M = modeloActual();
     const blob = await pdfDe(M);
-    const pref = {ficha:"ficha", inst:"instrumentos", registro:"registro"}[vistaEfectiva()] || state.modo;
+    const pref = {ficha:"ficha", inst:"instrumentos", registro:"registro", libreto:"libreto"}[vistaEfectiva()] || state.modo;
     await guardarArchivo(`${pref}-${slug(M.subtitulo || "planificacion")}.pdf`, blob, "PDF descargado.");
   } catch (e) {
     toast(e && e.message === "red" ? "No se pudo cargar el generador de PDF (hace falta conexión). Probá con «Descargar Word»." : "No se pudo armar el PDF. Probá con «Descargar Word».");
@@ -6628,7 +6636,7 @@ async function descargarWord(){
     await Promise.all(state.images.map(rasterize));
     const M = modeloActual();
     const blob = zipStore(await docxArchivos(M));
-    const pref = {ficha:"ficha", inst:"instrumentos", registro:"registro"}[vistaEfectiva()] || state.modo;
+    const pref = {ficha:"ficha", inst:"instrumentos", registro:"registro", libreto:"libreto"}[vistaEfectiva()] || state.modo;
     const nombre = `${pref}-${slug(M.subtitulo || "planificacion")}.docx`;
     await guardarArchivo(nombre, blob, "Documento de Word descargado.");
   } catch (e) {
@@ -16050,7 +16058,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "41.2 (26/10/2026)";
+const LAPACHO_VERSION = "41.3 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18520,6 +18528,198 @@ function cabTuDia(){
 }
 
 /* ============================================================
+   Versión 41.3: libreto de la clase para repasar antes de darla.
+   Se arma solo, en paralelo con la planificación (clase o secuencia):
+   qué hacer y qué decir en cada momento, con los minutos y la hora,
+   las preguntas, las ideas previas que suelen aparecer y cómo
+   retomarlas, el pizarrón, qué mirar mientras trabajan y qué hacer si
+   sobra o falta tiempo. Es un documento personal del docente.
+   ============================================================ */
+const IDEAS_PREVIAS = [
+  {k:"fuerza fuerzas movimiento newton dinamica primera ley", idea:"«Si algo se mueve, tiene que haber una fuerza empujándolo en ese sentido.»", ret:"Retomá el caso de una pelota que rueda por el piso: se frena por el rozamiento, no porque «se le acaba la fuerza». La fuerza cambia el movimiento; no hace falta para mantenerlo."},
+  {k:"inercia newton primera ley", idea:"«Los objetos se detienen solos cuando dejan de empujarlos.»", ret:"Compará la misma moneda deslizando sobre una mesa áspera y sobre una superficie lisa: cuanto menos rozamiento, más tarda en frenar."},
+  {k:"caida libre gravedad aceleracion peso", idea:"«Los objetos más pesados caen más rápido.»", ret:"Soltá al mismo tiempo una hoja abollada y un cuaderno: llegan casi juntos. La diferencia que se ve con la hoja abierta es por el aire, no por el peso."},
+  {k:"masa peso", idea:"«La masa y el peso son lo mismo.»", ret:"Preguntá cuánto pesaría y cuánta masa tendría la misma persona en la Luna: la masa no cambia, el peso sí."},
+  {k:"energia conservacion transformacion cinetica potencial", idea:"«La energía se gasta y desaparece.»", ret:"Seguí el recorrido de la energía en un ejemplo (una pelota que rebota hasta quedarse quieta): se transforma y una parte se disipa como calor y sonido, pero no desaparece."},
+  {k:"calor temperatura termica termodinamica", idea:"«Calor y temperatura son lo mismo.»", ret:"Compará una taza y una olla de agua a la misma temperatura: ¿cuál derrite más hielo? La temperatura es la misma; la energía que pueden transferir, no."},
+  {k:"calor abrigo aislante conductor", idea:"«El abrigo da calor.»", ret:"Preguntá si una campera puesta a una botella con hielo la calentaría: el abrigo no produce calor, frena la pérdida."},
+  {k:"corriente electrica circuito electricidad", idea:"«La corriente se gasta en la lámpara y vuelve menos.»", ret:"Medí con el amperímetro antes y después de la lámpara (o mostralo en la simulación): la corriente es la misma; lo que se transforma es la energía."},
+  {k:"luz vision optica ojo", idea:"«Vemos porque los ojos lanzan algo hacia los objetos.»", ret:"Preguntá por qué no vemos nada en una habitación totalmente oscura: la luz tiene que llegar desde el objeto a nuestros ojos."},
+  {k:"sonido ondas vacio propagacion", idea:"«El sonido viaja por el vacío, como la luz.»", ret:"Usá el ejemplo del espacio: en la Luna los astronautas se comunican por radio porque no hay aire que transmita el sonido."},
+  {k:"densidad flotacion hundimiento empuje", idea:"«Lo pesado se hunde y lo liviano flota.»", ret:"Compará un barco de acero con un clavo: lo que importa es la densidad, no el peso."},
+  {k:"presion atmosferica", idea:"«El aire no pesa ni hace fuerza.»", ret:"Hacé la experiencia del vaso con agua tapado con un cartón y dado vuelta: el cartón no se cae por la presión del aire."},
+  {k:"estados agregacion cambio ebullicion evaporacion", idea:"«Las burbujas del agua que hierve son aire.»", ret:"Preguntá de dónde saldría tanto aire. Son vapor de agua: el agua cambió de estado."},
+  {k:"atomo atomos particulas materia modelo", idea:"«Los átomos tienen las propiedades del material: los átomos de cobre son color cobre.»", ret:"Diferenciá lo que se observa (color, brillo) de lo que explica el modelo: las propiedades aparecen por cómo se ordenan muchísimas partículas juntas."},
+  {k:"reaccion quimica combustion conservacion masa", idea:"«En una combustión la materia desaparece.»", ret:"Pesá antes y después una reacción en un recipiente cerrado (o mostrá la de la vela con un frasco): la masa se conserva; se forman gases que no vemos."},
+  {k:"mezcla solucion disolucion soluto", idea:"«Cuando el azúcar se disuelve, desaparece.»", ret:"Pedí que prueben el agua (si es seguro) o que pesen antes y después: el azúcar sigue ahí, repartido en partículas que no se ven."},
+  {k:"fotosintesis plantas nutricion vegetal", idea:"«Las plantas sacan el alimento del suelo.»", ret:"Contá el experimento de Van Helmont: el árbol creció muchísimo y la tierra casi no cambió de peso. El alimento lo fabrican con agua, dióxido de carbono y luz."},
+  {k:"celula celulas seres vivos", idea:"«Solo los animales están formados por células.»", ret:"Mostrá en el microscopio o en una imagen células de cebolla y de mucosa: plantas, hongos y bacterias también."},
+  {k:"evolucion seleccion natural adaptacion", idea:"«Los seres vivos cambian porque lo necesitan.»", ret:"Trabajá con una población: los individuos no cambian a propósito; los que ya tienen una variante favorable dejan más descendencia."},
+  {k:"respiracion respiratorio", idea:"«Respirar es solo meter y sacar aire de los pulmones.»", ret:"Diferenciá la ventilación de la respiración celular: el oxígeno llega a cada célula para obtener energía."},
+  {k:"fracciones fraccion", idea:"«1/8 es más grande que 1/4 porque 8 es más grande que 4.»", ret:"Repartí una pizza en 4 y otra igual en 8: cuantas más partes, más chica cada una."},
+  {k:"multiplicacion division decimales", idea:"«Multiplicar siempre agranda y dividir siempre achica.»", ret:"Probá con 8 × 0,5 y 8 ÷ 0,5 y pedí que expliquen qué pasó."},
+  {k:"ecuacion ecuaciones igualdad algebra", idea:"«El signo igual quiere decir ‘da como resultado’.»", ret:"Usá la balanza: el igual indica que los dos lados valen lo mismo, por eso lo que se hace de un lado se hace del otro."},
+  {k:"probabilidad azar", idea:"«Si salió cara tres veces, ahora tiene que salir ceca.»", ret:"Tirá una moneda muchas veces y registren: cada tiro es independiente del anterior."},
+  {k:"revolucion mayo 1810 independencia", idea:"«En 1810 se declaró la independencia.»", ret:"Ubicá en una línea de tiempo 1810 y 1816: en Mayo se formó un gobierno propio; la independencia se declaró en Tucumán seis años después."},
+  {k:"clima tiempo atmosferico", idea:"«El clima y el tiempo son lo mismo.»", ret:"Compará «hoy llueve en Alberdi» con «en el sur de Tucumán llueve sobre todo en verano»: uno es un día, el otro es un promedio de muchos años."}
+];
+function ideasPreviasDe(terms, max){
+  return IDEAS_PREVIAS.map(x => ({x, s:puntajePalabras(terms, x.k)})).filter(x => x.s > 0).sort((a, b) => b.s - a.s).slice(0, max || 2).map(x => x.x);
+}
+/* Busca en un banco (ANTICIPA, ANALOGIAS) por palabras únicas del título; las palabras genéricas no cuentan */
+const LBQ_GEN = new Set(["energia", "materia", "sistema", "sistemas", "cambio", "cambios", "propiedades", "tipos", "estudio", "relacion", "relaciones", "concepto", "nocion"]);
+function lbBuscar(banco, textos){
+  for (const t of textos){
+    const W = [...new Set(palabrasDe(String(t || "")))].filter(w => !LBQ_GEN.has(w)); if (!W.length) continue;
+    const r = banco.map(x => ({x, s:W.filter(a => palabrasDe(x.k).some(b => mismaPalabra(a, b))).length})).filter(x => x.s > 0).sort((a, b) => b.s - a.s)[0];
+    if (r) return r.x;
+  }
+  return null;
+}
+const lbSinVineta = l => String(l || "").replace(/^\s*(?:[-•*·]|\d+[.)])\s+/, "").trim();
+const lbPreguntas = t => (String(t || "").match(/¿[^?¿]+\?/g) || []).map(q => q.trim());
+/* Recorta en una palabra entera */
+const lbCorto = (t, n) => { t = sinPunto(String(t || "")).replace(/\s+/g, " "); if (t.length <= n) return t; const c = t.slice(0, n); if (t[n] === " ") return c.replace(/[,;:]$/, "") + "…"; return c.slice(0, c.lastIndexOf(" ") > 20 ? c.lastIndexOf(" ") : n).replace(/[,;:]$/, "") + "…"; };
+const lbEsGuiaPreg = x => /^preguntas para (orientar|el docente)/i.test(x);
+const lbHM = m => `${pad2(Math.floor(m / 60) % 24)}:${pad2(m % 60)}`;
+const lbMin = s => { const m = /^(\d{1,2}):(\d{2})/.exec(s || ""); return m ? +m[1] * 60 + +m[2] : null; };
+/* Hora de inicio: el horario del curso con ese nombre, el día de la fecha planificada */
+function lbHoraInicio(fecha){
+  try {
+    const d = fechaDe(fecha || ""); if (!d) return null;
+    const c = cdatos().cursos.find(x => norm(x.curso || "") === norm(val("curso") || "")); if (!c) return null;
+    const h = (c.horario || []).find(x => +x.dia === d.getDay()); return h ? {ini:lbMin(h.ini), fin:lbMin(h.fin), alumnos:(c.alumnos || []).length} : null;
+  } catch (e) { logSilencioso(e); return null; }
+}
+function lbCantidadAlumnos(){ try { const c = cdatos().cursos.find(x => norm(x.curso || "") === norm(val("curso") || "")); return c ? (c.alumnos || []).length : 0; } catch (e) { logSilencioso(e); return 0; } }
+/* Una clase de secuencia guardada como texto: intención, momentos con minutos, preguntas y recursos */
+function lbParseSecuencia(txt){
+  const out = {intencion:"", momentos:[], preguntas:[], recursos:"", casa:[]};
+  let cur = null, modo = "";
+  String(txt || "").split("\n").map(l => l.trim()).filter(Boolean).forEach(l => {
+    let m;
+    if ((m = /^intenci[oó]n docente\s*:\s*(.*)$/i.exec(l))){ out.intencion = m[1]; modo = ""; return; }
+    if ((m = /^(inicio|desarrollo|cierre)\s*(?:\((\d+)\s*min\))?\s*:?\s*$/i.exec(l))){ cur = {k:norm(m[1]), min:m[2] ? +m[2] : null, items:[]}; out.momentos.push(cur); modo = "mom"; return; }
+    if (/^preguntas para el docente\s*:?\s*$/i.test(l)){ modo = "preg"; return; }
+    if ((m = /^recursos\s*:\s*(.*)$/i.exec(l))){ out.recursos = m[1]; modo = ""; return; }
+    if (/^para la casa\s*:?\s*$/i.test(l)){ modo = "casa"; return; }
+    const x = lbSinVineta(l).replace(/^«|»$/g, "");
+    if (modo === "preg") out.preguntas.push(...(lbPreguntas(x).length ? lbPreguntas(x) : [x]));
+    else if (modo === "casa") out.casa.push(x);
+    else if (modo === "mom" && cur) cur.items.push(x);
+  });
+  return out;
+}
+const LB_DECIR = {
+  inicio:(t, q) => q ? `«${q}» Escuchá varias respuestas antes de explicar y anotalas en el pizarrón, sin corregirlas todavía.` : `«Hoy vamos a trabajar ${t}. Antes de explicar nada, quiero saber qué piensan ustedes.»`,
+  desarrollo:(t, exp) => exp ? "«Ahora vamos a poner a prueba lo que dijeron. Antes de hacerlo, cada uno anote qué cree que va a pasar.»" : `«Ahora vamos a trabajar con ${t}. Vayan anotando las dudas: las retomamos al final.»`,
+  cierre:() => "«Antes de irnos, armemos entre todos lo que aprendimos hoy. ¿Qué cambió de lo que pensaban al principio?»"
+};
+const LB_TIT = {inicio:"Inicio", desarrollo:"Desarrollo", cierre:"Cierre"};
+/* Arma las secciones del libreto de una clase */
+function libretoSecs(o){
+  const C = ctxClase({materia:o.materia, tema:o.temaClase || o.tema}, o.terms) || {}, ideas = ideasPreviasDe([o.tema, o.temaClase || "", ...(o.terms || [])], 2);
+  const fuentes = [o.temaClase || "", o.tema || "", (o.terms || []).join(" ")];
+  const exp = C.area === "cn" ? ((lbBuscar(ANTICIPA, fuentes) || {}).exp || "") : "", an = (lbBuscar(ANALOGIAS, fuentes) || {}).t || "", T = (() => { try { return temaArt(o.tema); } catch (e) { return o.tema; } })() || "el tema";
+  const todosItems = o.momentos.flatMap(m => m.items).join(" ");
+  const usaTec = /simulaci|phet|video|proyector|enlace|internet|celular|computadora|geogebra|https?:/i.test(todosItems + " " + o.recursos);
+  const usaExp = exp && /experien|experiment|medir|midan|soltar|observ/i.test(todosItems);
+  const secs = [];
+  const frase = [o.intencion ? o.intencion : "", o.pregunta ? `Pregunta que guía la clase: ${o.pregunta}` : ""].filter(Boolean).join("\n");
+  secs.push({h:"La clase en una frase", body:frase, falta:"Completá los objetivos o la intención docente"});
+  const antes = [];
+  String(o.recursos || "").split(/[;\n]+/).map(s => lbSinVineta(s).replace(/:?\s*https?:\/\/\S+/g, "").trim()).filter(s => s.length > 2).slice(0, 6)
+    .forEach(r => antes.push(/simulaci|phet|educ\.ar|video|https?|software|aplicaci/i.test(r) ? `Abrir y dejar cargado: ${lcFirst(sinPunto(r))}.` : `Tener a mano: ${lcFirst(sinPunto(r))}.`));
+  if (o.ficha) antes.push(`Imprimir la ficha${o.alumnos ? ` (${o.alumnos + 2} copias: ${o.alumnos} estudiantes y 2 de reserva)` : ""}.`);
+  if (usaExp) antes.push(`Probar la experiencia antes de la clase: ${exp}.`);
+  if (usaTec) antes.push("Probar el proyector, los enlaces o la simulación antes de entrar, y tener el plan B a mano (ver «Si algo falla»).");
+  antes.push("Escribir en el pizarrón la fecha, el tema y la pregunta de la clase.");
+  secs.push({h:"Antes de entrar al aula", body:toList(antes)});
+  /* Momentos */
+  let t0 = 0;
+  const sub = o.momentos.map(m => {
+    const desde = t0, hasta = m.min ? t0 + m.min : null; if (m.min) t0 += m.min;
+    const reloj = m.min ? ` · minutos ${desde} a ${hasta}${o.hora != null ? ` (${lbHM(o.hora + desde)} a ${lbHM(o.hora + hasta)})` : ""}` : "";
+    const preg = [...new Set([...lbPreguntas(m.items.join(" ")), ...(m.k === "inicio" ? o.preguntas.slice(0, 1) : m.k === "desarrollo" ? o.preguntas.slice(1, 2) : o.preguntas.slice(2, 3))])];
+    const hace = m.items.filter(x => x.length > 3 && !lbEsGuiaPreg(x));
+    const L = [];
+    if (hace.length) L.push("Qué hacés:", toList(hace));
+    L.push("Qué podés decir:", "- " + (m.k === "inicio" ? LB_DECIR.inicio(T, preg[0] || "") : m.k === "desarrollo" ? LB_DECIR.desarrollo(T, usaExp) : LB_DECIR.cierre()));
+    const pregRest = m.k === "inicio" ? preg.slice(1) : preg;
+    if (pregRest.length) L.push("Preguntas para hacer:", toList(pregRest));
+    if (m.k === "inicio" && ideas.length) L.push("Ideas que suelen aparecer:", toList(ideas.map(i => `${i.idea} ${i.ret}`)));
+    if (m.k === "desarrollo" && an) L.push("Si cuesta entenderlo, una analogía:", `- ${cap(an)}.`);
+    if (m.k === "desarrollo" && usaExp) L.push("La experiencia:", `- ${cap(exp)}. Pedí que anticipen el resultado por escrito antes de hacerla.`);
+    if (m.k === "cierre" && o.ticket.length) L.push("Ticket de salida:", toList(o.ticket));
+    if (hasta && m.k !== "cierre") L.push(`Mirá el reloj: a los ${hasta} minutos${o.hora != null ? ` (${lbHM(o.hora + hasta)})` : ""} tendrías que estar empezando ${m.k === "inicio" ? "el desarrollo" : "el cierre"}.`);
+    return {h:(LB_TIT[m.k] || cap(m.k)) + reloj, body:L.join("\n")};
+  });
+  secs.push({h:"Paso a paso", sub});
+  /* Pizarrón */
+  const piz = [`Fecha y tema: ${o.temaClase || o.tema || "____"}`];
+  if (o.pregunta) piz.push(`Pregunta de la clase: ${o.pregunta}`);
+  const conc = (o.terms || []).filter(x => norm(x) !== norm(o.tema || "")).slice(0, 5);
+  if (conc.length) piz.push(`Palabras clave: ${conc.join(", ")}`);
+  piz.push("Un espacio para anotar las ideas del inicio y otro para la síntesis del cierre");
+  secs.push({h:"El pizarrón", body:toList(piz)});
+  if (o.mirar.length) secs.push({h:"Qué mirar mientras trabajan", body:toList(o.mirar)});
+  /* Imprevistos */
+  const desa = (o.momentos.find(m => m.k === "desarrollo") || {items:[]}).items.filter(x => !/^¿/.test(x) && !lbEsGuiaPreg(x));
+  const plan = [];
+  plan.push(`Si sobra tiempo: ${o.casa.length ? `adelantá «${sinPunto(o.casa[0])}».` : "pedí que cada uno escriba un ejemplo de la vida cotidiana relacionado con lo que vieron y compártanlo."}`);
+  plan.push(`Si falta tiempo: ${desa.length > 1 ? `priorizá lo central (${lbCorto(lcFirst(desa[0]), 90)}) y dejá para la próxima clase lo último del desarrollo (${lbCorto(lcFirst(desa[desa.length - 1]), 90)}). ` : ""}No saltees el cierre: aunque sean cinco minutos, volvé a la pregunta del inicio.`);
+  if (usaTec) plan.push(`Si no anda la tecnología: ${usaExp ? "hacé la experiencia en el escritorio o describila" : "dibujá en el pizarrón la situación o el gráfico"} y seguí con las mismas preguntas.`);
+  plan.push("Si el grupo está disperso: proponé trabajo en parejas con una consigna corta y un tiempo visible en el pizarrón.");
+  secs.push({h:"Si algo falla", body:toList(plan)});
+  if (o.apoyo) secs.push({h:"Apoyos previstos", body:o.apoyo});
+  return secs;
+}
+function lbTicket(){ return consignasDe(val("ticket")).slice(0, 3); }
+function lbMirar(evid){
+  const c = consignasDe(val("criterios")).slice(0, 4);
+  if (c.length) return c;
+  const f = consignasDe(val("formativa")).slice(0, 3);
+  if (f.length) return f;
+  return evid ? [evid] : [];
+}
+function lbApoyo(){ return [val("adecuaciones"), val("dua_rep"), val("dua_acc"), val("dua_imp")].map(x => String(x || "").trim()).filter(Boolean).slice(0, 2).join("\n"); }
+function modeloLibreto(){
+  const v = val, secu = state.modo === "secuencia", tema = temaVisible(), mat = v("materia");
+  const terms = consignasDe(v("contenidos")).map(x => lcFirst(sinPunto(x))).filter(x => !esProced(x)).slice(0, 8);
+  const datos = [["Espacio curricular", labelOf("materia")], ["Curso", v("curso") || anioSec(v("anio"))]];
+  let secs = [];
+  if (secu){
+    const N = +v("nclases") || 5, base = lbHoraInicio(v("fecha"));
+    datos.push(["Duración de cada clase", v("tiempo")]);
+    for (let n = 1; n <= N; n++){
+      const P = lbParseSecuencia(v(`sc${n}_a`));
+      if (!P.momentos.length && v(`sc${n}_a`)) P.momentos = [{k:"desarrollo", min:minutos(v("tiempo")), items:consignasDe(v(`sc${n}_a`))}];
+      const s = libretoSecs({materia:mat, tema, temaClase:v(`sc${n}_t`), terms, momentos:P.momentos, preguntas:P.preguntas, recursos:P.recursos, intencion:P.intencion || (n === 1 ? v("objgen") : ""), pregunta:"", ficha:false, alumnos:0, hora:base ? base.ini : null, ticket:n === N ? lbTicket() : [], mirar:lbMirar(v(`sc${n}_e`)), casa:P.casa, apoyo:n === 1 ? lbApoyo() : ""});
+      s[0] = {h:`Clase ${n}${v(`sc${n}_t`) ? `: ${v(`sc${n}_t`)}` : ""}`, pageBreak:n > 1, body:s[0].body, falta:v(`sc${n}_a`) ? "Completar la intención docente de la clase" : `Completar las actividades de la clase ${n}`};
+      secs.push(...s);
+    }
+  } else {
+    const rep = reparto(minutos(v("tiempo"))), hi = lbHoraInicio(v("fecha"));
+    datos.push(["Fecha", fmtFecha(v("fecha"))]);
+    if (hi && hi.ini != null) datos.push(["Horario", `${lbHM(hi.ini)}${hi.fin != null ? ` a ${lbHM(hi.fin)}` : ""}`]);
+    datos.push(["Duración", v("tiempo")]);
+    const mk = k => ({k, min:rep ? {inicio:rep.ini, desarrollo:rep.des, cierre:rep.cie}[k] : null, items:consignasDe(v(k))});
+    const objs = consignasDe(v("objetivos")), preg = lbPreguntas(v("pregunta"))[0] || "";
+    const o1 = objs.length ? sinPunto(objs[0]) : "";
+    const intencion = !o1 ? (consignasDe(v("propositos"))[0] || "") : /^que\s/i.test(o1) ? `${cap(o1)}.` : `Que al terminar la clase puedan ${lcFirst(o1)}.`;
+    secs = libretoSecs({materia:mat, tema, terms, momentos:["inicio", "desarrollo", "cierre"].map(mk).filter(m => m.items.length), preguntas:[], recursos:v("recursos"), intencion, pregunta:preg, ficha:consignasDe(v("ficha")).length > 0, alumnos:lbCantidadAlumnos(), hora:hi ? hi.ini : null, ticket:lbTicket(), mirar:lbMirar(""), casa:[], apoyo:lbApoyo()});
+    if (!secs.find(s => s.h === "Paso a paso").sub.length) secs.find(s => s.h === "Paso a paso").falta = "Completá el inicio, el desarrollo y el cierre de la clase";
+  }
+  return {inst:v("docente") || "Documento personal", datos, secs, firmas:null, titulo:"Libreto de la clase", subtitulo:tema, faltaSub:"Tema"};
+}
+function irALibreto(){
+  if (state.modo === "anual" || state.modo === "proyecto"){ toast("El libreto se arma para una clase o una secuencia didáctica."); return; }
+  $("vista").value = "libreto"; $("vista").dispatchEvent(new Event("change"));
+  try { if ($("app").dataset.view === "form" && getComputedStyle(document.querySelector(".viewswitch")).display !== "none") setView("doc"); } catch (e) { logSilencioso(e); }
+}
+function init46(){ try { const b = $("btn-repaso"); if (b) b.addEventListener("click", irALibreto); } catch (e) { registrarError("init46", e, "aviso"); } }
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -18577,7 +18777,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
