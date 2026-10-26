@@ -1531,6 +1531,22 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .pl-ok{font-size:12.5px;color:var(--accent);font-weight:600}
 .pl-sum{margin:4px 0}
 
+/* Versión 41.2: días de clase que quedan */
+.td-head{flex-wrap:wrap}
+.td-head .td-cuenta{margin-left:auto;display:flex;align-items:center;gap:10px;padding:7px 12px 7px 9px;border-radius:12px;background:var(--accent-soft);color:var(--ink);font-size:inherit;max-width:100%}
+.td-cuenta .cara{width:36px;height:36px;color:var(--accent);stroke-width:1.6}
+.td-head .td-cuenta>span{display:flex;flex-direction:column;line-height:1.25;color:var(--ink);font-size:inherit}
+.td-head .td-cuenta b{font-size:14px;color:var(--ink);font-weight:600}
+.td-head .td-cuenta .td-cn{font-size:19px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.td-head .td-cuenta small{font-size:12px;color:var(--muted)}
+.td-head .td-cbar{display:block;width:132px;max-width:100%;height:4px;border-radius:2px;background:var(--surface);margin-top:5px;overflow:hidden}
+.td-cbar i{display:block;height:100%;border-radius:2px;background:var(--accent)}
+.td-head .td-c4,.td-head .td-c5{background:var(--flag)}
+.td-c4 .cara,.td-c5 .cara{color:var(--flag-ink)}
+.td-head .td-c4 .td-cn{color:var(--flag-ink)}
+.td-c4 .td-cbar i{background:var(--flag-ink)}
+@media (max-width:480px){.td-head .td-cuenta{margin-left:0;width:100%}}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -4435,6 +4451,9 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-26-d", fecha:"2026-10-26", items:[
+    "«Tu día» muestra cuántos días de clase quedan hasta el cierre del ciclo lectivo (sin fines de semana, feriados ni receso) y, si cargaste tu horario, cuántos son con tus cursos. Una carita se pone más contenta a medida que se acerca el final: seis caritas distintas, hasta el festejo del último día."
+  ]},
   {id:"2026-10-26-c", fecha:"2026-10-26", items:[
     "Nuevo: «Plan de descanso», en Tu carrera › Licencias y feriados. Elegís el período y las licencias que querés usar, y Lapacho arma el plan que te da más días de descanso: combina asuntos particulares (y, si vas a donar, la donación de sangre) con feriados, fines de semana largos y el receso, respetando una por mes, cinco por año y los 90 días entre donaciones.",
     "Podés guardar el plan, pasarlo al calendario del celular con un aviso antes de cada plazo y registrar cada licencia como pedida. «Tu día» te recuerda una semana antes cuándo pedir cada una.",
@@ -12777,7 +12796,7 @@ function irSeccion(s, quieto){
   if (s === "hoy") renderTuDia();
   if (!quieto) window.scrollTo({top:0});
 }
-function cabTuDia(){
+function cabTuDiaBase(){
   const d = new Date();
   return `<div class="td-head" role="group" aria-label="Tu día, ${esc(fechaLarga(hoyIso()))}"><span class="td-num" aria-hidden="true">${d.getDate()}</span><span class="td-fecha" aria-hidden="true"><b>${esc(cap(d.toLocaleDateString("es-AR", {weekday:"long"})))}</b><small>de ${esc(d.toLocaleDateString("es-AR", {month:"long"}))}, tu día</small></span></div>`;
 }
@@ -16031,7 +16050,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "41.1 (26/10/2026)";
+const LAPACHO_VERSION = "41.2 (26/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18441,6 +18460,64 @@ function bindPlan(){
   document.addEventListener("click", e => { const b = e.target.closest('[data-tdact="licalc"]'); if (!b) return; e.stopImmediatePropagation(); abrirLicCalc(); lcTab("plan"); }, true);
 }
 function init44(){ try { bindPlan(); } catch (e) { registrarError("init44", e, "aviso"); } }
+
+/* ============================================================
+   Versión 41.2: cuántos días de clase quedan, en «Tu día».
+   Cuenta los días hábiles del ciclo lectivo (sin fines de semana,
+   feriados ni receso) desde hoy hasta el cierre; con horario cargado,
+   también los días con clases propias. Seis caritas, del mismo trazo
+   que los íconos de la app, que se ponen más contentas al acercarse
+   el final.
+   ============================================================ */
+const CARA_OJOS = '<circle cx="9" cy="10" r="1.1" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1.1" fill="currentColor" stroke="none"/>';
+const CARAS = [
+  /* 1. tranquila: queda mucho año */
+  {k:"tranquila", svg:`<circle cx="12" cy="12" r="9"/>${CARA_OJOS}<path d="M9 15.5h6"/>`},
+  /* 2. sonrisa leve */
+  {k:"leve", svg:`<circle cx="12" cy="12" r="9"/>${CARA_OJOS}<path d="M9.4 15.2q2.6 1.2 5.2 0"/>`},
+  /* 3. sonrisa */
+  {k:"sonrisa", svg:`<circle cx="12" cy="12" r="9"/>${CARA_OJOS}<path d="M8 14q4 3.6 8 0"/><path d="M5.9 12.6h1.6M16.5 12.6h1.6" stroke-width="1.4" opacity=".7"/>`},
+  /* 4. sonrisa abierta */
+  {k:"abierta", svg:`<circle cx="12" cy="12" r="9"/>${CARA_OJOS}<path d="M7.8 13.4h8.4a4.2 4.2 0 0 1-8.4 0z"/>`},
+  /* 5. riendo, con los ojos cerrados */
+  {k:"riendo", svg:'<circle cx="12" cy="12" r="9"/><path d="M7.4 10.4l1.6-1.6 1.6 1.6M13.4 10.4l1.6-1.6 1.6 1.6"/><path d="M7.6 13.2h8.8a4.4 4.4 0 0 1-8.8 0z"/><path d="M10 16.2q2 1 4 0"/>'},
+  /* 6. festejo: anteojos de sol y destellos */
+  {k:"festejo", svg:'<circle cx="12" cy="12.5" r="8.5"/><path d="M5.6 10.2h12.8"/><rect x="6.6" y="10.2" width="4.4" height="2.8" rx="1.2" fill="currentColor"/><rect x="13" y="10.2" width="4.4" height="2.8" rx="1.2" fill="currentColor"/><path d="M8.6 15.4q3.4 2.8 6.8 0"/><path d="M20.5 2.5v2.6M19.2 3.8h2.6M3.5 2.8v1.8M2.6 3.7h1.8"/>'}
+];
+const caraSvg = (i, cls) => `<svg class="ico cara${cls ? " " + cls : ""}" viewBox="0 0 24 24" aria-hidden="true">${CARAS[i].svg}</svg>`;
+/* Días de clase del ciclo: hábiles, sin feriados ni receso */
+function diasDeClaseRestantes(hoyI){
+  const hoy = hoyI || hoyIso(), y = +hoy.slice(0, 4), c = CAL[y];
+  if (!c || !c.inicio || !c.fin) return null;
+  let hor = null; try { hor = lcDiasConClase(); } catch (e) { logSilencioso(e); }
+  let total = 0, n = 0, mios = 0, prox = "";
+  for (let iso = c.inicio; iso <= c.fin; iso = lcMas(iso, 1)){
+    const d = fechaDe(iso);
+    if (lcFinde(d) || lcFeriado(iso) || lcReceso(iso)) continue;
+    total++;
+    if (iso >= hoy){ n++; if (!prox) prox = iso; if (hor && hor.has(d.getDay())) mios++; }
+  }
+  return {n, total, hechos:total - n, mios:hor ? mios : null, inicio:c.inicio, fin:c.fin, antes:hoy < c.inicio, despues:hoy > c.fin, receso:lcReceso(hoy)};
+}
+function nivelCuenta(n){ return n <= 0 ? 5 : n <= 5 ? 4 : n <= 20 ? 3 : n <= 50 ? 2 : n <= 100 ? 1 : 0; }
+const CUENTA_TXT = ["Todavía queda mucho año", "Vamos por buen camino", "Ya se siente el final", "Último tramo", "¡Ya casi!", "¡Terminaron las clases!"];
+function htmlCuentaClases(){
+  const R = diasDeClaseRestantes(); if (!R) return "";
+  if (R.antes){
+    const f = Math.round((fechaDe(R.inicio) - fechaDe(hoyIso())) / 864e5);
+    return `<div class="td-cuenta td-c5" role="group" aria-label="Faltan ${f} días para el inicio de clases">${caraSvg(5)}<span><b>Vacaciones</b><small>Las clases empiezan el ${esc(lcDia(R.inicio))}</small></span></div>`;
+  }
+  const i = R.despues ? 5 : nivelCuenta(R.n), pct = Math.round(R.hechos / R.total * 100);
+  if (i === 5) return `<div class="td-cuenta td-c5" role="group" aria-label="${esc(CUENTA_TXT[5])}">${caraSvg(5)}<span><b>${esc(CUENTA_TXT[5])}</b><small>Buen descanso</small></span></div>`;
+  const tit = `Quedan ${R.n} días de clase hasta el ${lcDia(R.fin)}${R.mios != null ? `, ${R.mios} con tus cursos` : ""}. Se cuentan los días hábiles del ciclo lectivo, sin fines de semana, feriados ni receso.`;
+  return `<div class="td-cuenta td-c${i}" role="group" aria-label="${esc(tit)}" title="${esc(tit)}">${caraSvg(i)}<span><b><span class="td-cn">${R.n}</span> ${R.n === 1 ? "día de clase" : "días de clase"}</b><small>${esc(CUENTA_TXT[i])}${R.mios != null ? ` · ${R.mios} con tus cursos` : ""}</small><span class="td-cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></span></div>`;
+}
+function cabTuDia(){
+  let c = "";
+  try { c = htmlCuentaClases(); } catch (e) { logSilencioso(e); }
+  const h = cabTuDiaBase();
+  return c ? h.replace(/<\/div>$/, c + "</div>") : h;
+}
 
 /* ============================================================
    Inicio
