@@ -1630,6 +1630,19 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .aus-l li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 10px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13.5px;background:var(--surface)}
 .aus-lb{display:flex;gap:8px;align-items:center}
 
+/* Versión 42.1: saludo, muestra de la escuela */
+.td-hola{margin:0 0 8px;font-size:clamp(18px,2.4vw,22px);font-weight:600;color:var(--ink)}
+.td-hola .linkbtn{font-size:14px;font-weight:500}
+.td-nom{display:flex;flex-direction:column;gap:6px;margin:0 0 10px;font-size:14px}
+.td-nom-f{display:flex;flex-wrap:wrap;gap:8px}
+.td-nom-f input{flex:1 1 160px;width:auto}
+.aj-row input#aj-nombre{width:150px;font-size:14px;padding:6px 8px}
+.mu-horas>div{display:flex;align-items:center;gap:8px}
+.mu-horas input{flex:1 1 0;min-width:0}
+.mu-dest{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px 16px}
+.mu-dest legend{font-size:13.5px;font-weight:600;margin-bottom:4px;padding:0}
+.mu-docs{flex-wrap:wrap}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -1691,6 +1704,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <button type="button" role="menuitem" id="btn-coher"><b>Revisar la coherencia</b><small>Objetivos, actividades y evaluación: avisa vacíos y contradicciones</small></button>
           <span class="menu-g">Para la escuela</span>
           <button type="button" role="menuitem" id="btn-feria"><b>Feria de ciencias</b><small>Proyecto, informe, carpeta de campo, registro pedagógico y stand</small></button>
+          <button type="button" role="menuitem" id="btn-muestra"><b>Muestra de la escuela</b><small>Proyecto, fichas de stand, invitación, valoración y lista del día</small></button>
           <button type="button" role="menuitem" id="btn-salidas"><b>Salidas educativas</b><small>Autorizaciones y planilla del día</small></button>
           <button type="button" role="menuitem" id="btn-actos"><b>Actos y efemérides</b><small>Calendario y guion del acto</small></button>
           <button type="button" role="menuitem" id="btn-actas"><b>Actas de reunión</b><small>Con familias, de área o institucionales</small></button>
@@ -1740,6 +1754,13 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           </div>
           <div class="aj-row" id="aj-bloqueo" hidden=""><label for="aj-pinmin">Bloqueo automático</label><select id="aj-pinmin"><option value="5">A los 5 minutos</option><option value="10">A los 10 minutos</option><option value="15">A los 15 minutos</option><option value="30">A los 30 minutos</option><option value="0">Nunca</option></select></div>
           <label class="aj-row aj-check"><span>Imprimir en escala de grises</span><input type="checkbox" id="aj-gris"></label>
+          <div class="aj-row"><label for="aj-nombre">Tu nombre</label><input id="aj-nombre" autocomplete="given-name" maxlength="40" placeholder="Para saludarte"></div>
+          <div class="aj-row"><span>Al abrir</span>
+            <div class="seg" role="group" aria-label="Qué mostrar al abrir Lapacho">
+              <button type="button" data-abrir="hoy" aria-pressed="true">Hoy</button>
+              <button type="button" data-abrir="plan" aria-pressed="false">Planificar</button>
+            </div>
+          </div>
           <div class="aj-sep"></div>
           <button type="button" class="aj-item" id="btn-respaldo"><b>Copia de seguridad</b><small>Guardá todo en un archivo o pasalo a otro dispositivo</small></button>
           <button type="button" class="aj-item" id="btn-offline"><b>Usar sin internet</b><small>Descargá el planificador para abrirlo sin conexión</small></button>
@@ -1949,7 +1970,10 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
-      <details class="faq"><summary>¿Qué le dejo al curso si adelanto una hora o falto?</summary><p>En «Herramientas › Para la clase», tocá «Actividades para cuando no estés». Elegís el curso, cuándo y desde qué tema. Lapacho toma los temas que siguen de tu planificación y arma una hoja para que trabajen en parejas sin explicación: recordar sin mirar la carpeta, un texto para leer (de Física, Química y Biología lo trae Lapacho; para otros temas indicá libro y páginas), actividades y preguntas para resolver y un cierre con su duda y un semáforo. Aparte descargás las indicaciones para quien queda a cargo y las respuestas para vos. Si vas a faltar varios días, desde «Licencias y feriados» tocá «Dejar actividades para esos días». Lapacho no envía nada: el mensaje para preceptoría lo copiás y lo mandás vos.</p></details>
+      <details class="faq"><summary>¿Qué piden para el stand de la feria de ciencias?</summary><p>En «Feria de ciencias», la sección «Stand y cartel» del proyecto y el botón «Lista para armar el stand» resumen las reglas de la Feria Nacional 2026: tríptico con todo del lado de adentro, cartel de 60 × 22 cm, carpeta de campo a la vista, informe impreso para los visitantes, electricidad y lo que no se puede llevar (seres vivos, fuego, vidrio, químicos, líquidos, alimentos, cinta bifaz). Para la feria de Tucumán, confirmá las reglas con la organización.</p></details>
+        <details class="faq"><summary>¿Cómo organizo la muestra de la escuela?</summary><p>En «Herramientas › Para la escuela › Muestra de la escuela» cargás el tipo de muestra, la fecha, el lugar y un stand por línea (o traés tus cursos). Lapacho arma el proyecto para la dirección con el cronograma de preparación, una ficha por stand con los turnos y el guion, la invitación a las familias con talón, la planilla para valorar la exposición y la lista para el día.</p></details>
+        <details class="faq"><summary>¿Puedo cambiar con qué pantalla abre Lapacho y cómo me saluda?</summary><p>Lapacho abre en «Hoy». En Ajustes podés poner tu nombre para que te salude y elegir si preferís que abra en «Planificar».</p></details>
+        <details class="faq"><summary>¿Qué le dejo al curso si adelanto una hora o falto?</summary><p>En «Herramientas › Para la clase», tocá «Actividades para cuando no estés». Elegís el curso, cuándo y desde qué tema. Lapacho toma los temas que siguen de tu planificación y arma una hoja para que trabajen en parejas sin explicación: recordar sin mirar la carpeta, un texto para leer (de Física, Química y Biología lo trae Lapacho; para otros temas indicá libro y páginas), actividades y preguntas para resolver y un cierre con su duda y un semáforo. Aparte descargás las indicaciones para quien queda a cargo y las respuestas para vos. Si vas a faltar varios días, desde «Licencias y feriados» tocá «Dejar actividades para esos días». Lapacho no envía nada: el mensaje para preceptoría lo copiás y lo mandás vos.</p></details>
         <details class="faq"><summary>¿Qué dinámicas tienen evidencia de que funcionan?</summary><p>En «Herramientas › Para la clase › Dinámicas que funcionan» están la instrucción entre pares, la práctica de recuperación, el vaciado de memoria, las minipizarras, las preguntas para antes, durante y después de resolver, predecir-observar-explicar y el juego por equipos, cada una con por qué funciona y su fuente. Las preguntas conceptuales se proyectan: el curso vota y Lapacho te dice qué hacer según cuántos acertaron.</p></details>
         <details class="faq"><summary>¿Cómo armo grupos para que se ayuden entre ellos?</summary><p>En «Mi curso › Notas», tocá «Armar grupos con estas notas». Elegís con qué nota ordenar (la del período, el promedio o una evaluación) y de cuántos integrantes. Lapacho dobla la lista al medio: cada grupo tiene quien acompaña (de la mitad de arriba) y quien es acompañado (de la mitad de abajo), cerca en el orden, para que nadie quede muy lejos. Podés pedir otra combinación, intercambiar a dos estudiantes y mostrarlo al curso sin notas. También arma rompecabezas, piensa-discute-comparte, cabezas numeradas, lápices al centro y tutoría recíproca, evita repetir parejas, separa a quienes marcaste para no juntar y muestra si los acompañados mejoraron en la evaluación siguiente. En el modo aula, elegí «Para acompañarse».</p></details>
       <details class="faq"><summary>¿Puedo cargar la lista del curso con una foto?</summary><p>Sí. En «Mi curso › Datos del curso», tocá «Cargar desde una foto» al lado de la lista (o elegí «Lista de alumnos» en «Subir una foto»). La foto se lee en tu celular, sin mandarla a ningún lado; después revisás los nombres, los corregís si hace falta y, al crear el curso, queda lista la planilla de asistencia. Las listas impresas se leen mucho mejor que las escritas a mano.</p></details>
@@ -2152,6 +2176,14 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
     </div>
   </dialog>
 
+  <dialog class="lib bancodlg" id="muestra" aria-labelledby="muestra-t">
+    <div class="lib-in">
+      <div class="lib-head"><h2 id="muestra-t">Muestra de la escuela</h2><button type="button" class="linkbtn" data-cerrar="muestra">Cerrar</button></div>
+      <p class="hint">Para la muestra anual, una muestra de ciencias, una jornada de puertas abiertas o la muestra de un área: el proyecto para presentar a la dirección, una ficha por stand, la invitación a las familias, la planilla para valorar la exposición y la lista para el día.</p>
+      <div id="mu-panel"></div>
+    </div>
+  </dialog>
+
   <dialog class="lib bancodlg" id="feria" aria-labelledby="feria-t">
     <div class="lib-in">
       <div class="lib-head"><h2 id="feria-t">Feria de ciencias</h2><button type="button" class="linkbtn" data-cerrar="feria">Cerrar</button></div>
@@ -2165,7 +2197,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
         <div class="f"><label for="fe-fecha">Fecha de la feria</label><input id="fe-fecha" type="date"></div>
       </div>
       <div id="fe-res" aria-live="polite"></div>
-      <div class="fe-acc"><button type="button" class="btn btn-sm btn-primary" data-fe="docx">Descargar en Word</button><button type="button" class="btn btn-sm" data-fe="pdf">Descargar en PDF</button></div>
+      <div class="fe-acc"><button type="button" class="btn btn-sm btn-primary" data-fe="docx">Descargar en Word</button><button type="button" class="btn btn-sm" data-fe="pdf">Descargar en PDF</button><button type="button" class="btn btn-sm" data-festand="">Lista para armar el stand</button></div>
     </div>
   </dialog>
 
@@ -4563,6 +4595,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-27-a", fecha:"2026-10-27", items:[
+    "Lapacho abre en «Hoy» y te saluda por tu nombre. Ponelo en «Hoy» o en Ajustes, donde también podés elegir que abra en «Planificar».",
+    "Feria de ciencias: el stand sigue las reglas de la Feria Nacional 2026 (tríptico, cartel de 60 × 22 cm, electricidad, qué va sobre la mesa y lo que no se puede llevar) y las orientaciones de seguridad y cuidado. Nuevo botón «Lista para armar el stand».",
+    "Nuevo: «Muestra de la escuela» (Herramientas › Para la escuela). Proyecto para la dirección con cronograma de preparación, ficha de cada stand con turnos y guion, invitación a las familias, planilla de valoración y lista para el día."
+  ]},
   {id:"2026-10-26-i", fecha:"2026-10-26", items:[
     "Nuevo: «Actividades para cuando no estés» (Herramientas › Para la clase). Si adelantás una hora, faltás o estás de licencia, Lapacho arma una hoja para que el curso avance solo con los temas que siguen de tu planificación: recordar sin mirar la carpeta, un texto para leer, actividades y preguntas para resolver en parejas y un cierre con su duda y un semáforo. Aparte, las indicaciones para quien queda a cargo, las respuestas para vos y el mensaje para preceptoría.",
     "Desde «Licencias y feriados», «Dejar actividades para esos días» arma una hoja por cada clase que perdés. Al volver, «Tu día» te recuerda retomarlas.",
@@ -12982,7 +13019,7 @@ function bindNav(){
   $("hoja").addEventListener("close", devolverAjustes);
   aplicarNav();
   try { NAV_MQ.addEventListener("change", aplicarNav); } catch (e) { try { NAV_MQ.addListener(aplicarNav); } catch (e2) { logSilencioso(e2); } }
-  irSeccion(cdatos().cursos.length ? "hoy" : "plan", true);
+  irSeccion(seccionInicial(cdatos().cursos.length ? "hoy" : "plan"), true);
 }
 
 /* ============================================================
@@ -16190,7 +16227,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "42 (26/10/2026)";
+const LAPACHO_VERSION = "42.1 (27/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -16739,7 +16776,7 @@ function aplicarDesk(){
   const app = document.querySelector(".app"); if (!app) return;
   const on = DESK_MQ.matches && !app.classList.contains("nav-app");
   app.classList.toggle("nav-desk", on);
-  if (on && !app.dataset.dsec){ const r = resumenDatos(datosLocales()); irDesk(r.cursos || r.planificaciones > 1 ? "inicio" : "plan"); }
+  if (on && !app.dataset.dsec){ const r = resumenDatos(datosLocales()); irDesk(deskInicial(r.cursos || r.planificaciones > 1 ? "inicio" : "plan")); }
 }
 
 /* En escritorio, abrir o empezar una planificación lleva al formulario. */
@@ -17947,11 +17984,7 @@ function modeloFeria(){
         {h:"Devoluciones recibidas en cada instancia", lineas:4},
         {h:"Fotografías del proceso", lineas:2}
       ]},
-      {h:"Stand y cartel", pageBreak:true, sub:[
-        {h:"Tríptico", body:`- Panel izquierdo: la situación de ${R.lugar}, la pregunta y la hipótesis.\n- Panel central: el procedimiento con fotos y el gráfico principal de resultados.\n- Panel derecho: conclusiones, nuevas preguntas y bibliografía.`},
-        {h:"Cartel del título (60 × 22 cm)", body:`${tit}\nLetras grandes, legibles a tres metros; el exterior del tríptico queda libre.`},
-        {h:"Sobre la mesa", body:`- La carpeta de campo, visible y abierta.\n- Una copia impresa del informe.\n${exp ? "- Los materiales de la experiencia, armados para mostrarla.\n" : "- Fotografías, documentos o grabaciones relevadas.\n"}- La tabla de datos y los gráficos en tamaño grande.`}
-      ]},
+      {h:"Stand y cartel", pageBreak:true, sub:standSubs({lugar:R.lugar, tit, exp})},
       {h:"Video de registro (hasta 5 minutos)", table:{head:["Tiempo", "Qué se muestra", "Quién habla"], rows:[
         ["0:00 a 0:30", "Título, escuela y pregunta del proyecto", "Estudiante 1"],
         ["0:30 a 1:15", `La situación de ${R.lugar} que originó el proyecto e ideas previas`, "Estudiante 2"],
@@ -18652,7 +18685,7 @@ function htmlCuentaClases(){
   const tit = `Quedan ${R.n} días de clase hasta el ${lcDia(R.fin)}${R.mios != null ? `, ${R.mios} con tus cursos` : ""}. Se cuentan los días hábiles del ciclo lectivo, sin fines de semana, feriados ni receso.`;
   return `<div class="td-cuenta td-c${i}" role="group" aria-label="${esc(tit)}" title="${esc(tit)}">${caraSvg(i)}<span><b><span class="td-cn">${R.n}</span> ${R.n === 1 ? "día de clase" : "días de clase"}</b><small>${esc(CUENTA_TXT[i])}${R.mios != null ? ` · ${R.mios} con tus cursos` : ""}</small><span class="td-cbar" aria-hidden="true"><i style="width:${pct}%"></i></span></span></div>`;
 }
-function cabTuDia(){
+function cabTuDia45(){
   let c = "";
   try { c = htmlCuentaClases(); } catch (e) { logSilencioso(e); }
   const h = cabTuDiaBase();
@@ -20249,7 +20282,7 @@ function ausPrev(){
   const share = (() => { try { return !!(navigator.canShare && navigator.canShare({files:[new File(["x"], "a.docx", {type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})]})); } catch (e) { return false; } })();
   box.innerHTML = `${R.sinLec.length ? `<p class="aus-av">No hay un texto de Lapacho para ${R.sinLec.map(t => `«${esc(t)}»`).join(", ")}: indicá qué leer en «Material para leer» (libro y páginas) para que tengan de dónde aprender.</p>` : ""}
     <div class="seg" role="group" aria-label="Qué documento ver">${AUS_VISTAS.map(([k, t]) => `<button type="button" data-ausv="${k}" aria-pressed="${AUS.vista === k}">${t}</button>`).join("")}</div>
-    <div class="aus-prev"><article class="paper">${docHTML(false, M).replace(/ data-goto="[^"]*"/g, "").replace(/ class="goto"/g, "")}</article></div>
+    <div class="aus-prev" tabindex="0" role="region" aria-label="Vista previa del documento"><article class="paper">${docHTML(false, M).replace(/ data-goto="[^"]*"/g, "").replace(/ class="goto"/g, "")}</article></div>
     <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-aus="docx">Descargar en Word</button><button type="button" class="btn btn-sm" data-aus="pdf">PDF</button>${share ? `<button type="button" class="btn btn-sm" data-aus="share">Compartir</button>` : ""}</div>
     <details class="aus-msg"><summary>Mensaje para preceptoría</summary><label class="sr-only" for="aus-msgt">Mensaje</label><textarea id="aus-msgt" rows="5">${esc(R.msg)}</textarea><div class="cur-bar"><button type="button" class="btn btn-sm" data-aus="copiar">Copiar el mensaje</button></div><p class="hint">Lapacho no manda nada: copiá el mensaje y envialo vos por donde uses.</p></details>`;
 }
@@ -20333,6 +20366,249 @@ function init50(){
 }
 
 /* ============================================================
+   Versión 42.1: Lapacho abre en «Hoy» y te saluda por tu nombre;
+   el stand de la feria según las reglas de la Feria Nacional 2026 y
+   las orientaciones de seguridad y cuidado; y la muestra de la escuela
+   (proyecto para la dirección, fichas de stand, invitación, valoración
+   y lista del día).
+   ============================================================ */
+/* ---------- Al abrir: «Hoy» y el saludo con tu nombre ---------- */
+/* En los navegadores automatizados se mantiene el arranque anterior (salvo que la prueba lo pida), como con la bienvenida */
+function seccionInicial(antes){
+  const p = leerPref().abrirEn;
+  if (p === "plan") return "plan";
+  if (navigator.webdriver && !window.__LAPACHO_INICIO_REAL) return antes;
+  return "hoy";
+}
+const deskInicial = antes => seccionInicial(antes === "inicio" ? "hoy" : "plan") === "hoy" ? "inicio" : "plan";
+function nombreDocente(){ return String(leerPref().nombre || "").trim().slice(0, 40); }
+function saludoDia(d){ const h = (d || new Date()).getHours(); return h >= 5 && h < 13 ? "Buen día" : h >= 13 && h < 20 ? "Buenas tardes" : "Buenas noches"; }
+const TD_NOM = {abierto:false};
+function htmlSaludo(){
+  const n = nombreDocente(), s = saludoDia();
+  if (n) return `<p class="td-hola">${esc(s)}, ${esc(n)}</p>`;
+  if (TD_NOM.abierto) return `<form class="td-nom" data-tdnomf><label for="td-nom-in">¿Cómo querés que te salude Lapacho?</label><div class="td-nom-f"><input id="td-nom-in" autocomplete="given-name" maxlength="40" placeholder="Tu nombre"><button type="submit" class="btn btn-sm btn-primary">Guardar</button><button type="button" class="btn btn-sm" data-tdnom="no">Ahora no</button></div></form>`;
+  if (leerPref().nombreNo) return `<p class="td-hola">${esc(s)}</p>`;
+  return `<p class="td-hola">${esc(s)}. <button type="button" class="linkbtn" data-tdnom="abrir">Poné tu nombre</button></p>`;
+}
+function cabTuDia(){ let h = ""; try { h = htmlSaludo(); } catch (e) { logSilencioso(e); } return h + cabTuDia45(); }
+function guardarNombre(v){
+  const n = String(v || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 40);
+  prefSet("nombre", n);
+  if (!n) prefSet("nombreNo", false);
+  const a = $("aj-nombre"); if (a && a !== document.activeElement) a.value = n;
+  TD_NOM.abierto = false;
+  try { renderTuDia(); } catch (e) { logSilencioso(e); }
+  return n;
+}
+function bindNombre(){
+  const a = $("aj-nombre");
+  if (a){ a.value = nombreDocente(); a.addEventListener("change", () => { const n = guardarNombre(a.value); toast(n ? `Listo, ${n}.` : "Quitaste tu nombre."); }); a.addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); a.blur(); } e.stopPropagation(); }); }
+  const pintarAbrir = () => document.querySelectorAll("[data-abrir]").forEach(b => b.setAttribute("aria-pressed", String((leerPref().abrirEn || "hoy") === b.dataset.abrir)));
+  pintarAbrir();
+  document.addEventListener("click", e => {
+    const ab = e.target.closest("[data-abrir]"); if (ab){ prefSet("abrirEn", ab.dataset.abrir); pintarAbrir(); toast(ab.dataset.abrir === "hoy" ? "Lapacho va a abrir en «Hoy»." : "Lapacho va a abrir en «Planificar»."); return; }
+    const t = e.target.closest("[data-tdnom]"); if (!t) return;
+    if (t.dataset.tdnom === "abrir"){ TD_NOM.abierto = true; renderTuDia(); const i = $("td-nom-in"); if (i) i.focus(); }
+    else if (t.dataset.tdnom === "no"){ TD_NOM.abierto = false; prefSet("nombreNo", true); renderTuDia(); }
+  });
+  document.addEventListener("submit", e => {
+    const f = e.target.closest("[data-tdnomf]"); if (!f) return;
+    e.preventDefault();
+    const n = guardarNombre(($("td-nom-in") || {}).value);
+    if (n) toast(`Listo, ${n}. Lo podés cambiar en Ajustes.`);
+  });
+}
+
+/* ---------- Feria de ciencias: el stand ---------- */
+const STAND_FUENTE = {f:"Ministerio de Educación de la Provincia de Córdoba (2026)", t:"Orientaciones y aportes para la planificación, desarrollo y exposición de proyectos feriales en un marco de seguridad y cultura del cuidado", u:"https://www.igualdadycalidadcba.gov.ar/SIPEC-CBA/SIDPyTE/SDCyAI/feria-de-cie-tec-art-e-inn/2026/doc/orientaciones-para-proyectos-feriales-seguridad-y-cuidado.pdf"};
+if (!FERIA_FUENTES.some(x => x.u === STAND_FUENTE.u)) FERIA_FUENTES.push(STAND_FUENTE);
+const STAND_NO = ["Seres vivos, incluidas las plantas, y animales vivos, muertos o disecados", "Fuego, velas, mecheros, combustibles o motores a explosión", "Vidrio y objetos cortantes o punzantes (jeringas, agujas, pipetas, cuchillos)", "Productos químicos y experiencias químicas", "Líquidos, incluso agua (salvo la botella para tomar)", "Cultivos de microorganismos, residuos o muestras de basura", "Sustancias tóxicas o elementos peligrosos (medicamentos, hielo seco)", "Alimentos para degustar o productos para vender", "Cinta bifaz y materiales autoadhesivos: usá adhesivo común, cinta de papel o de enmascarar"];
+const STAND_LLEVAR = ["El cartel del título, liviano, de 60 × 22 cm", "La carpeta de campo (se muestra, no se presta)", "Una copia impresa del informe para los visitantes", "El registro pedagógico, solo para los evaluadores", "Los paneles, fotos, gráficos y tablas para el interior del tríptico, con las fuentes citadas", "Las autorizaciones de uso de imagen y voz de las personas que aparecen en las fotos", "Un alargue de unos 5 m con fusible de 6 A, zapatillas y adaptadores (si usan electricidad)", "Herramientas, adhesivo común y cinta de papel para el montaje", "Guardapolvo o uniforme de la escuela, y ropa adecuada para un acto escolar"];
+function standSubs(o){
+  return [
+    {h:"Qué pone la organización", body:"En la Feria Nacional 2026: una mesa cubierta con un mantel hasta el piso, un tríptico de madera de tres paneles, tres sillas y un tomacorriente de 220 V. El stand se marca con un cordón y llega hasta 1,5 m sobre el pasillo. En la instancia escolar, zonal o provincial puede cambiar: confirmalo con quien organiza."},
+    {h:"Tríptico", body:`Todo va del lado de adentro de los paneles; el exterior queda libre.\n- Panel izquierdo: la situación de ${o.lugar}, la pregunta y la hipótesis.\n- Panel central: el procedimiento con fotos y el gráfico principal de resultados.\n- Panel derecho: conclusiones, nuevas preguntas y bibliografía.\nEn el espacio entre los paneles pueden ir otros materiales del proyecto. Cada imagen, gráfico o esquema lleva su fuente.`},
+    {h:"Cartel del título (60 × 22 cm)", body:`${o.tit}\nLiviano, con el título tal como se inscribió el proyecto y el nombre de la jurisdicción (Tucumán). Letras grandes, legibles a tres metros. En la cenefa (la tabla horizontal de arriba) van además el número de stand y el código del proyecto con su QR.`},
+    {h:"Sobre la mesa", body:`- La carpeta de campo, visible y abierta (no se presta).\n- Una copia impresa del informe para los visitantes.\n${o.exp ? "- La experiencia, si no usa líquidos, vidrio, fuego, químicos ni seres vivos; si los usa, se muestra con fotos, un video o una maqueta.\n" : "- Fotografías, documentos o grabaciones relevadas.\n"}- La tabla de datos y los gráficos en tamaño grande.\n- El registro pedagógico se guarda para los evaluadores: no queda a la vista.`},
+    {h:"Electricidad", body:"Equipos protegidos y bien aislados; iluminación decorativa solo LED; como máximo 1,5 A por stand; todo apagado cuando no hay nadie en el stand. Llevar el propio alargue (unos 5 m, con fusible de 6 A), zapatillas y adaptadores: la conexión la hace el personal técnico."},
+    {h:"Lo que no se puede llevar al stand", body:STAND_NO.map(x => `- ${x}.`).join("\n")},
+    {h:"Seguridad y cuidado", body:"- Planificar cada actividad con el docente orientador; lo que no estaba previsto necesita autorización de la dirección.\n- Evaluar los riesgos de cada actividad y armar una ficha técnica con los pasos y las medidas de cuidado.\n- Pasillos y salidas libres; los objetos personales y las herramientas, debajo de la mesa.\n- Saber dónde están el matafuego, el botiquín y las salidas; tener los teléfonos de las familias.\n- Las fotos de personas necesitan autorización de uso de imagen y voz."},
+    {h:"Expositores", body:"Exponen solo los estudiantes inscriptos (en la Feria Nacional, dos estudiantes y un docente orientador). El docente acompaña, pero no los reemplaza. Un reemplazo solo por un motivo justificado, certificado por la escuela y avisado antes de la acreditación."}
+  ];
+}
+function modeloStandFeria(){
+  const c = feriaCtx(), I = feriaIdea(), tit = feriaTxt(I.titulo, c.R), exp = !!I.vi;
+  return {inst:c.escuela, titulo:"Lista para armar el stand", subtitulo:tit, faltaSub:"", datos:[["Curso", c.curso], ["Docente orientador", c.docente], ["Fecha de la feria", c.fecha ? fechaCortaIso(c.fecha) : ""]].filter(d => d[1]),
+    secs:[
+      {h:"Para llevar", body:STAND_LLEVAR.map(x => `☐ ${x}`).join("\n")},
+      ...standSubs({lugar:c.R.lugar, tit, exp}),
+      {h:"Montaje y día de la feria", body:"☐ Ubicar el stand con el plano o con el personal de la feria.\n☐ Armar dentro del espacio asignado; si algo excede las medidas, avisar antes a la organización.\n☐ Esperar la revisión de la comisión técnica.\n☐ Estar en el stand en el horario de la feria; retirar los equipos al final de cada día.\n☐ Al terminar, desarmar, embolsar los residuos y dejar el lugar limpio."},
+      {h:"De dónde sale", body:"Programa Nacional de Ferias de Ciencias y Tecnología, Documento 2 (2026), y orientaciones de seguridad y cuidado del Ministerio de Educación de Córdoba (2026), revisados el 27/10/2026. Para la feria de Tucumán, confirmá las reglas con la organización: las bases jurisdiccionales 2026 no están publicadas en internet."},
+      {h:"Fuentes", links:[FERIA_FUENTES.find(x => /Documento 2/.test(x.t)), STAND_FUENTE].filter(Boolean), body:""}
+    ], firmas:null};
+}
+
+/* ---------- Muestra de la escuela ---------- */
+const MU_TIPOS = {anual:"Muestra anual", ciencias:"Muestra de ciencias", puertas:"Jornada de puertas abiertas", area:"Muestra de un área o de un curso"};
+const MU_DEST = [["familias", "Familias", "las familias"], ["comunidad", "Comunidad del barrio", "la comunidad del barrio"], ["escuelas", "Otras escuelas", "otras escuelas"], ["estudiantes", "Estudiantes de la escuela", "los estudiantes de la escuela"]];
+const MU_FUND = {
+  anual:"La muestra anual es una oportunidad para que los estudiantes comuniquen lo que aprendieron durante el año. Preparar un stand y explicarlo a otros les exige organizar lo aprendido, elegir qué mostrar y decirlo con claridad, con el vocabulario de cada espacio curricular. Al mismo tiempo, abre la escuela a las familias y a la comunidad y hace visible el trabajo de todo el año.",
+  ciencias:"La muestra de ciencias pone en el centro la indagación escolar: preguntas que surgen del aula, datos que se registran y conclusiones que se comunican con argumentos. Explicar un trabajo a visitantes que no lo conocen obliga a revisar lo que se hizo y a sostener las ideas con evidencias. También puede funcionar como instancia escolar previa a la feria de ciencias.",
+  puertas:"La jornada de puertas abiertas presenta la propuesta de la escuela a futuros estudiantes y sus familias. Son los propios estudiantes quienes muestran qué se aprende y cómo se trabaja en cada espacio, lo que les da un lugar de protagonismo y una situación real de comunicación.",
+  area:"La muestra permite que los estudiantes compartan con otros cursos y con las familias lo trabajado en el área. Prepararla y explicarla es parte del aprendizaje: obliga a seleccionar, organizar y comunicar con claridad lo que se aprendió."
+};
+const MU_OBJ = ["Comunicar oralmente y por escrito lo aprendido, con el vocabulario propio de cada espacio curricular.", "Seleccionar y organizar la información para presentarla de forma clara a distintos públicos.", "Trabajar en equipo, con roles y turnos acordados.", "Fortalecer el vínculo entre la escuela, las familias y la comunidad."];
+function muLeer(){ const m = leerPref().muestra; return m && typeof m === "object" ? m : {}; }
+function muGuardar(m){ prefSet("muestra", m); }
+function muDatos(){
+  const m = muLeer();
+  return {tipo:MU_TIPOS[m.tipo] ? m.tipo : "anual", titulo:m.titulo || "", fecha:m.fecha || "", hIni:m.hIni || "", hFin:m.hFin || "", lugar:m.lugar || "", dest:Array.isArray(m.dest) ? m.dest : ["familias"], stands:m.stands || "", resp:m.resp != null ? m.resp : val("docente") || "", doc:m.doc || "proyecto"};
+}
+/* Un stand por línea: curso, tema y docente, separados por «·», «-», «|» o «;» */
+function muStands(txt){
+  return String(txt || "").split("\n").map(l => l.trim()).filter(Boolean).slice(0, 40).map(l => {
+    const p = l.split(/\s*[·|;]\s*|\s+-\s+/).map(s => s.trim()).filter(Boolean);
+    return {curso:p[0] || "", tema:p[1] || "", resp:p.slice(2).join(", ")};
+  });
+}
+const muFechaTxt = m => m.fecha ? `${cap(DIAS_SEM[fechaDe(m.fecha).getDay()])} ${fechaCortaIso(m.fecha)}` : "";
+const muHoraTxt = m => m.hIni && m.hFin ? `de ${m.hIni} a ${m.hFin}` : m.hIni ? `desde las ${m.hIni}` : "";
+const muNombre = m => m.titulo ? `${MU_TIPOS[m.tipo]}: ${m.titulo}` : MU_TIPOS[m.tipo];
+function muCronograma(m){
+  const F = [[-28, "Presentar este proyecto a la dirección y acordar fecha, lugar y stands."], [-21, "Cada curso elige qué va a mostrar y completa la ficha de su stand."], [-14, "Preparar paneles, carteles y materiales; escribir el guion de la explicación."], [-10, "Ensayar la explicación en el aula, con turnos."], [-7, "Enviar la invitación y pedir las autorizaciones de uso de imagen; confirmar mesas, sillas y alargues."], [-2, "Revisar la seguridad de cada stand con la lista del día."], [-1, "Montaje de los stands."], [0, "Muestra: recepción, turnos de explicación, desarme y limpieza."], [3, "Devolución a los cursos con la planilla de valoración y registro en el libro de temas."]];
+  return F.map(([d, t]) => [m.fecha ? fechaCortaIso(lcMas(m.fecha, d)) : d === 0 ? "El día de la muestra" : d < 0 ? `${-d} días antes` : `${d} días después`, t]);
+}
+function muTurnos(m){
+  const a = lbMin(m.hIni), b = lbMin(m.hFin);
+  if (a == null || b == null || b <= a) return [["", ""], ["", ""], ["", ""], ["", ""]];
+  const out = []; for (let t = a; t < b && out.length < 12; t += 30) out.push([`${lbHM(t)} a ${lbHM(Math.min(b, t + 30))}`, ""]);
+  return out;
+}
+function modeloMuestra(doc){
+  const m = muDatos(), S = muStands(m.stands), esc0 = val("institucion"), nom = muNombre(m), cuando = [muFechaTxt(m), muHoraTxt(m)].filter(Boolean).join(", ");
+  const datos = [["Escuela", esc0], ["Fecha y horario", cuando], ["Lugar", m.lugar], ["Responsable de la organización", m.resp]];
+  const destD = MU_DEST.filter(([k]) => m.dest.includes(k)), dest = destD.map(x => x[1]), destA = destD.map(x => x[2]);
+  const seg = ["No llevar fuego, velas ni mecheros; si una experiencia los necesita, se muestra con fotos o un video.", "Nada de vidrio ni objetos cortantes o punzantes en los stands.", "Sin productos químicos ni experiencias químicas a la vista del público, sin seres vivos y sin líquidos en las mesas.", "Equipos eléctricos en buen estado, aislados y apagados cuando el stand queda solo; cables por donde no se pise.", "Pasillos y salidas libres; los objetos personales, fuera de las mesas.", "Matafuego, botiquín y salidas identificados; al menos una persona con conocimientos de primeros auxilios.", "Si se ofrecen alimentos, solo con autorización de la dirección y respetando las normas de la escuela; mejor evitarlos."];
+  if (doc === "fichas"){
+    const L = S.length ? S : [{curso:"", tema:"", resp:""}];
+    return {inst:esc0, titulo:"Ficha del stand", subtitulo:nom, faltaSub:"", datos:[["Fecha y horario", cuando]].filter(d => d[1]),
+      secs:L.map((s, i) => ({h:s.curso ? `${s.curso}${s.tema ? `: ${s.tema}` : ""}` : "Stand", pageBreak:i > 0, sub:[
+        {h:"Título del stand", body:s.tema ? `${cap(s.tema)}. Revisen si quieren un título más atractivo:` : "", lineas:1},
+        {h:"Docente responsable", body:s.resp || " "},
+        {h:"Integrantes y turnos", table:{head:["Turno", "Estudiantes"], rows:muTurnos(m), w:[2600, 6470]}, tableOnly:true},
+        {h:"Qué vamos a mostrar", lineas:3},
+        {h:"Qué necesitamos", body:"☐ Mesa   ☐ Sillas   ☐ Panel o pared para pegar   ☐ Enchufe   ☐ Proyector o pantalla\nOtros materiales:", lineas:1},
+        {h:"Guion para explicar en dos minutos", body:["Saludar, presentarse y decir el título del stand.", "Contar qué trabajamos y por qué nos interesó.", "Mostrar lo más importante (la maqueta, el gráfico, la experiencia en fotos o el video).", "Decir qué aprendimos con nuestras palabras.", "Invitar a preguntar."].map((x, k) => `${k + 1}. ${x}`).join("\n")},
+        {h:"Preguntas que nos pueden hacer y cómo las respondemos", lineas:4},
+        {h:"Antes de abrir el stand", body:"☐ El cartel con el título se lee de lejos.\n☐ Las imágenes y los gráficos dicen de dónde salen.\n☐ No hay nada de la lista de cosas que no se pueden llevar.\n☐ Los cables están en buen estado y no cruzan el paso.\n☐ El espacio y el pasillo quedan despejados."}
+      ]})), firmas:null};
+  }
+  if (doc === "invitacion"){
+    const temas = S.map(s => s.tema).filter(Boolean).slice(0, 6);
+    return {inst:esc0, titulo:"Invitación", subtitulo:nom, faltaSub:"", datos:[],
+      secs:[
+        {sinH:true, body:`Invitamos a ${destA.length ? destA.map((x, i) => i ? `a ${x}` : x).join(", ").replace(/, (a [^,]*)$/, " y $1") : "las familias"} a la ${lcFirst(MU_TIPOS[m.tipo])} de la escuela${m.titulo ? `, «${m.titulo}»` : ""}.`},
+        {h:"Cuándo y dónde", body:[cuando ? cap(cuando) + "." : "Fecha y horario: ____________", m.lugar ? `Lugar: ${m.lugar}.` : "Lugar: ____________"].join("\n")},
+        {h:"Qué vamos a ver", body:temas.length ? `Los estudiantes van a presentar lo que aprendieron: ${temas.map(t => lcFirst(t)).join("; ")}, entre otros trabajos.` : "Los estudiantes van a presentar lo que aprendieron durante el año en cada espacio curricular."},
+        {sinH:true, body:"Su visita es muy importante para ellos. ¡Los esperamos!"},
+        {h:"Notificación de la familia", pageBreak:false, body:"Recibí la invitación a la muestra.\nNombre del estudiante: ______________________   Curso: ________\nFirma de la familia: ______________________"}
+      ], firmas:[[m.resp, "Docente responsable"], ["", "Dirección"]]};
+  }
+  if (doc === "valoracion"){
+    const L = S.length ? S : Array.from({length:8}, () => ({curso:"", tema:""}));
+    return {inst:esc0, titulo:"Valoración de la exposición", subtitulo:nom, faltaSub:"", datos:[["Fecha", muFechaTxt(m)]].filter(d => d[1]),
+      secs:[
+        {h:"Criterios", body:"- Dominio del tema: explica con seguridad y responde las preguntas.\n- Claridad y síntesis: se entiende, va a lo importante y respeta el tiempo.\n- Vocabulario: usa los términos de la disciplina de forma adecuada.\n- Organización del stand: el material es legible, cita sus fuentes y acompaña la explicación.\n- Trabajo en equipo: todos participan y respetan los turnos.\nPara cada criterio: L (logrado), EP (en proceso) o F (falta)."},
+        {h:"Planilla", table:{head:["Stand", "Dominio", "Claridad", "Vocabulario", "Stand", "Equipo", "Observaciones"], rows:L.map(s => [[s.curso, s.tema].filter(Boolean).join(": "), "", "", "", "", "", ""]), w:[2300, 900, 900, 1000, 800, 900, 2270]}, tableOnly:true},
+        {h:"Para la devolución a los cursos", lineas:4}
+      ], firmas:null};
+  }
+  if (doc === "dia"){
+    return {inst:esc0, titulo:"Lista para el día de la muestra", subtitulo:nom, faltaSub:"", datos:datos.filter(d => d[1]),
+      secs:[
+        {h:"Antes de abrir", body:["Mesas, sillas y paneles ubicados según el plano.", "Alargues y zapatillas en buen estado; cables por donde no se pise.", "Matafuego, botiquín y salidas identificados; pasillos libres.", "Cada stand revisado con su ficha: cartel, fuentes citadas, nada de la lista de cosas que no se pueden llevar.", "Turnos de los estudiantes a la vista en cada stand.", "Recepción en la entrada: quién recibe y quién orienta a los visitantes.", "Autorizaciones de uso de imagen reunidas antes de sacar fotos para publicar."].map(x => `☐ ${x}`).join("\n")},
+        {h:"Durante la muestra", body:["Un docente o preceptor recorre los stands cada media hora.", "Los estudiantes respetan los turnos y no dejan el stand solo.", "Si alguien se siente mal o se lastima: suspender la actividad del stand, avisar a la dirección y a la familia.", "Fotos solo de quienes tienen autorización."].map(x => `☐ ${x}`).join("\n")},
+        {h:"Al cerrar", body:["Apagar y desconectar los equipos.", "Desarmar, separar los residuos y dejar el lugar limpio.", "Guardar los trabajos de cada curso identificados.", "Anotar lo que pasó y lo que conviene cambiar para la próxima."].map(x => `☐ ${x}`).join("\n")},
+        {h:"Seguridad y cuidado", body:seg.map(x => `- ${x}`).join("\n")}
+      ], firmas:null};
+  }
+  /* Proyecto para la dirección */
+  return {inst:esc0, titulo:"Proyecto de la muestra", subtitulo:nom, faltaSub:"", datos,
+    secs:[
+      {h:"Fundamentación", body:MU_FUND[m.tipo]},
+      {h:"Objetivos", body:MU_OBJ.map(x => `- ${x}`).join("\n")},
+      {h:"Destinatarios", body:dest.length ? dest.map((x, i) => i ? lcFirst(x) : x).join(", ").replace(/, ([^,]*)$/, " y $1") + "." : "", falta:"Elegir los destinatarios"},
+      {h:"Organización de los espacios", lead:S.length ? "" : "Completar un stand por fila.", table:{head:["N.º", "Curso", "Tema del stand", "Docente responsable", "Necesita"], rows:(S.length ? S : Array.from({length:6}, () => ({curso:"", tema:"", resp:""}))).map((s, i) => [String(i + 1), s.curso, s.tema, s.resp, ""]), w:[600, 1300, 3400, 2300, 1470]}, tableOnly:true},
+      {h:"Cronograma de preparación", table:{head:["Cuándo", "Qué se hace"], rows:muCronograma(m), w:[2000, 7070]}, tableOnly:true},
+      {h:"Responsabilidades", body:["Dirección: autoriza la muestra, el uso de los espacios y la difusión.", `Organización${m.resp ? ` (${m.resp})` : ""}: coordina los stands, el cronograma y los recursos.`, "Docentes de cada curso: acompañan la preparación, revisan la ficha del stand y valoran la exposición.", "Estudiantes: preparan el material, ensayan la explicación y atienden el stand en sus turnos.", "Preceptores: acompañan el ingreso, la asistencia y los recorridos de los cursos."].map(x => `- ${x}`).join("\n")},
+      {h:"Recursos", body:"Mesas, sillas, paneles o paredes para pegar, alargues y zapatillas en buen estado, adhesivo común y cinta de papel, cartulinas y fibrones, proyector o pantalla si algún stand lo necesita, bolsas para residuos."},
+      {h:"Seguridad y cuidado", body:seg.map(x => `- ${x}`).join("\n")},
+      {h:"Imágenes y datos de los estudiantes", body:"Antes de publicar fotos o videos, las familias firman la autorización de uso de imagen y voz. En los paneles, cada imagen, gráfico o esquema lleva su fuente. No se exhiben notas ni datos personales de los estudiantes."},
+      {h:"Difusión", body:"Invitación a las familias (con talón de notificación), cartelera de la escuela y redes institucionales con autorización de la dirección."},
+      {h:"Evaluación", body:"Cada docente valora la exposición de su curso con la planilla de valoración (dominio del tema, claridad, vocabulario, organización del stand y trabajo en equipo). Después de la muestra, cada curso conversa qué salió bien y qué cambiaría, y la organización deja por escrito lo aprendido para la próxima edición."}
+    ], firmas:[[m.resp, "Docente responsable"], ["", "Dirección"]]};
+}
+const MU_DOCS = [["proyecto", "Proyecto para la dirección"], ["fichas", "Fichas de cada stand"], ["invitacion", "Invitación a las familias"], ["valoracion", "Planilla de valoración"], ["dia", "Lista para el día"]];
+function renderMuestra(){
+  const box = $("mu-panel"); if (!box) return;
+  const m = muDatos();
+  box.innerHTML = `<div class="cfg-grid">
+      <div class="f"><label for="mu-tipo">Tipo de muestra</label><select id="mu-tipo">${Object.entries(MU_TIPOS).map(([k, t]) => `<option value="${k}"${m.tipo === k ? " selected" : ""}>${esc(t)}</option>`).join("")}</select></div>
+      <div class="f"><label for="mu-titulo">Lema o título (opcional)</label><input id="mu-titulo" autocomplete="off" value="${esc(m.titulo)}" placeholder="Ej.: Aprender haciendo"></div>
+      <div class="f"><label for="mu-fecha">Fecha</label><input id="mu-fecha" type="date" value="${esc(m.fecha)}"></div>
+      <div class="f mu-horas"><span class="lbl" id="mu-h-l">Horario</span><div role="group" aria-labelledby="mu-h-l"><label class="sr-only" for="mu-hini">Desde</label><input id="mu-hini" type="time" value="${esc(m.hIni)}"><span aria-hidden="true">a</span><label class="sr-only" for="mu-hfin">Hasta</label><input id="mu-hfin" type="time" value="${esc(m.hFin)}"></div></div>
+      <div class="f"><label for="mu-lugar">Lugar</label><input id="mu-lugar" autocomplete="off" value="${esc(m.lugar)}" placeholder="Ej.: SUM y patio cubierto"></div>
+      <div class="f"><label for="mu-resp">Responsable de la organización</label><input id="mu-resp" autocomplete="off" value="${esc(m.resp)}"></div>
+      <fieldset class="f full mu-dest"><legend>Para quién</legend>${MU_DEST.map(([k, t]) => `<label class="cond-check"><input type="checkbox" data-mudest="${k}"${m.dest.includes(k) ? " checked" : ""}> ${esc(t)}</label>`).join("")}</fieldset>
+      <div class="f full"><div class="f-head"><label for="mu-stands">Stands: uno por línea, con curso, tema y docente</label>${cdatos().cursos.length ? `<button type="button" class="linkbtn" data-mu="cursos">Traer mis cursos</button>` : ""}</div><textarea id="mu-stands" rows="5" placeholder="2.º A · La energía en casa · Prof. Valdez&#10;3.º B · Circuitos eléctricos · Prof. Gómez">${esc(m.stands)}</textarea></div>
+    </div>
+    <p class="hint">Se guarda en este dispositivo y entra en la copia de seguridad. Las reglas de seguridad siguen las orientaciones de las ferias de ciencias; ajustalas a las normas de tu escuela.</p>
+    <div class="seg mu-docs" role="group" aria-label="Qué documento ver">${MU_DOCS.map(([k, t]) => `<button type="button" data-mudoc="${k}" aria-pressed="${m.doc === k}">${esc(t)}</button>`).join("")}</div>
+    <div class="aus-prev" id="mu-prev" tabindex="0" role="region" aria-label="Vista previa del documento"></div>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-mu="docx">Descargar en Word</button><button type="button" class="btn btn-sm" data-mu="pdf">PDF</button></div>`;
+  muPrev();
+}
+function muPrev(){ const b = $("mu-prev"); if (!b) return; const m = muDatos(); b.innerHTML = `<article class="paper">${docHTML(false, modeloMuestra(m.doc)).replace(/ data-goto="[^"]*"/g, "").replace(/ class="goto"/g, "")}</article>`; }
+function muCambio(k, v){ const m = muLeer(); m[k] = v; muGuardar(m); }
+function abrirMuestra(){ renderMuestra(); abrirDialogo("muestra"); }
+function bindMuestra(){
+  const D = $("muestra"); if (!D || D.dataset.ok) return; D.dataset.ok = "1";
+  const b = $("btn-muestra"); if (b) b.addEventListener("click", abrirMuestra);
+  const campos = {"mu-tipo":"tipo", "mu-titulo":"titulo", "mu-fecha":"fecha", "mu-hini":"hIni", "mu-hfin":"hFin", "mu-lugar":"lugar", "mu-resp":"resp", "mu-stands":"stands"};
+  let tm = null;
+  D.addEventListener("input", e => {
+    const k = campos[e.target.id];
+    if (k){ muCambio(k, e.target.value); clearTimeout(tm); tm = setTimeout(muPrev, 300); return; }
+    const d = e.target.closest("[data-mudest]");
+    if (d){ const m = muDatos(); const s = new Set(m.dest); if (d.checked) s.add(d.dataset.mudest); else s.delete(d.dataset.mudest); muCambio("dest", MU_DEST.map(x => x[0]).filter(x => s.has(x))); muPrev(); }
+  });
+  D.addEventListener("change", e => { if (e.target.id === "mu-tipo"){ muCambio("tipo", e.target.value); muPrev(); } });
+  D.addEventListener("click", e => {
+    const d = e.target.closest("[data-mudoc]"); if (d){ muCambio("doc", d.dataset.mudoc); D.querySelectorAll("[data-mudoc]").forEach(x => x.setAttribute("aria-pressed", String(x === d))); muPrev(); return; }
+    const a = e.target.closest("[data-mu]"); if (!a) return;
+    if (a.dataset.mu === "cursos"){
+      const ta = $("mu-stands"), ya = muStands(ta.value).map(s => norm(s.curso));
+      const nuevos = cdatos().cursos.filter(c => c.curso && !ya.includes(norm(c.curso))).map(c => `${c.curso} · ${c.materia ? nombreMateria(c.materia) : ""} · ${c.docente || val("docente") || ""}`.replace(/ · $/, ""));
+      if (!nuevos.length){ toast("Tus cursos ya están en la lista."); return; }
+      ta.value = [ta.value.trim(), ...nuevos].filter(Boolean).join("\n"); muCambio("stands", ta.value); muPrev();
+      toast("Agregué tus cursos: completá el tema de cada stand."); return;
+    }
+    if (a.dataset.mu === "docx" || a.dataset.mu === "pdf"){
+      const m = muDatos();
+      bajarDoc(modeloMuestra(m.doc), `${slug((MU_DOCS.find(x => x[0] === m.doc) || MU_DOCS[0])[1])}-${slug(MU_TIPOS[m.tipo])}`, a.dataset.mu, a.dataset.mu === "pdf" ? "PDF descargado." : "Documento de Word descargado.");
+    }
+  });
+}
+function init51(){
+  /* Al cargar la última planificación, init pasa a «Planificar»: acá se vuelve a la sección elegida para abrir */
+  try { const app = document.querySelector(".app"); if (app && app.classList.contains("nav-app")) irSeccion(seccionInicial(app.dataset.sec || "plan"), true); } catch (e) { registrarError("init51", e, "aviso"); }
+  try { bindNombre(); } catch (e) { registrarError("init51", e, "aviso"); }
+  try { bindMuestra(); } catch (e) { registrarError("init51", e, "aviso"); }
+  try { const D = $("feria"); if (D) D.addEventListener("click", e => { if (e.target.closest("[data-festand]")) bajarDoc(modeloStandFeria(), `lista-del-stand-${slug(feriaTxt(feriaIdea().titulo, feriaCtx().R))}`, "docx", "Lista para armar el stand descargada."); }); } catch (e) { registrarError("init51", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -20390,7 +20666,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
