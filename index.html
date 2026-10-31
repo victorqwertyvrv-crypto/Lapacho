@@ -1771,6 +1771,25 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
   .pn-tareas,#ia-cons,#privia{display:none!important}
 }
 
+/* ---------- Versión 45: Derechos y obligaciones ---------- */
+.der-aviso{margin:0 0 12px;font-size:12.5px;color:var(--muted);border-left:3px solid var(--line);padding-left:10px}
+.der-h{margin:16px 0 6px;font-size:15px}
+.der-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.der-l li{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--surface);display:flex;flex-direction:column;gap:3px;font-size:14px}
+.der-ref{font-size:12px;color:var(--muted)}
+.der-ref a{color:var(--accent)}
+.der-sits .cv-sit small{margin-top:4px}
+.der-k{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 9px;border:1px solid var(--line)}
+.der-k.si{background:var(--accent-soft);color:var(--accent)}
+.der-k.no{background:var(--warn-soft);color:var(--warn)}
+.der-k.dep{background:var(--flag);color:var(--flag-ink)}
+.der-sit h3{margin:0;font-size:16px}
+.der-sit h4{margin:12px 0 4px;font-size:13.5px}
+.der-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.der-res{font-size:15px;font-weight:600;margin:8px 0 2px}
+#derechos .f{margin:8px 0}
+@media print{#derechos{display:none!important}}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -2113,7 +2132,8 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
       <details class="faq"><summary>¿Cómo no perder los datos de mis cursos?</summary><p>En «Ajustes › Copia de seguridad» descargás un archivo con todo, incluidas las fotos. Guardalo en tu Drive una vez por semana: si cambiás de celular o se borra el navegador, lo abrís ahí mismo y recuperás todo. «Tu día» te recuerda cuando pasó una semana sin copia.</p></details>
       <details class="faq"><summary>¿Funciona sin internet?</summary><p>Sí. En «Ajustes › Usar sin internet» descargás el planificador como un archivo y lo abrís con el navegador del celular o la computadora aunque no haya señal. Esa versión guarda sus datos aparte: para pasarlos de una a otra usá la copia de seguridad.</p></details>
-      <details class="faq"><summary>¿Y si otra persona usa mi computadora?</summary><p>En «Ajustes › Proteger con PIN» elegís un número que se pide para abrir Mi curso, el modo aula, el PPI, las actas y tu legajo. El PIN bloquea la pantalla, pero no cifra los datos guardados en el navegador. Lo que sí se cifra, con la contraseña que elijas, es la copia de seguridad.</p></details>
+      <details class="faq"><summary>¿Cómo sé si me corresponde lo que me pide la dirección?</summary><p>En «Herramientas › Para la escuela › Derechos y obligaciones», pestaña «¿Me corresponde?», elegís la situación (mensajes fuera de horario, tareas fuera de tu jornada, cambio de curso, un acta para firmar, una sanción) y te dice si corresponde, por qué, con qué norma y qué hacer. En «Cómo reclamar» armás la nota a la dirección. Es información orientativa: ante un conflicto, consultá a tu gremio.</p></details>
+<details class="faq"><summary>¿Y si otra persona usa mi computadora?</summary><p>En «Ajustes › Proteger con PIN» elegís un número que se pide para abrir Mi curso, el modo aula, el PPI, las actas y tu legajo. El PIN bloquea la pantalla, pero no cifra los datos guardados en el navegador. Lo que sí se cifra, con la contraseña que elijas, es la copia de seguridad.</p></details>
 <details class="faq"><summary>¿Qué se envía cuando uso Claude desde Lapacho?</summary><p>Solo el texto que hace falta para la tarea, sin nombres de estudiantes, documentos, correos, teléfonos ni datos de salud: Lapacho los quita antes de enviar y te muestra qué se envía, a quién y para qué. Las imágenes se consultan cada vez, porque no se pueden anonimizar. En «Ajustes › Privacidad e IA» podés usar Lapacho sin IA.</p></details>
 <details class="faq"><summary>¿Dónde se guardan mis datos?</summary><p>En este navegador, en dos lugares a la vez: una base interna (IndexedDB), donde cada cambio se guarda en el momento, y una copia rápida. Además, Lapacho guarda una versión por día de los últimos siete días. Para llevar los datos a otro dispositivo, o por si se borra el navegador, descargá una copia de seguridad: podés elegir qué módulos incluir y protegerla con contraseña.</p></details>
       <details class="faq"><summary>¿Dónde están la ficha, la rúbrica o el registro de clase?</summary><p>Se completan en «Más opciones», al final del formulario, y se ven eligiendo el documento en «Ver», arriba de la hoja.</p></details>
@@ -4737,6 +4757,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-31-d", fecha:"2026-10-31", items:[
+    "Nuevo: «Derechos y obligaciones» (Herramientas › Para la escuela y Mi carrera en el inicio). Elegís lo que te pidió la dirección y te dice si te corresponde, por qué, con qué norma y artículo y qué hacer. Arma la nota a la dirección en Word.",
+    "También tiene los derechos y obligaciones de los estudiantes y cómo tienen que ser las sanciones, con una versión para trabajar en el aula."
+  ]},
   {id:"2026-10-31-c", fecha:"2026-10-31", items:[
     "Puntaje de capacitaciones: el módulo quedó pendiente de validación normativa. El Decreto 3128 solo se conoce por la prensa y hay antecedentes de que habría sido derogado: Lapacho ya no descuenta los cursos de menos de 40 horas ni los de otras provincias, que figuran «a verificar». Los puntos de INFoD se muestran como estimados y cada norma dice su fuente y su estado.",
     "Cargos disponibles: en lugar de porcentajes, cada cargo muestra un escenario orientativo, con los datos que cargaste, los históricos, los supuestos del modelo y el resultado por separado.",
@@ -16386,7 +16410,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "44 (31/10/2026)";
+const LAPACHO_VERSION = "45 (31/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -21741,19 +21765,19 @@ async function ldbMigrarDesdeLocal(){
 }
 async function ldbConciliar(){
   const idb = await ldbLeerTodo(), pend = new Set((await ldbMeta("pendLocal")) || []);
-  let recuperadas = 0, sinEspacio = 0;
+  let recuperadas = 0, sinEspacio = 0; const claves = [];
   for (const k of LDB_CLAVES){
     let ls = null; try { ls = localStorage.getItem(k); } catch (e) { logSilencioso(e); }
     const x = idb[k];
     if (x && x.v != null && (pend.has(k) || ls == null) && x.v !== ls){
-      try { Storage.prototype.setItem.set0.call(localStorage, k, x.v); pend.delete(k); recuperadas++; }
+      try { Storage.prototype.setItem.set0.call(localStorage, k, x.v); pend.delete(k); recuperadas++; claves.push(k); }
       catch (e) { if (esCuota(e)){ sinEspacio++; LDB.pend.add(k); } else logSilencioso(e); }
     } else if (ls != null && (!x || x.v !== ls)) ldbEncolar(k, ls);
     else pend.delete(k);
   }
   pend.forEach(k => LDB.pend.add(k));
   await ldbMetaPut("pendLocal", [...LDB.pend]);
-  return {recuperadas, sinEspacio};
+  return {recuperadas, sinEspacio, claves};
 }
 /* Una versión por día de todos los datos (las últimas siete), para volver atrás */
 async function ldbVersionDiaria(){
@@ -21776,7 +21800,10 @@ async function ldbIniciar(){
     const r = await ldbConciliar();
     await ldbVersionDiaria();
     LDB.ok = true;
-    if (r.recuperadas) toast(`Se recuperaron ${r.recuperadas} ${r.recuperadas === 1 ? "parte" : "partes"} de tus datos desde la base interna.`, {label:"Recargar", fn:() => location.reload()});
+    /* Se avisa solo si volvieron datos de trabajo (no ajustes ni la planificación en curso) y sin tapar otro aviso */
+    const importantes = (r.claves || []).filter(k => !/preferencias|novedades|formato|encabezado|clases-v2/.test(k));
+    const libre = !$("toast") || $("toast").hidden;
+    if (importantes.length && libre) toast(`Se recuperaron ${importantes.length} ${importantes.length === 1 ? "parte" : "partes"} de tus datos desde la base interna.`, {label:"Recargar", fn:() => location.reload()});
     if (r.sinEspacio) toast("Hay cambios que solo están en la base interna porque este navegador no tiene espacio. Descargá una copia de seguridad.", {label:"Copia de seguridad", fn:() => { const b = $("btn-respaldo"); if (b) b.click(); }});
   } catch (e) { LDB.error = String((e && e.message) || e); registrarError("ldb.iniciar", e, "aviso"); }
   try { renderPanel(); } catch (e) { logSilencioso(e); }
@@ -22259,6 +22286,298 @@ function bindPrivacidadIA(){
 }
 
 /* ============================================================
+   Versión 45: Derechos y obligaciones (31/10/2026)
+   Para docentes: qué te corresponde y qué no ante un pedido de la dirección, con la norma y el artículo,
+   cómo reclamar y una nota modelo. Para estudiantes: sus derechos, sus obligaciones y cómo deben ser las sanciones.
+   Regla: solo se cita lo que se verificó en el texto de la norma. Donde no encontramos una norma provincial
+   publicada, se dice así y se propone pedir la indicación por escrito.
+   Es información orientativa: no reemplaza el asesoramiento legal ni gremial.
+   ============================================================ */
+const DER_REVISION = "2026-10-31";
+const DER_NORMAS = {
+  est:{n:"Estatuto del Docente de Tucumán (Ley 3470)", u:"https://leyes-ar.com/estatuto_del_docente_tucuman/6.htm", f:"Texto compilado por leyes-ar.com. El oficial está en el digesto de la Provincia."},
+  reg:{n:"Reglamentación del Estatuto (Ley 3470), art. 13, citada en la Guía para el desempeño profesional del docente 2023", u:"https://des-tuc.infd.edu.ar/sitio/wp-content/uploads/2023/10/Guia-para-el-desempeno-profesional-del-docente.pdf", f:"Ministerio de Educación de Tucumán."},
+  l8391:{n:"Ley de Educación de Tucumán N.º 8391", u:"https://des-tuc.infd.edu.ar/sitio/wp-content/uploads/2023/09/Ley-Provincial-de-Educacion-8391.pdf", f:"Texto publicado por el Ministerio de Educación de Tucumán."},
+  l26206:{n:"Ley de Educación Nacional N.º 26.206", u:"https://www.argentina.gob.ar/normativa/nacional/---123542/actualizacion", f:"Texto actualizado, Argentina.gob.ar."},
+  l9897:{n:"Ley 9.897 de desconexión digital docente (Tucumán)", u:"https://leyes-ar.com/derecho_a_la_desconexion_digital_para_el_personal_docente_de_instituciones_educativas_publicas_tucuman/3.htm", f:"Sancionada en junio de 2025. Según la prensa, en febrero de 2026 seguía sin reglamentar."},
+  rm101:{n:"Res. Ministerial 0101/5 (MEd) de 2024", u:"https://www.educaciontuc.gov.ar/wp-content/uploads/2024/05/0101MED24.pdf", f:"Cargos de profesor de tiempo completo y parcial, en las escuelas de su anexo."},
+  l26892:{n:"Ley 26.892 de convivencia en las instituciones educativas", u:"https://cedoc.infd.edu.ar/wp-content/uploads/2020/01/Ley_26892_convivencia_y_conflictos.pdf", f:"Texto publicado por el INFoD."},
+  l26061:{n:"Ley 26.061 de protección integral de niñas, niños y adolescentes", u:"https://www.argentina.gob.ar/node/32915", f:"Argentina.gob.ar."},
+  cn:{n:"Constitución Nacional, art. 18", u:"https://www.argentina.gob.ar/normativa/nacional/ley-24430-804/texto", f:"Garantía de defensa."}
+};
+/* Referencia corta: [clave de norma, artículo] */
+const derRef = ([k, a]) => `${DER_NORMAS[k].n.replace(/ \(.*?\)$/, "").replace(/^Reglamentación del Estatuto.*$/, "Reglamentación del Estatuto")}${a ? `, ${a}` : ""}`;
+const DER_DOC = {
+  derechos:[
+    {t:"Mantener tu cargo, tu categoría, tu jerarquía y tu lugar de trabajo, salvo los cambios que prevé el Estatuto.", r:[["est", "art. 6, inc. 1"], ["l8391", "art. 104, inc. 3"], ["l26206", "art. 67, inc. f"]]},
+    {t:"Un salario justo y digno.", r:[["est", "art. 6, inc. 2"], ["l8391", "art. 104, inc. 2"], ["l26206", "art. 67, inc. h"]]},
+    {t:"Trabajar en condiciones dignas, de higiene y seguridad.", r:[["est", "art. 6, inc. 7"], ["l8391", "art. 104, inc. 6"], ["l26206", "art. 67, inc. e"]]},
+    {t:"Enseñar con libertad de cátedra, respetando el proyecto institucional y los diseños curriculares.", r:[["l8391", "art. 104, inc. 1"], ["l26206", "art. 67, inc. c"]]},
+    {t:"Ser evaluado con criterios objetivos y debidamente fundamentados.", r:[["l8391", "art. 104, inc. 10"]]},
+    {t:"Contar en la escuela con el soporte tecnológico y didáctico necesario.", r:[["l8391", "art. 104, inc. 11"]]},
+    {t:"No responder mensajes ni asistir a reuniones virtuales no programadas fuera de la franja de trabajo, salvo emergencia institucional justificada.", r:[["l9897", "art. 3"]]},
+    {t:"Capacitación gratuita y en servicio.", r:[["l8391", "art. 104, inc. 8"], ["l26206", "art. 67, inc. b"]]},
+    {t:"Las vacaciones escolares reglamentarias y las licencias que te correspondan.", r:[["est", "art. 6, incs. 9 y 12"]]},
+    {t:"Conocer los antecedentes de los aspirantes y los órdenes de mérito en designaciones, traslados y concursos.", r:[["est", "art. 6, inc. 5"]]},
+    {t:"Afiliarte libremente a un gremio.", r:[["est", "art. 6, inc. 10"], ["l8391", "art. 104, inc. 7"], ["l26206", "art. 67, inc. m"]]},
+    {t:"Participar en la elaboración del proyecto institucional y en las Juntas de Clasificación y de Disciplina.", r:[["est", "art. 6, inc. 11"], ["l26206", "art. 67, inc. d"]]},
+    {t:"Programas de salud laboral y prevención de enfermedades profesionales.", r:[["l26206", "art. 67, inc. j"]]},
+    {t:"Defender tus derechos con los recursos que prevén el Estatuto, las leyes y los decretos.", r:[["est", "art. 6, inc. 15"], ["cn", ""]]}
+  ],
+  obligaciones:[
+    {t:"Cumplir personalmente tu jornada de trabajo.", r:[["reg", "art. 13"]]},
+    {t:"Desempeñar tu cargo con dignidad, eficacia, lealtad, idoneidad y responsabilidad.", r:[["est", "art. 5, inc. 1"], ["l8391", "art. 105, inc. 2"], ["l26206", "art. 67, obligaciones, inc. d"]]},
+    {t:"Respetar la cadena jerárquica y las indicaciones técnicas, administrativas y disciplinarias de la autoridad.", r:[["est", "art. 5, inc. 4"]]},
+    {t:"Cumplir la política educativa y los diseños curriculares.", r:[["l26206", "art. 67, obligaciones, inc. b"]]},
+    {t:"Participar en la formulación, la ejecución y la evaluación del proyecto institucional.", r:[["l8391", "art. 105, inc. 4"]]},
+    {t:"Respetar la dignidad y la autonomía de los estudiantes, sin manipulación ni violencia.", r:[["l8391", "art. 105, inc. 3"], ["l26206", "art. 67, obligaciones, inc. f"]]},
+    {t:"Proteger los derechos de las niñas, niños y adolescentes a tu cargo y comunicar cuando estén vulnerados.", r:[["l26206", "art. 67, obligaciones, inc. e"], ["l26061", ""]]},
+    {t:"Formarte y actualizarte de manera permanente.", r:[["est", "art. 5, inc. 6"], ["l8391", "art. 105, inc. 5"], ["l26206", "art. 67, obligaciones, inc. c"]]},
+    {t:"Tener el título reconocido para el cargo.", r:[["l8391", "art. 105, inc. 1"]]},
+    {t:"Mantener una conducta acorde a la función.", r:[["est", "art. 5, inc. 5"]]}
+  ]
+};
+/* «¿Me corresponde?»: lo que la dirección pide con más frecuencia.
+   k: "si" corresponde, "no" no corresponde, "dep" depende. sin: no encontramos norma provincial publicada que lo regule. */
+const DER_SIT = [
+  {id:"mensajes", t:"Me escriben o me citan a reuniones virtuales fuera de horario", k:"no",
+    res:"No estás obligado, salvo una emergencia institucional que la autoridad justifique.",
+    por:["La Ley 9.897 reconoce el derecho a la desconexión desde una hora después de terminar la jornada hasta una hora antes de la siguiente.", "En esa franja no se te puede exigir responder correos ni mensajes, asistir a reuniones virtuales no programadas ni hacer tareas que no sean urgentes."],
+    r:[["l9897", "art. 3"]], hacer:["Respondé en tu horario de trabajo.", "Si te dicen que es urgente, pedí que expliquen la emergencia institucional.", "La ley todavía no estaba reglamentada en febrero de 2026: si hay conflicto, consultá a tu gremio."],
+    nota:{asunto:"Comunicaciones fuera del horario de trabajo", pedido:"solicitar que las comunicaciones y reuniones se realicen dentro de mi horario de trabajo, conforme al derecho a la desconexión digital reconocido por la Ley 9.897, art. 3, salvo emergencia institucional debidamente justificada"}},
+  {id:"extra", t:"Me piden quedarme más tiempo o hacer tareas fuera de mi horario", k:"dep",
+    res:"Tu obligación es cumplir tu jornada. Fuera de ella, no encontramos una norma provincial publicada que te obligue a trabajar sin que se reconozca ese tiempo.", sin:true,
+    por:["Debés cumplir personalmente tu jornada de trabajo (Reglamentación del Estatuto, art. 13).", "Tenés derecho a un salario justo y a condiciones laborales dignas.", "Si tu cargo es de tiempo completo o parcial (Res. 0101/5 de 2024), parte del cargo son horas institucionales, de hasta el 30 %: las tareas fuera del aula corresponden dentro de esas horas."],
+    r:[["reg", "art. 13"], ["l8391", "art. 104, incs. 2 y 6"], ["rm101", "anexo I"]],
+    hacer:["Preguntá en qué horario y con qué norma se hace el pedido.", "Pedí que la indicación quede por escrito.", "Si es habitual y no se reconoce, consultá a tu gremio."],
+    nota:{asunto:"Tareas fuera de mi horario", pedido:"solicitar que se me indique por escrito la norma que establece la tarea encomendada fuera de mi horario de trabajo y la forma en que ese tiempo se computa o reconoce"}},
+  {id:"actos", t:"Me convocan a un acto escolar o a una reunión institucional", k:"dep",
+    res:"Dentro de tu horario, en general sí corresponde. Fuera de tu horario, depende de la norma que lo disponga: pedila.", sin:true,
+    por:["Tenés que participar en el proyecto institucional y respetar las indicaciones de la autoridad.", "No encontramos una norma provincial publicada que fije la obligación de asistir a actos o reuniones fuera del horario en secundaria."],
+    r:[["l8391", "art. 105, inc. 4"], ["est", "art. 5, inc. 4"]],
+    hacer:["Si es en tu horario, asistí.", "Si es fuera de tu horario, preguntá si es obligatorio, con qué norma y cómo se compensa.", "Si no podés, avisá por escrito con anticipación."],
+    nota:{asunto:"Convocatoria fuera de mi horario", pedido:"solicitar que se me informe por escrito el carácter obligatorio de la convocatoria fuera de mi horario de trabajo, la norma que la establece y la forma en que se computa"}},
+  {id:"cambio", t:"Me cambian de curso, de turno o de escuela sin mi acuerdo", k:"no",
+    res:"No, salvo los cambios que prevé el Estatuto, dispuestos por la autoridad que corresponde.",
+    por:["Tenés derecho a mantener tu cargo, tu categoría, tu jerarquía y tu lugar de trabajo, salvo los cambios decididos conforme al Estatuto.", "Los traslados se hacen cumpliendo los requisitos que fija la ley."],
+    r:[["est", "art. 6, incs. 1 y 3"], ["l8391", "art. 104, inc. 3"]],
+    hacer:["Pedí el acto administrativo (resolución o disposición) que dispone el cambio.", "Si no estás de acuerdo, presentá tu reclamo por escrito dentro del plazo.", "Consultá a tu gremio."],
+    nota:{asunto:"Cambio en mi situación de revista", pedido:"solicitar copia del acto administrativo que dispone el cambio de curso, turno o lugar de trabajo comunicado, en resguardo del derecho previsto en el Estatuto del Docente (Ley 3470), art. 6, inc. 1"}},
+  {id:"observar", t:"La dirección quiere observar mi clase o revisar mi planificación", k:"si",
+    res:"Sí corresponde: la dirección tiene a su cargo la orientación técnica. Vos tenés derecho a criterios claros y a una devolución fundamentada.",
+    por:["Debés respetar las indicaciones técnicas de la autoridad y cumplir los diseños curriculares.", "Tenés derecho a ser evaluado con criterios objetivos y fundamentados, y a la libertad de cátedra dentro del proyecto institucional."],
+    r:[["est", "art. 5, inc. 4"], ["l26206", "art. 67, obligaciones, inc. b"], ["l8391", "art. 104, incs. 1 y 10"]],
+    hacer:["Pedí de antemano qué se va a observar y con qué criterios.", "Pedí la devolución por escrito.", "Si no estás de acuerdo con la devolución, dejá tu opinión por escrito."],
+    nota:{asunto:"Observación de clase", pedido:"solicitar que se me informen con anticipación los criterios de la observación de clase y que la devolución se realice por escrito, conforme a la Ley 8391, art. 104, inc. 10"}},
+  {id:"acta", t:"Me piden firmar un acta, una notificación o un llamado de atención", k:"dep",
+    res:"Firmar suele acreditar que te notificaste, no que estás de acuerdo. Podés dejar constancia de tu desacuerdo y presentar tu descargo.",
+    por:["Tenés derecho a defenderte y a usar los recursos que prevén el Estatuto y las leyes.", "Es práctica habitual firmar con la aclaración «Me notifico. No presto conformidad» cuando no estás de acuerdo. No es un artículo de una norma: confirmalo con tu gremio en tu caso."],
+    r:[["est", "art. 6, inc. 15"], ["cn", ""]],
+    hacer:["Leé todo antes de firmar y pedí una copia.", "Si no estás de acuerdo, aclaralo al firmar y presentá tu descargo por escrito.", "No firmes declaraciones en blanco ni hojas incompletas."],
+    nota:{asunto:"Descargo", pedido:"presentar mi descargo respecto del acta o notificación de fecha ____, de la que me notifiqué sin prestar conformidad, y solicitar que este escrito se agregue a mis antecedentes"}},
+  {id:"sancion", t:"Me sancionan o me hablan de un sumario", k:"dep",
+    res:"Antes de una sanción tenés derecho a conocer los hechos que se te atribuyen y a defenderte.",
+    por:["La Constitución garantiza la defensa de los derechos.", "El Estatuto prevé los recursos para defenderlos y una Junta de Disciplina en la que participan docentes."],
+    r:[["cn", ""], ["est", "art. 6, incs. 11 y 15"]],
+    hacer:["Pedí por escrito los hechos, la norma y el plazo para el descargo.", "Guardá copia de todo lo que firmes y presentes.", "Consultá a tu gremio antes de declarar."],
+    nota:{asunto:"Pedido de información", pedido:"solicitar que se me informen por escrito los hechos que se me atribuyen, la norma aplicable y el plazo para presentar mi descargo, en ejercicio de mi derecho de defensa (Constitución Nacional, art. 18; Estatuto del Docente, art. 6, inc. 15)"}},
+  {id:"edificio", t:"El aula o la escuela no es segura", k:"no",
+    res:"No tenés que aceptarlo en silencio: trabajar en condiciones de higiene y seguridad es tu derecho.",
+    por:["Tenés derecho a condiciones pedagógicas, de higiene y seguridad en el edificio escolar.", "Los estudiantes también tienen derecho a aprender en edificios seguros."],
+    r:[["est", "art. 6, inc. 7"], ["l8391", "art. 104, inc. 6"], ["l26206", "arts. 67, inc. e, y 126, inc. j"]],
+    hacer:["Informá por escrito a la dirección, con fecha y fotos del lugar (sin estudiantes).", "Si no hay respuesta, informá a la supervisión.", "Ante un riesgo inmediato, sacá a los estudiantes del lugar y avisá."],
+    nota:{asunto:"Condiciones de seguridad", pedido:"informar las condiciones de seguridad que detallo y solicitar que se adopten las medidas necesarias, conforme al Estatuto del Docente, art. 6, inc. 7, y a la Ley 8391, art. 104, inc. 6"}},
+  {id:"propios", t:"Me piden usar mi celular, mis datos o materiales propios", k:"no",
+    res:"No es una obligación: la escuela tiene que darte el soporte tecnológico y didáctico necesario. Si lo hacés, es por decisión tuya.",
+    por:["Tenés derecho a disponer en la escuela del soporte tecnológico y didáctico necesario.", "Fuera de tu horario, además, rige el derecho a la desconexión."],
+    r:[["l8391", "art. 104, inc. 11"], ["l9897", "art. 3"]],
+    hacer:["Pedí los recursos que la escuela tiene para la tarea.", "Si usás tu celular, no compartas tu número personal si no querés: usá los canales de la escuela."],
+    nota:{asunto:"Recursos para la tarea", pedido:"solicitar los recursos tecnológicos y didácticos necesarios para la tarea encomendada, conforme a la Ley 8391, art. 104, inc. 11"}},
+  {id:"gremio", t:"Me ponen trabas para afiliarme o participar de mi gremio", k:"no",
+    res:"No corresponde: la libre agremiación es un derecho.",
+    por:["Tenés derecho a afiliarte libremente y a participar en la defensa de tus intereses profesionales."],
+    r:[["est", "art. 6, inc. 10"], ["l8391", "art. 104, inc. 7"], ["l26206", "art. 67, inc. m"]],
+    hacer:["Consultá a tu gremio qué franquicias gremiales rigen para asistir a asambleas.", "Si hay presiones, dejá constancia por escrito."],
+    nota:null},
+  {id:"nota", t:"Me piden cambiar una nota o aprobar a un estudiante", k:"dep",
+    res:"La calificación tiene que basarse en criterios fundamentados y en el régimen de evaluación vigente. La dirección puede pedirte que la revises, pero no inventar una nota.", sin:true,
+    por:["Los estudiantes tienen derecho a ser evaluados con criterios rigurosos y a conocerlos.", "No encontramos publicado el régimen de evaluación de secundaria de Tucumán vigente para citar el artículo exacto."],
+    r:[["l26206", "art. 126, inc. e"], ["l8391", "art. 100, inc. 3"]],
+    hacer:["Mostrá tus criterios, tus instrumentos y las notas registradas.", "Si te piden un cambio, pedilo por escrito con su fundamento.", "Si corresponde una nueva instancia (recuperatorio, comisión), proponela."],
+    nota:{asunto:"Calificación", pedido:"solicitar por escrito el fundamento y la norma del régimen de evaluación por los que se me requiere modificar la calificación de un estudiante, y adjuntar mis criterios e instrumentos de evaluación"}},
+  {id:"recreo", t:"Me piden cuidar un recreo o quedarme con un curso que no es mío", k:"dep",
+    res:"No encontramos una norma provincial publicada que lo regule para secundaria. Si los estudiantes quedan a tu cargo, no podés dejarlos solos.", sin:true,
+    por:["Tenés la obligación de proteger los derechos de las niñas, niños y adolescentes a tu cargo.", "Si tu cargo tiene horas institucionales (Res. 0101/5 de 2024), estas tareas pueden corresponder dentro de esas horas."],
+    r:[["l26206", "art. 67, obligaciones, inc. e"], ["rm101", "anexo I"]],
+    hacer:["Si quedás a cargo, quedate con el grupo hasta que llegue quien corresponda.", "Si se vuelve habitual, pedí la indicación por escrito con la norma."],
+    nota:{asunto:"Tareas de cuidado fuera de mi horario o de mis cursos", pedido:"solicitar que se me indique por escrito la norma por la que se me asigna el cuidado de estudiantes fuera de mis cursos u horario, y la forma en que ese tiempo se computa"}},
+  {id:"licencia", t:"Me niegan o me cuestionan una licencia", k:"dep",
+    res:"Depende de la licencia: el régimen es el Decreto 505/14. Revisá el artículo en «Licencias y feriados».",
+    por:["Las licencias docentes de Tucumán están reguladas por el Decreto 505/14 y sus modificatorias.", "Tenés derecho a las licencias que el régimen te reconoce."],
+    r:[["est", "art. 6, inc. 12"]],
+    hacer:["Abrí «Licencias y feriados» y buscá la licencia: tiene el artículo, los días y si es con goce.", "Pedí la negativa por escrito y con el artículo en que se basa."],
+    nota:{asunto:"Licencia", pedido:"solicitar que se me informe por escrito el fundamento normativo de la negativa a la licencia solicitada en fecha ____, conforme al régimen de licencias (Decreto 505/14)"}, lic:true}
+];
+const DER_K = {si:["Sí corresponde", "si"], no:["No corresponde", "no"], dep:["Depende", "dep"]};
+const DER_PASOS = [
+  "Pedí que el pedido o la indicación quede por escrito, con la norma que la fundamenta.",
+  "Respondé por escrito, con una nota a la dirección. Entregala con copia y pedí que te firmen la copia como recibida.",
+  "Si no hay respuesta o no estás de acuerdo, elevá la nota a la supervisión.",
+  "Consultá a tu gremio (en escuelas estatales, por ejemplo, ATEP; en escuelas privadas, SADOP) antes de firmar o de declarar.",
+  "Si corresponde, presentá el recurso que prevé el Estatuto dentro del plazo que te indiquen. Guardá copia de todo."
+];
+const DER_EST = {
+  derechos:[
+    {t:"Recibir una educación integral, de calidad e igualitaria.", r:[["l26206", "art. 126, inc. a"], ["l8391", "art. 100, inc. 1"]]},
+    {t:"Ser respetados en su dignidad, su integridad y sus convicciones, y ser protegidos contra agresiones físicas, psicológicas o morales.", r:[["l26206", "art. 126, incs. b y d"], ["l8391", "art. 100, inc. 2"]]},
+    {t:"Ser evaluados con criterios rigurosos y fundamentados, y conocer los resultados.", r:[["l26206", "art. 126, inc. e"], ["l8391", "art. 100, inc. 3"]]},
+    {t:"Concurrir a la escuela hasta terminar la educación obligatoria, con el apoyo económico, social y pedagógico necesario.", r:[["l26206", "art. 126, incs. c y f"]]},
+    {t:"Recibir apoyo psicopedagógico cuando lo necesiten.", r:[["l8391", "art. 100, inc. 5"]]},
+    {t:"Opinar y ser escuchados en los asuntos que los afectan, y que su opinión se tenga en cuenta.", r:[["l26061", "art. 24"]]},
+    {t:"Ser escuchados y formular su descargo antes de una sanción.", r:[["l26892", "arts. 2, inc. h, y 6, inc. d"]]},
+    {t:"Organizarse en centros de estudiantes.", r:[["l26206", "art. 126, inc. h"], ["l8391", "art. 100, inc. 7"]]},
+    {t:"Recibir orientación vocacional y ocupacional.", r:[["l26206", "art. 126, inc. g"], ["l8391", "art. 100, inc. 8"]]},
+    {t:"Aprender en edificios seguros y salubres.", r:[["l26206", "art. 126, inc. j"], ["l8391", "art. 100, inc. 6"]]},
+    {t:"Un régimen especial de asistencia durante el embarazo y la lactancia.", r:[["l8391", "art. 100, inc. 10"]]}
+  ],
+  obligaciones:[
+    {t:"Estudiar y esforzarse según sus capacidades.", r:[["l26206", "art. 127, inc. a"], ["l8391", "art. 101, inc. 6"]]},
+    {t:"Asistir a clase con regularidad y puntualidad.", r:[["l26206", "art. 127, inc. f"]]},
+    {t:"Participar en las actividades formativas.", r:[["l26206", "art. 127, inc. b"], ["l8391", "art. 101, inc. 3"]]},
+    {t:"Respetar a docentes, autoridades y compañeros, su libertad de conciencia, su dignidad y su intimidad.", r:[["l26206", "art. 127, inc. c"], ["l8391", "art. 101, incs. 2 y 5"]]},
+    {t:"Cumplir las normas de convivencia y contribuir a un buen clima de estudio.", r:[["l26206", "art. 127, incs. d y e"], ["l8391", "art. 101, inc. 2"]]},
+    {t:"Cuidar el edificio, el equipamiento y los materiales.", r:[["l26206", "art. 127, inc. g"], ["l8391", "art. 101, inc. 7"]]},
+    {t:"Respetar los símbolos patrios.", r:[["l8391", "art. 101, inc. 4"]]}
+  ],
+  sanciones:[
+    {t:"Tienen carácter educativo: buscan que el estudiante se haga responsable de sus actos.", r:[["l26892", "art. 6, inc. a"]]},
+    {t:"Son graduales y proporcionales a la falta.", r:[["l26892", "art. 6, inc. b"]]},
+    {t:"Consideran el contexto, los antecedentes y la mirada de todos, con igualdad ante las normas.", r:[["l26892", "art. 6, inc. c"]]},
+    {t:"Garantizan que el estudiante sea escuchado y pueda hacer su descargo.", r:[["l26892", "art. 6, inc. d"]]},
+    {t:"Están prohibidas las sanciones que atenten contra el derecho a la educación o impidan que el estudiante siga en la escuela.", r:[["l26892", "art. 7"]]},
+    {t:"Los acuerdos de convivencia se elaboran y revisan con la participación de los estudiantes.", r:[["l26892", "art. 4, incs. c y d"]]}
+  ]
+};
+const DER = {tab:"pedidos", sel:"", notaSit:""};
+function htmlRefs(r){ return `<span class="der-ref">${r.map(x => `<a href="${esc(DER_NORMAS[x[0]].u)}" target="_blank" rel="noopener">${esc(derRef(x))}</a>`).join(" · ")}</span>`; }
+function htmlDerLista(L){ return `<ul class="der-l">${L.map(x => `<li><span>${esc(x.t)}</span>${htmlRefs(x.r)}</li>`).join("")}</ul>`; }
+function htmlDerAviso(){ return `<p class="der-aviso">Información orientativa, armada con el texto de cada norma. No reemplaza el asesoramiento de tu gremio ni de un abogado. Revisado el ${esc(fechaCortaIso(DER_REVISION))}.</p>`; }
+function htmlDerSit(S){
+  const K = DER_K[S.k];
+  return `<article class="der-sit" aria-labelledby="der-sit-t">
+    <div class="der-top"><h3 id="der-sit-t">${esc(S.t)}</h3><span class="der-k ${K[1]}">${K[0]}</span></div>
+    <p class="der-res">${esc(S.res)}</p>
+    <h4>Por qué</h4><ul class="cp-reglas">${S.por.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+    <p class="hint">Normas: ${htmlRefs(S.r)}</p>
+    ${S.sin ? `<p class="aviso-c">No encontramos una norma provincial publicada que lo regule con precisión. Por eso conviene pedir la indicación por escrito, con la norma que la fundamenta.</p>` : ""}
+    <h4>Qué hacer</h4><ol class="cp-reglas">${S.hacer.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+    <div class="cur-bar">${S.nota ? `<button type="button" class="btn btn-sm btn-primary" data-der="nota" data-dersit="${S.id}">Armar la nota a la dirección</button>` : ""}${S.lic && $("btn-licalc") ? `<button type="button" class="btn btn-sm" data-der="lic">Abrir «Licencias y feriados»</button>` : ""}<button type="button" class="btn btn-sm" data-der="volver">Ver otras situaciones</button></div></article>`;
+}
+function htmlDerPedidos(){
+  if (DER.sel){ const S = DER_SIT.find(x => x.id === DER.sel); if (S) return htmlDerSit(S); }
+  return `<p class="hint">Elegí lo que te pidieron: te decimos si te corresponde, por qué, con qué norma y qué hacer.</p>
+    <div class="cv-sits der-sits" role="group" aria-label="Situación">${DER_SIT.map(x => `<button type="button" class="cv-sit" data-dersel="${x.id}"><b>${esc(x.t)}</b><small><span class="der-k ${DER_K[x.k][1]}">${DER_K[x.k][0]}</span></small></button>`).join("")}</div>`;
+}
+function htmlDerDocente(){
+  return `<h3 class="der-h">Tus derechos</h3>${htmlDerLista(DER_DOC.derechos)}<h3 class="der-h">Tus obligaciones</h3>${htmlDerLista(DER_DOC.obligaciones)}
+    <div class="cur-bar"><button type="button" class="btn btn-sm" data-der="bajardoc">Descargar en Word</button></div>`;
+}
+function htmlDerEstudiantes(){
+  return `<p class="hint">Lo que dicen la Ley de Educación Nacional, la Ley de Educación de Tucumán, la ley de convivencia y la de protección integral. El acuerdo de convivencia de tu escuela los desarrolla.</p>
+    <h3 class="der-h">Derechos de los estudiantes</h3>${htmlDerLista(DER_EST.derechos)}
+    <h3 class="der-h">Obligaciones de los estudiantes</h3>${htmlDerLista(DER_EST.obligaciones)}
+    <h3 class="der-h">Cómo tienen que ser las sanciones</h3>${htmlDerLista(DER_EST.sanciones)}
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-der="bajarest">Descargar para el aula (Word)</button>${$("btn-conv") ? `<button type="button" class="btn btn-sm" data-der="conv">Convivencia: qué hacer</button>` : ""}</div>`;
+}
+function htmlDerReclamar(){
+  const opts = DER_SIT.filter(x => x.nota).map(x => `<option value="${x.id}"${DER.notaSit === x.id ? " selected" : ""}>${esc(x.t)}</option>`).join("");
+  return `<h3 class="der-h">Los pasos</h3><ol class="cp-reglas">${DER_PASOS.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+    <h3 class="der-h">Nota a la dirección</h3>
+    <p class="hint">Elegí la situación, completá los hechos y descargala en Word para imprimir y firmar. Entregá dos copias y pedí que te firmen una como recibida.</p>
+    <div class="f"><label for="der-nsit">Situación</label><select id="der-nsit"><option value="">Elegí una situación</option>${opts}</select></div>
+    <div class="f"><label for="der-nhechos">Qué pasó (fecha, quién lo pidió y qué se pidió)</label><textarea id="der-nhechos" rows="4" placeholder="Ej.: El 30/10, la vicedirección me indicó por mensaje a las 22 h que…"></textarea></div>
+    <div class="f"><label for="der-ndest">Dirigida a</label><input id="der-ndest" value="Sr./Sra. Director/a"></div>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-der="nota-bajar">Descargar la nota (Word)</button><button type="button" class="btn btn-sm" data-der="nota-copiar">Copiar el texto</button></div>
+    <p class="hint" id="der-nst" role="status"></p>`;
+}
+function htmlDerFuentes(){
+  return `<details class="cur-sub"><summary>Fuentes</summary><ul class="cp-fuentes">${Object.values(DER_NORMAS).map(x => `<li><a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.n)}</a> <small>${esc(x.f)}</small></li>`).join("")}</ul></details>`;
+}
+const DER_TABS = [["pedidos", "¿Me corresponde?"], ["docente", "Docentes"], ["estudiantes", "Estudiantes"], ["reclamar", "Reclamar"]];
+function renderDerechos(){
+  const P = $("der-panel"); if (!P) return;
+  document.querySelectorAll('[data-tabs="der"] [data-tab]').forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tab === DER.tab)));
+  const cuerpo = DER.tab === "docente" ? htmlDerDocente() : DER.tab === "estudiantes" ? htmlDerEstudiantes() : DER.tab === "reclamar" ? htmlDerReclamar() : htmlDerPedidos();
+  P.innerHTML = htmlDerAviso() + cuerpo + htmlDerFuentes();
+}
+function textoNotaDer(){
+  const S = DER_SIT.find(x => x.id === ($("der-nsit") ? $("der-nsit").value : DER.notaSit));
+  if (!S || !S.nota) return null;
+  const hechos = ($("der-nhechos") ? $("der-nhechos").value : "").trim();
+  const dest = (($("der-ndest") ? $("der-ndest").value : "") || "Sr./Sra. Director/a").trim();
+  const esc2 = val("institucion");
+  const cuerpo = [`${dest}${esc2 ? `\n${esc2}` : ""}`, "S/D", "", `Me dirijo a usted a fin de ${S.nota.pedido}.`, "", hechos ? `Hechos: ${hechos}` : "Hechos: ______________________________________________", "", `Normas en que fundo este pedido: ${S.r.map(derRef).join("; ")}.`, "", "Solicito que se me responda por escrito.", "", "Sin otro particular, saludo a usted atentamente."].join("\n");
+  return {S, cuerpo, asunto:S.nota.asunto};
+}
+function modeloNotaDer(N){
+  return {inst:val("institucion"), titulo:"Nota", subtitulo:N.asunto, faltaSub:"", datos:[["Lugar y fecha", `San Miguel de Tucumán, ${(d => `${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`)(new Date())}`], ["Docente", val("docente") || BLANCO], ["DNI", BLANCO], ["Cargo, curso y turno", BLANCO]],
+    secs:[{sinH:true, body:N.cuerpo}], firmas:[["", "Firma y aclaración"], ["", "Recibido (firma, sello y fecha)"]]};
+}
+function modeloDerDocente(){
+  const L = l => l.map(x => `- ${x.t} (${x.r.map(derRef).join("; ")})`).join("\n");
+  return {inst:val("institucion") || "Documento personal", titulo:"Derechos y obligaciones docentes", subtitulo:"Provincia de Tucumán", faltaSub:"", datos:[["Revisado", fechaCortaIso(DER_REVISION)]],
+    secs:[{h:"Derechos", body:L(DER_DOC.derechos)}, {h:"Obligaciones", body:L(DER_DOC.obligaciones)}, {h:"Fuentes", body:Object.values(DER_NORMAS).map(x => `- ${x.n}: ${x.u}`).join("\n")}, {h:"Aclaración", body:"Información orientativa armada con el texto de cada norma. No reemplaza el asesoramiento gremial ni legal."}], firmas:null};
+}
+function modeloDerEstudiantes(){
+  const L = l => l.map(x => `- ${x.t} (${x.r.map(derRef).join("; ")})`).join("\n");
+  return {inst:val("institucion"), titulo:"Nuestros derechos y obligaciones", subtitulo:"Estudiantes de la escuela secundaria", faltaSub:"", datos:[["Curso", val("curso") || BLANCO]],
+    secs:[{h:"Tenemos derecho a", body:L(DER_EST.derechos)}, {h:"Nos comprometemos a", body:L(DER_EST.obligaciones)}, {h:"Si hay una sanción", body:L(DER_EST.sanciones)}, {h:"Para hablarlo en clase", body:"1. ¿Qué derecho les parece más importante y por qué?\n2. ¿Qué obligación cuesta más cumplir en el curso?\n3. ¿Qué dice nuestro acuerdo de convivencia sobre esto?"}], firmas:null};
+}
+function abrirDerechos(tab, sel){
+  if (tab) DER.tab = tab;
+  DER.sel = sel || (tab ? "" : DER.sel);
+  renderDerechos(); abrirDialogo("derechos");
+}
+function prepararDerechos(){
+  if (!$("derechos")) document.body.insertAdjacentHTML("beforeend", `<dialog class="lib bancodlg" id="derechos" aria-labelledby="derechos-t"><div class="lib-in">
+    <div class="lib-head"><h2 id="derechos-t">Derechos y obligaciones</h2><button type="button" class="linkbtn" data-cerrar="derechos">Cerrar</button></div>
+    <p class="hint">Qué te corresponde y qué no ante un pedido de la dirección, y los derechos y obligaciones de los estudiantes, con la norma y el artículo.</p>
+    <div class="seg tabs" role="group" aria-label="Sección" data-tabs="der">${DER_TABS.map(([k, n]) => `<button type="button" data-tab="${k}" aria-pressed="${k === DER.tab}">${n}</button>`).join("")}</div>
+    <div class="cp-panel" id="der-panel"></div></div></dialog>`);
+  const conv = $("btn-conv");
+  if (conv && !$("btn-derechos")) conv.insertAdjacentHTML("afterend", `<button type="button" role="menuitem" id="btn-derechos"><b>Derechos y obligaciones</b><small>Qué te corresponde ante la dirección y los derechos de los estudiantes, con la norma</small></button>`);
+}
+/* Se arma antes de init(): así el menú lateral y el buscador de herramientas ya lo incluyen */
+try { prepararDerechos(); } catch (e) { logSilencioso(e); }
+function bindDerechos(){
+  const b = $("btn-derechos"); if (b) b.addEventListener("click", () => abrirDerechos());
+  const D = $("derechos"); if (!D || D.dataset.ok) return; D.dataset.ok = "1";
+  D.addEventListener("click", async e => {
+    const tb = e.target.closest('[data-tabs="der"] [data-tab]'); if (tb){ DER.tab = tb.dataset.tab; DER.sel = ""; renderDerechos(); return; }
+    const s = e.target.closest("[data-dersel]"); if (s){ DER.sel = s.dataset.dersel; renderDerechos(); const h = $("der-sit-t"); if (h){ h.tabIndex = -1; h.focus(); } return; }
+    const a = e.target.closest("[data-der]"); if (!a) return;
+    const acc = a.dataset.der;
+    if (acc === "volver"){ const prev = DER.sel; DER.sel = ""; renderDerechos(); const v = D.querySelector(`[data-dersel="${prev}"]`); if (v) v.focus(); return; }
+    if (acc === "nota"){ DER.notaSit = a.dataset.dersit; DER.tab = "reclamar"; DER.sel = ""; renderDerechos(); const t = $("der-nhechos"); if (t) t.focus(); return; }
+    if (acc === "lic"){ cerrarDialogo("derechos"); $("btn-licalc").click(); return; }
+    if (acc === "conv"){ cerrarDialogo("derechos"); $("btn-conv").click(); return; }
+    if (acc === "bajardoc"){ bajarDoc(modeloDerDocente(), `derechos-y-obligaciones-docentes-${hoyIso()}`, "docx", "Derechos y obligaciones docentes descargados."); return; }
+    if (acc === "bajarest"){ bajarDoc(modeloDerEstudiantes(), `derechos-y-obligaciones-estudiantes-${hoyIso()}`, "docx", "Documento para el aula descargado."); return; }
+    if (acc === "nota-bajar" || acc === "nota-copiar"){
+      const N = textoNotaDer(), st = $("der-nst");
+      if (!N){ st.textContent = "Elegí la situación primero."; $("der-nsit").focus(); return; }
+      if (acc === "nota-copiar"){ try { await navigator.clipboard.writeText(`${N.asunto}\n\n${N.cuerpo}`); st.textContent = "Texto copiado."; } catch (err) { st.textContent = "No se pudo copiar: descargala en Word."; } return; }
+      bajarDoc(modeloNotaDer(N), `nota-${N.S.id}-${hoyIso()}`, "docx", "Nota descargada. Imprimí dos copias, firmalas y pedí el recibido en una.");
+    }
+  });
+  D.addEventListener("change", e => { if (e.target.id === "der-nsit"){ DER.notaSit = e.target.value; $("der-nst").textContent = ""; } });
+}
+function init55(){
+  try { bindDerechos(); } catch (e) { registrarError("init55", e); }
+  try { const T = TAREAS_INICIO.find(x => x.t === "Mi carrera"); if (T && !T.i.some(([id]) => id === "btn-derechos")) T.i.push(["btn-derechos", "Derechos y obligaciones"]); renderPanel(); } catch (e) { logSilencioso(e); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -22316,7 +22635,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
