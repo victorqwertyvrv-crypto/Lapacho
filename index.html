@@ -1682,6 +1682,12 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .cv-tel .btn{min-width:72px;justify-content:center;flex:none}
 .cv-mail{min-width:72px;text-align:center;font-weight:700;color:var(--accent);flex:none}
 
+.cp-nuevo{display:inline-block;margin-left:.35rem;white-space:nowrap;padding:.05rem .45rem;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:.72rem;font-weight:600;vertical-align:middle}
+.cp-cierre{font-weight:600;color:var(--ink)}
+.cp-cierre.pas{font-weight:400;color:var(--muted)}
+.cp-avisos{margin:.5rem 0 .75rem;padding:.6rem .75rem;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.cp-avisos .hint{margin:.35rem 0 0}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -2010,7 +2016,8 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
-      <details class="faq"><summary>¿Qué hago ante una pelea, un caso de acoso o algo grave en la escuela?</summary><p>En «Herramientas › Para la escuela › Convivencia: qué hacer» (o desde «Mi curso › Conducta») elegís la situación y ves qué hacer, qué no hacer y a quién avisar, según la guía provincial para situaciones escolares complejas (2025), con los teléfonos (911, 107, 102, 144, 141 y la línea de salud mental) y un acta para completar a mano. Lapacho no guarda lo que pasó en las situaciones graves.</p></details>
+      <details class="faq"><summary>¿Cómo me entero de los cursos nuevos que suman puntaje?</summary><p>El catálogo de «Tu carrera › Capacitaciones con puntaje» se revisa todos los días. Cuando sale un curso que te suma y tiene que ver con tus materias, «Tu día» te avisa, y en el catálogo aparece marcado «Nuevo», con la fecha de cierre de la inscripción si se conoce. Tocá «Me interesa» y te avisamos tres días antes de que cierre. Podés apagar el aviso en el mismo catálogo. La inscripción la hacés vos en el enlace del curso.</p></details>
+<details class="faq"><summary>¿Qué hago ante una pelea, un caso de acoso o algo grave en la escuela?</summary><p>En «Herramientas › Para la escuela › Convivencia: qué hacer» (o desde «Mi curso › Conducta») elegís la situación y ves qué hacer, qué no hacer y a quién avisar, según la guía provincial para situaciones escolares complejas (2025), con los teléfonos (911, 107, 102, 144, 141 y la línea de salud mental) y un acta para completar a mano. Lapacho no guarda lo que pasó en las situaciones graves.</p></details>
         <details class="faq"><summary>¿Cómo se suma el puntaje de mis capacitaciones?</summary><p>En «Capacitaciones con puntaje › Mi puntaje» ves cada curso de tu legajo con lo que suma y el total: los de INFoD según las horas (Res. 1741/5), los que no suman (menos de 40 horas o fuera de la provincia, desde el Decreto 3128) y los que quedan a confirmar porque el Anexo X no está publicado. Si tu certificado dice el puntaje, cargalo y se usa ese. Es una estimación: el puntaje oficial lo fija la Junta.</p></details>
         <details class="faq"><summary>¿Qué piden para el stand de la feria de ciencias?</summary><p>En «Feria de ciencias», la sección «Stand y cartel» del proyecto y el botón «Lista para armar el stand» resumen las reglas de la Feria Nacional 2026: tríptico con todo del lado de adentro, cartel de 60 × 22 cm, carpeta de campo a la vista, informe impreso para los visitantes, electricidad y lo que no se puede llevar (seres vivos, fuego, vidrio, químicos, líquidos, alimentos, cinta bifaz). Para la feria de Tucumán, confirmá las reglas con la organización.</p></details>
         <details class="faq"><summary>¿Cómo organizo la muestra de la escuela?</summary><p>En «Herramientas › Para la escuela › Muestra de la escuela» cargás el tipo de muestra, la fecha, el lugar y un stand por línea (o traés tus cursos). Lapacho arma el proyecto para la dirección con el cronograma de preparación, una ficha por stand con los turnos y el guion, la invitación a las familias con talón, la planilla para valorar la exposición y la lista para el día.</p></details>
@@ -4645,6 +4652,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-31-b", fecha:"2026-10-31", items:[
+    "Capacitaciones con puntaje: cuando sale un curso que te suma y tiene que ver con tus materias, «Tu día» te avisa. En el catálogo aparece marcado «Nuevo» y con la fecha de cierre de la inscripción. El catálogo se revisa todos los días.",
+    "Si tocás «Me interesa» en un curso del catálogo que tiene fecha de cierre, te avisamos tres días antes de que cierre la inscripción."
+  ]},
   {id:"2026-10-31-a", fecha:"2026-10-31", items:[
     "Muestra de la escuela: actividades para que los visitantes participen, sugeridas según el tema de cada stand (más de 50, de Física, Química, Biología, Matemática, Ciencias Sociales, Lengua, Arte y Tecnología), todas dentro de las reglas de seguridad. Las que elegís van a la ficha del stand y al proyecto.",
     "Capacitaciones con puntaje › «Mi puntaje»: cuánto suma cada curso de tu legajo y el total, con cómo se calculó (INFoD por horas, cursos que no suman desde el Decreto 3128 y los que quedan a confirmar). Se descarga un resumen para revisar el puntaje en la Junta.",
@@ -11245,7 +11256,7 @@ async function leerCursoCaptura(files){
 }
 const CP = {tab:"buscar", q:"", soloMias:true, soloGratis:false, chk:null, extra:0};
 function capInt(){ return leerLista(LEG_KEY, {}).capInt || []; }
-function htmlCursoCat(c){
+function htmlCursoCatBase(c){
   const rel = relacionCurso(c.area, `${c.n} ${c.dest}`);
   const ev = evaluarCurso({infod:c.infod, web:c.web, res:c.res, horas:c.horas, areas:c.area, txt:""});
   const anotado = capInt().some(x => x.cat === c.id);
@@ -11257,7 +11268,7 @@ function htmlCursoCat(c){
     ${rel ? `<span class="cp-rel ${rel.k}">${rel.t}</span>` : ""}${c.nota ? `<small class="cp-nota">${esc(c.nota)}</small>` : ""}
     <div class="cur-bar"><a class="btn btn-sm" href="${esc(c.url)}" target="_blank" rel="noopener">Ver el curso</a>${c.web ? "" : `<button type="button" class="btn btn-sm" data-cpint="${c.id}"${anotado ? " disabled" : ""}>${anotado ? "Ya está en «Mis cursos»" : "Me interesa"}</button>`}</div></li>`;
 }
-function renderCapac(){
+function renderCapacBase(){
   document.querySelectorAll('[data-tabs="cp"] [data-tab]').forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tab === CP.tab)));
   const P = $("cp-panel");
   if (CP.tab === "buscar"){
@@ -11325,12 +11336,12 @@ function anotarCurso(o){
   if (guardarLista(LEG_KEY, L)){ toast("Guardado en «Mis cursos»."); renderTuDia(); return true; }
   return false;
 }
-function avisosCapac(){
+function avisosCapacBase(){
   const hoy = hoyIso(), d3 = (() => { const d = new Date(); d.setDate(d.getDate() + 3); return isoDe(d); })();
   return capInt().filter(x => x.estado === "interesa" && x.cierre && x.cierre >= hoy && x.cierre <= d3).slice(0, 2)
     .map(x => ({f:x.cierre, t:`Cierra el ${dm(fechaDe(x.cierre))} la inscripción al curso «${x.n}».`, act:"capac"}));
 }
-function abrirCapac(tab){
+function abrirCapacBase(tab){
   abrirDialogo("capac");
   if (tab) CP.tab = tab;
   renderCapac();
@@ -11342,7 +11353,7 @@ function bindCapac(){
     const tb = t.closest('[data-tabs="cp"] [data-tab]'); if (tb){ CP.tab = tb.dataset.tab; renderCapac(); return; }
     const f = t.closest("[data-cpf]"); if (f){ CP[f.dataset.cpf] = !CP[f.dataset.cpf]; renderCapac(); return; }
     const it = t.closest("[data-cpint]");
-    if (it){ const c = CAPAC.find(x => x.id === it.dataset.cpint); if (!c) return; const ev = evaluarCurso({infod:c.infod, web:c.web, res:c.res, horas:c.horas}); anotarCurso({cat:c.id, n:c.n, inst:c.inst, horas:c.horas || "", res:c.res || (c.infod ? "INFoD" : ""), pts:ev.pts, url:c.url, cierre:""}); renderCapac(); return; }
+    if (it){ const c = CAPAC.find(x => x.id === it.dataset.cpint); if (!c) return; const ev = evaluarCurso({infod:c.infod, web:c.web, res:c.res, horas:c.horas}); anotarCurso({cat:c.id, n:c.n, inst:c.inst, horas:c.horas || "", res:c.res || (c.infod ? "INFoD" : ""), pts:ev.pts, url:c.url, cierre:c.cierre || ""}); renderCapac(); return; }
     const a = t.closest("[data-cp]");
     if (a && a.dataset.cp === "revisar"){ const txt = $("cp-txt").value.trim(); if (!txt){ toast("Pegá el texto o cargá una captura del curso."); return; } CP.chk = {...(CP.chk || {}), txt, ...datosDeTexto(txt)}; renderCapac(); return; }
     if (a && a.dataset.cp === "anotar"){ const C = CP.chk || {}; const ev = evaluarCurso(C); if (!C.nombre){ toast("Escribí el nombre del curso."); $("cp-n").focus(); return; } anotarCurso({n:C.nombre, inst:C.inst || "", horas:C.horas || "", res:C.infod ? "INFoD" : C.res || "", pts:ev.pts, url:C.url || "", cierre:C.cierre || ""}); CP.chk = null; CP.tab = "mios"; renderCapac(); return; }
@@ -16283,7 +16294,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "43 (31/10/2026)";
+const LAPACHO_VERSION = "43.1 (31/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -21070,6 +21081,115 @@ function init52(){
 }
 
 /* ============================================================
+   Versión 43.1: cursos nuevos que suman puntaje
+   ============================================================ */
+/* Cada curso del catálogo puede llevar alta (fecha en que se sumó al catálogo, AAAA-MM-DD)
+   y cierre (último día de inscripción). La tarea diaria que revisa los cursos los completa. */
+function capVistoDesde(){
+  const v = leerPref().capVisto;
+  if (v) return v;
+  const d = new Date(); d.setDate(d.getDate() - 14); return isoDe(d);
+}
+function capAvisosOn(){ return leerPref().capAvisos !== false; }
+function capCursoSirve(c){
+  if (!c || c.web || c.est === "cerrada") return false;
+  if (c.cierre && c.cierre < hoyIso()) return false;
+  const ev = evaluarCurso({infod:c.infod, web:c.web, res:c.res, horas:c.horas, areas:c.area, txt:""});
+  if (ev.suma === false) return false;
+  const rel = relacionCurso(c.area, `${c.n} ${c.dest}`);
+  return !rel || rel.k !== "baja";
+}
+/* Ids del catálogo que este dispositivo ya conoce: sirve para los cursos que llegan sin fecha de alta */
+function capIdsConocidos(){ const v = leerPref().capIds; return Array.isArray(v) ? v : null; }
+function capEsNuevo(c, desde, ids){
+  if (c.alta) return c.alta > desde;
+  return !!ids && !ids.includes(c.id);
+}
+function capNuevos(desde, ids){
+  const d = desde || capVistoDesde(), I = ids === undefined ? capIdsConocidos() : ids, anot = new Set(capInt().map(x => x.cat).filter(Boolean));
+  return CAPAC.filter(c => capEsNuevo(c, d, I) && !anot.has(c.id) && capCursoSirve(c))
+    .sort((a, b) => (b.alta || "").localeCompare(a.alta || ""));
+}
+function capPtsTexto(c){
+  if (c.infod && c.horas){ const p = puntosInfod(+c.horas); return p != null ? `${ptcFmt(p)} puntos` : ""; }
+  return c.infod ? "suma según las horas" : "puntaje a confirmar";
+}
+function avisosCapacNuevos(){
+  if (!capAvisosOn()) return [];
+  const L = capNuevos();
+  if (!L.length) return [];
+  const c = L[0], hasta = c.cierre ? ` Inscripción hasta el ${dm(fechaDe(c.cierre))}.` : "";
+  const t = L.length === 1
+    ? `Salió un curso que te suma: «${c.n}» (${c.inst}, ${capPtsTexto(c)}).${hasta}`
+    : `Hay ${L.length} cursos nuevos que te suman, entre ellos «${c.n}» (${c.inst}).${hasta}`;
+  return [{f:c.cierre || hoyIso(), t, act:"capnuevo"}];
+}
+/* Cursos del catálogo marcados «Me interesa» antes de que tuvieran fecha de cierre */
+function avisosCapacCat(){
+  const hoy = hoyIso(), d = new Date(); d.setDate(d.getDate() + 3); const d3 = isoDe(d);
+  return capInt().filter(x => x.estado === "interesa" && !x.cierre && x.cat).map(x => ({x, c:CAPAC.find(c => c.id === x.cat)}))
+    .filter(o => o.c && o.c.cierre && o.c.cierre >= hoy && o.c.cierre <= d3).slice(0, 2)
+    .map(o => ({f:o.c.cierre, t:`Cierra el ${dm(fechaDe(o.c.cierre))} la inscripción al curso «${o.x.n}».`, act:"capac"}));
+}
+function avisosCapac(){ return [...avisosCapacBase(), ...avisosCapacCat(), ...avisosCapacNuevos()]; }
+function htmlCursoCat(c){
+  let h = htmlCursoCatBase(c);
+  const desde = CP.visto0 || capVistoDesde(), ids = CP.ids0 === undefined ? capIdsConocidos() : CP.ids0;
+  if (capEsNuevo(c, desde, ids) && c.est !== "cerrada" && !(c.cierre && c.cierre < hoyIso())) h = h.replace("</b>", ` <span class="cp-nuevo">Nuevo</span></b>`);
+  if (c.cierre && c.est !== "cerrada"){
+    const pasado = c.cierre < hoyIso();
+    h = h.replace('<div class="cur-bar">', `<div class="cp-meta cp-cierre${pasado ? " pas" : ""}">${pasado ? "La inscripción cerró el" : "Inscripción hasta el"} ${esc(dm(fechaDe(c.cierre)))}</div><div class="cur-bar">`);
+  }
+  return h;
+}
+function htmlCapAvisos(){
+  const n = capNuevos(CP.visto0 || capVistoDesde(), CP.ids0 === undefined ? capIdsConocidos() : CP.ids0).length;
+  return `<div class="cp-avisos"><label class="cp-ck"><input type="checkbox" data-capavisos${capAvisosOn() ? " checked" : ""}> Avisarme en «Tu día» cuando salga un curso que me sume</label>
+    <p class="hint">${n ? `${n === 1 ? "Hay 1 curso nuevo que te suma" : `Hay ${n} cursos nuevos que te suman`} desde la última vez que miraste el catálogo. ` : ""}El catálogo se revisa todos los días con las publicaciones del INFoD, del Ministerio, de la UNT y de los gremios. Lapacho no te inscribe: la inscripción la hacés vos en el enlace de cada curso.</p></div>`;
+}
+function renderCapac(){
+  if (CP.tab === "buscar" && CP.visto0 === undefined){ CP.visto0 = capVistoDesde(); CP.ids0 = capIdsConocidos(); }
+  renderCapacBase();
+  if (CP.tab !== "buscar") return;
+  const P = $("cp-panel"), f = P && P.querySelector(".cg-filtros");
+  if (f) f.insertAdjacentHTML("afterend", htmlCapAvisos());
+  const hoy = hoyIso();
+  if ((leerPref().capVisto || "") < hoy) prefSet("capVisto", hoy);
+  capMarcarConocidos();
+}
+function abrirCapac(tab){
+  CP.visto0 = undefined; CP.ids0 = undefined;
+  abrirCapacBase(tab);
+}
+function bindCapNuevos(){
+  const D = $("capac"); if (!D) return;
+  D.addEventListener("change", e => {
+    const t = e.target.closest("[data-capavisos]"); if (!t) return;
+    prefSet("capAvisos", t.checked);
+    toast(t.checked ? "Te vamos a avisar en «Tu día» cuando salga un curso que te sume." : "Listo: no te avisamos de cursos nuevos.");
+    try { renderTuDia(); } catch (err) { logSilencioso(err); }
+  });
+}
+/* Los avisos de «Tu día» de capacitaciones abrían Mi curso: ahora abren el catálogo o «Mis cursos» */
+function bindCapTuDia(){
+  document.addEventListener("click", async e => {
+    const b = e.target.closest('[data-tdact="capac"], [data-tdact="capnuevo"]'); if (!b) return;
+    e.stopImmediatePropagation();
+    if (!(await exigirPIN())) return;
+    abrirCapac(b.dataset.tdact === "capnuevo" ? "buscar" : "mios");
+  }, true);
+}
+function capMarcarConocidos(){
+  const ids = CAPAC.map(c => c.id), v = capIdsConocidos() || [];
+  if (ids.some(id => !v.includes(id))) prefSet("capIds", [...new Set([...v, ...ids])]);
+}
+function init53(){
+  /* La primera vez, todo lo que ya está en el catálogo cuenta como conocido (avisan solo los que tienen alta reciente) */
+  if (!capIdsConocidos()) capMarcarConocidos();
+  bindCapNuevos(); bindCapTuDia();
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -21127,7 +21247,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
