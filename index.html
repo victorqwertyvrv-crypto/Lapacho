@@ -1643,6 +1643,45 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .mu-dest legend{font-size:13.5px;font-weight:600;margin-bottom:4px;padding:0}
 .mu-docs{flex-wrap:wrap}
 
+/* Versión 43: actividades de la muestra, puntaje de capacitaciones y convivencia */
+.mu-ideas{margin:8px 0}
+.mu-ideas>summary{cursor:pointer;list-style:none}
+.mu-ideas>summary::-webkit-details-marker{display:none}
+.mu-ideas>summary h3{display:inline}
+.mu-st{margin:10px 0}
+.mu-st h4{margin:0 0 6px;font-size:14.5px}
+.mu-ideas-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mu-idea{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);font-size:13.5px}
+.mu-idea p{margin:4px 0}
+.mu-idea small{color:var(--muted);display:block}
+.mu-idea.ele{border-color:var(--accent);background:var(--accent-soft)}
+.mu-idea .btn{flex:none}
+.mu-idea .btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.ptc-tot{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:6px 0 10px}
+.ptc-tot div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface);display:flex;flex-direction:column}
+.ptc-tot b{font-size:22px}
+.ptc-tot span{font-size:12.5px;color:var(--muted)}
+.ptc-como{margin:4px 0;font-size:13px}
+.ptc-sel{display:flex;flex-wrap:wrap;gap:8px}
+.ptc-sel select{flex:1 1 150px;width:auto;font-size:13.5px;padding:6px 8px}
+.cp-pts.est{background:var(--surface-2);color:var(--ink);font-weight:600}
+.cv-banner{margin:0 0 10px}
+.cv-sits{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin:8px 0 12px}
+.cv-sit{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface);color:var(--ink);font:inherit;font-size:13.5px;cursor:pointer}
+.cv-sit small{color:var(--muted)}
+.cv-sit[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.cv-det{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface);font-size:14px}
+.cv-det h3{margin:0}
+.cv-det h4{margin:12px 0 4px;font-size:14px}
+.cv-det ol,.cv-det ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.cv-no li::marker{color:var(--warn)}
+.cv-tel{list-style:none;margin:8px 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.cv-tel li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
+.cv-tel li>span{display:flex;flex-direction:column}
+.cv-tel small{color:var(--muted)}
+.cv-tel .btn{min-width:72px;justify-content:center;flex:none}
+.cv-mail{min-width:72px;text-align:center;font-weight:700;color:var(--accent);flex:none}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -1705,6 +1744,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <span class="menu-g">Para la escuela</span>
           <button type="button" role="menuitem" id="btn-feria"><b>Feria de ciencias</b><small>Proyecto, informe, carpeta de campo, registro pedagógico y stand</small></button>
           <button type="button" role="menuitem" id="btn-muestra"><b>Muestra de la escuela</b><small>Proyecto, fichas de stand, invitación, valoración y lista del día</small></button>
+          <button type="button" role="menuitem" id="btn-conv"><b>Convivencia: qué hacer</b><small>Cómo actuar y a quién acudir ante cada situación, según los acuerdos de convivencia</small></button>
           <button type="button" role="menuitem" id="btn-salidas"><b>Salidas educativas</b><small>Autorizaciones y planilla del día</small></button>
           <button type="button" role="menuitem" id="btn-actos"><b>Actos y efemérides</b><small>Calendario y guion del acto</small></button>
           <button type="button" role="menuitem" id="btn-actas"><b>Actas de reunión</b><small>Con familias, de área o institucionales</small></button>
@@ -1970,7 +2010,9 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
       <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
-      <details class="faq"><summary>¿Qué piden para el stand de la feria de ciencias?</summary><p>En «Feria de ciencias», la sección «Stand y cartel» del proyecto y el botón «Lista para armar el stand» resumen las reglas de la Feria Nacional 2026: tríptico con todo del lado de adentro, cartel de 60 × 22 cm, carpeta de campo a la vista, informe impreso para los visitantes, electricidad y lo que no se puede llevar (seres vivos, fuego, vidrio, químicos, líquidos, alimentos, cinta bifaz). Para la feria de Tucumán, confirmá las reglas con la organización.</p></details>
+      <details class="faq"><summary>¿Qué hago ante una pelea, un caso de acoso o algo grave en la escuela?</summary><p>En «Herramientas › Para la escuela › Convivencia: qué hacer» (o desde «Mi curso › Conducta») elegís la situación y ves qué hacer, qué no hacer y a quién avisar, según la guía provincial para situaciones escolares complejas (2025), con los teléfonos (911, 107, 102, 144, 141 y la línea de salud mental) y un acta para completar a mano. Lapacho no guarda lo que pasó en las situaciones graves.</p></details>
+        <details class="faq"><summary>¿Cómo se suma el puntaje de mis capacitaciones?</summary><p>En «Capacitaciones con puntaje › Mi puntaje» ves cada curso de tu legajo con lo que suma y el total: los de INFoD según las horas (Res. 1741/5), los que no suman (menos de 40 horas o fuera de la provincia, desde el Decreto 3128) y los que quedan a confirmar porque el Anexo X no está publicado. Si tu certificado dice el puntaje, cargalo y se usa ese. Es una estimación: el puntaje oficial lo fija la Junta.</p></details>
+        <details class="faq"><summary>¿Qué piden para el stand de la feria de ciencias?</summary><p>En «Feria de ciencias», la sección «Stand y cartel» del proyecto y el botón «Lista para armar el stand» resumen las reglas de la Feria Nacional 2026: tríptico con todo del lado de adentro, cartel de 60 × 22 cm, carpeta de campo a la vista, informe impreso para los visitantes, electricidad y lo que no se puede llevar (seres vivos, fuego, vidrio, químicos, líquidos, alimentos, cinta bifaz). Para la feria de Tucumán, confirmá las reglas con la organización.</p></details>
         <details class="faq"><summary>¿Cómo organizo la muestra de la escuela?</summary><p>En «Herramientas › Para la escuela › Muestra de la escuela» cargás el tipo de muestra, la fecha, el lugar y un stand por línea (o traés tus cursos). Lapacho arma el proyecto para la dirección con el cronograma de preparación, una ficha por stand con los turnos y el guion, la invitación a las familias con talón, la planilla para valorar la exposición y la lista para el día.</p></details>
         <details class="faq"><summary>¿Puedo cambiar con qué pantalla abre Lapacho y cómo me saluda?</summary><p>Lapacho abre en «Hoy». En Ajustes podés poner tu nombre para que te salude y elegir si preferís que abra en «Planificar».</p></details>
         <details class="faq"><summary>¿Qué le dejo al curso si adelanto una hora o falto?</summary><p>En «Herramientas › Para la clase», tocá «Actividades para cuando no estés». Elegís el curso, cuándo y desde qué tema. Lapacho toma los temas que siguen de tu planificación y arma una hoja para que trabajen en parejas sin explicación: recordar sin mirar la carpeta, un texto para leer (de Física, Química y Biología lo trae Lapacho; para otros temas indicá libro y páginas), actividades y preguntas para resolver y un cierre con su duda y un semáforo. Aparte descargás las indicaciones para quien queda a cargo y las respuestas para vos. Si vas a faltar varios días, desde «Licencias y feriados» tocá «Dejar actividades para esos días». Lapacho no envía nada: el mensaje para preceptoría lo copiás y lo mandás vos.</p></details>
@@ -2176,6 +2218,13 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
     </div>
   </dialog>
 
+  <dialog class="lib bancodlg" id="conv" aria-labelledby="conv-t">
+    <div class="lib-in">
+      <div class="lib-head"><h2 id="conv-t">Convivencia: qué hacer</h2><button type="button" class="linkbtn" data-cerrar="conv">Cerrar</button></div>
+      <div id="cv-panel"></div>
+    </div>
+  </dialog>
+
   <dialog class="lib bancodlg" id="muestra" aria-labelledby="muestra-t">
     <div class="lib-in">
       <div class="lib-head"><h2 id="muestra-t">Muestra de la escuela</h2><button type="button" class="linkbtn" data-cerrar="muestra">Cerrar</button></div>
@@ -2268,6 +2317,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
         <button type="button" data-tab="buscar" aria-pressed="true">Buscar cursos</button>
         <button type="button" data-tab="suma" aria-pressed="false">¿Me suma?</button>
         <button type="button" data-tab="mios" aria-pressed="false">Mis cursos</button>
+        <button type="button" data-tab="total" aria-pressed="false">Mi puntaje</button>
         <button type="button" data-tab="puntaje" aria-pressed="false">Cuánto subo</button>
       </div>
       <div class="cp-panel" id="cp-panel"></div>
@@ -4595,6 +4645,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-31-a", fecha:"2026-10-31", items:[
+    "Muestra de la escuela: actividades para que los visitantes participen, sugeridas según el tema de cada stand (más de 50, de Física, Química, Biología, Matemática, Ciencias Sociales, Lengua, Arte y Tecnología), todas dentro de las reglas de seguridad. Las que elegís van a la ficha del stand y al proyecto.",
+    "Capacitaciones con puntaje › «Mi puntaje»: cuánto suma cada curso de tu legajo y el total, con cómo se calculó (INFoD por horas, cursos que no suman desde el Decreto 3128 y los que quedan a confirmar). Se descarga un resumen para revisar el puntaje en la Junta.",
+    "Nuevo: «Convivencia: qué hacer» (Herramientas › Para la escuela y Mi curso › Conducta). Para cada situación, qué hacer, qué no hacer y a quién avisar según la guía provincial 2025, los teléfonos útiles y un acta para completar a mano."
+  ]},
   {id:"2026-10-27-a", fecha:"2026-10-27", items:[
     "Lapacho abre en «Hoy» y te saluda por tu nombre. Ponelo en «Hoy» o en Ajustes, donde también podés elegir que abra en «Planificar».",
     "Feria de ciencias: el stand sigue las reglas de la Feria Nacional 2026 (tríptico, cartel de 60 × 22 cm, electricidad, qué va sobre la mesa y lo que no se puede llevar) y las orientaciones de seguridad y cuidado. Nuevo botón «Lista para armar el stand».",
@@ -8481,7 +8536,7 @@ function guardarCorrector(){
 }
 
 /* ---------- Conducta ---------- */
-function htmlCond(c){
+function htmlCondBase(c){
   const als = alumnosActivos(c);
   if (!als.length) return vacioLista();
   if (!als.some(a => a.id === CUR.condAid)) CUR.condAid = als[0].id;
@@ -11252,6 +11307,7 @@ function renderCapac(){
       : `<p class="hint">Todavía no guardaste cursos. Tocá «Me interesa» en el catálogo o guardalos desde «¿Me suma?».</p>`;
     return;
   }
+  if (CP.tab === "total"){ P.innerHTML = htmlPuntajeCursos(); return; }
   if (CP.tab === "puntaje") P.innerHTML = htmlSimulador();
 }
 function htmlReglasPuntaje(){
@@ -16227,7 +16283,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "42.1 (27/10/2026)";
+const LAPACHO_VERSION = "43 (31/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -20485,7 +20541,7 @@ function muTurnos(m){
   const out = []; for (let t = a; t < b && out.length < 12; t += 30) out.push([`${lbHM(t)} a ${lbHM(Math.min(b, t + 30))}`, ""]);
   return out;
 }
-function modeloMuestra(doc){
+function modeloMuestraBase(doc){
   const m = muDatos(), S = muStands(m.stands), esc0 = val("institucion"), nom = muNombre(m), cuando = [muFechaTxt(m), muHoraTxt(m)].filter(Boolean).join(", ");
   const datos = [["Escuela", esc0], ["Fecha y horario", cuando], ["Lugar", m.lugar], ["Responsable de la organización", m.resp]];
   const destD = MU_DEST.filter(([k]) => m.dest.includes(k)), dest = destD.map(x => x[1]), destA = destD.map(x => x[2]);
@@ -20496,7 +20552,7 @@ function modeloMuestra(doc){
       secs:L.map((s, i) => ({h:s.curso ? `${s.curso}${s.tema ? `: ${s.tema}` : ""}` : "Stand", pageBreak:i > 0, sub:[
         {h:"Título del stand", body:s.tema ? `${cap(s.tema)}. Revisen si quieren un título más atractivo:` : "", lineas:1},
         {h:"Docente responsable", body:s.resp || " "},
-        {h:"Integrantes y turnos", table:{head:["Turno", "Estudiantes"], rows:muTurnos(m), w:[2600, 6470]}, tableOnly:true},
+        {h:"Integrantes y turnos", body:muTurnos(m).map(r => `${r[0] || "Turno"}: ________________________________________`).join("\n")},
         {h:"Qué vamos a mostrar", lineas:3},
         {h:"Qué necesitamos", body:"☐ Mesa   ☐ Sillas   ☐ Panel o pared para pegar   ☐ Enchufe   ☐ Proyector o pantalla\nOtros materiales:", lineas:1},
         {h:"Guion para explicar en dos minutos", body:["Saludar, presentarse y decir el título del stand.", "Contar qué trabajamos y por qué nos interesó.", "Mostrar lo más importante (la maqueta, el gráfico, la experiencia en fotos o el video).", "Decir qué aprendimos con nuestras palabras.", "Invitar a preguntar."].map((x, k) => `${k + 1}. ${x}`).join("\n")},
@@ -20550,7 +20606,7 @@ function modeloMuestra(doc){
     ], firmas:[[m.resp, "Docente responsable"], ["", "Dirección"]]};
 }
 const MU_DOCS = [["proyecto", "Proyecto para la dirección"], ["fichas", "Fichas de cada stand"], ["invitacion", "Invitación a las familias"], ["valoracion", "Planilla de valoración"], ["dia", "Lista para el día"]];
-function renderMuestra(){
+function renderMuestraBase(){
   const box = $("mu-panel"); if (!box) return;
   const m = muDatos();
   box.innerHTML = `<div class="cfg-grid">
@@ -20569,7 +20625,7 @@ function renderMuestra(){
     <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-mu="docx">Descargar en Word</button><button type="button" class="btn btn-sm" data-mu="pdf">PDF</button></div>`;
   muPrev();
 }
-function muPrev(){ const b = $("mu-prev"); if (!b) return; const m = muDatos(); b.innerHTML = `<article class="paper">${docHTML(false, modeloMuestra(m.doc)).replace(/ data-goto="[^"]*"/g, "").replace(/ class="goto"/g, "")}</article>`; }
+function muPrevBase(){ const b = $("mu-prev"); if (!b) return; const m = muDatos(); b.innerHTML = `<article class="paper">${docHTML(false, modeloMuestra(m.doc)).replace(/ data-goto="[^"]*"/g, "").replace(/ class="goto"/g, "")}</article>`; }
 function muCambio(k, v){ const m = muLeer(); m[k] = v; muGuardar(m); }
 function abrirMuestra(){ renderMuestra(); abrirDialogo("muestra"); }
 function bindMuestra(){
@@ -20606,6 +20662,411 @@ function init51(){
   try { bindNombre(); } catch (e) { registrarError("init51", e, "aviso"); }
   try { bindMuestra(); } catch (e) { registrarError("init51", e, "aviso"); }
   try { const D = $("feria"); if (D) D.addEventListener("click", e => { if (e.target.closest("[data-festand]")) bajarDoc(modeloStandFeria(), `lista-del-stand-${slug(feriaTxt(feriaIdea().titulo, feriaCtx().R))}`, "docx", "Lista para armar el stand descargada."); }); } catch (e) { registrarError("init51", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 43: actividades para los visitantes de la muestra según el
+   tema de cada stand. Todas respetan las reglas de seguridad de la
+   muestra: sin fuego, vidrio, químicos, líquidos, alimentos ni seres
+   vivos en las mesas.
+   k: palabras del tema y de la materia; que: qué hace el visitante;
+   mat: materiales; ojo: un cuidado particular.
+   ============================================================ */
+const MU_ACT = [
+  /* Física */
+  {id:"globo-cohete", k:"fisica fuerza fuerzas accion reaccion tercera ley newton movimiento propulsion cohete", t:"Globo cohete", que:"El visitante infla un globo, lo pega con cinta a un sorbete que corre por un hilo tenso y lo suelta. Antes, predice hasta dónde llega; después, el stand explica la acción y la reacción.", mat:"Globos, sorbetes, hilo de 4 a 5 m, cinta de papel, una regla o marcas en el hilo.", ojo:"Tender el hilo a la altura de la mesa, fuera del pasillo."},
+  {id:"paracaidas", k:"fisica caida libre gravedad aire rozamiento paracaidas aceleracion", t:"Concurso de paracaídas", que:"Cada visitante suelta desde la misma altura dos paracaídas de papel de distinto tamaño y cronometra cuál tarda más. Se anota en un cartel y se discute el papel del aire.", mat:"Paracaídas de papel o bolsas finas con hilo y un clip, cronómetro del celular, cartel para anotar.", ojo:"Soltar desde la altura de un brazo levantado, sin subirse a sillas."},
+  {id:"moneda-inercia", k:"fisica inercia primera ley newton movimiento masa", t:"La moneda que no se mueve", que:"Sobre un vaso de plástico hay una cartulina con una moneda encima. El visitante tira la cartulina de un golpe seco y la moneda cae dentro del vaso. Antes, predice qué va a pasar.", mat:"Vasos de plástico, cartulinas de 10 × 10 cm, monedas o arandelas.", ojo:""},
+  {id:"balancin", k:"fisica palanca palancas maquinas simples equilibrio torque momento", t:"Equilibrar el balancín", que:"Una regla apoyada en el centro hace de balancín. El visitante prueba dónde poner monedas de un lado para equilibrar las del otro y descubre la regla de la palanca.", mat:"Regla de 30 cm, un lápiz o una tapita como apoyo, monedas iguales, un cartel con la regla.", ojo:""},
+  {id:"pendulo", k:"fisica pendulo oscilacion energia periodo movimiento", t:"¿Qué cambia el péndulo?", que:"Hay péndulos con hilos de distinto largo y con distinta masa. El visitante cuenta las oscilaciones en 10 segundos y descubre que cambia con el largo, no con la masa.", mat:"Hilo, tuercas o arandelas, un soporte firme (una regla sujeta a la mesa), cronómetro.", ojo:"Sujetar bien el soporte con cinta de papel."},
+  {id:"rampa-canicas", k:"fisica energia cinetica potencial mecanica conservacion rampa altura velocidad", t:"Rampa de energía", que:"El visitante suelta una bolita desde distintas alturas de una rampa y mide cuánto empuja un vasito de plástico al llegar abajo. Así ve cómo la energía potencial se transforma en cinética.", mat:"Una canaleta o regla acanalada, bolitas, un vasito de plástico, cinta de papel para marcar alturas.", ojo:"Una bandeja o borde para que las bolitas no caigan al piso."},
+  {id:"circuito-armable", k:"fisica electricidad corriente circuito circuitos serie paralelo pila lamparita electrica", t:"Armá tu circuito", que:"El visitante conecta pilas, cables con cocodrilos y lamparitas LED para encender una o dos luces, en serie y en paralelo, y compara el brillo.", mat:"Pilas comunes (no recargables de litio), portapilas, cables con pinzas cocodrilo, LED con resistencia o lamparitas de linterna.", ojo:"Solo pilas comunes: nunca la red eléctrica. Revisar que no se recalienten."},
+  {id:"conductores", k:"fisica electricidad conductores aislantes materiales corriente circuito", t:"¿Conduce o no conduce?", que:"Con un circuito abierto de pila y LED, el visitante prueba objetos (clip, goma, lápiz de grafito, papel de aluminio, plástico) y los separa en conductores y aislantes.", mat:"Pila, portapilas, LED con resistencia, cables con cocodrilos, una caja con objetos variados.", ojo:"Solo pilas comunes."},
+  {id:"imanes", k:"fisica iman imanes magnetismo magnetico brujula polos atraccion", t:"¿Qué atrae un imán?", que:"El visitante predice y prueba qué objetos atrae un imán (clips, monedas, papel de aluminio, llaves, tapitas) y los clasifica. Después ve cómo se orienta una brújula.", mat:"Imanes, una caja con objetos de distintos materiales, una brújula, tarjetas «Sí» y «No».", ojo:"Mantener los imanes lejos de celulares y tarjetas."},
+  {id:"camara-oscura", k:"fisica luz optica camara oscura propagacion rectilinea imagen vision", t:"Cámara oscura", que:"El visitante mira por una caja con un agujero pequeño y un papel de calcar del otro lado, y ve la imagen de la ventana invertida. El stand explica por qué la luz viaja en línea recta.", mat:"Caja de zapatos o tubo de cartón, papel de calcar, papel aluminio con un agujero de alfiler, cinta.", ojo:"Hacer el agujero antes de la muestra: no llevar alfileres al stand."},
+  {id:"sombras", k:"fisica luz sombras sombra opaco transparente traslucido optica", t:"Teatro de sombras", que:"Con una linterna, el visitante proyecta figuras sobre una pantalla de papel y descubre cómo cambia la sombra al acercar o alejar el objeto. También clasifica materiales en opacos, traslúcidos y transparentes.", mat:"Linterna LED, pantalla de papel manteca, figuras de cartón, muestras de materiales (sin vidrio).", ojo:""},
+  {id:"espectro-cd", k:"fisica luz colores espectro difraccion arcoiris optica", t:"Los colores escondidos en la luz", que:"El visitante inclina un CD frente a una linterna y ve los colores que forman la luz blanca. Después mira la luz de la linterna del celular y de una lámpara y compara.", mat:"CD o DVD viejos, linterna LED.", ojo:""},
+  {id:"telefono-hilo", k:"fisica sonido ondas vibracion propagacion medio telefono", t:"Teléfono de hilo", que:"Dos visitantes hablan por vasos unidos con un hilo tenso. Prueban qué pasa si el hilo queda flojo o si alguien lo toca, y el stand explica que el sonido necesita un medio.", mat:"Vasos de plástico o latas sin bordes, hilo de algodón de 5 m, clips.", ojo:"Usar vasos de plástico; latas solo con los bordes limados y cubiertos."},
+  {id:"tubos-sonido", k:"fisica sonido frecuencia tono agudo grave musica instrumentos vibracion", t:"Instrumentos que suenan distinto", que:"El visitante sopla tubos o golpea reglas de distinto largo y ordena los sonidos de más grave a más agudo. Descubre la relación entre el largo y la frecuencia.", mat:"Sorbetes o tubos de PVC cortados en distintos largos, reglas, cinta.", ojo:"Tubos y sorbetes individuales o higienizables."},
+  {id:"resorte-ondas", k:"fisica ondas onda longitudinal transversal resorte propagacion energia", t:"Ondas con un resorte", que:"Con un resorte plástico estirado sobre la mesa, el visitante genera ondas longitudinales y transversales y observa que la energía viaja pero el resorte vuelve a su lugar.", mat:"Un resorte plástico de colores, cinta para marcar un punto.", ojo:""},
+  {id:"termico-tacto", k:"fisica calor temperatura conduccion conductores aislantes termica sensacion", t:"¿Cuál está más frío?", que:"El visitante toca un trozo de metal, uno de madera y uno de telgopor que están a la misma temperatura y dice cuál le parece más frío. Un termómetro digital muestra que están igual, y el stand explica la conducción.", mat:"Bloques de metal, madera y telgopor, termómetro digital.", ojo:""},
+  {id:"aislantes-video", k:"fisica calor aislantes transmision conveccion radiacion abrigo termos", t:"El mejor abrigo", que:"Fotos y un video del experimento hecho en clase (cubos de hielo envueltos en distintos materiales) y una votación: los visitantes eligen qué material creen que conservó más tiempo el hielo antes de ver el resultado.", mat:"Paneles con fotos y gráficos, QR al video, fichas y cajas para votar.", ojo:"El hielo y el agua no van a la mesa: se muestran en fotos o video."},
+  {id:"ventosas", k:"fisica presion atmosferica aire vacio ventosas fuerza superficie", t:"La fuerza del aire", que:"El visitante intenta separar dos ventosas apretadas entre sí y después lo intenta con un poco de aire adentro. El stand explica la presión atmosférica.", mat:"Ventosas de goma (de las que se usan para colgar), cartel con el esquema.", ojo:""},
+  {id:"fases-luna", k:"fisica astronomia luna fases sol tierra sistema solar eclipses", t:"Las fases de la Luna", que:"En penumbra, el visitante sostiene una pelota blanca (la Luna) frente a una linterna (el Sol) y gira sobre sí mismo (la Tierra) hasta ver cada fase.", mat:"Pelota blanca de telgopor clavada en un palito romo, linterna potente, un rincón con poca luz.", ojo:"El palito, sin punta."},
+  {id:"estaciones", k:"fisica astronomia estaciones tierra sol inclinacion eje traslacion verano invierno", t:"¿Por qué hay estaciones?", que:"Con una linterna y una pelota con el eje inclinado, el visitante compara cómo llega la luz a Tucumán en enero y en julio. Antes, vota si cree que es por la distancia al Sol.", mat:"Pelota de telgopor con un eje inclinado, linterna, Tucumán marcado, fichas para votar.", ojo:""},
+  {id:"tiempo-reaccion", k:"fisica biologia tiempo reaccion caida libre reflejos sistema nervioso medicion", t:"Medí tu tiempo de reacción", que:"Un estudiante suelta una regla y el visitante la atrapa con dos dedos. Con una tabla de la caída libre, la distancia se convierte en tiempo de reacción. Los resultados se suman a un gráfico del día.", mat:"Reglas de 30 cm, tabla de conversión impresa, cartel para el gráfico con stickers.", ojo:""},
+  /* Química */
+  {id:"moleculas", k:"quimica moleculas atomos enlaces modelo estructura materia particulas", t:"Armá una molécula", que:"Con bolitas de plastilina de colores (una por elemento) y sorbetes cortados, el visitante arma moléculas de agua, dióxido de carbono y metano siguiendo una tarjeta.", mat:"Plastilina de colores, sorbetes cortados, tarjetas con los modelos.", ojo:"Sorbetes en lugar de escarbadientes."},
+  {id:"tabla-juego", k:"quimica tabla periodica elementos quimicos atomos metales", t:"La tabla periódica cotidiana", que:"El visitante une tarjetas de objetos cotidianos (una lata, un cable, un globo de helio, la sal) con el elemento que contienen en una tabla periódica gigante.", mat:"Tabla periódica impresa grande, tarjetas con imágenes, cinta de papel.", ojo:""},
+  {id:"separar-mezclas", k:"quimica mezclas separacion metodos tamizado imantacion sistemas materiales heterogeneo", t:"Separar una mezcla", que:"El visitante recibe una mezcla seca de arena, porotos y clips y elige el método para separarla (tamiz, imán, a mano). Después compara con los métodos del cartel.", mat:"Bandejas, arena seca, porotos, clips, un imán, un colador.", ojo:"Solo materiales secos y una bandeja para que no caigan al piso."},
+  {id:"estados-particulas", k:"quimica fisica estados agregacion particulas solido liquido gas cambios estado modelo", t:"El modelo de partículas en una bandeja", que:"Con bolitas en una bandeja, el visitante representa un sólido (quietas y juntas), un líquido y un gas al moverla más o menos. El stand lo relaciona con los cambios de estado.", mat:"Bandeja con borde, bolitas o tapitas, carteles de cada estado.", ojo:""},
+  {id:"reacciones-fotos", k:"quimica reaccion reacciones cambios quimicos combustion oxidacion cocina", t:"¿Cambio físico o químico?", que:"El visitante clasifica tarjetas con fotos de situaciones (pan tostado, hielo que se derrite, clavo oxidado, papel roto, fruta que se oscurece) en cambios físicos y químicos, y comprueba con las respuestas al dorso.", mat:"Tarjetas con fotos y la respuesta al dorso, dos cajas.", ojo:"Las experiencias químicas hechas en clase se muestran en fotos o video."},
+  /* Biología */
+  {id:"modelo-pulmon", k:"biologia respiracion respiratorio pulmones diafragma cuerpo humano", t:"El pulmón en una botella", que:"El visitante tira del globo que hace de diafragma y ve cómo se inflan los globos de adentro. El stand explica la ventilación pulmonar.", mat:"Botella plástica cortada, dos globos chicos, un globo grande, sorbete en Y, cinta.", ojo:"Botella de plástico con el borde cubierto con cinta."},
+  {id:"pulso", k:"biologia circulacion corazon pulso sistema circulatorio ejercicio cuerpo humano", t:"Tu corazón antes y después", que:"El visitante se toma el pulso en reposo y después de 20 saltos suaves, y suma su dato a un gráfico del día. El stand explica por qué el corazón late más rápido.", mat:"Cronómetro, cartel con un gráfico para pegar stickers, tarjeta con cómo tomarse el pulso.", ojo:"Saltos suaves y opcionales; nadie está obligado."},
+  {id:"celula-3d", k:"biologia celula celulas organelas nucleo membrana vegetal animal", t:"La célula en tres dimensiones", que:"Con un modelo de célula hecho en clase, el visitante busca y nombra las partes con tarjetas, y compara una célula vegetal con una animal.", mat:"Modelos de telgopor o porcelana fría, tarjetas con nombres y funciones.", ojo:""},
+  {id:"microscopio-fotos", k:"biologia microscopio celulas microorganismos observacion lupa", t:"Lo que vimos en el microscopio", que:"El visitante une fotos tomadas con el celular por el ocular del microscopio con la muestra que corresponde (cebolla, hoja, piel de tomate, moho de pan) y lee qué se ve.", mat:"Fotos ampliadas, tarjetas con las muestras, QR al video del trabajo de laboratorio.", ojo:"Sin preparados de vidrio ni cultivos en el stand: solo fotos."},
+  {id:"cadena-trofica", k:"biologia ecologia cadena trofica alimentaria red ecosistema yungas productores consumidores", t:"Armá la red alimentaria", que:"Con tarjetas de seres vivos de las yungas tucumanas, el visitante arma una cadena alimentaria con lana, y después ve qué pasa si quita uno.", mat:"Tarjetas con fotos de especies locales, lana, tablero de corcho o cartón.", ojo:""},
+  {id:"residuos-tarjetas", k:"biologia ambiente residuos reciclaje basura separacion contaminacion educacion ambiental", t:"¿Dónde va cada residuo?", que:"El visitante clasifica tarjetas con fotos de residuos en los recipientes de colores, y el stand muestra cuánto tarda cada material en degradarse.", mat:"Tarjetas con fotos, cajas de colores, una línea de tiempo de la degradación.", ojo:"Sin residuos reales: tarjetas o fotos."},
+  {id:"sentidos", k:"biologia sentidos tacto sistema nervioso percepcion", t:"La caja misteriosa", que:"El visitante mete la mano en una caja con un objeto oculto y lo describe solo con el tacto antes de adivinarlo. El stand explica los receptores de la piel.", mat:"Caja con un agujero y una manga de tela, objetos seguros (esponja, piedra lisa, pluma, llave).", ojo:"Objetos sin bordes cortantes."},
+  /* Matemática */
+  {id:"grafico-vivo", k:"matematica estadistica graficos encuestas datos porcentaje", t:"Gráfico en vivo", que:"El visitante responde una pregunta de la encuesta del curso pegando un sticker en un gráfico de barras gigante. Al final del día, el stand analiza los resultados.", mat:"Afiche con ejes y categorías, stickers de colores.", ojo:""},
+  {id:"dados", k:"matematica probabilidad azar dados estadistica frecuencia", t:"¿Qué suma sale más?", que:"El visitante tira dos dados y anota la suma en una tabla común. Antes predice qué suma va a salir más; con muchos tiros, la tabla muestra que el 7 es la más frecuente.", mat:"Dados grandes, una caja para tirarlos, tabla de frecuencias en un afiche.", ojo:""},
+  {id:"hanoi", k:"matematica logica patrones torres hanoi algoritmo potencias", t:"Las torres de Hanói", que:"El visitante intenta mover la torre con la menor cantidad de movimientos y descubre el patrón (7 movimientos para 3 discos, 15 para 4).", mat:"Torres de cartón o madera con 3 a 5 discos.", ojo:""},
+  {id:"tangram", k:"matematica geometria figuras tangram areas poligonos", t:"Desafío tangram", que:"El visitante arma figuras con las piezas del tangram y el stand muestra que todas tienen la misma área aunque cambie la forma.", mat:"Tangrams de cartón, tarjetas con siluetas.", ojo:""},
+  {id:"escala-mapa", k:"matematica proporcionalidad escala mapas medidas razones geografia", t:"¿Cuánto hay de acá a…?", que:"Con un mapa de Tucumán a escala y una regla, el visitante calcula la distancia real de la escuela a otra localidad y la compara con el dato del cartel.", mat:"Mapa impreso con escala, reglas, tarjetas con destinos.", ojo:""},
+  {id:"fracciones-pizza", k:"matematica fracciones numeros racionales equivalencia", t:"La pizza de las fracciones", que:"Con círculos de cartón cortados en partes, el visitante arma fracciones equivalentes y compara cuál es mayor.", mat:"Círculos de cartón de colores divididos en mitades, tercios, cuartos, sextos y octavos.", ojo:""},
+  /* Ciencias sociales */
+  {id:"linea-tiempo", k:"historia linea tiempo procesos acontecimientos revolucion independencia periodos", t:"Línea de tiempo para completar", que:"El visitante ubica tarjetas con hechos e imágenes en una línea de tiempo y comprueba con el código de colores. El stand explica qué cambió y qué permaneció.", mat:"Línea de tiempo en papel madera, tarjetas con abrojo o cinta de papel.", ojo:""},
+  {id:"quien-soy", k:"historia personajes proceres biografias sociedad", t:"¿Quién soy?", que:"El visitante lee tres pistas y adivina el personaje histórico; después lee su biografía breve y su contexto.", mat:"Tarjetas con pistas y biografías, retratos con fuente citada.", ojo:""},
+  {id:"memoria-barrio", k:"historia memoria local comunidad barrio pueblo alberdi entrevistas patrimonio", t:"El pueblo antes y ahora", que:"El visitante compara fotos antiguas y actuales de Juan Bautista Alberdi y escucha, con un QR, las entrevistas que el curso hizo a vecinos. Puede dejar un recuerdo escrito en un libro de visitas.", mat:"Fotos con fecha y fuente, QR a los audios, libro de visitas.", ojo:"Autorización de las personas entrevistadas para usar su voz e imagen."},
+  {id:"maqueta-relieve", k:"geografia relieve tucuman maqueta llanura montana rios cuencas ambiente", t:"Maqueta de Tucumán", que:"Sobre una maqueta del relieve, el visitante ubica su localidad, el río Marapa, el dique Escaba y las yungas con banderitas, y el stand explica cómo influye el relieve en el clima.", mat:"Maqueta de cartón o papel maché, banderitas de papel con base de plastilina.", ojo:"Banderitas sin alfileres."},
+  {id:"clima-casero", k:"geografia clima tiempo atmosferico viento estacion meteorologica", t:"Estación meteorológica casera", que:"El visitante ve funcionar un anemómetro y una veleta hechos en clase y compara los registros del curso con los datos del Servicio Meteorológico Nacional.", mat:"Anemómetro de vasos plásticos, veleta, gráficos de los registros.", ojo:"El pluviómetro, en foto: sin agua en la mesa."},
+  {id:"debate-roles", k:"ciudadania formacion etica derechos debate convivencia participacion democracia", t:"Mesa de debate", que:"El visitante elige una tarjeta con un dilema (por ejemplo, el uso del celular en la escuela) y escucha los argumentos que preparó el curso desde distintos roles; después vota y deja su argumento.", mat:"Tarjetas con dilemas, cartel con argumentos, urna de cartón.", ojo:""},
+  /* Lengua y literatura */
+  {id:"microrrelatos", k:"lengua literatura escritura microrrelatos cuentos narrativa produccion", t:"Microrrelatos al paso", que:"El visitante lee los microrrelatos del curso en un tendedero y escribe uno propio de 50 palabras con una consigna sorpresa.", mat:"Tendedero de hilo con broches, tarjetas en blanco, una caja de consignas.", ojo:""},
+  {id:"radioteatro", k:"lengua literatura oralidad radio teatro lectura voz podcast", t:"Radioteatro con auriculares", que:"El visitante escucha, con un QR o un parlante a bajo volumen, el radioteatro o el pódcast que grabó el curso, y responde una pregunta sobre la historia.", mat:"QR impreso, parlante pequeño, guion a la vista.", ojo:"Volumen bajo para no molestar a los stands vecinos."},
+  {id:"poesia-verso", k:"lengua literatura poesia poemas versos rima", t:"Un verso para el poema colectivo", que:"El visitante agrega un verso a un poema colectivo en un afiche, siguiendo la rima o el tema propuesto, y al final del día el curso lo lee en voz alta.", mat:"Afiche grande, fibrones, un cartel con la consigna.", ojo:""},
+  /* Lenguas extranjeras, arte, música y tecnología */
+  {id:"vocabulario-ingles", k:"ingles lengua extranjera vocabulario idioma english", t:"Memotest en inglés", que:"El visitante juega a un memotest que une imágenes con palabras en inglés y aprende a decirlas con la ayuda de los estudiantes.", mat:"Tarjetas de memotest plastificadas.", ojo:""},
+  {id:"galeria", k:"arte artes visuales plastica galeria obras pintura dibujo", t:"Galería con la voz de los autores", que:"El visitante recorre las obras y, con un QR al lado de cada una, escucha a su autor contar qué quiso expresar. Elige su favorita con una ficha.", mat:"Obras, QR impresos, urna con fichas.", ojo:""},
+  {id:"instrumentos-reciclados", k:"musica instrumentos sonido reciclados ritmo arte", t:"Orquesta de instrumentos reciclados", que:"El visitante toca instrumentos hechos por el curso con materiales reciclados y sigue un ritmo propuesto por los estudiantes.", mat:"Instrumentos de cartón, plástico y tapitas, una tarjeta con el ritmo.", ojo:"Instrumentos sin bordes cortantes."},
+  {id:"programacion", k:"tecnologia programacion robotica scratch computacion informatica videojuegos tic", t:"Jugá con lo que programamos", que:"El visitante juega en una computadora o tableta al juego o la animación que programó el curso en Scratch, y un estudiante le muestra una parte del código.", mat:"Computadora o tableta, el proyecto guardado sin conexión, carteles con capturas del código.", ojo:"Cables por donde no se pise y equipos apagados si el stand queda solo."},
+  {id:"stop-motion", k:"tecnologia arte animacion stop motion video celular", t:"Stop motion en un minuto", que:"El visitante mueve una figura de plastilina cuadro a cuadro mientras un estudiante saca las fotos con el celular, y ve su animación de pocos segundos.", mat:"Celular con una aplicación de stop motion, figuras de plastilina, un fondo de cartulina.", ojo:"Las fotos de visitantes, solo de las manos o con autorización."}
+];
+/* Formatos que sirven para cualquier tema */
+const MU_GEN = [
+  {id:"gen-voto", gen:true, t:"Votá antes de ver", que:"El visitante lee una pregunta sobre el tema y elige una respuesta poniendo una ficha en una de cuatro cajas. Después, el stand explica la respuesta y muestra cómo votó la gente.", mat:"Cartel con la pregunta y las opciones, cuatro cajas o sobres, fichas de cartón.", ojo:""},
+  {id:"gen-antes", gen:true, t:"Antes pensaba, ahora pienso", que:"El visitante escribe en un papel qué pensaba del tema al llegar y, después de la explicación, qué piensa ahora. Las respuestas se pegan en un mural.", mat:"Papelitos autoadhesivos o tarjetas, un afiche dividido en dos columnas.", ojo:""},
+  {id:"gen-desafio", gen:true, t:"Desafío de un minuto", que:"El stand propone una pregunta o un problema corto que el visitante resuelve en un minuto con la ayuda de los estudiantes; quien lo logra firma el «muro de los que resolvieron».", mat:"Tarjetas con desafíos, reloj de arena o cronómetro, afiche para firmar.", ojo:""},
+  {id:"gen-qr", gen:true, t:"El proceso en video", que:"El visitante escanea un QR y mira, en un minuto, cómo trabajó el curso: las pruebas, los errores y lo que aprendieron.", mat:"QR impreso grande, el video subido a la cuenta de la escuela.", ojo:"Solo con la autorización de imagen de quienes aparecen."},
+  {id:"gen-guiado", gen:true, t:"Recorrido guiado de tres minutos", que:"Un estudiante guía al visitante por los tres paneles del stand: qué preguntamos, qué hicimos y qué descubrimos, y le deja una pregunta para pensar.", mat:"Tres paneles numerados, guion de la explicación.", ojo:""},
+  {id:"gen-libro", gen:true, t:"Libro de visitas con preguntas", que:"El visitante deja una pregunta o un comentario sobre el tema. El curso las responde en clase después de la muestra.", mat:"Cuaderno o afiche, lapiceras.", ojo:""}
+];
+const muKey = s => norm(`${s.curso}|${s.tema}`);
+function muIdeasDe(s){
+  const tema = String(s.tema || "").trim(), out = [];
+  if (tema){
+    out.push(...bancoOrden(MU_ACT, [tema]));
+    const p = pcDe([tema], "", 1)[0];
+    if (p) out.push({id:"pc-" + p.id, t:"Votá antes de ver", que:`El visitante elige una respuesta con una ficha antes de la explicación: «${p.q}» ${p.op.map((o, j) => `${PC_L[j]}) ${sinPunto(o)}`).join("; ")}. Después el stand muestra por qué la correcta es la ${PC_L[p.ok]} y qué idea lleva a elegir las otras.`, mat:"Cartel con la pregunta y las opciones, cuatro cajas o sobres, fichas de cartón.", ojo:""});
+  }
+  const ya = new Set(out.map(x => x.id));
+  out.push(...MU_GEN.filter(g => !ya.has(g.id) && !(g.id === "gen-voto" && out.some(x => /^pc-/.test(x.id)))));
+  return out;
+}
+const muIdeaPorId = (s, id) => muIdeasDe(s).find(x => x.id === id) || MU_ACT.find(x => x.id === id) || MU_GEN.find(x => x.id === id) || null;
+function muElegidas(s){ const m = muLeer(); return ((m.act || {})[muKey(s)] || []).map(id => muIdeaPorId(s, id)).filter(Boolean); }
+/* Las que se muestran: primero las elegidas y después tres sugerencias (que rotan con «Ver otras») */
+function muMostradas(s){
+  const m = muLeer(), k = muKey(s), todas = muIdeasDe(s), ele = (m.act || {})[k] || [], rot = +((m.rot || {})[k] || 0);
+  const resto = todas.filter(x => !ele.includes(x.id));
+  const n = resto.length, ini = n ? (rot * 3) % n : 0;
+  const sug = n <= 3 ? resto : [...resto, ...resto].slice(ini, ini + 3);
+  return {ele:todas.filter(x => ele.includes(x.id)), sug, hayMas:n > 3, tema:!!String(s.tema || "").trim()};
+}
+const muTxtIdea = x => `${x.t}. ${x.que}\nMateriales: ${sinPunto(x.mat)}.${x.ojo ? `\nCuidado: ${sinPunto(x.ojo)}.` : ""}`;
+function htmlIdeasMu(){
+  const S = muStands(muDatos().stands);
+  if (!S.length) return `<p class="hint">Cargá los stands con su tema y acá vas a ver actividades para que los visitantes participen, elegidas según el tema.</p>`;
+  return S.map((s, i) => {
+    const M = muMostradas(s), k = muKey(s);
+    const card = (x, ele) => `<li class="mu-idea${ele ? " ele" : ""}"><div><b>${esc(x.t)}</b><p>${esc(x.que)}</p><small><b>Materiales:</b> ${esc(x.mat)}${x.ojo ? ` <b>Cuidado:</b> ${esc(x.ojo)}` : ""}</small></div><button type="button" class="btn btn-sm" data-muact="${esc(k)}" data-muid="${esc(x.id)}" aria-pressed="${ele}">${ele ? "Elegida" : "Elegir"}</button></li>`;
+    return `<div class="mu-st"><h4>${esc(s.curso || `Stand ${i + 1}`)}${s.tema ? `: ${esc(s.tema)}` : ""}</h4>${M.tema ? "" : `<p class="hint">Sin tema: estas son ideas que sirven para cualquier stand. Escribí el tema después del curso para ver actividades del tema.</p>`}
+      <ul class="mu-ideas-l">${M.ele.map(x => card(x, true)).join("")}${M.sug.map(x => card(x, false)).join("")}</ul>${M.hayMas ? `<button type="button" class="linkbtn" data-murot="${esc(k)}">Ver otras ideas</button>` : ""}</div>`;
+  }).join("");
+}
+function renderIdeasMu(){ const b = $("mu-ideas-b"); if (b) b.innerHTML = htmlIdeasMu(); }
+function renderMuestra(){
+  renderMuestraBase();
+  const docs = document.querySelector("#mu-panel .mu-docs");
+  if (docs && !$("mu-ideas")) docs.insertAdjacentHTML("beforebegin", `<details class="mu-ideas" id="mu-ideas" open><summary><h3 class="lic-h" id="mu-ideas-h">Actividades para los visitantes</h3></summary><p class="hint">Según el tema de cada stand: que el visitante haga algo, no solo que mire. Todas cumplen las reglas de seguridad de la muestra. Elegí hasta dos por stand: van a la ficha del stand y al proyecto.</p><div id="mu-ideas-b" aria-live="polite"></div></details>`);
+  renderIdeasMu();
+}
+function muPrev(){ muPrevBase(); renderIdeasMu(); }
+function modeloMuestra(doc){
+  const M = modeloMuestraBase(doc), S = muStands(muDatos().stands);
+  if (doc === "fichas" && S.length){
+    M.secs.forEach((sec, i) => {
+      const s = S[i]; if (!s || !sec.sub) return;
+      const ele = muElegidas(s), sug = ele.length ? [] : muMostradas(s).sug.slice(0, 1);
+      const L = ele.length ? ele : sug;
+      const j = sec.sub.findIndex(x => x.h === "Qué vamos a mostrar");
+      if (L.length && j >= 0) sec.sub.splice(j + 1, 0, {h:ele.length ? "Actividad para los visitantes" : "Actividad para los visitantes (sugerida)", body:L.map(muTxtIdea).join("\n\n")});
+    });
+  }
+  if (doc === "proyecto" && S.length){
+    const j = M.secs.findIndex(x => x.h === "Organización de los espacios");
+    const rows = S.map((s, i) => { const L = muElegidas(s); return [`${i + 1}. ${[s.curso, s.tema].filter(Boolean).join(": ")}`, L.length ? L.map(x => x.t).join("; ") : "A definir"]; });
+    if (j >= 0) M.secs.splice(j + 1, 0, {h:"Actividades para los visitantes", lead:"En cada stand, los visitantes participan de una actividad breve. Todas cumplen las reglas de seguridad de la muestra.", table:{head:["Stand", "Actividad"], rows, w:[4200, 4870]}, tableOnly:true});
+  }
+  return M;
+}
+function bindIdeasMu(){
+  const D = $("muestra"); if (!D || D.dataset.okIdeas) return; D.dataset.okIdeas = "1";
+  D.addEventListener("click", e => {
+    const a = e.target.closest("[data-muact]");
+    if (a){
+      const m = muLeer(), k = a.dataset.muact, id = a.dataset.muid;
+      m.act = m.act || {}; const L = (m.act[k] || []).filter(x => x !== id);
+      if (L.length === (m.act[k] || []).length){ if (L.length >= 2){ toast("Elegí hasta dos actividades por stand."); return; } L.push(id); }
+      m.act[k] = L; if (!L.length) delete m.act[k];
+      muGuardar(m); muPrev(); return;
+    }
+    const r = e.target.closest("[data-murot]");
+    if (r){ const m = muLeer(); m.rot = m.rot || {}; m.rot[r.dataset.murot] = (+(m.rot[r.dataset.murot] || 0)) + 1; muGuardar(m); renderIdeasMu(); }
+  });
+}
+
+/* ---------- Capacitaciones: cómo se suma tu puntaje ----------
+   INFoD: Res. 1741/5 (MEd), 19/06/2026. Decreto 3128/5 (MEd), 2025: los cursos de menos de 40 horas
+   (desde 2004) y los dictados fuera de la provincia no suman, salvo INFoD. Valores anteriores a abril
+   de 2024: lo publicado sobre el Anexo X (0,15 con evaluación, 0,10 sin evaluación, 0,20 si lo dictó el docente).
+   El Anexo X completo no está publicado: lo demás queda «a confirmar». */
+const PTC_TIPOS = [["eval", "Con evaluación"], ["sin", "Sin evaluación"], ["dicte", "Lo dicté yo"]];
+const PTC_AMB = [["", "Dónde se dictó"], ["tuc", "Tucumán"], ["infod", "INFoD (nacional)"], ["fuera", "Otra provincia"]];
+const ptcFmt = n => (Math.round(n * 100) / 100).toFixed(2).replace(".", ",");
+const numPts = v => { const n = parseFloat(String(v == null ? "" : v).replace(",", ".")); return isFinite(n) && n > 0 ? n : null; };
+function ptcEsInfod(x){ return x.ambito === "infod" || (!x.ambito && (/infod|instituto nacional de formaci|red\.infd/i.test(`${x.nombre || ""} ${x.inst || ""} ${x.norma || ""}`) || /1741/.test(x.norma || ""))); }
+function ptcEval(x){
+  const horas = +x.horas || 0, man = numPts(x.puntaje), infod = ptcEsInfod(x);
+  if (man != null) return {estado:"suma", pts:man, como:"El puntaje que cargaste (del certificado o de la resolución)."};
+  if (infod){
+    if (!horas) return {estado:"conf", pts:null, como:"Es de INFoD: suma según las horas. Cargá las horas en Mi legajo."};
+    if (horas < 20) return {estado:"no", pts:0, como:`Tiene ${horas} horas: los cursos de INFoD suman desde 20 horas (Res. 1741/5 MEd).`};
+    return {estado:"suma", pts:puntosInfod(horas), como:`INFoD, ${horas} horas: ${ptcFmt(puntosInfod(horas))} puntos según la Res. 1741/5 (MEd) de 2026.`};
+  }
+  if (x.ambito === "fuera") return {estado:"no", pts:0, como:"Dictado fuera de Tucumán: desde el Decreto 3128 no suma, salvo los cursos de INFoD."};
+  if (horas && horas < 40 && (!x.fecha || x.fecha >= "2004-01-01")) return {estado:"no", pts:0, como:`Tiene ${horas} horas: desde el Decreto 3128 no suman los cursos de menos de 40 horas hechos desde 2004, salvo los de INFoD.`};
+  if (!String(x.norma || "").trim()) return {estado:"conf", pts:null, como:"Falta la resolución del Ministerio de Educación de Tucumán: sin resolución no suma. Si la tiene, cargala en Mi legajo."};
+  if (x.fecha && x.fecha < "2024-04-01"){
+    const p = x.tipo === "dicte" ? 0.2 : x.tipo === "sin" ? 0.1 : 0.15;
+    return {estado:"est", pts:p, como:`Estimado: ${ptcFmt(p)} puntos, según lo publicado sobre el Anexo X del Decreto 3128 para certificaciones anteriores a abril de 2024 (0,15 con evaluación, 0,10 sin evaluación y 0,20 si lo dictaste). Confirmalo en la Junta.`};
+  }
+  return {estado:"conf", pts:null, como:"Suma, pero el valor depende del Anexo X del Decreto 3128, que no está publicado. Si el certificado o la resolución dice el puntaje, cargalo en Mi legajo."};
+}
+function ptcCursos(){
+  const L = leerLista(LEG_KEY, {}), out = (L.cursos || []).map(x => ({...x, origen:"legajo"}));
+  (L.capInt || []).filter(x => x.estado === "aprobado" && !x.legajo).forEach(x => out.push({id:x.id, nombre:x.n, inst:x.inst, horas:x.horas, norma:x.res, puntaje:x.pts != null ? x.pts : "", ambito:x.infod ? "infod" : x.fuera ? "fuera" : "", origen:"mios"}));
+  return out;
+}
+function ptcResumen(){
+  const C = ptcCursos().map(x => ({x, e:ptcEval(x)}));
+  const r = {C, conf:0, est:0, nConf:0, nNo:0};
+  C.forEach(({e}) => { if (e.estado === "suma") r.conf += e.pts; else if (e.estado === "est") r.est += e.pts; else if (e.estado === "conf") r.nConf++; else r.nNo++; });
+  r.conf = Math.round(r.conf * 100) / 100; r.est = Math.round(r.est * 100) / 100; r.total = Math.round((r.conf + r.est) * 100) / 100;
+  return r;
+}
+const PTC_ET = {suma:["Suma", "si"], est:["Estimado", "est"], conf:["A confirmar", "conf"], no:["No suma", "no"]};
+function htmlPuntajeCursos(){
+  if (leerPref().pin && !pinOk) return `<p class="hint">Tus capacitaciones están en Mi legajo, protegido con PIN.</p><div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-ptc="pin">Desbloquear con el PIN</button></div>`;
+  const R = ptcResumen();
+  const reglas = `<details class="cur-sub"><summary>Cómo se suma</summary><ul class="cp-reglas">
+      <li>Cada curso aprobado suma una sola vez, y se suman todos los que cumplen los requisitos. El puntaje vale en el nivel o la modalidad en la que concursás.</li>
+      <li><b>INFoD</b> (Res. 1741/5 MEd, junio de 2026): según las horas, de 1,50 puntos (20 a 35 horas) a 6,30 (especialización de 400 horas).</li>
+      <li><b>Otros cursos:</b> necesitan resolución del Ministerio de Educación de Tucumán. Desde el Decreto 3128 (2025) no suman los de menos de 40 horas hechos desde 2004 ni los dictados fuera de la provincia.</li>
+      <li><b>Certificaciones anteriores a abril de 2024:</b> según lo publicado sobre el Anexo X, 0,15 puntos con evaluación, 0,10 sin evaluación y 0,20 si lo dictaste vos. Se muestran como estimados.</li>
+      <li>El valor de los demás cursos está en el Anexo X del Decreto 3128, que no está publicado en internet: si el certificado o la resolución dice el puntaje, cargalo en Mi legajo y se usa ese.</li>
+      <li>Si el Anexo X fija un tope para las capacitaciones, la Junta lo aplica al sumar. Este total es solo de capacitaciones: tu puntaje docente también suma el título, la antigüedad, el concepto y otros antecedentes.</li>
+      <li>Cuando se publique el padrón provisorio, compará tu puntaje en el período de tacha y, si no coincide, reclamá ante la Junta de Clasificación con tus certificados.</li></ul></details>`;
+  if (!R.C.length) return `<p class="hint">Cargá tus capacitaciones en «Mi legajo › Capacitaciones» (nombre, institución, horas, fecha y resolución) y acá ves cuánto suma cada una y el total.</p><div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-ptc="legajo">Cargar en Mi legajo</button></div>${reglas}`;
+  return `<div class="ptc-tot"><div><b>${ptcFmt(R.conf)}</b><span>puntos que suman</span></div>${R.est ? `<div><b>${ptcFmt(R.est)}</b><span>estimados</span></div>` : ""}<div><b>${R.nConf}</b><span>a confirmar</span></div><div><b>${R.nNo}</b><span>no suman</span></div></div>
+    <p class="hint">${R.est ? `Con los estimados, ${ptcFmt(R.total)} puntos por capacitaciones. ` : ""}Para que el cálculo sea más preciso, indicá dónde se dictó cada curso y si tuvo evaluación.</p>
+    <ul class="cp-list ptc-l">${R.C.map(({x, e}) => `<li class="cp-item"><div class="cp-top"><b>${esc(x.nombre || "Curso sin nombre")}</b><span class="cp-pts ${PTC_ET[e.estado][1]}">${e.pts != null && e.estado !== "no" ? `${ptcFmt(e.pts)} · ` : ""}${PTC_ET[e.estado][0]}</span></div>
+        <div class="cp-meta">${esc([x.inst, x.horas ? `${x.horas} horas` : "", x.fecha ? fechaCortaIso(x.fecha) : "", x.norma ? `Res. ${x.norma}` : ""].filter(Boolean).join(" · "))}</div>
+        <p class="ptc-como">${esc(e.como)}</p>
+        ${x.origen === "legajo" ? `<div class="ptc-sel"><label class="sr-only" for="ptca-${esc(x.id)}">Dónde se dictó</label><select id="ptca-${esc(x.id)}" data-ptcamb="${esc(x.id)}">${PTC_AMB.map(([v, l]) => `<option value="${v}"${(x.ambito || "") === v ? " selected" : ""}>${l}</option>`).join("")}</select>
+          <label class="sr-only" for="ptct-${esc(x.id)}">Tipo de certificación</label><select id="ptct-${esc(x.id)}" data-ptctipo="${esc(x.id)}">${PTC_TIPOS.map(([v, l]) => `<option value="${v}"${(x.tipo || "eval") === v ? " selected" : ""}>${l}</option>`).join("")}</select></div>` : `<p class="hint">Está en «Mis cursos»: pasalo a Mi legajo para completar los datos.</p>`}</li>`).join("")}</ul>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-ptc="word">Descargar para la Junta</button><button type="button" class="btn btn-sm" data-ptc="legajo">Editar en Mi legajo</button></div>
+    ${reglas}
+    <p class="hint">Fuentes: Res. 1741/5 (MEd) de 2026 según Monterizos (28/07/2026); Decreto 3128/5 (MEd) de 2025 según La Izquierda Diario (30/10/2025); Guía para el desempeño profesional del docente 2023. Revisado el 31/10/2026. Es una estimación: el puntaje oficial lo fija la Junta de Clasificación.</p>`;
+}
+function modeloPuntajeCursos(){
+  const R = ptcResumen();
+  return {inst:val("docente") || "Documento personal", titulo:"Mis capacitaciones y su puntaje", subtitulo:"Para revisar el puntaje en la Junta de Clasificación", faltaSub:"", datos:[["Docente", val("docente")], ["Fecha", fechaCortaIso(hoyIso())]].filter(d => d[1]),
+    secs:[
+      {h:"Detalle", tableOnly:true, table:{head:["Curso", "Institución", "Horas", "Resolución", "Fecha", "Puntos", "Estado"], w:[2500, 1500, 700, 1100, 1100, 800, 1370], rows:R.C.map(({x, e}) => [x.nombre || "", x.inst || "", x.horas ? String(x.horas) : "", x.norma || "", x.fecha ? fechaCortaIso(x.fecha) : "", e.pts != null && e.estado !== "no" ? ptcFmt(e.pts) : "", PTC_ET[e.estado][0]])}},
+      {h:"Total", body:`Puntos que suman: ${ptcFmt(R.conf)}.${R.est ? `\nEstimados (certificaciones anteriores a abril de 2024): ${ptcFmt(R.est)}.\nTotal con los estimados: ${ptcFmt(R.total)}.` : ""}\nCursos a confirmar: ${R.nConf}. Cursos que no suman: ${R.nNo}.`},
+      {h:"Cómo se calculó cada uno", body:R.C.map(({x, e}) => `- ${x.nombre || "Curso"}: ${e.como}`).join("\n")},
+      {h:"Para tener en cuenta", body:"- Es una estimación hecha con lo publicado; el puntaje oficial lo fija la Junta de Clasificación con la grilla vigente (Decreto 3128/5 MEd y su Anexo X).\n- Llevá los certificados originales y sus copias. En el período de tacha del padrón provisorio podés revisar tu puntaje y reclamar ante la Junta si no coincide."}
+    ], firmas:null};
+}
+function bindPuntajeCursos(){
+  const D = $("capac"); if (!D || D.dataset.okPtc) return; D.dataset.okPtc = "1";
+  D.addEventListener("click", async e => {
+    const b = e.target.closest("[data-ptc]"); if (!b) return;
+    if (b.dataset.ptc === "pin"){ if (await exigirPIN()) renderCapac(); return; }
+    if (b.dataset.ptc === "word"){ bajarDoc(modeloPuntajeCursos(), `capacitaciones-y-puntaje-${hoyIso()}`, "docx", "Resumen de capacitaciones descargado."); return; }
+    if (b.dataset.ptc === "legajo"){ cerrarDialogo("capac"); legTab = "cursos"; const l = $("btn-legajo"); if (l) l.click(); }
+  });
+  D.addEventListener("change", async e => {
+    const a = e.target.closest("[data-ptcamb], [data-ptctipo]"); if (!a) return;
+    if (!(await exigirPIN())) { renderCapac(); return; }
+    const L = leerLista(LEG_KEY, {}), id = a.dataset.ptcamb || a.dataset.ptctipo, x = (L.cursos || []).find(y => y.id === id); if (!x) return;
+    if (a.dataset.ptcamb != null) x.ambito = a.value; else x.tipo = a.value;
+    guardarLista(LEG_KEY, L); renderCapac();
+    const s = document.querySelector(`[${a.dataset.ptcamb != null ? "data-ptcamb" : "data-ptctipo"}="${CSS.escape(id)}"]`); if (s) s.focus();
+  });
+}
+
+/* ---------- Convivencia: qué hacer y a quién acudir ----------
+   Basado en la Guía provincial para el abordaje de situaciones escolares complejas (Res. M 2452/5,
+   Gabinete Pedagógico Interdisciplinario, octubre de 2025), la Guía federal (Res. CFE 217/14), las
+   pautas para los acuerdos de convivencia (Res. CFE 239/14), la Ley 26.892 y la Ley 26.061 (art. 30).
+   Lapacho no guarda lo que pasó: el acta se completa a mano y queda en la escuela. */
+const CONV_FUENTES = [
+  {f:"Ministerio de Educación de Tucumán, Gabinete Pedagógico Interdisciplinario (octubre de 2025)", t:"Guía provincial para el abordaje de situaciones escolares complejas (Res. M 2452/5)", u:"https://www.educaciontuc.gov.ar/wp-content/uploads/2025/10/Guia-de-Orientacion-para-el-abordaje-de-Situaciones-Escolares-Complejas_Res-M-2452_5.pdf"},
+  {f:"Consejo Federal de Educación (2014)", t:"Guía federal de orientaciones para la intervención educativa en situaciones complejas relacionadas con la vida escolar (Res. CFE 217/14)", u:"https://cfe.educacion.gob.ar/resoluciones/res14/217-14_01.pdf"},
+  {f:"Congreso de la Nación (2013)", t:"Ley 26.892 de promoción de la convivencia y abordaje de la conflictividad social en las instituciones educativas", u:"https://www.argentina.gob.ar/normativa/nacional/220645/texto"},
+  {f:"Consejo Federal de Educación (2014)", t:"Pautas y criterios federales para la elaboración de acuerdos de convivencia (Res. CFE 239/14)", u:"https://www.neuquen.edu.ar/wp-content/uploads/2025/06/L239-14_Anexo.pdf"},
+  {f:"Gobierno de Tucumán", t:"Línea 102: denuncia y asesoramiento (Dirección de Niñez, Adolescencia y Familia)", u:"https://guiadetramites.tucuman.gob.ar/tramite/9106/denuncia-y-asesoramiento-linea-102.html"}
+];
+const CONV_TEL = [
+  {n:"911", t:"Emergencias y policía", d:"Cuando hay peligro para alguien en este momento."},
+  {n:"107", t:"Emergencias médicas (SIPROSA)", d:"Lesiones, intoxicación, descompensación."},
+  {n:"102", t:"Línea 102 de Tucumán (Niñez, Adolescencia y Familia)", d:"Denuncias y asesoramiento ante derechos vulnerados de chicas y chicos. Gratuita, de 8 a 20."},
+  {n:"144", t:"Línea 144", d:"Violencia de género. Gratuita, las 24 horas."},
+  {n:"141", t:"Línea 141 (Sedronar)", d:"Consumo de sustancias. Gratuita y anónima."},
+  {n:"0800-999-0091", tel:"08009990091", t:"Urgencias de salud mental (Ministerio de Salud de la Nación)", d:"Orientación ante riesgo de suicidio o crisis. Gratuita, las 24 horas."}
+];
+const CONV_PASOS = [
+  "Escuchar y contener, en un lugar tranquilo y con un adulto de confianza presente.",
+  "Quien se entera primero avisa a la dirección (o a la supervisión) dentro de las 24 horas. No se guarda en secreto.",
+  "La dirección pide la intervención del Gabinete Pedagógico Interdisciplinario (GPI) y del SASE dentro de las 24 horas y lo registra en el SIME.",
+  "Se labra un acta en el libro exclusivo de situaciones complejas: el relato espontáneo con sus palabras, sin juicios ni opiniones, y quiénes estaban presentes.",
+  "Si hay lesiones o un malestar grave: atención médica urgente (107) y acta del traslado.",
+  "Se avisa a la familia; si el daño podría venir de la familia, a otro familiar o adulto de confianza.",
+  "Si hay derechos vulnerados (maltrato, abuso, trabajo infantil, violencia de un adulto), la escuela comunica a la Unidad Fiscal de Decisión Temprana del Ministerio Público Fiscal dentro de las 24 horas, por correo, con una nota y el acta.",
+  "Proteger: no pedir que repita lo que contó, no interrogar, no sacar fotos y no exponerlo frente a otros.",
+  "Pensar una respuesta pedagógica y trabajar en red con otras instituciones.",
+  "Hacer el seguimiento con el estudiante y la familia. Con los medios habla solo quien designe la dirección."
+];
+const CONV_AEC = [
+  "Las sanciones son educativas, graduales y proporcionales a la falta, y tienen en cuenta el contexto (Ley 26.892).",
+  "Antes de decidir una sanción, el estudiante tiene derecho a ser escuchado y a dar su descargo.",
+  "Están prohibidas las sanciones que atenten contra el derecho a la educación o que impidan seguir en la escuela.",
+  "Las notas no se usan como sanción (Res. CFE 239/14): una falta de conducta no se baja en la calificación.",
+  "Se prefieren las acciones reparatorias (pedir disculpas, reparar el daño, una tarea de reflexión acordada) a los castigos.",
+  "Las faltas se gradúan (leves, moderadas, graves) según lo que diga el acuerdo de convivencia de cada escuela; los casos que se repiten o son graves van al consejo de convivencia o al equipo directivo.",
+  "Un conflicto es una oportunidad para enseñar: la respuesta no debe ser punitiva ni patologizante (Guía provincial)."
+];
+const CONV = [
+  {id:"leve", t:"Faltas a los acuerdos", s:"Celular, impuntualidad, falta de respeto, no trabajar", reg:true,
+   ahora:["Intervenir en el momento con calma y recordar el acuerdo, sin elevar el tono.", "Después, conversar en privado: escuchar su versión antes de decidir nada.", "Acordar una acción reparatoria proporcional (pedir disculpas, reparar, una tarea de reflexión).", "Avisar a preceptoría y registrarlo.", "Si se repite, comunicar a la familia y llevarlo al equipo directivo o al consejo de convivencia, según el acuerdo de la escuela."],
+   no:["Exponerlo o ridiculizarlo frente al grupo.", "Bajarle la nota como castigo.", "Sacarlo del aula sin un adulto que lo reciba.", "Aplicar sanciones que lo dejen sin clases."],
+   avisar:["Preceptoría", "Equipo directivo, si se repite"]},
+  {id:"pelea", t:"Pelea o conflicto entre estudiantes", s:"Discusiones, golpes, amenazas", reg:true,
+   ahora:["Separarlos y calmarlos; si hay riesgo, pedir ayuda a otro adulto antes de intervenir.", "Si alguien se lastimó: atención médica (107) y avisar a la dirección.", "Hablar con cada uno por separado, sin juzgar.", "Avisar a la dirección dentro de las 24 horas y a las familias.", "Aplicar el acuerdo de convivencia con respuestas graduales y proporcionales; proponer una instancia de diálogo o de reparación."],
+   no:["Juntarlos para un careo.", "Sanciones «ejemplificadoras».", "Filmar o dejar que se difunda lo que pasó."],
+   avisar:["Equipo directivo", "Familias", "GPI y SASE si se repite o es grave (lo pide la dirección)"]},
+  {id:"acoso", t:"Acoso escolar", s:"Agresiones repetidas con desigualdad de poder", reg:true,
+   ahora:["Separar a los involucrados, contener y escuchar a cada uno en privado.", "Avisar a la dirección dentro de las 24 horas y a las familias.", "La dirección pide el acompañamiento del GPI y del SASE y lo registra en el SIME.", "Si hay grabaciones, pedir al grupo que las borre voluntariamente y dar un mensaje de cuidado.", "Trabajar con todo el grupo, no solo con los involucrados, y aplicar el acuerdo de convivencia."],
+   no:["Usar etiquetas como «víctima» y «victimario».", "Minimizarlo («son cosas de chicos»).", "Hacer careos o mediaciones entre quien acosa y quien es acosado."],
+   avisar:["Equipo directivo", "Familias", "GPI y SASE (lo pide la dirección)"]},
+  {id:"redes", t:"Violencia en redes, sexting o grooming", s:"Ciberacoso, suplantación, imágenes íntimas, un adulto que contacta a un menor", reg:false,
+   ahora:["Escuchar sin culpabilizar a quien lo cuenta.", "Pedir que no se reenvíe ni se difunda nada.", "Guardar como evidencia capturas con fecha, hora y enlace de los mensajes; si hay imágenes íntimas de menores, no se guardan ni se reenvían: se describe lo que se vio en el acta.", "Avisar a la dirección en el día y a la familia.", "Grooming (un adulto que contacta a un menor con fines sexuales) es un delito (Ley 26.904): la escuela lo comunica a la fiscalía o al 911, y la familia puede denunciar el perfil en la plataforma."],
+   no:["Reenviar, mostrar o guardar imágenes íntimas de menores: es delito, aunque sea para «mostrar el problema».", "Contactar o enfrentar al adulto.", "Borrar las conversaciones.", "Revisar el celular del estudiante sin su consentimiento."],
+   avisar:["Equipo directivo", "Familia", "911 o fiscalía en caso de grooming (lo hace la escuela)"]},
+  {id:"aDocente", t:"Un estudiante agrede a un docente", s:"Insultos, amenazas o golpes hacia vos u otro docente", reg:true,
+   ahora:["Ponete a resguardo y pedí ayuda a otro adulto.", "Si te lastimaron, pedí atención médica y consultá en la dirección cómo se registra como accidente de trabajo.", "Avisar a la dirección dentro de las 24 horas; la dirección pide el acompañamiento del GPI y del SASE.", "Dejar constancia en un acta, con lo que pasó y quiénes estaban.", "La dirección habla con el estudiante sin interrogarlo, avisa a la familia y aplica el acuerdo de convivencia."],
+   no:["Responder la agresión.", "Quedarte a solas con el estudiante si la situación sigue tensa."],
+   avisar:["Equipo directivo", "GPI y SASE", "107 si hay lesiones"]},
+  {id:"adulto", t:"Un familiar u otro adulto agrede o amenaza", s:"En la puerta, en la reunión o en el aula", reg:false,
+   ahora:["Mantener la calma y no quedarte a solas; pedir que otro adulto acompañe.", "Alejar la situación de los estudiantes y evitar que la persona alterada se encuentre con quien busca.", "Ofrecer una reunión posterior con la dirección.", "Si no se calma o hay peligro: 911.", "Después: atención médica si hace falta y acta con testigos. La dirección evalúa la denuncia judicial."],
+   no:["Discutir frente a los estudiantes.", "Recibir a la persona sola en un aula cerrada."],
+   avisar:["Equipo directivo", "911 si hay peligro"]},
+  {id:"abuso", t:"Un estudiante cuenta maltrato o abuso", s:"O tenés indicios de que sus derechos están vulnerados", reg:false,
+   ahora:["Escuchar en un lugar tranquilo, creerle y agradecerle que lo contó. No mostrar espanto ni enojo.", "Decirle que no es su culpa y que vas a pedir ayuda a otros adultos para cuidarlo: no se promete guardar el secreto.", "Anotar lo que dijo con sus palabras textuales, sin agregar interpretaciones.", "Avisar a la dirección ese mismo día (dentro de las 24 horas).", "La escuela comunica a la Unidad Fiscal de Decisión Temprana dentro de las 24 horas (con nota y acta) y pide el acompañamiento del GPI y del SASE. También se puede consultar a la línea 102.", "Si la persona señalada trabaja en la escuela, la supervisión y la dirección deciden las medidas y la apartan del contacto con estudiantes."],
+   no:["Revisar el cuerpo o buscar marcas: eso le corresponde al sistema de salud.", "Interrogarlo o pedir que lo repita a otras personas.", "Confrontarlo con la persona señalada.", "Avisar a la familia si el daño podría venir de la familia: lo decide la dirección, con otro adulto de confianza.", "Dejarlo pasar: comunicarlo es una obligación legal (Ley 26.061, art. 30)."],
+   avisar:["Equipo directivo, en el día", "Unidad Fiscal de Decisión Temprana (lo hace la escuela)", "GPI y SASE", "Línea 102"]},
+  {id:"suicidio", t:"Autolesiones o riesgo de suicidio", s:"Cortes, dichos o mensajes sobre querer morir", reg:false,
+   ahora:["Tomarlo en serio y no dejar solo al estudiante: que un adulto lo acompañe en todo momento.", "Escuchar sin juzgar. Preguntar directamente si piensa en quitarse la vida no aumenta el riesgo y ayuda a saber cómo está.", "Si hay riesgo inmediato o lesiones: 107 o 911.", "Avisar a la dirección y a la familia en el día; la dirección pide el acompañamiento del GPI y del SASE y la derivación a salud.", "Línea de urgencias de salud mental: 0800-999-0091 (gratuita, las 24 horas).", "Después, seguimiento cercano con la familia y el equipo de salud."],
+   no:["Prometer que vas a guardar el secreto.", "Minimizarlo, retarlo o decir que «lo hace para llamar la atención».", "Comentarlo con el curso o difundirlo.", "Dejarlo irse solo de la escuela."],
+   avisar:["Equipo directivo y familia, en el día", "107 o 911 si hay riesgo inmediato", "0800-999-0091", "GPI y SASE"]},
+  {id:"consumo", t:"Consumo de sustancias", s:"Alcohol u otras sustancias en la escuela", reg:false,
+   ahora:["Si está intoxicado o descompuesto: atención médica (107) y no dejarlo solo.", "Hablar en privado, desde el cuidado y no desde el castigo.", "Avisar a la dirección y a la familia; la dirección pide el acompañamiento del GPI y del SASE.", "Orientación gratuita y anónima: línea 141 (Sedronar).", "Si hay venta dentro de la escuela, la dirección evalúa comunicarlo a las autoridades."],
+   no:["Tratarlo como un delito frente al grupo.", "Revisar sus pertenencias por tu cuenta.", "Mandarlo a la casa solo."],
+   avisar:["Equipo directivo", "Familia", "107 si está descompuesto", "141 para orientación"]},
+  {id:"armas", t:"Armas en la escuela", s:"Un arma de fuego o un arma blanca", reg:false,
+   ahora:["Mantener la calma y considerar que toda arma de fuego está cargada.", "Pedir con tranquilidad que la apoye en una superficie, sin forcejear, y alejar al resto del grupo.", "Que haya más de un adulto presente; avisar a la dirección.", "La dirección llama al 911 (la policía retira el arma) y avisa a la familia.", "Con un arma blanca: calmar, separar a los demás, contener a quien fue amenazado y avisar a la dirección y a la familia.", "Después: el acuerdo de convivencia la considera una falta grave; trabajo con el grupo sobre el cuidado y la resolución pacífica de conflictos."],
+   no:["Forcejear o intentar quitarla.", "Plantearlo como un delito frente al grupo.", "Tocar el gatillo o manipular el arma."],
+   avisar:["Equipo directivo", "911", "Familia"]},
+  {id:"genero", t:"Violencia de género o discriminación", s:"Burlas, apodos, comentarios; violencia en la pareja o en la casa", reg:true,
+   ahora:["Frenar en el momento las burlas, apodos o comentarios discriminatorios y conversar con el grupo.", "Respetar el nombre y la identidad de género que la persona elige (Ley 26.743).", "Si una estudiante cuenta que sufre violencia: escuchar, creerle, no culpabilizar y avisar a la dirección en el día.", "Línea 144 (violencia de género, gratuita, las 24 horas).", "Trabajar el tema con la Educación Sexual Integral."],
+   no:["Naturalizar chistes o apodos que humillan.", "Obligar a alguien a contar su identidad u orientación.", "Proponer mediación entre quien sufre la violencia y quien la ejerce."],
+   avisar:["Equipo directivo", "Línea 144", "GPI y SASE"]},
+  {id:"salud", t:"Accidente o emergencia de salud", s:"Golpes, caídas, descompensaciones", reg:false,
+   ahora:["Si hay un golpe en la cabeza o el cuello, no moverlo.", "Llamar al 107 y avisar a la dirección.", "Avisar a la familia.", "Labrar el acta con lo que pasó y la hora del traslado; la dirección hace la denuncia del accidente según corresponda."],
+   no:["Darle medicamentos.", "Trasladarlo en un auto particular si no es indispensable."],
+   avisar:["107", "Equipo directivo", "Familia"]}
+];
+const CV = {sel:"leve"};
+const convPor = id => CONV.find(x => x.id === id) || CONV[0];
+const telHref = c => `tel:${c.tel || c.n}`;
+function htmlConvDetalle(){
+  const S = convPor(CV.sel);
+  return `<article class="cv-det" aria-labelledby="cv-det-h"><h3 id="cv-det-h">${esc(S.t)}</h3><p class="hint">${esc(S.s)}</p>
+    <h4>Qué hacer</h4><ol>${S.ahora.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+    <h4>Qué no hacer</h4><ul class="cv-no">${S.no.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+    <h4>A quién avisar</h4><ul>${S.avisar.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-cv="acta">Acta para completar (Word)</button><button type="button" class="btn btn-sm" data-cv="guia">Esta guía en Word</button>${S.reg ? `<button type="button" class="btn btn-sm" data-cv="conducta">Registrar en Conducta</button>` : ""}</div>
+    ${S.reg ? "" : `<p class="hint">Por cuidado de los estudiantes, Lapacho no guarda lo que pasó en estas situaciones: el acta se completa a mano y queda en el libro de la escuela.</p>`}</article>`;
+}
+function renderConv(){
+  const box = $("cv-panel"); if (!box) return;
+  box.innerHTML = `<p class="hint">Qué hacer ante una situación, qué no hacer y a quién avisar, según la guía provincial para situaciones escolares complejas (2025) y la normativa nacional. Seguí siempre el acuerdo de convivencia de tu escuela y lo que indique la dirección.</p>
+    <div class="cv-sits" role="group" aria-label="Situación">${CONV.map(x => `<button type="button" class="cv-sit" data-cvsit="${x.id}" aria-pressed="${x.id === CV.sel}"><b>${esc(x.t)}</b><small>${esc(x.s)}</small></button>`).join("")}</div>
+    <div id="cv-det" aria-live="polite">${htmlConvDetalle()}</div>
+    <details class="cur-sub" open><summary>A quién llamar</summary><ul class="cv-tel">${CONV_TEL.map(c => `<li><a class="btn btn-sm" href="${telHref(c)}">${esc(c.n)}</a><span><b>${esc(c.t)}</b><small>${esc(c.d)}</small></span></li>`).join("")}
+      <li><span class="cv-mail" aria-hidden="true">@</span><span><b>Gabinete Pedagógico Interdisciplinario (GPI)</b><small>gpi@educaciontuc.gov.ar · José Colombres 286 (altos), San Miguel de Tucumán. Lo convoca la dirección.</small></span></li></ul></details>
+    <details class="cur-sub"><summary>Pasos comunes a toda situación compleja</summary><ol class="cp-reglas">${CONV_PASOS.map(x => `<li>${esc(x)}</li>`).join("")}</ol></details>
+    <details class="cur-sub"><summary>Los acuerdos de convivencia y las sanciones</summary><ul class="cp-reglas">${CONV_AEC.map(x => `<li>${esc(x)}</li>`).join("")}</ul></details>
+    <details class="cur-sub"><summary>Fuentes</summary><ul class="cp-fuentes">${CONV_FUENTES.map(x => `<li><a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a> <small>${esc(x.f)}</small></li>`).join("")}</ul><p class="hint">Revisado el 31/10/2026. Es una guía de consulta rápida y no reemplaza la guía oficial ni el acuerdo de convivencia de tu escuela.</p></details>`;
+}
+function modeloActaConv(){
+  const S = convPor(CV.sel);
+  return {inst:val("institucion"), titulo:"Acta", subtitulo:S.t, faltaSub:"", datos:[["Fecha", BLANCO], ["Hora", BLANCO], ["Lugar", BLANCO], ["Curso y turno", BLANCO]],
+    secs:[
+      {sinH:true, body:"En la escuela consignada, en la fecha y hora indicadas, se deja constancia de lo siguiente:"},
+      {h:"Personas presentes", body:"Nombre, cargo, curso y turno de los adultos presentes.", lineas:3},
+      {h:"Lo que se observó o lo que contó el estudiante", body:"Con sus palabras textuales, sin interpretaciones ni opiniones.", lineas:8},
+      {h:"Acciones realizadas", body:"Qué se hizo y a qué hora (contención, atención médica, traslado, separación de los involucrados).", lineas:4},
+      {h:"Comunicaciones", tableOnly:true, table:{head:["A quién", "Cuándo", "Quién la hizo"], w:[3600, 2200, 3270], rows:[["Dirección o supervisión", "", ""], ["Familia o adulto de confianza", "", ""], ["GPI y SASE (registro en el SIME)", "", ""], ["Unidad Fiscal de Decisión Temprana (si corresponde)", "", ""], ["Otra", "", ""]]}},
+      {h:"Próximos pasos y seguimiento", lineas:3}
+    ], firmas:[["", "Docente"], ["", "Testigo"], ["", "Dirección"]]};
+}
+function modeloGuiaConv(){
+  const S = convPor(CV.sel);
+  return {inst:val("institucion"), titulo:"Convivencia: qué hacer", subtitulo:S.t, faltaSub:"", datos:[],
+    secs:[
+      {h:"Qué hacer", body:S.ahora.map((x, i) => `${i + 1}. ${x}`).join("\n")},
+      {h:"Qué no hacer", body:S.no.map(x => `- ${x}`).join("\n")},
+      {h:"A quién avisar", body:S.avisar.map(x => `- ${x}`).join("\n")},
+      {h:"Teléfonos", body:CONV_TEL.map(c => `- ${c.n}: ${c.t}. ${c.d}`).join("\n") + "\n- Gabinete Pedagógico Interdisciplinario (GPI): gpi@educaciontuc.gov.ar, José Colombres 286 (altos), San Miguel de Tucumán."},
+      {h:"Pasos comunes a toda situación compleja", body:CONV_PASOS.map((x, i) => `${i + 1}. ${x}`).join("\n")},
+      {h:"Los acuerdos de convivencia y las sanciones", body:CONV_AEC.map(x => `- ${x}`).join("\n")},
+      {h:"Fuentes", links:CONV_FUENTES, body:""}
+    ], firmas:null};
+}
+function abrirConv(sel){ if (sel && CONV.some(x => x.id === sel)) CV.sel = sel; renderConv(); abrirDialogo("conv"); }
+function htmlCond(c){ return `<div class="cv-banner"><button type="button" class="btn btn-sm" data-convabrir="">Convivencia: qué hacer ante una situación</button></div>` + htmlCondBase(c); }
+function bindConv(){
+  const D = $("conv"); if (!D || D.dataset.ok) return; D.dataset.ok = "1";
+  const b = $("btn-conv"); if (b) b.addEventListener("click", () => abrirConv());
+  document.addEventListener("click", e => { const a = e.target.closest("[data-convabrir]"); if (a) abrirConv(a.dataset.convabrir); });
+  D.addEventListener("click", e => {
+    const s = e.target.closest("[data-cvsit]");
+    if (s){ CV.sel = s.dataset.cvsit; D.querySelectorAll("[data-cvsit]").forEach(x => x.setAttribute("aria-pressed", String(x === s))); $("cv-det").innerHTML = htmlConvDetalle(); return; }
+    const a = e.target.closest("[data-cv]"); if (!a) return;
+    if (a.dataset.cv === "acta") bajarDoc(modeloActaConv(), `acta-${slug(convPor(CV.sel).t)}`, "docx", "Acta descargada: completala a mano.");
+    else if (a.dataset.cv === "guia") bajarDoc(modeloGuiaConv(), `convivencia-${slug(convPor(CV.sel).t)}`, "docx", "Guía descargada.");
+    else if (a.dataset.cv === "conducta"){ cerrarDialogo("conv"); abrirMiCurso("cond"); }
+  });
+}
+function init52(){
+  try { bindIdeasMu(); } catch (e) { registrarError("init52", e, "aviso"); }
+  try { bindPuntajeCursos(); } catch (e) { registrarError("init52", e, "aviso"); }
+  try { bindConv(); } catch (e) { registrarError("init52", e, "aviso"); }
 }
 
 /* ============================================================
@@ -20666,7 +21127,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
