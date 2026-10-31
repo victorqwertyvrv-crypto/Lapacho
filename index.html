@@ -1688,6 +1688,89 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .cp-avisos{margin:.5rem 0 .75rem;padding:.6rem .75rem;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
 .cp-avisos .hint{margin:.35rem 0 0}
 
+/* ---------- Versión 44 ---------- */
+/* Normativa del puntaje */
+.nrm-box{border:1px solid var(--line);border-left:4px solid #c49a1c;border-radius:10px;padding:10px 12px;margin:0 0 12px;background:var(--surface-2)}
+.nrm-t{margin:0 0 4px;font-size:13.5px}
+.nrm-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.nrm-l li{border-top:1px solid var(--line);padding-top:8px}
+.nrm-l p{margin:3px 0;font-size:13px}
+.nrm-box a{color:var(--accent)}
+.nrm-c{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.nrm-e{font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 8px;border:1px solid var(--line)}
+.nrm-e.ok{background:var(--accent-soft);color:var(--accent)}
+.nrm-e.sec{background:var(--flag);color:var(--flag-ink)}
+.nrm-e.nv{background:var(--warn-soft);color:var(--warn)}
+.cp-pts.duda{background:var(--flag);color:var(--flag-ink);font-weight:600}
+.cp-pts.si{font-weight:700}
+/* Escenarios de cargos y diálogos con definiciones */
+.esc-dl,.ped-dl{margin:6px 0 2px;display:flex;flex-direction:column;gap:6px}
+.esc-dl div,.ped-dl div{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:4px 12px}
+.esc-dl dt,.ped-dl dt{font-weight:600;font-size:12.5px;color:var(--muted)}
+.esc-dl dd,.ped-dl dd{margin:0;font-size:13.5px}
+@media (max-width:560px){.esc-dl div,.ped-dl div{grid-template-columns:1fr}}
+.ia-bar{margin-top:12px}
+#ia-cons .aviso-c{margin:10px 0}
+.aj-sec h3{margin:0 0 6px;font-size:15px}
+.aj-sec .cp-ck{margin:8px 0}
+/* Copias de seguridad */
+.resp-mods{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0}
+.resp-mods legend{font-weight:600;font-size:13.5px;padding:0 4px}
+.resp-mods .cp-ck{margin:4px 0}
+.resp-t th,.resp-t td{font-size:13px;text-align:left}
+.resp-diarias{margin-top:14px}
+.resp-diarias h3{margin:0 0 4px;font-size:15px}
+.gd-priv .f{margin:8px 0}
+/* Inicio por tareas */
+.pn-tareas{margin:0 0 18px}
+.pn-tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.pn-tc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px 8px;box-shadow:var(--sombra);min-width:0}
+.pn-tc h3{margin:0;font-size:15px}
+.pn-tc p{margin:1px 0 6px;font-size:12.5px;color:var(--muted)}
+.pn-tc ul{list-style:none;margin:0;padding:0}
+.pn-ta{display:block;width:100%;min-height:44px;text-align:left;font:inherit;font-size:14px;color:var(--ink);background:none;border:0;border-top:1px solid var(--line);padding:10px 2px;cursor:pointer}
+.pn-tc li:first-child .pn-ta{border-top:0}
+.pn-ta:hover{color:var(--accent)}
+.pn-ta::after{content:"›";float:right;color:var(--muted)}
+/* Motor pedagógico */
+.coh-ped{margin-top:18px}
+.ped-sec{margin-top:18px}
+.ped-o details{width:100%}
+.ped-o summary{cursor:pointer;line-height:1.45}
+.ped-o summary .coh-n{margin-right:6px}
+.ped-mas{width:100%;margin-top:2px}
+.ped-mas summary{cursor:pointer;font-size:12.5px;color:var(--accent);min-height:24px;display:flex;align-items:center}
+.ped-bt td,.ped-bt th{font-size:13px;vertical-align:top}
+.ped-bt select{min-width:150px;font-size:14px}
+.ped-dif{display:inline-block;margin-top:4px;font-size:11.5px;font-weight:600;color:var(--warn)}
+.ped-verbos{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.ped-verbos dt{font-weight:600}
+.ped-verbos dd{margin:0;font-size:13px;color:var(--muted)}
+.ped-bar{border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2px 12px}
+.ped-bar legend{font-weight:600;font-size:13.5px;padding:0 4px}
+.ped-dua{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ped-dua li{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--surface-2)}
+.ped-a{margin:0 0 4px;font-size:13.5px}
+.ped-a span{font-weight:600;color:var(--accent);margin-right:4px}
+.ped-abp{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:4px 14px}
+.ped-abp li{font-size:13.5px;min-height:24px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.ped-abp li.ok span{color:var(--accent);font-weight:700}
+.ped-abp li.falta span{color:var(--warn)}
+/* NAP */
+.nap-orig{margin-top:8px}
+/* Objetivos táctiles de al menos 24 px (WCAG 2.2, 2.5.8) */
+.linkbtn{min-height:24px;padding-top:3px;padding-bottom:3px}
+.cp-ck input[type="checkbox"],.cond-check input[type="checkbox"],.cp-ck input[type="radio"],.cond-check input[type="radio"]{width:24px;height:24px;min-width:24px;flex:none}
+.cp-ck,.cond-check{min-height:24px}
+/* Impresión: tablas que no se cortan y encabezados que se repiten */
+@media print{
+  thead{display:table-header-group}
+  tr,img,svg,figure,.d-table-wrap{break-inside:avoid;page-break-inside:avoid}
+  h1,h2,h3,h4{break-after:avoid;page-break-after:avoid}
+  p,li{orphans:3;widows:3}
+  .pn-tareas,#ia-cons,#privia{display:none!important}
+}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -2012,13 +2095,13 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Qué pasa si un alumno muestra señales de riesgo?</summary><p>Si junta dos o más señales (muchas faltas, notas en baja, tareas sin entregar o conducta a mejorar), aparece en «Mi curso › Esta semana» y en «Tu día». Desde ahí registrás la intervención en «Familias › Intervenciones»: qué hiciste, con quién hablaste, qué se acordó y cuándo volver a verlo. Se descarga en Word.</p></details>
       <details class="faq"><summary>¿Qué pasa si subo una foto?</summary><p>En «Más herramientas › Subir una foto» elegís una o varias fotos y la app reconoce qué son. Con un programa de la materia arma la planificación anual con sus unidades (después cada unidad se abre como secuencia y salen las clases). Con el flyer de un curso te dice si suma puntaje. Con evaluaciones de tus alumnos busca el nombre en cada una y la guarda en la carpeta de ese alumno. Con una captura del SIME carga las vacantes, y con un documento tuyo lo guarda en tu carpeta digital. Si no acierta, elegís vos qué es con un toque. Las evaluaciones y tus documentos se leen solo en tu celular.</p></details>
       <details class="faq"><summary>¿Puedo tener mis documentos en el celular e imprimirlos rápido?</summary><p>Sí. En «Más herramientas › Mi carpeta digital» sacás una foto de cada documento (título, DNI, constancias) y la app la deja como escaneada. Para un trámite, tocás «Tomar posesión», «Inscripción en la Junta», «Revisión de antecedentes» o «Mandar mi CV» y después «Compartir» o «Imprimir»: sale un solo PDF con todo y una hoja para la fotocopiadora. Las imágenes quedan solo en tu celular. Lo que pide copia legalizada o el original firmado está marcado.</p></details>
-      <details class="faq"><summary>¿Cómo decido si me conviene viajar por un cargo?</summary><p>En «Cargos disponibles» cargá tu lugar de partida y tus límites (minutos de viaje, mínimo por hora, no volver de noche). Cada cargo te muestra el viaje, si es una escuela rural, si hay otro cargo cerca para combinar, la chance de que salga uno más cerca si esperás y, si viajás en colectivo, si llegás al último de vuelta. Con «Medir mi viaje real» tomás el tiempo una vez y desde ahí se usa ese. El mapa muestra todos los cargos con zonas de 30, 45 y 60 minutos.</p></details>
+      <details class="faq"><summary>¿Cómo decido si me conviene viajar por un cargo?</summary><p>En «Cargos disponibles» cargá tu lugar de partida y tus límites (minutos de viaje, mínimo por hora, no volver de noche). Cada cargo te muestra el viaje, si es una escuela rural, si hay otro cargo cerca para combinar, un escenario sobre si conviene esperar uno más cerca (con al menos seis meses de datos) y, si viajás en colectivo, si llegás al último de vuelta. Con «Medir mi viaje real» tomás el tiempo una vez y desde ahí se usa ese. El mapa muestra todos los cargos con zonas de 30, 45 y 60 minutos.</p></details>
       <details class="faq"><summary>¿Cómo me protejo para que no me saquen un cargo?</summary><p>En «Cargos disponibles» el planificador marca los cargos que vuelven a publicarse y te avisa en «Tu día» si es uno al que te postulaste o que seguís, para que te postules de nuevo. Si un cargo que se asignó a otra persona vuelve a aparecer, te muestra una alerta y arma una nota para pedirle explicaciones a la Junta de Clasificación. Cuando te asignan un cargo, te da la lista de trámites para no perderlo. Guardá siempre el comprobante del SIME y, ante una irregularidad, consultá con tu gremio cuanto antes: los plazos para reclamar son cortos.</p></details>
       <details class="faq"><summary>¿Qué cursos me suman puntaje?</summary><p>En «Más herramientas › Capacitaciones con puntaje» tenés un catálogo de cursos con resolución del Ministerio o de INFoD, y «¿Me suma?», donde cargás la captura o el flyer de cualquier curso y te dice si suma en la Junta, cuánto (si se sabe) y si tiene que ver con tu título. En «Cuánto subo» ves cuántos lugares subís en el listado.</p></details>
-      <details class="faq"><summary>¿Cómo se calculan mis chances en un cargo?</summary><p>Con tu número de orden en el listado de esa materia (lo cargás en «Mi legajo › Junta») y una estimación de cuántos de los que tenés adelante suelen postularse según las horas, el turno, la zona y la situación de revista. Cada resultado que anotás en «Mis postulaciones» ajusta el cálculo. Es una estimación para comparar cargos, no un dato oficial.</p></details>
+      <details class="faq"><summary>¿Cómo se arma el escenario de cada cargo?</summary><p>No hay datos públicos de cuántos docentes se postulan a cada cargo, así que Lapacho no da porcentajes. Arma un escenario orientativo (favorable, intermedio o desfavorable) y te muestra por separado los datos que cargaste (tu número de orden y las vacantes), los datos históricos (tus resultados anteriores y los cortes que anotaste), los supuestos del modelo (cuántos de los que tenés adelante se postularían según las horas, el turno, la zona y la situación de revista) y el resultado. Sirve para comparar cargos, no para saber si te lo van a asignar.</p></details>
       <details class="faq"><summary>¿Cómo me entero de los cursos nuevos que suman puntaje?</summary><p>El catálogo de «Tu carrera › Capacitaciones con puntaje» se revisa todos los días. Cuando sale un curso que te suma y tiene que ver con tus materias, «Tu día» te avisa, y en el catálogo aparece marcado «Nuevo», con la fecha de cierre de la inscripción si se conoce. Tocá «Me interesa» y te avisamos tres días antes de que cierre. Podés apagar el aviso en el mismo catálogo. La inscripción la hacés vos en el enlace del curso.</p></details>
 <details class="faq"><summary>¿Qué hago ante una pelea, un caso de acoso o algo grave en la escuela?</summary><p>En «Herramientas › Para la escuela › Convivencia: qué hacer» (o desde «Mi curso › Conducta») elegís la situación y ves qué hacer, qué no hacer y a quién avisar, según la guía provincial para situaciones escolares complejas (2025), con los teléfonos (911, 107, 102, 144, 141 y la línea de salud mental) y un acta para completar a mano. Lapacho no guarda lo que pasó en las situaciones graves.</p></details>
-        <details class="faq"><summary>¿Cómo se suma el puntaje de mis capacitaciones?</summary><p>En «Capacitaciones con puntaje › Mi puntaje» ves cada curso de tu legajo con lo que suma y el total: los de INFoD según las horas (Res. 1741/5), los que no suman (menos de 40 horas o fuera de la provincia, desde el Decreto 3128) y los que quedan a confirmar porque el Anexo X no está publicado. Si tu certificado dice el puntaje, cargalo y se usa ese. Es una estimación: el puntaje oficial lo fija la Junta.</p></details>
+        <details class="faq"><summary>¿Cómo se suma el puntaje de mis capacitaciones?</summary><p>En «Capacitaciones con puntaje › Mi puntaje» ves cada curso de tu legajo con lo que suma y el total: los que tienen el puntaje del certificado, los de INFoD estimados con la tabla publicada en 2026, los que quedan a confirmar porque Lapacho no tiene cargada la escala vigente y los que quedan a verificar (menos de 40 horas o de otra provincia), porque el Decreto 3128 solo se conoce por la prensa y no lo pudimos verificar. El módulo está pendiente de validación normativa: el puntaje oficial lo fija la Junta.</p></details>
         <details class="faq"><summary>¿Qué piden para el stand de la feria de ciencias?</summary><p>En «Feria de ciencias», la sección «Stand y cartel» del proyecto y el botón «Lista para armar el stand» resumen las reglas de la Feria Nacional 2026: tríptico con todo del lado de adentro, cartel de 60 × 22 cm, carpeta de campo a la vista, informe impreso para los visitantes, electricidad y lo que no se puede llevar (seres vivos, fuego, vidrio, químicos, líquidos, alimentos, cinta bifaz). Para la feria de Tucumán, confirmá las reglas con la organización.</p></details>
         <details class="faq"><summary>¿Cómo organizo la muestra de la escuela?</summary><p>En «Herramientas › Para la escuela › Muestra de la escuela» cargás el tipo de muestra, la fecha, el lugar y un stand por línea (o traés tus cursos). Lapacho arma el proyecto para la dirección con el cronograma de preparación, una ficha por stand con los turnos y el guion, la invitación a las familias con talón, la planilla para valorar la exposición y la lista para el día.</p></details>
         <details class="faq"><summary>¿Puedo cambiar con qué pantalla abre Lapacho y cómo me saluda?</summary><p>Lapacho abre en «Hoy». En Ajustes podés poner tu nombre para que te salude y elegir si preferís que abra en «Planificar».</p></details>
@@ -2030,7 +2113,9 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
       <details class="faq"><summary>¿Cómo no perder los datos de mis cursos?</summary><p>En «Ajustes › Copia de seguridad» descargás un archivo con todo, incluidas las fotos. Guardalo en tu Drive una vez por semana: si cambiás de celular o se borra el navegador, lo abrís ahí mismo y recuperás todo. «Tu día» te recuerda cuando pasó una semana sin copia.</p></details>
       <details class="faq"><summary>¿Funciona sin internet?</summary><p>Sí. En «Ajustes › Usar sin internet» descargás el planificador como un archivo y lo abrís con el navegador del celular o la computadora aunque no haya señal. Esa versión guarda sus datos aparte: para pasarlos de una a otra usá la copia de seguridad.</p></details>
-      <details class="faq"><summary>¿Y si otra persona usa mi computadora?</summary><p>En «Ajustes › Proteger con PIN» elegís un número que se pide para abrir Mi curso, el modo aula, el PPI, las actas y tu legajo.</p></details>
+      <details class="faq"><summary>¿Y si otra persona usa mi computadora?</summary><p>En «Ajustes › Proteger con PIN» elegís un número que se pide para abrir Mi curso, el modo aula, el PPI, las actas y tu legajo. El PIN bloquea la pantalla, pero no cifra los datos guardados en el navegador. Lo que sí se cifra, con la contraseña que elijas, es la copia de seguridad.</p></details>
+<details class="faq"><summary>¿Qué se envía cuando uso Claude desde Lapacho?</summary><p>Solo el texto que hace falta para la tarea, sin nombres de estudiantes, documentos, correos, teléfonos ni datos de salud: Lapacho los quita antes de enviar y te muestra qué se envía, a quién y para qué. Las imágenes se consultan cada vez, porque no se pueden anonimizar. En «Ajustes › Privacidad e IA» podés usar Lapacho sin IA.</p></details>
+<details class="faq"><summary>¿Dónde se guardan mis datos?</summary><p>En este navegador, en dos lugares a la vez: una base interna (IndexedDB), donde cada cambio se guarda en el momento, y una copia rápida. Además, Lapacho guarda una versión por día de los últimos siete días. Para llevar los datos a otro dispositivo, o por si se borra el navegador, descargá una copia de seguridad: podés elegir qué módulos incluir y protegerla con contraseña.</p></details>
       <details class="faq"><summary>¿Dónde están la ficha, la rúbrica o el registro de clase?</summary><p>Se completan en «Más opciones», al final del formulario, y se ven eligiendo el documento en «Ver», arriba de la hoja.</p></details>
       <details class="faq"><summary>¿Las sugerencias reemplazan al diseño curricular?</summary><p>No. Son un punto de partida: revisalas con el diseño curricular vigente y con los acuerdos de tu escuela.</p></details>
     </div>
@@ -4652,6 +4737,14 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-31-c", fecha:"2026-10-31", items:[
+    "Puntaje de capacitaciones: el módulo quedó pendiente de validación normativa. El Decreto 3128 solo se conoce por la prensa y hay antecedentes de que habría sido derogado: Lapacho ya no descuenta los cursos de menos de 40 horas ni los de otras provincias, que figuran «a verificar». Los puntos de INFoD se muestran como estimados y cada norma dice su fuente y su estado.",
+    "Cargos disponibles: en lugar de porcentajes, cada cargo muestra un escenario orientativo, con los datos que cargaste, los históricos, los supuestos del modelo y el resultado por separado.",
+    "Privacidad: antes de enviar algo a Claude, Lapacho quita nombres de estudiantes y datos de salud y te pregunta. Podés usar la app sin IA (Ajustes › Privacidad e IA). En Google Drive, la copia completa se sube cifrada.",
+    "Tus datos se guardan también en una base interna (IndexedDB) en el momento en que cambian, con una versión por día de los últimos siete días. La copia de seguridad permite elegir qué módulos incluir y muestra qué cambia en cada uno antes de restaurar.",
+    "Revisar la coherencia: cada observación dice qué se detectó, por qué puede ser un problema, qué revisar y una propuesta. Se sumaron la taxonomía de Bloom, el DUA por actividad según las barreras del grupo y los componentes del proyecto.",
+    "Inicio: «¿Qué querés hacer?» ordena las herramientas por tareas: planificar, dar clase, evaluar, organizar la escuela y tu carrera."
+  ]},
   {id:"2026-10-31-b", fecha:"2026-10-31", items:[
     "Capacitaciones con puntaje: cuando sale un curso que te suma y tiene que ver con tus materias, «Tu día» te avisa. En el catálogo aparece marcado «Nuevo» y con la fecha de cierre de la inscripción. El catálogo se revisa todos los días.",
     "Si tocás «Me interesa» en un curso del catálogo que tiene fecha de cierre, te avisamos tres días antes de que cierre la inscripción."
@@ -5360,7 +5453,7 @@ function renderBanco(){
     `<div class="lib-act">${dest.length ? `<label class="sr-only" for="bd-${x.id}">Agregar a</label><select id="bd-${x.id}" class="banco-dest">${opts}</select><button type="button" class="btn btn-sm" data-bancoadd="${x.id}">Agregar</button>` : ""}<button type="button" class="btn btn-sm lib-del" data-bancodel="${x.id}">Borrar</button></div></div>`).join("")
     : `<p class="lib-empty">${q ? "No hay actividades con esas palabras." : "Todavía no guardaste actividades. Usá «Guardar en el banco» junto a las actividades o escribí una nueva acá abajo."}</p>`;
 }
-function abrirDialogo(id){
+function abrirDialogoV43(id){
   const dlg = $(id);
   dlg.appendChild($("toast"));
   if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
@@ -7201,7 +7294,7 @@ async function initCaps(){
     Promise.resolve().then(() => window.claude.use("sample")).catch(() => null),
     Promise.resolve().then(() => window.claude.use("downloads")).catch(() => null)
   ]);
-  caps.sample = s; caps.downloads = d; caps.pending = false;
+  caps.sample = leerPref().iaOff ? null : iaEnvolver(s); caps.downloads = d; caps.pending = false;
   updateImgHint();
   renderGallery();
 }
@@ -7211,13 +7304,13 @@ async function initCaps(){
    ============================================================ */
 let saveTimer;
 function scheduleSave(){ clearTimeout(saveTimer); try { if (!congelado) $("status").textContent = "Guardando…"; } catch (e) { logSilencioso(e); } saveTimer = setTimeout(save, 400); }
-function foto(){
+function fotoV43(){
   const v = {};
   ALL_IDS.forEach(id => { v[id] = $(id).value; });
   return {v, edited:{...state.edited}, sel:state.saberesSel ? [...state.saberesSel] : null, recursos:[...state.recursos], modo:state.modo, integra:[...state.integra],
     planea:state.planea, plNombre:state.plNombre, plTema:state.plTema, key:state.saberesKey, example:state.example, images:state.images.map(i => ({...i}))};
 }
-function aplicar(saved){
+function aplicarV43(saved){
   if ($("app").dataset.sec === "hoy" && typeof irSeccion === "function") irSeccion("plan", true);
   ALL_IDS.forEach(id => { if (saved.v[id] != null) $(id).value = saved.v[id]; else if (["dias", "instsel", "transv", "int_docentes"].includes(id)) $(id).value = ""; });
   state.edited = saved.edited || {};
@@ -7241,7 +7334,7 @@ function save(){
   const v = {};
   ALL_IDS.forEach(id => { v[id] = $(id).value; });
   const imgs = state.images.map(({png, ...rest}) => rest);
-  const base = {v, edited:state.edited, sel:state.saberesSel, recursos:state.recursos, modo:state.modo, integra:state.integra, planea:state.planea, plNombre:state.plNombre, plTema:state.plTema, planId:state.planId, key:state.saberesKey, accent:state.accent, docFont:state.docFont, example:state.example};
+  const base = {v, ped:state.ped || null, edited:state.edited, sel:state.saberesSel, recursos:state.recursos, modo:state.modo, integra:state.integra, planea:state.planea, plNombre:state.plNombre, plTema:state.plTema, planId:state.planId, key:state.saberesKey, accent:state.accent, docFont:state.docFont, example:state.example};
   try {
     localStorage.setItem(STORE_KEY, JSON.stringify({...base, images:imgs}));
     $("status").textContent = "Guardado a las " + new Date().toLocaleTimeString("es-AR", {hour:"2-digit", minute:"2-digit"});
@@ -7584,7 +7677,7 @@ function bind(){
     const nuevoId = state.planId;
     ALL_IDS.forEach(id => { if (!KEEP_ON_NEW.includes(id)) $(id).value = ""; });
     state.edited = {}; state.saberesSel = null; state.example = false; state.images = []; state.recursos = []; state.catAll = false; state.integra = [];
-    state.planea = ""; state.plNombre = ""; state.plTema = ""; state.plAll = false;
+    state.planea = ""; state.plNombre = ""; state.plTema = ""; state.plAll = false; state.ped = {bloom:{}, barreras:[]};
     $("example-note").hidden = true;
     $("img-detalle").value = "";
     $("cat-q").value = "";
@@ -10275,7 +10368,7 @@ function renderCargos(){
       <label class="sr-only" for="cg-dep">Zona</label><select id="cg-dep" data-cgf="dep"><option value="">Todas las zonas</option>${(j.zonas || []).length || (j.favEsc || []).length ? `<option value="mis"${CG.dep === "mis" ? " selected" : ""}>Mis zonas y escuelas</option>` : ""}${deps.map(d => `<option${CG.dep === d ? " selected" : ""}>${esc(d)}</option>`).join("")}</select>
       <label class="sr-only" for="cg-turno">Turno</label><select id="cg-turno" data-cgf="turno"><option value="">Todos los turnos</option>${["Mañana", "Tarde", "Noche", "Vespertino", "Intermedio"].map(t => `<option${CG.turno === t ? " selected" : ""}>${t}</option>`).join("")}</select>
       ${origenActual(j) ? `<label class="sr-only" for="cg-tmax">Tiempo de viaje</label><select id="cg-tmax" data-cgf="tmax"><option value="">Cualquier distancia</option>${[[20, "Hasta 20 min de viaje"], [30, "Hasta 30 min de viaje"], [45, "Hasta 45 min de viaje"], [60, "Hasta 1 hora de viaje"], [90, "Hasta 1 h 30 min"]].map(([m, l]) => `<option value="${m}"${+CG.tmax === m ? " selected" : ""}>${l}</option>`).join("")}</select>
-      <label class="sr-only" for="cg-orden">Ordenar</label><select id="cg-orden" data-cgf="orden"><option value="">Mis zonas primero</option><option value="viaje"${CG.orden === "viaje" ? " selected" : ""}>Más cerca primero</option><option value="cierre"${CG.orden === "cierre" ? " selected" : ""}>Cierra antes primero</option><option value="chance"${CG.orden === "chance" ? " selected" : ""}>Mejor chance primero</option><option value="conviene"${CG.orden === "conviene" ? " selected" : ""}>Me conviene más</option></select>` : `<label class="sr-only" for="cg-orden">Ordenar</label><select id="cg-orden" data-cgf="orden"><option value="">Mis zonas primero</option><option value="chance"${CG.orden === "chance" ? " selected" : ""}>Mejor chance primero</option><option value="conviene"${CG.orden === "conviene" ? " selected" : ""}>Me conviene más</option><option value="cierre"${CG.orden === "cierre" ? " selected" : ""}>Cierra antes primero</option></select>`}
+      <label class="sr-only" for="cg-orden">Ordenar</label><select id="cg-orden" data-cgf="orden"><option value="">Mis zonas primero</option><option value="viaje"${CG.orden === "viaje" ? " selected" : ""}>Más cerca primero</option><option value="cierre"${CG.orden === "cierre" ? " selected" : ""}>Cierra antes primero</option><option value="chance"${CG.orden === "chance" ? " selected" : ""}>Escenario más favorable primero</option><option value="conviene"${CG.orden === "conviene" ? " selected" : ""}>Me conviene más</option></select>` : `<label class="sr-only" for="cg-orden">Ordenar</label><select id="cg-orden" data-cgf="orden"><option value="">Mis zonas primero</option><option value="chance"${CG.orden === "chance" ? " selected" : ""}>Escenario más favorable primero</option><option value="conviene"${CG.orden === "conviene" ? " selected" : ""}>Me conviene más</option><option value="cierre"${CG.orden === "cierre" ? " selected" : ""}>Cierra antes primero</option></select>`}
       <label class="sr-only" for="cg-q">Buscar</label><input id="cg-q" type="search" data-cgf="q" placeholder="Buscar escuela o localidad" value="${esc(CG.q || "")}"></div>
     ${!mias.length ? `<p class="hint">Cargá tus materias en <button type="button" class="linkbtn" data-cg="junta">Mi legajo › Junta</button> para ver solo tus cargos.</p>` : ""}
     ${j.midiendo ? `<div class="cg-med"><b>Estás midiendo un viaje.</b><button type="button" class="btn btn-sm btn-primary" data-medfin="${esc(j.midiendo.k)}">Llegué</button><button type="button" class="linkbtn" data-medcancel>Cancelar</button></div>` : ""}${htmlPostulaciones(j)}
@@ -10397,7 +10490,7 @@ function legajoExtra(){
   if (legTab === "junta") P.insertAdjacentHTML("afterbegin", `<p class="hint">Cargá las materias en las que estás inscripto en Junta. «Cargos disponibles» las usa para mostrarte solo tus cargos. En «Otros nombres» poné cómo puede aparecer la materia en el SIME (por ejemplo: Fisicoquímica, Física I).</p><div class="cur-bar"><button type="button" class="btn btn-sm" data-legcargos>Ver cargos disponibles</button></div>`);
   if (legTab === "titulos") P.insertAdjacentHTML("afterbegin", `<div class="cp-banner"><button type="button" class="btn btn-sm btn-primary" data-legcarp="docs">Mi carpeta digital</button><button type="button" class="btn btn-sm" data-legcarp="cv">Mi CV</button></div>`);
   if (legTab === "cursos") P.insertAdjacentHTML("afterbegin", `<div class="cp-banner"><button type="button" class="btn btn-sm btn-primary" data-legcapac="buscar">Buscar cursos que suman puntaje</button><button type="button" class="btn btn-sm" data-legcapac="suma">¿Este curso me suma?</button></div>`);
-  if (legTab === "junta") P.insertAdjacentHTML("beforeend", `<p class="hint">Con tu número de orden, «Cargos disponibles» estima tus chances en cada cargo. Si copiás del padrón los puntajes de los que tenés adelante, también ves cuántos lugares subís con cada curso.</p><div class="cur-bar"><button type="button" class="btn btn-sm" data-legcapac="puntaje">Cuántos puntos me faltan</button></div>`);
+  if (legTab === "junta") P.insertAdjacentHTML("beforeend", `<p class="hint">Con tu número de orden, «Cargos disponibles» arma un escenario orientativo para cada cargo. Si copiás del padrón los puntajes de los que tenés adelante, también ves cuántos lugares subís con cada curso.</p><div class="cur-bar"><button type="button" class="btn btn-sm" data-legcapac="puntaje">Cuántos puntos me faltan</button></div>`);
   if (legTab === "juntaf") P.insertAdjacentHTML("beforeend", htmlFechasCal());
   if (legTab === "juntaf") P.insertAdjacentHTML("afterbegin", `<p class="hint">Cada año la Junta abre la inscripción y reinscripción por el SIME (en 2026 fue del 30 de septiembre al 15 de octubre), publica los padrones provisorios y abre la revisión de antecedentes. Cargá las fechas del cronograma y te avisamos en «Tu día» una semana antes.</p><div class="cur-bar"><a class="btn btn-sm" href="${SIME_URL}" target="_blank" rel="noopener">Abrir el SIME</a><a class="btn btn-sm" href="${PADRONES_URL}" target="_blank" rel="noopener">Comunicados y padrones</a></div>`);
 }
@@ -11220,7 +11313,7 @@ function datosDeTexto(txt){
   o.otroNivel = /\b(nivel )?(inicial|primari[oa])\b/i.test(t) && !/secundari/i.test(t);
   return o;
 }
-function evaluarCurso(o){
+function evaluarCursoV43(o){
   const motivos = [], horas = +o.horas || 0;
   let suma = null, pts = null;
   if (o.web){ suma = false; motivos.push("Los webinarios, charlas y conversatorios no tienen resolución del Ministerio y no otorgan puntaje."); }
@@ -11321,7 +11414,7 @@ function renderCapacBase(){
   if (CP.tab === "total"){ P.innerHTML = htmlPuntajeCursos(); return; }
   if (CP.tab === "puntaje") P.innerHTML = htmlSimulador();
 }
-function htmlReglasPuntaje(){
+function htmlReglasPuntajeV43(){
   return `<details class="cur-sub"><summary>Qué cursos suman puntaje en Tucumán</summary><ul class="cp-reglas">
     <li>Tiene que tener <b>resolución del Ministerio de Educación de Tucumán</b> («Res. N.º …/5 (MEd)»), salvo los cursos de INFoD.</li>
     <li>Desde el <b>Decreto 3128 (2025)</b>, según lo publicado, no suman los cursos de <b>menos de 40 horas</b> ni los dictados <b>fuera de la provincia</b>, salvo los de INFoD.</li>
@@ -11405,7 +11498,7 @@ function delanteDe(m){ return String((m && m.delante) || "").split(/;|\s+|,\s+/)
 function htmlChanceHint(j){
   const mias = misMateriasJunta();
   if (!mias.length || mias.some(m => +m.orden > 0) || !(j.vac || []).length) return "";
-  return `<p class="hint cg-chh">Para ver tus chances en cada cargo, cargá tu número de orden en el listado de cada materia en <button type="button" class="linkbtn" data-cg="junta">Mi legajo › Junta</button>.</p>`;
+  return `<p class="hint cg-chh">Para ver un escenario orientativo de cada cargo, cargá tu número de orden en el listado de cada materia en <button type="button" class="linkbtn" data-cg="junta">Mi legajo › Junta</button>.</p>`;
 }
 function binomMenos(a, p, k){ let s = 0, c = 1; for (let i = 0; i < k && i <= a; i++){ s += c * Math.pow(p, i) * Math.pow(1 - p, a - i); c = c * (a - i) / (i + 1); } return Math.min(1, s); }
 function pBase(v, j){
@@ -11465,7 +11558,7 @@ function choqueConPostulaciones(v, j){
   }
   return null;
 }
-function htmlChance(v, j){
+function htmlChanceV43(v, j){
   const C = chanceDe(v, j), co = cortesDe(v, j), ch = choqueConPostulaciones(v, j), out = [];
   if (C){
     const pct = Math.round(C.pr * 20) * 5, cada = Math.max(1, Math.round(1 / C.p));
@@ -11519,8 +11612,7 @@ function htmlSimRes(){
     const p = numAR(m.puntaje), del = delanteDe(m), ord = +m.orden || 0;
     if (!del.length) return `<tr><td data-l="Materia"><b>${esc(m.materia)}</b></td><td data-l="Hoy">${coma(p)} puntos${ord ? ` · puesto ${ord}` : ""}</td><td data-l="Sumando">${coma(p + x)} puntos<small>Para ver cuántos lugares subís, cargá los puntajes de los que tenés adelante (están en el padrón).</small></td></tr>`;
     const hoy = 1 + del.filter(d => d > p).length, nuevo = 1 + del.filter(d => d > p + x).length;
-    const pb = 0.3, ch = n => Math.round(binomMenos(n - 1, pb, 1) * 20) * 5;
-    return `<tr><td data-l="Materia"><b>${esc(m.materia)}</b></td><td data-l="Hoy">Puesto ${hoy} · ${coma(p)} puntos<small>Chance en un cargo típico: ${ch(hoy)} %</small></td><td data-l="Sumando">Puesto ${nuevo}${hoy > nuevo ? ` (subís ${hoy - nuevo})` : ""}<small>Chance en un cargo típico: ${ch(nuevo)} %</small></td></tr>`;
+        return `<tr><td data-l="Materia"><b>${esc(m.materia)}</b></td><td data-l="Hoy">Puesto ${hoy} · ${coma(p)} puntos</td><td data-l="Sumando">Puesto ${nuevo}${hoy > nuevo ? ` (subís ${hoy - nuevo})` : ""}<small>${hoy > nuevo ? `${hoy - nuevo} ${hoy - nuevo === 1 ? "docente menos" : "docentes menos"} adelante, según los puntajes que cargaste del padrón.` : "Mismo lugar en el listado."}</small></td></tr>`;
   }).join("")}</tbody></table>`;
 }
 function htmlSimulador(){
@@ -12047,7 +12139,7 @@ function htmlViajeExtra(v, j){
     const conViaje = (j.vac || []).filter(x => esMiMateria(x, mias) && minutosIda(x, j) != null);
     const share = conViaje.length ? conViaje.filter(x => minutosIda(x, j) < mi - 10).length / conViaje.length : 0;
     const p = 1 - Math.exp(-porMes * share);
-    if (porMes > 0) out.push(`<p class="cg-esp">Si esperás un mes, la chance de que salga un cargo de tus materias más cerca es de ${p < 0.05 ? "menos de 5 %" : `cerca de ${Math.round(p * 20) * 5} %`} (según lo que cargaste los últimos ${meses.length} meses).</p>`);
+    if (porMes > 0) out.push(`<p class="cg-esp">${esc(textoEsperar(p, meses.length))}</p>`);
   }
   /* colectivo y viaje medido */
   if (v.cue && origenActual(j)){
@@ -12081,7 +12173,7 @@ function htmlMapaCargos(j){
       <circle cx="0" cy="0" r="5" class="cg-home"/>
       ${pts.map(p => `<circle cx="${(p.dx * S).toFixed(1)}" cy="${(-p.dy * S).toFixed(1)}" r="5" fill="${color(p)}" stroke="var(--surface)" stroke-width="1.5"><title>${esc(p.v.materia || "")} · ${esc(p.v.escOficial || p.v.escuela || "")}${p.m != null ? ` · ${fmtMin(p.m)}` : ""}</title></circle>`).join("")}
     </svg>
-    <p class="hint">Cada punto es un cargo: verde, chance alta; ocre, media; rojo, baja; gris, sin dato. Los anillos marcan unos 30, 45 y 60 minutos de viaje en ${esc(MEDIOS[j.medio || "auto"].t.toLowerCase())}.</p></details>`;
+    <p class="hint">Cada punto es un cargo: verde, escenario favorable; ocre, intermedio; rojo, desfavorable; gris, sin dato. Son escenarios orientativos, no probabilidades. Los anillos marcan unos 30, 45 y 60 minutos de viaje en ${esc(MEDIOS[j.medio || "auto"].t.toLowerCase())}.</p></details>`;
 }
 /* Horas invisibles: clase, viaje, planificación y corrección */
 function htmlHorasInvisibles(j, F){
@@ -13252,7 +13344,7 @@ async function gdAsegurarCarpeta(){
   gdGuardarEstado({carpeta:f.id, carpetaNom:f.name, carpetaUrl:f.webViewLink, archivos:{}});
   return f.id;
 }
-async function gdSincronizar(manual){
+async function gdSincronizarV43(manual){
   if (GD.ocupado) return;
   const st = gdEstado();
   if (!st.activo) return;
@@ -13298,7 +13390,7 @@ function gdMezclarCurso(a, b){
   a.fichas = {...(b.fichas || {}), ...(a.fichas || {})};
   return a;
 }
-async function gdTraer(){
+async function gdTraerV43(){
   const st = gdEstado(), arch = (st.archivos || {}).respaldo;
   if (!arch){ toast("Todavía no hay una copia en Drive. Sincronizá primero desde el dispositivo donde cargás los datos."); return; }
   if (!gdConectado()) await gdPedirToken(true);
@@ -14022,7 +14114,7 @@ function napAuto(ctx, contTxt){
   return toList(L.map(x => napLinea(x.eje, x.t)));
 }
 function napEnTexto(txt, t){ return norm(txt).includes(norm(t).slice(0, 60)); }
-function renderNap(){
+function renderNapV43(){
   const box = $("nap-box"); if (!box) return;
   const materia = val("materia"), anio = val("anio");
   if (!materia || !anio){ box.innerHTML = `<p class="hint">Elegí el espacio curricular y el año para ver los NAP.</p>`; return; }
@@ -16294,7 +16386,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "43.1 (31/10/2026)";
+const LAPACHO_VERSION = "44 (31/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -16544,7 +16636,7 @@ async function descifrarRespaldo(o, pass){
   const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv, additionalData:RESP_AAD}, key, B64.a(o.datos_cifrados));
   return new TextDecoder().decode(pt);
 }
-async function armarContenidoRespaldo(conFotos){
+async function armarContenidoRespaldoV43(conFotos){
   save();
   const datos = datosLocales();
   let fotos = [];
@@ -16620,7 +16712,7 @@ function validarContenidoResp(c){
   const fotos = Array.isArray(c.fotos) ? c.fotos.filter(f => f && typeof f === "object" && typeof f.id === "string") : [];
   return {ok:Object.keys(datos).length > 0, motivo:"La copia no tiene datos que se puedan recuperar.", datos, fotos, descartadas};
 }
-async function respValidarYMostrar(c, o){
+async function respValidarYMostrarV43(c, o){
   if (o.version === 2 && !o.cifrado){
     const ok = o.contenido ? o.integridad && o.integridad.alg === "SHA-256" && (await sha256Hex(JSON.stringify(c))) === o.integridad.valor : o.suma ? (await sha256Hex(JSON.stringify({datos:c.datos, fotos:c.fotos || []}))) === o.suma : true;
     if (!ok){ respPaso(""); toast("La copia está dañada: no pasó la verificación de integridad. No se cambió nada."); registrarError("restaurarRespaldo", "verificación de integridad fallida", "aviso"); return; }
@@ -16647,11 +16739,11 @@ async function guardarPrevia(){
   for (const k of ks.slice(0, Math.max(0, ks.length - 3))) await idbDel("previas", k);
   return fecha;
 }
-function escribirDatos(d, reemplazar){
+function escribirDatosV43(d, reemplazar){
   if (reemplazar) CLAVES_RESPALDO.forEach(k => { if (!(k in d)) localStorage.removeItem(k); });
   Object.entries(d).forEach(([k, v]) => localStorage.setItem(k, v));
 }
-async function respAplicar(reemplazar){
+async function respAplicarV43(reemplazar){
   const v = RESP_PEND.c; if (!v) return;
   if (reemplazar && !window.confirm("Se reemplazan todos los datos de este navegador por los de la copia. Antes se guarda una copia automática para volver atrás. ¿Seguimos?")) return;
   let previa = "";
@@ -17361,7 +17453,7 @@ function espejarEstado(){
 }
 
 /* ---------- Panel de inicio: accesos rápidos y pendientes ---------- */
-function renderPanel(){
+function renderPanelV43(){
   renderPanelBase();
   try {
     const P = $("panel"); if (!P) return;
@@ -17496,7 +17588,7 @@ function revisarCoherencia(){
   } catch (e) { registrarError("revisarCoherencia", e, "aviso"); }
   return R;
 }
-function abrirCoherencia(){
+function abrirCoherenciaV43(){
   const {av, mapa, ev} = revisarCoherencia();
   const orden = {alto:0, medio:1, info:2}, nom = {alto:"Importante", medio:"Conviene revisar", info:"Sugerencia"};
   av.sort((a, b) => orden[a.n] - orden[b.n]);
@@ -18158,7 +18250,7 @@ function renderGD(){
     const inp = $("gd-cid"); if (inp){ inp.setAttribute("aria-invalid", "true"); inp.setAttribute("aria-describedby", "gd-cid-err"); inp.insertAdjacentHTML("afterend", `<p class="hint campo-err" id="gd-cid-err">Tiene que terminar en .apps.googleusercontent.com</p>`); }
     return;
   }
-  renderGDBase();
+  renderGDBaseV44();
 }
 function gdGuardarCfg(){
   const id = gdLimpiarId($("gd-cid").value), key = $("gd-key").value.trim(), app = $("gd-app").value.trim();
@@ -20839,7 +20931,7 @@ const PTC_AMB = [["", "Dónde se dictó"], ["tuc", "Tucumán"], ["infod", "INFoD
 const ptcFmt = n => (Math.round(n * 100) / 100).toFixed(2).replace(".", ",");
 const numPts = v => { const n = parseFloat(String(v == null ? "" : v).replace(",", ".")); return isFinite(n) && n > 0 ? n : null; };
 function ptcEsInfod(x){ return x.ambito === "infod" || (!x.ambito && (/infod|instituto nacional de formaci|red\.infd/i.test(`${x.nombre || ""} ${x.inst || ""} ${x.norma || ""}`) || /1741/.test(x.norma || ""))); }
-function ptcEval(x){
+function ptcEvalV43(x){
   const horas = +x.horas || 0, man = numPts(x.puntaje), infod = ptcEsInfod(x);
   if (man != null) return {estado:"suma", pts:man, como:"El puntaje que cargaste (del certificado o de la resolución)."};
   if (infod){
@@ -20861,15 +20953,15 @@ function ptcCursos(){
   (L.capInt || []).filter(x => x.estado === "aprobado" && !x.legajo).forEach(x => out.push({id:x.id, nombre:x.n, inst:x.inst, horas:x.horas, norma:x.res, puntaje:x.pts != null ? x.pts : "", ambito:x.infod ? "infod" : x.fuera ? "fuera" : "", origen:"mios"}));
   return out;
 }
-function ptcResumen(){
+function ptcResumenV43(){
   const C = ptcCursos().map(x => ({x, e:ptcEval(x)}));
   const r = {C, conf:0, est:0, nConf:0, nNo:0};
   C.forEach(({e}) => { if (e.estado === "suma") r.conf += e.pts; else if (e.estado === "est") r.est += e.pts; else if (e.estado === "conf") r.nConf++; else r.nNo++; });
   r.conf = Math.round(r.conf * 100) / 100; r.est = Math.round(r.est * 100) / 100; r.total = Math.round((r.conf + r.est) * 100) / 100;
   return r;
 }
-const PTC_ET = {suma:["Suma", "si"], est:["Estimado", "est"], conf:["A confirmar", "conf"], no:["No suma", "no"]};
-function htmlPuntajeCursos(){
+const PTC_ET_V43 = {suma:["Suma", "si"], est:["Estimado", "est"], conf:["A confirmar", "conf"], no:["No suma", "no"]};
+function htmlPuntajeCursosV43(){
   if (leerPref().pin && !pinOk) return `<p class="hint">Tus capacitaciones están en Mi legajo, protegido con PIN.</p><div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-ptc="pin">Desbloquear con el PIN</button></div>`;
   const R = ptcResumen();
   const reglas = `<details class="cur-sub"><summary>Cómo se suma</summary><ul class="cp-reglas">
@@ -20892,7 +20984,7 @@ function htmlPuntajeCursos(){
     ${reglas}
     <p class="hint">Fuentes: Res. 1741/5 (MEd) de 2026 según Monterizos (28/07/2026); Decreto 3128/5 (MEd) de 2025 según La Izquierda Diario (30/10/2025); Guía para el desempeño profesional del docente 2023. Revisado el 31/10/2026. Es una estimación: el puntaje oficial lo fija la Junta de Clasificación.</p>`;
 }
-function modeloPuntajeCursos(){
+function modeloPuntajeCursosV43(){
   const R = ptcResumen();
   return {inst:val("docente") || "Documento personal", titulo:"Mis capacitaciones y su puntaje", subtitulo:"Para revisar el puntaje en la Junta de Clasificación", faltaSub:"", datos:[["Docente", val("docente")], ["Fecha", fechaCortaIso(hoyIso())]].filter(d => d[1]),
     secs:[
@@ -21095,7 +21187,7 @@ function capCursoSirve(c){
   if (!c || c.web || c.est === "cerrada") return false;
   if (c.cierre && c.cierre < hoyIso()) return false;
   const ev = evaluarCurso({infod:c.infod, web:c.web, res:c.res, horas:c.horas, areas:c.area, txt:""});
-  if (ev.suma === false) return false;
+  if (ev.suma === false || ev.duda) return false;
   const rel = relacionCurso(c.area, `${c.n} ${c.dest}`);
   return !rel || rel.k !== "baja";
 }
@@ -21190,6 +21282,983 @@ function init53(){
 }
 
 /* ============================================================
+   Versión 44: auditoría integral (31/10/2026)
+   Módulos de esta versión, en este orden:
+     1. Normativa del puntaje: fuentes, vigencia y estado de validación
+     2. Puntaje de capacitaciones sin reglas que no se pudieron verificar
+     3. Cargos: escenarios orientativos en lugar de porcentajes
+     4. Privacidad: IA sin datos de estudiantes y con consentimiento
+     5. Google Drive: la copia completa se sube cifrada
+     6. Persistencia: base IndexedDB versionada con escritura inmediata
+     7. Copias: selección por módulo, versiones diarias y detalle de lo que se reemplaza
+     8. Accesibilidad: foco al cerrar ventanas y aviso de versión nueva
+     9. Inicio organizado por tareas
+    10. Motor pedagógico: observaciones explicadas, Bloom, DUA por actividad y ABP
+    11. NAP: por qué se sugiere cada uno y de qué documento sale
+   ============================================================ */
+
+/* ---------- 1. Normativa del puntaje ----------
+   Regla de esta versión: Lapacho no aplica reglas de puntaje que no pudo verificar en una fuente oficial.
+   Las que solo se conocen por la prensa se muestran como referencia y quedan «a verificar». */
+const NORMA_REVISION = "2026-10-31";
+const NORMAS_PUNTAJE = [
+  {id:"2925", n:"Decreto N.º 2925/5 (MEd) de 2009", que:"Escala de valoración de títulos y antecedentes para los concursos docentes.", estado:"oficial",
+    fuente:"Lo cita como norma reglamentaria de la escala el Decreto N.º 1569/5 (MEd) del 8/7/2026, publicado en el Boletín Oficial N.º 31.252 del 31/7/2026.",
+    url:"https://boletin.tucuman.gov.ar/Aviso/Detalle/619962/2",
+    uso:"Es la referencia de la escala. Lapacho no tiene cargados sus anexos: el valor de cada curso se toma del certificado o de la resolución que lo aprueba."},
+  {id:"3128", n:"Decreto N.º 3128/5 (MEd) de 2025", que:"Cambios en la valoración de capacitaciones (Anexo X): cursos de menos de 40 horas, cursos de otras provincias y certificaciones anteriores a abril de 2024.", estado:"sin-verificar",
+    fuente:"Solo se conoce por una nota periodística (La Izquierda Diario, 30/10/2025). No encontramos el texto oficial ni sus anexos. Hay antecedentes de que habría sido derogado por normativa posterior, que tampoco pudimos verificar.",
+    url:"https://www.laizquierdadiario.com/Un-nuevo-ataque-a-los-docentes-tucumanos-el-decreto-3128-y-la-ofensiva-del-Ministerio-de-Educacion",
+    uso:"Lapacho no aplica sus reglas: los cursos que alcanzaría quedan «a verificar» y no se descuentan."},
+  {id:"1741", n:"Res. N.º 1741/5 (MEd) de 2026", que:"Valoración de los cursos de INFoD según la carga horaria.", estado:"secundaria",
+    fuente:"Tabla publicada por Monterizos (28/07/2026), que la atribuye a esa resolución. No encontramos el texto oficial.",
+    url:"https://monterizos.com.ar/e/junta-de-clasificacion/",
+    uso:"Los puntos de INFoD se muestran como estimados, separados de los que figuran en un certificado o una resolución."}
+];
+const NORMA_ESTADO = {oficial:["Fuente oficial", "ok"], secundaria:["Fuente periodística", "sec"], "sin-verificar":["No verificada", "nv"]};
+function htmlNormativaPuntaje(abierto){
+  return `<div class="nrm-box" role="note"><p class="nrm-t"><b>Pendiente de validación normativa.</b> Los valores son orientativos hasta contar con el texto oficial de la escala vigente. El puntaje que vale es el que fija la Junta de Clasificación.</p>
+    <details class="cur-sub"${abierto ? " open" : ""}><summary>Normas que usa este módulo y su estado</summary><ul class="nrm-l">${NORMAS_PUNTAJE.map(n => `<li><div class="nrm-c"><b>${esc(n.n)}</b><span class="nrm-e ${NORMA_ESTADO[n.estado][1]}">${NORMA_ESTADO[n.estado][0]}</span></div>
+      <p>${esc(n.que)}</p><p class="hint">${esc(n.fuente)} <a href="${esc(n.url)}" target="_blank" rel="noopener">Ver la fuente</a>.</p><p class="hint"><b>Cómo lo usa Lapacho:</b> ${esc(n.uso)}</p></li>`).join("")}</ul>
+      <p class="hint">Fecha de consulta: ${esc(fechaCortaIso(NORMA_REVISION))}. Si tenés el texto oficial de una norma posterior, consultalo en la Junta de Clasificación antes de reclamar un puntaje.</p></details></div>`;
+}
+
+/* ---------- 2. Puntaje de capacitaciones ---------- */
+const PTC_ET = {suma:["Según certificado", "si"], est:["Estimado", "est"], conf:["A confirmar", "conf"], duda:["A verificar", "duda"], no:["No suma", "no"]};
+const PTC_DUDA = "Según una nota periodística sobre el Decreto 3128 (2025), que no pudimos verificar en fuentes oficiales, podría no sumar. Lapacho no lo descuenta: confirmalo en la Junta de Clasificación.";
+function ptcEval(x){
+  const horas = +x.horas || 0, man = numPts(x.puntaje), infod = ptcEsInfod(x);
+  if (man != null) return {estado:"suma", pts:man, como:"El puntaje que cargaste, tomado del certificado o de la resolución."};
+  if (infod){
+    if (!horas) return {estado:"conf", pts:null, como:"Es de INFoD: el valor depende de las horas. Cargalas en Mi legajo."};
+    const p = puntosInfod(horas);
+    if (p == null) return {estado:"conf", pts:null, como:`Tiene ${horas} horas, por debajo del primer tramo de la tabla publicada para INFoD (20 horas). Confirmá en la Junta si suma.`};
+    return {estado:"est", pts:p, como:`INFoD, ${horas} horas: ${ptcFmt(p)} puntos según la tabla publicada en 2026 y atribuida a la Res. 1741/5 (MEd). Es una estimación hasta tener el texto oficial.`};
+  }
+  if (x.ambito === "fuera") return {estado:"duda", pts:null, como:`Dictado fuera de Tucumán. ${PTC_DUDA}`};
+  if (horas && horas < 40 && (!x.fecha || x.fecha >= "2004-01-01")) return {estado:"duda", pts:null, como:`Tiene ${horas} horas. ${PTC_DUDA}`};
+  if (!String(x.norma || "").trim()) return {estado:"conf", pts:null, como:"Falta la resolución del Ministerio de Educación de Tucumán. Sin resolución, en general no suma: si la tiene, cargala en Mi legajo."};
+  return {estado:"conf", pts:null, como:"Tiene resolución, pero el valor depende de la escala vigente (Decreto 2925/5 y sus modificatorias), que Lapacho no tiene cargada. Si el certificado o la resolución dice el puntaje, cargalo en Mi legajo."};
+}
+function ptcResumen(){
+  const C = ptcCursos().map(x => ({x, e:ptcEval(x)}));
+  const r = {C, conf:0, est:0, nConf:0, nNo:0, nDuda:0};
+  C.forEach(({e}) => { if (e.estado === "suma") r.conf += e.pts; else if (e.estado === "est") r.est += e.pts; else if (e.estado === "conf") r.nConf++; else if (e.estado === "duda") r.nDuda++; else r.nNo++; });
+  r.conf = Math.round(r.conf * 100) / 100; r.est = Math.round(r.est * 100) / 100; r.total = Math.round((r.conf + r.est) * 100) / 100;
+  return r;
+}
+function htmlPuntajeCursos(){
+  if (leerPref().pin && !pinOk) return `<p class="hint">Tus capacitaciones están en Mi legajo, protegido con PIN.</p><div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-ptc="pin">Desbloquear con el PIN</button></div>`;
+  const R = ptcResumen();
+  const reglas = `<details class="cur-sub"><summary>Cómo se calcula</summary><ul class="cp-reglas">
+      <li><b>Según certificado:</b> el puntaje que cargaste del certificado o de la resolución. Es el dato más firme.</li>
+      <li><b>Estimado:</b> cursos de INFoD, con la tabla publicada en 2026 (de 1,50 puntos para 20 a 35 horas a 6,30 para una especialización de 400 horas).</li>
+      <li><b>A confirmar:</b> cursos con resolución del Ministerio cuyo valor depende de la escala vigente, que Lapacho no tiene cargada.</li>
+      <li><b>A verificar:</b> cursos de menos de 40 horas o de otra provincia. Una nota periodística dice que dejaron de sumar, pero no encontramos la norma oficial. No se descuentan.</li>
+      <li>Este total es solo de capacitaciones. Tu puntaje docente también suma el título, la antigüedad, el concepto y otros antecedentes, y la Junta aplica los topes que fije la escala.</li>
+      <li>Cuando se publique el padrón provisorio, compará tu puntaje en el período de tacha y, si no coincide, reclamá con tus certificados.</li></ul></details>`;
+  if (!R.C.length) return `${htmlNormativaPuntaje(false)}<p class="hint">Cargá tus capacitaciones en «Mi legajo › Capacitaciones» (nombre, institución, horas, fecha y resolución) y acá ves cómo se valora cada una.</p><div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-ptc="legajo">Cargar en Mi legajo</button></div>${reglas}`;
+  return `${htmlNormativaPuntaje(false)}<div class="ptc-tot"><div><b>${ptcFmt(R.conf)}</b><span>según certificado</span></div><div><b>${ptcFmt(R.est)}</b><span>estimados</span></div><div><b>${R.nConf}</b><span>a confirmar</span></div><div><b>${R.nDuda}</b><span>a verificar</span></div>${R.nNo ? `<div><b>${R.nNo}</b><span>no suman</span></div>` : ""}</div>
+    <p class="hint">${R.est ? `Con los estimados, ${ptcFmt(R.total)} puntos por capacitaciones. ` : ""}Los estimados y los cursos a verificar dependen de normas que no pudimos validar: tomalos como orientación.</p>
+    <ul class="cp-list ptc-l">${R.C.map(({x, e}) => `<li class="cp-item"><div class="cp-top"><b>${esc(x.nombre || "Curso sin nombre")}</b><span class="cp-pts ${PTC_ET[e.estado][1]}">${e.pts != null && e.estado !== "no" ? `${ptcFmt(e.pts)} · ` : ""}${PTC_ET[e.estado][0]}</span></div>
+        <div class="cp-meta">${esc([x.inst, x.horas ? `${x.horas} horas` : "", x.fecha ? fechaCortaIso(x.fecha) : "", x.norma ? `Res. ${x.norma}` : ""].filter(Boolean).join(" · "))}</div>
+        <p class="ptc-como">${esc(e.como)}</p>
+        ${x.origen === "legajo" ? `<div class="ptc-sel"><label class="sr-only" for="ptca-${esc(x.id)}">Dónde se dictó</label><select id="ptca-${esc(x.id)}" data-ptcamb="${esc(x.id)}">${PTC_AMB.map(([v, l]) => `<option value="${v}"${(x.ambito || "") === v ? " selected" : ""}>${l}</option>`).join("")}</select>
+          <label class="sr-only" for="ptct-${esc(x.id)}">Tipo de certificación</label><select id="ptct-${esc(x.id)}" data-ptctipo="${esc(x.id)}">${PTC_TIPOS.map(([v, l]) => `<option value="${v}"${(x.tipo || "eval") === v ? " selected" : ""}>${l}</option>`).join("")}</select></div>` : `<p class="hint">Está en «Mis cursos»: pasalo a Mi legajo para completar los datos.</p>`}</li>`).join("")}</ul>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-ptc="word">Descargar para la Junta</button><button type="button" class="btn btn-sm" data-ptc="legajo">Editar en Mi legajo</button></div>
+    ${reglas}`;
+}
+function modeloPuntajeCursos(){
+  const R = ptcResumen();
+  return {inst:val("docente") || "Documento personal", titulo:"Mis capacitaciones y su puntaje", subtitulo:"Para revisar el puntaje en la Junta de Clasificación", faltaSub:"", datos:[["Docente", val("docente")], ["Fecha", fechaCortaIso(hoyIso())]].filter(d => d[1]),
+    secs:[
+      {h:"Detalle", tableOnly:true, table:{head:["Curso", "Institución", "Horas", "Resolución", "Fecha", "Puntos", "Estado"], w:[2500, 1500, 700, 1100, 1100, 800, 1370], rows:R.C.map(({x, e}) => [x.nombre || "", x.inst || "", x.horas ? String(x.horas) : "", x.norma || "", x.fecha ? fechaCortaIso(x.fecha) : "", e.pts != null && e.estado !== "no" ? ptcFmt(e.pts) : "", PTC_ET[e.estado][0]])}},
+      {h:"Resumen", body:`Según certificado o resolución: ${ptcFmt(R.conf)} puntos.\nEstimados (INFoD, tabla publicada en 2026): ${ptcFmt(R.est)} puntos.\nCursos a confirmar: ${R.nConf}. Cursos a verificar: ${R.nDuda}.${R.nNo ? ` Cursos que no suman: ${R.nNo}.` : ""}`},
+      {h:"Cómo se calculó cada uno", body:R.C.map(({x, e}) => `- ${x.nombre || "Curso"}: ${e.como}`).join("\n")},
+      {h:"Normas y fuentes", body:NORMAS_PUNTAJE.map(n => `- ${n.n} (${NORMA_ESTADO[n.estado][0].toLowerCase()}): ${n.fuente}`).join("\n") + `\nFecha de consulta: ${fechaCortaIso(NORMA_REVISION)}.`},
+      {h:"Para tener en cuenta", body:"- Es una estimación orientativa, pendiente de validación normativa. El puntaje oficial lo fija la Junta de Clasificación con la escala vigente.\n- Llevá los certificados originales y sus copias. En el período de tacha del padrón provisorio podés revisar tu puntaje y reclamar ante la Junta."}
+    ], firmas:null};
+}
+function htmlReglasPuntaje(){
+  return `<details class="cur-sub"><summary>Qué cursos suman puntaje en Tucumán</summary><ul class="cp-reglas">
+    <li>En general, tiene que tener <b>resolución del Ministerio de Educación de Tucumán</b> («Res. N.º …/5 (MEd)»), salvo los cursos de INFoD.</li>
+    <li><b>INFoD</b>: según la tabla publicada en 2026 (atribuida a la Res. 1741/5 MEd), 20 a 35 horas, 1,50 puntos; 36 a 50, 2,30; 51 a 120, 2,62; 121 a 199, 3,10; actualización académica de 200 horas, 3,90; especialización de 400 horas, 6,30. Son estimados.</li>
+    <li>Una nota periodística informó que el <b>Decreto 3128 (2025)</b> dejó sin puntaje los cursos de <b>menos de 40 horas</b> y los de <b>otras provincias</b>. No encontramos el texto oficial y hay antecedentes de que habría sido derogado: esos cursos figuran «a verificar».</li>
+    <li>Los <b>webinarios</b> no tienen resolución y no otorgan puntaje.</li>
+    <li>El puntaje vale en el nivel o la modalidad en la que concursás.</li></ul>
+    ${htmlNormativaPuntaje(false)}</details>`;
+}
+function evaluarCurso(o){
+  const motivos = [], horas = +o.horas || 0;
+  let suma = null, pts = null, duda = false;
+  if (o.web){ suma = false; motivos.push("Los webinarios, charlas y conversatorios no tienen resolución del Ministerio y no otorgan puntaje."); }
+  else if (o.infod){
+    if (!horas){ suma = true; motivos.push("Es de INFoD: suma según la carga horaria. Cargá las horas para ver la estimación."); }
+    else if (horas < 20){ suma = null; motivos.push(`Tiene ${horas} horas, por debajo del primer tramo de la tabla publicada para INFoD (20 horas). Confirmá en la Junta si suma.`); }
+    else { suma = true; pts = puntosInfod(horas); motivos.push(`Curso de INFoD de ${horas} horas: ${coma(pts)} puntos estimados, según la tabla publicada en 2026 (Res. 1741/5 MEd, sin texto oficial verificado).`); }
+  } else {
+    if (!o.res){ suma = false; motivos.push("No figura una resolución del Ministerio de Educación de Tucumán («Res. N.º …/5 (MEd)»). Sin resolución, en general no suma: preguntá a quien lo dicta si la tiene."); }
+    else if (o.fuera){ suma = null; duda = true; motivos.push(`Se dicta fuera de Tucumán. ${PTC_DUDA}`); }
+    else if (horas && horas < 40){ suma = null; duda = true; motivos.push(`Tiene ${horas} horas. ${PTC_DUDA}`); }
+    else {
+      suma = true;
+      motivos.push(`Tiene la Res. ${o.res} (MEd)${horas ? ` y ${horas} horas` : ""}: suma puntaje.`);
+      motivos.push("El valor exacto depende de la escala vigente (Decreto 2925/5 y sus modificatorias): queda «a confirmar». Si el certificado dice el puntaje, cargalo en Mi legajo.");
+    }
+  }
+  if (o.otroNivel) motivos.push("Parece dirigido a inicial o primaria: el puntaje vale para el nivel en el que concursás.");
+  const rel = relacionCurso(o.areas, o.txt);
+  return {suma, pts, motivos, rel, duda};
+}
+
+/* ---------- 3. Cargos: escenarios orientativos ----------
+   No hay datos públicos de cuántos docentes se postulan a cada cargo, así que Lapacho no muestra porcentajes.
+   Separa lo que cargaste, lo que registraste antes, los supuestos del modelo y el resultado. */
+const ESC_CARGO = {alta:["Escenario favorable", "alta"], media:["Escenario intermedio", "media"], baja:["Escenario desfavorable", "baja"]};
+function htmlChance(v, j){
+  const C = chanceDe(v, j), co = cortesDe(v, j), ch = choqueConPostulaciones(v, j), out = [];
+  if (C){
+    const cada = Math.max(1, Math.round(1 / C.p)), E = ESC_CARGO[C.k];
+    out.push(`<details class="cg-ch ${E[1]}"><summary><b>${E[0]}</b> <span>(orientativo)</span></summary>
+      <dl class="esc-dl">
+        <div><dt>Datos que cargaste</dt><dd>${C.a === 0 ? "Estás primero en el listado" : `${C.a} ${C.a === 1 ? "docente" : "docentes"} adelante`} en ${esc(C.materia)}; ${+v.vacantes > 1 ? `${+v.vacantes} vacantes` : "1 vacante"}.</dd></div>
+        <div><dt>Datos históricos</dt><dd>${C.hist ? `${C.hist === 1 ? "Tu resultado anterior" : `Tus ${C.hist} resultados anteriores`} en cargos parecidos.` : "Todavía no registraste resultados de cargos anteriores."}${co ? ` Cortes que anotaste: ${co.l.length}.` : ""}</dd></div>
+        <div><dt>Supuestos del modelo</dt><dd>Que se postule ${cada === 1 ? "casi todo el que está adelante" : `1 de cada ${cada} de los que están adelante`}${C.f.length ? `, porque ${C.f.join(", ")}` : ""}. Este supuesto no sale de datos oficiales.</dd></div>
+        <div><dt>Resultado</dt><dd>${E[0]}: sirve para comparar entre cargos, no para saber si te lo van a asignar.</dd></div>
+      </dl></details>`);
+  }
+  if (co){ const mn = Math.min(...co.l), mx = Math.max(...co.l), mio = C ? C.puntaje : NaN; out.push(`<p class="cg-corte">Corte que registraste en ${esc(v.materia)}${co.z ? ` (${esc(co.z)})` : ""}: ${mn === mx ? coma(mn) : `${coma(mn)} a ${coma(mx)}`} puntos en ${co.l.length} ${co.l.length === 1 ? "cargo" : "cargos"}.${isFinite(mio) ? ` Vos tenés ${coma(mio)}.` : ""}</p>`); }
+  if (ch) out.push(`<p class="cg-sup">Se superpone con ${esc(ch.s.snap.materia || "otro cargo")} en ${esc(ch.s.snap.escOficial || ch.s.snap.escuela || "")}${ch.mas ? `, que tiene más horas (${ch.s.snap.horas})` : ""}, al que también te postulaste. Si te asignan este primero, quizás no puedas tomar el otro.</p>`);
+  return out.join("");
+}
+/* Esperar un mes: solo con al menos seis meses de datos cargados, y como escenario */
+function textoEsperar(p, meses){
+  if (meses < 6) return `Con ${meses} ${meses === 1 ? "mes" : "meses"} de datos todavía no se puede estimar si conviene esperar un cargo más cerca. Con seis meses cargados aparece un escenario orientativo.`;
+  const k = p >= 0.55 ? "es bastante probable" : p >= 0.2 ? "es posible" : "es poco probable";
+  return `Escenario orientativo: según los cargos que cargaste los últimos ${meses} meses, ${k} que en un mes salga uno de tus materias más cerca. Supone que el próximo mes se parece a los anteriores.`;
+}
+
+/* ---------- 4. Privacidad: IA sin datos de estudiantes ----------
+   Todo envío a Claude pasa por iaEnvolver: se quitan nombres de estudiantes, documentos, correos,
+   teléfonos y datos de salud, y se pide consentimiento diciendo qué se envía, a quién y para qué.
+   Las imágenes no se pueden anonimizar: se pide permiso cada vez. Las funciones pedagógicas
+   siguen funcionando sin IA (Ajustes › Privacidad e IA). */
+GEN_ERR.cancelado = "No se envió nada a Claude.";
+GEN_ERR.ia_off = "Las funciones con IA están apagadas en Ajustes › Privacidad e IA.";
+const IA_SALUD = /\b(TEA|TDAH|TDA|TGD|TEL|autismo|autista|asperger|s[ií]ndrome(?:\s+de\s+[A-ZÁÉÍÓÚ][\wáéíóúñ-]+)?|dislexia|disl[eé]xic[oa]|discalculia|disgraf[ií]a|epilepsia|epil[eé]ptic[oa]|hipoacusia|ceguera|par[aá]lisis cerebral|CUD|certificado [uú]nico de discapacidad|medicad[oa]s?|medicaci[oó]n|psiqui[aá]tric[oa]s?|neurol[oó]gic[oa]s?|trastorno(?:\s+(?:del?|por)\s+[\wáéíóúñ]+)?|discapacidad(?:\s+(?:intelectual|motora|motriz|visual|auditiva|mental|psicosocial))?)\b/gi;
+const IA_DNI = /\b\d{1,2}\.?\d{3}\.?\d{3}\b/g, IA_MAIL = /[\w.+-]+@[\w-]+\.[\w.-]+/g, IA_TEL = /(?:\+?54\s?)?(?:\(?0?381\)?|\(?0?3\d{2,3}\)?)[\s-]?\d{3,4}[\s-]?\d{3,4}\b/g;
+function iaNombresEstudiantes(){
+  const set = new Set();
+  const sumar = n => { const t = String(n || "").replace(/\s+/g, " ").trim(); if (t.length < 4) return; set.add(t);
+    const p = t.replace(/,/g, " ").split(" ").filter(Boolean);
+    if (p.length >= 2){ set.add(`${p[0]} ${p[1]}`); set.add(`${p[1]} ${p[0]}`); set.add(`${p[p.length - 1]} ${p[0]}`); set.add(`${p[0]}, ${p.slice(1).join(" ")}`); } };
+  try { (cdatos().cursos || []).forEach(c => (c.alumnos || []).forEach(a => sumar(a.n))); } catch (e) { logSilencioso(e); }
+  try { const P = JSON.parse(localStorage.getItem(PPI_KEY) || "[]"); (Array.isArray(P) ? P : Object.values(P || {})).forEach(x => x && x.v && sumar(x.v.est)); } catch (e) { logSilencioso(e); }
+  return [...set].filter(n => n.split(" ").length >= 2).sort((a, b) => b.length - a.length);
+}
+function iaAnonimizar(texto){
+  let t = String(texto == null ? "" : texto), nombres = 0, salud = 0, otros = 0;
+  const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const L = iaNombresEstudiantes(), mapa = new Map();
+  L.forEach(n => {
+    const re = new RegExp(`(^|[^\\p{L}])(${reEsc(n)})(?=[^\\p{L}]|$)`, "giu");
+    t = t.replace(re, (m, pre) => { nombres++; const k = norm(n); if (!mapa.has(k)) mapa.set(k, `Estudiante ${mapa.size + 1}`); return pre + mapa.get(k); });
+  });
+  t = t.replace(IA_SALUD, () => { salud++; return "[dato de salud omitido]"; });
+  t = t.replace(IA_MAIL, () => { otros++; return "[correo omitido]"; }).replace(IA_DNI, () => { otros++; return "[documento omitido]"; }).replace(IA_TEL, () => { otros++; return "[teléfono omitido]"; });
+  return {texto:t, nombres, salud, otros};
+}
+function iaFinalidad(p){
+  const s = norm(String(p || "").slice(0, 400));
+  if (/flyer|publicacion de un curso/.test(s)) return "leer los datos del curso que aparece en la imagen";
+  if (/programa de una materia/.test(s)) return "leer el programa de la materia";
+  if (/planilla de calificaciones/.test(s)) return "leer los títulos de las columnas de la planilla";
+  if (/capturas de la pantalla|se copio o se leyo de la pantalla/.test(s)) return "ordenar los datos de los cargos que pegaste";
+  if (/actividades de una clase/.test(s)) return "proponer actividades para la clase";
+  if (/consignas de una ficha/.test(s)) return "proponer consignas para la ficha";
+  if (/secuencia/.test(s)) return "redactar la secuencia didáctica";
+  if (/devolucion|corregir|profesor de practica/.test(s)) return "revisar y mejorar la planificación";
+  if (/imagen|dibuj|svg/.test(s)) return "dibujar la imagen para la clase";
+  return "la función que elegiste";
+}
+const IA = {resolver:null, recordar:false};
+function iaDialogo(){
+  let d = $("ia-cons"); if (d) return d;
+  document.body.insertAdjacentHTML("beforeend", `<dialog class="lib chico" id="ia-cons" aria-labelledby="ia-cons-t"><div class="lib-in"><div class="lib-head"><h2 id="ia-cons-t">Antes de enviar a Claude</h2></div><div id="ia-cons-b"></div>
+    <div class="cur-bar ia-bar"><button type="button" class="btn btn-primary" data-iac="si">Enviar</button><button type="button" class="btn" data-iac="no">No enviar</button></div></div></dialog>`);
+  d = $("ia-cons");
+  d.addEventListener("click", e => { const b = e.target.closest("[data-iac]"); if (!b) return; const ck = $("ia-recordar"); IA.recordar = !!(ck && ck.checked); iaCerrar(b.dataset.iac === "si"); });
+  d.addEventListener("close", () => iaCerrar(false));
+  return d;
+}
+function iaCerrar(ok){
+  const r = IA.resolver; IA.resolver = null;
+  if ($("ia-cons") && $("ia-cons").open) cerrarDialogo("ia-cons");
+  if (r) r(ok);
+}
+function iaPedirPermiso(info){
+  const p = leerPref();
+  if (!info.imagenes && p.iaTextoOk === 1) return Promise.resolve(true);
+  const d = iaDialogo();
+  const quitado = [info.nombres ? `${info.nombres} ${info.nombres === 1 ? "nombre de estudiante" : "nombres de estudiantes"}` : "", info.salud ? `${info.salud} ${info.salud === 1 ? "dato de salud" : "datos de salud"}` : "", info.otros ? `${info.otros} ${info.otros === 1 ? "dato de contacto o documento" : "datos de contacto o documentos"}` : ""].filter(Boolean);
+  $("ia-cons-b").innerHTML = `<dl class="esc-dl">
+      <div><dt>Qué se envía</dt><dd>${info.imagenes ? `${info.imagenes} ${info.imagenes === 1 ? "imagen" : "imágenes"} y una instrucción de trabajo.` : "El texto necesario para la tarea (por ejemplo, el tema, los contenidos y las actividades)."}${quitado.length ? ` Antes de enviar se quitaron ${quitado.join(", ")}.` : " No se encontraron nombres de estudiantes ni datos de salud."}</dd></div>
+      <div><dt>A quién</dt><dd>A Claude, el asistente de Anthropic, a través de claude.ai y con tu cuenta.</dd></div>
+      <div><dt>Para qué</dt><dd>Para ${esc(info.fin)}.</dd></div></dl>
+    ${info.imagenes ? `<p class="aviso-c">Las imágenes no se pueden anonimizar. Si muestran nombres, notas, fotos o datos de salud de estudiantes, recortalas antes o elegí «No enviar».</p>` : `<label class="cp-ck"><input type="checkbox" id="ia-recordar"> No volver a preguntar para textos (se puede cambiar en Ajustes › Privacidad e IA)</label>`}
+    <p class="hint">Si no querés usar IA, todas las funciones pedagógicas de Lapacho siguen funcionando sin ella.</p>`;
+  return new Promise(res => { IA.resolver = ok => { if (ok && IA.recordar && !info.imagenes) prefSet("iaTextoOk", 1); res(ok); }; abrirDialogo("ia-cons"); });
+}
+function iaPreparar(prompt, opts){
+  const a = iaAnonimizar(prompt), imgs = opts && Array.isArray(opts.images) ? opts.images.length : 0;
+  return {prompt:a.texto, info:{nombres:a.nombres, salud:a.salud, otros:a.otros, imagenes:imgs, fin:iaFinalidad(prompt)}};
+}
+function iaEnvolver(s){
+  if (!s) return s;
+  const guardia = async (prompt, opts) => {
+    if (leerPref().iaOff) throw {code:"ia_off"};
+    const P = iaPreparar(prompt, opts);
+    if (!(await iaPedirPermiso(P.info))) throw {code:"cancelado"};
+    return P.prompt;
+  };
+  const f = async (prompt, opts) => s(await guardia(prompt, opts), opts);
+  if (typeof s.json === "function") f.json = async (prompt, opts) => s.json(await guardia(prompt, opts), opts);
+  if (typeof s.limits === "function") f.limits = (...a) => s.limits(...a);
+  Object.keys(s).forEach(k => { if (!(k in f)) f[k] = s[k]; });
+  f.iaGuardia = true;
+  return f;
+}
+function htmlPrivacidadIA(){
+  const p = leerPref();
+  return `<section class="aj-sec" id="aj-ia"><h3>Privacidad e IA</h3>
+    <p class="hint">Las funciones con IA solo existen dentro de Claude. Antes de cada envío, Lapacho quita nombres de estudiantes, documentos, correos, teléfonos y datos de salud, y te dice qué se envía, a quién y para qué. Las imágenes se consultan siempre.</p>
+    <label class="cp-ck"><input type="checkbox" data-iapref="iaOff"${p.iaOff ? " checked" : ""}> Usar Lapacho sin IA (oculta los botones de Claude)</label>
+    <label class="cp-ck"><input type="checkbox" data-iapref="iaTextoOk"${p.iaTextoOk === 1 ? " checked" : ""}${p.iaOff ? " disabled" : ""}> Enviar textos sin preguntar cada vez (los datos se anonimizan igual)</label>
+    <p class="hint"><b>El PIN no cifra los datos.</b> Bloquea la pantalla de Lapacho en este dispositivo. Lo que sí se cifra, con AES-256-GCM y la contraseña que elijas, es la copia de seguridad.</p></section>`;
+}
+
+/* ---------- 5. Google Drive: la copia completa se sube cifrada ----------
+   La contraseña de la copia se usa en la sesión y no se guarda. Sin contraseña, la copia completa no se sube.
+   Las planillas de cada curso no se pueden cifrar (son para abrir en Drive): se suben solo si lo marcaste. */
+async function gdSincronizar(manual){
+  if (GD.ocupado) return;
+  const st = gdEstado();
+  if (!st.activo) return;
+  if (!gdConectado()){
+    if (!manual){ GD.pendiente = true; renderTuDia(); return; }
+    await gdPedirToken(true);
+  }
+  GD.ocupado = true; GD.error = ""; GD.aviso = ""; renderGD();
+  try {
+    const carpeta = await gdAsegurarCarpeta(), arch = {...(gdEstado().archivos || {})};
+    const que = gdEstado().que || {};
+    if (que.respaldo !== false){
+      if (GD.pass){
+        const cab = {app:"planificador-clases", tipo:"respaldo", version:2, fecha:new Date().toISOString(), appVersion:LAPACHO_VERSION, origen:"drive"};
+        const contenido = {datos:gdRespaldo().datos, fotos:[]};
+        const o = {...cab, cifrado:true, ...(await cifrarRespaldo(JSON.stringify(contenido), GD.pass))};
+        const r = await gdSubirSeguro("lapacho-copia-cifrada.json", "application/json", JSON.stringify(o), carpeta, arch.respaldoC);
+        arch.respaldoC = {id:r.id, url:r.webViewLink, n:"Copia de seguridad cifrada", mod:r.modifiedTime};
+      } else GD.aviso = "La copia completa no se subió: escribí la contraseña de la copia en «Qué se sube». No se guarda en ningún lado.";
+    }
+    for (const c of (que.cursos === true ? cdatos().cursos : [])){
+      const bytes = xlsxLibro(hojaCursoCompleto(c));
+      const x = await gdSubirSeguro(gdNombreCurso(c), XLSX_MIME, new Blob([bytes], {type:XLSX_MIME}), carpeta, arch["c:" + c.id]);
+      arch["c:" + c.id] = {id:x.id, url:x.webViewLink, n:nombreCurso(c), mod:x.modifiedTime};
+    }
+    gdGuardarEstado({archivos:arch, ult:Date.now()});
+    GD.pendiente = false;
+    setTimeout(gdAvisarConflictos, 0);
+    if (manual) toast(GD.aviso || "Listo: tus datos quedaron en Google Drive.", !GD.aviso && gdEstado().carpetaUrl ? {label:"Abrir la carpeta", fn:() => window.open(gdEstado().carpetaUrl, "_blank", "noopener")} : undefined);
+  } catch (e) {
+    GD.error = /vencido/.test(e.message) ? "Se venció el permiso de Google. Tocá «Sincronizar ahora» para renovarlo." : /popup|cancel|sin permiso|access_denied/i.test(e.message) ? "No se dio permiso en Google." : `No se pudo sincronizar: ${e.message}`;
+    GD.pendiente = true;
+    if (manual) toast(GD.error);
+  } finally { GD.ocupado = false; renderGD(); renderTuDia(); }
+}
+async function gdTraer(){
+  const st = gdEstado(), arch = (st.archivos || {}).respaldoC;
+  if (!arch){ toast((st.archivos || {}).respaldo ? "La copia que hay en Drive es de una versión anterior y no está cifrada. Sincronizá de nuevo con la contraseña para reemplazarla." : "Todavía no hay una copia cifrada en Drive. Sincronizá primero desde el dispositivo donde cargás los datos."); return; }
+  if (!GD.pass){ toast("Escribí la contraseña de la copia en «Qué se sube» para abrir la copia de Drive."); return; }
+  if (!gdConectado()) await gdPedirToken(true);
+  GD.ocupado = true; renderGD();
+  try {
+    const o = await gdJson(`${GD_API}/files/${arch.id}?alt=media`);
+    if (!o || o.tipo !== "respaldo" || !o.cifrado) throw new Error("la copia de Drive no es válida");
+    let c;
+    try { c = JSON.parse(await descifrarRespaldo(o, GD.pass)); } catch (e) { throw new Error("la contraseña no coincide con la de la copia"); }
+    const datos = {...(c.datos || {})};
+    const cb = JSON.parse(datos["planificador-cursos-v1"] || "null");
+    if (cb && Array.isArray(cb.cursos)){
+      const ca = cdatos();
+      cb.cursos.forEach(x => { const y = ca.cursos.find(z => z.id === x.id); if (y) gdMezclarCurso(y, x); else ca.cursos.push(x); });
+      if (!ca.sel && ca.cursos[0]) ca.sel = ca.cursos[0].id;
+      cguardar();
+      delete datos["planificador-cursos-v1"];
+    }
+    const txt = JSON.stringify({datos, fotos:[]});
+    $("resp-modo").value = "agregar";
+    await restaurarRespaldo(new File([JSON.stringify({app:"planificador-clases", tipo:"respaldo", version:2, fecha:o.fecha, cifrado:false, integridad:{alg:"SHA-256", valor:await sha256Hex(txt)}, contenido:{datos, fotos:[]}})], "drive.json", {type:"application/json"}));
+  } catch (e) { toast(/vencido/.test(e.message) ? "Se venció el permiso de Google: tocá de nuevo." : `No se pudo traer la copia: ${e.message}`); }
+  finally { GD.ocupado = false; renderGD(); }
+}
+function gdPrivacidadHtml(){
+  const st = gdEstado(), que = st.que || {};
+  return `<fieldset class="gd-que gd-priv"><legend>Qué se sube</legend>
+    <label class="cp-ck"><input type="checkbox" data-gdque2="respaldo"${que.respaldo !== false ? " checked" : ""}> La copia completa, cifrada con contraseña</label>
+    <div class="f"><label for="gd-pass">Contraseña de la copia (al menos 8 caracteres; se usa en esta sesión y no se guarda)</label><input type="password" id="gd-pass" autocomplete="off" value=""><p class="hint" id="gd-pass-st">${GD.pass ? "Contraseña cargada para esta sesión." : "Sin contraseña, la copia completa no se sube."}</p></div>
+    <label class="cp-ck"><input type="checkbox" data-gdque2="cursos"${que.cursos === true ? " checked" : ""}> También una planilla por curso (nombres, notas y asistencia <b>sin cifrar</b>, para abrirlas en Drive)</label></fieldset>`;
+}
+function renderGDBaseV44(){
+  renderGDBase();
+  const P = $("gd-panel"); if (!P) return;
+  const fs = P.querySelector("fieldset.gd-que:not(.gd-priv)");
+  if (fs) fs.outerHTML = gdPrivacidadHtml();
+  if (GD.aviso && !P.querySelector(".gd-aviso")) P.querySelector(".gd-est") && P.querySelector(".gd-est").insertAdjacentHTML("afterend", `<p class="aviso-c gd-aviso" role="status">${esc(GD.aviso)}</p>`);
+}
+function bindGD54(){
+  const D = $("gdrive"); if (!D) return;
+  D.addEventListener("change", e => {
+    const c = e.target.closest("[data-gdque2]");
+    if (c){ const que = {...(gdEstado().que || {})}; que[c.dataset.gdque2] = c.checked; gdGuardarEstado({que}); return; }
+    if (e.target.id === "gd-pass"){
+      const v = e.target.value;
+      if (v && v.length < 8){ $("gd-pass-st").textContent = "Usá al menos 8 caracteres."; return; }
+      GD.pass = v; e.target.value = "";
+      $("gd-pass-st").textContent = v ? "Contraseña cargada para esta sesión." : "Sin contraseña, la copia completa no se sube.";
+    }
+  });
+}
+
+/* ---------- 6. Persistencia: base IndexedDB «lapacho-datos» ----------
+   Cada cambio que la app guarda en localStorage se escribe en el mismo momento en IndexedDB
+   (transacción por lote, fuera del hilo de la interfaz). localStorage queda como copia de lectura
+   rápida y compatible con las versiones anteriores: no se borra.
+   Versiones de la base: 1 = datos y meta; 2 = historial de versiones diarias.
+   Al arrancar: se migra todo lo que haya en localStorage, se verifica leyéndolo de vuelta y se concilia.
+   Si el navegador se queda sin espacio en localStorage, el cambio igual queda en IndexedDB. */
+const LDB = {nombre:"lapacho-datos", version:2, db:null, abriendo:null, cola:new Map(), prog:false, reintentos:0, error:"", ult:0, migracion:null, pend:new Set(), escrituras:0, ok:false};
+const LDB_CLAVES = new Set(CLAVES_RESPALDO);
+const esCuota = e => !!e && (e.name === "QuotaExceededError" || e.code === 22 || /quota|exceeded/i.test(String(e.message || "")));
+function ldbMigrar(db, viejo){
+  if (viejo < 1){ db.createObjectStore("datos"); db.createObjectStore("meta"); }
+  if (viejo < 2){ db.createObjectStore("historial", {keyPath:"id"}); }
+}
+function ldbAbrir(){
+  if (LDB.db) return Promise.resolve(LDB.db);
+  if (LDB.abriendo) return LDB.abriendo;
+  LDB.abriendo = new Promise((res, rej) => {
+    if (!window.indexedDB){ rej(new Error("Este navegador no tiene IndexedDB")); return; }
+    let r;
+    try { r = indexedDB.open(LDB.nombre, LDB.version); } catch (e) { rej(e); return; }
+    r.onupgradeneeded = e => { try { ldbMigrar(r.result, e.oldVersion || 0); } catch (err) { registrarError("ldb.migrar", err); throw err; } };
+    r.onsuccess = () => { LDB.db = r.result; LDB.db.onversionchange = () => { try { LDB.db.close(); } catch (e) { logSilencioso(e); } LDB.db = null; }; res(LDB.db); };
+    r.onerror = () => rej(r.error || new Error("No se pudo abrir la base interna"));
+    r.onblocked = () => rej(new Error("La base interna está abierta en otra pestaña con una versión anterior"));
+  }).finally(() => { LDB.abriendo = null; });
+  return LDB.abriendo;
+}
+async function ldbTx(stores, modo, fn){
+  const db = await ldbAbrir();
+  return new Promise((res, rej) => {
+    let out;
+    const tx = db.transaction(stores, modo);
+    try { out = fn(tx); } catch (e) { try { tx.abort(); } catch (e2) { logSilencioso(e2); } rej(e); return; }
+    tx.oncomplete = () => res(out && out.__rq ? out.__rq.result : out);
+    tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || new Error("transacción cancelada"));
+  });
+}
+const ldbRq = rq => ({__rq:rq});
+function ldbEncolar(k, v){
+  LDB.cola.set(k, v);
+  if (!LDB.prog){ LDB.prog = true; Promise.resolve().then(ldbVaciar); }
+}
+async function ldbVaciar(){
+  LDB.prog = false;
+  if (!LDB.cola.size) return;
+  const lote = [...LDB.cola]; LDB.cola.clear();
+  try {
+    const t = Date.now();
+    await ldbTx(["datos", "meta"], "readwrite", tx => {
+      const os = tx.objectStore("datos");
+      lote.forEach(([k, v]) => { if (v == null) os.delete(k); else os.put({v, t, n:v.length}, k); });
+      tx.objectStore("meta").put([...LDB.pend], "pendLocal");
+    });
+    LDB.ult = t; LDB.escrituras += lote.length; LDB.error = ""; LDB.reintentos = 0; LDB.ok = true;
+  } catch (e) {
+    LDB.error = String((e && e.message) || e);
+    registrarError("ldb.escribir", e, "aviso");
+    lote.forEach(([k, v]) => { if (!LDB.cola.has(k)) LDB.cola.set(k, v); });
+    if (LDB.reintentos++ < 5) setTimeout(ldbVaciar, 2000 * LDB.reintentos);
+  }
+}
+(function ldbInterceptar(){
+  try {
+    const S = window.Storage && Storage.prototype; if (!S || S.setItem.ldb) return;
+    const set0 = S.setItem, rem0 = S.removeItem;
+    const esLocal = st => { try { return st === window.localStorage; } catch (e) { return false; } };
+    const setItem = function(k, v){
+      const clave = String(k), local = LDB_CLAVES.has(clave) && esLocal(this);
+      try { set0.call(this, k, v); }
+      catch (e) {
+        if (local && esCuota(e)){ LDB.pend.add(clave); ldbEncolar(clave, String(v)); ldbAvisoCuota(); }
+        throw e;
+      }
+      if (local){ LDB.pend.delete(clave); ldbEncolar(clave, String(v)); }
+    };
+    setItem.ldb = true; S.setItem = setItem;
+    S.removeItem = function(k){ rem0.call(this, k); if (LDB_CLAVES.has(String(k)) && esLocal(this)) ldbEncolar(String(k), null); };
+    S.setItem.set0 = set0;
+  } catch (e) { logSilencioso(e); }
+})();
+let LDB_AVISO = 0;
+function ldbAvisoCuota(){
+  if (Date.now() - LDB_AVISO < 60000) return; LDB_AVISO = Date.now();
+  setTimeout(() => { try { toast("Este navegador se quedó sin espacio para la copia rápida. El cambio quedó guardado en la base interna; descargá una copia de seguridad para tenerlo también afuera.", {label:"Copia de seguridad", fn:() => { const b = $("btn-respaldo"); if (b) b.click(); }}); } catch (e) { logSilencioso(e); } }, 0);
+}
+async function ldbLeerTodo(){
+  return ldbTx(["datos"], "readonly", tx => {
+    const os = tx.objectStore("datos"), out = {};
+    const rq = os.openCursor();
+    rq.onsuccess = () => { const c = rq.result; if (c){ out[c.key] = c.value; c.continue(); } };
+    return out;
+  });
+}
+const ldbMeta = k => ldbTx(["meta"], "readonly", tx => ldbRq(tx.objectStore("meta").get(k)));
+const ldbMetaPut = (k, v) => ldbTx(["meta"], "readwrite", tx => { tx.objectStore("meta").put(v, k); });
+async function ldbMigrarDesdeLocal(){
+  const m = await ldbMeta("migracion");
+  if (m && m.estado === "completa"){ LDB.migracion = m; return m; }
+  const loc = datosLocales(), t = Date.now();
+  await ldbTx(["datos"], "readwrite", tx => { const os = tx.objectStore("datos"); Object.entries(loc).forEach(([k, v]) => os.put({v, t, n:v.length}, k)); });
+  const leido = await ldbLeerTodo();
+  const malas = Object.keys(loc).filter(k => !leido[k] || leido[k].v !== loc[k]);
+  const res = {estado:malas.length ? "incompleta" : "completa", fecha:new Date().toISOString(), claves:Object.keys(loc).length, version:LDB.version, app:LAPACHO_VERSION, fallidas:malas};
+  await ldbMetaPut("migracion", res);
+  LDB.migracion = res;
+  if (malas.length) registrarError("ldb.migracion", `No se verificaron ${malas.length} partes: ${malas.join(", ")}`, "aviso");
+  return res;
+}
+async function ldbConciliar(){
+  const idb = await ldbLeerTodo(), pend = new Set((await ldbMeta("pendLocal")) || []);
+  let recuperadas = 0, sinEspacio = 0;
+  for (const k of LDB_CLAVES){
+    let ls = null; try { ls = localStorage.getItem(k); } catch (e) { logSilencioso(e); }
+    const x = idb[k];
+    if (x && x.v != null && (pend.has(k) || ls == null) && x.v !== ls){
+      try { Storage.prototype.setItem.set0.call(localStorage, k, x.v); pend.delete(k); recuperadas++; }
+      catch (e) { if (esCuota(e)){ sinEspacio++; LDB.pend.add(k); } else logSilencioso(e); }
+    } else if (ls != null && (!x || x.v !== ls)) ldbEncolar(k, ls);
+    else pend.delete(k);
+  }
+  pend.forEach(k => LDB.pend.add(k));
+  await ldbMetaPut("pendLocal", [...LDB.pend]);
+  return {recuperadas, sinEspacio};
+}
+/* Una versión por día de todos los datos (las últimas siete), para volver atrás */
+async function ldbVersionDiaria(){
+  const hoy = hoyIso(), d = datosLocales();
+  if (!Object.keys(d).length) return false;
+  const ks = await ldbTx(["historial"], "readonly", tx => ldbRq(tx.objectStore("historial").getAllKeys()));
+  if ((ks || []).includes(hoy)) return false;
+  const viejas = (ks || []).slice().sort().slice(0, Math.max(0, (ks || []).length - 6));
+  await ldbTx(["historial"], "readwrite", tx => { const os = tx.objectStore("historial"); os.put({id:hoy, fecha:new Date().toISOString(), app:LAPACHO_VERSION, datos:d, resumen:resumenDatos(d)}); viejas.forEach(k => os.delete(k)); });
+  return true;
+}
+async function ldbHistorial(){
+  try { return ((await ldbTx(["historial"], "readonly", tx => ldbRq(tx.objectStore("historial").getAll()))) || []).sort((a, b) => b.id.localeCompare(a.id)); }
+  catch (e) { logSilencioso(e); return []; }
+}
+async function ldbIniciar(){
+  try {
+    await ldbAbrir();
+    await ldbMigrarDesdeLocal();
+    const r = await ldbConciliar();
+    await ldbVersionDiaria();
+    LDB.ok = true;
+    if (r.recuperadas) toast(`Se recuperaron ${r.recuperadas} ${r.recuperadas === 1 ? "parte" : "partes"} de tus datos desde la base interna.`, {label:"Recargar", fn:() => location.reload()});
+    if (r.sinEspacio) toast("Hay cambios que solo están en la base interna porque este navegador no tiene espacio. Descargá una copia de seguridad.", {label:"Copia de seguridad", fn:() => { const b = $("btn-respaldo"); if (b) b.click(); }});
+  } catch (e) { LDB.error = String((e && e.message) || e); registrarError("ldb.iniciar", e, "aviso"); }
+  try { renderPanel(); } catch (e) { logSilencioso(e); }
+}
+function ldbResumenTexto(){
+  if (LDB.error && !LDB.ok) return `Base interna: no disponible (${LDB.error}). Los datos siguen en el navegador.`;
+  if (!LDB.ok) return "Base interna: preparando…";
+  const m = LDB.migracion;
+  return `Base interna (IndexedDB): activa${m ? `, ${m.claves} ${m.claves === 1 ? "parte migrada" : "partes migradas"}${m.estado === "completa" ? " y verificadas" : " (con partes sin verificar)"}` : ""}${LDB.ult ? `. Último guardado: ${String(new Date(LDB.ult).getHours()).padStart(2, "0")}:${String(new Date(LDB.ult).getMinutes()).padStart(2, "0")}` : ""}.`;
+}
+
+/* ---------- 7. Copias de seguridad: por módulo, versiones diarias y detalle ---------- */
+const MODULOS_RESP = [
+  {k:"plan", n:"Planificaciones y hojas", claves:["planificador-biblioteca-v1", "planificador-clases-v2", "planificador-hojas-v1"]},
+  {k:"cursos", n:"Mis cursos: estudiantes, notas, asistencia y seguimiento", claves:["planificador-cursos-v1", "planificador-seguimiento-v1"]},
+  {k:"ppi", n:"PPI", claves:["planificador-ppi-v1"]},
+  {k:"carrera", n:"Mi legajo y Junta", claves:["planificador-legajo-v1", "planificador-junta-v1"]},
+  {k:"recursos", n:"Preguntas, banco de actividades, actas y salidas", claves:["planificador-banco-v1", "planificador-preguntas-v1", "planificador-actas-v1", "planificador-salidas-v1"]},
+  {k:"ajustes", n:"Ajustes, encabezado y formato", claves:["planificador-encabezado-v1", "planificador-preferencias-v1", "planificador-formato-v1", "planificador-novedades-visto"]}
+];
+function modulosElegidos(){
+  const L = [...document.querySelectorAll("[data-respmod]")];
+  return L.length ? L.filter(c => c.checked).map(c => c.dataset.respmod) : MODULOS_RESP.map(m => m.k);
+}
+async function armarContenidoRespaldo(conFotos){
+  const c = await armarContenidoRespaldoV43(conFotos), sel = modulosElegidos();
+  if (sel.length === MODULOS_RESP.length) return c;
+  const claves = new Set(MODULOS_RESP.filter(m => sel.includes(m.k)).flatMap(m => m.claves));
+  const datos = {}; Object.entries(c.datos).forEach(([k, v]) => { if (claves.has(k)) datos[k] = v; });
+  return {datos, fotos:sel.includes("plan") ? c.fotos : [], modulos:sel};
+}
+function htmlModulosResp(){
+  return `<fieldset class="resp-mods"><legend>Qué incluir</legend>${MODULOS_RESP.map(m => `<label class="cp-ck"><input type="checkbox" data-respmod="${m.k}" checked> ${esc(m.n)}</label>`).join("")}
+    <p class="hint">Una copia parcial solo trae los módulos marcados. Al restaurarla con «Reemplazar todo», no se tocan los demás.</p></fieldset>`;
+}
+function cuentaModulo(d, m){
+  let n = 0, hay = false;
+  m.claves.forEach(k => { if (d[k] == null) return; hay = true; try { const v = JSON.parse(d[k]); n += Array.isArray(v) ? v.length : v && Array.isArray(v.cursos) ? v.cursos.length : v && typeof v === "object" ? Object.values(v).reduce((a, x) => a + (Array.isArray(x) ? x.length : 0), 0) : 0; } catch (e) { logSilencioso(e); } });
+  return {hay, n};
+}
+async function respValidarYMostrar(c, o){
+  await respValidarYMostrarV43(c, o);
+  const v = RESP_PEND.c, P = $("resp-paso");
+  if (!v || !P || P.hidden) return;
+  const mods = Array.isArray(c.modulos) ? c.modulos.filter(k => MODULOS_RESP.some(m => m.k === k)) : null;
+  v.alcance = mods && mods.length < MODULOS_RESP.length ? MODULOS_RESP.filter(m => mods.includes(m.k)).flatMap(m => m.claves) : null;
+  const loc = datosLocales();
+  const filas = MODULOS_RESP.map(m => {
+    const en = !v.alcance || m.claves.some(k => v.alcance.includes(k)), b = cuentaModulo(v.datos, m), a = cuentaModulo(loc, m);
+    const rep = !en ? "No se toca" : b.hay ? (a.hay ? "Se reemplaza" : "Se agrega") : (a.hay ? "Se borra" : "—");
+    return `<tr><th scope="row">${esc(m.n)}</th><td>${b.hay ? (b.n || "sí") : "no"}</td><td>${a.hay ? (a.n || "sí") : "no"}</td><td>${rep}</td></tr>`;
+  }).join("");
+  const bar = P.querySelector(".cur-bar");
+  const html = `<details class="cur-sub resp-det" open><summary>Qué cambia en cada módulo</summary><div class="d-table-wrap"><table class="d-table resp-t"><caption class="sr-only">Comparación entre la copia y este navegador</caption><thead><tr><th scope="col">Módulo</th><th scope="col">En la copia</th><th scope="col">En este navegador</th><th scope="col">Con «Reemplazar todo»</th></tr></thead><tbody>${filas}</tbody></table></div>
+    <p class="hint">Con «Incorporar lo nuevo» no se borra nada: se suma lo que falta y lo repetido no se duplica.${v.alcance ? " Es una copia parcial: los módulos que no trae quedan como están." : ""}</p></details>`;
+  if (bar) bar.insertAdjacentHTML("beforebegin", html); else P.insertAdjacentHTML("beforeend", html);
+}
+function escribirDatos(d, reemplazar){
+  const alc = RESP_PEND.alcance;
+  if (reemplazar) (alc || CLAVES_RESPALDO).forEach(k => { if (!(k in d)) localStorage.removeItem(k); });
+  Object.entries(d).forEach(([k, v]) => localStorage.setItem(k, v));
+}
+async function respAplicar(reemplazar){
+  RESP_PEND.alcance = RESP_PEND.c && RESP_PEND.c.alcance ? RESP_PEND.c.alcance : null;
+  try { return await respAplicarV43(reemplazar); } finally { RESP_PEND.alcance = null; }
+}
+async function renderVersionesDiarias(){
+  const box = $("resp-diarias"); if (!box) return;
+  const L = await ldbHistorial();
+  box.hidden = !L.length;
+  if (!L.length) return;
+  box.innerHTML = `<h3>Versiones diarias</h3><p class="hint">Lapacho guarda sola una versión por día de todos tus datos (las últimas siete), en este navegador.</p><ul class="diag-l">${L.map(x => `<li><b>${esc(fechaCortaIso(x.id))}</b><span>${x.resumen ? `${x.resumen.cursos} ${x.resumen.cursos === 1 ? "curso" : "cursos"}, ${x.resumen.planificaciones} ${x.resumen.planificaciones === 1 ? "planificación" : "planificaciones"}` : ""}${x.app ? ` · versión ${esc(String(x.app).split(" ")[0])}` : ""}</span><span class="cur-bar"><button type="button" class="btn btn-sm" data-rpd="${esc(x.id)}" data-acc="bajar">Descargar</button><button type="button" class="btn btn-sm" data-rpd="${esc(x.id)}" data-acc="volver">Volver a esta versión</button></span></li>`).join("")}</ul>`;
+}
+async function versionDiariaAccion(id, acc){
+  const x = (await ldbHistorial()).find(y => y.id === id); if (!x) return;
+  if (acc === "bajar"){
+    const contenido = {datos:x.datos, fotos:[]}, txt = JSON.stringify(contenido);
+    const o = {app:"planificador-clases", tipo:"respaldo", version:2, fecha:x.fecha, appVersion:x.app || LAPACHO_VERSION, cifrado:false, integridad:{alg:"SHA-256", valor:await sha256Hex(txt)}, contenido};
+    await guardarArchivo(`version-diaria-lapacho-${id}.json`, new Blob([JSON.stringify(o)], {type:"application/json"}), "Versión diaria descargada. No está cifrada: guardala en un lugar seguro.");
+    return;
+  }
+  const r = x.resumen || resumenDatos(x.datos);
+  if (!window.confirm(`Se vuelve a los datos del ${fechaCortaIso(id)} (${r.cursos} cursos, ${r.planificaciones} planificaciones). Lo de ahora se guarda antes en una copia automática. ¿Seguimos?`)) return;
+  try { await guardarPrevia(); RESP_PEND.alcance = null; escribirDatos(x.datos, true); toast("Listo. Se recarga la página…"); setTimeout(() => location.reload(), 900); }
+  catch (e) { registrarError("versionDiaria", e); toast("No se pudo volver a esa versión. No se cambió nada."); }
+}
+function prepararRespaldo54(){
+  const D = $("respaldo"); if (!D || D.dataset.v44) return; D.dataset.v44 = "1";
+  const f = $("resp-fotos"), lab = f && f.closest("label");
+  if (lab) lab.insertAdjacentHTML("afterend", htmlModulosResp());
+  const pv = $("resp-previas");
+  if (pv) pv.insertAdjacentHTML("afterend", `<div id="resp-diarias" class="resp-diarias" hidden></div>`);
+  D.addEventListener("click", e => { const b = e.target.closest("[data-rpd]"); if (b) versionDiariaAccion(b.dataset.rpd, b.dataset.acc); });
+  const btn = $("btn-respaldo"); if (btn) btn.addEventListener("click", () => setTimeout(renderVersionesDiarias, 50));
+}
+
+/* ---------- 8. Accesibilidad y versión nueva ---------- */
+function abrirDialogo(id){
+  const prev = document.activeElement, dlg = $(id);
+  abrirDialogoV43(id);
+  if (!dlg) return;
+  if (prev && prev !== document.body && !dlg.contains(prev)) dlg._focoPrevio = prev;
+  if (!dlg.dataset.focoV44){
+    dlg.dataset.focoV44 = "1";
+    dlg.addEventListener("close", () => {
+      let p = dlg._focoPrevio; dlg._focoPrevio = null;
+      const a = document.activeElement;
+      /* Si el botón que la abrió quedó oculto (por ejemplo, dentro de un menú que se cerró), vuelve al botón del menú */
+      if (p && p.isConnected && !p.getClientRects().length){ const m = p.closest("[role='menu'], .menu, details"); const t = m && (m.id ? document.querySelector(`[aria-controls="${CSS.escape(m.id)}"]`) : null) || (m && m.parentElement && m.parentElement.querySelector(":scope > button, :scope > summary")); p = t && t.getClientRects().length ? t : null; }
+      if (p && p.isConnected && (!a || a === document.body || dlg.contains(a))) { try { p.focus({preventScroll:true}); } catch (e) { logSilencioso(e); } }
+    });
+  }
+}
+function avisoVersionNueva(){
+  const p = leerPref(), v = String(LAPACHO_VERSION).split(" ")[0];
+  if (p.verVista && p.verVista !== v) setTimeout(() => toast(`Lapacho se actualizó a la versión ${v}. Tus datos siguen como estaban.`, {label:"Ver novedades", fn:() => { const b = $("btn-ayuda"); if (b) b.click(); }}), 1200);
+  if (p.verVista !== v) prefSet("verVista", v);
+  try {
+    if ("serviceWorker" in navigator && navigator.serviceWorker.getRegistration) navigator.serviceWorker.getRegistration().then(r => {
+      if (!r) return;
+      r.addEventListener("updatefound", () => { const w = r.installing; if (!w) return; w.addEventListener("statechange", () => { if (w.state === "installed" && navigator.serviceWorker.controller) toast("Hay una versión nueva de Lapacho lista.", {label:"Usarla ahora", fn:() => location.reload()}); }); });
+    }).catch(logSilencioso);
+  } catch (e) { logSilencioso(e); }
+}
+
+/* ---------- 9. Inicio organizado por tareas ---------- */
+const TAREAS_INICIO = [
+  {t:"Planificar", d:"Armar, revisar y guardar", i:[["btn-nueva", "Nueva planificación"], ["btn-lib", "Mis planificaciones"], ["btn-coher", "Revisar la coherencia"], ["btn-libreto", "Desde un libreto"]]},
+  {t:"Dar clase", d:"Para el aula", i:[["btn-repaso", "Repasar la clase"], ["btn-ausencia", "Cuando no estés"], ["btn-rutinas", "Rutinas de pensamiento"], ["btn-dinam", "Dinámicas"]]},
+  {t:"Evaluar y acompañar", d:"Notas, seguimiento y apoyos", i:[["btn-curso", "Mi curso"], ["btn-preg", "Preguntas y pruebas"], ["btn-ppi", "PPI"], ["btn-conv", "Convivencia"]]},
+  {t:"Organizar la escuela", d:"Actas, salidas y eventos", i:[["btn-actas", "Actas"], ["btn-salidas", "Salidas"], ["btn-actos", "Actos"], ["btn-feria", "Feria de ciencias"]]},
+  {t:"Mi carrera", d:"Cargos, cursos y legajo", i:[["btn-cargos", "Cargos disponibles"], ["btn-capac", "Capacitaciones"], ["btn-legajo", "Mi legajo"], ["btn-licalc", "Licencias"]]}
+];
+function htmlTareasInicio(){
+  const g = TAREAS_INICIO.map(x => ({...x, i:x.i.filter(([id]) => $(id))})).filter(x => x.i.length);
+  return `<section class="pn-tareas" aria-labelledby="pn-tareas-t"><h2 class="pn-t" id="pn-tareas-t">¿Qué querés hacer?</h2><div class="pn-tg">${g.map(x => `<div class="pn-tc"><h3>${esc(x.t)}</h3><p>${esc(x.d)}</p><ul>${x.i.map(([id, n]) => `<li><button type="button" class="pn-ta" data-proxy="${id}">${esc(n)}</button></li>`).join("")}</ul></div>`).join("")}</div></section>`;
+}
+function renderPanel(){
+  renderPanelV43();
+  const P = $("panel"); if (!P) return;
+  if (!P.querySelector(".pn-tareas")) P.insertAdjacentHTML("afterbegin", htmlTareasInicio());
+  const l = P.querySelector(".pn-datos");
+  if (l && !l.querySelector(".pn-ldb")) l.insertAdjacentHTML("beforeend", `<li class="pn-ldb"><span><b>${esc(ldbResumenTexto())}</b><small>Cada cambio se guarda en el momento. La copia en un archivo sigue siendo la forma de llevar los datos a otro dispositivo.</small></span></li>`);
+}
+
+/* ---------- 10. Motor pedagógico ----------
+   Reglas explicables, sin IA. Cada observación dice qué se detectó, por qué puede ser un problema,
+   qué revisar y una propuesta concreta. Son sugerencias didácticas, no exigencias normativas.
+   Taxonomía de Bloom revisada (Anderson y Krathwohl, 2001): seis procesos cognitivos. */
+const BLOOM = [
+  {k:"recordar", n:"Recordar", d:"Recuperar información de la memoria.", v:"recordar reconocer identificar nombrar enumerar listar definir mencionar señalar localizar ubicar citar repetir reproducir memorizar rotular"},
+  {k:"comprender", n:"Comprender", d:"Construir significado: explicar con palabras propias, dar ejemplos, comparar.", v:"explicar describir interpretar resumir parafrasear ejemplificar clasificar comparar inferir traducir reformular ilustrar caracterizar asociar"},
+  {k:"aplicar", n:"Aplicar", d:"Usar un procedimiento en una situación conocida o nueva.", v:"aplicar resolver calcular usar utilizar emplear ejecutar implementar demostrar medir operar graficar representar modelizar manipular experimentar convertir"},
+  {k:"analizar", n:"Analizar", d:"Descomponer en partes y ver cómo se relacionan.", v:"analizar organizar contrastar diferenciar distinguir examinar categorizar descomponer relacionar indagar investigar cuestionar detectar estructurar atribuir esquematizar"},
+  {k:"evaluar", n:"Evaluar", d:"Juzgar con criterios: justificar, argumentar, verificar.", v:"evaluar justificar argumentar fundamentar valorar juzgar criticar defender verificar validar debatir decidir priorizar comprobar"},
+  {k:"crear", n:"Crear", d:"Producir algo nuevo: diseñar, formular, planificar.", v:"crear diseñar elaborar producir formular planificar proponer inventar componer generar idear redactar plantear construir"}
+].map((b, i) => ({...b, i, verbos:b.v.split(" ")}));
+const BLOOM_IRREG = {resolver:["resuelv"], medir:["mid"], construir:["construy"], producir:["produzc"], proponer:["propong", "propus"], distinguir:["disting"], inferir:["infier", "infir"], defender:["defiend"], componer:["compong"], demostrar:["demuestr"], comprobar:["comprueb"], recordar:["recuerd"], reconocer:["reconozc"], traducir:["traduzc"], repetir:["repit"], reproducir:["reproduzc"], elegir:["elij", "elig"], seguir:["sig"], diferenciar:["diferenci"], convertir:["conviert", "convirt"], invertir:["inviert"], decidir:["decid"]};
+const BLOOM_IDX = (() => {
+  const out = [];
+  BLOOM.forEach(b => b.verbos.forEach(v0 => {
+    const v = norm(v0), st = v.replace(/(ar|er|ir)$/, ""), vs = new Set([st]);
+    if (/c$/.test(st)) vs.add(st.slice(0, -1) + "qu");
+    if (/g$/.test(st)) vs.add(st + "u");
+    if (/z$/.test(st)) vs.add(st.slice(0, -1) + "c");
+    (BLOOM_IRREG[v] || []).forEach(x => vs.add(x));
+    vs.forEach(s => { if (s.length >= 3) out.push([s, b.i, v0]); });
+  }));
+  return out.sort((a, b) => b[0].length - a[0].length);
+})();
+/* Sustantivos y participios que empiezan como un verbo («cuestionario», «relación», «medida») no cuentan */
+const BLOOM_NO = /(cion|ciones|sion|siones|miento|mientos|ario|arios|aria|arias|dor|dora|dores|doras|ble|bles|ivo|iva|ivos|ivas|ura|uras|encia|encias|ancia|ancias|ismo|ida|idas|ido|idos|ada|adas|ado|ados)$/;
+function bloomDeVerbo(w){
+  w = norm(w || "").replace(/[^a-z]/g, "");
+  if (w.length < 3) return null;
+  if (BLOOM_NO.test(w) && !/(ar|er|ir)$/.test(w)) return null;
+  for (const [s, i, v] of BLOOM_IDX) if (w.startsWith(s) && w.length - s.length <= 6) return {i, v};
+  return null;
+}
+function bloomLinea(l){
+  const pv = primerVerbo(l), b = bloomDeVerbo(pv);
+  return b ? {...b, palabra:pv} : {i:-1, palabra:pv, v:""};
+}
+/* Nivel más alto de una consigna: se miran las primeras palabras, donde suele estar lo que se pide */
+function bloomMaxConsigna(l, n){
+  const w = norm(lbSinMarca(l)).replace(/^[-•*\d.)\s¿¡"«(]+/, "").split(/[^a-zñ]+/).filter(Boolean).slice(0, n || 14);
+  let m = -1; w.forEach(x => { const b = bloomDeVerbo(x); if (b && b.i > m) m = b.i; });
+  return m;
+}
+const PED = {abierto:{}};
+function pedEstado(){ if (!state.ped || typeof state.ped !== "object") state.ped = {bloom:{}, barreras:[]}; state.ped.bloom = state.ped.bloom || {}; state.ped.barreras = Array.isArray(state.ped.barreras) ? state.ped.barreras : []; return state.ped; }
+const claveObj = o => norm(o).replace(/[^a-z0-9ñ ]/g, "").replace(/\s+/g, " ").trim().slice(0, 80);
+function foto(){ const f = fotoV43(); f.ped = JSON.parse(JSON.stringify(pedEstado())); return f; }
+function aplicar(saved){ const r = aplicarV43(saved); state.ped = saved && saved.ped && typeof saved.ped === "object" ? JSON.parse(JSON.stringify(saved.ped)) : {bloom:{}, barreras:[]}; return r; }
+function objetivosPed(){ return [...(state.modo === "secuencia" ? itemsLista(val("objgen")).map(o => ({o, id:"objgen"})) : []), ...itemsLista(val("objetivos")).map(o => ({o, id:"objetivos"}))]; }
+function momentosPed(){
+  const m = state.modo;
+  if (m === "secuencia") return clasesSec().map(c => ({k:`Clase ${c.n}`, campo:`sc${c.n}_a`, l:lineasAct(`${c.t}\n${c.a}`)}));
+  if (m === "proyecto") return ETAPAS.map(e => ({k:e.t, campo:e.id, l:lineasAct(val(e.id))}));
+  if (m === "anual") return [];
+  return [["Inicio", "inicio"], ["Desarrollo", "desarrollo"], ["Cierre", "cierre"]].map(([k, c]) => ({k, campo:c, l:lineasAct(val(c))}));
+}
+function rutinaPara(momento){ const r = RUTINAS.find(x => x.m === momento && x.pz); return r ? r.n : ""; }
+const BARRERAS = [
+  {k:"lectura", n:"Lectura de textos extensos", act:/\b(lee|leen|lean|lectura|texto|textos|fragmento|articulo|libro)\b/, apoyo:/(lectura compartida|en voz alta|glosario|audiolibro|texto en audio|lectura guiada|texto adaptado|fragmentos breves|fragmento breve|subrayado guiado|esquema del texto|organizador grafico)/,
+    sug:"Ofrecé el texto en fragmentos breves, con lectura compartida o en voz alta, un glosario y una imagen o un esquema que lo acompañe."},
+  {k:"escritura", n:"Producción escrita", act:/\b(escrib|redact|informe|respond[ae]n por escrito|completan la ficha|carpeta)/, apoyo:/(oral|audio|dibujo|esquema|mapa|elegir el formato|grabar|plantilla|organizador)/,
+    sug:"Permití mostrar lo aprendido de otra forma (oral, esquema, dibujo con rótulos o audio) o da una plantilla con el inicio de cada respuesta."},
+  {k:"atencion", n:"Atención sostenida", act:/\b(\d{2,3})\s*min/, apoyo:/(pausa|cambio de actividad|por pasos|cronometr|tiempo visible|en etapas)/,
+    sug:"Partí las actividades largas en tramos de 10 a 15 minutos, con el tiempo visible y una consigna por vez."},
+  {k:"consignas", n:"Comprensión de consignas", act:/./, apoyo:/(paso a paso|por pasos|ejemplo resuelto|modelo|lista de pasos|se lee la consigna|reformul)/,
+    sug:"Escribí las consignas en pasos numerados, con un ejemplo resuelto y una pregunta para comprobar que se entendió antes de empezar."},
+  {k:"oral", n:"Hablar frente al grupo", act:/\b(expon|exposicion|presentan oralmente|oral|frente al curso|debate)/, apoyo:/(en parejas|grupo chico|grabad|por escrito|afiche|roles|elegir)/,
+    sug:"Ofrecé alternativas: exponer en grupo chico, presentar un afiche, grabar un audio o compartir primero en parejas."},
+  {k:"grupo", n:"Trabajo en grupo y convivencia", act:/\b(grupo|grupos|equipo|equipos)\b/, apoyo:/(roles|rol de|secretari|vocero|coordinador|acuerdos|normas de trabajo)/,
+    sug:"Asigná roles (coordinación, registro, vocería, tiempo) y acordá dos o tres normas de trabajo antes de empezar."},
+  {k:"visual", n:"Acceso visual a la información", act:/\b(video|imagen|imagenes|grafic|simulador|phet|pizarr|proyect|lamina|esquema)/, apoyo:/(descrip|en voz alta|ampliad|alto contraste|relieve|manipul|tacto)/,
+    sug:"Describí en voz alta lo que se proyecta, ofrecé versiones ampliadas o en alto contraste y materiales para manipular."},
+  {k:"auditivo", n:"Acceso auditivo a la información", act:/\b(video|audio|explica|exposicion|escuchan|relato)/, apoyo:/(subtitul|por escrito|pizarr|imagen|lengua de señas|apoyo visual)/,
+    sug:"Acompañá lo oral con apoyo escrito o visual en el pizarrón y usá videos con subtítulos."},
+  {k:"recursos", n:"Conectividad o dispositivos", act:/\b(celular|computadora|internet|simulador|phet|aplicacion|app|online|en linea|google)\b/, apoyo:/(sin conexion|offline|impres|alternativa|en papel|descargad)/,
+    sug:"Prepará una alternativa sin conexión: el simulador descargado, capturas impresas o una versión en papel de la actividad."}
+];
+const TIPOS_ACT = [
+  {k:"lectura", re:/\b(lee|leen|lean|lectura|texto|fragmento)/, imp:"Elegí un texto con un problema o una pregunta que les importe.", rep:"Ofrecé el texto con imágenes, un glosario o en audio.", acc:"Permití responder con un esquema, oralmente o por escrito."},
+  {k:"escritura", re:/\b(escrib|redact|informe|produc)/, imp:"Explicá para quién y para qué escriben.", rep:"Mostrá un modelo de texto y una lista de lo que tiene que tener.", acc:"Aceptá formatos distintos: texto, historieta, audio o presentación."},
+  {k:"experimento", re:/\b(experiment|medi|midan|laboratorio|registr|hipotesis|observ)/, imp:"Arrancá con una predicción para que tengan algo propio en juego.", rep:"Demostrá el procedimiento y dejalo escrito en pasos con imágenes.", acc:"Registro de datos en tabla, foto, dibujo o grabación."},
+  {k:"problemas", re:/\b(resuelv|resolu|problema|ejercicio|calcul)/, imp:"Usá problemas de situaciones cercanas y dejá elegir entre dos de distinta dificultad.", rep:"Ofrecé un ejemplo resuelto y una representación gráfica.", acc:"Permití resolver con dibujos, tablas o calculadora y explicar el procedimiento oralmente."},
+  {k:"video", re:/\b(video|simulador|phet|imagen|animacion)/, imp:"Dá una pregunta para mirar con un propósito.", rep:"Subtítulos, pausas y descripción de lo que se ve.", acc:"Respuesta oral, escrita o con un dibujo de lo observado."},
+  {k:"debate", re:/\b(debat|discut|argument|opin|puesta en comun)/, imp:"Planteá una pregunta abierta con posiciones posibles.", rep:"Dejá a la vista las ideas principales y el vocabulario.", acc:"Participación oral, escrita en tarjetas o por un vocero del grupo."},
+  {k:"exposicion", re:/\b(explica el docente|el docente explica|exposicion del docente|presenta el tema)/, imp:"Conectá la explicación con una pregunta del inicio.", rep:"Apoyá lo oral con un esquema y ejemplos.", acc:"Cerrá con una pregunta breve que respondan como prefieran."},
+  {k:"grupo", re:/\b(grupo|grupos|equipo|parejas)/, imp:"Roles rotativos y una meta clara para el grupo.", rep:"Consigna escrita para cada grupo.", acc:"Producto común con aportes individuales visibles."}
+];
+function tipoActividad(l){ const n = norm(l); return TIPOS_ACT.find(t => t.re.test(n)) || null; }
+function nuevaObs(L, o){ L.push({nivel:"medio", campo:"", ...o}); }
+function analisisPedagogico(){
+  const L = [], P = pedEstado(), m = state.modo;
+  if (!val("materia")) return {obs:L, objs:[], moms:[]};
+  const objs = objetivosPed().map(x => ({...x, b:bloomLinea(x.o), sel:P.bloom[claveObj(x.o)]}));
+  const moms = momentosPed().map(x => ({...x, niveles:x.l.map(l => bloomMaxConsigna(l))}));
+  const actLineas = moms.flatMap(x => x.l), actMax = Math.max(-1, ...moms.flatMap(x => x.niveles));
+  /* Se miran los criterios e indicadores (empiezan con lo que hace el estudiante); los instrumentos se describen con sustantivos */
+  const evalLineas = [...itemsLista(val("criterios")), ...itemsLista(val("cotejo")), ...itemsLista(val("escala")), ...itemsLista(val("ticket"))];
+  const evalMax = Math.max(-1, ...evalLineas.map(l => bloomMaxConsigna(l, 6)));
+  const objMax = Math.max(-1, ...objs.map(x => x.sel != null ? +x.sel : x.b.i));
+  const verbosDe = i => BLOOM[i].verbos.slice(0, 5).join(", ");
+  /* Bloom: el verbo y el nivel elegido */
+  objs.forEach(x => {
+    if (x.sel != null && x.b.i >= 0 && +x.sel !== x.b.i) nuevaObs(L, {id:"bloom-sel", campo:x.id,
+      problema:`El objetivo «${lbCorta(x.o, 90)}» está marcado como ${BLOOM[x.sel].n}, pero el verbo «${x.b.palabra}» corresponde a ${BLOOM[x.b.i].n}.`,
+      porque:"El verbo dice qué va a hacer el estudiante y, por lo tanto, qué actividades hacen falta y qué se puede evaluar. Si no coincide con el nivel que buscás, las actividades y la evaluación apuntan a otra cosa.",
+      revisar:"El verbo del objetivo o el nivel que elegiste.",
+      propuesta:`Usá un verbo de ${BLOOM[x.sel].n} (${verbosDe(x.sel)}) o cambiá el nivel a ${BLOOM[x.b.i].n} si eso es lo que querés lograr.`});
+    if (x.b.i < 0 && x.b.palabra && !esVago(x.o) && !esDoc(x.o)) nuevaObs(L, {id:"bloom-nr", nivel:"info", campo:x.id,
+      problema:`No se reconoce un proceso cognitivo en «${lbCorta(x.o, 90)}» (empieza con «${x.b.palabra}»).`,
+      porque:"Sin un verbo de acción claro cuesta decidir qué actividad propone el desafío y cómo se evalúa.",
+      revisar:"El comienzo del objetivo.",
+      propuesta:"Empezá con un verbo que diga qué hace el estudiante. Podés elegir el nivel en «Taxonomía de Bloom», más abajo."});
+  });
+  /* Actividades que no alcanzan el nivel del objetivo */
+  if (actLineas.length) objs.forEach(x => {
+    const n = x.sel != null ? +x.sel : x.b.i;
+    if (n >= 2 && actMax < n) nuevaObs(L, {id:"bloom-act", campo:moms[1] ? moms[1].campo : (moms[0] || {}).campo,
+      problema:`El objetivo «${lbCorta(x.o, 80)}» pide ${BLOOM[n].n.toLowerCase()}, pero ninguna actividad llega a ese nivel (la más exigente pide ${actMax >= 0 ? BLOOM[actMax].n.toLowerCase() : "algo que no se reconoce"}).`,
+      porque:"Para lograr un objetivo, los estudiantes tienen que practicar eso mismo durante la clase. Si las actividades piden menos, el objetivo queda solo escrito.",
+      revisar:"Las consignas del desarrollo.",
+      propuesta:`Sumá una consigna que empiece con un verbo de ${BLOOM[n].n} (${verbosDe(n)}) sobre el mismo contenido del objetivo.`});
+  });
+  /* La evaluación por debajo de los objetivos */
+  if (evalLineas.length && objMax >= 0){
+    if (evalMax < 0) nuevaObs(L, {id:"bloom-ev0", nivel:"info", campo:"criterios",
+      problema:"Los criterios e instrumentos de evaluación no dicen qué hace el estudiante para demostrar lo aprendido.",
+      porque:"Un criterio sin una acción observable no permite decidir si el objetivo se logró ni explicarle al estudiante qué se espera.",
+      revisar:"Los criterios de evaluación.", propuesta:`Escribí cada criterio con una acción: «Explica…», «Resuelve…», «Justifica…», en el mismo nivel que el objetivo (${BLOOM[objMax].n}).`});
+    else if (evalMax < objMax - 1) nuevaObs(L, {id:"bloom-ev", campo:"criterios",
+      problema:`La evaluación llega hasta ${BLOOM[evalMax].n.toLowerCase()}, pero hay objetivos de ${BLOOM[objMax].n.toLowerCase()}.`,
+      porque:"Si se evalúa un nivel más bajo que el que se enseñó, la nota no informa si el objetivo se logró y los estudiantes aprenden que alcanza con menos.",
+      revisar:"Los criterios y los instrumentos de evaluación.", propuesta:`Agregá un criterio o una pregunta de ${BLOOM[objMax].n} (${verbosDe(objMax)}), por ejemplo en el ticket de salida o en la rúbrica.`});
+  }
+  /* Progresión cognitiva entre momentos */
+  if (m === "clase" || !m){
+    const [ini, des, cie] = moms.map(x => Math.max(-1, ...x.niveles));
+    if (actLineas.length >= 3 && actMax <= 1 && objMax >= 2) nuevaObs(L, {id:"prog", campo:"desarrollo",
+      problema:"Todas las actividades piden recordar o comprender, y los objetivos piden más.",
+      porque:"Sin una tarea que exija aplicar, analizar o justificar, la clase no ofrece la ocasión de construir lo que dicen los objetivos.",
+      revisar:"El desarrollo de la clase.", propuesta:`En el desarrollo, agregá un problema o una pregunta que pida ${BLOOM[objMax].n.toLowerCase()}.${rutinaPara("desarrollo") ? ` La rutina «${rutinaPara("desarrollo")}» ayuda a que fundamenten lo que dicen.` : ""}`});
+    else if (des >= 0 && cie >= 0 && cie < 1 && des >= 2) nuevaObs(L, {id:"prog-cierre", nivel:"info", campo:"cierre",
+      problema:"El cierre vuelve a recordar datos después de un desarrollo más exigente.",
+      porque:"El cierre es el momento de sintetizar y tomar conciencia de lo aprendido; si solo pide recordar, se pierde esa oportunidad.",
+      revisar:"El cierre de la clase.", propuesta:`Cerrá con una síntesis o una reflexión.${rutinaPara("cierre") ? ` Por ejemplo, la rutina «${rutinaPara("cierre")}».` : ""}`});
+    if (ini >= 0 && ini >= 3 && des >= 0 && des < ini) nuevaObs(L, {id:"prog-ini", nivel:"info", campo:"inicio",
+      problema:"El inicio pide más que el desarrollo.",
+      porque:"Una progresión habitual va de recuperar lo que saben a tareas más complejas. Empezar por lo más difícil sin herramientas puede desanimar.",
+      revisar:"El orden de las actividades.", propuesta:`Usá el inicio para activar lo que saben y dejá la tarea más compleja para el desarrollo.${rutinaPara("inicio") ? ` Una opción para el inicio: «${rutinaPara("inicio")}».` : ""}`});
+  }
+  /* Contenidos y tiempo disponible (regla orientativa) */
+  const cont = itemsLista(val("contenidos")).filter(x => !esProced(x)), dur = parseInt(val("tiempo"), 10) || 0;
+  if ((m === "clase" || !m) && dur && cont.length > Math.max(2, Math.round(dur / 25))) nuevaObs(L, {id:"tiempo", campo:"contenidos",
+    problema:`Hay ${cont.length} contenidos para una clase de ${dur} minutos.`,
+    porque:"Con tantos contenidos en poco tiempo, cada uno se presenta pero no se llega a trabajar con actividades. Es una regla orientativa de Lapacho: hasta un contenido nuevo cada 20 a 25 minutos.",
+    revisar:"Los contenidos de esta clase.", propuesta:"Elegí los centrales para esta clase y pasá los otros a la siguiente, o convertí esta planificación en una secuencia."});
+  if (m === "secuencia"){ const nc = +val("nclases") || 5; if (cont.length > nc * 2) nuevaObs(L, {id:"tiempo-sec", campo:"contenidos",
+    problema:`Hay ${cont.length} contenidos para ${nc} clases.`, porque:"Más de dos contenidos nuevos por clase deja poco tiempo para practicar y evaluar. Es una regla orientativa.",
+    revisar:"Los contenidos y la cantidad de clases.", propuesta:"Agrupá los contenidos en ideas centrales o sumá clases a la secuencia."}); }
+  /* Actividades sin un propósito visible */
+  const base = new Set(raices([val("tema"), val("contenidos"), val("objetivos"), val("objgen"), val("nombre"), val("pregunta")].join(" ")));
+  const ORG = /(forman|arman|se organiza|se reparte|reparto|pasar lista|asistencia|se retoma|se presenta la consigna|lectura de la consigna|saludo|se acomodan|recreo)/;
+  const sueltas = (moms.find(x => /desarrollo|clase 2/i.test(x.k)) || moms[0] || {l:[]}).l.filter(l => { const r = raices(l); return r.length >= 3 && !ORG.test(norm(l)) && !r.some(x => base.has(x)); });
+  if (base.size && sueltas.length) nuevaObs(L, {id:"proposito", nivel:"info", campo:(moms.find(x => /desarrollo/i.test(x.k)) || moms[0] || {}).campo,
+    problema:`${sueltas.length === 1 ? "Una actividad no muestra" : `${sueltas.length} actividades no muestran`} relación con el tema, los contenidos o los objetivos: «${lbCorta(sueltas[0], 80)}».`,
+    porque:"Cuando no se ve para qué sirve una actividad, los estudiantes la hacen como un trámite y es difícil evaluarla.",
+    revisar:"Esa actividad y su consigna.", propuesta:"Nombrá en la consigna el contenido que se trabaja o qué objetivo ayuda a lograr, o reemplazala por otra que lo haga."});
+  /* Barreras que marcó el docente y estrategias de la planificación */
+  const actN = norm(actLineas.join("\n") + "\n" + ["recursos", "adecuaciones", "apoyo", "general", "dua_rep", "dua_acc", "dua_imp"].map(val).join("\n"));
+  BARRERAS.filter(b => P.barreras.includes(b.k)).forEach(b => {
+    if (b.k === "atencion"){ const largo = (actN.match(/\b(\d{2,3})\s*min/g) || []).map(x => parseInt(x, 10)).some(n => n > 25); if (!largo || b.apoyo.test(actN)) return; }
+    else if (b.k === "consignas"){ if (b.apoyo.test(actN) || !actLineas.some(l => l.split(/\s+/).length > 30)) return; }
+    else if (!b.act.test(actN) || b.apoyo.test(actN)) return;
+    nuevaObs(L, {id:"barrera-" + b.k, campo:"adecuaciones",
+      problema:`Marcaste «${b.n}» como barrera del grupo y hay actividades que la ponen en juego sin un apoyo previsto.`,
+      porque:"Una barrera no está en el estudiante sino en el encuentro entre la tarea y el grupo. Si no se prevé una alternativa, algunos estudiantes no pueden participar aunque sepan.",
+      revisar:"Las actividades y las adecuaciones de acceso.", propuesta:`${b.sug} Cambia el acceso, no el objetivo.`});
+  });
+  /* Aprendizaje basado en proyectos: componentes */
+  let abp = null;
+  if (m === "proyecto"){
+    const t = id => val(id), et = ETAPAS.map(e => norm(val(e.id))).join("\n"), crit = t("criterios") + t("instrumentos") + t("rubrica");
+    abp = [
+      ["Pregunta guía", /[¿?]/.test(t("nombre")), "nombre", "Escribí el título como una pregunta abierta que el proyecto ayude a responder."],
+      ["Problema significativo", t("pregunta").length > 40, "pregunta", "Describí el desafío: qué problema real o cercano resuelven y para quién."],
+      ["Propósitos de aprendizaje", !!t("propositos") || !!t("objetivos"), "objetivos", "Escribí qué tienen que aprender, no solo qué van a hacer."],
+      ["Contenidos", !!t("contenidos"), "contenidos", "Indicá los contenidos que el proyecto pone en juego."],
+      ["Actividades por etapa", ETAPAS.filter(e => val(e.id)).length >= 4, "etapa1", "Completá al menos cuatro etapas con actividades concretas."],
+      ["Investigación", /(busc|investig|indag|entrevist|relev|encuest|fuentes|experiment)/.test(et), "etapa4", "Incluí una búsqueda de información, una entrevista o una experiencia."],
+      ["Producción", !!t("producto"), "producto", "Definí el producto final y los productos intermedios."],
+      ["Socialización", !!t("difusion") || /(present|expos|feria|muestra|audiencia|comparten)/.test(norm(val("etapa6"))), "difusion", "Decí ante quién se presenta el producto y cómo."],
+      ["Evaluación", !!crit.trim(), "criterios", "Sumá criterios e instrumentos, también para el proceso."],
+      ["Reflexión final", /(reflex|metacogn|metaaprend|que aprend|autoevalu|antes pensaba)/.test(et + norm(val("cierre"))), "etapa6", "Cerrá con una reflexión sobre qué aprendieron y cómo."]
+    ];
+    abp.filter(x => !x[1]).forEach(x => nuevaObs(L, {id:"abp-" + x[2], nivel:/Pregunta|Problema|Producción|Evaluación/.test(x[0]) ? "alto" : "medio", campo:x[2],
+      problema:`Al proyecto le falta: ${x[0].toLowerCase()}.`,
+      porque:"En el aprendizaje basado en proyectos, cada componente sostiene al siguiente: sin pregunta y problema no hay motivo para investigar, y sin producción ni socialización no hay a quién mostrarle lo aprendido.",
+      revisar:etiquetaDe(x[2]), propuesta:x[3]}));
+  }
+  return {obs:L, objs, moms, abp, evalMax, actMax, objMax};
+}
+/* Las observaciones de la revisión de coherencia, con la misma estructura */
+const COH_PORQUE = [
+  [/no se puede observar/, "Un verbo que no se observa no permite saber si el objetivo se logró ni diseñar la evaluación.", "La redacción del objetivo."],
+  [/No hay objetivos|Faltan las actividades|No hay criterios/, "Sin este componente no se puede revisar si lo que se propone, lo que se hace y lo que se evalúa van en la misma dirección.", "El componente que falta."],
+  [/no aparece en ninguna actividad|Ninguna actividad parece trabajar/, "Un contenido u objetivo que no se trabaja en una actividad queda solo enunciado: los estudiantes no tienen ocasión de aprenderlo.", "Las actividades del desarrollo."],
+  [/evalúa algo que no aparece/, "Evaluar lo que no se enseñó perjudica al estudiante y no informa sobre la enseñanza.", "El criterio de evaluación y lo enseñado."],
+  [/experimental/, "Una habilidad experimental se aprende haciendo y se evalúa mirando cómo se hace, no solo el resultado.", "Las actividades y los criterios."],
+  [/argumentaci/, "Argumentar se aprende con oportunidades de argumentar y de recibir devolución.", "Las actividades del desarrollo."],
+  [/simulador/, "Sin una predicción previa, el simulador se usa para mirar y no para poner a prueba una idea.", "La consigna del simulador."],
+  [/tiempos de las actividades suman/, "Si los tiempos no entran en la clase, se recorta lo último, que suele ser el cierre.", "Los tiempos de cada momento."],
+  [/adecuaciones|diversidad|etiqueta o un diagn/, "El Diseño Universal para el Aprendizaje propone prever alternativas desde el inicio, a partir de las barreras y no de los diagnósticos.", "Las adecuaciones y el DUA."],
+  [/conocimientos previos/, "Lo que el grupo ya sabe condiciona cómo se entiende lo nuevo; conocerlo permite ajustar la clase.", "El inicio de la clase."],
+  [/evaluación de cierre/, "Sin una instancia integradora no se sabe qué se logró al terminar la secuencia.", "La evaluación sumativa o la última clase."],
+  [/participaci|actitud|predisposici|prolijidad|esfuerzo/, "Las actitudes generales no son evidencia de aprendizaje y suelen evaluarse de forma desigual.", "La redacción del criterio."],
+  [/producen los estudiantes/, "Sin una producción, no queda evidencia de lo aprendido para evaluar ni para dar devolución.", "Las actividades y los instrumentos."],
+  [/recurso/, "Un recurso que no se usa en una actividad no aporta al aprendizaje.", "Los recursos y las actividades."],
+  [/largo/, "Un objetivo con varias ideas es difícil de evaluar.", "La redacción del objetivo."]
+];
+function partesObs(t){
+  const s = String(t || ""), i = s.search(/[.:](\s|$)/);
+  const prob = i > 0 ? s.slice(0, i + 1) : s, prop = i > 0 ? s.slice(i + 1).trim() : "";
+  const p = COH_PORQUE.find(([re]) => re.test(s));
+  return {problema:prob, porque:p ? p[1] : "Afecta la coherencia entre lo que se propone, lo que se hace y lo que se evalúa.", revisar:p ? p[2] : "El campo señalado.", propuesta:prop || "Revisá el campo señalado y ajustalo."};
+}
+const PED_NIVEL = {alto:"Importante", medio:"Conviene revisar", info:"Sugerencia"};
+function htmlObs(o, i){
+  return `<li class="ped-o coh-${o.nivel}"><details${PED.abierto[i] ? " open" : ""} data-pedi="${i}"><summary><span class="coh-n">${PED_NIVEL[o.nivel] || "Sugerencia"}</span> ${esc(o.problema)}</summary>
+    <dl class="ped-dl"><div><dt>Por qué puede ser un problema</dt><dd>${esc(o.porque)}</dd></div><div><dt>Qué revisar</dt><dd>${esc(o.revisar)}</dd></div><div><dt>Propuesta</dt><dd>${esc(o.propuesta)}</dd></div></dl>
+    ${o.campo && $(o.campo) ? `<button type="button" class="linkbtn" data-goto-coh="${esc(o.campo)}">Ir al campo</button>` : ""}</details></li>`;
+}
+function htmlBloom(A){
+  if (!A.objs.length) return "";
+  const opt = sel => `<option value=""${sel == null ? " selected" : ""}>Según el verbo</option>${BLOOM.map(b => `<option value="${b.i}"${sel != null && +sel === b.i ? " selected" : ""}>${b.n}</option>`).join("")}`;
+  return `<section class="ped-sec" aria-labelledby="ped-bloom-t"><h3 class="coh-h" id="ped-bloom-t">Taxonomía de Bloom</h3>
+    <p class="hint">Elegí el nivel que buscás en cada objetivo: Lapacho revisa que el verbo coincida y que las actividades y la evaluación lleguen a ese nivel. No hace falta que todos sean de los niveles altos: depende del propósito y del año.</p>
+    <div class="d-table-wrap"><table class="d-table ped-bt"><thead><tr><th scope="col">Objetivo</th><th scope="col">Verbo</th><th scope="col">Nivel del verbo</th><th scope="col">Nivel que buscás</th></tr></thead><tbody>${A.objs.map((x, i) => {
+      const ok = x.sel == null || x.b.i < 0 || +x.sel === x.b.i;
+      return `<tr><td>${esc(lbCorta(x.o, 110))}</td><td>${esc(x.b.palabra || "—")}</td><td>${x.b.i >= 0 ? BLOOM[x.b.i].n : "No se reconoce"}</td><td><label class="sr-only" for="ped-bl-${i}">Nivel que buscás para el objetivo ${i + 1}</label><select id="ped-bl-${i}" data-pedbloom="${esc(claveObj(x.o))}">${opt(x.sel)}</select>${ok ? "" : ` <span class="ped-dif">No coincide</span>`}</td></tr>`;
+    }).join("")}</tbody></table></div>
+    <details class="cur-sub"><summary>Verbos de cada nivel</summary><dl class="ped-verbos">${BLOOM.map(b => `<div><dt>${b.n}</dt><dd>${esc(b.d)} ${esc(b.verbos.join(", "))}.</dd></div>`).join("")}</dl></details></section>`;
+}
+function htmlDUA(A){
+  const P = pedEstado(), acts = A.moms.flatMap(x => x.l.map(l => ({k:x.k, l}))).filter(x => tipoActividad(x.l)).slice(0, 8);
+  const ck = BARRERAS.map(b => `<label class="cp-ck"><input type="checkbox" data-pedbar="${b.k}"${P.barreras.includes(b.k) ? " checked" : ""}> ${esc(b.n)}</label>`).join("");
+  return `<section class="ped-sec" aria-labelledby="ped-dua-t"><h3 class="coh-h" id="ped-dua-t">DUA por actividad</h3>
+    <p class="hint">Marcá las barreras que ves en el grupo (no diagnósticos). Para cada actividad, Lapacho sugiere alternativas de implicación, de representación y de acción y expresión. Las alternativas cambian el acceso, no bajan lo que se espera.</p>
+    <fieldset class="ped-bar"><legend>Barreras del grupo</legend>${ck}</fieldset>
+    ${acts.length ? `<ul class="ped-dua">${acts.map(x => { const t = tipoActividad(x.l), extra = BARRERAS.filter(b => P.barreras.includes(b.k) && b.act.test(norm(x.l))).map(b => b.sug);
+      return `<li><p class="ped-a"><span>${esc(x.k)}</span> ${esc(lbCorta(x.l, 120))}</p><dl class="ped-dl"><div><dt>Implicación</dt><dd>${esc(t.imp)}</dd></div><div><dt>Representación</dt><dd>${esc(t.rep)}</dd></div><div><dt>Acción y expresión</dt><dd>${esc(t.acc)}</dd></div>${extra.length ? `<div><dt>Para las barreras que marcaste</dt><dd>${esc(extra.join(" "))}</dd></div>` : ""}</dl></li>`; }).join("")}</ul>
+      ${$("dua_rep") ? `<div class="cur-bar"><button type="button" class="btn btn-sm" data-pedduaok>Agregar estas sugerencias al DUA de la planificación</button></div>` : ""}` : `<p class="hint">Cuando escribas las actividades, acá aparecen las alternativas para cada una.</p>`}</section>`;
+}
+function htmlABP(A){
+  if (!A.abp) return "";
+  return `<section class="ped-sec" aria-labelledby="ped-abp-t"><h3 class="coh-h" id="ped-abp-t">Componentes del proyecto</h3><ul class="ped-abp">${A.abp.map(x => `<li class="${x[1] ? "ok" : "falta"}"><span aria-hidden="true">${x[1] ? "✓" : "○"}</span> ${esc(x[0])}${x[1] ? "" : ` <button type="button" class="linkbtn" data-goto-coh="${esc(x[2])}">Completar</button>`}</li>`).join("")}</ul></section>`;
+}
+function renderPedagogia(){
+  const box = $("coh-ped"); if (!box) return;
+  const A = analisisPedagogico();
+  PED.ult = A;
+  box.innerHTML = `${A.obs.length ? `<h3 class="coh-h">Niveles cognitivos, tiempos y estrategias</h3><ul class="coh-l ped-l">${A.obs.map((o, i) => htmlObs(o, "n" + i)).join("")}</ul>` : `<p class="hint">Sin observaciones sobre niveles cognitivos, tiempos y estrategias.</p>`}
+    ${htmlABP(A)}${htmlBloom(A)}${htmlDUA(A)}`;
+}
+function enriquecerCoherencia(){
+  const R = $("coh-res"); if (!R) return;
+  R.querySelectorAll(".coh-l:not(.ped-l) > li").forEach((li, i) => {
+    const a = COH_ULT[i]; if (!a || li.querySelector(".ped-dl")) return;
+    const p = partesObs(a.t);
+    li.insertAdjacentHTML("beforeend", `<details class="ped-mas"><summary>Por qué y qué revisar</summary><dl class="ped-dl"><div><dt>Qué se detectó</dt><dd>${esc(p.problema)}</dd></div><div><dt>Por qué puede ser un problema</dt><dd>${esc(p.porque)}</dd></div><div><dt>Qué revisar</dt><dd>${esc(p.revisar)}</dd></div><div><dt>Propuesta</dt><dd>${esc(p.propuesta)}</dd></div></dl></details>`);
+  });
+  if (!$("coh-ped")) R.insertAdjacentHTML("beforeend", `<div id="coh-ped" class="coh-ped"></div>`);
+  renderPedagogia();
+}
+function abrirCoherencia(){ abrirCoherenciaV43(); try { enriquecerCoherencia(); } catch (e) { registrarError("motorPedagogico", e, "aviso"); } }
+function bindPedagogia(){
+  const R = $("coh-res"); if (!R || R.dataset.ped) return; R.dataset.ped = "1";
+  R.addEventListener("change", e => {
+    const s = e.target.closest("[data-pedbloom]"), b = e.target.closest("[data-pedbar]"), P = pedEstado();
+    if (s){ if (s.value === "") delete P.bloom[s.dataset.pedbloom]; else P.bloom[s.dataset.pedbloom] = +s.value; scheduleSave(); renderPedagogia(); const n = R.querySelector(`[data-pedbloom="${CSS.escape(s.dataset.pedbloom)}"]`); if (n) n.focus(); return; }
+    if (b){ P.barreras = b.checked ? [...new Set([...P.barreras, b.dataset.pedbar])] : P.barreras.filter(x => x !== b.dataset.pedbar); scheduleSave(); renderPedagogia(); const n = R.querySelector(`[data-pedbar="${b.dataset.pedbar}"]`); if (n) n.focus(); }
+  });
+  R.addEventListener("toggle", e => { const d = e.target.closest && e.target.closest("[data-pedi]"); if (d) PED.abierto[d.dataset.pedi] = d.open; }, true);
+  R.addEventListener("click", e => {
+    if (!e.target.closest("[data-pedduaok]")) return;
+    const A = PED.ult || analisisPedagogico(), acts = A.moms.flatMap(x => x.l).filter(tipoActividad).slice(0, 8), P = pedEstado();
+    const sum = (id, f) => { const el = $(id); if (!el) return; const nuevas = [...new Set(acts.map(l => f(tipoActividad(l), l)).filter(Boolean))]; const actual = itemsLista(el.value); const L = [...actual, ...nuevas.filter(n => !actual.some(a => norm(a) === norm(n)))]; el.value = toList(L); state.edited[id] = true; el.dispatchEvent(new Event("input", {bubbles:true})); };
+    sum("dua_imp", t => t.imp); sum("dua_rep", t => t.rep); sum("dua_acc", t => t.acc);
+    const extra = BARRERAS.filter(b => P.barreras.includes(b.k)).map(b => b.sug);
+    if (extra.length && $("adecuaciones")){ const el = $("adecuaciones"), actual = itemsLista(el.value); el.value = toList([...actual, ...extra.filter(x => !actual.some(a => norm(a) === norm(x)))]); state.edited.adecuaciones = true; el.dispatchEvent(new Event("input", {bubbles:true})); }
+    toast("Listo: se sumaron las alternativas al DUA de la planificación. Revisalas y ajustalas a tu grupo.");
+    renderPedagogia();
+  });
+}
+
+/* ---------- 11. NAP: por qué se sugiere cada uno y de dónde sale ---------- */
+function renderNap(){
+  renderNapV43();
+  const box = $("nap-box"); if (!box || box.querySelector(".nap-orig")) return;
+  const materia = val("materia"), anio = val("anio"), D = materia && anio ? napDe(materia, anio) : null;
+  if (!D) return;
+  const palabras = norm([val("tema"), ...(state.saberesSel || [])].join(" ")).split(/[^a-z0-9ñ]+/).filter(w => w.length >= 4 && !NAP_STOP.has(w));
+  const motivos = [];
+  D.grupos.forEach(g => g.items.forEach(it => { if (!napEnTexto(val("nap"), it.t)) return; const w = [...new Set(palabras.filter(p => it.r.includes(p.slice(0, 5))))].slice(0, 4); motivos.push({t:it.t, w}); }));
+  const auto = !state.edited.nap;
+  box.insertAdjacentHTML("beforeend", `<div class="nap-orig"><p class="hint"><b>Ámbito:</b> Núcleos de Aprendizajes Prioritarios nacionales, aprobados por el Consejo Federal de Educación. Los saberes del diseño curricular de Tucumán se eligen aparte, en «Saberes».${D.fuente ? ` <b>Documento:</b> ${esc(D.fuente[0])}.` : ""}</p>
+    ${motivos.length && auto ? `<details class="cur-sub"><summary>Por qué se sugieren estos NAP</summary><ul class="cp-reglas">${motivos.map(x => `<li>${esc(lbCorta(x.t, 120))}<br><small>${x.w.length ? `Coincide con: ${x.w.map(w => `«${esc(w)}»`).join(", ")}, del tema o los saberes elegidos, dentro de los NAP de este espacio y este año.` : "Corresponde al eje de este espacio y este año."}</small></li>`).join("")}</ul><p class="hint">Es una sugerencia de Lapacho, no una selección oficial. Revisá el documento y quedate con los que correspondan.</p></details>` : ""}</div>`);
+}
+
+/* ---------- Arranque de la versión 44 ---------- */
+function init54(){
+  try { const s = load(); if (s && s.ped) state.ped = JSON.parse(JSON.stringify(s.ped)); } catch (e) { logSilencioso(e); }
+  pedEstado();
+  try { bindGD54(); } catch (e) { registrarError("init54.gd", e); }
+  try { prepararRespaldo54(); } catch (e) { registrarError("init54.resp", e); }
+  try { bindPedagogia(); } catch (e) { registrarError("init54.ped", e); }
+  try { prepararPrivacidad(); bindPrivacidadIA(); } catch (e) { registrarError("init54.ia", e); }
+  try { avisoVersionNueva(); } catch (e) { registrarError("init54.version", e); }
+  try { renderPanel(); } catch (e) { logSilencioso(e); }
+  setTimeout(() => { ldbIniciar(); }, navigator.webdriver ? 0 : 1500);
+}
+function prepararPrivacidad(){
+  if (!$("privia")) document.body.insertAdjacentHTML("beforeend", `<dialog class="lib chico" id="privia" aria-labelledby="privia-t"><div class="lib-in"><div class="lib-head"><h2 id="privia-t">Privacidad e IA</h2><button type="button" class="linkbtn" data-cerrar="privia">Cerrar</button></div><div id="aj-ia-box"></div></div></dialog>`);
+  const pin = $("btn-pin");
+  if (pin && !$("btn-privia")) pin.insertAdjacentHTML("afterend", `<button type="button" class="aj-item" id="btn-privia"><b>Privacidad e IA</b><small>Qué se envía a Claude y cómo se protegen los datos</small></button>`);
+  const sm = pin && pin.querySelector("small"); if (sm) sm.textContent = "Bloquea la pantalla; no cifra los datos";
+  const b = $("btn-privia"); if (b) b.addEventListener("click", () => { $("aj-ia-box").innerHTML = htmlPrivacidadIA(); abrirDialogo("privia"); });
+}
+function bindPrivacidadIA(){
+  document.addEventListener("change", e => {
+    const c = e.target.closest("[data-iapref]"); if (!c) return;
+    const k = c.dataset.iapref;
+    if (k === "iaOff"){ prefSet("iaOff", c.checked); if (c.checked){ caps.sample = null; } else if (caps.inClaude){ initCaps(); } try { updateImgHint(); } catch (err) { logSilencioso(err); } toast(c.checked ? "Listo: Lapacho funciona sin IA. Los botones de Claude no aparecen." : "Las funciones con IA vuelven a estar disponibles."); const box = $("aj-ia-box"); if (box) box.innerHTML = htmlPrivacidadIA(); }
+    else if (k === "iaTextoOk") prefSet("iaTextoOk", c.checked ? 1 : 0);
+  });
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -21247,7 +22316,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
