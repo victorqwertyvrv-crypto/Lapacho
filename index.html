@@ -10,6 +10,8 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="lapacho-config.js"></script>
 <style>body{margin:0}
+:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+body{margin:0}
 
 /* Herramienta de trabajo: formulario a la izquierda y la hoja de la planificación a la derecha; en el teléfono se alternan con un selector. */
 :root{
@@ -1861,6 +1863,13 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
   .doc-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
   #btn-docx{grid-column:1/-1;order:-1;padding:11px 14px}
 }
+.de-lista,.lc-perd{list-style:none;margin:6px 0 10px;padding:0;display:grid;gap:6px}
+.de-lista li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.de-lista li span{display:flex;flex-direction:column;min-width:0}
+.de-lista li small{color:var(--muted)}
+.lc-perd li{padding:4px 0;border-bottom:1px solid var(--line)}
+.td-clases li.td-conrep{grid-template-columns:auto minmax(0,1fr) auto auto}
+@media (max-width:640px){.td-clases li.td-conrep{grid-template-columns:1fr 1fr}.td-clases li.td-conrep>.td-h,.td-clases li.td-conrep>.td-c{grid-column:1/-1}.td-clases li.td-conrep .td-rep,.td-clases li.td-conrep .btn{grid-column:auto;min-height:44px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation-duration:2s!important}}
 </style>
 </head>
@@ -1897,6 +1906,7 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
           <button type="button" role="menuitem" id="btn-feria"><b>Feria de ciencias</b><small>Proyecto, informe, carpeta de campo, registro pedagógico y stand</small></button>
           <button type="button" role="menuitem" id="btn-muestra"><b>Muestra de la escuela</b><small>Proyecto, fichas de stand, invitación, valoración y lista del día</small></button>
           <button type="button" role="menuitem" id="btn-conv"><b>Convivencia: qué hacer</b><small>Cómo actuar y a quién acudir ante cada situación, según los acuerdos de convivencia</small></button>
+          <button type="button" role="menuitem" id="btn-diasesc"><b>Días sin clases de tu escuela</b><small>Asuetos y jornadas institucionales: Lapacho los saltea al contar tus clases</small></button>
           <button type="button" role="menuitem" id="btn-salidas"><b>Salidas educativas</b><small>Autorizaciones y planilla del día</small></button>
           <button type="button" role="menuitem" id="btn-actos"><b>Actos y efemérides</b><small>Calendario y guion del acto</small></button>
           <button type="button" role="menuitem" id="btn-actas"><b>Actas de reunión</b><small>Con familias, de área o institucionales</small></button>
@@ -2379,6 +2389,14 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
     <div class="lib-in">
       <div class="lib-head"><h2 id="conv-t">Convivencia: qué hacer</h2><button type="button" class="linkbtn" data-cerrar="conv">Cerrar</button></div>
       <div id="cv-panel"></div>
+    </div>
+  </dialog>
+
+  <dialog class="lib bancodlg" id="diasesc" aria-labelledby="diasesc-t">
+    <div class="lib-in">
+      <div class="lib-head"><h2 id="diasesc-t">Días sin clases de tu escuela</h2><button type="button" class="linkbtn" data-cerrar="diasesc">Cerrar</button></div>
+      <p class="hint">Cargá los asuetos, las jornadas institucionales y los días en que tu escuela no tiene clases. Lapacho los saltea al poner las fechas de una secuencia, al contar los días de clase que quedan y al dejar actividades para cuando no estás. Los asuetos tampoco cuentan como días hábiles en las licencias. Se guardan en este dispositivo y entran en la copia de seguridad.</p>
+      <div id="de-panel"></div>
     </div>
   </dialog>
 
@@ -4191,7 +4209,8 @@ const CAL = {
   },
   /* 2027: el Ministerio de Educación de Tucumán todavía no publicó el calendario escolar (inicio, receso y cierre).
      Feriados nacionales según la Ley 27.399 (inamovibles y trasladables con su regla de traslado) y el 24/9 provincial.
-     Faltan los días no laborables con fines turísticos, que fija un decreto. */
+     Faltan los días no laborables con fines turísticos, que fija un decreto (sin publicar al 1/11/2026).
+     El 20/11/2027 cae sábado: el Decreto 614/2025 permite trasladarlo; todavía no se decidió. */
   2027: {
     provisorio:true,
     feriados:{
@@ -4213,7 +4232,7 @@ const isoDe = d => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDat
 const fechaDe = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || ""); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
 const dm = d => `${d.getDate()}/${d.getMonth() + 1}`;
 const diaCorto = d => `${DIAS_SEM[d.getDay()]} ${dm(d)}`;
-function estadoDia(d){
+function estadoDiaBase(d){
   if (d.getDay() === 0 || d.getDay() === 6) return "fin de semana";
   const c = CAL[d.getFullYear()];
   if (!c) return null;
@@ -4802,6 +4821,14 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-01", fecha:"2026-11-01", items:[
+    "Nuevo: «Días sin clases de tu escuela» (Herramientas › Para la escuela). Cargás asuetos y jornadas institucionales y Lapacho los saltea al poner las fechas de una secuencia, al contar los días de clase que quedan y al dejar actividades. «Tu día» te los recuerda y podés pasárselos a tus colegas con un archivo.",
+    "Licencias y feriados: la nota de pedido de licencia sale lista para firmar en Word, y si cargaste tu horario ves qué clases perdés, con acceso a la guía para el suplente.",
+    "Muestra de la escuela: «Tu día» te avisa qué toca en cada etapa del cronograma, el cronograma pasa al calendario del celular y hay dos documentos nuevos: los carteles de cada stand en A4 apaisado y la autorización de uso de imagen para las familias.",
+    "En «Tu día», cada clase de hoy con una planificación guardada tiene el botón «Repasar», que abre el libreto de esa clase.",
+    "Mi curso › Cierre: nuevo «Período de acompañamiento» para diciembre y febrero, con los encuentros, los contenidos adeudados repartidos y una planilla de seguimiento.",
+    "Las situaciones para anticipar y los contextos de la clase ahora respetan la materia: una secuencia de energía mecánica ya no trae la masa del pan, ni una de Química la del colectivo que frena."
+  ]},
   {id:"2026-10-31-g", fecha:"2026-10-31", items:[
     "Muestra de la escuela: el apartado de temas para exponer ahora cubre todas las materias, de 1.º a 6.º año. Elegís la materia y el año, y cada saber del diseño trae un tema con qué exponer, la idea que se lleva el visitante, una pregunta para el público y actividades.",
     "Nuevo botón «Sumar todos los temas de este año», que arma de una vez los stands del curso con sus actividades.",
@@ -8946,7 +8973,7 @@ function modeloInformeC(c, aids){
 }
 
 /* ---------- Cierre: estadísticas, recuperación, actas y previas ---------- */
-function htmlCierre(c){
+function htmlCierreBase(c){
   const als = alumnosActivos(c);
   if (!als.length) return vacioLista();
   if (CUR.cierreP == null) CUR.cierreP = periodoActual(c);
@@ -9196,7 +9223,7 @@ function avisosDelDia(){
   av.push(...avisosLegajo(), ...avisosCargos());
   return av.sort((a, b) => a.f.localeCompare(b.f)).slice(0, 7);
 }
-function renderTuDia(){
+function renderTuDiaBase(){
   const box = $("tudia");
   if (!box) return;
   const d = cdatos();
@@ -10103,6 +10130,7 @@ function avisosLegajo(){
   try { av.push(...avisoMemoria()); } catch (e) { logSilencioso(e); }
   try { av.push(...avisosGD()); } catch (e) { logSilencioso(e); }
   try { av.push(...avisosAusencia()); } catch (e) { logSilencioso(e); }
+  try { av.push(...avisosMuestra(), ...avisosDiasEsc()); } catch (e) { logSilencioso(e); }
   return av;
 }
 function modeloLegajo(){
@@ -15018,7 +15046,7 @@ function contextoLocal(area, pesos, I, tema, caso){
   const R = lugarRefs(I);
   const rc = new Set(raices(caso || "").filter(r => !LB_GEN.has(r)));
   const adelanta = c => rc.size && raices(ctxRellenar(c.ver + " " + c.q, R)).filter(r => rc.has(r)).length >= 2;
-  const cand = CONTEXTOS.filter(c => c.a.includes(area) && (!c.z || c.z.includes(I.zona)) && (!c.sinZ || !c.sinZ.includes(I.zona)) && !adelanta(c))
+  const cand = CONTEXTOS.filter(c => c.a.includes(area) && ctxDiscOk(c) && (!c.z || c.z.includes(I.zona)) && (!c.sinZ || !c.sinZ.includes(I.zona)) && !adelanta(c))
     .map(c => ({c, s:napPuntaje({r:[...new Set(raices(c.k))]}, pesos)})).filter(x => x.s > 0).sort((a, b) => b.s - a.s);
   if (cand.length){ const c = cand[0].c; return {ver:contraer(ctxRellenar(c.ver, R)), q:contraer(ctxRellenar(c.q, R)), cts:contraer(ctxRellenar(c.cts, R))}; }
   return {ver:contraer(`una foto o un video corto de un lugar conocido de ${R.lugar} donde ${taVerbo(tema, "aparezca", "aparezcan")} ${temaArt(tema)}`), q:contraer(`¿Qué ven en esta imagen que tenga que ver con ${temaArt(tema)}?`), cts:""};
@@ -15128,14 +15156,15 @@ const ANTICIPA = [
   {k:"pendulo oscilacion periodo", q:"Si hamacamos a un chico liviano y a uno pesado en la misma hamaca, ¿cuál va y vuelve más rápido?", exp:"se arma un péndulo con una tuerca y un hilo y se mide el tiempo de diez oscilaciones cambiando la longitud y la masa"},
   {k:"resorte elasticidad hooke", q:"Si colgamos el doble de peso de un resorte, ¿se estira el doble?", exp:"se cuelgan monedas de un resorte o de una bandita elástica y se mide el estiramiento con una regla"}
 ];
+const ANT_FIS_N = ANTICIPA.length;
 /* Coincidencia por palabra completa (singular o plural), para no confundir «potencia» con «potencial» */
 const palabrasDe = x => norm(x || "").split(/[^a-z0-9ñ]+/).filter(w => w.length >= 3 && !NAP_STOP.has(w));
 const mismaPalabra = (a, b) => a === b || a === b + "s" || b === a + "s" || a === b + "es" || b === a + "es";
 function puntajePalabras(terms, k){
-  const A = palabrasDe(terms.join(" ")), B = palabrasDe(k);
+  const A = [...new Set(palabrasDe(terms.join(" ")))], B = palabrasDe(k);
   return A.filter(a => B.some(b => mismaPalabra(a, b))).length;
 }
-function anticipaDe(terms){
+function anticipaDeBase(terms){
   const a = ANTICIPA.map(x => ({x, s:puntajePalabras(terms, x.k)})).filter(x => x.s > 0).sort((a, b) => b.s - a.s)[0];
   return a ? a.x : null;
 }
@@ -16014,11 +16043,11 @@ function ctxClase(ctx, items){
   const tema = ctx.tema || "";
   const pesos = pesosDe([[tema, 3], [(items || []).join(" "), 1]]);
   const I = lugarInfo(val("lugar") || val("institucion"));
-  const c = contextoLocal(area, pesos, I, tema, "");
+  CTX_MAT.m = ctx.materia || ""; let c; try { c = contextoLocal(area, pesos, I, tema, ""); } finally { CTX_MAT.m = null; }
   const generico = /^una foto o un video corto de un lugar conocido/.test(c.ver);
   const terms = (items || []).filter(x => !esProced(x)).map(x => lcFirst(sinPunto(x)));
   const T = terms.length ? terms : [tema];
-  const sim = (tema && simsDe(ctx.materia, [tema])[0]) || simsDe(ctx.materia, T)[0] || null, antic = area === "cn" ? anticipaDe([tema, ...T]) : null, cat = (tema && recursoCatalogo(ctx.materia, [tema], false)) || recursoCatalogo(ctx.materia, T, false);
+  const sim = (tema && simsDe(ctx.materia, [tema])[0]) || simsDe(ctx.materia, T)[0] || null, antic = area === "cn" ? anticipaDe([tema, ...T], ctx.materia || "") : null, cat = (tema && recursoCatalogo(ctx.materia, [tema], false)) || recursoCatalogo(ctx.materia, T, false);
   return {area, local:generico ? null : c, prob:area === "mat" ? matProbDe([tema, ...T]) : "", sim, cat, antic, an:analogiaDe([tema, ...T]), terms:T, lugar:I.lugar};
 }
 /* Bibliografía base: documentos oficiales y recursos que la planificación efectivamente usa */
@@ -16468,7 +16497,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "48 (31/10/2026)";
+const LAPACHO_VERSION = "49 (01/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18469,7 +18498,7 @@ const licTodas = () => [...LICENCIAS, ...LIC_OTRAS];
 const licPorId = id => licTodas().find(l => l.id === id) || null;
 const lcMas = (iso, n) => { const d = fechaDe(iso); d.setDate(d.getDate() + n); return isoDe(d); };
 const lcDia = iso => diaCorto(fechaDe(iso));
-function lcFeriado(iso){ const c = CAL[+iso.slice(0, 4)]; return (c && c.feriados && c.feriados[iso]) || ""; }
+function lcFeriadoBase(iso){ const c = CAL[+iso.slice(0, 4)]; return (c && c.feriados && c.feriados[iso]) || ""; }
 function lcReceso(iso){ const c = CAL[+iso.slice(0, 4)]; return !!(c && c.receso && iso >= c.receso[0] && iso <= c.receso[1]); }
 const lcFinde = d => d.getDay() === 0 || d.getDay() === 6;
 const lcHabil = d => !lcFinde(d) && !lcFeriado(isoDe(d));
@@ -18596,7 +18625,7 @@ function lcTiposLibres(r){
   const L = ["fin de semana", "feriado", "receso", "días sin clases"].filter(x => t.has(x));
   return L.length > 1 ? L.slice(0, -1).join(", ") + " y " + L.slice(-1) : L[0] || "días sin clases";
 }
-function htmlCalcLic(r){
+function htmlCalcLicBase(r){
   const l = r.l, gana = r.bloque.total - r.ocupa;
   const uno = r.ini === r.hasta;
   return `<div class="lc-card">
@@ -20790,7 +20819,7 @@ function modeloMuestraBase(doc){
       {h:"Evaluación", body:"Cada docente valora la exposición de su curso con la planilla de valoración (dominio del tema, claridad, vocabulario, organización del stand y trabajo en equipo). Después de la muestra, cada curso conversa qué salió bien y qué cambiaría, y la organización deja por escrito lo aprendido para la próxima edición."}
     ], firmas:[[m.resp, "Docente responsable"], ["", "Dirección"]]};
 }
-const MU_DOCS = [["proyecto", "Proyecto para la dirección"], ["fichas", "Fichas de cada stand"], ["invitacion", "Invitación a las familias"], ["valoracion", "Planilla de valoración"], ["dia", "Lista para el día"]];
+const MU_DOCS = [["proyecto", "Proyecto para la dirección"], ["fichas", "Fichas de cada stand"], ["invitacion", "Invitación a las familias"], ["valoracion", "Planilla de valoración"], ["dia", "Lista para el día"], ["imagen", "Autorización de imagen"], ["carteles", "Carteles de los stands"]];
 function renderMuestraBase(){
   const box = $("mu-panel"); if (!box) return;
   const m = muDatos();
@@ -20969,7 +20998,7 @@ function renderMuestraV46(){
   renderIdeasMu();
 }
 function muPrev(){ muPrevBase(); renderIdeasMu(); }
-function modeloMuestra(doc){
+function modeloMuestra48(doc){
   const M = modeloMuestraBase(doc), S = muStands(muDatos().stands);
   if (doc === "fichas" && S.length){
     M.secs.forEach((sec, i) => {
@@ -22934,7 +22963,7 @@ const MU_ESP = {
 const MU_ANIOS = [["7", "1.º año"], ["8", "2.º año"], ["9", "3.º año"], ["10", "4.º año"], ["11", "5.º año"], ["12", "6.º año"], ["co", "Ciclo Orientado (NAP)"]];
 const muActPorId = id => MU_ACT.find(x => x.id === id) || MU_GEN.find(x => x.id === id) || null;
 function renderMuEsp(){ const b = $("mu-esp-b"); if (b) b.innerHTML = htmlMuEsp(); }
-function renderMuestra(){
+function renderMuestra48(){
   renderMuestraV46();
   const ideas = $("mu-ideas");
   if (ideas && !$("mu-esp")) ideas.insertAdjacentHTML("beforebegin", `<details class="mu-ideas mu-esp" id="mu-esp"><summary><h3 class="lic-h">Muestra por materia: temas para exponer y actividades</h3></summary><div id="mu-esp-b"></div></details>`);
@@ -23559,7 +23588,406 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); } finally { ocultarSplash(); }
+/* ============================================================
+   Versión 49 (1/11/2026)
+   - Situaciones para anticipar y contextos locales de la materia correcta
+     (solo cuentan las palabras propias del tema).
+   - Días sin clases de la escuela (asuetos y jornadas institucionales),
+     que usan las secuencias, los días de clase que quedan, las actividades
+     para cuando no estás y, si es asueto, las licencias. Se guardan en las
+     preferencias (diasEsc) y entran en la copia de seguridad.
+   - Licencias: nota de pedido lista para firmar y qué clases se pierden.
+   - Muestra: aviso en «Tu día» por etapa, calendario, carteles de los
+     stands en A4 apaisado y autorización de uso de imagen.
+   - «Tu día»: repasar la clase de hoy con un toque.
+   - Mi curso › Cierre: período de acompañamiento (diciembre y febrero).
+   ============================================================ */
+
+/* ---------- 1. Bancos de la materia correcta ---------- */
+var ANT_BIO_RE = /celula|fotosintesis|respiracion|levadura|ecosistema|digestion|nutricion|herencia|organismo|evolucion|microorganismo|tejido|reproduccion|planta/;
+function antDisc(x, i){ if (i < ANT_FIS_N) return "fis"; return ANT_BIO_RE.test(x.k) ? "bio" : "qui"; }
+var DISC_DE_MAT = {fisica:"fis", quimica:"qui", biologia:"bio"};
+function anticipaDe(terms, mat){
+  let m = mat; if (m == null){ try { m = val("materia"); } catch (e) { logSilencioso(e); m = ""; } }
+  const d = DISC_DE_MAT[m || ""] || "";
+  const B = ANTICIPA.filter((x, i) => !d || antDisc(x, i) === d);
+  return bancoOrden(B, (terms || []).filter(Boolean))[0] || null;
+}
+/* Contextos locales propios de Física: no se proponen en Química ni en Biología */
+var CTX_FIS_RE = /inercia|circuito|onda|planeta|rayo|hidroelectrica|arquimedes/;
+var CTX_BIO_RE = /fotosintesis/;
+var CTX_MAT = {m:null};
+function ctxDiscOk(c){
+  let m = CTX_MAT ? CTX_MAT.m : null; if (m == null){ try { m = val("materia"); } catch (e) { logSilencioso(e); m = ""; } }
+  const d = DISC_DE_MAT[m || ""]; if (!d) return true;
+  if (CTX_FIS_RE.test(c.k)) return d === "fis";
+  if (CTX_BIO_RE.test(c.k)) return d === "bio";
+  return true;
+}
+
+/* ---------- 2. Días sin clases de la escuela ---------- */
+var DE_TIPOS = {asueto:"Asueto: no se trabaja", jornada:"Jornada institucional: se trabaja, sin clases", sinclase:"Sin clases por otro motivo"};
+var DE_TXT = {asueto:"asueto", jornada:"jornada institucional", sinclase:"sin clases en la escuela"};
+var DE_CACHE;
+function deLeer(){
+  if (!DE_TIPOS) return [];
+  if (!DE_CACHE) DE_CACHE = {raw:undefined, L:[]};
+  let raw = null; try { raw = localStorage.getItem(PREF_KEY); } catch (e) { logSilencioso(e); }
+  if (raw === DE_CACHE.raw) return DE_CACHE.L;
+  let L = [];
+  try { const p = JSON.parse(raw || "{}"); L = Array.isArray(p.diasEsc) ? p.diasEsc.filter(x => x && /^\d{4}-\d{2}-\d{2}$/.test(x.d || "") && DE_TIPOS[x.k]) : []; } catch (e) { logSilencioso(e); }
+  DE_CACHE = {raw, L}; return L;
+}
+function deHasta(x){ return x.h && x.h >= x.d ? x.h : x.d; }
+function deDelDia(iso){ return deLeer().find(x => iso >= x.d && iso <= deHasta(x)) || null; }
+function deTexto(x){ return x.t ? x.t : (DE_TXT || {})[x.k] || "sin clases"; }
+function estadoDia(d){
+  const b = estadoDiaBase(d); if (b) return b;
+  const x = deDelDia(isoDe(d)); return x ? deTexto(x) : null;
+}
+function lcFeriado(iso){ const f = lcFeriadoBase(iso); if (f) return f; const x = deDelDia(iso); return x && x.k === "asueto" ? deTexto(x) : ""; }
+var deLimpio = s => String(s || "").replace(/[<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 60);
+function deRango(x){ const a = fechaDe(x.d), h = deHasta(x); return h === x.d ? diaCorto(a) : `${diaCorto(a)} al ${diaCorto(fechaDe(h))}`; }
+function renderDE(){
+  const box = $("de-panel"); if (!box) return;
+  const hoy = hoyIso(), L = [...deLeer()].sort((a, b) => a.d.localeCompare(b.d));
+  const prox = L.filter(x => deHasta(x) >= hoy), pas = L.filter(x => deHasta(x) < hoy);
+  const fila = x => `<li><span><b>${esc(deRango(x))}</b> · ${esc(deTexto(x))}<small>${esc(DE_TIPOS[x.k])}</small></span><button type="button" class="btn btn-sm" data-dequitar="${esc(x.id)}" aria-label="Quitar ${esc(deRango(x))}">Quitar</button></li>`;
+  box.innerHTML = `<div class="cfg-grid">
+      <div class="f"><label for="de-desde">Día</label><input id="de-desde" type="date"></div>
+      <div class="f"><label for="de-hasta">Hasta (si es más de un día)</label><input id="de-hasta" type="date"></div>
+      <div class="f"><label for="de-tipo">Qué es</label><select id="de-tipo">${Object.entries(DE_TIPOS).map(([k, t]) => `<option value="${k}">${esc(t)}</option>`).join("")}</select></div>
+      <div class="f"><label for="de-motivo">Motivo (opcional)</label><input id="de-motivo" autocomplete="off" maxlength="60" placeholder="Ej.: fiesta patronal, jornada de ESI"></div>
+    </div>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-de="agregar">Agregar</button>${L.length ? `<button type="button" class="btn btn-sm" data-de="ics">Pasar al calendario</button><button type="button" class="btn btn-sm" data-de="exp">Pasar a un colega</button>` : ""}<button type="button" class="btn btn-sm" data-de="imp">Sumar desde un archivo</button><input type="file" id="de-imp" accept=".txt,.json,text/plain,application/json" hidden aria-label="Archivo con días sin clases"></div>
+    <p class="de-msg hint" id="de-msg" role="status" aria-live="polite"></p>
+    ${prox.length ? `<h3 class="lic-h">Próximos</h3><ul class="de-lista">${prox.map(fila).join("")}</ul>` : `<p class="hint">Todavía no cargaste días sin clases de tu escuela.</p>`}
+    ${pas.length ? `<details class="cur-sub"><summary>Ya pasaron (${pas.length})</summary><ul class="de-lista">${pas.map(fila).join("")}</ul></details>` : ""}`;
+}
+function deAgregar(){
+  const d = $("de-desde").value, h = $("de-hasta").value, k = $("de-tipo").value, t = deLimpio($("de-motivo").value), msg = $("de-msg");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d)){ msg.textContent = "Elegí el día."; $("de-desde").focus(); return; }
+  if (h && h < d){ msg.textContent = "La fecha «hasta» tiene que ser posterior al día."; $("de-hasta").focus(); return; }
+  if (h && (fechaDe(h) - fechaDe(d)) / 864e5 > 60){ msg.textContent = "Cargá como mucho 60 días seguidos."; return; }
+  const L = deLeer().slice();
+  if (L.some(x => !(deHasta(x) < d || x.d > (h || d)))){ msg.textContent = "Ese día ya está cargado. Quitalo primero si querés cambiarlo."; return; }
+  L.push({id:nuevoIdC("de"), d, h:h && h !== d ? h : "", k:DE_TIPOS[k] ? k : "sinclase", t});
+  prefSet("diasEsc", L);
+  renderDE(); try { renderTuDia(); } catch (e) { logSilencioso(e); }
+  const m2 = $("de-msg"); if (m2) m2.textContent = "Listo. Lapacho ya no cuenta ese día como día de clases.";
+}
+async function deIcs(){
+  /* icsArchivo arma eventos de un día: los de varios días se pasan uno por día */
+  const todos = [];
+  deLeer().forEach(x => { for (let iso = x.d, k = 0; iso <= deHasta(x) && k < 61; iso = lcMas(iso, 1), k++) if (fechaDe(iso).getDay() % 6) todos.push({uid:`esc-${x.id}-${iso}`, f:iso, t:`Sin clases: ${deTexto(x)}`, desc:DE_TIPOS[x.k]}); });
+  if (!todos.length){ toast("No hay días de semana para pasar al calendario."); return; }
+  await guardarArchivo("dias-sin-clases.ics", new Blob([icsArchivo(todos)], {type:"text/calendar"}), "Calendario descargado. Abrilo con Google Calendar o el calendario del celular.");
+}
+/* Compartir los días con colegas de la misma escuela: un archivo chico, sin datos personales */
+async function deExportar(){
+  const L = deLeer().map(x => ({d:x.d, h:x.h || "", k:x.k, t:x.t || ""}));
+  const txt = JSON.stringify({app:"Lapacho", tipo:"dias-sin-clases", version:1, dias:L}, null, 1);
+  await guardarArchivo("dias-sin-clases-de-la-escuela.txt", new Blob([txt], {type:"text/plain"}), "Archivo descargado. Mandáselo a tus colegas: lo suman en «Días sin clases de tu escuela › Sumar desde un archivo».");
+}
+async function deImportar(file){
+  const msg = $("de-msg");
+  try {
+    if (!file || file.size > 200000) throw new Error("tam");
+    const o = JSON.parse(await file.text());
+    if (!o || o.tipo !== "dias-sin-clases" || !Array.isArray(o.dias)) throw new Error("tipo");
+    const L = deLeer().slice(); let n = 0;
+    o.dias.slice(0, 200).forEach(x => {
+      if (!x || !/^\d{4}-\d{2}-\d{2}$/.test(x.d || "") || !DE_TIPOS[x.k]) return;
+      const h = /^\d{4}-\d{2}-\d{2}$/.test(x.h || "") && x.h > x.d && (fechaDe(x.h) - fechaDe(x.d)) / 864e5 <= 60 ? x.h : "";
+      if (L.some(y => !(deHasta(y) < x.d || y.d > (h || x.d)))) return;
+      L.push({id:nuevoIdC("de"), d:x.d, h, k:x.k, t:deLimpio(x.t)}); n++;
+    });
+    prefSet("diasEsc", L); renderDE(); try { renderTuDia(); } catch (e) { logSilencioso(e); }
+    const m2 = $("de-msg"); if (m2) m2.textContent = n ? `Se ${n === 1 ? "sumó 1 día" : `sumaron ${n} días`}. Los que ya tenías no se repiten.` : "No había días nuevos para sumar.";
+  } catch (e) {
+    logSilencioso(e);
+    if (msg) msg.textContent = "Ese archivo no es una lista de días sin clases de Lapacho. No se cambió nada.";
+  }
+}
+function abrirDE(){ renderDE(); abrirDialogo("diasesc"); }
+function avisosDiasEsc(){
+  const hoy = hoyIso(), lim = lcMas(hoy, 7);
+  return deLeer().filter(x => x.d <= lim && deHasta(x) >= hoy).map(x => ({f:x.d < hoy ? hoy : x.d, act:"diasesc", t:`${x.d <= hoy ? "Hoy" : dm(fechaDe(x.d))}: ${deTexto(x)}. No hay clases en tu escuela.`}));
+}
+
+/* ---------- 3. Licencias: nota de pedido y clases que se pierden ---------- */
+function lcClasesPerdidas(r){
+  const out = [], cursos = (cdatos().cursos || []).filter(c => (c.horario || []).length);
+  if (!cursos.length) return out;
+  for (let iso = r.ini, k = 0; iso <= r.hasta && k < 400; iso = lcMas(iso, 1), k++){
+    const d = fechaDe(iso); if (estadoDia(d)) continue;
+    cursos.forEach(c => (c.horario || []).filter(h => +h.dia === d.getDay()).forEach(h => out.push({iso, c, h})));
+  }
+  return out.sort((a, b) => a.iso.localeCompare(b.iso) || (a.h.ini || "").localeCompare(b.h.ini || ""));
+}
+function htmlClasesPerdidas(r){
+  const cursos = (cdatos().cursos || []).filter(c => (c.horario || []).length);
+  if (!cursos.length) return "";
+  const P = lcClasesPerdidas(r);
+  if (!P.length) return `<h3 class="lic-h">Qué clases perdés</h3><p class="hint">Según tu horario, en esos días no tenés clases.</p>`;
+  const L = P.slice(0, 30).map(x => `<li><b>${esc(lcDia(x.iso))}</b>${x.h.ini ? ` · ${esc(x.h.ini)}` : ""} · ${esc(x.c.curso)} · ${esc(nombreMateria(x.c.materia))}</li>`).join("");
+  return `<h3 class="lic-h">Qué clases perdés (${P.length})</h3><ul class="lc-perd">${L}</ul>${P.length > 30 ? `<p class="hint">Y ${P.length - 30} más.</p>` : ""}
+    <div class="cur-bar">${$("btn-suplente") ? `<button type="button" class="btn btn-sm" data-lcsupl="">Guía para el suplente</button>` : ""}</div>
+    <p class="hint">Según tu horario de Mi curso, sin contar feriados, receso ni los días sin clases de tu escuela.</p>`;
+}
+function htmlCalcLic(r){
+  const h = htmlCalcLicBase(r).replace('<div class="cur-bar">', '<div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-lcnota="">Nota de pedido (Word)</button>');
+  let extra = ""; try { extra = htmlClasesPerdidas(r); } catch (e) { logSilencioso(e); }
+  return extra ? h.replace(/<\/div>\s*$/, extra + "</div>") : h;
+}
+function nombreLicNota(l){ return lcFirst(String(l.n || "licencia").replace(/^licencia\s+(por\s+)?/i, "").replace(/\s*\(.*?\)\s*$/, "")); }
+function modeloNotaLic(r){
+  const l = r.l, doc = val("docente") || "", cursos = cdatos().cursos || [];
+  const escuela = (cursos.find(c => c.escuela) || {}).escuela || val("institucion") || "";
+  const uno = r.ini === r.hasta, unidad = r.n === 1 ? (l.u === "corridos" ? "día corrido" : l.u === "habiles" ? "día hábil" : "día") : U_TXT[l.u] || "días";
+  const cuando = uno ? `el día ${fechaCarta(r.ini)}` : `desde el ${fechaCarta(r.ini)} hasta el ${fechaCarta(r.hasta)} inclusive`;
+  const P = (() => { try { return lcClasesPerdidas(r); } catch (e) { logSilencioso(e); return []; } })();
+  const cursosAf = [...new Set(P.map(x => x.c.curso).filter(Boolean))];
+  const cuerpo = [SALUDO_FORMAL,
+    `Me dirijo a usted, en mi carácter de docente de este establecimiento, a fin de solicitar licencia por ${nombreLicNota(l)}${l.art ? `, según el ${l.art} del régimen de licencias docentes` : ""}, ${cuando}, por un total de ${r.n} ${unidad}.`,
+    l.id === "sangre" ? "Presentaré el certificado del banco de sangre que acredita la donación." : "Oportunamente presentaré la documentación respaldatoria que corresponda.",
+    cursosAf.length ? `Durante esos días dejaré previstas las actividades para ${cursosAf.length === 1 ? "el curso" : "los cursos"} a mi cargo (${cursosAf.join(", ")}), a fin de que puedan continuar con su trabajo.` : "",
+    "Sin otro particular, saludo a usted atentamente."].filter(Boolean).join("\n\n");
+  return {inst:doc || "Documento personal", titulo:"Nota de pedido de licencia", subtitulo:l.n, faltaSub:"", datos:[],
+    secs:[...seccionesCarta({lugarFecha:lineaLugarFecha(escuela), dest:["Señor/a Director/a", escuela || "____________________________", "S/D"], ref:`Solicitud de licencia por ${nombreLicNota(l)}`, cuerpo}),
+      {h:"", sinH:true, der:true, body:`______________________________\n${doc || "Firma y aclaración"}\nDNI: ____________________`},
+      {h:"Constancia de recepción", body:"Recibida el ____/____/______ a las ______ h.\nFirma y sello: ______________________"}],
+    firmas:null};
+}
+
+/* ---------- 4. Muestra: avisos, calendario, carteles y autorización de imagen ---------- */
+function muEtapas(m){
+  const base = muCronograma({fecha:""});
+  return base.map(([q, t]) => { const a = /(\d+) días antes/.exec(q), d = /(\d+) días después/.exec(q); const off = a ? -a[1] : d ? +d[1] : 0; return {off, iso:m.fecha ? lcMas(m.fecha, off) : "", t}; });
+}
+function avisosMuestra(){
+  const m = muDatos(); if (!m.fecha || !fechaDe(m.fecha)) return [];
+  const hoy = hoyIso(), falta = Math.round((fechaDe(m.fecha) - fechaDe(hoy)) / 864e5);
+  if (falta > 30 || falta < -3) return [];
+  const E = muEtapas(m), sig = E.find(e => e.iso >= hoy);
+  if (!sig) return [];
+  const cuando = falta === 0 ? "es hoy" : falta === 1 ? "es mañana" : falta > 0 ? `faltan ${falta} días` : "ya pasó";
+  const paso = sig.iso === hoy ? "Hoy" : `Para el ${dm(fechaDe(sig.iso))}`;
+  return [{f:sig.iso, act:"muestra", t:`${muNombre(m)}: ${cuando}. ${paso}: ${lcFirst(sinPunto(sig.t))}.`}];
+}
+async function muIcs(){
+  const m = muDatos(); if (!m.fecha){ toast("Primero poné la fecha de la muestra."); const f = $("mu-fecha"); if (f) f.focus(); return; }
+  const ev = muEtapas(m).map((e, i) => ({uid:`muestra-${m.fecha}-${i}`, f:e.iso, t:e.off === 0 ? muNombre(m) : `${muNombre(m)}: ${lcFirst(sinPunto(e.t))}`, desc:e.t, aviso:true, ...(e.off === 0 && m.hIni ? {hora:m.hIni, horaFin:m.hFin || m.hIni} : {})}));
+  await guardarArchivo("muestra-de-la-escuela.ics", new Blob([icsArchivo(ev)], {type:"text/calendar"}), "Cronograma descargado. Abrilo con Google Calendar o el calendario del celular: trae un aviso el día antes de cada etapa.");
+}
+function muCarteles(){
+  const m = muDatos();
+  return muStands(m.stands).filter(s => s.tema || s.curso);
+}
+function modeloMuestra(doc){
+  const m = muDatos();
+  if (doc === "imagen"){
+    const esc0 = (cdatos().cursos.find(c => c.escuela) || {}).escuela || val("institucion") || "";
+    const cuando = m.fecha ? `el ${fechaCarta(m.fecha)}` : "el día de la muestra";
+    const cuerpo = [`Por la presente, la escuela solicita autorización para tomar fotografías y videos de su hijo o hija durante la ${lcFirst(muNombre(m))}, que se realizará ${cuando}${m.lugar ? ` en ${m.lugar}` : ""}.`,
+      "Las imágenes se usarán solo con fines educativos e institucionales: carteleras de la escuela, el registro del proyecto y los canales oficiales de comunicación de la institución. No se publicarán junto con el nombre completo ni con otros datos personales del estudiante, y no se cederán a terceros.",
+      "La autorización es voluntaria y puede retirarse en cualquier momento, avisando por escrito a la escuela. Si no se autoriza, el estudiante participa igual de la muestra y se cuida que no aparezca en las imágenes.",
+      "Marco: derecho a la imagen (art. 53 del Código Civil y Comercial de la Nación) y protección de los datos personales (Ley 25.326)."].join("\n\n");
+    return {inst:esc0, titulo:"Autorización de uso de imagen", subtitulo:muNombre(m), faltaSub:"", datos:[],
+      secs:[...seccionesCarta({lugarFecha:lineaLugarFecha(esc0), dest:["Señores padres, madres o responsables", "S/D"], ref:"Autorización de uso de imagen", cuerpo}),
+        {h:"", sinH:true, der:true, body:`______________________________\n${m.resp || "Responsable de la organización"}`},
+        {h:"Autorización de la familia", body:"Yo, ______________________________________, DNI ______________, responsable de ______________________________________, del curso ________, \n[  ] autorizo     [  ] no autorizo\na que se tomen y usen fotografías y videos de mi hijo o hija en la muestra, en las condiciones indicadas en esta nota.\nFirma: ______________________   Aclaración: ______________________   Fecha: ____/____/______"}],
+      firmas:null};
+  }
+  if (doc === "carteles"){
+    const S = muCarteles();
+    return {inst:"", titulo:"Carteles de los stands", subtitulo:muNombre(m), faltaSub:"", datos:[],
+      secs:S.length ? S.map((s, i) => ({h:s.tema || s.curso, pageBreak:i > 0, body:[s.curso, s.resp].filter(Boolean).join(" · ") || " "}))
+        : [{h:"Todavía no hay stands", body:"Escribí un stand por línea (curso · tema · docente) y acá aparece un cartel por stand, en hoja A4 apaisada, para imprimir y pegar en cada mesa."}],
+      firmas:null};
+  }
+  return modeloMuestra48(doc);
+}
+var xmlTxt = t => String(t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+function muTamTema(t){ const n = String(t || "").length; return n <= 22 ? 120 : n <= 40 ? 96 : n <= 70 ? 72 : 56; }
+async function muCartelesDocx(){
+  const m = muDatos(), S = muCarteles();
+  if (!S.length){ toast("Escribí al menos un stand (curso · tema · docente)."); return; }
+  const files = await docxArchivos({inst:"", titulo:"Carteles", subtitulo:"", datos:[], secs:[{h:"", sinH:true, body:" "}], firmas:null});
+  const W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+  const p = (txt, sz, o = {}) => `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="${o.antes || 0}" w:after="${o.desp || 120}"/></w:pPr><w:r><w:rPr>${o.b ? "<w:b/>" : ""}<w:color w:val="${o.col || "1C1D1B"}"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${xmlTxt(txt)}</w:t></w:r></w:p>`;
+  const salto = `<w:p><w:r><w:br w:type="page"/></w:r></w:p>`;
+  const body = S.map((s, i) => (i ? salto : "") + p(muNombre(m), 36, {col:"555555", antes:1400, desp:600}) + p(s.tema || s.curso, muTamTema(s.tema || s.curso), {b:true, desp:500}) + (s.tema && s.curso ? p(s.curso, 64, {desp:200}) : "") + (s.resp ? p(s.resp, 40, {col:"444444"}) : "")).join("");
+  const docXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<w:document xmlns:w="${W}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>${body}<w:sectPr><w:pgSz w:w="16838" w:h="11906" w:orient="landscape"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="567" w:footer="567" w:gutter="0"/><w:vAlign w:val="center"/></w:sectPr></w:body></w:document>`;
+  const f = files.find(x => x.name === "word/document.xml"); if (f) f.data = docXml;
+  await guardarArchivo("carteles-de-los-stands.docx", zipStore(files), "Carteles descargados: uno por hoja A4 apaisada.");
+}
+async function muCartelesPdf(){
+  const m = muDatos(), S = muCarteles();
+  if (!S.length){ toast("Escribí al menos un stand (curso · tema · docente)."); return; }
+  try {
+    const J = await cargarJsPDF();
+    const doc = new J({unit:"pt", format:"a4", orientation:"landscape"});
+    const W = 841.89, H = 595.28, CW = W - 120;
+    S.forEach((s, i) => {
+      if (i) doc.addPage();
+      doc.setFont("helvetica", "normal"); doc.setFontSize(18); doc.setTextColor(85, 85, 85); doc.text(muNombre(m), W / 2, 80, {align:"center"});
+      const tt = s.tema || s.curso, sz = muTamTema(tt) / 2;
+      doc.setFont("helvetica", "bold"); doc.setFontSize(sz); doc.setTextColor(28, 29, 27);
+      const L = doc.splitTextToSize(tt, CW), alto = L.length * sz * 1.15;
+      let y = Math.max(150, H / 2 - alto / 2 - 20) + sz;
+      doc.text(L, W / 2, y, {align:"center", lineHeightFactor:1.15}); y += alto + 30;
+      doc.setFont("helvetica", "normal");
+      if (s.tema && s.curso){ doc.setFontSize(32); doc.text(s.curso, W / 2, y, {align:"center"}); y += 44; }
+      if (s.resp){ doc.setFontSize(20); doc.setTextColor(68, 68, 68); doc.text(s.resp, W / 2, y, {align:"center"}); }
+    });
+    await guardarArchivo("carteles-de-los-stands.pdf", doc.output("blob"), "Carteles descargados: uno por hoja A4 apaisada.");
+  } catch (e) {
+    registrarError("muCartelesPdf", e, "aviso");
+    toast("Para el PDF hace falta conexión. Descargalos en Word.");
+  }
+}
+function renderMuestra(){
+  renderMuestra48();
+  const bar = document.querySelector("#mu-panel > .cur-bar");
+  if (bar && !bar.querySelector('[data-mu59="ics"]')) bar.insertAdjacentHTML("beforeend", `<button type="button" class="btn btn-sm" data-mu59="ics">Pasar al calendario</button>`);
+}
+
+/* ---------- 5. «Tu día»: repasar la clase de hoy ---------- */
+function planParaRepasar(c){
+  try { const s = claseDeHoy(c), e = libLeer().find(x => x.id === s.planId); return e && ["clase", "secuencia"].includes(e.data.modo) ? e : null; } catch (e) { logSilencioso(e); return null; }
+}
+function renderTuDia(){
+  renderTuDiaBase();
+  try {
+    const ul = document.querySelector("#tudia .td-clases"); if (!ul) return;
+    const cl = clasesDeHoy();
+    [...ul.children].forEach((li, i) => { const x = cl[i]; if (!x || li.querySelector("[data-tdrep]") || !planParaRepasar(x.c)) return; li.classList.add("td-conrep"); const html = `<button type="button" class="btn btn-sm td-rep" data-tdrep="${esc(x.c.id)}" aria-label="Repasar la clase de ${esc(x.c.curso)}">Repasar</button>`; const au = li.querySelector("[data-aula]"); if (au) au.insertAdjacentHTML("beforebegin", html); else li.insertAdjacentHTML("beforeend", html); });
+  } catch (e) { logSilencioso(e); }
+}
+function repasarDeHoy(cid){
+  const c = (cdatos().cursos || []).find(x => x.id === cid); if (!c) return;
+  const e = planParaRepasar(c); if (!e){ toast("No hay una planificación de clase o secuencia guardada para este curso."); return; }
+  if (state.planId !== e.id){ save(); cargarPlan(e, e.id); }
+  try { if (document.querySelector(".app.nav-app")) irSeccion("plan"); } catch (err) { logSilencioso(err); }
+  irALibreto();
+}
+
+/* ---------- 6. Mi curso › Cierre: período de acompañamiento ---------- */
+var ACP = {inst:"dic", desde:"", hasta:""};
+function acpAlumnos(c, inst){ return alumnosActivos(c).filter(a => condicion(c, a.id).k === inst); }
+function htmlCierre(c){
+  const base = htmlCierreBase(c);
+  if (!alumnosActivos(c).length) return base;
+  const fin = (CAL[+c.ciclo] || CAL[new Date().getFullYear()] || {}).fin;
+  const nDic = acpAlumnos(c, "dic").length, nFeb = acpAlumnos(c, "feb").length;
+  return base + `<details class="cur-sub" id="acp-box"><summary>Período de acompañamiento (diciembre y febrero)</summary>
+    <p class="hint">Organizá los encuentros con quienes tienen que completar aprendizajes: el cronograma con los contenidos de cada encuentro y una planilla para seguir la asistencia y las entregas. Toma los contenidos adeudados que cargaste arriba.${fin ? ` Las clases de ${esc(String(c.ciclo || ""))} terminan el ${esc(fechaCortaIso(fin))}.` : ""} Las fechas del período las fija el calendario escolar: confirmalas con la dirección.</p>
+    <div class="cfg-grid">
+      <div class="f"><label for="acp-inst">Instancia</label><select id="acp-inst"><option value="dic"${ACP.inst === "dic" ? " selected" : ""}>Diciembre (${nDic})</option><option value="feb"${ACP.inst === "feb" ? " selected" : ""}>Febrero/marzo (${nFeb})</option></select></div>
+      <div class="f"><label for="acp-desde">Desde</label><input id="acp-desde" type="date" value="${esc(ACP.desde)}"></div>
+      <div class="f"><label for="acp-hasta">Hasta</label><input id="acp-hasta" type="date" value="${esc(ACP.hasta)}"></div>
+    </div>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-acp="docx">Cronograma y seguimiento (Word)</button><button type="button" class="btn btn-sm" data-acp="pdf">PDF</button></div>
+    <p class="hint" id="acp-msg" role="status" aria-live="polite"></p>
+  </details>`;
+}
+function acpEncuentros(c, desde, hasta){
+  const dias = new Set((c.horario || []).map(h => +h.dia).filter(d => d >= 1 && d <= 5)), out = [];
+  for (let iso = desde, k = 0; iso <= hasta && k < 120 && out.length < 15; iso = lcMas(iso, 1), k++){
+    const d = fechaDe(iso); if (lcFinde(d) || lcFeriadoBase(iso) || deDelDia(iso)) continue;
+    if (dias.size && !dias.has(d.getDay())) continue;
+    out.push(iso);
+  }
+  return out;
+}
+function modeloAcomp(c, inst, desde, hasta){
+  const als = acpAlumnos(c, inst), E = acpEncuentros(c, desde, hasta);
+  const cont = [...new Set(als.flatMap(a => itemsLista(((c.recup || {})[a.id] || {}).cont || "").filter(Boolean)).map(x => sinPunto(x.trim())).filter(Boolean))];
+  const lista = cont.length ? cont : (contenidosSugeridos(c) || []).map(x => sinPunto(String(x)));
+  const nInst = inst === "dic" ? "diciembre" : "febrero/marzo";
+  const medio = E.length > 2 ? E.slice(1, -1) : E.length === 2 ? [E[0]] : E;
+  const reparto = medio.map((_, i) => lista.filter((_, j) => j % Math.max(1, medio.length) === i));
+  const filas = E.map((iso, i) => {
+    const ult = E.length > 1 && i === E.length - 1, pri = E.length > 2 && i === 0;
+    const k = medio.indexOf(iso);
+    const temas = ult ? "Integración de los contenidos" : pri ? "Diagnóstico de lo que falta" : (reparto[k] || []).join("; ") || "Repaso de los contenidos adeudados";
+    const prop = ult ? "Evaluación de la instancia: la producción o la prueba acordada." : pri ? "Qué recuerdan y qué les cuesta; acuerdo de trabajo y de entregas." : "Explicación breve, resolución guiada y práctica sin mirar la carpeta; consulta individual.";
+    return [`${cap(diaCorto(fechaDe(iso)))}`, `Encuentro ${i + 1}`, temas, prop];
+  });
+  const cols = E.slice(0, 8);
+  const nombres = als.length ? als.map(a => a.n) : Array.from({length:5}, () => "");
+  return {inst:c.escuela, titulo:"Período de acompañamiento", subtitulo:`${nombreCurso(c)} · ${cap(nInst)}`, faltaSub:"Curso", datos:[...datosBaseCurso(c), ["Período", `${fechaCortaIso(desde)} al ${fechaCortaIso(hasta)}`]],
+    secs:[
+      {h:"Propósito", body:`Acompañar a quienes tienen que completar los aprendizajes de ${nombreMateria(c.materia) || "el espacio curricular"} en la instancia de ${nInst}, con encuentros que retoman los contenidos adeudados, práctica guiada y una evaluación al final.`},
+      {h:"Contenidos a trabajar", body:toList(lista.length ? lista : ["Completar con los contenidos adeudados."])},
+      E.length ? {h:"Cronograma de encuentros", tableOnly:true, table:{head:["Fecha", "Encuentro", "Contenidos", "Propuesta"], rows:filas}}
+        : {h:"Cronograma de encuentros", body:"Entre esas fechas no hay días hábiles con clases de este curso. Revisá las fechas o tu horario."},
+      {h:"Seguimiento", tableOnly:true, table:{head:["Estudiante", ...cols.map(iso => dm(fechaDe(iso))), "Entregó", "Resultado"], rows:nombres.map(n => [n, ...cols.map(() => ""), "", ""])}},
+      {h:"Criterios", body:toList(["Asiste a los encuentros y trabaja en las actividades propuestas.", "Explica los contenidos con vocabulario específico.", "Resuelve las actividades mostrando el procedimiento.", "Entrega las producciones acordadas en las fechas fijadas."])}
+    ], firmas:null};
+}
+async function acpBajar(c, fmt){
+  const inst = ($("acp-inst") || {}).value || "dic", desde = ($("acp-desde") || {}).value, hasta = ($("acp-hasta") || {}).value, msg = $("acp-msg");
+  ACP.inst = inst; ACP.desde = desde || ""; ACP.hasta = hasta || "";
+  if (!desde || !hasta){ if (msg) msg.textContent = "Poné las fechas de inicio y de fin del período."; ($(!desde ? "acp-desde" : "acp-hasta") || {focus(){}}).focus(); return; }
+  if (hasta < desde){ if (msg) msg.textContent = "La fecha de fin tiene que ser posterior a la de inicio."; return; }
+  if (msg) msg.textContent = "";
+  await bajarDoc(modeloAcomp(c, inst, desde, hasta), `acompanamiento-${inst}-${slug(c.curso)}`, fmt);
+}
+
+/* ---------- Novedades de la búsqueda de herramientas ---------- */
+try {
+  CT_RUTAS.push(
+    {id:"diasesc", t:"Días sin clases de tu escuela", d:"Asuetos y jornadas institucionales que Lapacho saltea.", a:() => abrirDE(), p:[[/asueto|jornada institucional|dia sin clases|dias sin clases|no hay clases|suspension de clases|fiesta patronal/, 6]]},
+    {id:"notalic", t:"Nota de pedido de licencia", d:"Licencias y feriados: calculá los días y bajá la nota para firmar.", a:() => abrirLicCalc(), p:[[/nota (de|para) (pedido de |pedir |solicitar )?(una )?licencia|pedir (una )?licencia/, 6]]},
+    {id:"acomp", t:"Período de acompañamiento", d:"Mi curso › Cierre: encuentros de diciembre y febrero.", a:ctMC("cierre"), p:[[/periodo de (acompanamiento|orientacion|apoyo)|mesas? de diciembre|recuperatorio|intensificacion|van a diciembre/, 6]]}
+  );
+} catch (e) { logSilencioso(e); }
+
+function init59(){
+  try {
+    const b = $("btn-diasesc"); if (b) b.addEventListener("click", abrirDE);
+    const D = $("diasesc");
+    if (D && !D.dataset.ok){
+      D.dataset.ok = "1";
+      D.addEventListener("change", e => { if (e.target.id === "de-imp"){ const f = e.target.files && e.target.files[0]; const copia = f ? new File([f], f.name, {type:f.type}) : null; e.target.value = ""; deImportar(copia); } });
+      D.addEventListener("click", e => {
+        const a = e.target.closest("[data-de]"), q = e.target.closest("[data-dequitar]");
+        if (a && a.dataset.de === "agregar") deAgregar();
+        else if (a && a.dataset.de === "ics") deIcs();
+        else if (a && a.dataset.de === "exp") deExportar();
+        else if (a && a.dataset.de === "imp"){ const f = $("de-imp"); if (f) f.click(); }
+        else if (q){ prefSet("diasEsc", deLeer().filter(x => x.id !== q.dataset.dequitar)); renderDE(); try { renderTuDia(); } catch (err) { logSilencioso(err); } const f = $("de-desde"); if (f) f.focus(); }
+      });
+    }
+    const LCD = $("licalc");
+    if (LCD && !LCD.dataset.ok59){
+      LCD.dataset.ok59 = "1";
+      LCD.addEventListener("click", e => {
+        if (e.target.closest("[data-lcnota]") && LC.r){ bajarDoc(modeloNotaLic(LC.r), `nota-pedido-licencia-${LC.r.ini}`, "docx", "Nota descargada. Revisala, firmala y presentala en la dirección."); return; }
+        if (e.target.closest("[data-lcsupl]")){ const s = $("btn-suplente"); if (s) s.click(); }
+      });
+    }
+    document.addEventListener("click", e => {
+      const t = e.target.closest('[data-tdact="muestra"], [data-tdact="diasesc"]');
+      if (t){ e.stopImmediatePropagation(); if (t.dataset.tdact === "muestra") abrirMuestra(); else abrirDE(); return; }
+      const r = e.target.closest("[data-tdrep]");
+      if (r){ e.stopImmediatePropagation(); repasarDeHoy(r.dataset.tdrep); return; }
+      const mu = e.target.closest("[data-mu59]");
+      if (mu){ muIcs(); return; }
+      const m = e.target.closest('#muestra [data-mu="docx"], #muestra [data-mu="pdf"]');
+      if (m && muDatos().doc === "carteles"){ e.stopImmediatePropagation(); e.preventDefault(); if (m.dataset.mu === "docx") muCartelesDocx(); else muCartelesPdf(); return; }
+      const ac = e.target.closest("[data-acp]");
+      if (ac){ e.stopImmediatePropagation(); const c = cursoSel(); if (c) acpBajar(c, ac.dataset.acp); }
+    }, true);
+    document.addEventListener("change", e => {
+      if (e.target && /^acp-(inst|desde|hasta)$/.test(e.target.id)) ACP[e.target.id.slice(4)] = e.target.value;
+    });
+  } catch (e) { registrarError("init59", e, "aviso"); }
+}
+
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
