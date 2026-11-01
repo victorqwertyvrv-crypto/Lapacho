@@ -1790,6 +1790,39 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 #derechos .f{margin:8px 0}
 @media print{#derechos{display:none!important}}
 
+/* ---------- Versión 46: Contame qué pasa ---------- */
+.ct{margin:0 0 18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--sombra)}
+#contame .ct{border:0;box-shadow:none;padding:0;margin:0}
+.ct .hint{margin:2px 0 8px}
+.ct-f{display:flex;gap:8px;align-items:flex-start}
+.ct-f textarea{flex:1;min-height:48px;resize:vertical}
+.ct-f .btn{min-height:44px;white-space:nowrap}
+.ct-ej{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.ct-ejb{font:inherit;font-size:13px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:5px 12px;min-height:32px;cursor:pointer;text-align:left}
+.ct-ejb:hover{border-color:var(--accent);color:var(--accent)}
+.ct-out:empty{display:none}
+.ct-out{margin-top:12px}
+.ct-intro{margin:0 0 6px;font-size:13.5px;color:var(--muted)}
+.ct-res{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ct-res li{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface-2)}
+.ct-res li.ct-pri{border-color:var(--accent);background:var(--accent-soft)}
+.ct-res li div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ct-res li b{font-size:15px}
+.ct-res li span{font-size:13px}
+.ct-res li small{font-size:12px;color:var(--muted)}
+.ct-res .btn{min-height:40px;flex:none}
+.ct-urg{border:1px solid var(--warn);border-left-width:5px;border-radius:12px;padding:10px 12px;background:var(--warn-soft);margin:0 0 10px}
+.ct-urg p{margin:0 0 8px}
+.ct-tels{display:flex;flex-wrap:wrap;gap:8px}
+.ct-tel{display:flex;flex-direction:column;align-items:flex-start;min-height:44px;text-decoration:none}
+.ct-tel small{font-weight:400;font-size:11.5px}
+.ct-nada p{margin:0 0 6px}
+@media (max-width:560px){.ct-f{flex-direction:column;align-items:stretch}.ct-res li{flex-direction:column;align-items:stretch}}
+@media print{.ct,#contame{display:none!important}}
+.ct-sug{margin:4px 0 0;font-size:13px}
+.ct-sug:empty{display:none}
+.sn-busca .ct-sug .linkbtn{color:inherit;text-align:left}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -2132,7 +2165,8 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
       <details class="faq"><summary>¿Cuántas licencias me quedan?</summary><p>En «Mi legajo › Licencias» elegís tu situación de revista y ves todas las licencias que te corresponden según el régimen docente de Tucumán (Decreto 505/14 de 1996 y modificatorias), con los días que te quedan en el año. Cada licencia que registrás descuenta los días sola. En «Tu carrera › Licencias y feriados» calculás hasta qué día va una licencia y qué día volvés, con los feriados contados como dice la norma, y ves las mejores fechas para asuntos particulares o la donación de sangre. En «Plan de descanso» combinás tus licencias con feriados y fines de semana largos para todo el año, y «Tu día» te avisa cuándo pedir cada una. Es una guía: ante dudas, consultá en la dirección de tu escuela.</p></details>
       <details class="faq"><summary>¿Cómo no perder los datos de mis cursos?</summary><p>En «Ajustes › Copia de seguridad» descargás un archivo con todo, incluidas las fotos. Guardalo en tu Drive una vez por semana: si cambiás de celular o se borra el navegador, lo abrís ahí mismo y recuperás todo. «Tu día» te recuerda cuando pasó una semana sin copia.</p></details>
       <details class="faq"><summary>¿Funciona sin internet?</summary><p>Sí. En «Ajustes › Usar sin internet» descargás el planificador como un archivo y lo abrís con el navegador del celular o la computadora aunque no haya señal. Esa versión guarda sus datos aparte: para pasarlos de una a otra usá la copia de seguridad.</p></details>
-      <details class="faq"><summary>¿Cómo sé si me corresponde lo que me pide la dirección?</summary><p>En «Herramientas › Para la escuela › Derechos y obligaciones», pestaña «¿Me corresponde?», elegís la situación (mensajes fuera de horario, tareas fuera de tu jornada, cambio de curso, un acta para firmar, una sanción) y te dice si corresponde, por qué, con qué norma y qué hacer. En «Cómo reclamar» armás la nota a la dirección. Es información orientativa: ante un conflicto, consultá a tu gremio.</p></details>
+      <details class="faq"><summary>Son muchas herramientas: ¿cómo encuentro la que necesito?</summary><p>Escribí lo que pasa en «Contame qué pasa», arriba en el inicio (o en Herramientas): por ejemplo, «se pelearon dos alumnos» o «la directora me pide quedarme hasta tarde». Lapacho te propone la herramienta y el caso, y te explica por qué. No necesita internet y lo que escribís no se guarda.</p></details>
+<details class="faq"><summary>¿Cómo sé si me corresponde lo que me pide la dirección?</summary><p>En «Herramientas › Para la escuela › Derechos y obligaciones», pestaña «¿Me corresponde?», elegís la situación (mensajes fuera de horario, tareas fuera de tu jornada, cambio de curso, un acta para firmar, una sanción) y te dice si corresponde, por qué, con qué norma y qué hacer. En «Cómo reclamar» armás la nota a la dirección. Es información orientativa: ante un conflicto, consultá a tu gremio.</p></details>
 <details class="faq"><summary>¿Y si otra persona usa mi computadora?</summary><p>En «Ajustes › Proteger con PIN» elegís un número que se pide para abrir Mi curso, el modo aula, el PPI, las actas y tu legajo. El PIN bloquea la pantalla, pero no cifra los datos guardados en el navegador. Lo que sí se cifra, con la contraseña que elijas, es la copia de seguridad.</p></details>
 <details class="faq"><summary>¿Qué se envía cuando uso Claude desde Lapacho?</summary><p>Solo el texto que hace falta para la tarea, sin nombres de estudiantes, documentos, correos, teléfonos ni datos de salud: Lapacho los quita antes de enviar y te muestra qué se envía, a quién y para qué. Las imágenes se consultan cada vez, porque no se pueden anonimizar. En «Ajustes › Privacidad e IA» podés usar Lapacho sin IA.</p></details>
 <details class="faq"><summary>¿Dónde se guardan mis datos?</summary><p>En este navegador, en dos lugares a la vez: una base interna (IndexedDB), donde cada cambio se guarda en el momento, y una copia rápida. Además, Lapacho guarda una versión por día de los últimos siete días. Para llevar los datos a otro dispositivo, o por si se borra el navegador, descargá una copia de seguridad: podés elegir qué módulos incluir y protegerla con contraseña.</p></details>
@@ -4757,6 +4791,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-31-e", fecha:"2026-10-31", items:[
+    "Nuevo: «Contame qué pasa», arriba de todo en el inicio y en Herramientas. Escribís la situación con tus palabras (una pelea, un pedido de la dirección, que vas a faltar) y te lleva a la herramienta y al caso que corresponde. Si es urgente, primero te muestra a quién llamar.",
+    "Funciona sin internet. Lo que escribís no se guarda. Si en el buscador de herramientas escribís una situación, también te ofrece ir directo."
+  ]},
   {id:"2026-10-31-d", fecha:"2026-10-31", items:[
     "Nuevo: «Derechos y obligaciones» (Herramientas › Para la escuela y Mi carrera en el inicio). Elegís lo que te pidió la dirección y te dice si te corresponde, por qué, con qué norma y artículo y qué hacer. Arma la nota a la dirección en Word.",
     "También tiene los derechos y obligaciones de los estudiantes y cómo tienen que ser las sanciones, con una versión para trabajar en el aula."
@@ -16410,7 +16448,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "45 (31/10/2026)";
+const LAPACHO_VERSION = "46 (31/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -17443,7 +17481,7 @@ function mejorarSidenav(){
   const pie = S.querySelector(".sn-pie");
   if (pie && !$("sn-guardado")) pie.insertAdjacentHTML("beforebegin", `<p class="sn-guardado" id="sn-guardado" aria-live="polite"></p>`);
 }
-function filtrarHerramientas(cont, texto, est){
+function filtrarHerramientasV45(cont, texto, est){
   const t = norm(texto || "").trim();
   let n = 0;
   cont.querySelectorAll(".sn-i, .hoja-i").forEach(b => { const ok = !t || norm(b.textContent).includes(t); b.hidden = !ok; if (ok && t) n++; });
@@ -21941,7 +21979,7 @@ function htmlTareasInicio(){
   const g = TAREAS_INICIO.map(x => ({...x, i:x.i.filter(([id]) => $(id))})).filter(x => x.i.length);
   return `<section class="pn-tareas" aria-labelledby="pn-tareas-t"><h2 class="pn-t" id="pn-tareas-t">¿Qué querés hacer?</h2><div class="pn-tg">${g.map(x => `<div class="pn-tc"><h3>${esc(x.t)}</h3><p>${esc(x.d)}</p><ul>${x.i.map(([id, n]) => `<li><button type="button" class="pn-ta" data-proxy="${id}">${esc(n)}</button></li>`).join("")}</ul></div>`).join("")}</div></section>`;
 }
-function renderPanel(){
+function renderPanelV44(){
   renderPanelV43();
   const P = $("panel"); if (!P) return;
   if (!P.querySelector(".pn-tareas")) P.insertAdjacentHTML("afterbegin", htmlTareasInicio());
@@ -22578,6 +22616,200 @@ function init55(){
 }
 
 /* ============================================================
+   Versión 46: «Contame qué pasa» (31/10/2026)
+   El docente escribe la situación con sus palabras y Lapacho lo lleva a la herramienta y al caso.
+   Funciona sin internet y sin IA: reglas de palabras y frases, con puntaje.
+   Las situaciones urgentes (riesgo de suicidio, abuso, armas, emergencia de salud) van siempre primero,
+   con los teléfonos de emergencia a mano. Dentro de Claude, si no hay coincidencia, se puede consultar
+   a Claude con el texto anonimizado (pasa por la guarda de privacidad de la versión 44).
+   Lo que se escribe no se guarda.
+   ============================================================ */
+const CT_ADULTO_DIR = /\b(director|directora|directivo|directivos|vice|vicedirector|vicedirectora|rector|rectora|regente|secretari[oa]|supervis\w*|coordinador\w*|la direccion|la escuela me|me piden|me pide|me pidio|me pidieron|me obligan|me exigen|me quieren|me mandan|me dijeron que tengo que|me labraron|me sancion\w*|me hicieron|me dicen que tengo que|tengo que venir|preceptor\w*)\b/;
+const CT_ALUMNO = /\b(alumn\w*|estudiant\w*|chic[oa]s?|pib[ea]s?|companer\w*|curso|division|nene|nena|adolescente|menor)\b/;
+const ctMC = tab => () => abrirMiCurso(tab);
+const ctBtn = id => () => { const b = $(id); if (b) b.click(); };
+const ctConv = id => () => abrirConv(id);
+const ctDer = (tab, s) => () => abrirDerechos(tab, s);
+const CT_RUTAS = [
+  /* Urgentes: convivencia */
+  {id:"conv-suicidio", k:["suici", "autol", "ahorc"], t:"Autolesiones o riesgo de suicidio", d:"Qué hacer ahora, qué no hacer y a quién llamar.", urg:["911", "0800-999-0091"], a:ctConv("suicidio"), p:[[/suicid\w*|matarse|matarme|(me|se|te) (voy|va|iba|quiere|queria|quiero|pensaba|piensa|vas) a (matar|morir)(?! de (risa|calor|frio|hambre|sueno|verguenza|aburrimiento|ganas|amor))|quitarse la vida|no (quiere|quiero|queria) (seguir|existir|estar mas)|desaparecer del mundo|(quiere|quiero|queria|quiera) morir(?! de (risa|calor|frio|hambre|sueno|verguenza|aburrimiento|ganas|amor))|no (quiere|quiero) vivir|autolesi\w*|se corta\w*|cortes en (los |sus )?(brazos|piernas|munecas)|se lastima\w*|lastimarse|hacerse dano/, 8]]},
+  {id:"conv-abuso", k:["abuso", "abusa", "manose", "moret", "viola"], t:"Un estudiante cuenta maltrato o abuso", d:"Cómo escuchar, qué no preguntar, a quién avisar y el acta.", urg:["911", "102"], a:ctConv("abuso"), p:[[/abus\w*|manose\w*|viol(o|aron|acion)|maltrat\w*|(le|lo|la) pegan en (la|su) casa|golpes en (la|su) casa|(lo|la) tocaron|\b(lo|la) toco\b|(lo|la) toca(ba)?\b|toco a (una|un) (alumn|estudiant|nen)|me conto (que|algo)|moreton\w*|marcas de golpes|(madre|padre|mama|papa|padrastro|madrastra|tio|abuel[oa]|familia\w*|hermano)[^.]{0,30}\b(la|lo|le|los) (golpea\w*|pega\w*|maltrat\w*|encierra\w*)/, 8]]},
+  {id:"conv-armas", k:[], t:"Armas en la escuela", d:"Qué hacer de inmediato y a quién llamar.", urg:["911"], a:ctConv("armas"), p:[[/\barma(s)?\b|cuchillo|navaja|revolver|pistola|\bfaca\b|arma blanca|tumbera/, 8]]},
+  {id:"conv-salud", k:["desma", "convu", "sangr", "descom", "fiebr", "herid", "lesio"], t:"Accidente o emergencia de salud", d:"Primeros pasos, el 107 y el acta del traslado.", urg:["107", "911"], a:ctConv("salud"), p:[[/se desmay\w*|desmayo|convuls\w*|sangr\w*|accidente|se cayo|caida|se golpeo|golpe en la cabeza|descompen\w*|no respira|ataque de (asma|panico|epilepsia)|fractur\w*|se quebro|desvanec\w*|se ahoga/, 7]]},
+  /* Convivencia */
+  {id:"conv-consumo", k:["alcoh", "cerve", "vino", "ferne", "borra", "droga", "porro", "fuman", "tomand", "pasti"], t:"Consumo de sustancias", d:"Qué hacer, qué no hacer y la línea 141.", a:ctConv("consumo"), p:[[/alcohol|cerveza|fernet|vino|tomando|borrach\w*|droga\w*|marihuana|porro|fumando|faso|sustancia\w*|pastillas|vaper|vapeo|cocaina/, 6]]},
+  {id:"conv-redes", k:["redes", "insta", "tikto", "whats", "video", "fotos", "captu", "cuent", "grupo"], t:"Violencia en redes, sexting o grooming", d:"Qué hacer con capturas, a quién avisar, cuándo denunciar.", a:ctConv("redes"), al:true, p:[[/grooming|sexting|fotos intimas|fotos desnud\w*|nudes|\bpack\b|cuenta falsa|perfil falso|ciberacoso|escrache|subieron (una |un )?(foto|video)|viralizaron|circula\w* (un |una )?(video|foto|audio|captura)|(fotos?|videos?)[^.]{0,30}(sin ropa|desnud\w*|intim\w*)|sin ropa|difund\w*|grupo del curso|un adulto le escribe|le escribe un adulto/, 7], [/(redes|instagram|tiktok|grupo de whatsapp|whatsapp del curso|historia de instagram)/, 3]]},
+  {id:"conv-acoso", k:["acoso", "bully", "burla", "carga", "molest", "exclu", "aisla", "gorda", "gordo"], t:"Acoso escolar", d:"Cómo distinguirlo de un conflicto, qué hacer y el seguimiento.", a:ctConv("acoso"), al:true, p:[[/acoso|bullying|lo molestan siempre|la molestan siempre|todos los dias (lo|la|le)|se burlan|le hacen burla|lo cargan|la cargan|lo excluyen|la excluyen|se burla\w*|lo boludean|la boludean|(lo|la|le) (insultan|esconden|rompen|sacan|patean|empujan)\w*[^.]{0,40}(siempre|todos los dias|cada dia|todo el tiempo)|siempre (lo|la|le) (insultan|molestan|cargan|empujan)|nadie se junta con|lo dejan solo|la dejan sola/, 6]]},
+  {id:"conv-genero", k:["gener", "machi", "discr", "racis", "homof", "trans"], t:"Violencia de género o discriminación", d:"Qué hacer ante burlas, discriminación o violencia en la pareja.", a:ctConv("genero"), p:[[/genero|machis\w*|discrimin\w*|racis\w*|homofob\w*|transfob\w*|por ser (gay|lesbiana|trans|mujer|varon|boliviano|paraguayo|gordo|gorda)|el novio le pega|la novia le pega|violencia en la pareja|xenofob\w*/, 6]]},
+  {id:"conv-adulto", k:["padre", "madre", "famil", "tutor", "abuel"], t:"Un familiar u otro adulto agrede o amenaza", d:"Cómo resguardarte, a quién llamar y el acta.", a:ctConv("adulto"), p:[[/(padre|madre|familiar|tutor|tutora|abuel[oa]|mama|papa|tio|tia|hermano mayor)\b[^.]{0,50}(agredi\w*|amenaz\w*|grit\w*|insult\w*|vino a pelear|me pego|pego a|violent\w*|prepotent\w*)/, 8], [/me (amenazo|insulto|agredio|grito) (un|una|el|la) (padre|madre|familiar|tutor)/, 8]]},
+  {id:"conv-pelea", k:["pelea", "pegar", "pegar", "golpe", "pinas", "tromp", "empuj", "pelo", "rasgu", "mordi", "tirar", "tiraro"], t:"Pelea o conflicto entre estudiantes", d:"Cómo separar, a quién avisar, el acta y la reparación.", a:ctConv("pelea"), al:true, p:[[/pelea\w*|pelear\w*|pelearon|se pegaron|pina\w*|trompad\w*|cachetad\w*|bofetad\w*|golpearon|le pego (a|un|una)|se agarraron|se trenzaron|a las manos|(se )?tiraron del pelo|se arañaron|se aranaron|agresion|agredi\w*|amenaz\w*|empuj\w*|discusion fuerte|se insultaron|patada\w*/, 6]]},
+  {id:"conv-leve", k:["celul", "respe", "tarde", "charl", "interr", "desor"], t:"Faltas a los acuerdos de convivencia", d:"Celular, impuntualidad, falta de respeto: qué hacer y cómo registrarlo.", a:ctConv("leve"), al:true, p:[[/celular en (la )?clase|no trabaja\w*|impuntual\w*|llega\w* tarde|falta\w* (el|de) respeto|me falta\w* el respeto|no hacen caso|no me hacen caso|indisciplina|desorden|mal comportamiento|se portan mal|no se callan|charlan todo el tiempo|interrump\w*|copiaron|se copiaron/, 5]]},
+  /* La dirección me pide algo */
+  {id:"der-mensajes", k:["mensa", "whats", "audio", "llama", "correo", "noche", "domin", "finde"], t:"Mensajes o reuniones fuera de horario", d:"¿Me corresponde? Ley 9.897 de desconexión digital.", a:ctDer("pedidos", "mensajes"), dir:true, p:[[/(mensaj\w*|audio\w*|me escrib\w*|whatsapp|wsp|me llam\w*|correo|mail|reunion virtual|meet|zoom)[^.]{0,60}(noche|fin de semana|domingo|sabado|fuera de (mi )?horario|madrugada|vacaciones|feriado|\d{2} ?h|a las (2[0-3]|0?[0-6])\b)/, 7], [/(noche|fin de semana|domingo|fuera de (mi )?horario|madrugada)[^.]{0,60}(mensaj\w*|whatsapp|me llam\w*|correo|reunion)/, 7]]},
+  {id:"der-extra", k:["queda", "horas", "sabad", "pinta", "limpi", "tarde", "cobra", "pago"], t:"Tareas o más tiempo fuera de tu horario", d:"¿Me corresponde? Qué dice la norma y cómo pedirlo por escrito.", a:ctDer("pedidos", "extra"), dir:true, p:[[/(quedarme|quede|quedar|quedes)[^.]{0,30}(mas|tarde|despues|hasta)|horas extra\w*|fuera de (mi )?horario|sin (cobrar|pago|pagar)|gratis|trabajar de mas|contraturno|venir a la tarde|venir a la manana|(venga|venir|vaya|ir|vengamos|vayamos) (el |los )?(sabado|domingo|feriado)s?\b/, 6]]},
+  {id:"der-actos", k:["acto", "actos", "desfi", "reuni", "jorna"], t:"Convocatoria a un acto o reunión", d:"¿Me corresponde? En tu horario y fuera de él.", a:ctDer("pedidos", "actos"), dir:true, p:[[/(ir|venir|asistir|estar) (a|al|en) (un |el |los )?(acto|actos|desfile|reunion)|reunion (de personal|institucional|plenaria|general)|jornada institucional|venir un sabado|el sabado a la escuela/, 6]]},
+  {id:"der-cambio", k:["cambi", "turno", "trasl", "mover", "moverm"], t:"Cambio de curso, turno o escuela", d:"¿Me corresponde? Estatuto del Docente, art. 6.", a:ctDer("pedidos", "cambio"), dir:true, p:[[/me (cambiaron|cambian|quieren cambiar|pasaron|sacaron|mueven|movieron)[^.]{0,40}(curso|turno|horario|escuela|division|materia|horas)|me (\w+ )?(cambi\w*|pas\w*|mov\w*|mand\w*) (a|al|de) (otro |otra |el |la )?(curso|turno|escuela|division|horario)|traslado|me (sacaron|quitaron|redujeron) (las |unas )?horas/, 7]]},
+  {id:"der-observar", k:["obser", "plani", "carpe", "super"], t:"Observación de clase o pedido de planificación", d:"Sí corresponde, con criterios claros y devolución.", a:ctDer("pedidos", "observar"), dir:true, p:[[/observ(ar|o|aron|an|e) (mi |la |una |de )?clase|me (observa|observan|observo)|(revisar|revisa|revisan|reviso|pide|piden|pidio|entregar) (mi |la |las )?planificacion\w*|(entregu\w*|present\w*|mand\w*|subir|suba) (le |mi |la |las )*planificacion\w*|carpeta didactica|la supervisora viene/, 7]]},
+  {id:"der-acta", k:["firma", "acta", "notif"], t:"Firmar un acta o una notificación", d:"Qué significa firmar y cómo dejar tu desacuerdo.", a:ctDer("pedidos", "acta"), dir:true, p:[[/firm(ar|e|o|en|aron)[^.]{0,20}(acta|notificacion|llamado de atencion|apercibimiento|libro)|me hicieron firmar|me piden (que )?firm\w*|me notificaron/, 7]]},
+  {id:"der-sancion", k:["sanci", "sumar", "aperc", "descu", "suspe"], t:"Sanción, sumario o descuento", d:"Tu derecho a defensa y qué pedir por escrito.", a:ctDer("pedidos", "sancion"), dir:true, p:[[/sancion\w*|sumario|apercib\w*|suspension|suspendieron|me van a sancionar|descargo|me labraron|me descont\w*|descuento|llamado de atencion/, 7]]},
+  {id:"der-edificio", k:["techo", "cable", "luz", "agua", "rajad", "derru", "gotera"], t:"Edificio o aula insegura", d:"Tu derecho a condiciones de seguridad y cómo informarlo.", a:ctDer("pedidos", "edificio"), p:[[/techo|cables|electric\w*|se llueve|goteras|sin luz|sin agua|insegur\w*|peligros\w*|derrumb\w*|rajadura|se cae el|vidrios rotos|banos (rotos|clausurados)|no hay (luz|agua|gas)|sin (luz|agua|gas)\b|frio en el aula|calor en el aula|sin ventiladores/, 6]]},
+  {id:"der-propios", k:["celul", "datos", "proye", "propio", "mio"], t:"Usar tu celular o tus materiales", d:"No es una obligación: qué dice la ley.", a:ctDer("pedidos", "propios"), dir:true, p:[[/(con|usar|uso) (mi|mis) (celular|datos|computadora|notebook|parlante|proyector|impresora)|de mi bolsillo|pagar (yo|de mi)|comprar (yo )?(materiales|fotocopias|tizas|fibrones)|mis (materiales|fotocopias)|(traiga|traer|lleve|llevar|use|usar|ponga|pague|compre) (el |la |los |las )?(mio|mia|mios|mias|propi\w*)/, 6]]},
+  {id:"der-gremio", k:["gremi", "atep", "sadop", "paro", "asamb"], t:"Gremio, asambleas y paros", d:"Tu derecho a la libre agremiación.", a:ctDer("pedidos", "gremio"), p:[[/gremio|\batep\b|\bsadop\b|asamblea|\bparo\b|afiliar\w*|huelga|medida de fuerza/, 6]]},
+  {id:"der-nota", k:["nota", "aprue", "aprob", "desap"], t:"Te piden cambiar una nota", d:"Qué dice la norma y cómo responder por escrito.", a:ctDer("pedidos", "nota"), dir:true, p:[[/(cambi\w*|sub(ir|a|e|irle|ile)|modific\w*|levant\w*|poner(le)?) (le |la |una |su |esa )*(nota|calificacion)|aprobar a (un|una|el|la|ese|esa)|que (lo|la|los|las) apruebe|que apruebe\w*|aprobar(lo|la|los|las)|regalar (la |una )?nota|que no (lo|la) desapruebe/, 7]]},
+  {id:"der-recreo", k:["recre", "guard", "cubri", "libres"], t:"Cuidar recreos o cubrir otro curso", d:"¿Me corresponde? Qué hacer si quedás a cargo.", a:ctDer("pedidos", "recreo"), dir:true, p:[[/cuidar (el |los )?recreo\w*|guardia de recreo|cubrir (un |el |una |otro |otra )?(curso|hora|division|grado)|horas libres|hora libre|quedarme con (otro|un) curso|reemplazar a (un|una) (colega|companer\w*|profe\w*)/, 6]]},
+  {id:"der-licencia", t:"Te niegan una licencia", d:"Cómo pedir el fundamento por escrito.", a:ctDer("pedidos", "licencia"), dir:true, p:[[/(negaron|niegan|rechazaron|cuestionan|cuestionaron|no me (dan|dieron|quieren dar)) (la |una |mi )?licencia/, 9]]},
+  {id:"der-derechos", t:"Tus derechos y obligaciones", d:"La lista completa, con la norma de cada uno.", a:ctDer("docente"), p:[[/mis derechos|derechos (docentes|del docente)|me corresponde|mis obligaciones|que (puedo|debo) (hacer|negarme)|puedo negarme|tengo que aceptar|estoy obligad[oa]/, 5]]},
+  {id:"der-estudiantes", t:"Derechos y obligaciones de los estudiantes", d:"Con las sanciones y una versión para el aula.", a:ctDer("estudiantes"), p:[[/derechos (de los|del|tienen los|de mis) (alumn\w*|estudiant\w*)|derechos[^.]{0,25}(alumn\w*|estudiant\w*)|obligaciones (de los|del) (alumn\w*|estudiant\w*)|pueden sancionar(lo|la|los)|lo pueden echar|expulsar|sanciones a (los )?(alumn|estudiant)/, 6]]},
+  /* Mi trabajo de todos los días */
+  {id:"licencias", k:["licen", "enfer", "opera", "medic", "final", "feria", "mudan", "duelo"], t:"Licencias y feriados", d:"Qué licencia te corresponde, los días y el plan de descanso.", a:ctBtn("btn-licalc"), p:[[/licencia|carpeta medica|me enferme|enferm\w*|operacion|operar(me)?|embaraz\w*|maternidad|paternidad|rendir (un )?(final|examen)|duelo|fallecio|fallecimiento|me caso|casamiento|mudanza|feriado|cuantos dias|vacaciones/, 5]]},
+  {id:"ausencia", k:["falta", "faltar", "falto", "suple", "adela"], t:"Actividades para cuando no estés", d:"Lo que el curso puede hacer sin vos, para seguir con el tema.", a:ctBtn("btn-ausencia"), p:[[/(\bfalto\b|faltare|voy a faltar|falto (manana|el|la)|no vengo|faltar (manana|el|la|una)|no voy a (estar|ir)|me ausento|no puedo ir|no voy a poder ir|tengo que faltar)/, 6], [/dejar (actividades|tarea|algo)|actividades para (el |la )?(suplente|curso)|adelantar (el |los )?tema/, 6]]},
+  {id:"suplente", t:"Guía para el suplente", d:"Lo que necesita saber quien te reemplaza.", a:ctBtn("btn-suplente"), p:[[/suplente|reemplazante|me reemplaza|guia para (el|la) suplente/, 5]]},
+  {id:"planificar", k:["plani", "secue", "clase", "proye"], t:"Planificar una clase o una secuencia", d:"El formulario de planificación, con los saberes y los NAP.", a:() => { if (document.querySelector(".app.nav-desk")) irDesk("plan"); else irSeccion("plan"); const t = $("tema"); if (t) t.focus(); }, p:[[/planific\w*|secuencia|armar (una|la|mi) clase|preparar (una|la|mi) clase|dar (una|la) clase (de|sobre)|clase (de|sobre) [a-z]|proyecto (de|sobre)|\babp\b|planificacion anual/, 4]]},
+  {id:"coher", t:"Revisar la coherencia de la planificación", d:"Objetivos, actividades y evaluación; Bloom y DUA.", a:ctBtn("btn-coher"), p:[[/coherencia|revisar (mi|la) planificacion|esta bien (mi|la) planificacion|objetivos|bloom|\bdua\b/, 5]]},
+  {id:"libreto", t:"Clases desde un libreto o cuadernillo", d:"Texto, PDF o fotos convertidos en clases con los NAP.", a:ctBtn("btn-libreto"), p:[[/libreto|cuadernillo|planea|libro de texto|desde un pdf|manual/, 5]]},
+  {id:"rutinas", t:"Rutinas de pensamiento", d:"Para el inicio, el desarrollo o el cierre.", a:ctBtn("btn-rutinas"), p:[[/rutina\w*|pensamiento visible|veo,? pienso/, 5]]},
+  {id:"dinam", k:["dinam", "juego", "motiv", "atenc", "aburr"], t:"Dinámicas que funcionan", d:"Para que participen y presten atención.", a:ctBtn("btn-dinam"), p:[[/dinamica\w*|juego\w*|motivar\w*|no prestan atencion|no participan|aburr\w*|desmotivad\w*|romper el hielo|(no|poco|que|para que)[^.]{0,25}particip\w*/, 5]]},
+  {id:"repaso", t:"Repasar la clase", d:"Preguntas y actividades para recuperar lo visto.", a:ctBtn("btn-repaso"), p:[[/repas\w*|recuperar lo visto|no se acuerdan|se olvidaron/, 5]]},
+  {id:"preg", k:["prueb", "exame", "evalu", "cuest"], t:"Preguntas y pruebas", d:"Armar una prueba, un TP o un cuestionario.", a:ctBtn("btn-preg"), p:[[/prueba\b|pruebas|examen escrito|evaluacion escrita|cuestionario|multiple choice|trabajo practico|\btp\b|armar (una )?evaluacion/, 5]]},
+  {id:"corregir", t:"Corregir con foto", d:"Las hojas de respuestas, corregidas con la cámara.", a:() => abrirCorregir(), p:[[/corregir|correccion|hojas de respuesta\w*/, 5]]},
+  {id:"asis", k:["asist", "lista", "ausen", "falta"], t:"Tomar asistencia", d:"Mi curso › Asistencia.", a:ctMC("asis"), p:[[/asistencia|tomar lista|pasar lista|presentes|ausentes|inasistencia\w*|viene faltando|faltan mucho|falta mucho|dejo de venir|abandon\w*/, 5]]},
+  {id:"notas", k:["notas", "prome", "calif", "trime"], t:"Notas del curso", d:"Mi curso › Notas: carga, promedios y grupos.", a:ctMC("notas"), p:[[/\bnotas\b|calificacion\w*|promedio\w*|planilla de notas|libreta/, 4]]},
+  {id:"familias", k:["padre", "madre", "famil", "citar"], t:"Comunicación con las familias", d:"Mi curso › Familias: citaciones e informes.", a:ctMC("familias"), p:[[/(citar|hablar con|llamar|reunion con|escribirle|avisar|reunirme con) (a )?(los |la |el |sus |su )?(padres|familia\w*|madre|padre|tutor\w*|mama|papa)|informe para (la |las )?familia\w*|nota para (los )?padres|cuaderno de comunicaciones/, 6]]},
+  {id:"cierre", k:["prece", "cierr", "boleti"], t:"Cierre del trimestre y planillas", d:"Mi curso › Cierre y Para entregar.", a:ctMC("cierre"), p:[[/cierre (del |de )?(trimestre|cuatrimestre|ano|periodo)|cerrar (el )?(trimestre|cuatrimestre|periodo)|entregar (las )?notas|preceptor\w*|planilla para (la )?preceptoria/, 5]]},
+  {id:"conducta", t:"Registro de conducta", d:"Mi curso › Conducta.", a:ctMC("cond"), p:[[/registro de conducta|anotar (la )?conducta|observaciones de conducta/, 5]]},
+  {id:"ppi", k:["disca", "integ", "inclu", "adecu", "apoyo", "visua", "audit", "motri"], t:"PPI y apoyos", d:"Proyecto pedagógico individual, centrado en barreras y apoyos.", a:ctBtn("btn-ppi"), p:[[/\bppi\b|discapacidad|integracion|inclusion|adecuacion\w*|acompanante terapeutico|\bat\b|maestr[oa] integrador\w*|\btea\b|tdah|dislexia|certificado de discapacidad|\bcud\b/, 6]]},
+  {id:"feria", k:["feria$","ferias$","cienc","stand"], t:"Feria de ciencias", d:"Requisitos del stand, informe y registro pedagógico.", a:ctBtn("btn-feria"), p:[[/\bferias?\b/, 6]]},
+  {id:"muestra", t:"Muestra de la escuela", d:"Proyecto, fichas de stand e invitación.", a:ctBtn("btn-muestra"), p:[[/muestra|exposicion anual|\bstand\b/, 5]]},
+  {id:"salidas", t:"Salidas educativas", d:"Autorizaciones y planilla del día.", a:ctBtn("btn-salidas"), p:[[/salida\w* (educativ\w*|didactic\w*)|excursion|visita (a|al)|viaje (de estudios|con el curso)|autorizacion\w*/, 6]]},
+  {id:"actos", t:"Actos y efemérides", d:"El calendario y el guion del acto.", a:ctBtn("btn-actos"), p:[[/efemeride\w*|guion del acto|organizar (el )?acto|me toca (el|un) acto|armar el acto|dia de la (bandera|independencia|tradicion|madre)/, 6]]},
+  {id:"actas", t:"Actas de reunión", d:"Para reuniones de área, de departamento o con familias.", a:ctBtn("btn-actas"), p:[[/acta de (la )?reunion|reunion de (departamento|area)|labrar (un |el )?acta|escribir (un |el )?acta/, 6]]},
+  {id:"cargos", t:"Cargos disponibles", d:"Vacantes del SIME, escenarios y postulaciones.", a:ctBtn("btn-cargos"), p:[[/\bcargo\b|cargos|vacante\w*|\bsime\b|horas catedra|suplencia\w*|interinato|titulariz\w*|postular\w*/, 5]]},
+  {id:"capac", t:"Capacitaciones con puntaje", d:"Cursos que suman y tu puntaje.", a:() => abrirCapac("buscar"), p:[[/capacitacion\w*|curso\w* (que suman|con puntaje|para sumar)|puntaje|\binfod\b|junta de clasificacion|sumar puntos/, 5]]},
+  {id:"legajo", t:"Mi legajo", d:"Títulos, capacitaciones, Junta y licencias.", a:ctBtn("btn-legajo"), p:[[/legajo|mis titulos|antiguedad|mis certificados|\bcv\b|curriculum/, 5]]},
+  {id:"respaldo", k:["copia", "respa", "perde", "perdi", "borro", "datos"], t:"Copia de seguridad", d:"Para no perder tus datos o pasarlos a otro dispositivo.", a:ctBtn("btn-respaldo"), p:[[/copia de seguridad|respaldo|cambie de celular|celular nuevo|pasar (mis |los )?datos|perdi (mis |los )?datos|se (me )?borr(o|aron)/, 6]]},
+  {id:"pin", t:"Proteger con PIN", d:"Bloquea la pantalla en un dispositivo compartido.", a:ctBtn("btn-pin"), p:[[/\bpin\b|que no vean (mis|los) datos|celular compartido|computadora compartida|bloquear (la )?app/, 5]]},
+  {id:"cole", t:"Colectivos TESA y Exprebus", d:"Horarios y pasajes.", a:ctBtn("btn-cole"), p:[[/colectivo\w*|\btesa\b|exprebus|pasaje\w*|horario del (colectivo|omnibus)/, 6]]}
+];
+const ctTexto = s => " " + norm(String(s || "")).replace(/[¿?¡!.,;:()«»"]/g, m => (m === "." ? "." : " ")).replace(/\s+/g, " ") + " ";
+function ctAnalizar(texto){
+  const t = ctTexto(texto);
+  if (t.trim().length < 3) return [];
+  const dir = CT_ADULTO_DIR.test(t), alu = CT_ALUMNO.test(t);
+  const tok = t.split(/[^a-zñ]+/).filter(w => w.length >= 4);
+  const out = [];
+  CT_RUTAS.forEach(r => {
+    let s = 0; const vio = [];
+    r.p.forEach(([re, w]) => { const m = t.match(re); if (m){ s += w; vio.push(m[0].trim()); } });
+    const pega = (w, st) => st.endsWith("$") ? w === st.slice(0, -1) : w.startsWith(st);
+    const kk = (r.k || []).filter(st => tok.some(w => pega(w, st)));
+    if (kk.length){ s += Math.min(9, 3 * kk.length); if (!vio.length) vio.push(...kk.map(st => tok.find(w => pega(w, st)))); }
+    if (!s) return;
+    if (!r.p.some(([re]) => re.test(t)) && kk.length < 2 && !r.urg) return;
+    if (r.id === "planificar" && dir) s -= 3;
+    if (r.dir && dir) s += 3;
+    if (r.al && alu) s += 2;
+    if (r.urg) s += 20;
+    out.push({r, s, vio:[...new Set(vio)]});
+  });
+  return out.sort((a, b) => b.s - a.s);
+}
+const CT = {px:null, ultimo:"", ia:false};
+function ctTel(n){ const c = CONV_TEL.find(x => x.n === n); return c ? `<a class="btn btn-sm ct-tel" href="${telHref(c)}">${esc(c.n)}<small>${esc(c.t)}</small></a>` : ""; }
+function htmlCtResultados(texto, L, desdeIA){
+  if (!String(texto || "").trim()) return "";
+  if (!L.length) return `<div class="ct-nada"><p>No encontré una herramienta para eso. Probá con otras palabras (por ejemplo, «se pelearon dos alumnos» o «la directora me pide quedarme hasta tarde»).</p>
+    ${caps.sample && !CT.ia ? `<div class="cur-bar"><button type="button" class="btn btn-sm" data-ct="ia">Preguntarle a Claude</button></div><p class="hint">Antes de enviar, Lapacho quita nombres de estudiantes y datos de salud, y te pide permiso.</p>` : ""}
+    <p class="hint">También podés ver todas las herramientas en «¿Qué querés hacer?».</p></div>`;
+  const urg = L.filter(x => x.r.urg), resto = L.filter(x => !x.r.urg);
+  const top = [...urg.slice(0, 1), ...resto].slice(0, 3);
+  const tels = urg.length ? [...new Set(urg.flatMap(x => x.r.urg))] : [];
+  return `${tels.length ? `<div class="ct-urg" role="alert"><p><b>Si alguien corre peligro ahora, llamá primero.</b> Después seguí la guía.</p><div class="ct-tels">${tels.map(ctTel).join("")}</div></div>` : ""}
+    <p class="ct-intro">${desdeIA ? "Según Claude, esto es lo que te sirve:" : top.length > 1 ? "Esto es lo que más se parece a lo que contaste:" : "Esto es lo que te sirve:"}</p>
+    <ul class="ct-res">${top.map((x, i) => `<li class="${i === 0 ? "ct-pri" : ""}"><div><b>${esc(x.r.t)}</b><span>${esc(x.r.d)}</span>${x.vio.length ? `<small>Por lo que escribiste: ${x.vio.slice(0, 3).map(v => `«${esc(v)}»`).join(", ")}</small>` : ""}</div><button type="button" class="btn btn-sm${i === 0 ? " btn-primary" : ""}" data-ctir="${x.r.id}">Abrir</button></li>`).join("")}</ul>`;
+}
+function htmlContame(px){
+  return `<section class="ct" aria-labelledby="${px}-t"><h2 class="pn-t" id="${px}-t">Contame qué pasa</h2>
+    <p class="hint">Escribí la situación con tus palabras y te llevo a la herramienta que corresponde. Lo que escribís no se guarda.</p>
+    <div class="ct-f"><label class="sr-only" for="${px}-in">Qué pasa</label><textarea id="${px}-in" rows="2" placeholder="Ej.: Dos alumnos se pelearon en el recreo" data-ctin></textarea><button type="button" class="btn btn-primary" data-ct="buscar">Buscar ayuda</button></div>
+    <div class="ct-ej" role="group" aria-label="Ejemplos">${["Dos alumnos se pelearon en el recreo", "La directora me escribe a la noche", "Mañana falto y quiero dejar actividades", "Me piden firmar un acta"].map(e => `<button type="button" class="ct-ejb" data-ctej="${esc(e)}">${esc(e)}</button>`).join("")}</div>
+    <div class="ct-out" id="${px}-out" aria-live="polite"></div></section>`;
+}
+function ctBuscar(box, texto){
+  const out = box.querySelector(".ct-out"); if (!out) return;
+  CT.ultimo = texto; CT.ia = false;
+  const L = ctAnalizar(texto);
+  out.innerHTML = htmlCtResultados(texto, L);
+  CT.res = L;
+}
+async function ctPreguntarIA(box){
+  const out = box.querySelector(".ct-out"); if (!caps.sample || !CT.ultimo) return;
+  CT.ia = true; out.innerHTML = `<p class="hint" role="status">Consultando a Claude…</p>`;
+  const lista = CT_RUTAS.map(r => `${r.id}: ${r.t}`).join("\n");
+  try {
+    const r = await caps.sample.json(`Sos parte de Lapacho, una app para docentes de secundaria de Tucumán. Un docente describe una situación. Elegí del listado hasta tres herramientas que le sirvan, de la más a la menos útil. Devolvé solo JSON: {"ids":["id1","id2"]}. Si ninguna sirve, {"ids":[]}.\n\nListado:\n${lista}\n\nSituación: ${CT.ultimo.slice(0, 800)}`, {modelTier:"default", cache:false});
+    const ids = (r && Array.isArray(r.ids) ? r.ids : []).filter(id => CT_RUTAS.some(x => x.id === id)).slice(0, 3);
+    const L = ids.map((id, i) => ({r:CT_RUTAS.find(x => x.id === id), s:10 - i, vio:[]}));
+    CT.res = L;
+    out.innerHTML = L.length ? htmlCtResultados(CT.ultimo, L, true) : `<p class="hint">Claude tampoco encontró una herramienta para eso. Mirá «¿Qué querés hacer?».</p>`;
+  } catch (e) {
+    out.innerHTML = `<p class="hint">${esc(e && e.code === "cancelado" ? "No se envió nada a Claude." : e && e.code === "ia_off" ? GEN_ERR.ia_off : "No se pudo consultar a Claude. Probá de nuevo.")}</p>`;
+  }
+}
+function ctIr(id){
+  const R = CT_RUTAS.find(x => x.id === id); if (!R) return;
+  if ($("contame") && $("contame").open) cerrarDialogo("contame");
+  try { R.a(); } catch (e) { registrarError("contame.ir", e); toast("No se pudo abrir esa herramienta."); }
+}
+function bindContame(raiz){
+  if (!raiz || raiz.dataset.ctOk) return; raiz.dataset.ctOk = "1";
+  raiz.addEventListener("click", e => {
+    const box = e.target.closest(".ct"); if (!box) return;
+    const ej = e.target.closest("[data-ctej]"); if (ej){ const t = box.querySelector("[data-ctin]"); t.value = ej.dataset.ctej; ctBuscar(box, t.value); return; }
+    const b = e.target.closest("[data-ct]"); if (b){ if (b.dataset.ct === "buscar") ctBuscar(box, box.querySelector("[data-ctin]").value); else if (b.dataset.ct === "ia") ctPreguntarIA(box); return; }
+    const ir = e.target.closest("[data-ctir]"); if (ir) ctIr(ir.dataset.ctir);
+  });
+  raiz.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || e.shiftKey || !e.target.matches("[data-ctin]")) return;
+    e.preventDefault(); ctBuscar(e.target.closest(".ct"), e.target.value);
+  });
+}
+function abrirContame(texto){
+  const D = $("contame"); if (!D) return;
+  abrirDialogo("contame");
+  const t = $("ctd-in");
+  if (texto){ t.value = texto; ctBuscar(D.querySelector(".ct"), texto); }
+  t.focus();
+}
+function prepararContame(){
+  if (!$("contame")) document.body.insertAdjacentHTML("beforeend", `<dialog class="lib" id="contame" aria-labelledby="ctd-t"><div class="lib-in"><div class="lib-head"><span></span><button type="button" class="linkbtn" data-cerrar="contame">Cerrar</button></div>${htmlContame("ctd")}</div></dialog>`);
+  const m = document.querySelector("#m-herr [role='menu']");
+  if (m && !$("btn-contame")) m.insertAdjacentHTML("afterbegin", `<button type="button" role="menuitem" id="btn-contame"><b>Contame qué pasa</b><small>Escribí la situación y te llevo a la herramienta</small></button>`);
+}
+/* Se arma antes de init(): el menú lateral y la hoja «Más» lo incluyen */
+try { prepararContame(); } catch (e) { logSilencioso(e); }
+/* En el inicio, arriba de «¿Qué querés hacer?» */
+function renderPanel(){ renderPanelV44(); const P = $("panel"); if (P && !P.querySelector(".ct")) P.insertAdjacentHTML("afterbegin", htmlContame("ct")); }
+/* El buscador de herramientas: si lo escrito parece una situación, ofrece ir directo */
+function filtrarHerramientas(cont, texto, est){
+  filtrarHerramientasV45(cont, texto, est);
+  if (!est) return;
+  let box = est.nextElementSibling && est.nextElementSibling.classList.contains("ct-sug") ? est.nextElementSibling : null;
+  if (!box){ est.insertAdjacentHTML("afterend", `<p class="ct-sug"></p>`); box = est.nextElementSibling; }
+  const t = String(texto || "").trim();
+  if (t.split(/\s+/).length < 3){ box.innerHTML = ""; return; }
+  const L = ctAnalizar(t), top = L.length ? (L.find(x => x.r.urg) || L[0]).r.t : "";
+  box.innerHTML = `<button type="button" class="linkbtn" data-ctbusca="${esc(t)}">${top ? `Ir a «${esc(top)}»` : "Contame qué pasa"}</button>`;
+}
+function init56(){
+  try {
+    bindContame(document.body);
+    const b = $("btn-contame"); if (b) b.addEventListener("click", () => abrirContame());
+    document.addEventListener("click", e => { const x = e.target.closest("[data-ctbusca]"); if (!x) return; e.preventDefault(); abrirContame(x.dataset.ctbusca); });
+    renderPanel();
+  } catch (e) { registrarError("init56", e); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -22635,7 +22867,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
