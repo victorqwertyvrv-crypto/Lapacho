@@ -1823,6 +1823,15 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .ct-sug:empty{display:none}
 .sn-busca .ct-sug .linkbtn{color:inherit;text-align:left}
 
+/* ---------- Versión 47: Muestra de Física o de Historia ---------- */
+.mu-esp-l{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.mu-esp-i{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface)}
+.mu-esp-i p{margin:4px 0;font-size:13.5px}
+.mu-esp-top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.mu-esp-top b{font-size:15px}
+.mu-esp-s{font-style:italic}
+.mu-esp-f{margin-bottom:4px}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -4791,6 +4800,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-31-f", fecha:"2026-10-31", items:[
+    "Muestra de la escuela: nuevo apartado «Muestra de Física o de Historia». Elegís el espacio y el año (de 1.º a 3.º o Ciclo Orientado) y ves los temas para exponer, ligados a los saberes del diseño y a los NAP, con qué mostrar, la idea que se lleva el visitante, una pregunta para el público y actividades. Con un toque se suman como stands.",
+    "Se sumaron 31 actividades para los visitantes: 11 de Física y 20 de Historia (fuentes, la Batalla de Tucumán, el Congreso de 1816, el ingenio y el tren, el voto antes y después de 1912, Malvinas, memoria). Todas sin fuego, sin vidrio y sin productos químicos."
+  ]},
   {id:"2026-10-31-e", fecha:"2026-10-31", items:[
     "Nuevo: «Contame qué pasa», arriba de todo en el inicio y en Herramientas. Escribís la situación con tus palabras (una pelea, un pedido de la dirección, que vas a faltar) y te lleva a la herramienta y al caso que corresponde. Si es urgente, primero te muestra a quién llamar.",
     "Funciona sin internet. Lo que escribís no se guarda. Si en el buscador de herramientas escribís una situación, también te ofrece ir directo."
@@ -16448,7 +16461,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "46 (31/10/2026)";
+const LAPACHO_VERSION = "47 (31/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -20942,7 +20955,7 @@ function htmlIdeasMu(){
   }).join("");
 }
 function renderIdeasMu(){ const b = $("mu-ideas-b"); if (b) b.innerHTML = htmlIdeasMu(); }
-function renderMuestra(){
+function renderMuestraV46(){
   renderMuestraBase();
   const docs = document.querySelector("#mu-panel .mu-docs");
   if (docs && !$("mu-ideas")) docs.insertAdjacentHTML("beforebegin", `<details class="mu-ideas" id="mu-ideas" open><summary><h3 class="lic-h" id="mu-ideas-h">Actividades para los visitantes</h3></summary><p class="hint">Según el tema de cada stand: que el visitante haga algo, no solo que mire. Todas cumplen las reglas de seguridad de la muestra. Elegí hasta dos por stand: van a la ficha del stand y al proyecto.</p><div id="mu-ideas-b" aria-live="polite"></div></details>`);
@@ -22810,6 +22823,165 @@ function init56(){
 }
 
 /* ============================================================
+   Versión 47: Muestra especializada en Física e Historia (31/10/2026)
+   Para cada año, los temas para exponer salen de los saberes del diseño curricular que usa Lapacho
+   (1.º a 3.º año) y de los NAP del Ciclo Orientado (Res. CFE 180/12). Cada tema propone qué exponer,
+   la idea que el visitante se lleva, una pregunta para el público y actividades en las que participa.
+   Todas las actividades respetan las reglas de seguridad de la muestra: sin fuego, sin vidrio,
+   sin productos químicos.
+   ============================================================ */
+MU_ACT.push(
+  /* Física */
+  {id:"carrito-rapidez", k:"fisica movimiento rapidez velocidad cinematica distancia tiempo trayectoria referencia", t:"¿Quién es más rápido?", que:"El visitante suelta un autito de juguete por una pista marcada cada 50 cm y otro estudiante toma el tiempo con el celular. Con la distancia y el tiempo calculan la rapidez y la anotan en un gráfico del stand.", mat:"Autitos de juguete, cinta métrica, cinta de papel para marcar la pista, cronómetro del celular, afiche con el gráfico.", ojo:"La pista va en el piso o sobre una mesa larga, fuera del paso."},
+  {id:"rampa-aceleracion", k:"fisica aceleracion cinematica movimiento rectilineo plano inclinado velocidad", t:"La rampa que acelera", que:"El visitante cambia la inclinación de una rampa y ve, en las marcas de tiempo, que la bolita recorre cada tramo más rápido. Predice antes qué pasa si la rampa está más empinada.", mat:"Tabla o canaleta de 1,5 m, libros para la inclinación, bolita de plástico o de goma, marcas cada 25 cm, celular para filmar en cámara lenta.", ojo:"Bolitas grandes, que no se pierdan en el piso."},
+  {id:"panel-solar", k:"fisica energia renovable solar fuentes renovables no renovables transformacion electricidad matriz", t:"Energía del sol y de tus manos", que:"El visitante enciende un LED con un panel solar pequeño bajo una lámpara y después con un generador a manivela. Compara cuál cuesta más y conversa de dónde sale la electricidad de su casa.", mat:"Panel solar de juguete o de calculadora, LED o motorcito, generador a manivela (linterna de dínamo), lámpara de escritorio.", ojo:"Lámpara LED, que no calienta."},
+  {id:"matriz-energetica", k:"fisica energia matriz energetica fuentes renovables no renovables electricidad argentina", t:"¿De dónde viene la luz de tu casa?", que:"El visitante ubica una ficha en el gráfico de la matriz eléctrica argentina según la fuente que cree que más aporta. Después el stand muestra los datos reales y de dónde salen.", mat:"Gráfico grande armado por el curso con datos de CAMMESA del último año, fichas adhesivas.", ojo:"El gráfico dice la fuente y el año de los datos."},
+  {id:"periscopio", k:"fisica luz optica reflexion espejos periscopio instrumentos opticos", t:"Mirá por el periscopio", que:"El visitante mira por encima de una pared de cartón con un periscopio armado por el curso y explica, con un dibujo, por dónde viaja la luz.", mat:"Periscopios de cartón con espejos acrílicos, pared de cartón, dibujo del camino de la luz.", ojo:"Espejos acrílicos o de plástico, nunca de vidrio."},
+  {id:"refraccion-moneda", k:"fisica luz optica refraccion lapiz acrilico lente bloque", t:"El lápiz que se corta", que:"El visitante mira un lápiz a través de un bloque de acrílico transparente inclinado y ve que parece cortado. Antes predice qué va a ver; después, el stand muestra en fotos o en video la moneda que aparece al agregar agua a un vaso.", mat:"Bloque o regla gruesa de acrílico transparente, lápices, hoja con líneas, fotos o video de la experiencia de la moneda.", ojo:"Sin líquidos en la mesa: la experiencia con agua se muestra en video."},
+  {id:"electroiman", k:"fisica electricidad magnetismo electromagnetismo corriente iman bobina campo", t:"Armá un electroimán", que:"El visitante conecta una bobina enrollada en un tornillo a una pila y ve cuántos clips levanta. Prueba con más vueltas y comprueba que levanta más.", mat:"Tornillo grande, cable esmaltado, pilas AA en portapilas con interruptor, clips.", ojo:"Conectar solo unos segundos: el cable se calienta. Nunca baterías de auto ni enchufes."},
+  {id:"campo-limaduras", k:"fisica campo magnetico iman limaduras modelos campo particula onda", t:"El campo se ve", que:"El visitante acerca imanes a una bolsa cerrada con limaduras de hierro y ve cómo se ordenan las líneas del campo. Lo compara con el dibujo del modelo de campo.", mat:"Limaduras de hierro dentro de una bolsa con cierre sellada con cinta, imanes de distintas formas, dibujo de las líneas de campo.", ojo:"La bolsa queda cerrada y sellada."},
+  {id:"onda-soga", k:"fisica ondas onda estacionaria soga frecuencia longitud de onda modelos", t:"Ondas que se quedan quietas", que:"Dos visitantes sacuden una soga larga hasta formar una onda estacionaria y cuentan los nodos. Después comparan con el modelo de onda del panel.", mat:"Soga o resorte largo, cinta para marcar nodos, panel con el modelo.", ojo:"Espacio libre de al menos 3 m."},
+  {id:"gps-relatividad", k:"fisica relatividad cuantica gps satelites tecnologia microondas reactores", t:"¿Por qué tu GPS necesita a Einstein?", que:"El visitante abre en el celular una aplicación que muestra los satélites GPS que lo ubican. El stand explica, con un esquema, por qué los relojes de los satélites se corrigen por la relatividad.", mat:"Celulares con una aplicación de estado del GPS, esquema de la órbita y de los relojes.", ojo:""},
+  {id:"linea-fisica", k:"fisica historia historicidad ciencia cientificos galileo newton maxwell einstein curie", t:"La física también tiene historia", que:"El visitante ordena en una cuerda tarjetas con descubrimientos y personas (Galileo, Newton, Maxwell, Marie Curie, Einstein) y lee qué problema intentaban resolver.", mat:"Cuerda, broches, tarjetas con fecha, imagen y una frase.", ojo:""},
+  /* Historia */
+  {id:"detectives-fuentes", k:"historia fuentes historicas primarias secundarias pasado interpretacion documento testimonio", t:"Detectives de fuentes", que:"El visitante recibe la copia de una fuente (una carta, una foto antigua, un objeto) y responde con una tarjeta: quién la hizo, cuándo, para qué y qué nos cuenta.", mat:"Copias de fuentes con su referencia, tarjetas de preguntas, lupas.", ojo:"Copias, nunca originales."},
+  {id:"cuerda-tiempo", k:"historia tiempo historico periodizacion cronologia linea tiempo antes despues siglos", t:"El tiempo en una cuerda", que:"El visitante cuelga tarjetas en una cuerda que representa 10.000 años y descubre cuánto ocupan, en proporción, los últimos 500.", mat:"Cuerda con marcas a escala, broches, tarjetas de acontecimientos.", ojo:""},
+  {id:"nomades-sedentarios", k:"historia primeras sociedades nomadismo sedentarismo agricultura excedente division del trabajo", t:"¿Nómades o sedentarios?", que:"El visitante clasifica imágenes y réplicas de objetos según si eran de grupos nómades o sedentarios, y explica qué cambió con la agricultura.", mat:"Réplicas o imágenes de herramientas, vasijas y viviendas; dos cajas rotuladas.", ojo:""},
+  {id:"votar-atenas", k:"historia antiguedad grecia atenas democracia ciudadania esclavitud roma republica", t:"Votá como en Atenas", que:"Cada visitante recibe una tarjeta con un personaje de la Atenas clásica. Solo los ciudadanos varones pueden votar: el resto descubre por qué no y conversa quiénes votan hoy.", mat:"Tarjetas de personajes (ciudadano, mujer, esclavo, extranjero), urna, cartel con la pregunta.", ojo:""},
+  {id:"mapa-feudo", k:"historia feudalismo feudo senor campesinos vida cotidiana edad media castillo", t:"Viví en un feudo", que:"El visitante ubica en la maqueta del feudo el castillo, la aldea y los campos, y elige una tarjeta de señor o de campesino para leer cómo era su día.", mat:"Maqueta o mapa del feudo, tarjetas de personajes, fichas.", ojo:""},
+  {id:"ciudad-quilmes", k:"historia sociedades originarias diaguitas quilmes calchaqui pueblos originarios valles tucuman", t:"La ciudad de los quilmes", que:"El visitante recorre una maqueta de la ciudadela de Quilmes y responde, con las pistas del panel, cómo vivían, qué cultivaban y qué pasó con su pueblo después de las guerras calchaquíes.", mat:"Maqueta de cartón, panel con imágenes del sitio y mapa de los valles.", ojo:"Las imágenes del sitio dicen de dónde salen."},
+  {id:"camino-potosi", k:"historia colonia comercio mineria potosi plata camino real tucuman rio de la plata", t:"El camino de la plata", que:"El visitante mueve una ficha por el mapa del camino de Potosí a Buenos Aires, pasando por Tucumán, y en cada parada lee qué se producía y qué se intercambiaba.", mat:"Mapa grande del Virreinato, fichas, tarjetas de cada parada.", ojo:""},
+  {id:"batalla-tucuman", k:"historia independencia batalla de tucuman 1812 belgrano revolucion guerras", t:"La Batalla de Tucumán", que:"El visitante lee dos fuentes sobre el 24 de septiembre de 1812 y mueve las fichas de los ejércitos en el plano del Campo de las Carreras. El stand explica por qué esa batalla fue decisiva.", mat:"Plano del campo de batalla, fichas de dos colores, copias de fuentes con su referencia.", ojo:""},
+  {id:"congreso-1816", k:"historia independencia congreso de tucuman 1816 casa historica acta provincias", t:"El Congreso de 1816", que:"El visitante busca en el mapa las provincias que mandaron diputados a la Casa Histórica y lee un fragmento del Acta de la Independencia. Responde: ¿por qué en Tucumán?", mat:"Mapa de las Provincias Unidas, reproducción del Acta, tarjetas de diputados.", ojo:""},
+  {id:"rutas-mapas", k:"historia expansion europea viajes colon descubrimiento mapas estado moderno reforma absolutismo", t:"El mapa antes y después de 1492", que:"El visitante compara un mapa del mundo de antes de 1492 con uno de 1550 y marca con hilo las rutas de los viajes portugueses y españoles. Responde qué buscaban y qué encontraron.", mat:"Copias de mapas antiguos con su fuente, mapa actual grande, hilos de colores y chinches de plástico.", ojo:""},
+  {id:"linea-montaje", k:"historia revolucion industrial fabrica trabajo produccion division del trabajo", t:"Fábrica en un minuto", que:"Dos equipos de visitantes arman barquitos de papel: uno cada persona el suyo completo, otro en línea de montaje. Comparan cuántos hicieron y qué se gana y qué se pierde.", mat:"Hojas, cronómetro, cartel para anotar resultados.", ojo:""},
+  {id:"valija-inmigrante", k:"historia inmigracion inmigrantes modelo agroexportador siglo xix xx tucuman", t:"La valija del inmigrante", que:"El visitante abre una valija con objetos, fotos y documentos (copias) y adivina de dónde venía la familia y por qué llegó a la Argentina. Puede dejar el origen de su propia familia en un mapa.", mat:"Valija vieja, objetos y copias de documentos, mapa del mundo, fichas adhesivas.", ojo:"Con permiso de las familias que prestan los objetos."},
+  {id:"ingenio-azucarero", k:"historia ingenio azucar zafra ferrocarril tucuman modelo agroexportador industria", t:"El ingenio y el tren", que:"El visitante sigue en una maqueta el recorrido de la caña desde el surco hasta la bolsa de azúcar y el tren, y conversa cómo cambió Tucumán con la llegada del ferrocarril en 1876.", mat:"Maqueta del ingenio, fotos antiguas con su fuente, línea de tiempo de la industria azucarera.", ojo:""},
+  {id:"voto-saenz-pena", k:"historia ley saenz pena voto secreto obligatorio 1912 democracia elecciones", t:"Votá antes y después de 1912", que:"El visitante vota primero «cantando» su voto en voz alta, como antes de la Ley Sáenz Peña, y después en un cuarto oscuro. Conversa qué cambió y quiénes todavía no podían votar.", mat:"Urna, cuarto oscuro con una cortina, boletas inventadas.", ojo:"Boletas con candidatos ficticios."},
+  {id:"voto-mujeres", k:"historia voto femenino 1947 mujeres derechos politicos peronismo ciudadania", t:"El primer voto de las mujeres", que:"El visitante lee testimonios de mujeres que votaron por primera vez en 1951 y ubica en una línea de tiempo la Ley 13.010 de 1947.", mat:"Copias de testimonios y fotos con su fuente, línea de tiempo.", ojo:""},
+  {id:"crack-29", k:"historia crisis 1929 economia bolsa desempleo keynesianismo", t:"El crac del 29 en un minuto", que:"Los visitantes compran y venden «acciones» con fichas mientras los precios suben, hasta que una noticia hace que todos quieran vender a la vez. Después conversan qué pasó en 1929.", mat:"Fichas, cartel de precios que se cambia a mano, tarjetas de noticias.", ojo:""},
+  {id:"mundo-dividido", k:"historia guerra fria bloques capitalismo comunismo revolucion cubana descolonizacion", t:"El mundo dividido", que:"El visitante ubica países en un mapa según el bloque al que se alinearon y lee un caso de América Latina, como la Revolución Cubana.", mat:"Mapa mundial, fichas de dos colores, tarjetas de casos.", ojo:""},
+  {id:"memoria-nunca-mas", k:"historia memoria dictadura terrorismo de estado derechos humanos nunca mas 1976 democracia", t:"Memoria, verdad y justicia", que:"El visitante recorre una línea de tiempo de 1976 a 1983 con fuentes del informe Nunca Más y deja en un mural una palabra sobre por qué recordar.", mat:"Línea de tiempo, copias de fuentes con su referencia, mural y fibrones.", ojo:"Acordar el tratamiento con la dirección; sin imágenes violentas."},
+  {id:"cartas-malvinas", k:"historia malvinas guerra 1982 soldados transicion democratica", t:"Cartas desde Malvinas", que:"El visitante lee cartas publicadas de soldados de 1982, ubica las islas en el mapa y deja una pregunta para un excombatiente.", mat:"Copias de cartas publicadas con su fuente, mapa, buzón de preguntas.", ojo:"Si se invita a un excombatiente, coordinarlo con la dirección."},
+  {id:"tapas-2001", k:"historia crisis 2001 neoliberalismo democracia 1983 transformaciones diarios", t:"Las tapas de los diarios", que:"El visitante ordena tapas de diarios de 1983 a 2001 y explica, con la ayuda del stand, qué cambió en la vida cotidiana en esos años.", mat:"Copias de tapas con fecha y diario, cuerda y broches.", ojo:""}
+);
+/* Temas para exponer: s = saber del diseño curricular o enunciado del NAP; a = actividades sugeridas */
+const MU_ESP = {
+  fisica:{n:"Física", fuente:"Saberes del diseño curricular que usa Lapacho (1.º a 3.º año) y NAP de Física del Ciclo Orientado (Res. CFE 180/12).", anios:{
+    "7":[
+      {s:"Movimiento: sistemas de referencia, trayectoria, desplazamiento, rapidez y velocidad.", t:"¿Todo se mueve?", idea:"Un objeto puede estar quieto o en movimiento según desde dónde se lo mire.", exp:["Panel con la misma escena vista desde dos sistemas de referencia.", "Tabla y gráfico con las rapideces medidas por el curso.", "Diferencia entre trayectoria y desplazamiento, con un dibujo del recorrido de casa a la escuela."], preg:"Si vas sentado en el colectivo, ¿estás quieto o te movés?", a:["carrito-rapidez", "gen-voto"]},
+      {s:"Energía y calor: formas de energía, fuentes renovables y no renovables, temperatura y escalas térmicas.", t:"La energía que usamos", idea:"La energía se transforma y no todas las fuentes se agotan igual.", exp:["Cadena de transformaciones de un objeto cotidiano.", "Fuentes renovables y no renovables, con datos de la matriz argentina.", "Temperatura y escalas: Celsius y Kelvin en un termómetro gigante."], preg:"¿De dónde viene la electricidad de tu casa?", a:["panel-solar", "matriz-energetica"]}
+    ],
+    "8":[
+      {s:"Cinemática: movimiento rectilíneo, velocidad y aceleración.", t:"Más rápido, cada vez más rápido", idea:"La aceleración dice cuánto cambia la velocidad en cada segundo.", exp:["Gráficos de posición y velocidad hechos con datos propios.", "Video en cámara lenta de la rampa, con las marcas de tiempo."], preg:"¿Qué cae más rápido, una pelota pesada o una liviana?", a:["rampa-aceleracion", "tiempo-reaccion"]},
+      {s:"Dinámica: fuerzas, inercia, interacción y Leyes de Newton.", t:"Las tres leyes de Newton en tres mesas", idea:"Las fuerzas aparecen de a pares y cambian el movimiento, no lo mantienen.", exp:["Una mesa por ley, con un ejemplo cotidiano cada una.", "Diagramas de fuerzas de situaciones del stand."], preg:"¿Por qué te vas para adelante cuando el colectivo frena?", a:["moneda-inercia", "globo-cohete"]},
+      {s:"Energía mecánica: trabajo, potencia, energía cinética y potencial.", t:"La energía cambia de forma", idea:"La energía de la altura se convierte en energía de movimiento.", exp:["Gráfico de energía potencial y cinética en la rampa.", "Cálculos del curso con alturas y velocidades medidas."], preg:"¿Desde dónde hay que soltar la bolita para que dé la vuelta?", a:["rampa-canicas", "pendulo"]},
+      {s:"Calor y temperatura: propagación del calor, dilatación y equilibrio térmico.", t:"Calor no es temperatura", idea:"El calor pasa de lo más caliente a lo más frío hasta el equilibrio.", exp:["Las tres formas de propagación con ejemplos de la casa.", "Dilatación en vías del tren y puentes (fotos con su fuente)."], preg:"¿Por qué el metal se siente más frío que la madera si están a la misma temperatura?", a:["termico-tacto", "aislantes-video"]},
+      {s:"Ondas y sonido: propagación de ondas mecánicas y fenómenos acústicos.", t:"El sonido viaja", idea:"El sonido es una vibración que necesita un medio para propagarse.", exp:["Tipos de ondas con el resorte.", "Frecuencia y tono con instrumentos del curso."], preg:"¿Se escucharía una explosión en el espacio?", a:["telefono-hilo", "resorte-ondas"]},
+      {s:"Óptica: luz, reflexión, refracción e instrumentos ópticos.", t:"Lo que la luz hace", idea:"La luz viaja en línea recta y cambia de dirección al reflejarse o al cambiar de medio.", exp:["Esquemas de reflexión y refracción.", "Cámara oscura y periscopio del curso."], preg:"¿Por qué el lápiz parece quebrado dentro del agua?", a:["refraccion-moneda", "periscopio", "camara-oscura"]},
+      {s:"Electricidad y magnetismo: carga, corriente, voltaje, resistencia, circuitos e imanes.", t:"Circuitos e imanes", idea:"Para que haya corriente hace falta un circuito cerrado.", exp:["Circuitos en serie y en paralelo armados.", "Materiales conductores y aislantes clasificados."], preg:"Si se quema una lamparita del árbol de Navidad, ¿por qué se apagan todas?", a:["circuito-armable", "conductores", "imanes"]}
+    ],
+    "9":[
+      {s:"Cinemática y dinámica: análisis cuantitativo del movimiento y Leyes de Newton.", t:"Medir para entender el movimiento", idea:"Con datos medidos se puede predecir dónde va a estar un objeto.", exp:["Gráficos posición-tiempo y velocidad-tiempo con datos propios.", "Problemas resueltos de situaciones viales: distancia de frenado."], preg:"¿Cuántos metros recorre un auto a 60 km/h mientras el conductor mira el celular dos segundos?", a:["tiempo-reaccion", "carrito-rapidez"]},
+      {s:"Energía mecánica y térmica: trabajo, potencia, energía cinética y potencial.", t:"Cuánta energía gastamos", idea:"La potencia dice qué tan rápido se transforma la energía.", exp:["Cálculo de la potencia al subir una escalera.", "Consumo de los artefactos de la casa, con las etiquetas de eficiencia."], preg:"¿Qué consume más: una pava eléctrica o una heladera en un día?", a:["rampa-canicas", "panel-solar"]},
+      {s:"Ondas, acústica y óptica: ondas mecánicas, sonido, luz, reflexión y refracción.", t:"Ondas por todas partes", idea:"El sonido y la luz son ondas, pero se propagan de forma distinta.", exp:["Ondas estacionarias y frecuencia.", "Espectro de la luz con un CD."], preg:"¿Por qué ves el relámpago antes de escuchar el trueno?", a:["onda-soga", "espectro-cd", "tubos-sonido"]},
+      {s:"Electricidad y magnetismo: circuitos eléctricos, corriente, voltaje, resistencia y electromagnetismo.", t:"Electricidad que se vuelve imán", idea:"Una corriente eléctrica produce un campo magnético.", exp:["Ley de Ohm con mediciones del curso.", "Electroimán y motor sencillo."], preg:"¿Cómo funciona el timbre de tu casa?", a:["electroiman", "circuito-armable"]}
+    ],
+    "co":[
+      {s:"Obtención, transporte, transformación y degradación de la energía, y comparación de fuentes renovables y no renovables en la matriz energética.", t:"La matriz energética argentina", idea:"Cada fuente de energía tiene costos, impactos y límites.", exp:["Matriz eléctrica con datos oficiales y su fuente.", "Comparación de fuentes: rendimiento, emisiones y costos.", "El caso de Tucumán: biomasa del bagazo de la caña."], preg:"¿Qué fuente conviene sumar en el norte argentino?", a:["matriz-energetica", "panel-solar"]},
+      {s:"Modelos físicos para comprender fenómenos naturales y tecnológicos, articulando las nociones de partícula, onda y campo.", t:"Partícula, onda y campo", idea:"La física usa modelos distintos según la pregunta que quiere responder.", exp:["Tres paneles: un fenómeno explicado con cada modelo.", "Qué explica y qué no explica cada modelo."], preg:"¿La luz es una onda o una partícula?", a:["campo-limaduras", "onda-soga", "espectro-cd"]},
+      {s:"Nociones básicas de mecánica cuántica y relatividad, y su aplicación en dispositivos como el microondas, el GPS o los reactores nucleares.", t:"La física del siglo XX en tu bolsillo", idea:"La relatividad y la cuántica están en tecnologías de todos los días.", exp:["GPS y relatividad.", "Cómo funciona un microondas.", "Los reactores nucleares argentinos (fuentes oficiales)."], preg:"¿Tu celular usa la teoría de la relatividad?", a:["gps-relatividad", "gen-voto"]},
+      {s:"Historicidad de la física y sus vínculos con otras disciplinas.", t:"La física también tiene historia", idea:"Las ideas de la física se construyeron, se discutieron y cambiaron.", exp:["Línea de tiempo con controversias científicas.", "Científicas y científicos argentinos."], preg:"¿Las leyes de la física se descubren o se inventan?", a:["linea-fisica", "gen-antes"]}
+    ]
+  }},
+  historia:{n:"Historia", fuente:"Saberes del diseño curricular que usa Lapacho (1.º a 3.º año) y NAP de Historia del Ciclo Orientado (Res. CFE 180/12).", anios:{
+    "7":[
+      {s:"Historia: interpretación del pasado, periodizaciones, tiempo histórico, protagonistas y fuentes históricas.", t:"¿Cómo sabemos lo que pasó?", idea:"La historia se construye con fuentes que hay que interrogar.", exp:["Tipos de fuentes, con ejemplos de la historia del barrio.", "Periodizaciones en una línea de tiempo a escala."], preg:"Una foto, ¿dice siempre la verdad?", a:["detectives-fuentes", "cuerda-tiempo"]},
+      {s:"Primeras sociedades humanas: cultura y sociedad, nomadismo, sedentarismo, agricultura, excedente económico y división del trabajo.", t:"Cuando dejamos de caminar", idea:"La agricultura cambió la forma de vivir, de trabajar y de repartir.", exp:["Mapa de los primeros asentamientos.", "Antes y después de la agricultura: vivienda, trabajo y alimentación."], preg:"¿Por qué con la agricultura aparecieron los que mandan?", a:["nomades-sedentarios", "gen-voto"]},
+      {s:"Sociedades de la antigüedad clásica: democracia griega, República e Imperio romano, esclavitud y crisis imperial.", t:"Grecia y Roma: ¿quién decidía?", idea:"La democracia ateniense era para pocos.", exp:["Instituciones de Atenas y de la República romana.", "Quiénes eran ciudadanos y quiénes no."], preg:"¿Era democrática una sociedad con esclavos?", a:["votar-atenas", "quien-soy"]},
+      {s:"Sociedad feudal: transición hacia el feudalismo, relaciones entre campesinos y señores, vida cotidiana, sociedades bizantina, musulmana y cristiana, crisis del feudalismo y resurgimiento urbano.", t:"Un día en un feudo", idea:"En el feudalismo, la tierra organizaba la vida y las obligaciones.", exp:["Maqueta del feudo.", "Tres sociedades del Mediterráneo comparadas."], preg:"¿Qué le debía un campesino a su señor?", a:["mapa-feudo", "linea-tiempo"]}
+    ],
+    "8":[
+      {s:"Sociedades americanas originarias: cazadores-recolectores, desarrollo agrícola, jefaturas e imperios. Casos: Chavín, incas, diaguitas y quilmes.", t:"Los pueblos de los valles", idea:"Antes de la conquista, en el actual Tucumán había sociedades agrícolas organizadas.", exp:["Mapa de los pueblos originarios del noroeste.", "Maqueta de Quilmes y cultivos andinos.", "Los pueblos originarios hoy en Tucumán."], preg:"¿Qué palabras de origen quechua usamos todos los días?", a:["ciudad-quilmes", "gen-voto"]},
+      {s:"Contacto entre sociedades americanas y Europa: Estado moderno, absolutismo, Reforma religiosa y expansión europea.", t:"Dos mundos se encuentran", idea:"La expansión europea se explica por cambios en Europa: el Estado moderno, el comercio y la religión.", exp:["Rutas de los viajes de exploración.", "El Estado moderno y el absolutismo en una línea de tiempo.", "La Reforma y la división religiosa de Europa en un mapa."], preg:"¿Por qué los europeos buscaban otra ruta hacia Asia?", a:["rutas-mapas", "detectives-fuentes"]},
+      {s:"Dominación colonial americana: conquista, ciudad colonial, comercio, minería, Potosí, rebeliones, esclavitud y rol de la Iglesia.", t:"Tucumán en el camino de la plata", idea:"Tucumán creció como paso del comercio entre Potosí y el Atlántico.", exp:["Mapa del Camino Real.", "Plano de la ciudad colonial: plaza, cabildo, iglesia.", "Rebeliones indígenas."], preg:"¿Por qué la plaza principal de casi todas las ciudades tiene la misma forma?", a:["camino-potosi", "detectives-fuentes"]},
+      {s:"Cambios de los siglos XVIII y XIX: Revolución Industrial, Ilustración, Revolución Francesa, Reformas Borbónicas y Virreinato del Río de la Plata.", t:"Máquinas e ideas que cambiaron el mundo", idea:"La Revolución Industrial y la Revolución Francesa cambiaron cómo se trabaja y quién gobierna.", exp:["La fábrica y el trabajo en la Revolución Industrial.", "Derechos del hombre y del ciudadano: qué decía y a quiénes dejaba afuera."], preg:"¿Trabajar en una línea de montaje es mejor o peor?", a:["linea-montaje", "linea-tiempo"]},
+      {s:"Independencias americanas: Revoluciones de 1810, procesos independentistas, caudillos y proyectos de organización nacional.", t:"Tucumán, cuna de la Independencia", idea:"En Tucumán se ganó una batalla decisiva en 1812 y se declaró la independencia en 1816.", exp:["La Batalla de Tucumán.", "El Congreso de 1816 en la Casa Histórica.", "Caudillos y proyectos de país."], preg:"¿Por qué el Congreso se reunió en Tucumán y no en Buenos Aires?", a:["batalla-tucuman", "congreso-1816"]}
+    ],
+    "9":[
+      {s:"Modernización latinoamericana: Constitución de 1853, gobiernos liberales, modelo agroexportador, inmigración y Ley Sáenz Peña.", t:"El país que llegó en tren", idea:"El modelo agroexportador, la inmigración y el ferrocarril transformaron la Argentina y Tucumán.", exp:["La industria azucarera y el ferrocarril en Tucumán.", "La inmigración en las familias del curso.", "La Ley Sáenz Peña y el voto secreto."], preg:"¿Tu familia llegó de otro lugar? ¿Cuándo y por qué?", a:["ingenio-azucarero", "valija-inmigrante", "voto-saenz-pena"]},
+      {s:"Conflictos internacionales y transformaciones sociales: Crisis de 1929, industrialización, migración interna, Segunda Guerra Mundial, Estado Benefactor y peronismo.", t:"Crisis, fábricas y derechos", idea:"Después de 1929 el Estado empezó a intervenir en la economía y se ampliaron derechos.", exp:["La crisis de 1929 en un gráfico.", "Industrialización y migración interna.", "El voto femenino (Ley 13.010, 1947)."], preg:"¿Desde cuándo votan las mujeres en la Argentina?", a:["crack-29", "voto-mujeres"]},
+      {s:"Democracias y dictaduras: Revolución Mexicana, Revolución Cubana, dictaduras militares, terrorismo de Estado y Guerra Fría.", t:"Democracias y dictaduras", idea:"En el siglo XX América Latina alternó democracias y dictaduras en el contexto de la Guerra Fría.", exp:["El mundo de la Guerra Fría.", "Línea de tiempo de los golpes de Estado en la Argentina.", "Terrorismo de Estado y memoria."], preg:"¿Por qué es importante recordar lo que pasó entre 1976 y 1983?", a:["mundo-dividido", "memoria-nunca-mas"]},
+      {s:"Argentina y construcción democrática: transición democrática, alfonsinismo, reformas neoliberales, crisis económicas, relaciones Estado-sindicatos y problemáticas culturales contemporáneas.", t:"Cuarenta años de democracia", idea:"La democracia recuperada en 1983 atravesó crisis y se sostuvo.", exp:["Línea de tiempo de 1983 a hoy.", "La crisis de 2001 en las tapas de los diarios.", "Entrevistas a familiares sobre esos años."], preg:"¿Qué derechos tenemos hoy que antes de 1983 no estaban garantizados?", a:["tapas-2001", "memoria-barrio"]}
+    ],
+    "co":[
+      {s:"Economías primario-exportadoras latinoamericanas (1880-1930) y crisis de los regímenes oligárquicos.", t:"Trigo, carne y azúcar", idea:"América Latina se insertó en el mundo vendiendo materias primas; Tucumán creció con una industria para el mercado interno.", exp:["Mapa de productos de exportación de América Latina.", "El azúcar tucumano: una industria para el mercado interno, con protección aduanera, dentro del modelo agroexportador."], preg:"¿Qué vendía la Argentina al mundo en 1900 y qué vende hoy?", a:["ingenio-azucarero", "valija-inmigrante"]},
+      {s:"Crisis de 1929, keynesianismo, totalitarismos y Segunda Guerra Mundial.", t:"El mundo en crisis", idea:"La crisis de 1929 cambió el papel del Estado y abrió paso a los totalitarismos.", exp:["El crac en un gráfico.", "Totalitarismos y Segunda Guerra Mundial."], preg:"¿Puede una crisis económica cambiar quién gobierna?", a:["crack-29", "detectives-fuentes"]},
+      {s:"Guerra Fría, Revolución Cubana y descolonización.", t:"El mundo dividido en dos", idea:"Durante la Guerra Fría, los conflictos se libraron en terceros países.", exp:["Mapa de los bloques.", "Revolución Cubana y descolonización de África y Asia."], preg:"¿Por qué se llamó «fría» si hubo tantas guerras?", a:["mundo-dividido", "gen-voto"]},
+      {s:"Terrorismo de Estado, dictadura de 1976 y neoliberalismo.", t:"Memoria, verdad y justicia", idea:"El terrorismo de Estado violó derechos humanos de forma sistemática; la memoria es una construcción colectiva.", exp:["Fuentes del informe Nunca Más.", "Los juicios por crímenes de lesa humanidad.", "La memoria en Tucumán: sitios y testimonios."], preg:"¿Qué podemos hacer para que no se repita?", a:["memoria-nunca-mas", "gen-libro"]},
+      {s:"Guerra de Malvinas y transición democrática.", t:"Malvinas y la vuelta a la democracia", idea:"La guerra de 1982 aceleró el final de la dictadura.", exp:["Mapa y línea de tiempo de la guerra.", "Cartas y testimonios publicados de soldados."], preg:"¿Qué le preguntarías a un excombatiente?", a:["cartas-malvinas", "linea-tiempo"]},
+      {s:"Transformaciones de la Argentina entre 1983 y 2001.", t:"De 1983 a 2001", idea:"La democracia se consolidó en medio de crisis económicas profundas.", exp:["Tapas de diarios ordenadas.", "Entrevistas a las familias."], preg:"¿Qué recuerdan tus familiares de diciembre de 2001?", a:["tapas-2001", "memoria-barrio"]}
+    ]
+  }}
+};
+const MU_ANIOS = [["7", "1.º año"], ["8", "2.º año"], ["9", "3.º año"], ["co", "Ciclo Orientado"]];
+function muEspSel(){ const m = muLeer(); return {mat:MU_ESP[m.espMat] ? m.espMat : (val("materia") === "historia" ? "historia" : "fisica"), anio:MU_ANIOS.some(x => x[0] === m.espAnio) ? m.espAnio : (["7", "8", "9"].includes(val("anio")) ? val("anio") : +val("anio") >= 10 ? "co" : "8")}; }
+const muActPorId = id => MU_ACT.find(x => x.id === id) || MU_GEN.find(x => x.id === id) || null;
+function htmlMuEsp(){
+  const {mat, anio} = muEspSel(), E = MU_ESP[mat], L = E.anios[anio] || [];
+  const stands = muStands(muDatos().stands).map(s => norm(s.tema));
+  return `<div class="cfg-grid mu-esp-f"><div class="f"><label for="mu-esp-mat">Espacio curricular</label><select id="mu-esp-mat">${Object.entries(MU_ESP).map(([k, x]) => `<option value="${k}"${k === mat ? " selected" : ""}>${x.n}</option>`).join("")}</select></div>
+      <div class="f"><label for="mu-esp-anio">Año</label><select id="mu-esp-anio">${MU_ANIOS.map(([k, t]) => `<option value="${k}"${k === anio ? " selected" : ""}>${t}</option>`).join("")}</select></div></div>
+    <p class="hint">${esc(E.fuente)} Cada tema trae qué exponer, la idea que se lleva el visitante y actividades en las que participa.</p>
+    <ul class="mu-esp-l">${L.map((x, i) => { const ya = stands.includes(norm(x.t)); return `<li class="mu-esp-i"><div class="mu-esp-top"><b>${esc(x.t)}</b>${ya ? `<span class="der-k si">En tus stands</span>` : ""}</div>
+      <p class="hint mu-esp-s">${esc(x.s)}</p>
+      <p><b>La idea que se lleva el visitante:</b> ${esc(x.idea)}</p>
+      <p><b>Qué exponer:</b></p><ul class="cp-reglas">${x.exp.map(e => `<li>${esc(e)}</li>`).join("")}</ul>
+      <p><b>Pregunta para el público:</b> ${esc(x.preg)}</p>
+      <p><b>Actividades para los visitantes:</b> ${x.a.map(muActPorId).filter(Boolean).map(a => esc(a.t)).join(" · ")}</p>
+      <div class="cur-bar"><button type="button" class="btn btn-sm${ya ? "" : " btn-primary"}" data-muesp="${i}"${ya ? " disabled" : ""}>${ya ? "Ya está en los stands" : "Sumar como stand"}</button></div></li>`; }).join("")}</ul>
+    <div class="cur-bar"><button type="button" class="btn btn-sm" data-mu="esp-docx">Descargar la guía de ${esc(E.n)} (Word)</button></div>`;
+}
+function modeloMuEsp(){
+  const {mat, anio} = muEspSel(), E = MU_ESP[mat], L = E.anios[anio] || [], an = (MU_ANIOS.find(x => x[0] === anio) || [])[1] || "";
+  return {inst:val("institucion"), titulo:`Muestra de ${E.n}`, subtitulo:`${an}: temas para exponer y actividades para los visitantes`, faltaSub:"", datos:[["Docente", val("docente")]].filter(d => d[1]),
+    secs:[...L.map((x, i) => ({h:x.t, pageBreak:i > 0, body:[`Saber: ${x.s}`, "", `La idea que se lleva el visitante: ${x.idea}`, "", "Qué exponer:", ...x.exp.map(e => `- ${e}`), "", `Pregunta para el público: ${x.preg}`, "", "Actividades para los visitantes:", ...x.a.map(muActPorId).filter(Boolean).map(a => `- ${muTxtIdea(a)}`)].join("\n")})),
+      {h:"Fuente de los temas", body:E.fuente},
+      {h:"Seguridad", body:"Ninguna actividad usa fuego, vidrio ni productos químicos. Las imágenes, los datos y las fuentes de los paneles dicen de dónde salen."}], firmas:null};
+}
+function renderMuEsp(){ const b = $("mu-esp-b"); if (b) b.innerHTML = htmlMuEsp(); }
+function renderMuestra(){
+  renderMuestraV46();
+  const ideas = $("mu-ideas");
+  if (ideas && !$("mu-esp")) ideas.insertAdjacentHTML("beforebegin", `<details class="mu-ideas mu-esp" id="mu-esp"><summary><h3 class="lic-h">Muestra de Física o de Historia: temas y actividades</h3></summary><div id="mu-esp-b"></div></details>`);
+  renderMuEsp();
+}
+function bindMuEsp(){
+  const D = $("muestra"); if (!D || D.dataset.okEsp) return; D.dataset.okEsp = "1";
+  D.addEventListener("change", e => {
+    if (e.target.id === "mu-esp-mat" || e.target.id === "mu-esp-anio"){ const m = muLeer(); m[e.target.id === "mu-esp-mat" ? "espMat" : "espAnio"] = e.target.value; muGuardar(m); renderMuEsp(); const n = $(e.target.id); if (n) n.focus(); }
+  });
+  D.addEventListener("click", e => {
+    const b = e.target.closest("[data-muesp]");
+    if (b){
+      const {mat, anio} = muEspSel(), x = (MU_ESP[mat].anios[anio] || [])[+b.dataset.muesp]; if (!x) return;
+      const m = muLeer(), an = (MU_ANIOS.find(y => y[0] === anio) || [])[1] || "";
+      const curso = val("curso") || an;
+      const linea = `${curso} | ${x.t}${m.resp || val("docente") ? ` | ${m.resp || val("docente")}` : ""}`;
+      m.stands = [String(m.stands || "").trim(), linea].filter(Boolean).join("\n");
+      const s = muStands(linea)[0]; m.act = m.act || {}; m.act[muKey(s)] = x.a.filter(id => muActPorId(id)).slice(0, 2);
+      muGuardar(m);
+      const t = $("mu-stands"); if (t) t.value = m.stands;
+      muPrev(); renderMuEsp();
+      toast(`Se sumó el stand «${x.t}» con sus actividades. Cambiá el curso si hace falta.`);
+      return;
+    }
+    if (e.target.closest('[data-mu="esp-docx"]')){ const {mat} = muEspSel(); bajarDoc(modeloMuEsp(), `muestra-de-${mat}-${hoyIso()}`, "docx", `Guía de la muestra de ${MU_ESP[mat].n} descargada.`); }
+  });
+}
+function init57(){ try { bindMuEsp(); } catch (e) { registrarError("init57", e); } }
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -22867,7 +23039,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
