@@ -1832,6 +1832,8 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .mu-esp-s{font-style:italic}
 .mu-esp-f{margin-bottom:4px}
 
+.mu-esp-n{margin:4px 0 0;font-weight:600}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -4800,6 +4802,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-10-31-g", fecha:"2026-10-31", items:[
+    "Muestra de la escuela: el apartado de temas para exponer ahora cubre todas las materias, de 1.º a 6.º año. Elegís la materia y el año, y cada saber del diseño trae un tema con qué exponer, la idea que se lleva el visitante, una pregunta para el público y actividades.",
+    "Nuevo botón «Sumar todos los temas de este año», que arma de una vez los stands del curso con sus actividades.",
+    "Se sumaron 109 actividades para los visitantes de todas las áreas: física, historia, química, biología, matemática, lengua, inglés, tecnología, arte, educación física, ética, filosofía, psicología, sociología, economía, informática, comunicación, geografía y el taller. Todas sin fuego, vidrio, productos químicos, líquidos, alimentos ni seres vivos."
+  ]},
   {id:"2026-10-31-f", fecha:"2026-10-31", items:[
     "Muestra de la escuela: nuevo apartado «Muestra de Física o de Historia». Elegís el espacio y el año (de 1.º a 3.º o Ciclo Orientado) y ves los temas para exponer, ligados a los saberes del diseño y a los NAP, con qué mostrar, la idea que se lleva el visitante, una pregunta para el público y actividades. Con un toque se suman como stands.",
     "Se sumaron 31 actividades para los visitantes: 11 de Física y 20 de Historia (fuentes, la Batalla de Tucumán, el Congreso de 1816, el ingenio y el tren, el voto antes y después de 1912, Malvinas, memoria). Todas sin fuego, sin vidrio y sin productos químicos."
@@ -16461,7 +16468,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "47 (31/10/2026)";
+const LAPACHO_VERSION = "48 (31/10/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -22924,36 +22931,13 @@ const MU_ESP = {
     ]
   }}
 };
-const MU_ANIOS = [["7", "1.º año"], ["8", "2.º año"], ["9", "3.º año"], ["co", "Ciclo Orientado"]];
-function muEspSel(){ const m = muLeer(); return {mat:MU_ESP[m.espMat] ? m.espMat : (val("materia") === "historia" ? "historia" : "fisica"), anio:MU_ANIOS.some(x => x[0] === m.espAnio) ? m.espAnio : (["7", "8", "9"].includes(val("anio")) ? val("anio") : +val("anio") >= 10 ? "co" : "8")}; }
+const MU_ANIOS = [["7", "1.º año"], ["8", "2.º año"], ["9", "3.º año"], ["10", "4.º año"], ["11", "5.º año"], ["12", "6.º año"], ["co", "Ciclo Orientado (NAP)"]];
 const muActPorId = id => MU_ACT.find(x => x.id === id) || MU_GEN.find(x => x.id === id) || null;
-function htmlMuEsp(){
-  const {mat, anio} = muEspSel(), E = MU_ESP[mat], L = E.anios[anio] || [];
-  const stands = muStands(muDatos().stands).map(s => norm(s.tema));
-  return `<div class="cfg-grid mu-esp-f"><div class="f"><label for="mu-esp-mat">Espacio curricular</label><select id="mu-esp-mat">${Object.entries(MU_ESP).map(([k, x]) => `<option value="${k}"${k === mat ? " selected" : ""}>${x.n}</option>`).join("")}</select></div>
-      <div class="f"><label for="mu-esp-anio">Año</label><select id="mu-esp-anio">${MU_ANIOS.map(([k, t]) => `<option value="${k}"${k === anio ? " selected" : ""}>${t}</option>`).join("")}</select></div></div>
-    <p class="hint">${esc(E.fuente)} Cada tema trae qué exponer, la idea que se lleva el visitante y actividades en las que participa.</p>
-    <ul class="mu-esp-l">${L.map((x, i) => { const ya = stands.includes(norm(x.t)); return `<li class="mu-esp-i"><div class="mu-esp-top"><b>${esc(x.t)}</b>${ya ? `<span class="der-k si">En tus stands</span>` : ""}</div>
-      <p class="hint mu-esp-s">${esc(x.s)}</p>
-      <p><b>La idea que se lleva el visitante:</b> ${esc(x.idea)}</p>
-      <p><b>Qué exponer:</b></p><ul class="cp-reglas">${x.exp.map(e => `<li>${esc(e)}</li>`).join("")}</ul>
-      <p><b>Pregunta para el público:</b> ${esc(x.preg)}</p>
-      <p><b>Actividades para los visitantes:</b> ${x.a.map(muActPorId).filter(Boolean).map(a => esc(a.t)).join(" · ")}</p>
-      <div class="cur-bar"><button type="button" class="btn btn-sm${ya ? "" : " btn-primary"}" data-muesp="${i}"${ya ? " disabled" : ""}>${ya ? "Ya está en los stands" : "Sumar como stand"}</button></div></li>`; }).join("")}</ul>
-    <div class="cur-bar"><button type="button" class="btn btn-sm" data-mu="esp-docx">Descargar la guía de ${esc(E.n)} (Word)</button></div>`;
-}
-function modeloMuEsp(){
-  const {mat, anio} = muEspSel(), E = MU_ESP[mat], L = E.anios[anio] || [], an = (MU_ANIOS.find(x => x[0] === anio) || [])[1] || "";
-  return {inst:val("institucion"), titulo:`Muestra de ${E.n}`, subtitulo:`${an}: temas para exponer y actividades para los visitantes`, faltaSub:"", datos:[["Docente", val("docente")]].filter(d => d[1]),
-    secs:[...L.map((x, i) => ({h:x.t, pageBreak:i > 0, body:[`Saber: ${x.s}`, "", `La idea que se lleva el visitante: ${x.idea}`, "", "Qué exponer:", ...x.exp.map(e => `- ${e}`), "", `Pregunta para el público: ${x.preg}`, "", "Actividades para los visitantes:", ...x.a.map(muActPorId).filter(Boolean).map(a => `- ${muTxtIdea(a)}`)].join("\n")})),
-      {h:"Fuente de los temas", body:E.fuente},
-      {h:"Seguridad", body:"Ninguna actividad usa fuego, vidrio ni productos químicos. Las imágenes, los datos y las fuentes de los paneles dicen de dónde salen."}], firmas:null};
-}
 function renderMuEsp(){ const b = $("mu-esp-b"); if (b) b.innerHTML = htmlMuEsp(); }
 function renderMuestra(){
   renderMuestraV46();
   const ideas = $("mu-ideas");
-  if (ideas && !$("mu-esp")) ideas.insertAdjacentHTML("beforebegin", `<details class="mu-ideas mu-esp" id="mu-esp"><summary><h3 class="lic-h">Muestra de Física o de Historia: temas y actividades</h3></summary><div id="mu-esp-b"></div></details>`);
+  if (ideas && !$("mu-esp")) ideas.insertAdjacentHTML("beforebegin", `<details class="mu-ideas mu-esp" id="mu-esp"><summary><h3 class="lic-h">Muestra por materia: temas para exponer y actividades</h3></summary><div id="mu-esp-b"></div></details>`);
   renderMuEsp();
 }
 function bindMuEsp(){
@@ -22980,6 +22964,542 @@ function bindMuEsp(){
   });
 }
 function init57(){ try { bindMuEsp(); } catch (e) { registrarError("init57", e); } }
+
+/* ============================================================
+   Versión 48: Muestra por materia, para todas las materias (31/10/2026)
+   Parte 1: actividades nuevas para los visitantes, por área.
+   Formato de cada línea: id | palabras clave | título | qué hace el visitante | materiales | cuidado
+   Todas respetan las reglas de la muestra: sin fuego, vidrio, productos químicos, líquidos, alimentos ni seres vivos.
+   ============================================================ */
+const MU_ACT_TXT = `
+q-modelos|quimica modelos atomicos atomo particulas subatomicas estructura dalton thomson rutherford bohr|Los modelos del átomo en la mesa|El visitante ordena cuatro maquetas del átomo (Dalton, Thomson, Rutherford y Bohr) y lee qué experimento obligó a cambiar cada modelo.|Maquetas de telgopor o plastilina, tarjetas con el experimento de cada modelo.|
+q-molecula|quimica uniones enlaces ionicos covalentes lewis electrones de valencia moleculas|Armá la molécula|El visitante une círculos de cartulina con sus electrones de valencia para formar agua, dióxido de carbono y sal, y descubre cuándo se comparten electrones y cuándo se ceden.|Círculos de cartulina con imanes o abrojo, tablero, tarjetas con las fórmulas.|
+q-ph|quimica acidos bases ph indicadores neutralizacion|El semáforo del pH|El visitante ubica fotos de productos de la casa en una escala de pH gigante. Después mira en video cómo el repollo colorado cambia de color con cada uno.|Escala de pH impresa, fotos plastificadas, video de la experiencia.|Solo fotos y video: ningún producto en la mesa.
+q-masa|quimica reacciones quimicas conservacion de la masa ecuaciones estequiometria|¿Se pierde la masa?|El visitante balancea una ecuación con fichas de átomos sobre una balanza de dos platos y después mira en video una reacción en un frasco cerrado sobre una balanza.|Balanza de dos platos de juguete, fichas de colores por elemento, video.|
+q-velocidad|quimica velocidad de reaccion equilibrio quimico temperatura catalizador|Más rápido o más lento|El visitante predice en qué vaso se disuelve antes una pastilla efervescente y lo comprueba en un video en cámara lenta. Ubica el resultado en un gráfico.|Video, gráfico para completar, fichas.|Solo en video.
+q-carbono|quimica organica carbono hidrocarburos grupos funcionales cadenas|Cadenas de carbono|El visitante arma una cadena de hidrocarburo con bolitas de plastilina y trozos de sorbete y la compara con la fórmula del panel.|Plastilina de colores, sorbetes cortados, tarjetas con fórmulas.|
+q-redox|quimica oxido reduccion electroquimica pilas corrosion|La química de las pilas|El visitante clasifica fotos de objetos oxidados y de pilas, y arma un circuito con una pila comercial para identificar dónde ocurre la oxidación.|Fotos, portapilas con pila AA, LED, esquema de la pila.|Pilas comunes, nunca abiertas.
+q-etiquetas|quimica biomoleculas hidratos lipidos proteinas nutricion etiquetas|Las etiquetas hablan|El visitante busca en envases vacíos y limpios cuántos hidratos de carbono, grasas y proteínas tiene cada producto y los ordena en una tabla.|Envases vacíos y limpios, tabla para completar.|Solo envases vacíos.
+q-aire|quimica ambiental contaminacion aire agua suelo ambiente|¿Qué hay en el aire de tu ciudad?|El visitante marca en un mapa de Tucumán dónde cree que hay más contaminación y lo compara con datos de monitoreo con su fuente.|Mapa grande, fichas adhesivas, tabla de datos con la fuente.|
+q-bioetanol|quimica industrial materiales argentina bioetanol caña azucar tucuman|De la caña al combustible|El visitante ordena tarjetas con las etapas de producción de azúcar y de bioetanol en un ingenio tucumano y responde qué se aprovecha del bagazo.|Tarjetas de etapas, esquema del proceso, fotos con su fuente.|
+q-endo-exo|quimica endotermico exotermico energia reacciones calor|¿Libera o absorbe energía?|El visitante clasifica tarjetas de procesos cotidianos (fogón, compresa fría, fotosíntesis, respiración) en dos columnas y lo comprueba con un video.|Tarjetas, afiche en dos columnas, video.|Sin fuego en la mesa.
+b-adn|biologia adn genetica herencia bases nucleotidos|Abrí el ADN como un cierre|El visitante completa una doble hélice con fichas de colores, uniendo cada base con su par, y lee qué información guarda.|Modelo de doble hélice de cartón o cierre, fichas de colores para las bases.|
+b-mendel|biologia herencia mendel genetica alelos dominante recesivo|¿A quién te parecés?|El visitante tira dos monedas (una por progenitor) para combinar alelos y anota el resultado en un cuadro. Al final se compara con la proporción de Mendel.|Monedas, cuadro de Punnett grande, fichas.|
+b-picos|biologia evolucion seleccion natural adaptacion darwin biodiversidad|El pico justo|El visitante «come» semillas de papel con distintas herramientas (pinza, cuchara, broche) y descubre qué pico conviene para cada alimento.|Herramientas de cocina limpias, semillas de papel o botones, cronómetro.|Botones grandes, que no se traguen.
+b-yungas|biologia biodiversidad conservacion argentina yungas especies nativas tucuman|Las yungas tucumanas|El visitante ubica en un mapa de Tucumán fotos de especies nativas y de amenazas, y propone una acción para conservarlas.|Mapa, fotos de especies con su fuente, fichas.|
+b-inmune|biologia sistema inmunologico defensas salud vacunas|Defensores del cuerpo|El visitante juega a defender el organismo con tarjetas de barreras, glóbulos blancos y vacunas frente a tarjetas de microorganismos.|Tarjetas de juego, tablero del cuerpo.|
+b-arbol|biologia fotosintesis respiracion metabolismo nutrientes plantas|¿De dónde sale la madera de un árbol?|El visitante vota si la masa del árbol sale del suelo, del agua o del aire, y el stand explica la fotosíntesis con la experiencia de Van Helmont.|Urna, cartel de votación, esquema de la fotosíntesis.|
+b-camuflaje|biologia poblaciones ecologia depredador presa camuflaje seleccion|Presas camufladas|El visitante tiene diez segundos para «cazar» fichas de papel de colores sobre una tela estampada. Se cuenta qué colores sobrevivieron.|Tela estampada, fichas de papel de varios colores, cronómetro.|
+b-mitos|biologia salud enfermedad educacion sexual integral esi mitos|Mitos y verdades de la salud|El visitante decide si cada frase es mito o verdad y da vuelta la tarjeta para leer la respuesta con su fuente.|Tarjetas con frases y respuestas con fuente oficial.|Revisar las tarjetas de ESI con el equipo docente.
+b-biotec|biologia biotecnologia etica transgenicos clonacion debate|¿Lo harías?|El visitante lee un caso de biotecnología (un cultivo resistente a la sequía, una terapia génica) y vota a favor o en contra con un argumento.|Tarjetas de casos, urna, mural de argumentos.|
+m-pitagoras|matematica pitagoras triangulo rectangulo cuadrados geometria|El rompecabezas de Pitágoras|El visitante arma con las piezas de los dos cuadrados chicos el cuadrado grande y comprueba el teorema sin hacer cuentas.|Piezas de cartón o goma eva, plantilla del triángulo.|
+m-funcion|matematica funciones lineales cuadraticas grafico pendiente ordenada|La función en el piso|Sobre un eje cartesiano marcado en el piso, cada visitante se para en el punto que le corresponde según la fórmula y entre todos forman la recta o la parábola.|Cinta de papel para el eje, tarjetas con valores de x.|
+m-encuesta|matematica estadistica media mediana moda probabilidad datos encuesta|Encuesta en vivo|El visitante responde una pregunta poniendo una ficha en un gráfico de barras, y el stand calcula en el momento la media, la mediana y la moda.|Gráfico de barras en afiche, fichas, calculadora.|
+m-cuotas|matematica financiera interes simple compuesto porcentaje cuotas|¿Te conviene esta cuota?|El visitante elige entre pagar al contado, en cuotas sin interés o con interés, y el stand calcula cuánto paga en cada caso.|Afiche con planes de pago, calculadora, tabla.|
+m-altura|matematica trigonometria razones tangente triangulos medicion|Medí el mástil sin subir|El visitante mide el ángulo hasta la punta del mástil con un clinómetro casero y calcula la altura con la tangente.|Clinómetro de transportador, cinta métrica, tabla de tangentes o calculadora.|
+m-papel|matematica exponencial logaritmo crecimiento potencias|Doblá el papel|El visitante dobla una hoja por la mitad todas las veces que puede y calcula el grosor si pudiera seguir. El stand muestra el crecimiento en un gráfico.|Hojas, regla, gráfico exponencial.|
+m-balanza|matematica ecuaciones algebra incognita balanza lenguaje algebraico|La balanza de las ecuaciones|El visitante equilibra una balanza con bolsitas de peso desconocido y pesas, y descubre cuánto pesa cada bolsita sin abrirla.|Balanza de dos platos, bolsitas cerradas, pesas.|
+m-recta|matematica numeros enteros racionales reales recta numerica fracciones|La recta numérica gigante|El visitante ubica en una recta en el piso un número entero, una fracción y la raíz de 2, que se marca con un compás de hilo.|Cinta de papel, tarjetas de números, hilo para el compás.|
+m-pendiente|matematica derivada pendiente calculo limite tangente|La pendiente en cada punto|El visitante mide con una regla la pendiente de distintos tramos de una ruta de montaña dibujada y descubre dónde es más empinada.|Gráfico grande de un perfil de ruta, reglas.|
+m-patrones|matematica sucesiones patrones regularidades limite|¿Qué figura sigue?|El visitante arma la figura que sigue en un patrón de fichas y escribe la regla que la genera.|Fichas o palitos, tarjetas con patrones.|
+l-cadaver|lengua escritura colectiva produccion escrita creatividad narrativa|Cadáver exquisito|Cada visitante escribe una línea de un cuento viendo solo la anterior. Al final del día se lee el cuento completo.|Tira de papel larga, lapiceras.|
+l-debate|lengua argumentacion tesis argumentos contraargumentos debate oralidad|Debate de un minuto|El visitante elige una postura ante una pregunta y tiene un minuto para dar un argumento; un estudiante le responde con un contraargumento.|Tarjetas de temas, reloj de arena o cronómetro.|
+l-falsa|lengua medios noticias falsas lectura critica discursos periodisticos|¿Verdadera o falsa?|El visitante lee titulares y decide si son noticias reales o falsas, con una guía de preguntas para chequear la fuente.|Titulares impresos, guía de chequeo, celular para buscar.|
+l-corrector|lengua revision correccion ortografia gramatica cohesion coherencia|Corregí al corrector|El visitante revisa un texto con errores y usa el código de corrección del curso para marcarlos.|Textos breves con errores, código de corrección, lápices.|
+l-variedades|lengua variedades linguisticas regionalismos español dialecto|¿Cómo lo decís vos?|El visitante dice cómo llama a ciertos objetos y lo ubica en un mapa de las variedades del español.|Mapa de América, tarjetas de palabras.|
+l-autores|lengua literatura latinoamericana argentina autores fragmentos movimientos|Adiviná el autor|El visitante lee fragmentos breves y los une con el autor y el movimiento, con pistas en el panel.|Tarjetas de fragmentos, fotos y fichas de autores.|
+l-opiniones|lengua ensayo opinion argumentacion escritura|Muro de opiniones|El visitante responde una pregunta del curso con una opinión y un argumento en un papel que se pega en el muro.|Papelitos autoadhesivos, mural.|
+i-interview|ingles to be presentaciones saludos comunicacion oral|Interview me!|El visitante responde tres preguntas en inglés con la ayuda de un estudiante (nombre, edad, lo que le gusta) y recibe una tarjeta con sus respuestas.|Tarjetas con preguntas y respuestas modelo.|
+i-routine|ingles present simple rutinas horarios|What time do you...?|El visitante mueve las agujas de un reloj de cartón y cuenta su rutina con frases del panel.|Reloj de cartón, tarjetas de actividades.|
+i-story|ingles past simple past continuous narrar cuento|Tell me a story|El visitante elige tres imágenes y arma una historia en pasado con los verbos del panel.|Tarjetas de imágenes, lista de verbos.|
+i-future|ingles futuro will going to predicciones modal verbs|The fortune teller|El visitante saca una tarjeta y un estudiante le «predice» el futuro con will o going to; después el visitante predice uno.|Tarjetas de predicciones, cartel con estructuras.|
+i-signs|ingles textos autenticos lectura comprension carteles|Read the signs|El visitante lee carteles reales en inglés (de aeropuertos, envases, juegos) y dice qué significan.|Copias de carteles reales, tarjetas de respuestas.|
+i-listen|ingles comprension auditiva audio podcast escucha|Listen and guess|El visitante escucha un audio breve con auriculares y responde dos preguntas para adivinar de qué se habla.|Celular o reproductor, auriculares, tarjetas de preguntas.|
+t-proceso|tecnologia procesos productivos insumos bienes servicios etapas|De la materia prima al producto|El visitante ordena tarjetas con las etapas de un proceso productivo de la región (yerba, limón, azúcar) e identifica insumos, operaciones y productos.|Tarjetas de etapas, diagrama de flujo para completar.|
+t-artefactos|tecnologia artefactos herramientas cambio tecnico antes ahora|Antes y ahora|El visitante une artefactos de antes con los de ahora que cumplen la misma función y piensa qué cambió.|Objetos prestados o fotos, tarjetas de funciones.|Objetos sin partes cortantes.
+t-semaforo|tecnologia sistemas control automatizacion programacion arduino energia|El semáforo automático|El visitante programa la secuencia de un semáforo de maqueta con interruptores o con una placa programable y la prueba.|Maqueta con LED, interruptores o placa programable, pilas.|Solo pilas, sin conexión a la red eléctrica.
+t-adentro|tecnologia residuos electronicos reciclaje materiales impacto ambiental|¿Qué hay adentro?|El visitante mira un aparato desarmado y clasifica sus partes según el material y si se pueden reciclar.|Aparato viejo desarmado sin pilas ni baterías, cajas de clasificación.|Sin baterías ni pantallas rotas.
+t-torre|tecnologia diseño resolucion de problemas proyecto prototipo|Desafío de la torre|El visitante tiene tres minutos para construir la torre más alta que se sostenga, con 20 sorbetes y cinta.|Sorbetes, cinta de papel, cinta métrica, cronómetro.|
+a-color|artistica color lenguaje visual forma textura mezcla|El círculo del color|El visitante superpone láminas transparentes de colores para descubrir las mezclas y arma su propio círculo cromático.|Acetatos de colores, círculo cromático para completar.|
+a-escultura|artistica volumen tridimensional escultura tecnicas|Escultura colectiva|Cada visitante agrega una pieza de cartón encastrable a una escultura que crece durante el día.|Piezas de cartón con ranuras, base.|
+a-ritmo|artistica musica ritmo percusion corporal melodia timbre|Ritmo en ronda|El visitante sigue y después propone un ritmo con palmas y pies en una ronda guiada por estudiantes.|Espacio libre, cartel con figuras rítmicas.|
+a-impro|artistica teatro improvisacion personajes expresion corporal|Improvisación en dos minutos|El visitante saca una tarjeta de personaje y otra de situación e improvisa una escena breve con un estudiante.|Tarjetas de personajes y situaciones.|
+a-noa|artistica patrimonio cultural noa coplas tejidos ceramica arte local|Patrimonio del NOA|El visitante reconoce en fotos y objetos prestados técnicas del NOA (tejido, cerámica, copla) y las ubica en el mapa.|Fotos con su fuente, objetos prestados, mapa.|Objetos prestados con el permiso de sus dueños.
+a-cine|artistica audiovisual cine cortos video produccion|Cine de un minuto|El visitante mira cortos de un minuto hechos por el curso y vota cuál le gustó más con un argumento.|Pantalla o proyector, urna, tarjetas.|
+a-critica|artistica critica analisis obras arte contemporaneo|Hacé tu crítica|El visitante elige una obra de la galería y escribe una crítica breve con la guía de tres preguntas.|Guía impresa, tarjetas, mural.|
+ef-circuito|educacion fisica coordinacion capacidades motoras habilidades motrices circuito|Circuito de coordinación|El visitante recorre un circuito de conos, aros y saltos, y un estudiante toma el tiempo.|Conos, aros, cronómetro.|Superficie sin desniveles; calzado adecuado.
+ef-cooperativo|educacion fisica juegos cooperativos equipo cooperacion|El juego del paracaídas|Un grupo de visitantes mueve juntos una tela grande para hacer saltar una pelota sin que se caiga.|Tela grande o paracaídas de juego, pelota liviana.|
+ef-arbitro|educacion fisica deportes reglamento juego limpio arbitraje|¿Qué cobra el árbitro?|El visitante mira situaciones de juego en tarjetas o en video y decide qué cobraría según el reglamento.|Tarjetas o video, reglamento resumido.|
+ef-semana|educacion fisica condicion fisica salud entrenamiento vida activa planificacion|Armá tu semana activa|El visitante arma un plan de actividad física para una semana con tarjetas y recibe recomendaciones según su edad.|Tarjetas de actividades, planilla semanal.|
+ef-mochila|educacion fisica vida en la naturaleza campamento nudos cuidado ambiental|Mochila de campamento|El visitante arma una mochila con lo necesario para una salida a la naturaleza y aprende un nudo básico.|Mochila, objetos de campamento, sogas.|
+ef-flexibilidad|educacion fisica flexibilidad condicion fisica medicion aptitud|Test de flexibilidad|El visitante hace la prueba de flexibilidad en un cajón de medición y compara el resultado con la tabla, sin competir.|Cajón de cartón con regla, tabla de referencia.|Sin forzar: se hace una sola vez.
+e-dilemas|etica valores normas dilemas moral responsabilidad|Dilemas en tarjetas|El visitante lee un dilema y elige qué haría, con un argumento. El stand muestra cómo respondieron los demás.|Tarjetas de dilemas, urna, mural.|
+e-derechos|etica derechos humanos derechos de niños adolescentes ley 26061|¿Es un derecho?|El visitante decide si cada situación de la tarjeta respeta o vulnera un derecho y busca cuál en la lista.|Tarjetas de situaciones, lista de derechos.|
+e-constitucion|etica constitucion nacional garantias articulos derechos|Buscá en la Constitución|El visitante busca en un ejemplar de la Constitución el artículo que responde una pregunta cotidiana.|Ejemplares de la Constitución, tarjetas de preguntas.|
+e-urna|etica participacion democratica ciudadania centro de estudiantes votacion|Votá en el centro de estudiantes|El visitante vota en una elección simulada con padrón, boleta y urna, y cuenta los votos con el stand.|Urna, boletas, padrón ficticio.|Listas y candidatos ficticios.
+e-poderes|etica estado division de poderes constitucion instituciones|¿Qué poder interviene?|El visitante decide qué poder del Estado actúa en cada caso de la tarjeta (sancionar una ley, juzgar, ejecutar).|Tarjetas de casos, tres cajas rotuladas.|
+f-preguntas|filosofia asombro preguntas filosoficas dialogo|La pregunta del millón|El visitante deja una pregunta que no tenga respuesta fácil en un mural; el curso elige algunas para dialogar.|Mural, papelitos, fibrones.|
+f-falacias|filosofia logica argumentos falacias razonamiento|Cazá la falacia|El visitante lee publicidades y frases y encuentra la falacia con la ayuda de un cartel de tipos de falacias.|Copias de publicidades, cartel de falacias.|
+f-tranvia|filosofia etica libertad responsabilidad experimento mental dilema|El dilema del tranvía|El visitante elige qué haría en el dilema del tranvía y en una versión distinta, y compara sus razones.|Tarjetas del dilema, urna.|
+p-ilusiones|psicologia percepcion ilusiones atencion procesos psicologicos|Ilusiones que engañan|El visitante mira ilusiones ópticas y responde qué ve; el stand explica qué hace el cerebro.|Láminas de ilusiones ópticas.|
+p-memoria|psicologia memoria aprendizaje atencion|¿Cuánto recordás?|El visitante mira una lista de 15 palabras durante 30 segundos y escribe las que recuerda. El stand muestra qué palabras se recuerdan más.|Lista de palabras, tarjetas, gráfico.|
+p-emociones|psicologia emociones vinculos comunicacion|La ruleta de las emociones|El visitante gira una ruleta, ve una situación y nombra la emoción que siente y qué podría hacer.|Ruleta de cartón, tarjetas de situaciones.|
+p-grupo|psicologia social influencia presion de grupo prejuicios actitudes|¿Seguís al grupo?|El visitante compara líneas de distinto largo después de escuchar respuestas equivocadas de otros, como en el experimento de Asch.|Láminas de líneas, guion para los estudiantes.|Al final se explica el experimento a cada visitante.
+s-encuesta|sociologia investigacion social encuesta entrevista metodologia|Encuestá al visitante|El visitante responde una encuesta breve del curso y ve los resultados actualizados en un gráfico.|Encuesta impresa o formulario, gráfico.|Encuesta anónima.
+s-reparto|sociologia economia desigualdad distribucion del ingreso estructura social|El reparto|Diez visitantes se reparten diez sillas según los datos de distribución del ingreso y conversan qué muestra.|Sillas o fichas, datos con su fuente.|
+s-juventudes|sociologia juventudes culturas juveniles consumos estilos de vida|¿Qué escuchás, qué mirás?|El visitante marca en un mural sus consumos culturales y compara con los de otras generaciones.|Mural, fichas adhesivas de colores.|
+ec-mercado|economia mercado oferta demanda precios equilibrio|Mercado en vivo|Los visitantes compran y venden un producto ficticio con fichas hasta encontrar el precio de equilibrio.|Fichas, tarjetas de compradores y vendedores, pizarra de precios.|
+ec-canasta|economia dinero inflacion precios canasta|La canasta de antes y de ahora|El visitante compara cuánto costaba una canasta en distintos años y calcula cuánto aumentó, con datos del INDEC.|Tabla de precios con su fuente, calculadora.|
+ec-presupuesto|economia estado presupuesto impuestos gasto publico|Armá el presupuesto|El visitante reparte cien fichas entre salud, educación, seguridad y obras, y lo compara con el presupuesto real de la provincia.|Fichas, cajas rotuladas, datos con su fuente.|
+ec-emprende|economia emprendimientos economia regional noa costos|Nuestro emprendimiento|El visitante conoce el producto que pensó el curso, sus costos y su precio, y deja una sugerencia.|Prototipo, planilla de costos, buzón.|Sin alimentos.
+c-radio|comunicacion radio podcast produccion radial oralidad|Radio en vivo|El visitante participa de un programa de radio del curso: responde una pregunta al aire o graba un saludo.|Micrófono o celular, guion del programa.|Pedir permiso para grabar la voz.
+c-noticia|comunicacion periodismo noticia cronica entrevista|Escribí la noticia|El visitante escribe una noticia breve sobre la muestra con la pirámide invertida y la pega en el diario mural.|Plantilla de la pirámide invertida, diario mural.|
+c-posteo|comunicacion redes sociales lectura critica mensajes mediaticos digital|Detrás del posteo|El visitante analiza una publicación de redes con tres preguntas: quién la hizo, para qué y qué deja afuera.|Capturas de publicaciones, guía de preguntas.|Sin datos personales en las capturas.
+inf-robot|informatica algoritmos pensamiento computacional programacion instrucciones|El robot humano|El visitante da instrucciones paso a paso a un estudiante que hace de robot para llegar a una meta en una cuadrícula del piso.|Cuadrícula en el piso, tarjetas de instrucciones.|
+inf-binario|informatica binario datos codificacion bits sistemas|Tu nombre en binario|El visitante escribe su inicial en código binario con cuentas de dos colores y se lleva una pulsera.|Cuentas de dos colores, hilo elástico, tabla ASCII.|Cuentas grandes.
+inf-claves|informatica ciudadania digital privacidad seguridad contraseñas|¿Qué tan segura es tu contraseña?|El visitante arma contraseñas inventadas con tarjetas y el stand estima cuánto tardaría en adivinarse.|Tarjetas de letras y símbolos, tabla de tiempos.|Nunca contraseñas reales.
+inf-red|informatica redes internet nube paquetes servicios|Cómo viaja un mensaje|El visitante lleva un mensaje partido en paquetes por una red de hilos entre «routers» y ve cómo se arma al llegar.|Hilos, tarjetas de paquetes, carteles de routers.|
+inf-ia|informatica inteligencia artificial datos sesgos sociedad|¿Quién decide la máquina?|El visitante lee casos de decisiones tomadas por sistemas de IA y decide si son justas, pensando en los datos que usaron.|Tarjetas de casos, urna.|
+inf-datos|informatica bases de datos consultas organizacion tablas|Buscá en la base de datos|El visitante hace una consulta a una base de datos del curso (por ejemplo, de libros o de especies) y descubre cómo se organiza la información.|Computadora o fichas en tablas, guía de consultas.|
+tal-semaforo|taller autoevaluacion semaforo metacognicion habitos de estudio|El semáforo de lo que aprendí|El visitante prueba la autoevaluación del curso: elige verde, amarillo o rojo para tres saberes y anota qué le haría falta.|Tarjetas de colores, planilla.|
+tal-rompecabezas|taller trabajo colaborativo rompecabezas roles cooperacion|Rompecabezas de expertos|Tres visitantes reciben una parte distinta de un tema y tienen que explicársela a los otros para resolver una pregunta.|Tarjetas de cada parte, pregunta final.|
+tal-agenda|taller organizacion del tiempo agenda tareas oficio de estudiante consignas|Armá tu agenda|El visitante organiza una semana de tareas en una agenda de ejemplo y recibe consejos de los estudiantes.|Agendas de ejemplo, tarjetas de tareas.|
+g-croquis|geografia representacion cartografica mapa espacio geografico territorio paisaje|Dibujá tu barrio|El visitante dibuja el croquis del camino de su casa a la escuela con referencias y lo compara con un mapa.|Hojas, lápices, mapa impreso de la zona.|
+g-proyecciones|geografia cartografia proyecciones mapas planisferio globo|¿Groenlandia es tan grande?|El visitante compara el tamaño de países en un planisferio y en un globo, y descubre por qué los mapas deforman.|Planisferio, globo terráqueo, siluetas de países a escala.|
+g-piramides|geografia poblacion demografia piramides indicadores migraciones|Pirámides de población|El visitante compara las pirámides de población de Tucumán, Argentina y otro país, y explica qué cambia.|Pirámides impresas con datos del INDEC y su fuente.|
+g-limon|geografia circuitos productivos economia regional tucuman limon azucar|El circuito del limón|El visitante sigue el recorrido del limón tucumano desde la finca hasta el puerto y ubica a los actores de cada etapa.|Mapa del circuito, tarjetas de actores, fotos con su fuente.|Fotos, sin fruta en la mesa.
+g-origen|geografia migraciones poblacion diversidad cultural|¿De dónde venimos?|El visitante marca en un mapa dónde nacieron sus abuelos y el stand muestra el mapa de migraciones de la comunidad.|Mapa, chinches de plástico o fichas adhesivas.|
+g-riesgos|geografia riesgos desastres ambiente inundaciones sismos problematicas ambientales|Mapa de riesgos|El visitante ubica en un mapa de Tucumán zonas de inundación, deslizamiento y sismos, y propone una medida de prevención.|Mapa con datos de la fuente oficial, fichas.|
+g-sig|geografia cartografia digital sistemas de informacion geografica sig gps capas|Tu ciudad en capas|El visitante superpone capas en un mapa digital (escuelas, hospitales, ríos) y mide distancias.|Tableta o computadora con un mapa digital, guía de pasos.|
+g-america|geografia america mercosur integracion regional paises bloques|Rompecabezas de América|El visitante arma el mapa de América con piezas y pinta los países de cada bloque regional.|Rompecabezas de cartón, fichas de colores.|
+g-etiquetas|geografia globalizacion comercio circulacion de bienes economia mundial|¿Dónde se hizo tu ropa?|El visitante busca en la etiqueta de su ropa o de un objeto dónde se fabricó y lo marca en un planisferio.|Planisferio, fichas adhesivas.|
+`;
+MU_ACT.push(...MU_ACT_TXT.trim().split("\n").map(l => { const [id, k, t, que, mat, ojo] = l.split("|"); return {id, k, t, que, mat, ojo:ojo || ""}; }));
+MU_ACT.push(...`
+f-pistones|fisica fluidos presion pascal hidraulica prensa frenos|Fuerza multiplicada|El visitante empuja un pistón chico y levanta un peso con el grande, y descubre cómo funcionan el freno del auto y el gato hidráulico.|Dos pistones de plástico de distinto diámetro unidos por una manguera, solo con aire; pesas chicas.|Sin líquidos: el sistema funciona con aire.
+f-arquimedes|fisica fluidos arquimedes empuje flotacion densidad|¿Flota o se hunde?|El visitante predice si cada objeto flota y lo comprueba en un simulador; después compara la densidad de cada material en una tabla.|Computadora con un simulador de flotación, objetos de distintos materiales, tabla de densidades.|El agua está solo en la pantalla.
+f-lenz|fisica electromagnetismo induccion lenz faraday generador corriente inducida|El imán que cae lento|El visitante suelta un imán por un caño de PVC y por uno de aluminio y mide cuánto tarda en cada uno. El stand explica la inducción.|Caño de aluminio y caño de PVC del mismo largo, imán de neodimio atado a un hilo, cronómetro.|El imán no se acerca a celulares ni a tarjetas.
+f-decaimiento|fisica nuclear radiactividad vida media decaimiento fision|La vida media con dados|El visitante tira 50 dados, saca los que muestran un seis y repite. El gráfico de los que quedan muestra cómo decae una muestra radiactiva.|Dados, bandeja, gráfico para completar.|
+f-escala-solar|fisica astronomia sistema solar planetas distancias escala estrellas universo|El Sistema Solar en el pasillo|El visitante recorre el pasillo con los planetas ubicados a escala y descubre cuánto espacio vacío hay entre ellos.|Carteles de los planetas, cinta métrica, tabla de escalas.|
+f-simulador|fisica moderna fotoelectrico modelos atomicos termodinamica maquinas termicas simulador phet|Física en el simulador|El visitante cambia el color de la luz en un simulador del efecto fotoeléctrico y observa cuándo salen electrones; también puede probar el simulador de una máquina térmica.|Computadora con simuladores PhET de la Universidad de Colorado.|
+h-mapa-estado|historia estado nacional territorio organizacion nacional 1853 1880 constitucion|El mapa que se fue armando|El visitante superpone mapas de la Argentina de 1820, 1862 y 1884 y explica qué cambió y a costa de quiénes.|Mapas impresos en acetato con su fuente.|
+h-reparto-africa|historia imperialismo colonialismo reparto africa conferencia de berlin|El reparto de África|El visitante arma el mapa de África de 1914 con piezas de colores por potencia colonial y lo compara con un mapa de los pueblos africanos.|Rompecabezas de cartón, mapa de referencia con su fuente.|
+`.trim().split("\n").map(l => { const [id, k, t, que, mat, ojo] = l.split("|"); return {id, k, t, que, mat, ojo:ojo || ""}; }));
+/* Parte 2: temas para exponer de todas las materias.
+   Cada línea: año.índice | título | idea que se lleva el visitante | qué exponer (separado por ;) | pregunta para el público | actividades
+   El saber se toma de CURRICULUM[materia][año][índice], así el texto coincide siempre con el diseño. */
+const MU_ESP_TXT = {
+fisica:`
+10.0|La energía no se pierde, se degrada|La energía total se conserva, pero en cada transformación una parte se vuelve calor que ya no se aprovecha.|Cadena de transformaciones de una lamparita, con lo que se pierde como calor.;Lámpara incandescente y LED comparadas con sus etiquetas de eficiencia.|Si la energía se conserva, ¿por qué hay que ahorrarla?|rampa-canicas,panel-solar
+10.1|Máquinas que funcionan con calor|Una máquina térmica convierte en trabajo solo una parte del calor que recibe.|Esquema de la máquina de vapor y del motor de un auto.;El rendimiento de una máquina térmica con números reales.;La caldera de un ingenio tucumano, en fotos con su fuente.|¿Por qué el motor de un auto se calienta tanto?|termico-tacto,f-simulador
+10.2|Cuánto gasta tu casa|La potencia eléctrica depende de la tensión y de la corriente, y en la factura se paga la energía consumida.|Ley de Ohm con mediciones del curso.;Lectura de una factura de luz: kWh y potencia de los artefactos.|¿Qué gasta más en un mes: la heladera o el cargador del celular?|circuito-armable,conductores
+10.3|Sonido y luz, dos ondas distintas|El sonido necesita un medio para propagarse; la luz puede viajar por el vacío.|Velocidad, frecuencia y medio de propagación de cada onda.;El espectro electromagnético con usos cotidianos.|¿Por qué ves el relámpago antes de oír el trueno?|resorte-ondas,espectro-cd
+11.0|Tiros y trayectorias|Un movimiento en dos dimensiones se puede pensar como dos movimientos que ocurren a la vez.|Análisis en video de un tiro oblicuo con una pelota.;Diagramas de fuerzas de situaciones deportivas.|Si soltás una pelota y lanzás otra horizontal desde la misma altura, ¿cuál llega primero al piso?|carrito-rapidez,moneda-inercia
+11.1|Trabajo y potencia en el cuerpo|La potencia dice qué tan rápido se hace un trabajo.|Cálculo de la potencia al subir la escalera de la escuela.;Energía potencial y cinética en una montaña rusa.|¿Quién hace más trabajo: el que sube la escalera corriendo o caminando?|rampa-canicas,pendulo
+11.2|La presión de los fluidos|La presión se transmite en un fluido y el empuje depende del volumen que se desplaza.|Principio de Pascal en el freno del auto y el gato hidráulico.;Principio de Arquímedes: por qué flota un barco de acero.|¿Por qué un barco de miles de toneladas flota y un clavo se hunde?|f-pistones,f-arquimedes,ventosas
+11.3|De un imán a la electricidad de tu casa|Un imán que se mueve cerca de una bobina genera corriente: así funcionan las centrales eléctricas.|La experiencia de Faraday en un esquema.;Cómo genera electricidad una central hidroeléctrica o eólica.|¿Cómo enciende la luz una bicicleta con dínamo, sin pilas?|f-lenz,electroiman,campo-limaduras
+12.0|El átomo por dentro|Los modelos atómicos cambiaron cada vez que un experimento no encajaba con el modelo anterior.|Los modelos de Thomson, Rutherford y Bohr.;El efecto fotoeléctrico y la idea de fotón.;La dualidad onda-partícula con ejemplos.|¿Alguien vio alguna vez un átomo?|q-modelos,f-simulador
+12.1|La energía del núcleo|La fisión y la fusión liberan la energía del núcleo; la radiactividad también se usa en medicina y en la industria.|Fisión y fusión en un esquema.;Las centrales nucleares argentinas y la medicina nuclear, con fuentes oficiales.|¿Es peligrosa una radiografía?|f-decaimiento,gen-voto
+12.2|Einstein en tu bolsillo|El tiempo no transcurre igual para todos los observadores.|Los postulados de la relatividad especial con ejemplos.;Por qué los satélites del GPS corrigen sus relojes.|Si viajaras a una velocidad cercana a la de la luz, ¿envejecerías más lento?|gps-relatividad,gen-antes
+12.3|Nuestro lugar en el universo|El Sistema Solar es una parte muy chica de una galaxia entre miles de millones.|El Sistema Solar a escala.;El ciclo de vida de las estrellas.;Observatorios argentinos, en fotos con su fuente.|¿Cuánto tarda en llegar a la Tierra la luz del Sol?|f-escala-solar,fases-luna,estaciones
+12.4|Energía para el futuro|La matriz energética argentina depende mucho del gas, y las fuentes renovables vienen creciendo.|La matriz energética con datos oficiales.;Proyectos de energías renovables en el NOA.|¿Qué fuente de energía conviene sumar en Tucumán?|matriz-energetica,panel-solar
+`,
+historia:`
+10.0|La construcción del Estado nacional|Entre 1853 y 1880 se armó el Estado nacional con su Constitución, su territorio y sus instituciones.|La Constitución de 1853 y la federalización de Buenos Aires.;El territorio en mapas sucesivos y las campañas militares sobre los pueblos originarios.|¿Quiénes quedaron afuera de ese Estado?|h-mapa-estado,linea-tiempo
+10.1|Granero del mundo, puerto de llegada|La Argentina exportaba granos y carne, y recibió millones de inmigrantes.|Exportaciones e inmigración en gráficos.;La industria azucarera tucumana y el ferrocarril.|¿De dónde vinieron tus bisabuelos?|valija-inmigrante,ingenio-azucarero
+10.2|Fábricas e imperios|La industrialización europea impulsó el reparto colonial del mundo.|La fábrica y el trabajo obrero.;El reparto de África y de Asia en un mapa.|¿Por qué las potencias europeas querían colonias?|linea-montaje,h-reparto-africa
+11.0|Un siglo en guerra|Las dos guerras mundiales y la crisis de 1930 transformaron el mundo.|Causas y consecuencias de las guerras mundiales en una línea de tiempo.;El crac de 1929 y sus efectos en la Argentina.|¿Puede una crisis económica llevar a una guerra?|crack-29,detectives-fuentes
+11.1|De Yrigoyen a Perón|Entre 1916 y 1955 se ampliaron los derechos, pero también empezaron los golpes de Estado.|El primer gobierno elegido con la Ley Sáenz Peña.;El golpe de 1930.;El peronismo y los derechos sociales.|¿Desde cuándo votan las mujeres en la Argentina?|voto-saenz-pena,voto-mujeres
+11.2|El mundo dividido en dos|La Guerra Fría dividió el mundo en bloques mientras los pueblos de África y Asia se independizaban.|El mapa de los bloques.;La descolonización en una línea de tiempo.|¿Por qué se llamó «fría» si hubo tantas guerras?|mundo-dividido,gen-voto
+12.0|Entre golpes y proscripciones|Entre 1955 y 1983 los gobiernos civiles alternaron con dictaduras, y la última aplicó el terrorismo de Estado.|Línea de tiempo de los gobiernos de 1955 a 1983.;El cierre de ingenios en Tucumán en 1966.;El terrorismo de Estado, con fuentes oficiales y judiciales.|¿Qué cambió en los pueblos de Tucumán cuando cerraron los ingenios?|memoria-nunca-mas,linea-tiempo
+12.1|La democracia desde 1983|La democracia recuperada se sostuvo entre crisis económicas y nuevos derechos.|El Juicio a las Juntas, la crisis de 2001 y los derechos ampliados.;Entrevistas a familiares sobre esos años.|¿Qué derechos tenemos hoy que antes de 1983 no estaban garantizados?|tapas-2001,memoria-barrio
+12.2|Memoria, verdad y justicia|La memoria es una construcción colectiva que sostienen los juicios, los testimonios y los sitios de memoria.|Fuentes del informe Nunca Más y los juicios de lesa humanidad.;Los sitios de memoria de Tucumán.|¿Por qué el 24 de marzo es el Día Nacional de la Memoria?|memoria-nunca-mas,cartas-malvinas
+`,
+geografia:`
+7.0|El mapa de mi lugar|El espacio geográfico lo construye la sociedad con sus decisiones, y se representa en mapas.|El paisaje del barrio en fotos, con elementos naturales y construidos.;Escala y referencias de un mapa.|¿El mapa de tu barrio de hace cincuenta años sería igual al de hoy?|g-croquis,escala-mapa
+7.1|Ambientes y riesgos|Un desastre ocurre cuando una amenaza natural encuentra a una población vulnerable.|Los subsistemas naturales en una maqueta.;Riesgos de Tucumán: inundaciones, deslizamientos y sismos.|Una inundación, ¿es un hecho natural o social?|maqueta-relieve,g-riesgos
+7.2|¿Cuántos somos y cómo vivimos?|Los indicadores demográficos muestran cómo vive una población.|Pirámides de población.;La distribución de la población en el mapa de Tucumán.|¿Por qué tanta gente se va del campo a la ciudad?|g-piramides,m-encuesta
+7.3|Del campo a la ciudad|Las actividades agrarias y las urbanas se conectan por medio de actores y tecnologías.|El recorrido de un cultivo tucumano.;Los actores sociales del campo y de la ciudad.|¿Qué parte de lo que usás todos los días viene del campo?|g-limon,maqueta-relieve
+8.0|El mapa político de América|América se organiza en Estados que cooperan en bloques regionales.|Mapa de América con los bloques de integración.;América Latina y América Anglosajona: con qué criterio se divide.|¿Por qué decimos «América Latina»?|g-america,escala-mapa
+8.1|La diversidad ambiental de América|América tiene casi todos los ambientes del planeta, y el uso de sus recursos genera conflictos.|Mapa de los ambientes de América.;Un conflicto ambiental: la deforestación de la Amazonia o el litio en la Puna.|¿De quién son los recursos naturales?|maqueta-relieve,g-riesgos
+8.2|Los pueblos de América|La población americana se formó con pueblos originarios y con migraciones de Europa, África y Asia.|Mapa de las migraciones hacia América.;Las ciudades más pobladas del continente.|¿Qué palabras de otros idiomas usamos sin darnos cuenta?|g-origen,g-piramides
+8.3|América en la economía mundial|Cada país americano se especializa en ciertos productos dentro de la economía globalizada.|Las exportaciones de cada país en un mapa.;Cadenas productivas que cruzan el continente.|¿Dónde se fabricó lo que tenés puesto?|g-etiquetas,g-limon
+9.0|El territorio argentino|El territorio se organiza en provincias y se integra con los países vecinos en el Mercosur.|Mapa político con límites y fronteras.;El Mercosur y los pasos fronterizos del NOA.|¿Dónde termina la Argentina?|g-proyecciones,g-america
+9.1|Ambientes argentinos|La Argentina tiene ambientes muy diversos, cada uno con sus problemas ambientales.|Mapa de los ambientes del país.;Las yungas tucumanas y sus amenazas.|¿Qué ambiente argentino te gustaría conocer?|maqueta-relieve,b-yungas
+9.2|La población argentina|La población se concentra en las ciudades y cambió con las migraciones internas y externas.|Pirámides de población de la Argentina y de Tucumán.;Migraciones internas y de países limítrofes.|¿De dónde vinieron tus abuelos?|g-piramides,g-origen
+9.3|Lo que produce la Argentina|La Argentina exporta sobre todo productos primarios y sus derivados.|Circuitos productivos de las regiones.;Comercio exterior y energía en gráficos.|¿Qué le vende Tucumán al mundo?|g-limon,matriz-energetica
+10.0|Un mundo desigual|La globalización conecta al mundo, pero no reparte por igual.|Indicadores de desarrollo por país en un mapa.;Flujos de comercio y de información.|La globalización, ¿nos acerca o nos aleja?|g-etiquetas,s-reparto
+10.1|Las migraciones del mundo|Las personas migran por trabajo, por guerras o por cambios en el ambiente.|Mapa de los flujos migratorios actuales.;La pirámide de un país joven y la de un país envejecido.|¿Por qué alguien deja su país?|g-origen,g-piramides
+10.2|Recursos para todos|Los recursos naturales son limitados y su uso tiene consecuencias en todo el planeta.|El cambio climático con datos y su fuente.;Agua, energía y alimentos a escala mundial.|¿Cuántos planetas harían falta si todos consumiéramos como los países ricos?|q-aire,gen-voto
+11.0|Las regiones argentinas|Las regiones cambian según el criterio que se elige para trazarlas.|Mapas de regiones armados con criterios distintos.;La organización federal del territorio.|¿Con qué criterio se dice que Tucumán es parte del NOA?|g-proyecciones,maqueta-relieve
+11.1|Circuitos productivos regionales|Cada producto regional recorre un circuito con actores que no ganan lo mismo.|El circuito del azúcar y el del limón tucumanos.;Otro circuito regional: la yerba mate o la vid.|¿Quién gana más en el circuito del limón?|g-limon,q-bioetanol
+11.2|Problemas ambientales en la Argentina|Los problemas ambientales tienen causas sociales y actores con intereses distintos.|Mapa de conflictos ambientales del país.;Un caso tucumano: la quema de caña o la contaminación del río Salí.|¿Quién tiene que resolver un problema ambiental?|g-riesgos,q-aire
+12.0|Tucumán y el NOA|Tucumán es una de las provincias más chicas y la más densamente poblada del país, con una economía muy ligada al azúcar y al limón.|Mapa del NOA con sus actividades económicas.;Indicadores sociales de Tucumán comparados con los del país.|¿Qué hace distinta a Tucumán del resto del NOA?|maqueta-relieve,g-limon
+12.1|La ciudad que queremos|El crecimiento de las ciudades trae problemas que se pueden pensar y resolver desde lo local.|Problemas del Gran San Miguel de Tucumán: tránsito, residuos e inundaciones.;Propuestas de desarrollo local del curso.|Si fueras intendente, ¿qué cambiarías primero?|g-croquis,ec-presupuesto
+12.2|Mapas hechos con datos|Un sistema de información geográfica superpone capas de datos para tomar decisiones.|Capas de un mapa digital de la ciudad.;Usos de los SIG en salud, transporte y ambiente.|¿Cuántos mapas usás por día en el celular?|g-sig,g-proyecciones
+`,
+quimica:`
+7.0|Sólido, líquido y gaseoso|La materia cambia de estado cuando cambia la energía de sus partículas.|El modelo de partículas de cada estado.;Los cambios de estado en el ciclo del agua.|¿Adónde va el agua de un charco cuando se seca?|estados-particulas,gen-voto
+7.1|¿Mezcla o sustancia?|Un sistema es homogéneo si se ve igual en todas sus partes, aunque tenga varios componentes.|Fotos de sistemas materiales clasificados.;Fases y componentes de cada sistema.|La leche, ¿es homogénea o heterogénea?|separar-mezclas,gen-voto
+7.2|Separar lo que está junto|Cada método de separación aprovecha una propiedad distinta de los componentes.|Métodos de separación con ejemplos de la casa y de la industria.;Cómo separa el ingenio el azúcar del jugo de la caña.|¿Cómo separarías arena, sal y limaduras de hierro?|separar-mezclas,q-bioetanol
+8.0|Los modelos del átomo|Cada modelo atómico cambió cuando un experimento mostró algo que el anterior no explicaba.|Maquetas de los modelos de Dalton, Thomson, Rutherford y Bohr.;Protones, neutrones y electrones en un esquema.|Si nadie vio un átomo, ¿cómo sabemos cómo es?|q-modelos,moleculas
+8.1|La tabla periódica|La tabla ordena los elementos por número atómico y agrupa los que se parecen.|Tabla periódica gigante con objetos cotidianos.;Distribución electrónica de los primeros elementos.|¿Qué elementos hay en tu celular?|tabla-juego,q-modelos
+8.2|Por qué se unen los átomos|Los átomos se unen compartiendo o cediendo electrones de valencia.|Enlace iónico y enlace covalente con modelos.;La electronegatividad en la tabla.|¿Por qué la sal se disuelve en el agua y el aceite no?|q-molecula,moleculas
+8.3|Nada se pierde|En una reacción química los átomos se reordenan y la masa se conserva.|Reacciones cotidianas en fotos.;La experiencia de Lavoisier.|Cuando se quema un papel, ¿adónde va su masa?|q-masa,reacciones-fotos
+8.4|Soluciones de todos los días|Una solución tiene un soluto disuelto en un solvente, y su concentración se puede medir.|Etiquetas de productos con su concentración.;Cálculo de concentraciones con datos reales.|¿Qué quiere decir que una bebida tiene 5 % de jugo?|q-etiquetas,gen-voto
+9.0|El átomo y la tabla|Las propiedades de un elemento dependen de cómo está formado su átomo.|Modelos atómicos.;Grupos y períodos de la tabla.|¿Por qué el helio casi no reacciona con nada?|q-modelos,tabla-juego
+9.1|Moléculas en el papel|Las estructuras de Lewis muestran cómo se comparten los electrones.|Estructuras de Lewis del agua, el metano y el dióxido de carbono.;Las mismas moléculas en tres dimensiones.|¿Por qué la molécula de agua tiene forma de V?|q-molecula,moleculas
+9.2|Ecuaciones que cuentan átomos|Una ecuación balanceada muestra que la masa se conserva, y cada reacción tiene su velocidad y su energía.|Balanceo de ecuaciones con fichas.;Velocidad y energía en reacciones cotidianas.|¿Por qué la comida dura más en la heladera?|q-masa,q-velocidad
+9.3|Soluciones y coloides|No todo lo que parece mezclado es una solución: también hay suspensiones y coloides.|Sistemas dispersos clasificados con fotos.;El efecto Tyndall en video.|La niebla, ¿es una solución?|q-etiquetas,separar-mezclas
+9.4|Ácidos y bases|El pH indica cuán ácida o básica es una sustancia.|Escala de pH con productos de la casa.;Indicadores naturales en video.|¿La lluvia es ácida?|q-ph,gen-voto
+9.5|Reacciones que calientan y reacciones que enfrían|Algunos procesos liberan energía y otros la absorben.|Ejemplos de procesos endotérmicos y exotérmicos.;Cómo funcionan las compresas frías y las calientes.|¿Por qué una compresa fría se enfría sola?|q-endo-exo,termico-tacto
+10.0|Propiedades periódicas|El radio atómico y la electronegatividad cambian de forma ordenada a lo largo de la tabla.|Gráficos de las propiedades periódicas.;La tabla con los usos de cada elemento.|¿Por qué el litio es tan importante hoy?|tabla-juego,q-modelos
+10.1|Fuerzas entre moléculas|Las fuerzas intermoleculares explican por qué una sustancia es sólida, líquida o gaseosa a temperatura ambiente.|Tipos de uniones y de fuerzas intermoleculares.;Puntos de fusión y de ebullición comparados.|¿Por qué la manteca se derrite y la sal no?|q-molecula,estados-particulas
+10.2|Química con cantidades|La estequiometría permite calcular cuánto producto se obtiene de una reacción.|Cálculos estequiométricos con un ejemplo industrial.;Rendimiento teórico y rendimiento real.|Si se duplican los ingredientes, ¿siempre sale el doble?|q-masa,q-bioetanol
+10.3|Concentración y propiedades|La concentración de una solución cambia propiedades como el punto de congelación.|Formas de expresar la concentración.;Por qué se echa sal en las rutas con nieve.|¿Por qué el agua de mar no se congela a 0 °C?|q-etiquetas,gen-voto
+11.0|La química del carbono|El carbono forma cadenas que dan lugar a millones de compuestos.|Hidrocarburos y grupos funcionales con modelos.;Petróleo, plásticos y biocombustibles.|¿Qué tienen en común un envase plástico y la nafta?|q-carbono,q-bioetanol
+11.1|Más rápido o en equilibrio|La temperatura y los catalizadores cambian la velocidad de una reacción; el equilibrio químico es dinámico.|Factores que cambian la velocidad de reacción.;El equilibrio químico explicado con una analogía.|¿Por qué algunas reacciones parecen detenerse antes de terminar?|q-velocidad,q-endo-exo
+11.2|Neutralizar|Un ácido y una base se neutralizan y forman sal y agua.|La escala de pH.;Antiácidos y suelos ácidos.|¿Cómo funciona un antiácido?|q-ph,gen-voto
+11.3|Pilas y corrosión|En la oxidación y la reducción se transfieren electrones; así funcionan las pilas.|Esquema de la pila de Daniell.;La corrosión en objetos cotidianos.|¿Por qué se oxida una bicicleta que queda afuera?|q-redox,residuos-tarjetas
+12.0|Las moléculas de la vida|Hidratos de carbono, lípidos, proteínas y ácidos nucleicos forman a todos los seres vivos.|Modelos de cada biomolécula.;Etiquetas nutricionales analizadas.|¿Qué aporta más energía: un gramo de grasa o uno de azúcar?|q-etiquetas,b-adn
+12.1|El aire, el agua y el suelo|La contaminación se puede medir, tiene responsables y tiene soluciones.|Datos de calidad del aire y del agua, con su fuente.;La quema de caña y sus efectos.|¿Qué contamina más en tu ciudad?|q-aire,residuos-tarjetas
+12.2|La química que produce el país|Las industrias químicas argentinas transforman recursos naturales en materiales.|Industria azucarera, bioetanol y litio.;Materiales nuevos: polímeros y compuestos.|¿Qué se hace con el bagazo de la caña?|q-bioetanol,tabla-juego
+`,
+biologia:`
+7.0|La Tierra, un sistema|El agua, el aire, las rocas y el suelo interactúan en ciclos.|Maqueta del ciclo del agua.;Perfil del suelo en fotos.|El agua que tomás, ¿pudo haberla tomado un dinosaurio?|maqueta-relieve,clima-casero
+7.1|Lo que tienen en común los seres vivos|Todos los seres vivos están formados por células y cumplen funciones vitales.|La diversidad de seres vivos en fotos.;Modelo de una célula.|Un virus, ¿es un ser vivo?|celula-3d,microscopio-fotos
+7.2|¿Quién se come a quién?|En un ecosistema la energía pasa de un nivel a otro.|Red trófica de las yungas.;Niveles de organización, de la célula al ecosistema.|¿Qué pasa si desaparece un eslabón de la cadena?|cadena-trofica,b-yungas
+8.0|La diversidad tiene historia|La biodiversidad es el resultado de la evolución.|Árbol de la vida simplificado.;Fósiles de la Argentina en fotos.|¿Por qué hay tantas especies distintas?|b-picos,b-yungas
+8.1|La célula por dentro|La célula es la unidad de los seres vivos y cada organela cumple una función.|Célula animal y vegetal en tres dimensiones.;Fotos tomadas en el microscopio del laboratorio.|¿En qué se parece una célula a una fábrica?|celula-3d,microscopio-fotos
+8.2|Relaciones en el ecosistema|Los seres vivos se relacionan entre sí por competencia, depredación o mutualismo.|Tipos de interacciones con ejemplos de Tucumán.;Red trófica para completar.|¿Todas las relaciones entre especies son de pelea?|cadena-trofica,b-camuflaje
+8.3|Fotosíntesis y respiración|Las plantas fabrican su alimento con la luz, y todos los seres vivos respiran.|Esquema de la fotosíntesis y la respiración.;El ciclo del carbono.|¿De dónde sale la madera de un árbol?|b-arbol,cadena-trofica
+8.4|Salud y ambiente|La salud depende también del ambiente en que vivimos.|Enfermedades ligadas al ambiente: el dengue.;Acciones de prevención en la casa y en el barrio.|¿Qué tiene que ver un patio con el dengue?|b-mitos,residuos-tarjetas
+9.0|Evolución en acción|La selección natural favorece a los individuos mejor adaptados a su ambiente.|Darwin y la selección natural.;Ejemplos de adaptación.|¿Las jirafas tienen el cuello largo porque lo estiraron?|b-picos,b-camuflaje
+9.1|Células en funcionamiento|La célula toma, transforma y elimina sustancias para vivir.|Organelas y sus funciones.;El transporte a través de la membrana.|¿Cuántas células tiene tu cuerpo?|celula-3d,microscopio-fotos
+9.2|Poblaciones que crecen y que decrecen|Las poblaciones cambian según los recursos disponibles y sus depredadores.|Gráfico del crecimiento de una población.;Especies invasoras en la Argentina.|¿Qué pasa si se sueltan conejos donde no hay quien los cace?|b-camuflaje,cadena-trofica
+9.3|De dónde sale la energía|La fotosíntesis guarda energía en los alimentos y la respiración celular la libera.|Esquema de la fotosíntesis y de la respiración celular.;Nutrición y etiquetas de alimentos.|¿Por qué tenemos más hambre después de hacer deporte?|b-arbol,q-etiquetas
+9.4|El cuerpo trabaja en equipo|Los sistemas de nutrición, respiración, circulación y excreción funcionan conectados.|Modelo del cuerpo con sus sistemas.;El recorrido de un nutriente por el cuerpo.|¿Por qué se acelera el corazón cuando corrés?|modelo-pulmon,pulso
+9.5|Salud integral|La salud incluye el cuerpo, las emociones, el ambiente y los derechos.|Mitos y verdades sobre la salud.;Los derechos de los adolescentes en el cuidado de su salud.|¿Qué es estar sano?|b-mitos,e-derechos
+10.0|La célula se divide|La mitosis produce células iguales y la meiosis produce células para la reproducción.|Etapas de la mitosis y de la meiosis con modelos.;Fotos de células en división.|¿Cómo se cierra una herida?|celula-3d,microscopio-fotos
+10.1|La energía en la célula|La fotosíntesis y la respiración son dos caras del mismo ciclo de energía.|Esquemas comparados de los dos procesos.;Dónde ocurre cada uno: cloroplastos y mitocondrias.|Las plantas, ¿respiran?|b-arbol,cadena-trofica
+10.2|Herencia y ADN|Los genes se heredan según reglas que describió Mendel y están escritos en el ADN.|Las leyes de Mendel con ejemplos.;La estructura del ADN.|¿Por qué no sos igual a tus hermanos?|b-mendel,b-adn
+11.0|Evolución: pruebas y mecanismos|La evolución se apoya en los fósiles, la anatomía comparada y el ADN.|Evidencias de la evolución.;Las ideas de Lamarck y de Darwin comparadas.|¿Venimos del mono?|b-picos,b-camuflaje
+11.1|Ecología|Las poblaciones, las comunidades y los ecosistemas se estudian con datos tomados en el lugar.|Cómo se muestrea una población.;La sucesión ecológica.|¿Cuántos árboles hay en la plaza de tu barrio?|b-camuflaje,cadena-trofica
+11.2|Biodiversidad argentina|La Argentina tiene ecorregiones únicas que necesitan protección.|Ecorregiones y áreas protegidas del país.;Las yungas y el Parque Nacional Aconquija.|¿Qué especie de Tucumán está en peligro?|b-yungas,gen-voto
+12.0|El cuerpo se defiende y se regula|Los sistemas inmunológico, endocrino y nervioso coordinan y protegen al cuerpo.|Cómo actúa una vacuna.;Hormonas y neuronas en esquemas.|¿Por qué la vacuna de la gripe se aplica todos los años?|b-inmune,tiempo-reaccion
+12.1|Biotecnología|La biotecnología resuelve problemas y abre debates éticos.|Ejemplos argentinos: el trigo HB4 y las vacunas.;Los argumentos a favor y en contra.|¿Comerías un alimento transgénico?|b-biotec,b-adn
+12.2|Cuidar el cuerpo, conocer los derechos|Conocer el cuerpo y los derechos sexuales y reproductivos permite cuidarse.|Los sistemas reproductores en esquemas.;Las leyes de salud sexual y de ESI.|¿Qué derechos tenés para cuidar tu salud?|b-mitos,e-derechos
+`,
+lengua:`
+7.0|Hablar y escuchar|Contar bien una historia en voz alta también se aprende.|Recomendaciones para hablar en público.;Grabaciones de relatos orales del curso.|¿Qué hace que una historia contada atrape?|radioteatro,l-debate
+7.1|Leer el mundo|Cada texto pide una manera distinta de leer.|Tipos de textos con ejemplos.;Las recomendaciones de lectura del curso.|¿Qué libro le recomendarías a un amigo?|microrrelatos,l-autores
+7.2|Escribir, borrar y volver a escribir|Un buen texto pasa por varios borradores.|Borradores de un texto con sus correcciones.;El plan de escritura del curso.|¿Cuántas veces reescribiste tu último texto?|l-cadaver,l-corrector
+7.3|Las reglas del juego|La ortografía y la gramática ayudan a que el lector entienda.|Errores frecuentes y cómo corregirlos.;Conectores que dan cohesión.|¿Puede una coma cambiar el sentido de una frase?|l-corrector,gen-desafio
+8.0|Narrar, cantar, actuar|Cada género literario tiene su manera de contar.|Cuento, poema y obra de teatro comparados.;Lecturas dramatizadas.|¿Qué te gusta más: leer un cuento o verlo actuado?|radioteatro,poesia-verso
+8.1|Informar y opinar|Una noticia informa y una nota de opinión argumenta.|Noticia, texto expositivo y nota de opinión comparados.;El diario mural del curso.|¿Se puede informar sin opinar?|l-falsa,c-noticia
+8.2|Taller de escritura|Revisar es parte de escribir, no un paso aparte.|Antes y después de una revisión.;El código de corrección del curso.|¿Qué es lo primero que mirás cuando revisás un texto?|l-cadaver,l-corrector
+8.3|Las palabras por dentro|Las palabras se forman, se combinan y cambian según quién habla y dónde.|Familias de palabras.;Variedades del español en un mapa.|¿Cómo le decís a la bombilla del mate?|l-variedades,gen-voto
+9.0|Leer con lupa|Analizar un texto literario es descubrir cómo está construido.|Análisis de un cuento del programa.;Los recursos literarios con ejemplos.|¿Lo que quiso decir el autor es lo único que dice el texto?|l-autores,microrrelatos
+9.1|Discursos que convencen|Los discursos sociales usan estrategias para convencer.|Publicidades y discursos analizados.;Estrategias argumentativas.|¿Qué publicidad te convenció alguna vez?|l-debate,f-falacias
+9.2|Textos de largo aliento|Un texto complejo se planifica por partes y se revisa varias veces.|El plan y los borradores de un texto largo del curso.;Cómo se organizan los párrafos.|¿Cómo empezás un texto largo?|l-cadaver,l-corrector
+9.3|La oración compuesta|Las oraciones se unen de distintas formas, y cada una cambia la relación entre las ideas.|Coordinación y subordinación con ejemplos.;Variedades lingüísticas y registro.|¿Es lo mismo «llegó y se fue» que «llegó porque se fue»?|l-corrector,l-variedades
+10.0|El relato y la poesía|Los recursos literarios hacen que un texto diga más de lo que dice.|Géneros y recursos con ejemplos.;Producciones del curso.|¿Qué tiene que tener un texto para que sea literatura?|microrrelatos,poesia-verso
+10.1|Argumentar|Una buena argumentación sostiene una tesis y responde a los contraargumentos.|Estructura de un texto argumentativo.;Debates del curso con sus argumentos.|¿Alguna vez cambiaste de opinión por un buen argumento?|l-debate,l-opiniones
+10.2|Textos que se sostienen|La cohesión y la coherencia hacen que un texto se entienda como un todo.|Mecanismos de cohesión con ejemplos.;Un texto incoherente corregido.|¿Qué hace que un texto se entienda?|l-corrector,l-cadaver
+11.0|Literatura latinoamericana|La literatura latinoamericana tiene movimientos y voces propias.|Línea de tiempo de los movimientos.;Fragmentos de autoras y autores.|¿Qué autor latinoamericano leíste?|l-autores,microrrelatos
+11.1|Informar con rigor|Un informe o una monografía presentan información con fuentes citadas.|Estructura de un informe.;Cómo se citan las fuentes.|¿Cómo sabés si una fuente es confiable?|l-falsa,gen-libro
+11.2|Exponer y debatir|Exponer y debatir son prácticas orales que se preparan.|Recomendaciones para una exposición oral.;Reglas de un debate.|¿Qué te pone más nervioso al hablar en público?|l-debate,radioteatro
+12.0|Literatura argentina contemporánea|La literatura argentina de hoy habla de nuestros temas y de nuestros lugares.|Autoras y autores argentinos actuales.;Fragmentos leídos por el curso.|¿Qué historia de Tucumán merece un libro?|l-autores,microrrelatos
+12.1|El ensayo|El ensayo es una forma de pensar por escrito.|Fragmentos de ensayos argentinos.;Ensayos breves del curso.|¿Sobre qué tema escribirías un ensayo?|l-opiniones,l-debate
+12.2|Leer los medios|Los medios construyen la realidad que muestran.|Una misma noticia en distintos medios.;Cómo detectar una noticia falsa.|¿Cómo te informás vos?|l-falsa,c-posteo
+`,
+matematica:`
+7.0|La recta numérica|Naturales, enteros y racionales tienen un lugar en la misma recta.|Recta numérica con ejemplos de la vida cotidiana: temperaturas bajo cero, deudas, alturas.;Conjuntos numéricos en un esquema.|¿Hay un número entre dos números cualesquiera?|m-recta,dados
+7.1|Fracciones y proporciones|Las fracciones y la proporcionalidad están en las recetas, los mapas y las ofertas.|Fracciones equivalentes con material concreto.;Problemas de proporcionalidad de la vida cotidiana.|¿Qué conviene: un descuento del 25 % o llevar 4 y pagar 3?|fracciones-pizza,escala-mapa
+7.2|Figuras, perímetros y áreas|Dos figuras pueden tener el mismo perímetro y distinta área.|Figuras armadas con las mismas piezas.;Cálculo del área del aula o del patio.|¿Cuántas baldosas tiene el patio de la escuela?|tangram,gen-desafio
+7.3|Las letras en matemática|Con letras se pueden escribir reglas que sirven para cualquier número.|Patrones con su fórmula.;Problemas resueltos con lenguaje algebraico.|¿Qué número sigue: 2, 5, 8, 11…?|m-patrones,m-balanza
+8.0|Números racionales|Fracciones y decimales son dos formas de escribir el mismo número.|Equivalencias entre fracciones, decimales y porcentajes.;Operaciones con racionales en situaciones reales.|¿Es lo mismo 0,5 que 1/2 que 50 %?|fracciones-pizza,m-recta
+8.1|La balanza de las ecuaciones|Una ecuación es una balanza que hay que mantener en equilibrio.|Ecuaciones resueltas con la balanza.;Problemas del curso traducidos a ecuaciones.|Pienso un número, le sumo 7 y me da 20. ¿Qué número pensé?|m-balanza,m-patrones
+8.2|Funciones y proporcionalidad|Una función relaciona dos cantidades, y algunas lo hacen en forma proporcional.|Tablas y gráficos de situaciones del curso.;Proporcionalidad directa e inversa.|Si cuatro personas pintan un aula en dos horas, ¿cuánto tardan ocho?|m-funcion,grafico-vivo
+8.3|Geometría en la escuela|Las figuras de la escuela se pueden medir y calcular.|Planos del aula con perímetros y áreas.;Construcciones con regla y compás.|¿Cuánta pintura hace falta para pintar el aula?|tangram,m-pitagoras
+9.0|Números reales|Hay números que no se pueden escribir como fracción, como la raíz de 2 o pi.|Construcción de la raíz de 2 en la recta.;Historia del número pi.|¿Cuántos decimales tiene pi?|m-recta,gen-voto
+9.1|Rectas y parábolas|Las funciones lineales y cuadráticas describen situaciones reales.|Gráficos de funciones con situaciones del curso.;La parábola en un tiro de básquet.|¿Qué forma dibuja una pelota en el aire?|m-funcion,grafico-vivo
+9.2|Ecuaciones e inecuaciones|Una inecuación tiene muchas soluciones, no una sola.|Ecuaciones e inecuaciones resueltas.;Problemas con condiciones: «como mucho», «al menos».|Con 2000 pesos, ¿cuántos alfajores de 350 podés comprar?|m-balanza,gen-desafio
+9.3|El teorema de Pitágoras|En todo triángulo rectángulo el cuadrado mayor es igual a la suma de los dos menores.|Demostración con piezas.;Usos en la construcción.|¿Cómo saben los albañiles si una pared está en escuadra?|m-pitagoras,m-altura
+9.4|Estadística y probabilidad|Los datos permiten describir y los cálculos de probabilidad, anticipar.|Gráficos de una encuesta del curso.;Experimentos de azar con sus resultados.|¿Qué es más probable: sacar dos caras o una cara y una ceca?|m-encuesta,dados
+10.0|Funciones: gráficos y fórmulas|El gráfico y la fórmula de una función cuentan lo mismo de dos maneras.|Funciones lineales y cuadráticas con su gráfico y su fórmula.;Situaciones del curso modelizadas.|Si conocés dos puntos de una recta, ¿podés saber su fórmula?|m-funcion,grafico-vivo
+10.1|Sistemas de ecuaciones|Con dos ecuaciones se pueden encontrar dos incógnitas.|Sistemas resueltos con distintos métodos.;Comparación de planes de telefonía.|¿Cuándo conviene un plan con abono y cuándo uno sin abono?|m-balanza,m-cuotas
+10.2|Trigonometría|Con un ángulo y una distancia se puede medir lo que no se alcanza.|Razones trigonométricas con ejemplos.;Medición de la altura del edificio de la escuela.|¿Cómo se mide la altura de una montaña?|m-altura,m-pitagoras
+10.3|Estadística|La media no alcanza: hay que mirar también la dispersión de los datos.|Medidas de posición y de dispersión con datos del curso.;Gráficos engañosos y gráficos correctos.|Si el promedio de notas es 7, ¿todos aprobaron?|m-encuesta,grafico-vivo
+11.0|Crecimiento exponencial|Lo que crece en forma exponencial empieza lento y después se dispara.|Gráficos de crecimiento exponencial y logarítmico.;Ejemplos: población, contagios, ahorro.|Si doblás una hoja 42 veces, ¿llegaría a la Luna?|m-papel,hanoi
+11.1|Funciones trigonométricas|Las funciones seno y coseno describen todo lo que se repite.|Gráficos de seno y coseno.;Fenómenos periódicos: mareas, sonido, horas de luz.|¿Qué tienen en común una onda de sonido y las horas de luz del año?|m-altura,onda-soga
+11.2|Polinomios|Los polinomios sirven para describir curvas y calcular áreas y volúmenes.|Funciones polinómicas con su gráfico.;Problemas de cajas: cuál tiene más volumen.|¿Qué caja de cartón guarda más con la misma cantidad de material?|m-funcion,m-patrones
+11.3|Probabilidad y combinatoria|Contar bien las posibilidades permite calcular probabilidades.|Diagramas de árbol y combinaciones.;La probabilidad de ganar un juego de azar.|¿Cuántas contraseñas de cuatro números existen?|dados,hanoi
+12.0|Sucesiones y límite|Algunas sucesiones se acercan a un número sin llegar nunca.|Sucesiones con patrones.;La idea de límite con ejemplos.|Si caminás siempre la mitad de lo que te falta, ¿llegás?|m-patrones,m-papel
+12.1|La derivada|La derivada mide cuánto cambia algo en un instante.|La pendiente de la recta tangente.;La velocidad instantánea con datos.|¿Qué marca el velocímetro de un auto?|m-pendiente,carrito-rapidez
+12.2|Análisis de datos|Los datos bien analizados ayudan a tomar decisiones.|Una investigación estadística del curso.;Gráficos y conclusiones.|¿Qué pregunta le harías a toda la escuela?|m-encuesta,grafico-vivo
+12.3|Matemática financiera|El interés compuesto hace crecer el dinero, y también las deudas.|Interés simple y compuesto comparados.;Cuotas, tarjetas de crédito y ahorro.|¿Qué conviene: pagar al contado o en doce cuotas?|m-cuotas,ec-canasta
+`,
+ingles:`
+7.0|Hello! Nice to meet you|En inglés también se saluda y se presenta uno con fórmulas sencillas.|Saludos y presentaciones con ilustraciones.;Diálogos breves del curso.|How do you say «mucho gusto» in English?|i-interview,vocabulario-ingles
+7.1|All about me|Con el verbo to be se puede contar quién sos.|Fichas personales del curso en inglés.;El verbo to be en un afiche.|What's your favourite colour?|i-interview,vocabulario-ingles
+7.2|Reading short texts|Se puede entender un texto en inglés sin conocer todas las palabras.|Textos breves con sus palabras clave marcadas.;Estrategias para adivinar palabras.|Can you guess what this sign means?|i-signs,vocabulario-ingles
+7.3|My first texts in English|Con pocas palabras se pueden escribir textos completos.|Producciones escritas del curso.;Videos breves con presentaciones orales.|What would you write about yourself?|i-interview,gen-libro
+8.0|My daily routine|El present simple sirve para contar lo que hacemos todos los días.|Rutinas del curso en un reloj gigante.;Adverbios de frecuencia.|What time do you get up?|i-routine,vocabulario-ingles
+8.1|What did you do yesterday?|El past simple sirve para contar lo que pasó.|Historias del curso en pasado.;Verbos regulares e irregulares.|What did you do last weekend?|i-story,gen-desafio
+8.2|Likes and dislikes|Para hablar de gustos se usan estructuras como I like o I don't like.|Encuesta de gustos del curso en inglés.;Actividades cotidianas con imágenes.|Do you like football?|i-interview,m-encuesta
+8.3|Dialogues|Un diálogo breve tiene fórmulas para empezar, seguir y terminar.|Diálogos representados por el curso.;Expresiones útiles.|How do you ask for directions?|i-interview,i-listen
+9.0|What's happening now?|El present continuous describe lo que pasa en este momento.|Descripción de fotos de la muestra en inglés.;Diferencia entre present simple y continuous.|What are you doing right now?|i-story,vocabulario-ingles
+9.1|While I was…|El past continuous cuenta lo que estaba pasando cuando ocurrió otra cosa.|Historias con past simple y past continuous.;Línea de tiempo de una historia.|What were you doing at eight last night?|i-story,i-listen
+9.2|The future|Will y going to sirven para predecir y para planear.|Predicciones del curso para el año 2050.;Planes para las vacaciones.|What are you going to do next summer?|i-future,gen-voto
+9.3|Can, must, should|Los verbos modales expresan capacidad, obligación y consejo.|Reglas de la escuela en inglés.;Consejos para un estudiante nuevo.|What should a new student know about our school?|i-signs,i-future
+9.4|Let's talk!|Hablar en inglés se aprende hablando.|Videos de conversaciones del curso.;Textos escritos con su revisión.|Can you introduce yourself in one minute?|i-interview,i-listen
+10.0|Real texts|Los textos auténticos, como carteles, folletos o posteos, se pueden leer con estrategias.|Textos auténticos con estrategias de lectura.;Glosario armado por el curso.|Where can you find English in your daily life?|i-signs,i-listen
+10.1|My experiences|Contar experiencias propias es una buena manera de practicar.|Relatos personales del curso.;Fotos con epígrafes en inglés.|What's the best trip you've ever had?|i-story,i-interview
+10.2|Past and future in context|Los tiempos verbales cambian el sentido de lo que se cuenta.|Una misma historia contada en pasado y en futuro.;Línea de tiempo con los tiempos verbales.|What will your life be like in ten years?|i-story,i-future
+11.0|Popular science in English|Mucha información de ciencia y tecnología está en inglés.|Artículos de divulgación con su resumen en castellano.;Vocabulario de la orientación.|What science topic would you like to read about?|i-signs,gen-qr
+11.1|In my opinion…|Un texto argumentativo breve tiene opinión, razones y conclusión.|Textos argumentativos del curso.;Conectores para argumentar.|Should homework be banned?|l-debate,gen-voto
+11.2|Listen up|Para entender un audio no hace falta entender cada palabra.|Estrategias de comprensión auditiva.;Audios usados en clase con sus actividades.|What English songs do you listen to?|i-listen,vocabulario-ingles
+12.0|Academic and technical texts|Los textos técnicos tienen una estructura que ayuda a leerlos.|Textos técnicos de la orientación con su análisis.;Glosario técnico.|Which words are the same in English and Spanish?|i-signs,gen-qr
+12.1|Presentations and debates|Una presentación oral en inglés se prepara con apoyo visual y práctica.|Videos de presentaciones del curso.;Reglas para debatir en inglés.|Can you give your opinion in English?|l-debate,i-interview
+12.2|Formal writing|Un correo formal tiene partes y fórmulas fijas.|Correos e informes del curso.;Diferencias entre registro formal e informal.|How do you start a formal email?|i-signs,gen-libro
+`,
+tecnologia:`
+7.0|Cómo se hace|Todo producto pasa por un proceso con etapas, insumos y operaciones.|Diagrama de un proceso productivo de la región.;Videos de una fábrica tucumana.|¿Cuántos pasos hay para fabricar una birome?|t-proceso,linea-montaje
+7.1|Herramientas y artefactos|Cada artefacto resuelve un problema y cambia con el tiempo.|Artefactos de antes y de ahora.;Partes y funciones de una herramienta.|¿Qué herramienta de tu casa usaría tu bisabuela?|t-artefactos,gen-voto
+7.2|Técnica, ciencia y sociedad|La técnica cambia la vida de las personas, y la sociedad decide cómo usarla.|Una línea de tiempo de inventos.;Un invento y sus consecuencias.|¿Qué invento cambió más tu vida?|t-artefactos,linea-montaje
+7.3|De insumo a producto|Los procesos transforman insumos en bienes y en servicios.|Bienes y servicios clasificados.;El proceso del azúcar o del limón.|¿Qué diferencia hay entre un bien y un servicio?|t-proceso,q-bioetanol
+8.0|Todo es un sistema|Un sistema tecnológico tiene entradas, procesos y salidas.|Diagramas de bloques de sistemas cotidianos.;Maquetas del curso.|¿Qué entra y qué sale de un lavarropas?|t-semaforo,circuito-armable
+8.1|Energía y control|Los sistemas se controlan de forma manual o automática.|Control manual y automático comparados.;Maqueta de un semáforo automático.|¿Cómo sabe el semáforo cuándo cambiar?|t-semaforo,panel-solar
+8.2|Resolver problemas con tecnología|Un problema tecnológico se resuelve diseñando, probando y mejorando.|El proceso de diseño del curso.;Prototipos y sus mejoras.|¿Qué problema de la escuela resolverías con un invento?|t-torre,gen-desafio
+8.3|Información y comunicación|Las TIC transforman cómo nos comunicamos.|Del telégrafo al celular en una línea de tiempo.;Cómo viaja un mensaje por Internet.|¿Cómo llega un mensaje de WhatsApp a otro celular?|programacion,inf-red
+9.0|Innovación tecnológica|Innovar es mejorar algo que existe o crear algo nuevo.|Innovaciones argentinas.;El prototipo del curso.|¿Qué invento argentino conocés?|t-artefactos,stop-motion
+9.1|Impacto socioambiental|Toda tecnología tiene efectos sobre la sociedad y el ambiente.|Análisis del ciclo de vida de un producto.;Un caso local.|¿Cuánto dura un celular y qué pasa después?|t-adentro,residuos-tarjetas
+9.2|Residuos tecnológicos|Los aparatos que tiramos tienen materiales valiosos y contaminantes.|Qué hay adentro de un aparato.;Puntos de recolección de residuos electrónicos.|¿Dónde se tira un celular viejo?|t-adentro,residuos-tarjetas
+9.3|Proyectos de diseño|Un proyecto de diseño va del problema al prototipo.|Etapas del proyecto del curso.;El prototipo con sus pruebas.|¿Qué mejorarías del prototipo?|t-torre,programacion
+`,
+artistica:`
+7.0|El lenguaje visual|El color, la forma y la línea comunican aunque no haya palabras.|Obras del curso con sus elementos marcados.;Círculo cromático.|¿Qué sentís frente a una obra solo de color rojo?|a-color,galeria
+7.1|Del plano al volumen|Una misma idea se puede trabajar en dos o en tres dimensiones.|Técnicas bidimensionales y tridimensionales.;Obras del curso.|¿Qué es más difícil: dibujar o esculpir?|a-escultura,a-color
+7.2|Arte y patrimonio|El patrimonio cultural es el arte que una comunidad decide conservar.|Obras del patrimonio tucumano.;Producciones del curso inspiradas en él.|¿Qué obra de Tucumán conservarías para siempre?|a-noa,galeria
+7.3|El lenguaje musical|El ritmo, el sonido y el silencio son la base de la música.|Elementos del lenguaje musical.;Instrumentos del curso.|¿Hay música sin melodía?|a-ritmo,instrumentos-reciclados
+8.0|Leer imágenes|Una imagen se puede leer como se lee un texto.|Imágenes analizadas por el curso.;Publicidades y obras comparadas.|¿Una imagen dice lo mismo para todos?|galeria,a-critica
+8.1|Volumen y tridimensionalidad|El volumen cambia según desde dónde se mira.|Esculturas del curso.;Bocetos y obras terminadas.|¿Cuántos puntos de vista tiene una escultura?|a-escultura,galeria
+8.2|Ritmo, melodía y armonía|La música combina ritmo, melodía, armonía y timbre.|Ejemplos sonoros de cada elemento.;Producciones del curso.|¿Por qué una misma canción suena distinta en otro instrumento?|a-ritmo,instrumentos-reciclados
+8.3|Expresión corporal y teatral|El cuerpo es un lenguaje para expresar.|Fotos y videos de escenas del curso.;Ejercicios de expresión.|¿Se puede contar una historia sin hablar?|a-impro,radioteatro
+9.0|Estéticas contemporáneas|El arte de hoy usa materiales y formas nuevas.|Obras contemporáneas con su fuente.;Producciones del curso.|¿Cualquier cosa puede ser arte?|galeria,a-critica
+9.1|Mirar críticamente|Analizar una obra es preguntarse qué dice, cómo y para quién.|Guía de análisis de obras.;Críticas escritas por el curso.|¿Qué hace que una obra sea buena?|a-critica,gen-voto
+9.2|Producción audiovisual|Un audiovisual combina imagen, sonido y montaje.|Cortos del curso.;El guion y el plan de rodaje.|¿Qué película te hizo cambiar de opinión?|a-cine,stop-motion
+9.3|Teatro e improvisación|Un personaje se construye con el cuerpo, la voz y la historia.|Escenas improvisadas en video.;Fichas de personajes.|¿Qué personaje te gustaría interpretar?|a-impro,radioteatro
+10.0|Lenguajes contemporáneos|Los lenguajes artísticos actuales se mezclan entre sí.|Obras que combinan lenguajes.;Producciones del curso.|¿Una instalación es una escultura?|galeria,a-cine
+10.1|Arte y contexto|Una obra se entiende mejor conociendo cuándo y dónde se hizo.|Obras con su contexto histórico.;Producciones del curso con su fundamentación.|¿Una obra significa lo mismo en otra época?|galeria,a-critica
+10.2|Arte y cultura local|Tucumán tiene artistas y tradiciones propias.|Artistas tucumanos con su obra.;Entrevistas a artistas del barrio.|¿Qué artista de tu barrio conocés?|a-noa,memoria-barrio
+11.0|Proyecto grupal|Una obra colectiva se construye con acuerdos.|El proceso del proyecto grupal.;La obra terminada.|¿Cómo se decide en grupo qué hacer?|a-escultura,galeria
+11.1|Arte, tecnología y medios digitales|Las tecnologías digitales abren nuevas formas de crear.|Obras digitales del curso.;Herramientas usadas.|¿Una imagen hecha con inteligencia artificial es arte?|stop-motion,a-cine
+11.2|Patrimonio cultural del NOA|El NOA tiene técnicas y tradiciones que forman parte de su identidad.|Tejidos, cerámica y copla en fotos con su fuente.;Mapa del patrimonio del NOA.|¿Qué tradición del NOA conocés?|a-noa,instrumentos-reciclados
+12.0|Arte para la comunidad|El arte puede transformar un espacio y a quienes lo habitan.|El proyecto comunitario del curso.;Registro del antes y el después.|¿Qué lugar de tu barrio pintarías?|a-escultura,gen-libro
+12.1|Por dónde circula el arte|El arte llega al público por museos, ferias, redes y calles.|Mapa de espacios culturales de Tucumán.;Cómo se difunde una obra.|¿Dónde viste arte por última vez?|galeria,a-critica
+12.2|Crítica y análisis|La crítica ayuda a mirar con más atención.|Críticas del curso.;Guía de análisis.|¿Qué obra de la muestra te gustó más y por qué?|a-critica,gen-voto
+`,
+educacion_fisica:`
+7.0|El cuerpo en movimiento|Conocer el propio cuerpo mejora la forma de moverse.|Fotos de las prácticas del curso.;Cambios del cuerpo al moverse.|¿Qué pasa en tu cuerpo cuando corrés?|ef-circuito,pulso
+7.1|Capacidades motoras|La fuerza, la velocidad, la resistencia y la coordinación se entrenan.|Capacidades motoras con ejemplos.;Registro de la mejora del curso.|¿Cuál de tus capacidades querés mejorar?|ef-circuito,tiempo-reaccion
+7.2|Jugar con otros|En los juegos cooperativos todos ganan o nadie gana.|Juegos cooperativos del curso.;Diferencias con los juegos competitivos.|¿Se puede jugar sin que nadie pierda?|ef-cooperativo,gen-desafio
+7.3|Cuidar el cuerpo|La higiene y el descanso son parte de la actividad física.|Hábitos de cuidado antes y después de la actividad.;Mitos y verdades.|¿Hay que elongar antes o después de correr?|b-mitos,ef-semana
+8.0|Prácticas gimnásticas|La gimnasia desarrolla la flexibilidad, el equilibrio y la fuerza.|Secuencias gimnásticas del curso.;Cuidados para practicar.|¿Qué es más difícil: el equilibrio o la flexibilidad?|ef-flexibilidad,ef-circuito
+8.1|Habilidades combinadas|Correr, saltar y lanzar se combinan en los deportes.|Circuito de habilidades.;Videos del curso.|¿Qué deporte combina más habilidades?|ef-circuito,tiempo-reaccion
+8.2|Juegos y deportes|Los deportes nacieron como juegos con reglas.|Reglas de los deportes que practica el curso.;Historia de un deporte.|¿Quién inventó el fútbol?|ef-arbitro,ef-cooperativo
+8.3|Trabajo en equipo|Un equipo funciona cuando cada uno cumple su rol.|Roles en un juego de equipo.;Acuerdos del curso.|¿Qué hace a un buen compañero de equipo?|ef-cooperativo,tal-rompecabezas
+9.0|Deportes reglados|El reglamento hace que el juego sea justo para todos.|Reglamentos resumidos.;Situaciones de juego analizadas.|¿Qué regla cambiarías de tu deporte favorito?|ef-arbitro,ef-circuito
+9.1|Acondicionamiento físico|El entrenamiento mejora la condición física si es progresivo.|Plan de acondicionamiento del curso.;Registro de la frecuencia cardíaca.|¿Cuánto tiempo hay que entrenar para notar un cambio?|ef-flexibilidad,pulso
+9.2|Autonomía|Practicar por cuenta propia requiere saber planificar y cuidarse.|Planes de actividad diseñados por el curso.;Recomendaciones de cuidado.|¿Hacés actividad física fuera de la escuela?|ef-semana,ef-flexibilidad
+9.3|Vida en la naturaleza|En la naturaleza se aprende a convivir y a cuidar el ambiente.|Fotos de salidas del curso.;Normas de cuidado del ambiente.|¿Qué llevarías a un campamento?|ef-mochila,residuos-tarjetas
+10.0|Técnica, táctica y reglamento|Ganar depende de la técnica, de la táctica y de respetar las reglas.|Jugadas analizadas en video.;Reglamento del deporte del curso.|¿Qué es más importante: la técnica o la táctica?|ef-arbitro,ef-circuito
+10.1|Condición física y salud|La actividad física regular mejora la salud.|Recomendaciones de actividad física para adolescentes.;Registros del curso.|¿Cuántos minutos de actividad física por día necesitás?|pulso,ef-semana
+10.2|Prácticas en la naturaleza|Las salidas a la naturaleza requieren planificación y cuidado.|Planificación de una salida.;Mapa de senderos de Tucumán.|¿Qué cerro de Tucumán subirías?|ef-mochila,b-yungas
+11.0|Planificar el propio entrenamiento|Cada persona puede planificar su entrenamiento según sus objetivos.|Planes de entrenamiento del curso.;Principios del entrenamiento.|¿Cuál sería tu objetivo de entrenamiento?|ef-semana,pulso
+11.1|Juego limpio|El juego limpio es parte del deporte, no un agregado.|Situaciones de juego limpio y de juego sucio.;Acuerdos de convivencia.|¿Vale ganar haciendo trampa?|ef-arbitro,e-dilemas
+11.2|Organizar un evento deportivo|Un evento deportivo necesita organización, roles y reglas.|El torneo organizado por el curso.;Fixture y roles.|¿Qué hace falta para organizar un torneo?|ef-cooperativo,ef-circuito
+12.0|Vida activa|Un proyecto de vida activa se sostiene más allá de la escuela.|Proyectos personales del curso.;Lugares para hacer actividad en Tucumán.|¿Qué actividad física vas a seguir haciendo después de la escuela?|ef-semana,ef-flexibilidad
+12.1|Salud integral|La salud integral une cuerpo, mente y relaciones.|Prácticas corporales para el bienestar.;Mitos y verdades.|¿Qué te hace sentir bien después de moverte?|pulso,b-mitos
+12.2|Liderar el juego|Liderar es organizar para que todos participen.|Propuestas recreativas del curso.;Roles de un líder.|¿Qué juego le enseñarías a un grupo de chicos?|ef-cooperativo,ef-circuito
+`,
+taller:`
+7.0|El oficio de estudiante|Organizar el tiempo y entender las consignas se aprende.|Agendas del curso.;Pistas para interpretar consignas.|¿Cómo organizás tus tareas de la semana?|tal-agenda,gen-desafio
+7.1|Hacer visible el pensamiento|Las rutinas de pensamiento ayudan a explicar lo que pensamos.|Afiches con las rutinas del curso.;Ejemplos de explicaciones con evidencia.|¿Cómo sabés que lo que pensás es cierto?|gen-antes,detectives-fuentes
+7.2|Autoevaluación|Evaluarse a uno mismo ayuda a aprender mejor.|El semáforo y el «Me pregunto».;Autoevaluaciones de la presentación oral.|¿Qué te sale bien y qué te cuesta?|tal-semaforo,gen-antes
+8.0|Pensar en voz alta|Afirmar, apoyar y cuestionar ordena una discusión.|Rutinas de pensamiento: titulares, brújula, círculo de puntos de vista.;Producciones del curso.|¿Qué titular le pondrías a tu semana?|gen-antes,l-debate
+8.1|Evaluarse entre pares|Mirar el trabajo de un compañero también enseña.|Instrumentos de evaluación entre pares.;Reflexiones sobre emociones y hábitos de estudio.|¿Qué emoción sentís antes de una prueba?|tal-semaforo,p-emociones
+8.2|El recorrido del año|Mirar lo aprendido ayuda a proponerse metas.|Tutoriales para los ingresantes.;Metas para el año que viene.|¿Qué le dirías a un chico que empieza primer año?|gen-libro,tal-agenda
+9.0|Comunicar ideas|Argumentar y escuchar otros puntos de vista se practica.|Charlas breves en video del curso.;Guía para argumentar.|¿Sobre qué tema darías una charla de tres minutos?|l-debate,a-cine
+9.1|Trabajo colaborativo|En un equipo cada uno es necesario para el resultado.|Roles del trabajo colaborativo.;La técnica del rompecabezas.|¿Qué rol ocupás cuando trabajás en grupo?|tal-rompecabezas,ef-cooperativo
+9.2|Del ciclo básico al orientado|Repasar el recorrido ayuda a elegir el camino que sigue.|Mapas de ideas del ciclo básico.;Metas para el ciclo orientado.|¿Qué orientación elegirías y por qué?|tal-semaforo,tal-agenda
+`,
+etica:`
+7.0|Normas para convivir|Las normas existen para que todos podamos convivir.|Acuerdos de convivencia del curso.;Valores en situaciones cotidianas.|¿Qué norma de la escuela cambiarías?|e-dilemas,debate-roles
+7.1|Identidad y dignidad|Cada persona es única y tiene la misma dignidad.|Mural de identidades del curso.;El derecho a la identidad.|¿Qué te hace ser vos?|e-derechos,gen-libro
+7.2|Derechos humanos|Los derechos humanos son de todas las personas, sin excepción.|La Declaración Universal en ilustraciones.;Derechos en situaciones cotidianas.|¿Qué derecho te parece el más importante?|e-derechos,e-constitucion
+7.3|Participar|En una democracia se participa de muchas maneras, no solo votando.|Formas de participación en la escuela.;El centro de estudiantes.|¿Cómo se toma una decisión en tu curso?|e-urna,debate-roles
+8.0|Ciudadanía democrática|Ser ciudadano es tener derechos y responsabilidades.|Derechos y deberes de los ciudadanos.;Instituciones democráticas.|¿Desde qué edad se puede votar en la Argentina?|e-urna,e-poderes
+8.1|Derechos de niños y adolescentes|Los chicos tienen derechos propios, reconocidos por ley.|La Ley 26.061 en ilustraciones.;Dónde pedir ayuda.|¿Sabías que tenés derecho a ser escuchado?|e-derechos,gen-voto
+8.2|Resolver conflictos|Un conflicto se puede resolver dialogando.|Pasos de la mediación.;Casos resueltos por el curso.|¿Cuál fue el último conflicto que resolviste hablando?|e-dilemas,debate-roles
+8.3|Diversidad y participación social|La diversidad enriquece a la comunidad.|Mapa de los orígenes de las familias del curso.;Organizaciones del barrio.|¿Qué organizaciones hay en tu barrio?|e-urna,g-origen
+9.0|La Constitución Nacional|La Constitución es la ley más importante del país.|Partes de la Constitución.;Artículos clave explicados.|¿Cuántos artículos tiene la Constitución?|e-constitucion,e-poderes
+9.1|Garantías constitucionales|Las garantías protegen a las personas frente al poder.|El hábeas corpus y el amparo explicados.;Casos reales.|¿Qué podés hacer si el Estado no respeta un derecho tuyo?|e-constitucion,e-derechos
+9.2|Memoria histórica|Recordar el pasado ayuda a construir el futuro.|Línea de tiempo de la última dictadura.;Testimonios publicados.|¿Por qué es importante recordar?|memoria-nunca-mas,memoria-barrio
+9.3|Participación ciudadana|Hay muchas formas de participar en la vida pública.|Mecanismos de participación ciudadana.;Proyectos del curso.|¿Qué propondrías para mejorar tu barrio?|e-urna,debate-roles
+9.4|Democracia y derechos humanos|La democracia y los derechos humanos se sostienen mutuamente.|La relación entre democracia y derechos humanos.;Avances desde 1983.|¿Qué derechos se ganaron con la democracia?|e-derechos,memoria-nunca-mas
+10.0|Derechos humanos y ciudadanía|Los derechos humanos se conquistaron y hay que defenderlos.|Historia de los derechos humanos.;Derechos vulnerados hoy.|¿Qué derecho está en riesgo hoy?|e-derechos,e-constitucion
+10.1|Participación juvenil|Los jóvenes también transforman la democracia.|El voto joven.;Organizaciones juveniles.|¿Votarías a los 16?|e-urna,debate-roles
+10.2|Identidades y diversidad|Cada persona tiene derecho a ser quien es.|Diversidad de identidades.;Leyes que protegen la diversidad.|¿Qué es la discriminación?|g-origen,e-dilemas
+11.0|Estado y división de poderes|La división de poderes evita que alguien concentre todo el poder.|Los tres poderes y sus funciones.;Controles entre los poderes.|¿Qué pasaría si un solo poder hiciera las leyes y juzgara?|e-poderes,e-constitucion
+11.1|Problemáticas sociales|Los problemas sociales se pueden analizar y debatir.|Problemáticas elegidas por el curso.;Propuestas de solución.|¿Qué problema social te preocupa más?|debate-roles,s-reparto
+11.2|Medios y opinión pública|Los medios influyen en lo que pensamos.|Análisis de noticias.;Cómo se forma la opinión pública.|¿Te informás por redes o por medios?|l-falsa,c-posteo
+12.0|Ética y proyecto de vida|Las decisiones de vida tienen una dimensión ética.|Proyectos de vida del curso.;Dilemas éticos.|¿Qué querés hacer cuando termines la escuela?|e-dilemas,f-tranvia
+12.1|Trabajo y derechos|El trabajo es un derecho con reglas que lo protegen.|Derechos laborales.;Entrevistas a trabajadores.|¿Qué derechos tiene un trabajador?|e-derechos,s-encuesta
+12.2|Participación política|Las organizaciones sociales y los partidos son formas de participar.|Organizaciones sociales de Tucumán.;Cómo funciona un partido político.|¿Qué causa defenderías?|e-urna,s-encuesta
+`,
+filosofia:`
+10.0|¿Qué es la filosofía?|La filosofía empieza cuando nos asombramos y preguntamos.|Preguntas filosóficas del curso.;Filósofos y sus preguntas.|¿Por qué hay algo en lugar de nada?|f-preguntas,gen-voto
+10.1|¿Cómo sabemos lo que sabemos?|No es lo mismo creer que saber.|Diferencia entre creencia, opinión y conocimiento.;Ejemplos cotidianos.|¿Cómo sabés que no estás soñando?|f-falacias,l-falsa
+10.2|Argumentos y falacias|Un buen argumento se puede distinguir de una falacia.|Tipos de falacias con ejemplos.;Argumentos del curso analizados.|¿Una publicidad te engañó alguna vez?|f-falacias,l-debate
+11.0|Libertad y responsabilidad|Ser libre implica hacerse cargo de lo que se decide.|Dilemas éticos.;Posiciones filosóficas sobre la libertad.|¿Sos libre si hacés lo que todos hacen?|f-tranvia,e-dilemas
+11.1|Poder, justicia y democracia|La filosofía política pregunta quién debe gobernar y por qué.|Teorías sobre el poder y la justicia.;Debates del curso.|¿Qué es una sociedad justa?|e-urna,debate-roles
+11.2|Ciencia y tecnología en debate|La ciencia y la tecnología plantean preguntas éticas.|Casos de inteligencia artificial y biotecnología.;Argumentos a favor y en contra.|¿Todo lo que se puede hacer se debe hacer?|inf-ia,b-biotec
+12.0|¿Qué es el ser humano?|Distintas filosofías responden de forma distinta qué nos hace humanos.|Respuestas de distintas épocas.;Preguntas del curso.|¿Qué nos diferencia de una máquina?|f-preguntas,gen-libro
+12.1|Pensamiento latinoamericano|América Latina tiene una tradición filosófica propia.|Pensadoras y pensadores latinoamericanos y argentinos.;Sus preguntas centrales.|¿Hay una filosofía latinoamericana?|f-preguntas,detectives-fuentes
+12.2|El arte y la belleza|La estética pregunta qué es lo bello y qué es el arte.|Teorías sobre la belleza.;Obras discutidas por el curso.|¿La belleza está en el objeto o en quien lo mira?|galeria,a-critica
+`,
+psicologia:`
+10.0|La psicología como ciencia|La psicología estudia la conducta y los procesos mentales con métodos propios.|Campos de la psicología.;Experimentos clásicos.|¿Se puede estudiar científicamente la mente?|p-ilusiones,p-memoria
+10.1|Percibir, recordar, aprender|El cerebro selecciona, organiza y a veces se equivoca.|Percepción, memoria y atención con ejemplos.;Resultados de los experimentos del stand.|¿Por qué recordamos algunas cosas y otras no?|p-memoria,p-ilusiones
+10.2|Emociones y vínculos|Reconocer las emociones ayuda a cuidar los vínculos.|Emociones básicas.;Cómo se expresan en los vínculos.|¿Qué hacés cuando te enojás?|p-emociones,gen-libro
+11.0|Adolescencias|La adolescencia es una etapa de construcción de la identidad.|Identidad y grupos de pares.;Proyectos de vida.|¿Qué te define hoy?|s-juventudes,p-emociones
+11.1|Psicología social|El grupo influye en lo que pensamos y hacemos.|Experimentos de influencia social.;Prejuicios y estereotipos.|¿Alguna vez hiciste algo solo porque el grupo lo hacía?|p-grupo,gen-voto
+11.2|Salud mental y cuidado|La salud mental se cuida, y pedir ayuda es parte del cuidado.|Factores de protección.;Dónde pedir ayuda en Tucumán.|¿Con quién hablás cuando algo te preocupa?|p-emociones,b-mitos
+12.0|Personalidad|Hay distintas teorías para explicar la personalidad.|Teorías y enfoques comparados.;Límites de los tests de personalidad.|¿La personalidad se nace o se hace?|f-preguntas,gen-voto
+12.1|Comunicación y conflictos|Los conflictos se pueden transformar con comunicación.|Estilos de comunicación.;Pasos para resolver conflictos.|¿Qué frase arruina una conversación?|p-emociones,debate-roles
+12.2|Psicología y trabajo|El trabajo también es un espacio de bienestar o de malestar.|La psicología en el mundo laboral.;Orientación vocacional.|¿Qué trabajo te imaginás haciendo?|s-encuesta,ec-emprende
+`,
+economia:`
+10.0|El problema económico|Las necesidades son muchas y los recursos, limitados.|Necesidades y bienes clasificados.;El costo de oportunidad con ejemplos.|Si tenés que elegir, ¿qué dejás de lado?|ec-mercado,gen-voto
+10.1|El circuito económico|Familias, empresas y Estado están conectados en un circuito.|Diagrama del circuito económico.;Agentes económicos de Tucumán.|¿Qué papel cumple tu familia en la economía?|ec-mercado,t-proceso
+10.2|Oferta, demanda y precios|El precio se forma donde se cruzan la oferta y la demanda.|Gráfico de oferta y demanda.;Casos reales de precios.|¿Por qué sube el precio del limón en algunos meses?|ec-mercado,ec-canasta
+11.0|Dinero e inflación|La inflación hace que el dinero compre cada vez menos.|Historia del dinero en la Argentina.;La inflación con datos del INDEC.|¿Cuánto costaba un alfajor cuando naciste?|ec-canasta,m-cuotas
+11.1|PBI, empleo e ingresos|El PBI mide lo que produce un país, pero no muestra cómo se reparte.|Indicadores macroeconómicos.;La distribución del ingreso.|¿Un país rico es un país sin pobreza?|s-reparto,ec-canasta
+11.2|El Estado en la economía|El Estado recauda impuestos y decide en qué gastar.|El presupuesto de la provincia.;Tipos de impuestos.|¿Qué impuestos pagás sin darte cuenta?|ec-presupuesto,gen-voto
+12.0|Economía argentina|La economía argentina pasó por modelos muy distintos.|Línea de tiempo de los modelos económicos.;Datos de cada etapa.|¿Qué modelo económico conocieron tus abuelos?|linea-tiempo,tapas-2001
+12.1|Comercio internacional|La Argentina vende y compra en un mundo globalizado.|Exportaciones e importaciones.;Los principales socios comerciales.|¿Qué compramos al exterior?|g-etiquetas,g-limon
+12.2|Economía regional y emprendimientos|El NOA tiene economías regionales con oportunidades.|Economías regionales del NOA.;El emprendimiento del curso.|¿Qué emprendimiento pondrías en tu barrio?|ec-emprende,g-limon
+`,
+sociologia:`
+10.0|La mirada sociológica|Lo que parece personal también es social.|Ejemplos de cómo la sociedad influye en las decisiones.;Sociólogos y sus preguntas.|¿Elegiste tu ropa o la eligió la moda?|s-encuesta,p-grupo
+10.1|Socialización y cultura|Aprendemos a vivir en sociedad en la familia, la escuela y los grupos.|Agentes de socialización.;Instituciones del barrio.|¿Qué aprendiste en tu familia que no se enseña en la escuela?|s-juventudes,gen-libro
+10.2|Desigualdades|La estructura social reparte oportunidades de forma desigual.|Indicadores de desigualdad.;Datos de Tucumán.|¿Todos tenemos las mismas oportunidades?|s-reparto,g-piramides
+11.0|Juventudes|No hay una sola juventud, hay muchas.|Culturas juveniles.;Resultados de la encuesta del curso.|¿Qué tienen en común los jóvenes de hoy?|s-juventudes,s-encuesta
+11.1|Trabajo, consumo y estilos de vida|El trabajo y el consumo definen formas de vivir.|Cambios en el trabajo.;Consumos culturales.|¿Qué comprás que no necesitás?|s-juventudes,g-etiquetas
+11.2|Movimientos sociales|Los movimientos sociales transforman la sociedad.|Movimientos sociales argentinos.;Formas de participación.|¿Qué movimiento social conocés?|memoria-barrio,e-urna
+12.0|Medios y realidad|Los medios y las redes construyen la realidad que vemos.|Análisis de noticias y de posteos.;Algoritmos y burbujas.|¿Las redes muestran el mundo o tu mundo?|c-posteo,l-falsa
+12.1|Problemas sociales de Tucumán|Investigar un problema social es el primer paso para cambiarlo.|Problemáticas elegidas por el curso.;Datos y entrevistas.|¿Qué problema de Tucumán investigarías?|s-encuesta,g-riesgos
+12.2|Investigar la sociedad|Encuestas y entrevistas son herramientas para conocer la sociedad.|Diseño de la encuesta del curso.;Resultados y conclusiones.|¿Qué pregunta le harías a la ciudad?|s-encuesta,m-encuesta
+`,
+informatica:`
+10.0|Hardware, software y redes|Una computadora es un sistema de partes físicas y programas.|Partes de una computadora desarmada.;Cómo se conectan en red.|¿Qué hay adentro de tu celular?|inf-red,t-adentro
+10.1|Pensamiento computacional|Un algoritmo es una receta precisa para resolver un problema.|Algoritmos del curso.;Problemas resueltos paso a paso.|¿Cuántos pasos tiene atarse los cordones?|inf-robot,hanoi
+10.2|Ciudadanía digital|Cuidar la privacidad y la seguridad también es una forma de cuidarse.|Recomendaciones de seguridad.;Casos de robo de datos.|¿Qué datos tuyos están en Internet?|inf-claves,c-posteo
+11.0|Programar|Variables, condiciones y repeticiones son la base de todo programa.|Programas del curso.;Estructuras de control explicadas.|¿Qué programarías si pudieras?|programacion,inf-robot
+11.1|Bases de datos|Una base de datos organiza la información para encontrarla rápido.|Base de datos del curso.;Consultas de ejemplo.|¿Cuántas bases de datos tienen información tuya?|inf-datos,m-encuesta
+11.2|Aplicaciones sencillas|Con herramientas simples se pueden crear aplicaciones útiles.|Aplicaciones del curso.;El proceso de desarrollo.|¿Qué aplicación le falta a tu escuela?|programacion,inf-binario
+12.0|Proyecto de software|Un proyecto de software se planifica, se programa y se prueba.|Etapas del proyecto del curso.;La demostración del producto.|¿Qué harías primero: diseñar o programar?|programacion,t-torre
+12.1|Datos e inteligencia artificial|La inteligencia artificial aprende de datos, y los datos pueden tener sesgos.|Cómo aprende una IA.;Debates éticos.|¿Una máquina puede ser injusta?|inf-ia,inf-datos
+12.2|Internet y la nube|Internet es una red de redes y la nube son computadoras de otros.|Cómo viaja la información.;Servicios en la nube.|¿Dónde están guardadas tus fotos?|inf-red,inf-binario
+`,
+comunicacion:`
+10.0|¿Qué es comunicar?|Comunicar es más que transmitir: es construir sentido con otros.|Modelos de la comunicación.;Ejemplos de malentendidos.|¿Alguna vez te entendieron mal?|telefono-hilo,c-noticia
+10.1|Lenguajes de los medios|Cada medio tiene su propio lenguaje.|La misma noticia en diario, radio, TV y redes.;Características de cada medio.|¿Qué medio usás más?|c-radio,c-posteo
+10.2|Lectura crítica de mensajes|Todo mensaje tiene un autor, una intención y un público.|Análisis de mensajes mediáticos.;Guía de lectura crítica.|¿Quién gana con que veas ese mensaje?|c-posteo,l-falsa
+11.0|Periodismo|La noticia, la crónica y la entrevista son géneros del periodismo.|Producciones periodísticas del curso.;Cómo se arma una noticia.|¿Qué noticia de tu escuela merece ser contada?|c-noticia,c-radio
+11.1|Radio y podcast|La radio y el podcast cuentan con la voz y el sonido.|Programas grabados por el curso.;El guion radial.|¿Qué podcast escuchás?|c-radio,radioteatro
+11.2|Comunicación institucional y comunitaria|Las instituciones también comunican, y la comunidad puede hacer sus propios medios.|Campañas del curso.;Medios comunitarios de Tucumán.|¿Cómo se entera tu barrio de lo que pasa?|c-noticia,gen-libro
+12.0|Producción audiovisual|Un audiovisual se piensa, se graba y se edita.|Cortos del curso.;Guion y plan de rodaje.|¿Qué historia filmarías?|a-cine,stop-motion
+12.1|Redes sociales|Las redes sociales comunican, pero también recolectan datos.|Análisis de cuentas y publicaciones.;Privacidad en redes.|¿Cuánto tiempo pasás en redes por día?|c-posteo,inf-claves
+12.2|Comunicar con la comunidad|Un proyecto de comunicación puede mejorar la vida del barrio.|El proyecto del curso.;Registro del trabajo con la comunidad.|¿Qué le contarías a tu barrio?|c-radio,memoria-barrio
+`
+};
+/* Parte 3: arma MU_ESP para todas las materias y años, y amplía la interfaz de la muestra. */
+const MU_ANIO_N = {"7":"1.º año", "8":"2.º año", "9":"3.º año", "10":"4.º año", "11":"5.º año", "12":"6.º año", "co":"Ciclo Orientado (NAP)"};
+function muRango(ks){ const n = ks.filter(k => k !== "co").map(Number).sort((a, b) => a - b); if (!n.length) return ""; const t = k => MU_ANIO_N[k].replace(" año", ""); return n.length === 1 ? MU_ANIO_N[n[0]] : `${t(n[0])} a ${MU_ANIO_N[n[n.length - 1]]}`; }
+(function muEspArmar(){
+  const nombre = k => ((MATERIAS.find(m => m[0] === k) || [k, k])[1]).replace(/ \((Ciclo Orientado|PLaNEA)\)$/, "");
+  for (const [mat, txt] of Object.entries(MU_ESP_TXT)){
+    const E = MU_ESP[mat] || (MU_ESP[mat] = {n:nombre(mat), fuente:"", anios:{}});
+    const nuevos = {};
+    txt.trim().split("\n").forEach(l => {
+      const [pos, t, idea, exp, preg, a] = l.split("|"), [an, i] = pos.split(".");
+      const s = ((CURRICULUM[mat] || {})[an] || [])[+i]; if (!s || !t) return;
+      (nuevos[an] = nuevos[an] || [])[+i] = {s, t:t.trim(), idea:idea.trim(), exp:exp.split(";").map(x => x.trim()).filter(Boolean), preg:preg.trim(), a:a.split(",").map(x => x.trim()).filter(Boolean)};
+    });
+    for (const [an, L] of Object.entries(nuevos)) E.anios[an] = L.filter(Boolean);
+  }
+  for (const [mat, E] of Object.entries(MU_ESP)){
+    const ks = Object.keys(E.anios).filter(k => E.anios[k].length), r = muRango(ks);
+    if (mat === "fisica" || mat === "historia") E.fuente = E.fuente.replace("(1.º a 3.º año)", `(${r})`);
+    else E.fuente = `Saberes del diseño curricular que usa Lapacho (${r}).` + (ks.some(k => +k >= 10) ? " En el Ciclo Orientado son saberes orientativos basados en los NAP: ajustalos al diseño de tu orientación." : "");
+  }
+})();
+const muEspMaterias = () => MATERIAS.map(m => m[0]).filter(k => MU_ESP[k]);
+const muAniosDe = mat => ["7", "8", "9", "10", "11", "12", "co"].filter(k => ((MU_ESP[mat] || {}).anios || {})[k] && MU_ESP[mat].anios[k].length).map(k => [k, MU_ANIO_N[k]]);
+function muEspSel(){
+  const m = muLeer(), lista = muEspMaterias();
+  const mat = MU_ESP[m.espMat] ? m.espMat : lista.includes(val("materia")) ? val("materia") : "fisica";
+  const an = muAniosDe(mat).map(x => x[0]);
+  const anio = an.includes(m.espAnio) ? m.espAnio : an.includes(String(val("anio"))) ? String(val("anio")) : an[0];
+  return {mat, anio};
+}
+function htmlMuEsp(){
+  const {mat, anio} = muEspSel(), E = MU_ESP[mat], L = E.anios[anio] || [];
+  const stands = muStands(muDatos().stands).map(s => norm(s.tema));
+  return `<div class="cfg-grid mu-esp-f"><div class="f"><label for="mu-esp-mat">Espacio curricular</label><select id="mu-esp-mat">${muEspMaterias().map(k => `<option value="${k}"${k === mat ? " selected" : ""}>${esc(MU_ESP[k].n)}</option>`).join("")}</select></div>
+      <div class="f"><label for="mu-esp-anio">Año</label><select id="mu-esp-anio">${muAniosDe(mat).map(([k, t]) => `<option value="${k}"${k === anio ? " selected" : ""}>${t}</option>`).join("")}</select></div></div>
+    <p class="hint">${esc(E.fuente)} Cada tema trae qué exponer, la idea que se lleva el visitante y actividades en las que participa.</p>
+    <p class="hint mu-esp-n" aria-live="polite">${L.length === 1 ? "1 tema" : `${L.length} temas`} para ${esc(E.n)}, ${esc(MU_ANIO_N[anio] || "")}.</p>
+    <ul class="mu-esp-l">${L.map((x, i) => { const ya = stands.includes(norm(x.t)); return `<li class="mu-esp-i"><div class="mu-esp-top"><b>${esc(x.t)}</b>${ya ? `<span class="der-k si">En tus stands</span>` : ""}</div>
+      <p class="hint mu-esp-s">${esc(x.s)}</p>
+      <p><b>La idea que se lleva el visitante:</b> ${esc(x.idea)}</p>
+      <p><b>Qué exponer:</b></p><ul class="cp-reglas">${x.exp.map(e => `<li>${esc(e)}</li>`).join("")}</ul>
+      <p><b>Pregunta para el público:</b> ${esc(x.preg)}</p>
+      <p><b>Actividades para los visitantes:</b> ${x.a.map(muActPorId).filter(Boolean).map(a => esc(a.t)).join(" · ")}</p>
+      <div class="cur-bar"><button type="button" class="btn btn-sm${ya ? "" : " btn-primary"}" data-muesp="${i}"${ya ? " disabled" : ""}>${ya ? "Ya está en los stands" : "Sumar como stand"}</button></div></li>`; }).join("")}</ul>
+    <div class="cur-bar"><button type="button" class="btn btn-sm" data-mu="esp-docx">Descargar la guía de ${esc(E.n)} (Word)</button><button type="button" class="btn btn-sm" data-mu="esp-todo">Sumar todos los temas de este año</button></div>`;
+}
+function modeloMuEsp(){
+  const {mat, anio} = muEspSel(), E = MU_ESP[mat], L = E.anios[anio] || [], an = MU_ANIO_N[anio] || "";
+  return {inst:val("institucion"), titulo:`Muestra de ${E.n}`, subtitulo:`${an}: temas para exponer y actividades para los visitantes`, faltaSub:"", datos:[["Docente", val("docente")]].filter(d => d[1]),
+    secs:[...L.map((x, i) => ({h:x.t, pageBreak:i > 0, body:[`Saber: ${x.s}`, "", `La idea que se lleva el visitante: ${x.idea}`, "", "Qué exponer:", ...x.exp.map(e => `- ${e}`), "", `Pregunta para el público: ${x.preg}`, "", "Actividades para los visitantes:", ...x.a.map(muActPorId).filter(Boolean).map(a => `- ${muTxtIdea(a)}`)].join("\n")})),
+      {h:"Fuente de los temas", body:E.fuente},
+      {h:"Seguridad", body:"Ninguna actividad usa fuego, vidrio, productos químicos, líquidos, alimentos ni seres vivos. Las imágenes, los datos y las fuentes de los paneles dicen de dónde salen."}], firmas:null};
+}
+function muEspSumarTodos(){
+  const {mat, anio} = muEspSel(), L = MU_ESP[mat].anios[anio] || [];
+  const m = muLeer(), resp = m.resp || val("docente"), curso = val("curso") || MU_ANIO_N[anio] || "";
+  const ya = muStands(m.stands || "").map(s => norm(s.tema));
+  const nuevos = L.filter(x => !ya.includes(norm(x.t)));
+  if (!nuevos.length){ toast("Todos los temas de este año ya están en los stands."); return; }
+  m.act = m.act || {};
+  const lineas = nuevos.map(x => { const linea = `${curso} | ${x.t}${resp ? ` | ${resp}` : ""}`; const s = muStands(linea)[0]; m.act[muKey(s)] = x.a.filter(id => muActPorId(id)).slice(0, 2); return linea; });
+  m.stands = [String(m.stands || "").trim(), ...lineas].filter(Boolean).join("\n");
+  muGuardar(m);
+  const t = $("mu-stands"); if (t) t.value = m.stands;
+  muPrev(); renderMuEsp();
+  toast(`Se sumaron ${nuevos.length === 1 ? "1 stand" : `${nuevos.length} stands`} con sus actividades. Revisá el curso de cada uno.`);
+}
+function init58(){
+  try {
+    const D = $("muestra"); if (!D || D.dataset.okEsp58) return; D.dataset.okEsp58 = "1";
+    D.addEventListener("click", e => { if (e.target.closest('[data-mu="esp-todo"]')) muEspSumarTodos(); });
+    D.addEventListener("change", e => { if (e.target.id === "mu-esp-mat"){ const m = muLeer(); delete m.espAnio; muGuardar(m); } }, true);
+  } catch (e) { registrarError("init58", e); }
+}
 
 /* ============================================================
    Inicio
@@ -23039,7 +23559,7 @@ function init(){
   renderTuDia();
   requestAnimationFrame(() => growAll());
 }
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
