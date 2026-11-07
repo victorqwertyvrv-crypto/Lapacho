@@ -12,6 +12,8 @@
 <style>body{margin:0}
 :root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 body{margin:0}
+:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+body{margin:0}
 
 /* Herramienta de trabajo: formulario a la izquierda y la hoja de la planificación a la derecha; en el teléfono se alternan con un selector. */
 :root{
@@ -4835,6 +4837,7 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-07-cap", fecha:"2026-11-07", items:["Capacitaciones: sumamos la Diplomatura en Inteligencia Artificial de Filosofía y Letras (UNT), 120 horas en tres cursos de 40 que se pueden hacer sueltos, y el curso de IA para docentes del SIED de la UNT (Res. 0682/5, cohorte cerrada)."]},
   {id:"2026-11-02-a", fecha:"2026-11-02", items:[
     "Nueva herramienta «Líneas de colectivo de Tucumán» (en Más herramientas): 63 líneas urbanas, interurbanas y rurales, con 206 ramales. Buscás por número, calle, barrio o localidad; ves los barrios, el recorrido y los horarios. En «De un lugar a otro» encontrás las líneas que pasan por tu casa y por la escuela sin trasbordo, y en «Por escuela» las que pasan por la calle de cualquier escuela del padrón.",
     "En «Cargos disponibles», cada escuela muestra qué colectivos de línea pasan por su calle o llegan a su localidad.",
@@ -11367,7 +11370,7 @@ function puntosInfod(h){ const f = INFOD_TABLA.find(([a, b]) => h >= a && h <= b
 const INFOD_URL = "https://red.infd.edu.ar";
 const FILO_URL = "https://filo.unt.edu.ar/category/capacitacion-docente/";
 /* Catálogo: se renueva en cada actualización mensual. Solo datos publicados por quien dicta el curso. */
-const CAPAC_ACT = "2026-10-22";
+const CAPAC_ACT = "2026-11-07";
 const CAPAC = [
   {id:"inf-fin60", n:"Educación financiera en clave didáctica", inst:"INFoD", infod:true, horas:60, mod:"Virtual autoasistido", dest:"Secundaria, todas las áreas", area:["todas"], ed:"1.ª cohorte 2026 (inicio 01/04)", est:"cerrada", costo:"Gratuito", url:INFOD_URL},
   {id:"inf-fin30", n:"Educación financiera: conceptos clave y estrategias transversales aplicadas", inst:"INFoD", infod:true, horas:30, mod:"Virtual autoasistido", dest:"Secundaria, todas las áreas", area:["todas"], ed:"1.ª cohorte 2026 (inicio 01/04)", est:"cerrada", costo:"Gratuito", url:INFOD_URL},
@@ -11384,7 +11387,9 @@ const CAPAC = [
   {id:"unt-ciud", n:"Construcción de ciudadanía en contextos complejos", inst:"Facultad de Filosofía y Letras (UNT)", res:"", horas:null, mod:"Semipresencial", dest:"Asesores pedagógicos y docentes de secundaria de todas las áreas", area:["todas"], ed:"Septiembre 2026", est:"consultar", costo:"Consultar", url:FILO_URL},
   {id:"cgce-fin", n:"Habilidades financieras en estudiantes", inst:"Colegio de Graduados en Ciencias Económicas de Tucumán", res:"", horas:null, mod:"Consultar", dest:"Docentes", area:["todas", "economía"], ed:"2026", est:"consultar", costo:"Consultar", url:"https://www.cgcetucuman.org.ar/inscripciones-abiertas-para-la-capacitacion-habilidades-financieras-en-estudiantes-con-puntaje-docente/"},
   {id:"min-ia", n:"Capacitación docente en inteligencia artificial (2.ª edición)", inst:"Ministerio de Educación de Tucumán", res:"", horas:null, mod:"Consultar", dest:"Docentes", area:["todas"], ed:"Abril 2026", est:"consultar", costo:"Gratuito", url:"https://www.educaciontuc.gov.ar/2026/04/08/se-lanzo-la-2-a-capacitacion-docente-en-inteligencia-artificial/"},
-  {id:"min-fdci", n:"Cursos de la plataforma del Ministerio (Formación Docente Continua e Investigación, antes FORMAR)", inst:"Ministerio de Educación de Tucumán", res:"", horas:null, mod:"Virtual y presencial", dest:"Docentes con título habilitante", area:["todas"], ed:"Permanente", est:"consultar", costo:"Gratuito", url:"https://capacitaciondocente.educaciontuc.gov.ar/", nota:"Hay que estar registrado en el Panel Docente. Asistencia mínima: 100 % en cursos a distancia y 80 % en presenciales."}
+  {id:"min-fdci", n:"Cursos de la plataforma del Ministerio (Formación Docente Continua e Investigación, antes FORMAR)", inst:"Ministerio de Educación de Tucumán", res:"", horas:null, mod:"Virtual y presencial", dest:"Docentes con título habilitante", area:["todas"], ed:"Permanente", est:"consultar", costo:"Gratuito", url:"https://capacitaciondocente.educaciontuc.gov.ar/", nota:"Hay que estar registrado en el Panel Docente. Asistencia mínima: 100 % en cursos a distancia y 80 % en presenciales."},
+  {id:"unt-diplo-ia", n:"Diplomatura de Posgrado en Inteligencia Artificial: desafíos epistemológicos y proyecciones educativas", inst:"Facultad de Filosofía y Letras (UNT)", res:"", horas:120, mod:"Virtual", dest:"Docentes, investigadores y profesionales", area:["todas"], ed:"3.ª cohorte, octubre a diciembre de 2026 (tres cursos de 40 h; se pueden hacer por separado)", est:"consultar", costo:"$90.000 la diplomatura; $120.000 cada curso suelto", url:"https://www.lagaceta.com.ar/nota/1155971/sociedad/inteligencia-artificial-educacion-unt-abre-nueva-diplomatura-virtual.html", nota:"La nota (06/10/2026) dice que otorga 4 puntos por el Decreto 292/26 del MEd, ítem F.9.1.8, y que la inscripción está abierta. No cita resolución: confirmá antes de pagar. Consultas: diplomatura.ia@filo.unt.edu.ar.", alta:"2026-11-07"},
+  {id:"unt-sied-ia", n:"Inteligencia Artificial para Docentes: herramientas y aplicaciones prácticas", inst:"SIED, Secretaría Académica (UNT)", res:"0682/5", horas:40, mod:"Virtual", dest:"Directivos, asesores pedagógicos y docentes de todos los niveles y áreas", area:["todas", "tecnología"], ed:"3.ª cohorte (inicio 02/06/2026; inscripción hasta el 28/05)", est:"cerrada", costo:"Consultar", url:"https://medios.unt.edu.ar/2026/05/15/la-unt-abre-una-nueva-cohorte-del-curso-de-inteligencia-artificial-para-docentes/", nota:"Según la UNT otorga 0,75 puntos. Son 40 horas cátedra. Atento a una próxima cohorte.", alta:"2026-11-07"},
 ];
 const CAPAC_FUENTES = [
   ["Plataforma del Ministerio (FDCI)", "https://capacitaciondocente.educaciontuc.gov.ar/"],
