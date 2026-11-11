@@ -10,7 +10,6 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="lapacho-config.js"></script>
 <style>body{margin:0}
-:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 body{margin:0}
 :root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 body{margin:0}
@@ -2169,6 +2168,16 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 #coh-mini{margin-bottom:12px}
 .dev-res{margin-top:4px}
 [data-devol]{min-height:28px;display:inline-flex;align-items:center}
+
+/* Versión 62: «¿Me corresponde?» por grupos */
+.der-ir{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}
+.der-ir a{display:inline-flex;align-items:center;min-height:32px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink);text-decoration:none;background:var(--bg-card, transparent)}
+.der-ir a:hover{border-color:var(--accent)}
+.der-g{margin-top:14px}
+.der-g .der-h{margin-bottom:8px}
+.der-decir{margin:4px 0 0;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--radius-s, 8px) var(--radius-s, 8px) 0;font-size:15px;line-height:1.5;color:var(--ink)}
+.der-acudir{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 0}
+.der-acudir span{padding:3px 10px;border:1px solid var(--line);border-radius:999px;font-size:14px}
 
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
@@ -5163,6 +5172,13 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-11a", fecha:"2026-11-11", items:[
+    "«¿Me corresponde?» pasa de 13 a 35 situaciones, en cinco grupos: pedidos de la dirección, ausencias y licencias, tu cargo y tu legajo, el aula y las familias, y una parte para directivos.",
+    "Cada situación nueva trae una frase para decir, qué conviene dejar por escrito y a quién acudir, además de la norma con su artículo.",
+    "Se suman el régimen de licencias (enfermedad, familiar enfermo, duelo, examen, asuntos particulares), el cese de interinos y suplentes, el cierre de cursos, los recursos contra la calificación anual y las sanciones, los accidentes de estudiantes y las inasistencias por embarazo.",
+    "Podés preguntarlo con tus palabras en «Contame qué necesitás»: por ejemplo, «estoy enfermo y no puedo ir» o «un alumno se lastimó en mi hora».",
+    "Lo que no pudimos leer en una norma publicada sigue marcado para que lo confirmes en tu escuela."
+  ]},
   {id:"2026-11-10g", fecha:"2026-11-10", items:[
     "Criterios con su fuente: cada aviso nuevo dice si es «Norma verificada», «A confirmar con tu escuela» o «Sugerencia didáctica».",
     "«Mi curso › Notas» avisa si a un período le faltan las tres calificaciones y la instancia integradora que pide el Régimen Académico. Es un aviso: no bloquea.",
@@ -16907,7 +16923,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "61 (10/11/2026)";
+const LAPACHO_VERSION = "62 (11/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -22962,8 +22978,8 @@ const DER_EST = {
 const DER = {tab:"pedidos", sel:"", notaSit:""};
 function htmlRefs(r){ return `<span class="der-ref">${r.map(x => `<a href="${esc(DER_NORMAS[x[0]].u)}" target="_blank" rel="noopener">${esc(derRef(x))}</a>`).join(" · ")}</span>`; }
 function htmlDerLista(L){ return `<ul class="der-l">${L.map(x => `<li><span>${esc(x.t)}</span>${htmlRefs(x.r)}</li>`).join("")}</ul>`; }
-function htmlDerAviso(){ return `<p class="der-aviso">Información orientativa, armada con el texto de cada norma. No reemplaza el asesoramiento de tu gremio ni de un abogado. Revisado el ${esc(fechaCortaIso(DER_REVISION))}.</p>`; }
-function htmlDerSit(S){
+function htmlDerAvisoV61(){ return `<p class="der-aviso">Información orientativa, armada con el texto de cada norma. No reemplaza el asesoramiento de tu gremio ni de un abogado. Revisado el ${esc(fechaCortaIso(DER_REVISION))}.</p>`; }
+function htmlDerSitV61(S){
   const K = DER_K[S.k];
   return `<article class="der-sit" aria-labelledby="der-sit-t">
     <div class="der-top"><h3 id="der-sit-t">${esc(S.t)}</h3><span class="der-k ${K[1]}">${K[0]}</span></div>
@@ -22974,7 +22990,7 @@ function htmlDerSit(S){
     <h4>Qué hacer</h4><ol class="cp-reglas">${S.hacer.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
     <div class="cur-bar">${S.nota ? `<button type="button" class="btn btn-sm btn-primary" data-der="nota" data-dersit="${S.id}">Armar la nota a la dirección</button>` : ""}${S.lic && $("btn-licalc") ? `<button type="button" class="btn btn-sm" data-der="lic">Abrir «Licencias y feriados»</button>` : ""}<button type="button" class="btn btn-sm" data-der="volver">Ver otras situaciones</button></div></article>`;
 }
-function htmlDerPedidos(){
+function htmlDerPedidosV61(){
   if (DER.sel){ const S = DER_SIT.find(x => x.id === DER.sel); if (S) return htmlDerSit(S); }
   return `<p class="hint">Elegí lo que te pidieron: te decimos si te corresponde, por qué, con qué norma y qué hacer.</p>
     <div class="cv-sits der-sits" role="group" aria-label="Situación">${DER_SIT.map(x => `<button type="button" class="cv-sit" data-dersel="${x.id}"><b>${esc(x.t)}</b><small><span class="der-k ${DER_K[x.k][1]}">${DER_K[x.k][0]}</span></small></button>`).join("")}</div>`;
@@ -26293,6 +26309,284 @@ function init71(){
 }
 
 /* ============================================================
+   Versión 62: más situaciones en «¿Me corresponde?»
+   Ausencias y licencias, el cargo y el sueldo, el aula y las familias, y una sección para directivos.
+   Cada situación trae la norma (solo si se leyó su texto), una frase para decir, qué dejar por escrito
+   y a quién acudir. Lo que no se pudo comprobar en una norma publicada queda marcado.
+   ============================================================ */
+const DER_REVISION_62 = "2026-11-11";
+Object.assign(DER_NORMAS, {
+  d505:{n:"Régimen de licencias docentes (Decreto 505/14 MGEyJ de 1996)", u:LIC_URL, f:"Registro Oficial de Leyes y Decretos de Tucumán. Los días y artículos son los que usa «Licencias y feriados»."},
+  estc:{n:"Estatuto del Docente de Tucumán, texto consolidado (Ley 3470)", u:"https://iesfa-tuc.infd.edu.ar/sitio/upload/Estatuto_Docente.tuc.pdf", f:"Copia del texto consolidado publicada por un instituto de formación docente de la Provincia. Leído el 11/11/2026."},
+  l25273:{n:"Ley 25.273 de inasistencias por embarazo y lactancia", u:"https://digesto.catamarca.gob.ar/media/genero/Ley25273.pdf", f:"Ley nacional. Copia publicada en un digesto oficial provincial."},
+  ccc:{n:"Código Civil y Comercial de la Nación", u:"https://repositorio.uca.edu.ar/bitstream/123456789/8439/1/responsabilidad-civil-establecimientos-educativos.pdf", f:"El art. 1767 está transcripto y explicado en este trabajo de la Universidad Católica Argentina. El texto oficial está en Infoleg."},
+  cfe311:{n:"Res. CFE 311/16", u:"https://www.bnm.me.gov.ar/giga1/normas/RCFE_311-16.pdf", f:"Consejo Federal de Educación. Biblioteca Nacional de Maestros."}
+});
+const DER_G = [["ped", "Pedidos de la dirección"], ["aus", "Ausencias y licencias"], ["car", "Tu cargo y tu legajo"], ["aul", "En el aula y con las familias"], ["dir", "Si sos directivo"]];
+DER_SIT.forEach(x => { if (!x.g) x.g = "ped"; });
+DER_SIT.push(
+  /* ---------- Ausencias y licencias ---------- */
+  {id:"enfermo", g:"aus", t:"Estoy enfermo y no puedo ir a dar clase", k:"si", lic:true,
+    res:"Te corresponde la licencia por enfermedad de corto tratamiento: hasta 30 días corridos por año calendario, con goce íntegro.",
+    por:["El régimen de licencias la prevé para titulares; lo que pasa de 30 días en el año es sin goce.", "Si sos suplente o contratado también son hasta 30 días con goce; después, las inasistencias por enfermedad se justifican sin goce.", "No pudimos leer en una fuente oficial con cuánta anticipación hay que avisar ni cómo se pide hoy el control médico: preguntalo en secretaría."],
+    r:[["d505", "art. 10, inc. a, y arts. 38 y 39"], ["est", "art. 6, inc. 12"]],
+    hacer:["Avisá a la escuela apenas sepas que no vas, por el canal que usen, y guardá el mensaje.", "Pedí el certificado médico el mismo día.", "Presentá el pedido de licencia como te indique secretaría y quedate con el comprobante."],
+    decir:"Hoy no puedo asistir por enfermedad. Pido licencia por corto tratamiento, art. 10, inc. a, del régimen de licencias. Presento el certificado por la vía que me indiquen.",
+    escrito:["El aviso, con día y hora.", "El certificado médico y el comprobante del pedido de licencia."],
+    acudir:["Secretaría de la escuela", "Tu gremio, si te la niegan o te descuentan"],
+    nota:{asunto:"Licencia por enfermedad", pedido:"solicitar licencia por enfermedad de corto tratamiento desde el ____ hasta el ____, conforme al régimen de licencias (Decreto 505/14, art. 10, inc. a), y acompañar el certificado médico"}},
+  {id:"famenf", g:"aus", t:"Tengo que cuidar a un familiar enfermo", k:"si", lic:true,
+    res:"Te corresponden hasta 10 días hábiles por año con goce. Se puede prorrogar hasta 30 días hábiles más, sin goce.",
+    por:["El régimen pide una certificación médica oficial y que la atención sea personal y directa.", "Si el familiar tiene una discapacidad hay una licencia aparte, más larga (art. 25)."],
+    r:[["d505", "arts. 24 y 25"]],
+    hacer:["Avisá a la escuela y pedí el certificado del familiar.", "Preguntá en secretaría cómo se tramita hoy la certificación médica.", "Presentá el pedido y guardá el comprobante."],
+    decir:"Necesito ausentarme para atender a un familiar enfermo. Pido la licencia del art. 24 del régimen de licencias y presento la certificación.",
+    escrito:["El aviso y el certificado médico del familiar.", "El comprobante del pedido."],
+    acudir:["Secretaría de la escuela", "Tu gremio"],
+    nota:{asunto:"Licencia por atención de familiar enfermo", pedido:"solicitar licencia por atención de familiar enfermo desde el ____ hasta el ____, conforme al régimen de licencias (Decreto 505/14, art. 24), y acompañar la certificación correspondiente"}},
+  {id:"duelo", g:"aus", t:"Falleció un familiar", k:"si", lic:true,
+    res:"Te corresponde licencia por duelo con goce íntegro. Los días dependen del parentesco.",
+    por:["Cónyuge, hijos o padres: 5 días corridos. Hermanos, suegros o hijos políticos: 2 días. Abuelos, nietos o hermanos políticos: 1 día.", "Si el sepelio es fuera de la provincia se suman 2 días.", "La documentación se presenta dentro de las 48 horas."],
+    r:[["d505", "art. 23, inc. c"]],
+    hacer:["Avisá a la escuela.", "Al volver, presentá la partida o la constancia dentro de las 48 horas."],
+    decir:"Falleció un familiar directo. Tomo la licencia por duelo del art. 23, inc. c, y presento la constancia al reintegrarme.",
+    escrito:["El aviso.", "La constancia de fallecimiento y el vínculo."],
+    acudir:["Secretaría de la escuela"], nota:null},
+  {id:"rendir", g:"aus", t:"Tengo que rendir un examen o integrar una mesa en otra institución", k:"si", lic:true,
+    res:"Para rendir finales de nivel superior o universitario: 3 días hábiles por examen, hasta 12 por año, con goce. Para integrar mesas o jurados: hasta 10 días por año, si hay superposición horaria.",
+    por:["Las dos se piden con 5 días de anticipación.", "Para la de examen, el comprobante se presenta dentro de los 5 días hábiles del reintegro."],
+    r:[["d505", "arts. 27 y 28"]],
+    hacer:["Pedila por escrito 5 días antes, con la fecha del examen o de la mesa.", "Pedí la constancia el día del examen.", "Entregala al reintegrarte y guardá una copia."],
+    decir:"El día ____ rindo un final. Pido la licencia por examen del art. 27, con los 5 días de anticipación que fija el régimen.",
+    escrito:["El pedido con fecha de presentación.", "La constancia de examen o de integración de la mesa."],
+    acudir:["Secretaría de la escuela"],
+    nota:{asunto:"Licencia por examen", pedido:"solicitar licencia por examen para el día ____, conforme al régimen de licencias (Decreto 505/14, art. 27), y comprometerme a presentar el comprobante dentro de los cinco días hábiles del reintegro"}},
+  {id:"personal", g:"aus", t:"Necesito faltar por un asunto personal", k:"si", lic:true,
+    res:"Tenés la justificación por asuntos particulares: hasta 1 por mes y 5 por año, con goce.",
+    por:["Si es previsible, se pide con 2 días de anticipación.", "El régimen también justifica la citación de una autoridad judicial o administrativa, la donación de sangre y la fuerza mayor comprobada."],
+    r:[["d505", "art. 51"]],
+    hacer:["Pedila por escrito con 2 días de anticipación si podés preverlo.", "Llevá la cuenta: «Licencias y feriados» te dice cuántas te quedan."],
+    decir:"El día ____ necesito ausentarme por asuntos particulares, art. 51, inc. 6. Es la primera del mes.",
+    escrito:["El pedido con fecha."],
+    acudir:["Secretaría de la escuela"],
+    nota:{asunto:"Justificación de inasistencia", pedido:"solicitar la justificación de mi inasistencia del día ____ por asuntos particulares, conforme al régimen de licencias (Decreto 505/14, art. 51, inc. 6)"}},
+  /* ---------- Tu cargo y tu legajo ---------- */
+  {id:"titular", g:"car", t:"Soy interino o suplente y se presenta el titular", k:"si",
+    res:"Sí corresponde el cese: el Estatuto lo prevé. Lo que podés exigir es que se haga por escrito y con la fecha exacta.",
+    por:["El interino cesa cuando se presenta el titular, cuando se suprime el cargo o por una sanción.", "El suplente ocupa el lugar mientras dura la licencia o la ausencia del titular."],
+    r:[["estc", "art. 18, incs. 2 y 3"]],
+    hacer:["Pedí la notificación del cese por escrito, con fecha.", "Pedí la constancia de servicios por el tiempo trabajado: suma para tu puntaje.", "Controlá que el último sueldo incluya los días trabajados."],
+    decir:"Entiendo que corresponde el cese. Necesito la notificación por escrito con la fecha y mi constancia de servicios.",
+    escrito:["La notificación del cese.", "La constancia de servicios."],
+    acudir:["Secretaría de la escuela", "Junta de Clasificación, por el cómputo de los servicios", "Tu gremio"],
+    nota:{asunto:"Cese y constancia de servicios", pedido:"solicitar la notificación por escrito de mi cese, con indicación de la fecha y la causa, y la constancia de los servicios prestados, conforme al Estatuto del Docente (Ley 3470), art. 18"}},
+  {id:"cierre", g:"car", t:"Cierran mi curso o suprimen mis horas", k:"dep",
+    res:"Si sos titular, no te quedás sin sueldo de un día para el otro: el Estatuto prevé la disponibilidad con goce de sueldo, hasta un año, y un nuevo destino con intervención de la Junta. Si sos interino, la supresión del cargo es causa de cese.",
+    por:["La disponibilidad con goce rige cuando se clausura la escuela o se suprime el cargo o las horas del titular.", "Para el interino, la supresión del cargo figura entre las causas de cese."],
+    r:[["estc", "arts. 8 y 18, inc. 2"], ["est", "art. 6, inc. 1"]],
+    hacer:["Pedí el acto administrativo que dispone el cierre o la supresión.", "Si sos titular, pedí por escrito que se te declare en disponibilidad y se te dé nuevo destino.", "Consultá a tu gremio antes de firmar una reubicación que no te convenga."],
+    decir:"Necesito copia de la resolución que suprime las horas. Soy titular: pido que se aplique el art. 8 del Estatuto.",
+    escrito:["La copia de la resolución.", "Tu pedido de disponibilidad y nuevo destino, con sello de recibido."],
+    acudir:["Dirección y supervisión", "Junta de Clasificación", "Tu gremio"],
+    nota:{asunto:"Supresión de horas o cargo", pedido:"solicitar copia del acto administrativo que dispone la supresión de mis horas o cargo y, en mi carácter de titular, que se me declare en disponibilidad con goce de sueldo y se me asigne nuevo destino, conforme al Estatuto del Docente (Ley 3470), art. 8"}},
+  {id:"concepto", g:"car", t:"No estoy de acuerdo con mi calificación anual o con algo de mi legajo", k:"si",
+    res:"Tenés derecho a conocer tu legajo y a impugnarlo. Contra la calificación anual hay un recurso de reposición, con apelación en subsidio, dentro de los 5 días hábiles.",
+    por:["El Estatuto te reconoce el derecho a conocer lo que figura en tu legajo y a pedir que se corrija.", "El plazo es corto: 5 días hábiles desde que te notificás."],
+    r:[["estc", "arts. 44 y 45"]],
+    hacer:["Al notificarte, anotá la fecha al lado de tu firma y aclará que no prestás conformidad.", "Pedí copia.", "Presentá el recurso dentro de los 5 días hábiles, con las pruebas."],
+    decir:"Me notifico y no presto conformidad. Voy a presentar el recurso dentro del plazo del art. 45.",
+    escrito:["La fecha de notificación.", "El recurso, con sello de recibido."],
+    acudir:["Dirección", "Junta de Clasificación", "Tu gremio"],
+    nota:{asunto:"Recurso contra la calificación anual", pedido:"interponer recurso de reposición, con apelación en subsidio, contra la calificación anual de la que me notifiqué el ____, conforme al Estatuto del Docente (Ley 3470), art. 45, por los fundamentos que expongo"}},
+  {id:"apercibir", g:"car", t:"Me aplicaron una amonestación o un apercibimiento", k:"dep",
+    res:"El superior jerárquico puede aplicar esas dos sanciones, y vos podés recurrirlas. De la suspensión en adelante hace falta un sumario previo.",
+    por:["El Estatuto ordena las sanciones de menor a mayor: amonestación, apercibimiento por escrito, suspensión, traslado, retrogradación, cesantía y exoneración.", "Contra la amonestación y el apercibimiento hay reposición y apelación, con dictamen de la Junta de Disciplina.", "Nadie puede recibir las sanciones mayores sin sumario y sin haberse defendido."],
+    r:[["estc", "arts. 9 y 56 a 61"], ["cn", ""]],
+    hacer:["Pedí la sanción por escrito, con los hechos y la norma.", "Firmá con fecha y, si no estás de acuerdo, aclaralo.", "Preguntale hoy mismo a tu gremio el plazo para recurrir: no lo dejes pasar."],
+    decir:"Necesito la sanción por escrito, con los hechos que se me atribuyen. Me notifico sin prestar conformidad.",
+    escrito:["La sanción y la fecha de notificación.", "Tu recurso, con sello de recibido."],
+    acudir:["Tu gremio", "Junta de Disciplina, por medio del recurso"],
+    nota:{asunto:"Recurso contra una sanción", pedido:"interponer recurso de reposición, con apelación en subsidio, contra la sanción de la que me notifiqué el ____, conforme al Estatuto del Docente (Ley 3470), arts. 56 a 61, por los fundamentos que expongo"}},
+  {id:"sueldo", g:"car", t:"Me liquidaron mal el sueldo o me descontaron un día", k:"dep", sin:true,
+    res:"Tenés derecho a que te expliquen cada descuento. Pedí el detalle por escrito antes de discutir.",
+    por:["La ley te reconoce el derecho a un salario justo.", "No encontramos publicado el trámite de reclamo de haberes ni sus plazos: preguntalos en secretaría o en tu gremio."],
+    r:[["l8391", "art. 104, inc. 2"]],
+    hacer:["Compará el recibo con el del mes anterior y marcá el concepto que cambió.", "Si el descuento es por una inasistencia, buscá el comprobante de la licencia o de la justificación.", "Presentá el reclamo por escrito, con copia del recibo."],
+    decir:"En el recibo de ____ figura un descuento que no entiendo. Necesito saber a qué día y a qué concepto corresponde.",
+    escrito:["Copia del recibo.", "El reclamo, con sello de recibido."],
+    acudir:["Secretaría de la escuela", "Tu gremio"],
+    nota:{asunto:"Reclamo por liquidación de haberes", pedido:"solicitar que se me informe por escrito el concepto y la fecha a los que corresponde el descuento que figura en mi recibo de ____ y, de no corresponder, que se rectifique la liquidación"}},
+  /* ---------- En el aula y con las familias ---------- */
+  {id:"accidente", g:"aul", t:"Un estudiante se lastimó estando a mi cargo", k:"dep",
+    res:"Ante la familia responde, en primer lugar, el titular de la escuela: su responsabilidad es objetiva y debe tener seguro. A vos se te puede reclamar en lo personal solo si hubo culpa o dolo de tu parte.",
+    por:["El Código Civil y Comercial hace responsable al titular del establecimiento por el daño que causen o sufran los alumnos menores de edad mientras están, o deben estar, bajo el control de la autoridad escolar.", "El titular solo se libera si prueba el caso fortuito, y está obligado a contratar un seguro.", "La regla no se aplica al nivel superior ni al universitario."],
+    r:[["ccc", "art. 1767"], ["l26206", "art. 67, obligaciones, inc. e"]],
+    hacer:["Atendé al estudiante y no dejes solo al resto del grupo: pedí ayuda.", "Avisá enseguida a la dirección y seguí el protocolo de accidentes de la escuela. Si no lo conocés, pedilo.", "El mismo día, pedí que se labre el acta: hora, lugar, qué pasó, quién estaba, qué se hizo y a qué hora se avisó a la familia."],
+    decir:"Quiero que el acta se labre hoy, con la hora, lo que pasó y lo que hicimos, y necesito una copia.",
+    escrito:["El acta del accidente, con copia para vos.", "Una entrada en tu bitácora con tu relato y los testigos."],
+    acudir:["Dirección", "Tu gremio, si recibís un reclamo o una citación"],
+    nota:{asunto:"Accidente escolar", pedido:"informar el accidente ocurrido el ____ a las ____ h con el/la estudiante ____, dejar constancia de las medidas adoptadas y solicitar copia del acta labrada y de la denuncia al seguro del establecimiento"}},
+  {id:"embarazo", g:"aul", t:"Una estudiante embarazada o que es madre falta mucho", k:"si",
+    res:"Corresponde justificarle las inasistencias: la ley nacional le da un régimen especial. No significa promoción automática.",
+    por:["Tiene 30 inasistencias justificadas, antes o después del parto, con certificado médico.", "Durante la lactancia puede retirarse una hora por día, por seis meses.", "Tiene que cumplir con las evaluaciones: lo que cambia es la asistencia, no la acreditación."],
+    r:[["l25273", "arts. 2, 3 y 4"]],
+    hacer:["Avisá a preceptoría y a la dirección para que se aplique el régimen.", "Acordá con ella cómo recupera los contenidos y las evaluaciones.", "Dejá registrado el acuerdo."],
+    decir:"A esta estudiante le corresponde el régimen de la Ley 25.273. Propongo acordar cómo recupera los trabajos.",
+    escrito:["El acuerdo de recuperación, en tu bitácora o en el libro de temas."],
+    acudir:["Preceptoría y dirección", "Equipo de orientación, si la escuela tiene"], nota:null},
+  {id:"reclamo", g:"aul", t:"Una familia me reclama por una nota", k:"dep",
+    res:"Tienen derecho a saber cómo se evaluó. Vos tenés que poder mostrar los criterios, los instrumentos y las devoluciones. No tenés que cambiar la nota por la presión.",
+    por:["Los estudiantes tienen derecho a ser evaluados con criterios rigurosos y a conocerlos.", "El Diseño Curricular de Tucumán pide explicitar los criterios al comienzo y dar devoluciones."],
+    r:[["l26206", "art. 126, inc. e"], ["l8391", "art. 100, inc. 3"]],
+    hacer:["Atendelos en la escuela, con cita y, si podés, con alguien del equipo directivo.", "Llevá los criterios, los trabajos corregidos y el registro de notas.", "Si queda un compromiso (un recuperatorio, una revisión), anotalo y que lo firmen."],
+    decir:"Con gusto les muestro cómo se evaluó. Coordinemos una reunión en la escuela para ver los trabajos y los criterios.",
+    escrito:["El acta de la reunión o una entrada en tu bitácora.", "Los criterios de evaluación con la fecha en que los comunicaste."],
+    acudir:["Dirección o asesoría pedagógica"],
+    nota:{asunto:"Reunión con una familia por la calificación", pedido:"informar el reclamo recibido el ____ por la calificación del/de la estudiante ____, adjuntar los criterios e instrumentos de evaluación utilizados y solicitar que la reunión con la familia se realice en la institución, con presencia de un integrante del equipo directivo"}},
+  {id:"agresion", g:"aul", t:"Un estudiante o un familiar me insulta, me amenaza o me agrede", k:"no", sin:true, sinTxt:"No encontramos un protocolo provincial publicado para agresiones a docentes. Por eso conviene que todo quede en un acta el mismo día.",
+    res:"No tenés que tolerarlo. La escuela tiene que intervenir y vos tenés derecho a trabajar en condiciones dignas y seguras.",
+    por:["La ley te reconoce condiciones laborales dignas y de seguridad.", "Si quien agrede es un estudiante, se trabaja con el acuerdo de convivencia: sanciones graduales, con derecho a ser escuchado."],
+    r:[["l8391", "art. 104, inc. 6"], ["l26892", ""]],
+    hacer:["No respondas en el momento: salí de la situación y pedí la presencia de un directivo.", "Pedí que se labre un acta el mismo día.", "Si hubo amenazas o golpes, podés hacer la denuncia: pedí que la dirección y tu gremio te acompañen."],
+    decir:"Así no puedo seguir la conversación. La retomamos en dirección, con un directivo presente.",
+    escrito:["El acta, con hora, lugar, palabras textuales y testigos.", "Capturas de pantalla, si fue por mensajes."],
+    acudir:["Dirección", "Tu gremio", "911, si hay riesgo en el momento"],
+    nota:{asunto:"Agresión sufrida en la escuela", pedido:"informar la agresión sufrida el ____ a las ____ h, solicitar que se labre el acta correspondiente y que se adopten las medidas necesarias para resguardar mi integridad, conforme a la Ley 8391, art. 104, inc. 6"}},
+  {id:"celular", g:"aul", t:"Un estudiante no guarda el celular en clase", k:"dep", sin:true, sinTxt:"No encontramos el texto oficial que regule los celulares en las escuelas de Tucumán. Lo que rige es el acuerdo de convivencia de tu escuela: pedilo si no lo tenés.",
+    res:"Aplicá lo que diga el acuerdo de convivencia de tu escuela. No revises el contenido del teléfono.",
+    por:["Las normas de convivencia las define cada escuela con participación de la comunidad, y las sanciones tienen que ser graduales.", "Sobre el uso de celulares en las escuelas de Tucumán solo encontramos notas de prensa, no un texto oficial: confirmá en la escuela qué rige.", "Lo que hay dentro del teléfono es parte de la intimidad del estudiante."],
+    r:[["l26892", ""], ["l26061", ""]],
+    hacer:["Recordá la regla del acuerdo de convivencia, sin discutir delante del grupo.", "Si la escuela prevé que el celular se guarde, que lo guarde el estudiante o se lo entregue a preceptoría, según el acuerdo.", "Si se repite, registralo y avisá a preceptoría."],
+    decir:"La regla del curso es que el celular se guarda mientras trabajamos. Guardalo y seguimos.",
+    escrito:["El registro, si se repite."],
+    acudir:["Preceptoría", "Dirección, si el acuerdo de convivencia no dice nada"], nota:null},
+  {id:"apoyo", g:"aul", t:"Tengo un estudiante con discapacidad y no me dieron el PPI ni apoyo", k:"si",
+    res:"Corresponde pedirlo: el proyecto pedagógico individual se elabora en equipo, no lo arma un docente solo.",
+    por:["La resolución federal pide que el PPI se construya entre la escuela, los equipos de apoyo y la familia, con base en el diseño curricular del año.", "Tenés derecho a contar con el soporte didáctico necesario para la tarea."],
+    r:[["cfe311", "art. 17"], ["l8391", "art. 104, inc. 11"]],
+    hacer:["Pedí por escrito el PPI vigente o la reunión para armarlo.", "Mientras tanto, registrá los ajustes que ya hacés en clase.", "Usá «PPI» en Lapacho para dejar tu parte lista."],
+    decir:"Para evaluar bien a este estudiante necesito el PPI o la reunión con el equipo de apoyo. ¿Cuándo la hacemos?",
+    escrito:["El pedido, con fecha.", "Los ajustes que aplicás, en tu planificación."],
+    acudir:["Dirección o asesoría pedagógica", "Equipo de orientación o docente de apoyo"],
+    nota:{asunto:"Proyecto pedagógico individual", pedido:"solicitar el proyecto pedagógico individual vigente del/de la estudiante ____ o, de no existir, que se convoque a la reunión con el equipo de apoyo y la familia para su elaboración, conforme a la Res. CFE 311/16, art. 17"}},
+  /* ---------- Si sos directivo ---------- */
+  {id:"d-pedir", g:"dir", t:"Qué puedo pedirle a un docente, y cómo", k:"si",
+    res:"Podés dar indicaciones técnicas y pedir lo que hace al proyecto institucional, dentro de la jornada. Por escrito y con la norma, el pedido se cumple mejor y te cubre.",
+    por:["El docente debe respetar las indicaciones técnicas de la autoridad y participar del proyecto institucional.", "Fuera del horario rige el derecho a la desconexión: solo cabe una emergencia institucional justificada."],
+    r:[["est", "art. 5, inc. 4"], ["l8391", "art. 105, inc. 4"], ["l9897", "art. 3"]],
+    hacer:["Hacé el pedido por un canal institucional y dentro del horario.", "Decí qué se pide, para cuándo y con qué norma o acuerdo.", "Si es una tarea extra, aclará en qué horas se computa."],
+    decir:"Te lo pido por escrito para que quede claro qué necesito y para cuándo. Si algo no te cierra, lo vemos.",
+    escrito:["El pedido en el cuaderno de comunicaciones o por nota, con notificación."],
+    acudir:["Supervisión, si hay dudas sobre la norma"], nota:null},
+  {id:"d-fuera", g:"dir", t:"Necesito avisar algo fuera del horario", k:"dep",
+    res:"Solo si es una emergencia institucional y podés justificarla. El resto espera a la jornada siguiente.",
+    por:["La ley de desconexión protege la franja que va desde una hora después de terminar la jornada hasta una hora antes de la siguiente.", "En febrero de 2026 la ley seguía sin reglamentar: no hay una lista oficial de qué es emergencia."],
+    r:[["l9897", "art. 3"]],
+    hacer:["Programá el mensaje para que salga en horario.", "Si es una emergencia, decilo en el mensaje y explicá por qué.", "Acordá con el equipo un único canal para urgencias."],
+    decir:"Les escribo fuera de horario porque es una emergencia: ____. No hace falta responder más que esto.",
+    escrito:["El motivo de la urgencia, en el mismo mensaje."],
+    acudir:["Supervisión"], nota:null},
+  {id:"d-incumple", g:"dir", t:"Un docente falta seguido o no cumple", k:"dep",
+    res:"Podés aplicar amonestación o apercibimiento por escrito. Para una suspensión o más hace falta sumario, y no lo resolvés vos.",
+    por:["El Estatuto reserva al superior jerárquico las dos sanciones menores y exige sumario previo para las demás.", "Toda sanción supone que el docente conoció los hechos y pudo defenderse.", "Antes de sancionar conviene descartar que las ausencias sean licencias o justificaciones que el régimen reconoce."],
+    r:[["estc", "arts. 9 y 56 a 61"], ["d505", ""]],
+    hacer:["Registrá los hechos con fecha: qué pasó y qué se había pedido.", "Hablá primero con el docente y dejá constancia de la reunión.", "Si sancionás, hacelo por escrito, con los hechos y la norma, y notificá con copia.", "Si es grave, elevá el informe a la supervisión."],
+    decir:"Quiero que revisemos estas fechas. Antes de decidir nada necesito escuchar tu explicación y dejarla asentada.",
+    escrito:["El acta de la reunión, con el descargo del docente.", "La sanción, con su notificación."],
+    acudir:["Supervisión", "Asesoría legal del Ministerio, por medio de la supervisión"], nota:null},
+  {id:"d-observar", g:"dir", t:"Quiero observar clases y pedir planificaciones", k:"si",
+    res:"Te corresponde: es parte de la orientación técnica. La observación vale más, y se discute menos, si avisás qué vas a mirar y devolvés por escrito.",
+    por:["El docente debe cumplir los diseños curriculares y respetar las indicaciones técnicas.", "También tiene derecho a ser evaluado con criterios objetivos y fundamentados."],
+    r:[["est", "art. 5, inc. 4"], ["l8391", "art. 104, incs. 1 y 10"]],
+    hacer:["Avisá con anticipación y compartí los criterios.", "Hacé la devolución por escrito, con lo logrado y lo que hay que ajustar.", "Dejá lugar para que el docente escriba su opinión."],
+    decir:"La semana que viene paso por tu clase. Voy a mirar ____ y después te hago la devolución por escrito.",
+    escrito:["La planilla de observación, firmada por los dos."],
+    acudir:["Supervisión"], nota:null},
+  {id:"d-queja", g:"dir", t:"Una familia se queja de un docente", k:"dep",
+    res:"Recibí la queja, pero no resuelvas sin escuchar al docente: tiene derecho a conocer de qué se lo acusa y a responder.",
+    por:["El Estatuto y la Constitución garantizan la defensa.", "Si la queja toca la integridad de un estudiante, primero va la protección del estudiante y el protocolo de situaciones complejas."],
+    r:[["estc", "art. 9"], ["cn", ""], ["l26061", ""]],
+    hacer:["Pedí la queja por escrito o labrá un acta con lo que dice la familia.", "Dale traslado al docente y recibí su respuesta por escrito.", "Citá a las partes por separado antes de juntarlas.", "Cerrá con un acta que diga qué se acordó."],
+    decir:"Tomo nota de lo que plantean. Voy a hablar con el docente y los vuelvo a citar el día ____ con una respuesta.",
+    escrito:["La queja, la respuesta del docente y el acta de cierre."],
+    acudir:["Supervisión", "Equipo de orientación"], nota:null},
+  {id:"d-accidente", g:"dir", t:"Hubo un accidente con un estudiante en la escuela", k:"si",
+    res:"La escuela responde ante la familia aunque nadie haya tenido la culpa. Te toca activar el protocolo, avisar a la familia, dejar el acta y dar aviso al seguro.",
+    por:["El titular del establecimiento responde por el daño que sufran o causen los alumnos menores mientras están bajo el control de la autoridad escolar, y solo se libera por caso fortuito.", "El seguro de responsabilidad civil es obligatorio."],
+    r:[["ccc", "art. 1767"]],
+    hacer:["Asegurá la atención del estudiante y el aviso a la familia, con la hora.", "Labrá el acta el mismo día, con el relato de quienes estaban.", "Dale copia al docente a cargo.", "Informá a la supervisión y hacé la denuncia al seguro como indique el Ministerio."],
+    decir:"Lo primero es la atención. Ya avisamos a la familia a las ____ y ahora dejamos todo asentado en el acta.",
+    escrito:["El acta, el aviso a la familia y la denuncia al seguro."],
+    acudir:["Supervisión", "Servicio de emergencias: 107"], nota:null}
+);
+/* Ficha de una situación: suma la frase, lo que conviene dejar por escrito y a quién acudir */
+function htmlDerSit(S){
+  let h = htmlDerSitV61(S);
+  if (S.sin && S.sinTxt) h = h.replace(/<p class="aviso-c">[^<]*<\/p>/, `<p class="aviso-c">${esc(S.sinTxt)}</p>`);
+  const extra = [
+    S.decir ? `<h4>Qué podés decir</h4><blockquote class="der-decir" id="der-decir">${esc(S.decir)}</blockquote>` : "",
+    S.escrito && S.escrito.length ? `<h4>Qué dejar por escrito</h4><ul class="cp-reglas">${S.escrito.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "",
+    S.acudir && S.acudir.length ? `<h4>A quién acudir</h4><p class="der-acudir">${S.acudir.map(x => `<span>${esc(x)}</span>`).join("")}</p>` : ""
+  ].join("");
+  if (extra) h = h.replace('<div class="cur-bar">', extra + '<div class="cur-bar">');
+  const mas = [S.decir ? `<button type="button" class="btn btn-sm" data-der62="copiar">Copiar la frase</button>` : "", $("btn-entregas") ? `<button type="button" class="btn btn-sm" data-der62="bit">Anotarlo en la bitácora</button>` : ""].join("");
+  if (S.g === "dir") h = h.replace("Armar la nota a la dirección", "Armar la nota");
+  return h.replace('<button type="button" class="btn btn-sm" data-der="volver">', mas + '<button type="button" class="btn btn-sm" data-der="volver">');
+}
+function htmlDerPedidos(){
+  if (DER.sel){ const S = DER_SIT.find(x => x.id === DER.sel); if (S) return htmlDerSit(S); }
+  const btn = x => `<button type="button" class="cv-sit" data-dersel="${x.id}"><b>${esc(x.t)}</b><small><span class="der-k ${DER_K[x.k][1]}">${DER_K[x.k][0]}</span></small></button>`;
+  return `<p class="hint">Elegí la situación: te decimos si corresponde, por qué, con qué norma, qué decir y qué dejar por escrito.</p>
+    <nav class="der-ir" aria-label="Grupos de situaciones">${DER_G.map(([k, n]) => `<a href="#der-g-${k}" data-derg="${k}">${esc(n)}</a>`).join("")}</nav>
+    ${DER_G.map(([k, n]) => `<section class="der-g" aria-labelledby="der-g-${k}"><h3 class="der-h" id="der-g-${k}" tabindex="-1">${esc(n)}</h3>
+      <div class="cv-sits der-sits" role="group" aria-label="${esc(n)}">${DER_SIT.filter(x => x.g === k).map(btn).join("")}</div></section>`).join("")}`;
+}
+function htmlDerAviso(){ return htmlDerAvisoV61().replace(esc(fechaCortaIso(DER_REVISION)), esc(fechaCortaIso(DER_REVISION_62))); }
+function init72(){
+  try {
+    const D = $("derechos");
+    if (D) D.addEventListener("click", async e => {
+      const g = e.target.closest("[data-derg]");
+      if (g){ e.preventDefault(); const h = $("der-g-" + g.dataset.derg); if (h){ h.scrollIntoView({block:"start"}); h.focus({preventScroll:true}); } return; }
+      const a = e.target.closest("[data-der62]"); if (!a) return;
+      const S = DER_SIT.find(x => x.id === DER.sel); if (!S) return;
+      if (a.dataset.der62 === "copiar"){
+        let ok = false; try { await navigator.clipboard.writeText(S.decir); ok = true; } catch (err) { logSilencioso(err); }
+        toast(ok ? "Frase copiada." : "No se pudo copiar: seleccioná el texto y copialo a mano."); return;
+      }
+      if (a.dataset.der62 === "bit"){ cerrarDialogo("derechos"); try { abrirEntregas("bitacora"); } catch (err) { registrarError("der62-bit", err, "aviso"); } }
+    });
+  } catch (e) { registrarError("init72", e, "aviso"); }
+  try {
+    const R = (id, sit, t, d, p, k) => ({id:"der-" + id, k, t, d, a:ctDer("pedidos", sit), dir:true, p});
+    CT_RUTAS.push(
+      R("enfermo", "enfermo", "Estás enfermo y no podés ir", "Licencia por corto tratamiento: días, goce y qué decir.", [[/(estoy|me siento|amaneci|ando) (enferm\w*|mal|con fiebre|con gripe|engripad\w*)|no puedo ir (a (dar )?clase|a la escuela|a trabajar|manana)|falt(ar|o|e) por enfermedad|certificado medico|parte de enferm\w*|me enferme/, 9]], ["enferm", "fiebre", "gripe", "certif"]),
+      R("famenf", "famenf", "Cuidar a un familiar enfermo", "Licencia por atención de familiar: 10 días hábiles con goce.", [[/(mi )?(hij[oa]|mama|papa|madre|padre|espos[oa]|marido|pareja|bebe|familiar)[^.]{0,40}(enferm\w*|internad\w*|operan|operar|operacion|cirugia)|cuidar (a )?(mi|un) (hij[oa]|familiar|mama|papa|madre|padre)|familiar enfermo/, 14]], ["famil"]),
+      R("duelo", "duelo", "Falleció un familiar", "Licencia por duelo: días según el parentesco.", [[/(fallecio|murio|se murio|fallecimiento|velorio|sepelio|duelo)/, 9]], ["fallec", "duelo", "velor"]),
+      R("rendir", "rendir", "Rendir un final o integrar una mesa", "Licencia por examen: 3 días hábiles por examen, hasta 12 al año.", [[/(tengo que |voy a |debo )?rend(ir|o) (un |el |mi )?(final|examen|parcial|materia)|licencia (por|para) (examen|estudio|rendir)|dia(s)? (por|de) examen|integrar (una |la )?mesa|mesa examinadora|soy jurado/, 9]]),
+      R("personal", "personal", "Faltar por un asunto personal", "Asuntos particulares: 1 por mes y 5 por año.", [[/(asunto\w*|razon\w*|motivo\w*) (particular\w*|personal\w*)|dia (particular|personal|por razones particulares)|articulo 51|falt(ar|o) (por|para) (un )?tramite|tengo (un |que hacer un )tramite|citacion (judicial|del juzgado)/, 9]]),
+      R("titular", "titular", "Se presenta el titular", "Cese de interinos y suplentes: qué pedir por escrito.", [[/(vuelve|volvio|se presenta|se presento|regresa|se reintegra) (el |la )?titular|me (dieron|dan|van a dar) (de )?(baja|el cese)|\bcese\b|me quedo sin (las )?horas[^.]{0,30}(suplen|interin)|termina (mi|la) suplencia/, 9]]),
+      R("cierre", "cierre", "Cierran tu curso o suprimen tus horas", "Disponibilidad con goce para titulares: Estatuto, art. 8.", [[/(cierran|cerraron|cierre de|suprim\w*|fusion\w*|unifican|unificaron|eliminan|eliminaron) (el |la |mi |mis |un |una |las |los )?(curso|cursos|division|divisiones|horas|cargo|seccion)|disponibilidad|me quedo sin (horas|cargo|curso)/, 9]]),
+      R("concepto", "concepto", "Tu calificación anual o tu legajo", "Reposición dentro de los 5 días hábiles: Estatuto, art. 45.", [[/(concepto|calificacion) (anual|profesional|docente)|mi concepto|hoja de concepto|me (pusieron|bajaron) (el |un |mal )?concepto|(ver|conocer|impugnar|corregir|error en) (mi |el )?legajo/, 10]]),
+      R("apercibir", "apercibir", "Amonestación o apercibimiento", "Quién puede aplicarlos y cómo recurrir.", [[/amonest\w*|me apercib\w*|apercibimiento|recurr(ir|o) (la |una )?sancion|recurso de (reposicion|apelacion)|junta de disciplina/, 10]]),
+      R("sueldo", "sueldo", "Sueldo mal liquidado o descuento", "Cómo pedir el detalle y reclamar por escrito.", [[/me (descontaron|descuentan|pagaron mal|pagaron menos|liquidaron mal|deben)|descuento (en|de) (mi |el )?(sueldo|recibo)|(mal|error en la) liquida\w*|no me pagaron|recibo de sueldo|reclamo de haberes/, 9]], ["sueldo", "descont", "liquid"]),
+      R("accidente", "accidente", "Un estudiante se lastimó a tu cargo", "Quién responde y qué dejar asentado.", [[/(se|me) (lastimo|golpeo|cayo|corto|quebro|fracturo|accidento|desmayo)|accidente (escolar|en (la |el )?(escuela|aula|recreo|patio|laboratorio|gimnasio))|soy responsable si|responsabilidad civil|me pueden (demandar|hacer juicio)|seguro escolar/, 10]], ["accid", "lastim"]),
+      R("embarazo", "embarazo", "Estudiante embarazada o madre", "Inasistencias justificadas: Ley 25.273.", [[/(alumna|estudiante|chica) (esta )?(embarazada|que es madre|mama)|alumna madre|embaraz\w*[^.]{0,40}(falta\w*|inasistenc\w*|asistencia)|ley 25\.?273|lactancia[^.]{0,30}(alumna|estudiante)/, 10]]),
+      R("reclamo", "reclamo", "Una familia reclama por una nota", "Qué mostrar y cómo dejar registro de la reunión.", [[/(padre|madre|mama|papa|familia|tutor\w*|padres)[^.]{0,50}(reclam\w*|se quej\w*|protest\w*|discut\w*|no esta de acuerdo)[^.]{0,40}(nota|calificacion|desaprob\w*|aplaz\w*)|(reclam\w*|quej\w*) (de|por) (la |una )?(nota|calificacion)/, 10]]),
+      R("agresion", "agresion", "Te insultan, amenazan o agreden", "No tenés que tolerarlo: qué hacer y a quién acudir.", [[/me (insulto|insultaron|amenazo|amenazaron|agredio|agredieron|pego|pegaron|empujo|grito|gritaron|escracharon|escracho|filmo|filmaron)|(alumno|estudiante|padre|madre|familia\w*)[^.]{0,30}me (insult\w*|amenaz\w*|agred\w*|falt\w* el respeto)|agresion (a|al|contra) (un |el |la )?docente/, 10]]),
+      R("celular", "celular", "Celular en clase", "Qué podés hacer y qué no.", [[/(no (guarda|deja|suelta|quiere guardar)|usa|usan|con|sacar(le)?|quitar(le)?|reten\w*|secuestr\w*) (el |su |los |sus )?(celular|celulares|telefono|telefonos)[^.]{0,30}(clase|aula|hora)?|puedo (sacar|quitar|retener)(le)? el (celular|telefono)/, 8]]),
+      R("apoyo", "apoyo", "Estudiante con discapacidad sin PPI ni apoyo", "Qué pedir y a quién: Res. CFE 311/16.", [[/(no (tengo|me dieron|hay|tiene)|sin|falta) (el |un |la )?(ppi|maestra integradora|docente de apoyo|acompanante|dai|apoyo)[^.]{0,40}|(alumno|estudiante) (con discapacidad|integrado|con cud)[^.]{0,50}(no (tengo|se)|sin|nadie)/, 9]]),
+      R("d-pedir", "d-pedir", "Directivos: qué podés pedirle a un docente", "Dentro de la jornada, por escrito y con la norma.", [[/soy (director\w*|vicedirector\w*|directiv\w*|rector\w*)[^.]{0,60}(pedir|exigir|obligar|indicar)|como (director\w*|directiv\w*)[^.]{0,40}puedo (pedir|exigir|obligar)|puedo (obligar|exigir)(le)? a (un|una|los|mis) (docente|profesor)\w*/, 12]]),
+      R("d-fuera", "d-fuera", "Directivos: avisar fuera de horario", "Solo ante una emergencia institucional.", [[/(soy|como) (director\w*|vicedirector\w*|directiv\w*)[^.]{0,60}(fuera de horario|a la noche|fin de semana|whatsapp|grupo)/, 12]]),
+      R("d-incumple", "d-incumple", "Directivos: un docente falta o no cumple", "Qué sanciones podés aplicar y cuáles requieren sumario.", [[/(un|una|el|la|mi|mis) (docente|profesor|profesora|profe)\w* (falta|faltan|llega tarde|no (cumple|entrega|planifica|viene|firma))|sancionar (a )?(un|una|al) (docente|profesor)\w*|(soy|como) (director\w*|directiv\w*)[^.]{0,50}(sancion\w*|apercib\w*|sumari\w*)/, 12]]),
+      R("d-observar", "d-observar", "Directivos: observar clases", "Avisar los criterios y devolver por escrito.", [[/(soy|como) (director\w*|vicedirector\w*|directiv\w*|asesor\w*)[^.]{0,50}(observ\w*|planificacion\w*|carpeta\w*)|quiero observar (la |las |una )?clase/, 12]]),
+      R("d-queja", "d-queja", "Directivos: queja de una familia sobre un docente", "Escuchar a las dos partes y dejar actas.", [[/(queja|denuncia|reclamo) (de|contra|sobre) (un|una|el|la) (docente|profesor|profesora)|(familia|padre|madre|mama|papa)\w* (se quej\w*|denunci\w*) (de|a|contra) (un|una|el|la) (docente|profesor)\w*/, 12]]),
+      R("d-accidente", "d-accidente", "Directivos: accidente de un estudiante", "Protocolo, acta, familia y seguro.", [[/(soy|como) (director\w*|vicedirector\w*|directiv\w*)[^.]{0,50}(accident\w*|lastim\w*|seguro)|denuncia al seguro|acta de accidente/, 12]])
+    );
+  } catch (e) { logSilencioso(e); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -26749,7 +27043,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
