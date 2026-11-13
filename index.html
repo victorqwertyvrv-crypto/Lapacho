@@ -10,6 +10,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="lapacho-config.js"></script>
 <style>body{margin:0}
+:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 body{margin:0}
 :root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 body{margin:0}
@@ -5172,6 +5173,7 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-12-cap", fecha:"2026-11-12", items:["Capacitaciones: se suma la diplomatura gratuita de la UNT sobre cuidado y bienestar estudiantil (grooming, salud mental y consumos). Falta confirmar si sigue abierta y si tiene resolución del Ministerio."]},
   {id:"2026-11-11a", fecha:"2026-11-11", items:[
     "«¿Me corresponde?» pasa de 13 a 35 situaciones, en cinco grupos: pedidos de la dirección, ausencias y licencias, tu cargo y tu legajo, el aula y las familias, y una parte para directivos.",
     "Cada situación nueva trae una frase para decir, qué conviene dejar por escrito y a quién acudir, además de la norma con su artículo.",
@@ -11771,7 +11773,7 @@ function puntosInfod(h){ const f = INFOD_TABLA.find(([a, b]) => h >= a && h <= b
 const INFOD_URL = "https://red.infd.edu.ar";
 const FILO_URL = "https://filo.unt.edu.ar/category/capacitacion-docente/";
 /* Catálogo: se renueva en cada actualización mensual. Solo datos publicados por quien dicta el curso. */
-const CAPAC_ACT = "2026-11-07";
+const CAPAC_ACT = "2026-11-12";
 const CAPAC = [
   {id:"inf-fin60", n:"Educación financiera en clave didáctica", inst:"INFoD", infod:true, horas:60, mod:"Virtual autoasistido", dest:"Secundaria, todas las áreas", area:["todas"], ed:"1.ª cohorte 2026 (inicio 01/04)", est:"cerrada", costo:"Gratuito", url:INFOD_URL},
   {id:"inf-fin30", n:"Educación financiera: conceptos clave y estrategias transversales aplicadas", inst:"INFoD", infod:true, horas:30, mod:"Virtual autoasistido", dest:"Secundaria, todas las áreas", area:["todas"], ed:"1.ª cohorte 2026 (inicio 01/04)", est:"cerrada", costo:"Gratuito", url:INFOD_URL},
@@ -11791,6 +11793,7 @@ const CAPAC = [
   {id:"min-fdci", n:"Cursos de la plataforma del Ministerio (Formación Docente Continua e Investigación, antes FORMAR)", inst:"Ministerio de Educación de Tucumán", res:"", horas:null, mod:"Virtual y presencial", dest:"Docentes con título habilitante", area:["todas"], ed:"Permanente", est:"consultar", costo:"Gratuito", url:"https://capacitaciondocente.educaciontuc.gov.ar/", nota:"Hay que estar registrado en el Panel Docente. Asistencia mínima: 100 % en cursos a distancia y 80 % en presenciales."},
   {id:"unt-diplo-ia", n:"Diplomatura de Posgrado en Inteligencia Artificial: desafíos epistemológicos y proyecciones educativas", inst:"Facultad de Filosofía y Letras (UNT)", res:"", horas:120, mod:"Virtual", dest:"Docentes, investigadores y profesionales", area:["todas"], ed:"3.ª cohorte, octubre a diciembre de 2026 (tres cursos de 40 h; se pueden hacer por separado)", est:"consultar", costo:"$90.000 la diplomatura; $120.000 cada curso suelto", url:"https://www.lagaceta.com.ar/nota/1155971/sociedad/inteligencia-artificial-educacion-unt-abre-nueva-diplomatura-virtual.html", nota:"La nota (06/10/2026) dice que otorga 4 puntos por el Decreto 292/26 del MEd, ítem F.9.1.8, y que la inscripción está abierta. No cita resolución: confirmá antes de pagar. Consultas: diplomatura.ia@filo.unt.edu.ar.", alta:"2026-11-07"},
   {id:"unt-sied-ia", n:"Inteligencia Artificial para Docentes: herramientas y aplicaciones prácticas", inst:"SIED, Secretaría Académica (UNT)", res:"0682/5", horas:40, mod:"Virtual", dest:"Directivos, asesores pedagógicos y docentes de todos los niveles y áreas", area:["todas", "tecnología"], ed:"3.ª cohorte (inicio 02/06/2026; inscripción hasta el 28/05)", est:"cerrada", costo:"Consultar", url:"https://medios.unt.edu.ar/2026/05/15/la-unt-abre-una-nueva-cohorte-del-curso-de-inteligencia-artificial-para-docentes/", nota:"Según la UNT otorga 0,75 puntos. Son 40 horas cátedra. Atento a una próxima cohorte.", alta:"2026-11-07"},
+  {id:"unt-diplo-cuid", n:"Diplomatura Universitaria «Formación para el cuidado y el bienestar estudiantil» (grooming, salud mental y consumos)", inst:"Secretaría Académica (UNT)", res:"", horas:null, mod:"Consultar", dest:"Docentes", area:["todas"], ed:"2026 (aprobada por Res. DGD 3101/2026 de la UNT)", est:"consultar", costo:"Gratuito", url:"https://www.lagaceta.com.ar/nota/1138558/sociedad/grooming-salud-mental-consumos-unt-abre-diplomatura-para-formar-docentes.html", nota:"La publicación es de mitad de año: preguntá si queda cupo o si abre otra cohorte. La resolución citada es de la UNT, no del Ministerio: resolución a confirmar antes de contar con el puntaje.", alta:"2026-11-12"},
 ];
 const CAPAC_FUENTES = [
   ["Plataforma del Ministerio (FDCI)", "https://capacitaciondocente.educaciontuc.gov.ar/"],
