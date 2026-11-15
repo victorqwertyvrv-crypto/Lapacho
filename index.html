@@ -5425,6 +5425,10 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-15g", fecha:"2026-11-15", items:[
+    "Arreglo: una clase nueva no aparecía en «Mi curso» hasta marcarla a mano en «Datos del curso». Ahora, si tiene el mismo espacio curricular y el mismo curso (aunque lo escribas «3.º B», «3° B» o «3ro B»), aparece sola en el modo aula, el libro de temas y la carpeta didáctica.",
+    "Si la desmarcás en «Datos del curso», queda desmarcada: no vuelve a sumarse sola."
+  ]},
   {id:"2026-11-15f", fecha:"2026-11-15", items:[
     "Mi curso tiene una pestaña «Gráficos»: asistencia media, promedio del curso, cuántos aprueban, la asistencia de cada clase, el promedio de cada evaluación, cómo están los promedios y quiénes faltan más. Podés elegir el período o todo el año.",
     "Mis planificaciones y el inicio de la computadora muestran cuántas tenés en borrador, listas y entregadas, y la asistencia de las últimas clases.",
@@ -17208,7 +17212,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "68 (15/11/2026)";
+const LAPACHO_VERSION = "69 (15/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -27295,7 +27299,7 @@ function lpEstadoSet(id, v){
   if (antes !== v && lpEstado(id) === v) lpAnotar(v, id);
 }
 let lpConocidos = null;
-function libActualizar(){
+function libActualizarV68(){
   libActualizarV64();
   try {
     const id = state.planId; if (!id) return;
@@ -27770,7 +27774,7 @@ function htmlGraficosCurso(c){
   }
   return h + `</div><p class="hint gr-nota">Los gráficos usan lo que cargaste en este curso. No se guarda nada nuevo.</p></div>`;
 }
-function renderCurTab(t){
+function renderCurTabV68(t){
   if (t !== "graf") return renderCurTabV67(t);
   state.tabs.cur = t;
   const c = cursoSel();
@@ -27834,6 +27838,65 @@ function init78(){
       setTimeout(() => { try { setTab("cur", "graf"); } catch (er) { logSilencioso(er); } }, 150);
     });
   } catch (e) { registrarError("init78", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 69: las planificaciones se vinculan solas a su curso
+   Antes, Mi curso (modo aula, libro de temas, «Esta semana», carpeta didáctica) solo veía las planificaciones
+   marcadas a mano en «Datos del curso». Ahora, cuando una planificación tiene el mismo espacio curricular y el mismo
+   curso (o, si no dice el curso, el mismo año y hay un solo curso así), se suma sola a c.planes.
+   Cada planificación se vincula sola una única vez (lapacho-autovinculo-v1): si después la desmarcás en
+   «Datos del curso», no vuelve a aparecer. Solo agrega ids a c.planes; no borra ni cambia nada.
+   ============================================================ */
+const LP_AV_KEY = "lapacho-autovinculo-v1";
+function lpCursoClave(s){
+  return norm(s || "").replace(/\bano\b/g, " ").replace(/(\d)\s*(ro|do|er|to|vo|mo|no|°|º|ª)/g, "$1").replace(/[^a-z0-9]/g, "");
+}
+function lpPlanCoincide(e, c, cursos){
+  const v = (e.data && e.data.v) || {};
+  if (!v.materia || v.materia !== c.materia) return false;
+  const pc = lpCursoClave(v.curso);
+  if (pc) return pc === lpCursoClave(c.curso);
+  if (!v.anio || String(v.anio) !== String(c.anio || "")) return false;
+  return cursos.filter(x => x.materia === c.materia && String(x.anio || "") === String(v.anio)).length === 1;
+}
+function lpAutoVincular(soloId){
+  try {
+    const D = cdatos(); if (!D.cursos.length) return [];
+    let hechos; try { hechos = new Set(JSON.parse(localStorage.getItem(LP_AV_KEY) || "[]")); } catch (e) { hechos = new Set(); }
+    const out = []; let cambio = false, marcado = false;
+    libLeer().forEach(e => {
+      if (soloId && e.id !== soloId) return;
+      if (hechos.has(e.id)) return;
+      const cs = D.cursos.filter(c => lpPlanCoincide(e, c, D.cursos)); if (!cs.length) return;
+      cs.forEach(c => { if (!(c.planes || []).includes(e.id)){ c.planes = [...(c.planes || []), e.id]; cambio = true; out.push({e, c}); } });
+      hechos.add(e.id); marcado = true;
+    });
+    if (cambio) cguardar();
+    if (marcado) localStorage.setItem(LP_AV_KEY, JSON.stringify([...hechos].slice(-3000)));
+    return out;
+  } catch (e) { registrarError("lpAutoVincular", e, "aviso"); return []; }
+}
+function libActualizar(){
+  libActualizarV68();
+  try {
+    if (!state.planId) return;
+    const r = lpAutoVincular(state.planId);
+    if (r.length) toast(`Esta planificación ya aparece en «Mi curso» de ${[...new Set(r.map(x => x.c.curso || "tu curso"))].join(" y ")}.`);
+  } catch (e) { logSilencioso(e); }
+}
+function renderCurTab(t){
+  try {
+    const r = lpAutoVincular();
+    if (r.length){
+      const c = cursoSel(), mias = c ? r.filter(x => x.c.id === c.id) : [];
+      if (mias.length) toast(mias.length === 1 ? `Se sumó «${tituloPlan(mias[0].e.data)}» a este curso.` : `Se sumaron ${mias.length} planificaciones de este curso.`);
+    }
+  } catch (e) { logSilencioso(e); }
+  return renderCurTabV68(t);
+}
+function init79(){
+  try { lpAutoVincular(); } catch (e) { registrarError("init79", e, "aviso"); }
 }
 
 /* ============================================================
@@ -28293,7 +28356,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
