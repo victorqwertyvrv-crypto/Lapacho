@@ -2315,6 +2315,27 @@ dialog.a4dlg::backdrop{background:rgba(10,22,16,.55)}
   #prog-form,.pasos-cab,.pasos,.paso-pie,.pn-rec,dialog.a4dlg{display:none!important}
 }
 
+/* ---------- Versión 65: cajón del menú en la tablet y actividad ---------- */
+.app.nav-desk.nav-cajon{padding-left:16px}
+.app.nav-cajon .sidenav{display:flex!important;width:min(300px,82vw);z-index:60;transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility 0s linear .22s}
+.app.nav-cajon.cajon-abierto .sidenav{transform:none;visibility:visible;transition:transform .22s ease;box-shadow:8px 0 40px rgba(0,0,0,.3)}
+#sn-velo{position:fixed;inset:0;z-index:59;background:rgba(10,22,16,.45)}
+#sn-velo[hidden]{display:none}
+.app.nav-cajon #sn-abrir{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-right:10px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.app.nav-desk.nav-cajon .sidenav :is(.sn-i,.sn-d .sn-i,.sn-d>summary,.sn-ocultar,button){min-height:44px}
+@media (prefers-reduced-motion:reduce){.app.nav-cajon .sidenav,.app.nav-cajon.cajon-abierto .sidenav{transition:none}}
+
+.lib-cuando{white-space:nowrap}
+.lib-actividad{border:1px solid var(--line);border-radius:var(--radius-m,10px);background:var(--surface);padding:0 12px}
+.lib-actividad>summary{cursor:pointer;font-weight:600;font-size:14px;min-height:44px;display:flex;align-items:center}
+.lib-actividad .hint{margin:4px 0 10px;font-size:12.5px}
+.lib-act-l,.pn-act-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.lib-act-l li,.pn-act-l li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;padding:7px 0;border-top:1px solid var(--line);font-size:13.5px}
+.lib-act-l li:first-child,.pn-act-l li:first-child{border-top:0}
+.lib-act-l time,.pn-act-l time{color:var(--muted);font-size:12.5px;white-space:nowrap}
+.pn-act-t{margin:6px 0 0;font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+@media print{#sn-velo,.lib-actividad{display:none!important}}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -5308,6 +5329,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-15c", fecha:"2026-11-15", items:[
+    "En la tablet acostada, Lapacho usa el diseño de computadora: el menú lateral se abre con «Menú» y se cierra solo al elegir una opción. Parada sigue con la barra de abajo.",
+    "Mis planificaciones suma «Actividad reciente»: cuándo empezaste cada una, cuándo la marcaste como lista o entregada y cuándo descargaste el Word o el PDF.",
+    "La copia que descargás de tus planificaciones ahora guarda también el estado de cada una, para que no se pierda al pasarla a otra computadora."
+  ]},
   {id:"2026-11-15b", fecha:"2026-11-15", items:[
     "La planificación se arma por pasos: arriba ves en qué paso estás y cuáles ya completaste, y cada sección termina con «Anterior» y «Siguiente». En el celular se abre una sección por vez; lo podés cambiar.",
     "«Vista A4» muestra el documento repartido en hojas, con los márgenes de impresión y el número de página. Al imprimir, las hojas también salen numeradas.",
@@ -6457,7 +6483,7 @@ async function pdfDe(M){
   for (let i = 1; i <= np; i++){ doc.setPage(i); doc.setFont(F, "normal"); doc.setFontSize(8.5); doc.setTextColor(120, 120, 120); doc.text(String(i), W - MX, H - 32, {align:"right"}); }
   return doc.output("blob");
 }
-async function descargarPDF(){
+async function descargarPDFV64(){
   const btn = $("btn-pdf");
   if (btn.disabled) return;
   btn.disabled = true; const t0 = btn.textContent; btn.textContent = "Preparando…";
@@ -7628,7 +7654,7 @@ async function docxArchivos(M){
     ...media
   ];
 }
-async function descargarWord(){
+async function descargarWordV64(){
   if (vistaEfectiva() === "slides") return descargarPPTX();
   const btn = $("btn-docx");
   if (btn.disabled) return;
@@ -7941,7 +7967,7 @@ async function descargarImagen(id){
 }
 async function guardarArchivo(filename, blob, okMsg){
   if (caps.downloads){
-    try { await caps.downloads.save({filename, data:blob}); toast(okMsg); }
+    try { await caps.downloads.save({filename, data:blob}); toast(okMsg); lpDescargaOk(); }
     catch (e) {
       if (e && e.code === "declined") return;
       if (e && e.code === "rate_limited") toast("Ya hay una descarga esperando confirmación.");
@@ -7954,6 +7980,7 @@ async function guardarArchivo(filename, blob, okMsg){
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   toast(okMsg);
+  lpDescargaOk();
 }
 
 function updateImgHint(){
@@ -8058,7 +8085,7 @@ function tituloPlan(d){
   if (d.modo === "anual") return ["Planificación anual", nombreMateria(v.materia), anioSec(v.anio)].filter(Boolean).join(" · ");
   return (d.modo === "proyecto" ? (v.nombre || v.tema) : v.tema) || "Sin tema";
 }
-function libActualizar(){
+function libActualizarV64(){
   const d = foto();
   if (!d.v.materia && !d.v.tema) return;
   if (d.modo === "anual" && !d.v.materia) return;
@@ -8143,7 +8170,7 @@ async function exportarLib(){
   save();
   const lib = libLeer();
   if (!lib.length){ toast("Todavía no hay planificaciones para descargar."); return; }
-  const data = JSON.stringify({app:"planificador-clases", version:2, exportado:new Date().toISOString(), planes:lib, banco:bancoLeer()}, null, 1);
+  const data = JSON.stringify({app:"planificador-clases", version:2, exportado:new Date().toISOString(), planes:lib, banco:bancoLeer(), estados:lpEstados()}, null, 1);
   const hoy = new Date().toISOString().slice(0, 10);
   await guardarArchivo(`planificaciones-${hoy}.json`, new Blob([data], {type:"application/json"}), lib.length === 1 ? "Se descargó 1 planificación." : `Se descargaron ${lib.length} planificaciones.`);
 }
@@ -8170,6 +8197,7 @@ function importarLib(file){
       n++;
     });
     libGuardar(lib);
+    lpEstadosImportar(entrada && entrada.estados, lib);
     renderLib();
     toast(n ? (n === 1 ? "Se importó 1 planificación." : `Se importaron ${n} planificaciones.`) : "Esas planificaciones ya estaban guardadas.");
   };
@@ -13807,7 +13835,7 @@ function bindCole(){
 /* ============================================================
    Navegación de app en el celular: Hoy, Planificar, Mi curso, Carrera y Más
    ============================================================ */
-const NAV_MQ = window.matchMedia ? window.matchMedia("(max-width:760px), (max-width:1279px) and (pointer:coarse)") : {matches:false, addEventListener(){}};
+const NAV_MQ = window.matchMedia ? window.matchMedia("(max-width:760px), (max-width:999px) and (pointer:coarse)") : {matches:false, addEventListener(){}};
 function aplicarNav(){ const app = document.querySelector(".app"); if (app) app.classList.toggle("nav-app", NAV_MQ.matches); }
 function irSeccion(s, quieto){
   const app = document.querySelector(".app"); if (!app) return;
@@ -17071,7 +17099,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "64 (15/11/2026)";
+const LAPACHO_VERSION = "65 (15/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -17616,7 +17644,7 @@ function construirSidenavV62(){
     const d = e.target.closest("[data-dnav]"); if (d){ irDesk(d.dataset.dnav); return; }
   });
 }
-function aplicarDesk(){
+function aplicarDeskV64(){
   const app = document.querySelector(".app"); if (!app) return;
   const on = DESK_MQ.matches && !app.classList.contains("nav-app");
   app.classList.toggle("nav-desk", on);
@@ -26995,7 +27023,7 @@ const LP_EST_KEY = "lapacho-estados-v1";
 const LP_ESTADOS = [["borrador", "Borrador"], ["lista", "Lista"], ["entregada", "Entregada"]];
 function lpEstados(){ try { const o = JSON.parse(localStorage.getItem(LP_EST_KEY) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
 function lpEstado(id){ const e = lpEstados()[id]; return LP_ESTADOS.some(x => x[0] === e) ? e : "borrador"; }
-function lpEstadoSet(id, v){ try { const o = lpEstados(); if (v === "borrador") delete o[id]; else o[id] = v; localStorage.setItem(LP_EST_KEY, JSON.stringify(o)); } catch (e) { toast("No se pudo guardar el estado: el navegador no deja guardar."); } }
+function lpEstadoSetV64(id, v){ try { const o = lpEstados(); if (v === "borrador") delete o[id]; else o[id] = v; localStorage.setItem(LP_EST_KEY, JSON.stringify(o)); } catch (e) { toast("No se pudo guardar el estado: el navegador no deja guardar."); } }
 const LP_TIPOS = [["", "Todos los tipos"], ["clase", "Clase"], ["secuencia", "Secuencia"], ["proyecto", "Proyecto"], ["anual", "Anual"]];
 const lpTipo = d => ({proyecto:"proyecto", secuencia:"secuencia", anual:"anual"}[d.modo] || "clase");
 function lpFiltrosHTML(lib){
@@ -27009,7 +27037,7 @@ function lpFiltrosHTML(lib){
     <label><span class="sr-only">Estado</span><select id="lf-est">${opt([["", "Todos los estados"], ...LP_ESTADOS], F.est)}</select></label>
   </div><p class="lib-cuenta" id="lib-cuenta" aria-live="polite"></p>`;
 }
-function renderLib(){
+function renderLibV64(){
   const box = $("lib-list"); if (!box) return renderLibV63();
   try {
     const lib = libLeer().sort((a, b) => b.upd - a.upd), borrados = Object.values(state.libBorrados || {});
@@ -27061,7 +27089,7 @@ function lpRecientesHTML(){
     return `<li><div><b>${esc(tituloPlan(d))}</b><small>${esc([nombreMateria(v.materia), v.curso || anioSec(v.anio), "editada " + fechaCorta(e.upd)].filter(Boolean).join(" · "))}</small></div><span class="lp-est" data-est="${est}">${nom[est]}</span><button type="button" class="btn btn-sm" data-rec-abrir="${e.id}">${e.id === state.planId ? "Seguir" : "Abrir"}</button></li>`;
   }).join("")}</ul></section>`;
 }
-function renderPanel(){
+function renderPanelV64(){
   renderPanelV63();
   try {
     const P = $("panel"); if (!P) return;
@@ -27111,6 +27139,158 @@ function init74(){
     progresoFormulario();
     renderDoc();
   } catch (e) { registrarError("init74", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 65: menú lateral en la tablet acostada y registro de actividad
+   - Tablet con pantalla táctil de 1000 px o más (acostada): usa el diseño de computadora con el menú
+     lateral como cajón que se abre con «Menú» y se cierra al elegir, al tocar afuera o con Escape.
+     Parada (menos de 1000 px) sigue con la barra de abajo.
+   - Actividad: Lapacho anota cuándo empezaste una planificación, cuándo cambiaste su estado y cuándo
+     descargaste el Word o el PDF (clave aparte lapacho-actividad-v1, solo en este navegador).
+   - La copia descargada de Mis planificaciones lleva también el estado de cada una.
+   ============================================================ */
+
+/* ---------- Registro de actividad ---------- */
+const LP_ACT_KEY = "lapacho-actividad-v1", LP_ACT_MAX = 80;
+function lpActividad(){ try { const a = JSON.parse(localStorage.getItem(LP_ACT_KEY) || "[]"); return Array.isArray(a) ? a.filter(x => x && x.t && x.ev) : []; } catch (e) { return []; } }
+function lpAnotar(ev, id, det){
+  try {
+    if (!id) return;
+    const e = libLeer().find(x => x.id === id);
+    const tit = e ? tituloPlan(e.data) : (id === state.planId ? tituloPlan(foto()) : "");
+    const A = lpActividad();
+    /* el mismo hecho repetido en menos de un minuto cuenta una sola vez */
+    if (A[0] && A[0].ev === ev && A[0].id === id && (A[0].det || "") === (det || "") && Date.now() - A[0].t < 60000) A.shift();
+    A.unshift({t:Date.now(), ev, id, tit, det:det || ""});
+    localStorage.setItem(LP_ACT_KEY, JSON.stringify(A.slice(0, LP_ACT_MAX)));
+  } catch (e) { logSilencioso(e); }
+}
+function lpActTexto(a){
+  const t = `«${a.tit || "Sin tema"}»`;
+  switch (a.ev){
+    case "creada": return `Empezaste ${t}`;
+    case "lista": return `Marcaste ${t} como lista`;
+    case "entregada": return `Marcaste ${t} como entregada`;
+    case "borrador": return `Volviste ${t} a borrador`;
+    case "pdf": return a.det ? `Descargaste ${a.det} de ${t} en PDF` : `Descargaste el PDF de ${t}`;
+    case "word": return a.det ? `Descargaste ${a.det} de ${t} en Word` : `Descargaste el Word de ${t}`;
+    default: return t;
+  }
+}
+const lpFechaHora = ts => { const d = new Date(ts); return d.toLocaleDateString("es-AR", {day:"numeric", month:"short"}) + ", " + d.toLocaleTimeString("es-AR", {hour:"2-digit", minute:"2-digit"}); };
+function lpCuandoEstado(id, ev){ const a = lpActividad().find(x => x.id === id && x.ev === ev); return a ? a.t : 0; }
+function lpEstadoSet(id, v){
+  const antes = lpEstado(id);
+  lpEstadoSetV64(id, v);
+  if (antes !== v && lpEstado(id) === v) lpAnotar(v, id);
+}
+let lpConocidos = null;
+function libActualizar(){
+  libActualizarV64();
+  try {
+    const id = state.planId; if (!id) return;
+    if (!lpConocidos) lpConocidos = new Set(libLeer().map(x => x.id));
+    if (lpConocidos.has(id)) return;
+    if (libLeer().some(x => x.id === id)){ lpConocidos.add(id); lpAnotar("creada", id); }
+  } catch (e) { logSilencioso(e); }
+}
+let lpDescarga = "";
+function lpDescargaOk(){
+  if (!lpDescarga || !state.planId) return;
+  const vis = {ficha:"la ficha para estudiantes", inst:"los instrumentos de evaluación", registro:"el registro de clase", libreto:"el libreto"}[vistaEfectiva()] || "";
+  lpAnotar(lpDescarga, state.planId, vis);
+}
+async function descargarPDF(){ lpDescarga = "pdf"; try { await descargarPDFV64(); } finally { lpDescarga = ""; } }
+async function descargarWord(){ lpDescarga = vistaEfectiva() === "slides" ? "" : "word"; try { await descargarWordV64(); } finally { lpDescarga = ""; } }
+function lpEstadosImportar(E, lib){
+  try {
+    if (!E || typeof E !== "object") return;
+    const o = lpEstados(), ids = new Set((lib || libLeer()).map(x => x.id)); let n = 0;
+    Object.entries(E).forEach(([id, v]) => { if (ids.has(id) && !o[id] && LP_ESTADOS.some(x => x[0] === v) && v !== "borrador"){ o[id] = v; n++; } });
+    if (n) localStorage.setItem(LP_EST_KEY, JSON.stringify(o));
+  } catch (e) { logSilencioso(e); }
+}
+function lpActividadHTML(max, cls){
+  const A = lpActividad().slice(0, max);
+  if (!A.length) return "";
+  return `<ol class="${cls}">${A.map(a => `<li><span>${esc(lpActTexto(a))}</span><time datetime="${new Date(a.t).toISOString()}">${esc(lpFechaHora(a.t))}</time></li>`).join("")}</ol>`;
+}
+function renderLib(){
+  renderLibV64();
+  try {
+    /* fecha en que quedó lista o entregada */
+    document.querySelectorAll("#lib-list .lib-item select[data-lib-estado]").forEach(s => {
+      const v = s.value; if (v === "borrador") return;
+      const t = lpCuandoEstado(s.dataset.libEstado, v); if (!t) return;
+      const sm = s.closest(".lib-item").querySelector(".lib-txt small");
+      if (sm && !sm.querySelector(".lib-cuando")) sm.insertAdjacentHTML("beforeend", `<span class="lib-cuando"> · ${v === "lista" ? "lista" : "entregada"} el ${esc(new Date(t).toLocaleDateString("es-AR", {day:"numeric", month:"short"}))}</span>`);
+    });
+    const lib = $("lib"); if (!lib) return;
+    let reg = $("lib-actividad");
+    const html = lpActividadHTML(15, "lib-act-l");
+    if (!html){ if (reg) reg.remove(); return; }
+    if (!reg){
+      const foot = lib.querySelector(".lib-foot");
+      (foot || $("lib-list")).insertAdjacentHTML(foot ? "beforebegin" : "afterend", `<details class="lib-actividad" id="lib-actividad"><summary>Actividad reciente</summary><div class="lib-act-c"></div><p class="hint">Se anota sola en este navegador: cuándo empezaste cada planificación, cuándo cambiaste su estado y cuándo la descargaste.</p></details>`);
+      reg = $("lib-actividad");
+    }
+    reg.querySelector(".lib-act-c").innerHTML = html;
+  } catch (e) { registrarError("renderLib65", e, "aviso"); }
+}
+function renderPanel(){
+  renderPanelV64();
+  try {
+    const R = document.querySelector("#panel .pn-rec"); if (!R) return;
+    const html = lpActividadHTML(4, "pn-act-l"); if (!html) return;
+    R.insertAdjacentHTML("beforeend", `<h3 class="pn-act-t">Lo último que hiciste</h3>${html}`);
+  } catch (e) { registrarError("renderPanel65", e, "aviso"); }
+}
+
+/* ---------- Tablet acostada: menú lateral como cajón ---------- */
+const LP_CAJON_MQ = window.matchMedia ? window.matchMedia("(pointer:coarse) and (max-width:1279px)") : {matches:false, addEventListener(){}};
+function lpCajonAbierto(on, foco){
+  const app = document.querySelector(".app"); if (!app) return;
+  on = !!on && app.classList.contains("nav-cajon");
+  app.classList.toggle("cajon-abierto", on);
+  let v = $("sn-velo");
+  if (!v){ document.body.insertAdjacentHTML("beforeend", `<div id="sn-velo" hidden></div>`); v = $("sn-velo"); v.addEventListener("click", () => lpCajonAbierto(false, true)); }
+  v.hidden = !on;
+  const S = $("sidenav"); if (S) S.inert = app.classList.contains("nav-cajon") && !on;
+  const a = $("sn-abrir"); if (a) a.setAttribute("aria-expanded", String(on));
+  const o = document.querySelector(".sn-ocultar"); if (o) o.textContent = app.classList.contains("nav-cajon") ? "Cerrar el menú" : "Ocultar el menú";
+  if (foco){ if (on){ const p = S && S.querySelector(".sn-ocultar, button, a"); if (p) p.focus(); } else if (a) a.focus(); }
+}
+function lpAplicarCajon(){
+  const app = document.querySelector(".app"); if (!app) return;
+  const on = app.classList.contains("nav-desk") && LP_CAJON_MQ.matches;
+  const era = app.classList.contains("nav-cajon");
+  app.classList.toggle("nav-cajon", on);
+  if (on){ app.classList.add("nav-oculto"); lpCajonAbierto(app.classList.contains("cajon-abierto")); }
+  else if (era){ app.classList.remove("cajon-abierto"); lpCajonAbierto(false); lpMenuOculto(!!leerPref().menuOculto); }
+}
+function aplicarDesk(){
+  aplicarDeskV64();
+  try { lpAplicarCajon(); } catch (e) { registrarError("aplicarDesk65", e, "aviso"); }
+}
+
+function init75(){
+  try {
+    /* los botones «Menú» y «Ocultar el menú» abren y cierran el cajón cuando corresponde */
+    document.addEventListener("click", e => {
+      const app = document.querySelector(".app.nav-cajon"); if (!app) return;
+      if (e.target.closest("#sn-abrir")){ e.preventDefault(); e.stopPropagation(); lpCajonAbierto(!app.classList.contains("cajon-abierto"), true); return; }
+      if (e.target.closest(".sn-ocultar")){ e.preventDefault(); e.stopPropagation(); lpCajonAbierto(false, true); return; }
+      /* elegir una opción del menú lo cierra; abrir o cerrar un grupo, no */
+      const b = e.target.closest("#sidenav button, #sidenav a");
+      if (b && app.classList.contains("cajon-abierto") && !b.closest("summary")) setTimeout(() => lpCajonAbierto(false), 0);
+    }, true);
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && document.querySelector(".app.cajon-abierto") && !document.querySelector("dialog[open]")){ e.preventDefault(); lpCajonAbierto(false, true); } });
+    if (LP_CAJON_MQ.addEventListener) LP_CAJON_MQ.addEventListener("change", aplicarDesk);
+    lpAplicarCajon();
+    /* «Mis planificaciones» se vuelve a dibujar al abrir: así la actividad está al día */
+    const panel = $("panel"); if (panel && document.querySelector(".app.nav-desk")) renderPanel();
+  } catch (e) { registrarError("init75", e, "aviso"); }
 }
 
 /* ============================================================
@@ -27570,7 +27750,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
