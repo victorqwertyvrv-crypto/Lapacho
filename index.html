@@ -2355,6 +2355,83 @@ dialog.a4dlg::backdrop{background:rgba(10,22,16,.55)}
 .lp-nom{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media print{.lp-perfil,.banco-filtros{display:none!important}}
 
+/* ---------- Versión 67: íconos y dibujos ---------- */
+.lp-ic{width:18px;height:18px;flex:none}
+/* menú lateral: las herramientas llevan su ícono y se alinean con los de arriba */
+.app.nav-desk .sidenav .sn-d .sn-i.tiene-ic{padding-left:14px;gap:10px}
+.app.nav-desk .sidenav .sn-d .sn-i .lp-ic{opacity:.82}
+.app.nav-desk .sidenav .sn-d .sn-i:hover .lp-ic,.app.nav-desk .sidenav .sn-d .sn-i[aria-current] .lp-ic{opacity:1}
+.sn-d>summary .lp-ic-g{margin-right:10px;vertical-align:-4px}
+/* hoja «Más» del celular y menús desplegables: ícono en un círculo suave a la izquierda */
+.hoja-i.tiene-ic,.menu-pop [role="menuitem"].tiene-ic{display:grid;grid-template-columns:34px minmax(0,1fr);column-gap:12px;align-items:center;justify-items:start}
+.hoja-i.tiene-ic>.lp-ic-c,.menu-pop [role="menuitem"].tiene-ic>.lp-ic-c{grid-row:1/span 2;width:34px;height:34px;padding:7px;box-sizing:border-box;border-radius:10px;background:var(--accent-soft);color:var(--acc-texto,var(--accent))}
+.hoja-i.tiene-ic>:not(svg),.menu-pop [role="menuitem"].tiene-ic>:not(svg){grid-column:2}
+.hoja-i.prim.tiene-ic>.lp-ic-c{background:rgba(255,255,255,.18);color:inherit}
+.hoja-dn .lp-ic-g,.menu-g .lp-ic-g{margin-right:8px;vertical-align:-4px;color:var(--acc-texto,var(--accent))}
+/* secciones del formulario */
+details.sec>summary.con-ic{justify-content:flex-start}
+details.sec>summary.con-ic .sum-hint{margin-left:auto}
+.sec-ic{display:inline-grid;place-items:center;width:38px;height:38px;flex:none;border-radius:11px;background:var(--accent-soft);color:var(--acc-texto,var(--accent))}
+.sec-ic .lp-ic{width:20px;height:20px}
+details.sec.opc .sec-ic{background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+details.sec[open] .sec-ic{background:var(--accent);color:var(--on-accent)}
+@media (max-width:760px){.sec-ic{width:32px;height:32px;border-radius:9px}.sec-ic .lp-ic{width:18px;height:18px}}
+/* estados vacíos con dibujo */
+.lib-empty.con-il,.lib-vacio.con-il{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:18px 12px}
+.lib-vacio.con-il{border-style:dashed}
+.lp-ilus{width:140px;height:96px;flex:none}
+@media print{.lp-ic,.sec-ic,.lp-ilus{display:none!important}}
+
+/* ---------- Versión 68: gráficos ---------- */
+.gr{display:flex;flex-direction:column;gap:14px}
+.gr-per{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;align-self:flex-start}
+.gr-per select{width:auto;min-height:40px;font-size:14px;padding:6px 10px}
+.gr-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.gr-tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m,10px);padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.gr-tl{font-size:13px;color:var(--muted);font-weight:600}
+.gr-tv{font-size:24px;line-height:1.2;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.gr-tile small{font-size:12.5px;color:var(--muted)}
+.gr-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gr-fig{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m,10px);padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.gr-fig figcaption{display:flex;flex-direction:column;gap:1px}
+.gr-fig figcaption b{font-size:15px}
+.gr-fig figcaption small{font-size:12.5px;color:var(--muted)}
+.gr-lienzo{width:100%;min-width:0;overflow:hidden}
+.gr-svg{display:block;max-width:100%;overflow:visible}
+.gr-grid{stroke:var(--line);stroke-width:1}
+.gr-base{stroke:var(--muted);stroke-width:1;opacity:.6}
+.gr-eje,.gr-et{fill:var(--muted);font:11.5px/1 var(--f-ui,system-ui,sans-serif)}
+.gr-et{fill:var(--ink);font-size:12.5px}
+.gr-val{fill:var(--ink);font:600 12px/1 var(--f-ui,system-ui,sans-serif)}
+.gr-col{fill:var(--accent)}
+.gr-hit{fill:transparent}
+.gr-m:hover .gr-col{opacity:.78}
+.gr-ref{stroke:var(--ink);stroke-width:1.5;opacity:.6}
+.gr-ref-t{fill:var(--ink);font:600 11.5px/1 var(--f-ui,system-ui,sans-serif);opacity:.8}
+.gr-datos>summary{cursor:pointer;font-size:13px;color:var(--acc-texto,var(--accent));font-weight:600;min-height:32px;display:flex;align-items:center}
+.gr-tw{overflow-x:auto;max-height:240px;overflow-y:auto}
+.gr-datos table{border-collapse:collapse;width:100%;font-size:13px}
+.gr-datos th,.gr-datos td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.gr-datos thead th{color:var(--muted);font-weight:600}
+.gr-nota{margin:0;font-size:12.5px}
+.gr-mas{align-self:flex-start;font-size:13.5px}
+/* barra segmentada de estados: un mismo verde, de claro (borrador) a oscuro (entregada) */
+.gr-seg{display:flex;gap:2px;height:14px;border-radius:999px;overflow:hidden;background:var(--surface-2)}
+.gr-sg{display:block;min-width:6px;flex-basis:0}
+[data-est="borrador"].gr-sg,.gr-ley i[data-est="borrador"]{background:color-mix(in srgb,var(--accent) 28%,var(--surface))}
+[data-est="lista"].gr-sg,.gr-ley i[data-est="lista"]{background:color-mix(in srgb,var(--accent) 65%,var(--surface))}
+[data-est="entregada"].gr-sg,.gr-ley i[data-est="entregada"]{background:var(--accent)}
+.gr-ley{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:var(--muted)}
+.gr-ley li{display:inline-flex;align-items:center;gap:6px}
+.gr-ley b{color:var(--ink)}
+.gr-ley i{display:inline-block;width:12px;height:12px;border-radius:3px}
+#lib-resumen .gr-fig{padding:10px 12px}
+.pn-graf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.pn-graf>.gr-fig:only-child{grid-column:1/-1}
+@media (max-width:1100px){.gr-grid2,.pn-graf{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){.gr-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.gr-tv{font-size:20px}}
+@media print{.gr-datos,.gr-per{display:none!important}.gr-fig{break-inside:avoid}}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -5348,6 +5425,15 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-15f", fecha:"2026-11-15", items:[
+    "Mi curso tiene una pestaña «Gráficos»: asistencia media, promedio del curso, cuántos aprueban, la asistencia de cada clase, el promedio de cada evaluación, cómo están los promedios y quiénes faltan más. Podés elegir el período o todo el año.",
+    "Mis planificaciones y el inicio de la computadora muestran cuántas tenés en borrador, listas y entregadas, y la asistencia de las últimas clases.",
+    "Cada gráfico tiene «Ver los datos» con la tabla de números. Los gráficos usan lo que ya cargaste: no se guarda nada nuevo."
+  ]},
+  {id:"2026-11-15e", fecha:"2026-11-15", items:[
+    "Cada herramienta tiene su ícono, en el menú de la computadora, en «Más» del celular y en los menús desplegables, para encontrarla de un vistazo.",
+    "Las secciones del formulario también llevan su ícono, y las pantallas vacías tienen un dibujo que explica qué va ahí."
+  ]},
   {id:"2026-11-15d", fecha:"2026-11-15", items:[
     "En el banco de actividades podés filtrar por espacio curricular, y las actividades aparecen agrupadas por tema, con cuántas tenés de cada uno.",
     "En la computadora, arriba a la derecha está tu nombre con tus iniciales: tocándolo lo cambiás."
@@ -9155,7 +9241,7 @@ function renderCurTop(){
   $("cur-tabs").hidden = !c || state.tabs.cur === "config";
   $("cur-tabs").querySelectorAll("[data-tab]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.tab === state.tabs.cur)));
 }
-function renderCurTab(t){
+function renderCurTabV67(t){
   state.tabs.cur = t;
   const c = cursoSel();
   renderCurTop();
@@ -17122,7 +17208,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "66 (15/11/2026)";
+const LAPACHO_VERSION = "68 (15/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -27239,7 +27325,7 @@ function lpActividadHTML(max, cls){
   if (!A.length) return "";
   return `<ol class="${cls}">${A.map(a => `<li><span>${esc(lpActTexto(a))}</span><time datetime="${new Date(a.t).toISOString()}">${esc(lpFechaHora(a.t))}</time></li>`).join("")}</ol>`;
 }
-function renderLib(){
+function renderLibV67(){
   renderLibV64();
   try {
     /* fecha en que quedó lista o entregada */
@@ -27261,7 +27347,7 @@ function renderLib(){
     reg.querySelector(".lib-act-c").innerHTML = html;
   } catch (e) { registrarError("renderLib65", e, "aviso"); }
 }
-function renderPanel(){
+function renderPanelV67(){
   renderPanelV64();
   try {
     const R = document.querySelector("#panel .pn-rec"); if (!R) return;
@@ -27389,6 +27475,365 @@ function init76(){
     document.addEventListener("submit", alNombre, true);
     document.addEventListener("click", e => { if (e.target.closest("[data-tdnom]")) alNombre(); });
   } catch (e) { registrarError("init76", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 67: un ícono para cada parte y dibujos en los estados vacíos
+   - Íconos propios (SVG en línea, trazo de 1,8, color del texto), sin librerías ni archivos externos.
+   - Se aplican a: herramientas del menú lateral, la hoja «Más» del celular, los menús «Más herramientas» y «Más»
+     del documento, los grupos de esos menús y las secciones del formulario.
+   - Estados vacíos (.lib-empty) y búsquedas sin resultados (.lib-vacio) con un dibujo chico de Lapacho.
+   - Un observador agrega los íconos cuando una parte se vuelve a dibujar; marca con .con-ic para no repetir.
+   ============================================================ */
+const LP_ICS = {
+  nueva:'<path d="M12 5v14M5 12h14"/>',
+  lib:'<path d="M4 5.5h6l2 2h8v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/>',
+  curso:'<circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><path d="M16 5.5a3 3 0 0 1 0 5.6M18 14.6c1.4.7 2.3 2.1 2.6 4.4"/>',
+  chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M10 9.2a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9"/><path d="M12 13.6v.1"/>',
+  camara:'<path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.2"/>',
+  play:'<circle cx="12" cy="12" r="8.5"/><path d="M10 8.8v6.4l5-3.2z"/>',
+  nota:'<path d="M5 4h14v10l-5 6H5z"/><path d="M14 20v-6h5"/><path d="M8.5 9h7M8.5 12h4"/>',
+  libro:'<path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1v13c-3-1-6-1-9 1-3-2-6-2-9-1z"/><path d="M12 6.5v13"/>',
+  capas:'<path d="M12 4 3 8.5l9 4.5 9-4.5z"/><path d="m3 12.5 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/>',
+  biblio:'<path d="M5 4.5h4v15H5zM10 4.5h4v15h-4zM15.5 5l3.6 1-3.4 14-3.5-1"/>',
+  pregunta:'<path d="M6 3.5h9l4 4v13H6z"/><path d="M15 3.5v4h4"/><path d="M10.2 11a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9"/><path d="M12.2 17v.1"/>',
+  idea:'<path d="M9 17.5h6M10 20.5h4"/><path d="M12 3.5a6 6 0 0 0-3.6 10.8c.4.3.6.8.6 1.3v1.9h6v-1.9c0-.5.2-1 .6-1.3A6 6 0 0 0 12 3.5z"/>',
+  ciclo:'<path d="M4 12a8 8 0 0 1 13.7-5.7L20 8.5"/><path d="M20 4v4.5h-4.5"/><path d="M20 12a8 8 0 0 1-13.7 5.7L4 15.5"/><path d="M4 20v-4.5h4.5"/>',
+  ia:'<path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+  revisar:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/><path d="m7.8 10.6 2 2 3.6-3.8"/>',
+  frasco:'<path d="M9.5 3.5h5M10.5 3.5v5.2L5 18.2a1.5 1.5 0 0 0 1.3 2.3h11.4a1.5 1.5 0 0 0 1.3-2.3l-5.5-9.5V3.5"/><path d="M7.5 14.5h9"/>',
+  atril:'<path d="M4 4.5h16v10H4z"/><path d="M12 14.5v3M8 21l4-3.5 4 3.5"/><path d="M8 11l2.5-2.5 2 2 3.5-3.5"/>',
+  dialogo:'<path d="M4 5h11v8H8l-4 3z"/><path d="M15 9h5v8l-3-2.5h-6.5V13"/>',
+  balanza:'<path d="M12 4v16M7 20h10M5 7h14"/><path d="M5 7l-2.5 6a2.5 2.5 0 0 0 5 0z"/><path d="M19 7l-2.5 6a2.5 2.5 0 0 0 5 0z"/>',
+  calx:'<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="m9.5 12.5 5 5M14.5 12.5l-5 5"/>',
+  pin:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>',
+  bandera:'<path d="M5 21V4"/><path d="M5 4.5h12l-2 3.5 2 3.5H5"/>',
+  acta:'<path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 12h6M9 15.5h6M9 8.5h2.5"/>',
+  entrega:'<path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M10 13l2 2 4-4"/>',
+  ppi:'<circle cx="10" cy="8" r="3.5"/><path d="M3.5 20c.6-3.6 3.2-5.5 6.5-5.5 1.6 0 3 .4 4.1 1.2"/><path d="M18 14v6M15 17h6"/>',
+  maletin:'<rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V5.5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5.5v2"/><path d="M3.5 12.5h17"/>',
+  birrete:'<path d="M2.5 9 12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11v4.5c1.5 1.6 3.4 2.5 5.5 2.5s4-.9 5.5-2.5V11"/><path d="M21.5 9v5"/>',
+  credencial:'<rect x="3" y="5.5" width="18" height="13" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c.5-1.5 1.6-2.3 3-2.3s2.5.8 3 2.3"/><path d="M14 10h4.5M14 13.5h3"/>',
+  sello:'<path d="M9.5 4.5h5l-1 6h-3z"/><path d="M5 14.5c0-2 1.5-4 4-4h6c2.5 0 4 2 4 4v1.5H5z"/><path d="M4.5 19.5h15"/>',
+  sol:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/>',
+  archivo:'<rect x="3" y="4.5" width="18" height="4.5" rx="1"/><path d="M4.5 9v10a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V9"/><path d="M10 13h4"/>',
+  colectivo:'<rect x="5" y="3.5" width="14" height="14" rx="2.5"/><path d="M5 10h14M9 20.5v-3M15 20.5v-3"/><circle cx="8.5" cy="14" r=".9"/><circle cx="15.5" cy="14" r=".9"/>',
+  recorrido:'<circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18h6a3 3 0 0 0 0-6h-5a3 3 0 0 1 0-6h6"/>',
+  devol:'<path d="M4 5h16v11H9l-5 4z"/><path d="m8.5 10.5 2.2 2.2 4.8-4.8"/>',
+  portapapeles:'<rect x="5.5" y="4.5" width="13" height="16" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 10h6M9 13.5h6M9 17h3.5"/>',
+  texto:'<path d="M4 6h16M4 10h16M4 14h11M4 18h8"/>',
+  impresora:'<path d="M7 8V3.5h10V8"/><rect x="3.5" y="8" width="17" height="8" rx="2"/><path d="M7 13.5h10v7H7z"/>',
+  qr:'<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2.5v2.5H14zM17.5 17.5H20V20h-2.5zM14 20h1M20 14v1"/>',
+  suplente:'<circle cx="8" cy="8" r="3"/><path d="M3 19c.5-3 2.5-4.5 5-4.5"/><path d="M14 9h7m-2.5-2.5L21 9l-2.5 2.5"/><path d="M20 16h-7m2.5 2.5L13 16l2.5-2.5"/>',
+  pizarron:'<rect x="3" y="4.5" width="18" height="12" rx="1.5"/><path d="M8 20.5l2-4M16 20.5l-2-4"/><path d="M7 9h6M7 12h4"/>',
+  hoja:'<path d="M6.5 3.5h7.5l4 4v13h-11.5z"/><path d="M14 3.5v4h4"/><path d="M9.5 17h5"/>',
+  compartir:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6"/>',
+  lapiz:'<path d="M4 20l1-4.5L16 4.5l3.5 3.5L8.5 19z"/><path d="M14 7l3.5 3.5"/>',
+  estrella:'<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/>',
+  escudo:'<path d="M12 3.5 5 6v5.5c0 4.3 3 7.6 7 9 4-1.4 7-4.7 7-9V6z"/>',
+  ajustes:'<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+  escuela:'<path d="M3 20.5h18M5 20.5V10l7-5 7 5v10.5"/><path d="M10 20.5v-5h4v5"/><path d="M12 8.5v.1"/>',
+  cohete:'<path d="M14.5 4.5c2.5-1 4.5-1 5.5-1 0 1 0 3-1 5.5l-6 6-4.5-4.5z"/><path d="M8.5 10.5 5 10l-2 2.5 4 1M13.5 15.5l.5 3.5-2.5 2-1-4"/><circle cx="15.5" cy="8.5" r="1.3"/>',
+  diana:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+  lista:'<circle cx="5.5" cy="6.5" r="1.5"/><circle cx="5.5" cy="12" r="1.5"/><circle cx="5.5" cy="17.5" r="1.5"/><path d="M10 6.5h10M10 12h10M10 17.5h10"/>',
+  calendario:'<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M7.5 13.5h3M13.5 13.5h3M7.5 17h3"/>',
+  fases:'<path d="M3 12h18"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 6.5v3.5M18 6.5v3.5M12 14v3.5"/>',
+  evaluar:'<rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="m8 12.5 2.8 2.8L16.5 9"/>',
+  imagen:'<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="9.5" r="1.8"/><path d="m4 18 5.5-5 4 3.5 2.5-2 4.5 3.5"/>',
+  diversidad:'<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 19c.5-3 2.6-4.8 5.5-4.8s5 1.8 5.5 4.8"/><path d="M14.5 14.6c.7-.4 1.6-.6 2.5-.6 2.4 0 4.1 1.5 4.5 4"/>',
+  enlace:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  instrumentos:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="m8.5 10 1 1 2-2M13.5 10.5H16M8.5 15l1 1 2-2M13.5 15.5H16"/>',
+  ficha:'<path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 11.5h6M9 14.5h6M9 17.5h4"/>',
+  globo:'<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.3 3.5 5.2 3.5 8.5s-1.2 6.2-3.5 8.5c-2.3-2.3-3.5-5.2-3.5-8.5s1.2-6.2 3.5-8.5z"/>',
+  cuaderno:'<path d="M5 3.5h11a2 2 0 0 1 2 2v15H7a2 2 0 0 1-2-2z"/><path d="M5 18.5a2 2 0 0 1 2-2h11"/><path d="M9 8h5M9 11h3"/>',
+  diseno:'<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9h17M9.5 9v11"/>',
+  ayuda:'<circle cx="12" cy="12" r="8.5"/><path d="M9.8 9.6a2.3 2.3 0 1 1 3 2.2c-.5.2-.8.6-.8 1.1v.6"/><path d="M12 16.4v.1"/>'
+};
+/* qué ícono lleva cada herramienta (por el id de su botón) */
+const LP_IC_ID = {
+  "btn-nueva":"nueva", "btn-lib":"lib", "btn-curso":"curso", "btn-contame":"chat", "btn-fotoia":"camara", "btn-repaso":"play",
+  "btn-ausencia":"nota", "btn-libreto":"libro", "btn-banco":"capas", "btn-biblio":"biblio", "btn-preg":"pregunta", "btn-rutinas":"idea",
+  "btn-dinam":"ciclo", "btn-ia":"ia", "btn-coher":"revisar", "btn-feria":"frasco", "btn-muestra":"atril", "btn-conv":"dialogo",
+  "btn-derechos":"balanza", "btn-diasesc":"calx", "btn-salidas":"pin", "btn-actos":"bandera", "btn-actas":"acta", "btn-entregas":"entrega",
+  "btn-ppi":"ppi", "btn-cargos":"maletin", "btn-capac":"birrete", "btn-legajo":"credencial", "btn-tramites":"sello", "btn-licalc":"sol",
+  "btn-carpeta":"archivo", "btn-cole":"colectivo", "btn-lineas":"recorrido", "btn-devol":"devol", "btn-formato":"portapapeles",
+  "btn-texto":"texto", "btn-imprimir":"impresora", "btn-qr":"qr", "btn-suplente":"suplente", "btn-sintec":"pizarron", "btn-a4m":"hoja",
+  "btn-compartir":"compartir", "btn-ayuda":"ayuda"
+};
+/* grupos de los menús y secciones del formulario, por su título */
+const LP_IC_TXT = [
+  [/^preparar/, "lapiz"], [/^en el aula/, "pizarron"], [/^proyectos/, "estrella"], [/^gestion/, "escudo"], [/^ajustes/, "ajustes"],
+  [/^tu carrera|^carrera/, "maletin"], [/^para la clase/, "lapiz"], [/^datos generales/, "escuela"], [/^tema y contenidos/, "libro"],
+  [/^el proyecto/, "cohete"], [/^nap/, "diana"], [/^secuencia didactica/, "lista"], [/^clases de la secuencia/, "calendario"],
+  [/^fases/, "fases"], [/^organizacion anual/, "calendario"], [/^evaluacion/, "evaluar"], [/^recursos/, "biblio"],
+  [/^capacidades/, "estrella"], [/^imagenes/, "imagen"], [/^atencion a la diversidad/, "diversidad"], [/^trabajo integrado/, "enlace"],
+  [/^instrumentos/, "instrumentos"], [/^ficha/, "ficha"], [/^ejes/, "globo"], [/^registro/, "cuaderno"], [/^formato/, "diseno"]
+];
+const lpSvg = (k, cls) => LP_ICS[k] ? `<svg class="${cls || "lp-ic"}" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${LP_ICS[k]}</svg>` : "";
+function lpIcPorTexto(t){ const n = norm(String(t || "").trim()); const m = LP_IC_TXT.find(([re]) => re.test(n)); return m ? m[1] : ""; }
+
+/* Dibujos para estados vacíos: una carpeta con una rama de lapacho, y una lupa */
+function lpFlor(x, y, r){
+  return `<g transform="translate(${x} ${y})">${[0, 72, 144, 216, 288].map(a => `<ellipse cx="0" cy="${-r}" rx="${r * 0.62}" ry="${r}" transform="rotate(${a})" fill="var(--lapacho,#b83c74)" opacity=".85"/>`).join("")}<circle r="${r * 0.42}" fill="#f6d36b"/></g>`;
+}
+const LP_ILUS = {
+  carpeta:() => `<svg class="lp-ilus" viewBox="0 0 140 96" aria-hidden="true" focusable="false"><path d="M16 34h32l8 8h66v40a5 5 0 0 1-5 5H21a5 5 0 0 1-5-5z" fill="var(--accent-soft)" stroke="var(--acc-verde,var(--accent))" stroke-width="2"/><path d="M40 26h44l12 12v14H40z" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/><path d="M48 38h28M48 45h20" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"/><path d="M16 50h106" stroke="var(--acc-verde,var(--accent))" stroke-width="2" opacity=".5"/><path d="M96 30c8-10 16-16 30-20" fill="none" stroke="var(--acc-verde,var(--accent))" stroke-width="2.2" stroke-linecap="round" opacity=".7"/>${lpFlor(112, 15, 4.5)}${lpFlor(126, 9, 3.6)}${lpFlor(102, 24, 3.4)}</svg>`,
+  lupa:() => `<svg class="lp-ilus" viewBox="0 0 140 96" aria-hidden="true" focusable="false"><circle cx="62" cy="44" r="24" fill="var(--accent-soft)" stroke="var(--acc-verde,var(--accent))" stroke-width="2.4"/><path d="m80 62 18 18" stroke="var(--acc-verde,var(--accent))" stroke-width="6" stroke-linecap="round"/><path d="M52 44h20" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round"/>${lpFlor(104, 22, 4)}${lpFlor(116, 32, 3.2)}</svg>`
+};
+
+function lpIconizar(raiz){
+  const R = raiz || document;
+  try {
+    /* herramientas: menú lateral, hoja del celular y menús desplegables */
+    R.querySelectorAll("#sidenav .sn-i[data-proxy]:not(.con-ic), .hoja-i[data-proxy]:not(.con-ic), .menu-pop [role='menuitem'][id]:not(.con-ic)").forEach(b => {
+      b.classList.add("con-ic");
+      if (b.closest(".hoja-top")) return;
+      if (b.querySelector(":scope > svg")) return;
+      const k = LP_IC_ID[b.dataset.proxy || b.id]; if (!k) return;
+      b.insertAdjacentHTML("afterbegin", lpSvg(k, "lp-ic" + (b.matches(".hoja-i, .menu-pop [role='menuitem']") ? " lp-ic-c" : "")));
+      b.classList.add("tiene-ic");
+    });
+    /* grupos de los menús */
+    R.querySelectorAll("#sidenav .sn-d > summary:not(.con-ic), .hoja-d > summary:not(.con-ic), .menu-pop .menu-g:not(.con-ic)").forEach(s => {
+      s.classList.add("con-ic");
+      if (s.querySelector("svg:not(.chev)") && !s.matches(".hoja-d > summary")) return;
+      const nom = s.querySelector(".hoja-dn") || s;
+      const k = lpIcPorTexto(nom.textContent); if (!k) return;
+      if (s.querySelector(".lp-ic")) return;
+      nom.insertAdjacentHTML("afterbegin", lpSvg(k, "lp-ic lp-ic-g"));
+    });
+    /* secciones del formulario */
+    R.querySelectorAll("#form-secs details.sec > summary:not(.con-ic)").forEach(s => {
+      s.classList.add("con-ic");
+      const t = s.querySelector(".sec-t"), k = t && lpIcPorTexto(t.textContent); if (!k) return;
+      s.insertAdjacentHTML("afterbegin", `<span class="sec-ic">${lpSvg(k)}</span>`);
+    });
+    /* estados vacíos */
+    R.querySelectorAll(".lib-empty:not(.con-il), .lib-vacio:not(.con-il)").forEach(e => {
+      e.classList.add("con-il");
+      e.insertAdjacentHTML("afterbegin", e.classList.contains("lib-vacio") ? LP_ILUS.lupa() : LP_ILUS.carpeta());
+    });
+  } catch (e) { registrarError("lpIconizar", e, "aviso"); }
+}
+function init77(){
+  try {
+    lpIconizar(document);
+    let pend = 0;
+    new MutationObserver(() => { if (pend) return; pend = requestAnimationFrame(() => { pend = 0; lpIconizar(document); }); })
+      .observe(document.body, {childList:true, subtree:true});
+  } catch (e) { registrarError("init77", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 68: gráficos con los datos del docente
+   - Mi curso: pestaña «Gráficos» con cuatro números (asistencia, promedio, aprobados, señales de riesgo) y cuatro gráficos:
+     asistencia por clase, promedio de cada evaluación, cómo están los promedios y quiénes faltan más.
+   - Mis planificaciones: barra con cuántas hay en borrador, listas y entregadas.
+   - Inicio (computadora): el mismo resumen y la asistencia de las últimas clases del curso elegido.
+   Todo se dibuja en SVG propio, sin librerías; cada gráfico tiene «Ver los datos» con la tabla, para leerlo sin mirar el dibujo.
+   Los datos salen de lo que ya está guardado: no se agrega ni se cambia nada en el almacenamiento.
+   ============================================================ */
+const LP_GRAF = new Map();
+let lpGrafRO = null;
+const lpFmt = (x, d) => x == null || isNaN(x) ? "" : String(Math.round(x * Math.pow(10, d || 0)) / Math.pow(10, d || 0)).replace(".", ",");
+const lpFechaCorta = iso => { const [y, m, d] = String(iso || "").split("-"); return d ? `${+d}/${+m}` : iso; };
+function lpTablaDatos(cab, filas){
+  return `<details class="gr-datos"><summary>Ver los datos</summary><div class="gr-tw"><table><thead><tr>${cab.map(c => `<th scope="col">${esc(c)}</th>`).join("")}</tr></thead><tbody>${filas.map(f => `<tr>${f.map((v, i) => i ? `<td>${esc(v)}</td>` : `<th scope="row">${esc(v)}</th>`).join("")}</tr>`).join("")}</tbody></table></div></details>`;
+}
+/* columna con la punta redondeada (4 px) y la base recta */
+function lpCol(x, y, w, h){
+  if (h <= 0) return "";
+  const r = Math.min(4, w / 2, h);
+  return `M${x} ${y + h}V${y + r}Q${x} ${y} ${x + r} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h}Z`;
+}
+function lpBarraH(x, y, w, h){
+  if (w <= 0) return "";
+  const r = Math.min(4, h / 2, w);
+  return `M${x} ${y}H${x + w - r}Q${x + w} ${y} ${x + w} ${y + r}V${y + h - r}Q${x + w} ${y + h} ${x + w - r} ${y + h}H${x}Z`;
+}
+/* Gráfico de columnas. o = {datos:[{et, v, tip}], min, max, ticks:[...], ref:{v, et}, fmt, resaltarUltima, alto, resumen} */
+function lpDibujarColumnas(el, o){
+  const W = Math.max(260, Math.floor(el.clientWidth || 600)), H = o.alto || 190;
+  const largo = Math.max(1, ...(o.ticks || []).map(t => String(o.fmt ? o.fmt(t) : t).length));
+  const ml = 12 + largo * 7, mr = 10, mt = o.ref ? 26 : 18, mb = 30, pw = W - ml - mr, ph = H - mt - mb;
+  const n = o.datos.length, min = o.min || 0, max = o.max;
+  const yv = v => mt + ph - (Math.max(min, Math.min(max, v)) - min) / (max - min) * ph;
+  const banda = pw / Math.max(1, n), bw = Math.max(4, Math.min(24, banda - 2));
+  const cada = Math.max(1, Math.ceil(n / Math.max(1, Math.floor(pw / 46))));
+  let s = `<svg class="gr-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.resumen || "")}">`;
+  (o.ticks || []).forEach(t => { const y = yv(t); s += `<line class="gr-grid" x1="${ml}" x2="${W - mr}" y1="${y}" y2="${y}"/><text class="gr-eje" x="${ml - 6}" y="${y + 4}" text-anchor="end">${esc(o.fmt ? o.fmt(t) : t)}</text>`; });
+  s += `<line class="gr-base" x1="${ml}" x2="${W - mr}" y1="${mt + ph}" y2="${mt + ph}"/>`;
+  o.datos.forEach((d, i) => {
+    const cx = ml + banda * i + banda / 2, x = cx - bw / 2, y = yv(d.v), h = mt + ph - y;
+    s += `<g class="gr-m${o.resaltarUltima && i === n - 1 ? " ult" : ""}"><title>${esc(d.tip || `${d.et}: ${d.v}`)}</title><rect class="gr-hit" x="${ml + banda * i}" y="${mt}" width="${banda}" height="${ph}"/>${d.v != null ? `<path class="gr-col" d="${lpCol(x, y, bw, h)}"/>` : ""}</g>`;
+    if (i % cada === 0 || i === n - 1) s += `<text class="gr-eje" x="${cx}" y="${H - 10}" text-anchor="middle">${esc(d.et)}</text>`;
+  });
+  /* la línea de referencia lleva su clave arriba, fuera del área de las barras, para que no se encime */
+  if (o.ref){ const y = yv(o.ref.v); s += `<line class="gr-ref" x1="${ml}" x2="${W - mr}" y1="${y}" y2="${y}"/>`; if (o.ref.et) s += `<line class="gr-ref" x1="${W - mr - 150}" x2="${W - mr - 134}" y1="7" y2="7"/><text class="gr-ref-t" x="${W - mr - 128}" y="11">${esc(o.ref.et)}</text>`; }
+  if (o.resaltarUltima && n){ const d = o.datos[n - 1]; if (d.v != null){ const cx = ml + banda * (n - 1) + banda / 2; s += `<text class="gr-val" x="${Math.min(cx, W - mr - 14)}" y="${Math.max(12, yv(d.v) - 6)}" text-anchor="middle">${esc(o.fmt ? o.fmt(d.v) : d.v)}</text>`; } }
+  el.innerHTML = s + `</svg>`;
+}
+/* Barras horizontales. o = {datos:[{et, v, tip}], max, ref:{v, et}, fmt, resumen} */
+function lpDibujarBarrasH(el, o){
+  const W = Math.max(260, Math.floor(el.clientWidth || 600)), fila = 30, mt = 6, mb = 8, n = o.datos.length, H = mt + mb + fila * n;
+  const etW = Math.min(170, Math.max(90, Math.floor(W * 0.36))), mr = 46, pw = W - etW - mr;
+  const xv = v => etW + Math.max(0, Math.min(o.max, v)) / o.max * pw;
+  let s = `<svg class="gr-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.resumen || "")}">`;
+  o.datos.forEach((d, i) => {
+    const y = mt + i * fila, bh = 16, by = y + (fila - bh) / 2;
+    const et = d.et.length > 24 ? d.et.slice(0, 23) + "…" : d.et;
+    s += `<g class="gr-m"><title>${esc(d.tip || `${d.et}: ${d.v}`)}</title><rect class="gr-hit" x="0" y="${y}" width="${W}" height="${fila}"/><text class="gr-et" x="${etW - 8}" y="${y + fila / 2 + 4}" text-anchor="end">${esc(et)}</text><path class="gr-col" d="${lpBarraH(etW, by, xv(d.v) - etW, bh)}"/><text class="gr-val" x="${xv(d.v) + 6}" y="${y + fila / 2 + 4}">${esc(o.fmt ? o.fmt(d.v) : d.v)}</text></g>`;
+  });
+  s += `<line class="gr-base" x1="${etW}" x2="${etW}" y1="${mt}" y2="${H - mb}"/>`;
+  if (o.ref){ const x = xv(o.ref.v); s += `<line class="gr-ref" x1="${x}" x2="${x}" y1="${mt}" y2="${H - mb}"/>`; }
+  el.innerHTML = s + `</svg>`;
+}
+function lpGrafPintar(el){
+  const o = LP_GRAF.get(el.dataset.grafId); if (!o) return;
+  try { (o.tipo === "h" ? lpDibujarBarrasH : lpDibujarColumnas)(el, o); } catch (e) { registrarError("lpGrafPintar", e, "aviso"); }
+}
+/* deja un lugar para el gráfico y lo dibuja cuando ya tiene ancho; se vuelve a dibujar si cambia el tamaño */
+let lpGrafN = 0;
+function lpGrafLugar(o){ const id = "g" + (++lpGrafN); LP_GRAF.set(id, o); return `<div class="gr-lienzo" data-graf-id="${id}" style="min-height:${o.tipo === "h" ? 30 * o.datos.length + 14 : (o.alto || 190)}px"></div>`; }
+function lpGrafActivar(raiz){
+  (raiz || document).querySelectorAll(".gr-lienzo[data-graf-id]:not(.listo)").forEach(el => {
+    el.classList.add("listo");
+    lpGrafPintar(el);
+    if (window.ResizeObserver){
+      if (!lpGrafRO) lpGrafRO = new ResizeObserver(es => es.forEach(en => { const t = en.target; const w = Math.floor(en.contentRect.width); if (t.dataset.w != w){ t.dataset.w = w; lpGrafPintar(t); } }));
+      el.dataset.w = Math.floor(el.clientWidth); lpGrafRO.observe(el);
+    }
+  });
+  /* limpia los datos de gráficos que ya no están en pantalla */
+  if (LP_GRAF.size > 60) [...LP_GRAF.keys()].forEach(k => { if (!document.querySelector(`[data-graf-id="${k}"]`)) LP_GRAF.delete(k); });
+}
+function lpFigura(t, sub, lugar, tabla){ return `<figure class="gr-fig"><figcaption><b>${esc(t)}</b>${sub ? `<small>${esc(sub)}</small>` : ""}</figcaption>${lugar}${tabla || ""}</figure>`; }
+
+/* ---------- Mi curso: pestaña «Gráficos» ---------- */
+let lpGrafPer = null;
+function htmlGraficosCurso(c){
+  const ps = c.periodos || [], hoyP = periodoActual(c);
+  if (lpGrafPer == null || (lpGrafPer !== "todo" && !ps[lpGrafPer])) lpGrafPer = ps.length ? hoyP : "todo";
+  const p = lpGrafPer === "todo" ? null : +lpGrafPer;
+  const al = alumnosActivos(c), ap = aprobC(c), mx = +((c.escala || {}).max) || 10, lim = +c.limiteFaltas || 20;
+  const sel = ps.length ? `<label class="gr-per"><span>Período</span><select id="gr-per">${ps.map((x, i) => `<option value="${i}"${i === p ? " selected" : ""}>${esc(nombrePeriodo(c, i))}</option>`).join("")}<option value="todo"${p == null ? " selected" : ""}>Todo el año</option></select></label>` : "";
+  if (!al.length) return `<div class="gr">${sel}<p class="lib-empty">Cuando cargues la lista del curso, acá vas a ver la asistencia y las notas en gráficos.</p></div>`;
+  /* asistencia por clase */
+  const fechas = Object.keys(c.asis || {}).filter(f => p == null || periodoDe(c, f) === p).sort();
+  const clases = fechas.map(f => { const m = c.asis[f] || {}; const tom = al.filter(a => m[a.id]); const pres = tom.filter(a => m[a.id] === "P" || m[a.id] === "T").length; return {f, tom:tom.length, pres, pct: tom.length ? pres / tom.length * 100 : null}; }).filter(x => x.tom);
+  const ult = clases.slice(-24);
+  const asisMedia = clases.length ? clases.reduce((s, x) => s + x.pct, 0) / clases.length : null;
+  /* notas */
+  const evs = p == null ? (c.evals || []).slice().sort((a, b) => (a.f || "").localeCompare(b.f || "")) : evalsDe(c, p);
+  const promEv = evs.map(e => { const ns = al.map(a => notaEval(c, a.id, e.id)).filter(x => x != null); return {e, n:ns.length, prom: ns.length ? ns.reduce((s, x) => s + x, 0) / ns.length : null}; }).filter(x => x.n);
+  const promAl = al.map(a => {
+    if (p != null) return promPeriodo(c, a.id, p);
+    const ns = (c.evals || []).map(e => notaEval(c, a.id, e.id)).filter(x => x != null);
+    return ns.length ? ns.reduce((s, x) => s + x, 0) / ns.length : null;
+  });
+  const conNota = promAl.filter(x => x != null), aprob = conNota.filter(x => x >= ap).length;
+  const promCurso = conNota.length ? conNota.reduce((s, x) => s + x, 0) / conNota.length : null;
+  let riesgo = 0; try { riesgo = riesgoAlumnos(c).length; } catch (e) { logSilencioso(e); }
+  /* faltas por estudiante */
+  const faltas = al.map(a => ({a, r:asisResumen(c, a.id, p)})).filter(x => x.r.clases && x.r.faltas > 0).sort((x, y) => y.r.pct - x.r.pct || y.r.faltas - x.r.faltas).slice(0, 6);
+  const tiles = [
+    ["Asistencia media", asisMedia == null ? "—" : `${lpFmt(asisMedia)} %`, clases.length ? `${clases.length} clase${clases.length === 1 ? "" : "s"} con asistencia` : "Sin asistencia tomada"],
+    ["Promedio del curso", promCurso == null ? "—" : lpFmt(promCurso, 1), conNota.length ? `${conNota.length} de ${al.length} con notas` : "Sin notas cargadas"],
+    ["Aprueban", conNota.length ? `${aprob} de ${conNota.length}` : "—", `Con ${lpFmt(ap)} o más`],
+    ["Señales de riesgo", String(riesgo), riesgo ? "Mirá «Esta semana»" : "Nadie con dos señales a la vez"]
+  ];
+  let h = `<div class="gr">${sel}<div class="gr-tiles">${tiles.map(([l, v, s]) => `<div class="gr-tile"><span class="gr-tl">${esc(l)}</span><b class="gr-tv">${esc(v)}</b><small>${esc(s)}</small></div>`).join("")}</div><div class="gr-grid2">`;
+  if (ult.length){
+    h += lpFigura("Asistencia por clase", `Porcentaje de presentes${clases.length > ult.length ? `, últimas ${ult.length} clases` : ""} (las llegadas tarde cuentan como presentes)`,
+      lpGrafLugar({datos:ult.map(x => ({et:lpFechaCorta(x.f), v:x.pct, tip:`${lpFechaCorta(x.f)}: ${lpFmt(x.pct)} % (${x.pres} de ${x.tom})`})), min:0, max:100, ticks:[0, 50, 100], fmt:t => t + " %", resaltarUltima:true,
+        resumen:`Asistencia por clase: media ${lpFmt(asisMedia)} %, última clase ${lpFmt(ult[ult.length - 1].pct)} %.`}),
+      lpTablaDatos(["Clase", "Presentes", "Porcentaje"], clases.map(x => [lpFechaCorta(x.f), `${x.pres} de ${x.tom}`, `${lpFmt(x.pct)} %`])));
+  } else h += lpFigura("Asistencia por clase", "", `<p class="lib-empty">Todavía no tomaste asistencia${p == null ? "" : " en este período"}. Se carga en la pestaña «Asistencia».</p>`);
+  if (promEv.length){
+    h += lpFigura("Promedio de cada evaluación", `Promedio del curso en cada nota cargada, sobre ${lpFmt(mx)}`,
+      lpGrafLugar({datos:promEv.map(x => ({et:x.e.t ? (x.e.t.length > 10 ? x.e.t.slice(0, 9) + "…" : x.e.t) : lpFechaCorta(x.e.f), v:x.prom, tip:`${x.e.t || "Evaluación"}${x.e.f ? " (" + lpFechaCorta(x.e.f) + ")" : ""}: ${lpFmt(x.prom, 2)} (${x.n} notas)`})), min:0, max:mx, ticks:[0, Math.round(mx / 2), mx], ref:{v:ap, et:`Aprueba con ${lpFmt(ap)}`},
+        resumen:`Promedio de cada evaluación: ${promEv.map(x => `${x.e.t || lpFechaCorta(x.e.f)} ${lpFmt(x.prom, 1)}`).join(", ")}.`}),
+      lpTablaDatos(["Evaluación", "Fecha", "Notas", "Promedio"], promEv.map(x => [x.e.t || "Evaluación", x.e.f ? lpFechaCorta(x.e.f) : "", String(x.n), lpFmt(x.prom, 2)])));
+    const bins = Array.from({length:Math.ceil(mx)}, (_, i) => ({desde:i + 1, n:0}));
+    conNota.forEach(x => { const i = Math.min(bins.length - 1, Math.max(0, Math.round(x) - 1)); bins[i].n++; });
+    const tope = Math.max(2, ...bins.map(b => b.n));
+    h += lpFigura("Cómo están los promedios", `Cuántos estudiantes tienen cada promedio (redondeado). Aprueban ${aprob} de ${conNota.length}.`,
+      lpGrafLugar({datos:bins.map(b => ({et:String(b.desde), v:b.n, tip:`Promedio ${b.desde}: ${b.n} estudiante${b.n === 1 ? "" : "s"}`})), min:0, max:tope, ticks:[0, tope], alto:170,
+        resumen:`Distribución de promedios: ${bins.filter(b => b.n).map(b => `${b.n} con ${b.desde}`).join(", ")}. Aprueban ${aprob} de ${conNota.length}.`}),
+      lpTablaDatos(["Promedio", "Estudiantes"], bins.map(b => [String(b.desde), String(b.n)])));
+  } else h += lpFigura("Notas", "", `<p class="lib-empty">Todavía no hay notas${p == null ? "" : " en este período"}. Se cargan en la pestaña «Notas».</p>`);
+  if (faltas.length){
+    h += lpFigura("Quiénes faltan más", `Porcentaje de faltas (la llegada tarde y el retiro cuentan media falta). La línea marca el límite de ${lpFmt(lim)} %.`,
+      lpGrafLugar({tipo:"h", datos:faltas.map(x => ({et:x.a.n, v:x.r.pct, tip:`${x.a.n}: ${x.r.pct} % (${lpFmt(x.r.faltas, 1)} faltas en ${x.r.clases} clases)`})), max:Math.max(lim + 10, ...faltas.map(x => x.r.pct)), ref:{v:lim}, fmt:v => v + " %",
+        resumen:`Más faltas: ${faltas.map(x => `${x.a.n} ${x.r.pct} %`).join(", ")}.`}),
+      lpTablaDatos(["Estudiante", "Faltas", "Clases", "Porcentaje"], faltas.map(x => [x.a.n, lpFmt(x.r.faltas, 1), String(x.r.clases), `${x.r.pct} %`])));
+  }
+  return h + `</div><p class="hint gr-nota">Los gráficos usan lo que cargaste en este curso. No se guarda nada nuevo.</p></div>`;
+}
+function renderCurTab(t){
+  if (t !== "graf") return renderCurTabV67(t);
+  state.tabs.cur = t;
+  const c = cursoSel();
+  renderCurTop();
+  const P = $("cur-panel");
+  if (!c){ return renderCurTabV67("config"); }
+  P.innerHTML = htmlGraficosCurso(c);
+  requestAnimationFrame(() => lpGrafActivar(P));
+}
+
+/* ---------- Mis planificaciones e inicio: estado de las planificaciones ---------- */
+function lpSegEstados(lib){
+  const n = {borrador:0, lista:0, entregada:0}; lib.forEach(e => { n[lpEstado(e.id)]++; });
+  const T = lib.length || 1, partes = LP_ESTADOS.filter(([k]) => n[k]);
+  return `<figure class="gr-fig gr-seg-f"><figcaption><b>Estado de tus planificaciones</b><small>${lib.length} en total</small></figcaption>
+    <div class="gr-seg" role="img" aria-label="${esc(LP_ESTADOS.map(([k, t]) => `${n[k]} ${t.toLowerCase()}`).join(", "))}">${partes.map(([k, t]) => `<span class="gr-sg" data-est="${k}" style="flex-grow:${n[k] / T}" title="${esc(`${t}: ${n[k]}`)}"></span>`).join("")}</div>
+    <ul class="gr-ley">${LP_ESTADOS.map(([k, t]) => `<li><i data-est="${k}" aria-hidden="true"></i>${esc(t)} <b>${n[k]}</b></li>`).join("")}</ul></figure>`;
+}
+function renderLib(){
+  renderLibV67();
+  try {
+    const lib = libLeer(), box = $("lib-list"); if (!box) return;
+    let r = $("lib-resumen");
+    if (lib.length < 2){ if (r) r.remove(); return; }
+    if (!r){ box.insertAdjacentHTML("beforebegin", `<div id="lib-resumen"></div>`); r = $("lib-resumen"); }
+    r.innerHTML = lpSegEstados(lib);
+  } catch (e) { registrarError("renderLib68", e, "aviso"); }
+}
+function renderPanel(){
+  renderPanelV67();
+  try {
+    const P = $("panel"); if (!P || !P.querySelector(".pn-acc")) return;
+    P.querySelectorAll(".pn-graf").forEach(n => n.remove());
+    const lib = libLeer(), c = cursoSel(); let h = "";
+    if (lib.length >= 2) h += lpSegEstados(lib);
+    if (c){
+      const al = alumnosActivos(c);
+      const cl = Object.keys(c.asis || {}).sort().map(f => { const m = c.asis[f] || {}; const tom = al.filter(a => m[a.id]); const pres = tom.filter(a => m[a.id] === "P" || m[a.id] === "T").length; return {f, tom:tom.length, pres, pct:tom.length ? pres / tom.length * 100 : null}; }).filter(x => x.tom).slice(-10);
+      if (cl.length >= 2) h += lpFigura(`Asistencia en ${c.curso || "tu curso"}`, `Últimas ${cl.length} clases, porcentaje de presentes`,
+        lpGrafLugar({datos:cl.map(x => ({et:lpFechaCorta(x.f), v:x.pct, tip:`${lpFechaCorta(x.f)}: ${lpFmt(x.pct)} % (${x.pres} de ${x.tom})`})), min:0, max:100, ticks:[0, 100], fmt:t => t + " %", alto:150, resaltarUltima:true,
+          resumen:`Asistencia de las últimas ${cl.length} clases de ${c.curso || "tu curso"}: la última, ${lpFmt(cl[cl.length - 1].pct)} %.`}),
+        `<button type="button" class="linkbtn gr-mas" data-grafcur="1">Ver todos los gráficos del curso</button>`);
+    }
+    if (!h) return;
+    const ref = P.querySelector(".pn-rec") || P.querySelector(".pn-acc");
+    ref.insertAdjacentHTML("afterend", `<section class="pn-graf" aria-label="Tus números">${h}</section>`);
+    requestAnimationFrame(() => lpGrafActivar(P));
+  } catch (e) { registrarError("renderPanel68", e, "aviso"); }
+}
+function init78(){
+  try {
+    const tabs = $("cur-tabs");
+    if (tabs && !tabs.querySelector('[data-tab="graf"]')){
+      const ref = tabs.querySelector('[data-tab="asis"]');
+      (ref || tabs.lastElementChild).insertAdjacentHTML(ref ? "beforebegin" : "afterend", `<button type="button" data-tab="graf" aria-pressed="false">Gráficos</button>`);
+    }
+    document.addEventListener("change", e => { if (e.target && e.target.id === "gr-per"){ lpGrafPer = e.target.value === "todo" ? "todo" : +e.target.value; renderCurTab("graf"); } });
+    document.addEventListener("click", e => {
+      if (!e.target.closest("[data-grafcur]")) return;
+      const b = $("btn-curso"); if (b) b.click();
+      setTimeout(() => { try { setTab("cur", "graf"); } catch (er) { logSilencioso(er); } }, 150);
+    });
+  } catch (e) { registrarError("init78", e, "aviso"); }
 }
 
 /* ============================================================
@@ -27848,7 +28293,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
