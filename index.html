@@ -10,7 +10,6 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="lapacho-config.js"></script>
 <style>body{margin:0}
-:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 body{margin:0}
 :root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
 body{margin:0}
@@ -2179,6 +2178,54 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .der-decir{margin:4px 0 0;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--radius-s, 8px) var(--radius-s, 8px) 0;font-size:15px;line-height:1.5;color:var(--ink)}
 .der-acudir{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 0}
 .der-acudir span{padding:3px 10px;border:1px solid var(--line);border-radius:999px;font-size:14px}
+
+/* Versión 63: identidad Lapacho (verde bosque, esmeralda, crema y lapacho en flor). Solo cuando no se eligió otro estilo de vista. */
+:root:not([data-estilo]):not([data-theme="dark"]){
+  --bg:#f4f0e6; --surface:#fffdf8; --surface-2:#faf6ed; --field:#fffefb; --line:#e2dbcb;
+  --ink:#19291f; --muted:#56635b; --acc-verde:#13775a; --soft-verde:#e1efe6; --accent-soft:#e1efe6;
+  --paper-head:#f2efe5; --nav-bg:#173f30; --nav-ink:#f2f7f3; --nav-muted:#c3d6ca; --nav-hover:rgba(255,255,255,.08); --nav-on:rgba(255,255,255,.15);
+  --lapacho:#b83c74; --lapacho-soft:#f9e2ec; --acc-texto:#0e5d45; --sombra-l:0 1px 2px rgba(25,41,31,.05),0 6px 18px rgba(25,41,31,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]):not([data-estilo]){
+    --bg:#0f1512; --surface:#18211c; --surface-2:#131b17; --field:#101713; --line:#2b3730;
+    --ink:#e6eee9; --muted:#9fb0a7; --acc-verde:#4fcf9f; --soft-verde:#173527; --accent-soft:#173527;
+    --nav-bg:#0c1d15; --nav-ink:#e4eee8; --nav-muted:#a7bfb2; --lapacho:#f08ab8; --lapacho-soft:#3a1f2c; --acc-texto:#4fcf9f; --sombra-l:none;
+  }
+}
+:root[data-theme="dark"]:not([data-estilo]){
+  --bg:#0f1512; --surface:#18211c; --surface-2:#131b17; --field:#101713; --line:#2b3730;
+  --ink:#e6eee9; --muted:#9fb0a7; --acc-verde:#4fcf9f; --soft-verde:#173527; --accent-soft:#173527;
+  --nav-bg:#0c1d15; --nav-ink:#e4eee8; --nav-muted:#a7bfb2; --lapacho:#f08ab8; --lapacho-soft:#3a1f2c; --acc-texto:#4fcf9f; --sombra-l:none;
+}
+:root:not([data-estilo]):not([data-acento]) .cp-pts:not(.conf):not(.no):not(.est):not(.duda){color:var(--acc-texto)}
+:root:not([data-estilo]) .card,:root:not([data-estilo]) .pn-card{box-shadow:var(--sombra-l)}
+:root:not([data-estilo]) .app.nav-desk .sidenav [aria-current="page"]{box-shadow:inset 3px 0 0 var(--lapacho, #b83c74)}
+/* Inicio de escritorio */
+.pn-hero{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:6px;padding:22px 24px;border-radius:var(--radius, 16px);background:var(--surface);border:1px solid var(--line);box-shadow:var(--sombra-l, none)}
+.pn-hero h2{margin:0;font-size:26px;line-height:1.15;max-width:70%}
+.pn-hero p{margin:0;color:var(--muted);font-size:15px;max-width:70%}
+.pn-hero .pn-flor{position:absolute;right:-8px;top:-10px;width:200px;height:auto;opacity:.9;pointer-events:none}
+.pn-acc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pn-acc button{display:flex;align-items:flex-start;gap:12px;text-align:left;min-height:88px;padding:14px 16px;border-radius:var(--radius-m, 14px);border:1px solid var(--line);background:var(--surface);color:var(--ink);box-shadow:var(--sombra-l, none);cursor:pointer;transition:border-color .15s, transform .15s}
+.pn-acc button:hover{border-color:var(--accent)}
+@media (prefers-reduced-motion: no-preference){.pn-acc button:hover{transform:translateY(-1px)}}
+.pn-acc button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.pn-acc svg{width:30px;height:30px;flex:none;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pn-acc b{display:block;font-size:16px}
+.pn-acc small{display:block;color:var(--muted);font-size:13.5px;line-height:1.35;margin-top:2px}
+.pn-acc .pn-acc-p{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pn-acc .pn-acc-p svg{stroke:var(--on-accent)}
+.pn-acc .pn-acc-p small{color:var(--on-accent);opacity:.9}
+@media (max-width:1279px){.pn-acc{grid-template-columns:repeat(2,minmax(0,1fr))}.pn-hero h2,.pn-hero p{max-width:100%}.pn-hero .pn-flor{opacity:.25}}
+/* Menú lateral que se puede ocultar */
+.sn-ocultar{margin:4px 0 8px;align-self:flex-start;background:none;border:1px solid var(--nav-muted, var(--line));color:var(--nav-ink, var(--ink));border-radius:999px;min-height:36px;padding:0 12px;font:inherit;font-size:13px;cursor:pointer}
+.sn-ocultar:focus-visible,#sn-abrir:focus-visible{outline:3px solid var(--lapacho, var(--accent));outline-offset:2px}
+#sn-abrir{display:none}
+.app.nav-desk.nav-oculto{padding-left:16px}
+.app.nav-desk.nav-oculto .sidenav{display:none}
+.app.nav-desk.nav-oculto #sn-abrir{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-right:10px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+@media print{.pn-hero,.pn-acc,#sn-abrir,.sn-ocultar{display:none!important}}
 
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
@@ -5173,6 +5220,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-15a", fecha:"2026-11-15", items:[
+    "Identidad nueva: verde bosque, esmeralda y fondos crema, con detalles del lapacho en flor. Es el aspecto de entrada; los otros estilos siguen en Ajustes.",
+    "En la computadora, el inicio suma seis accesos grandes: nueva planificación, tus planificaciones, el seguimiento de tus cursos, recursos, biblioteca y documentos.",
+    "El menú lateral se puede ocultar para trabajar con más espacio; «Menú» lo vuelve a mostrar y Lapacho recuerda tu elección."
+  ]},
   {id:"2026-11-12-cap", fecha:"2026-11-12", items:["Capacitaciones: se suma la diplomatura gratuita de la UNT sobre cuidado y bienestar estudiantil (grooming, salud mental y consumos). Falta confirmar si sigue abierta y si tiene resolución del Ministerio."]},
   {id:"2026-11-11a", fecha:"2026-11-11", items:[
     "«¿Me corresponde?» pasa de 13 a 35 situaciones, en cinco grupos: pedidos de la dirección, ausencias y licencias, tu cargo y tu legajo, el aula y las familias, y una parte para directivos.",
@@ -16926,7 +16978,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "62 (11/11/2026)";
+const LAPACHO_VERSION = "63 (15/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -17452,7 +17504,7 @@ function irDesk(s){
   if (s === "inicio"){ renderTuDia(); renderPanel(); }
   window.scrollTo({top:0});
 }
-function construirSidenav(){
+function construirSidenavV62(){
   const S = $("sidenav"); if (!S) return;
   const item = (id, b) => `<button type="button" class="sn-i" data-proxy="${id}">${esc(b)}</button>`;
   const grupo = sel => [...document.querySelectorAll(sel)].map(n => n.matches(".menu-g") ? `<p class="sn-g">${esc(n.textContent)}</p>` : n.id ? item(n.id, (n.querySelector("b") || n).textContent) : "").join("");
@@ -25201,7 +25253,7 @@ function bindUso(){
 }
 
 /* ---------- 2. «Hoy» corto: lo del día, cuatro atajos y un solo camino al resto ---------- */
-function renderPanel(){
+function renderPanelV62(){
   renderPanelV52();
   try {
     const P = $("panel"); if (!P) return;
@@ -26095,7 +26147,7 @@ function init69(){
    Solo pone o quita dos atributos en la raíz y guarda la elección. No toca datos ni lógica.
    ============================================================ */
 const EST_KEY = "planificador-estilo-v1";
-const EST_ESTILOS = [["", "Lapacho (original)"], ["minimal", "Minimalismo funcional"], ["enterprise", "Tabular empresarial"], ["bento", "Bento analítico"], ["high-density", "Alta densidad, oscuro"]];
+const EST_ESTILOS = [["", "Lapacho (verde)"], ["minimal", "Minimalismo funcional"], ["enterprise", "Tabular empresarial"], ["bento", "Bento analítico"], ["high-density", "Alta densidad, oscuro"]];
 const EST_ACENTOS = [["", "El de la planificación"], ["blue", "Azul"], ["emerald", "Esmeralda"], ["violet", "Violeta"], ["amber", "Ámbar"]];
 try { if (!CLAVES_RESPALDO.includes(EST_KEY)) CLAVES_RESPALDO.push(EST_KEY); } catch (e) { logSilencioso(e); }
 function estLeer(){
@@ -26590,6 +26642,70 @@ function init72(){
 }
 
 /* ============================================================
+   Versión 63: identidad Lapacho e inicio de escritorio
+   La paleta nueva vive en p73.css (solo cuando no hay otro estilo de vista elegido).
+   En la computadora, el inicio abre con saludo, fecha y seis accesos; el menú lateral se puede ocultar.
+   ============================================================ */
+const LP_FLOR = `<svg class="pn-flor" viewBox="0 0 220 160" aria-hidden="true" focusable="false"><g fill="none" stroke="var(--acc-verde)" stroke-width="2.4" stroke-linecap="round" opacity=".55"><path d="M30 160 C70 120 110 110 150 70 C165 55 180 40 205 30"/><path d="M110 105 C120 92 128 86 142 84"/><path d="M160 64 C168 52 176 46 190 46"/></g>${[[150,62,15],[188,40,12],[128,92,11],[205,74,10],[172,96,9]].map(([x,y,r]) => `<g transform="translate(${x} ${y})">${[0,72,144,216,288].map(a => `<ellipse cx="0" cy="${-r*0.62}" rx="${r*0.48}" ry="${r*0.66}" fill="var(--lapacho)" opacity=".85" transform="rotate(${a})"/>`).join("")}<circle r="${r*0.22}" fill="#f6d36b"/></g>`).join("")}</svg>`;
+const LP_IC = {
+  nueva:'<path d="M12 5v14M5 12h14"/>',
+  lib:'<path d="M4 5.5h6l2 2h8v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/>',
+  curso:'<circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"/><path d="M16 5.5a3 3 0 0 1 0 5.6M18 14.6c1.4.7 2.3 2.1 2.6 4.4"/>',
+  banco:'<path d="M4 6h16M4 12h16M4 18h10"/>',
+  biblio:'<path d="M5 4.5h4v15H5zM10 4.5h4v15h-4zM15.5 5l3.6 1 -3.4 14 -3.5-1"/>',
+  ent:'<path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M10 13l2 2 4-4"/>'
+};
+function htmlInicioDesk(){
+  const n = nombreDocente(), D = cdatos(), L = libLeer(), cu = D.cursos.length;
+  const acc = [
+    ["btn-nueva", "nueva", "Nueva planificación", "Clase, secuencia, proyecto o anual", true],
+    ["btn-lib", "lib", "Mis planificaciones", L.length ? `${L.length} guardada${L.length === 1 ? "" : "s"}` : "Todavía no guardaste ninguna"],
+    ["btn-curso", "curso", "Seguimiento de tus cursos", cu ? `${cu} curso${cu === 1 ? "" : "s"}: asistencia, notas y familias` : "Asistencia, notas y familias"],
+    ["btn-banco", "banco", "Recursos didácticos", "Banco de actividades, rutinas y dinámicas"],
+    ["btn-biblio", "biblio", "Biblioteca", "Fichas de libros e ideas previas por tema"],
+    ["btn-entregas", "ent", "Documentos y entregas", "Notas, constancias y lo que pide la escuela"]
+  ].filter(a => $(a[0]));
+  return `<section class="pn-hero" aria-labelledby="pn-hero-t">${LP_FLOR}<h2 id="pn-hero-t">¿Qué querés hacer hoy?</h2><p>Lo principal de Lapacho, a un toque.${n ? "" : " Si querés que te salude por tu nombre, cargalo en «Tu día»."}</p></section>
+    <nav class="pn-acc" aria-label="Accesos principales">${acc.map(([id, ic, t, s, p]) => `<button type="button" data-proxy="${id}"${p ? ' class="pn-acc-p"' : ""}><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${LP_IC[ic]}</svg><span><b>${esc(t)}</b><small>${esc(s)}</small></span></button>`).join("")}</nav>`;
+}
+function renderPanel(){
+  renderPanelV62();
+  try {
+    const P = $("panel"); if (!P) return;
+    P.querySelectorAll(".pn-hero, .pn-acc").forEach(n => n.remove());
+    if (!document.querySelector(".app.nav-desk")) return;
+    P.insertAdjacentHTML("afterbegin", htmlInicioDesk());
+    /* Los accesos nuevos reemplazan los dos botones sueltos; la guía de la primera planificación se mantiene */
+    const una = P.querySelector(".pn-una"); if (una && una.querySelector('[data-proxy="btn-nueva"]')) una.remove();
+  } catch (e) { registrarError("renderPanel63", e, "aviso"); }
+}
+function lpMenuOculto(on){
+  const app = document.querySelector(".app"); if (!app) return;
+  app.classList.toggle("nav-oculto", !!on);
+  const b = $("sn-abrir"); if (b) b.setAttribute("aria-expanded", String(!on));
+  const o = document.querySelector(".sn-ocultar"); if (o) o.setAttribute("aria-expanded", String(!on));
+}
+function construirSidenav(){
+  construirSidenavV62();
+  try {
+    const S = $("sidenav"); if (!S || S.querySelector(".sn-ocultar")) return;
+    const br = S.querySelector(".sn-brand");
+    (br || S.firstElementChild).insertAdjacentHTML("afterend", `<button type="button" class="sn-ocultar" aria-controls="sidenav" aria-expanded="true">Ocultar el menú</button>`);
+    S.querySelector(".sn-ocultar").addEventListener("click", () => { lpMenuOculto(true); prefSet("menuOculto", true); const a = $("sn-abrir"); if (a) a.focus(); });
+  } catch (e) { registrarError("construirSidenav63", e, "aviso"); }
+}
+function init73(){
+  try {
+    const ctx = document.querySelector(".sec-ctx");
+    if (ctx && !$("sn-abrir")) ctx.insertAdjacentHTML("beforebegin", `<button type="button" id="sn-abrir" aria-controls="sidenav" aria-expanded="false"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>Menú</button>`);
+    const a = $("sn-abrir"); if (a) a.addEventListener("click", () => { lpMenuOculto(false); prefSet("menuOculto", false); const o = document.querySelector(".sn-ocultar"); if (o) o.focus(); });
+    if (!document.querySelector(".sn-ocultar")) construirSidenav();
+    lpMenuOculto(!!leerPref().menuOculto);
+    if (document.querySelector(".app.nav-desk") && document.querySelector('.app[data-dsec="inicio"]')) renderPanel();
+  } catch (e) { registrarError("init73", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -27046,7 +27162,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
