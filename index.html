@@ -2227,6 +2227,94 @@ dialog.bienv{width:min(460px,calc(100vw - 32px))}
 .app.nav-desk.nav-oculto #sn-abrir{display:inline-flex;align-items:center;gap:6px;min-height:40px;margin-right:10px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
 @media print{.pn-hero,.pn-acc,#sn-abrir,.sn-ocultar{display:none!important}}
 
+/* ---------- Versión 64: pasos, vista A4 y filtros de Mis planificaciones ---------- */
+.pasos-cab{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2px 12px;margin-top:4px}
+.pasos-txt{margin:0;font-size:13.5px;font-weight:600;color:var(--ink)}
+.pasos-uno{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;min-height:32px}
+.pasos-uno input{width:18px;height:18px;margin:0;accent-color:var(--accent);flex:none}
+.pasos{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.pasos li{margin:0}
+.pasos button{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:4px 12px 4px 5px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;font-size:13px;line-height:1.2;cursor:pointer;text-align:left}
+.pasos button:hover{border-color:var(--accent)}
+.pasos button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pasos .ps-n{display:inline-grid;place-items:center;width:26px;height:26px;flex:none;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);font-weight:700;font-size:12.5px;color:var(--muted)}
+.pasos .ok .ps-n{background:var(--accent-soft);border-color:transparent;color:var(--acc-texto,var(--ink))}
+.pasos [aria-current="step"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);font-weight:600}
+.pasos [aria-current="step"] .ps-n{background:var(--accent);border-color:transparent;color:var(--on-accent)}
+.pasos .ps-opc .ps-n{background:transparent;border-style:dashed}
+.paso-pie{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-top:4px;padding-top:12px;border-top:1px dashed var(--line)}
+.paso-pie .btn-primary{margin-left:auto}
+#form-secs details.sec,#opc-head{scroll-margin-top:84px}
+.app.nav-app #form-secs details.sec .paso-pie{scroll-margin-bottom:96px}
+@media (max-width:760px){
+  .pasos button:not([aria-current="step"]) .ps-t{display:none}
+  .pasos button:not([aria-current="step"]){padding:4px}
+  .pasos button{min-height:40px}
+  .pasos .ps-n{width:30px;height:30px}
+  .paso-pie .btn{flex:1 1 140px;min-height:44px;justify-content:center;white-space:normal}
+  #btn-a4{display:none}
+}
+
+/* Vista previa A4 */
+dialog.a4dlg{width:min(980px,calc(100vw - 24px));height:min(94vh,1200px);max-height:94dvh;padding:0;border:1px solid var(--line);border-radius:calc(var(--radius) + 2px);background:var(--surface);color:var(--ink);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+dialog.a4dlg::backdrop{background:rgba(10,22,16,.55)}
+.a4-in{display:flex;flex-direction:column;gap:10px;height:100%;padding:16px 16px 12px;box-sizing:border-box}
+.a4-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px 16px}
+.a4-head h2{margin:0;font-size:18px}
+.a4-head .hint{margin:2px 0 0}
+.a4-acc{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.a4-scroll{flex:1 1 auto;min-height:0;overflow:auto;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius-m,10px);padding:16px 4px}
+.a4-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.a4-pags{display:flex;flex-direction:column;align-items:center;gap:22px}
+.a4-cargando{margin:40px auto;color:var(--muted)}
+.a4-pag{position:relative;width:210mm;min-height:297mm;box-sizing:border-box;padding:18mm 16mm;background:#fff;color:#1c1d1b;box-shadow:0 1px 3px rgba(0,0,0,.12),0 10px 30px rgba(0,0,0,.10);border-radius:2px;flex:none}
+.a4-pag{--paper:#fff;--paper-ink:#1c1d1b;--paper-head:#f2efe5;--paper-line:#d9d6cc;--paper-muted:#5d625c}
+.a4-pag .paper.a4-cont{max-width:none;width:auto;margin:0;padding:0;box-shadow:none;border-radius:0;background:transparent;color:inherit}
+.a4-pag .a4-cont>:first-child{margin-top:0}
+.a4-pie{position:absolute;left:16mm;right:16mm;bottom:8mm;display:flex;justify-content:space-between;gap:12px;font:11px/1.3 var(--f-ui,system-ui,sans-serif);color:#6b6f6a;border-top:1px solid #e3e3df;padding-top:5px}
+.a4-pie span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.a4-pie span:last-child{flex:none}
+.a4-nota{margin:0;font-size:12.5px}
+@media (max-width:760px){
+  dialog.a4dlg{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border-radius:0;margin:0}
+  .a4-in{padding:12px 10px calc(10px + env(safe-area-inset-bottom,0px))}
+  .a4-acc{width:100%}
+  .a4-acc .btn{flex:1 1 auto;min-height:44px}
+  .a4-scroll{padding:10px 2px}
+  .a4-pags{gap:12px}
+}
+
+/* Mis planificaciones: filtros y estado */
+.lib-filtros{display:flex;flex-wrap:wrap;gap:8px}
+.lib-filtros label{display:block;flex:1 1 140px;margin:0}
+.lib-filtros .lf-q{flex:2 1 220px}
+.lib-filtros input,.lib-filtros select{width:100%;font-size:14px;padding:8px 10px;min-height:40px;box-sizing:border-box}
+.lib-cuenta{margin:-4px 0 0;font-size:13px;color:var(--muted)}
+.lib-vacio{border:1px dashed var(--line);border-radius:var(--radius-m,10px);padding:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.lib-vacio p{margin:0}
+.lib-est select{width:auto;font-size:13px;padding:5px 8px;min-height:34px}
+.lib-item[data-est="lista"]{border-left:4px solid var(--accent)}
+.lib-item[data-est="entregada"]{border-left:4px solid var(--muted)}
+.lp-est{font-size:12px;font-weight:700;letter-spacing:.02em;border-radius:999px;padding:2px 9px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line);white-space:nowrap}
+.lp-est[data-est="lista"]{background:var(--accent-soft);color:var(--acc-texto,var(--ink));border-color:transparent}
+.lp-est[data-est="entregada"]{background:transparent}
+
+/* Inicio: seguí donde dejaste */
+.pn-rec{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--sombra-l,none)}
+.pn-rec-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pn-rec h2{margin:0;font-size:15px}
+.pn-rec ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.pn-rec li{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.pn-rec li:first-child{border-top:0}
+.pn-rec li>div{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+.pn-rec li b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pn-rec li small{font-size:12.5px;color:var(--muted)}
+
+@media print{
+  @page{size:A4;margin:18mm 16mm;@bottom-right{content:"Página " counter(page) " de " counter(pages);font-size:8.5pt;font-family:sans-serif;color:#777}}
+  #prog-form,.pasos-cab,.pasos,.paso-pie,.pn-rec,dialog.a4dlg{display:none!important}
+}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -5220,6 +5308,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-15b", fecha:"2026-11-15", items:[
+    "La planificación se arma por pasos: arriba ves en qué paso estás y cuáles ya completaste, y cada sección termina con «Anterior» y «Siguiente». En el celular se abre una sección por vez; lo podés cambiar.",
+    "«Vista A4» muestra el documento repartido en hojas, con los márgenes de impresión y el número de página. Al imprimir, las hojas también salen numeradas.",
+    "En «Mis planificaciones» podés buscar, filtrar por tipo, espacio curricular y estado, y marcar cada una como borrador, lista o entregada. En el inicio de la computadora aparecen las últimas que editaste."
+  ]},
   {id:"2026-11-15a", fecha:"2026-11-15", items:[
     "Identidad nueva: verde bosque, esmeralda y fondos crema, con detalles del lapacho en flor. Es el aspecto de entrada; los otros estilos siguen en Ajustes.",
     "En la computadora, el inicio suma seis accesos grandes: nueva planificación, tus planificaciones, el seguimiento de tus cursos, recursos, biblioteca y documentos.",
@@ -7170,7 +7263,7 @@ function docText(M){
   return out.join("\n").trim() + "\n";
 }
 
-function renderDoc(){ $("doc").innerHTML = vistaEfectiva() === "slides" ? slidesHTML() : docHTML(false, modeloActual()); $("doc").dataset.vista = vistaEfectiva(); renderPendientes(); }
+function renderDocV63(){ $("doc").innerHTML = vistaEfectiva() === "slides" ? slidesHTML() : docHTML(false, modeloActual()); $("doc").dataset.vista = vistaEfectiva(); renderPendientes(); }
 
 /* Datos que faltan: aviso arriba del documento y en cada sección */
 function pendientes(){
@@ -7983,7 +8076,7 @@ function fechaCorta(ts){
   if (d.toDateString() === hoy.toDateString()) return "hoy, " + d.toLocaleTimeString("es-AR", {hour:"2-digit", minute:"2-digit"});
   return d.toLocaleDateString("es-AR", {day:"numeric", month:"short", year: d.getFullYear() === hoy.getFullYear() ? undefined : "numeric"});
 }
-function renderLib(){
+function renderLibV63(){
   const lib = libLeer().sort((a, b) => b.upd - a.upd);
   const borrados = Object.values(state.libBorrados);
   const box = $("lib-list");
@@ -16978,7 +17071,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "63 (15/11/2026)";
+const LAPACHO_VERSION = "64 (15/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -18116,7 +18209,7 @@ function marcarNecesarios(){
     el.addEventListener("input", () => { if (el.getAttribute("aria-invalid") === "true") validar(); });
   });
 }
-function progresoFormulario(){
+function progresoFormularioV63(){
   const secs = [...document.querySelectorAll("#form-secs details.sec.esen")].filter(d => !d.dataset.solo || d.dataset.solo.split(/\s+/).includes(state.modo || "clase"));
   if (!secs.length) return;
   const ok = secs.filter(d => { const h = d.querySelector(".sum-hint"); return !h || !h.textContent.trim(); }).length;
@@ -26668,7 +26761,7 @@ function htmlInicioDesk(){
   return `<section class="pn-hero" aria-labelledby="pn-hero-t">${LP_FLOR}<h2 id="pn-hero-t">¿Qué querés hacer hoy?</h2><p>Lo principal de Lapacho, a un toque.${n ? "" : " Si querés que te salude por tu nombre, cargalo en «Tu día»."}</p></section>
     <nav class="pn-acc" aria-label="Accesos principales">${acc.map(([id, ic, t, s, p]) => `<button type="button" data-proxy="${id}"${p ? ' class="pn-acc-p"' : ""}><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${LP_IC[ic]}</svg><span><b>${esc(t)}</b><small>${esc(s)}</small></span></button>`).join("")}</nav>`;
 }
-function renderPanel(){
+function renderPanelV63(){
   renderPanelV62();
   try {
     const P = $("panel"); if (!P) return;
@@ -26703,6 +26796,321 @@ function init73(){
     lpMenuOculto(!!leerPref().menuOculto);
     if (document.querySelector(".app.nav-desk") && document.querySelector('.app[data-dsec="inicio"]')) renderPanel();
   } catch (e) { registrarError("init73", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 64: planificar por pasos, vista previa A4 y Mis planificaciones con filtros
+   - Pasos: las secciones esenciales se recorren en orden, con «Anterior» y «Siguiente».
+     «Una sección por vez» (pref pasoUno) cierra las demás al abrir una; de entrada está activo en celular y tablet.
+   - Vista A4: reparte el documento en hojas de 210 × 297 mm con los márgenes de impresión y numera las hojas.
+   - Mis planificaciones: buscador, filtros por tipo, espacio curricular y estado, y estado de cada una
+     (borrador, lista, entregada) guardado aparte, sin tocar los registros que ya existen.
+   ============================================================ */
+
+/* ---------- Pasos del formulario ---------- */
+function lpPasosVisibles(){
+  return [...document.querySelectorAll("#form-secs details.sec.esen")].filter(d => !d.dataset.solo || d.dataset.solo.split(/\s+/).includes(state.modo || "clase"));
+}
+const lpSecOk = d => { const h = d.querySelector(".sum-hint"); return !h || !h.textContent.trim(); };
+const lpSecTitulo = d => { const t = d.querySelector("summary .sec-t"); return t ? t.textContent.trim() : ""; };
+function lpPasoUno(){ const p = leerPref().pasoUno; return p == null ? !document.querySelector(".app.nav-desk") : !!p; }
+let lpPasoActual = "", lpToque = {d:null, t:0};
+function lpIrPaso(id, enfocar){
+  if (id === "opc"){
+    const h = $("opc-head"); if (!h) return;
+    if (!state.opcAbiertas){ const t = $("opc-toggle"); if (t) t.click(); }
+    h.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+    return;
+  }
+  const d = $(id); if (!d) return;
+  lpPasoActual = id;
+  if (!d.open) d.open = true;
+  if (lpPasoUno()) document.querySelectorAll("#form-secs details.sec[open]").forEach(o => { if (o !== d) o.open = false; });
+  renderPasos();
+  const s = d.querySelector("summary");
+  d.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+  if (enfocar && s) s.focus({preventScroll:true});
+}
+function renderPasos(){
+  const bar = $("prog-form"); if (!bar) return;
+  const secs = lpPasosVisibles(); if (!secs.length) return;
+  if (!secs.some(d => d.id === lpPasoActual)){ const ab = secs.find(d => d.open); lpPasoActual = ab ? ab.id : secs[0].id; }
+  let cab = bar.querySelector(".pasos-cab");
+  if (!cab){
+    bar.insertAdjacentHTML("beforeend", `<div class="pasos-cab"><p class="pasos-txt" id="pasos-txt"></p><label class="pasos-uno"><input type="checkbox" id="pasos-uno"> Una sección por vez</label></div><ol class="pasos" id="pasos" aria-label="Pasos de la planificación"></ol>`);
+    cab = bar.querySelector(".pasos-cab");
+    $("pasos-uno").addEventListener("change", e => {
+      prefSet("pasoUno", e.target.checked);
+      if (e.target.checked){ const d = $(lpPasoActual); document.querySelectorAll("#form-secs details.sec[open]").forEach(o => { if (o !== d) o.open = false; }); if (d) d.open = true; }
+      toast(e.target.checked ? "Ahora se abre una sección por vez." : "Ahora podés tener varias secciones abiertas.");
+    });
+  }
+  $("pasos-uno").checked = lpPasoUno();
+  const i = Math.max(0, secs.findIndex(d => d.id === lpPasoActual));
+  $("pasos-txt").textContent = `Paso ${i + 1} de ${secs.length}: ${lpSecTitulo(secs[i])}`;
+  $("pasos").innerHTML = secs.map((d, k) => {
+    const ok = lpSecOk(d), cur = k === i;
+    return `<li><button type="button" class="${ok ? "ok" : ""}" data-paso="${d.id}"${cur ? ' aria-current="step"' : ""} aria-label="Paso ${k + 1}: ${esc(lpSecTitulo(d))}${ok ? ", completa" : ", por completar"}"><span class="ps-n" aria-hidden="true">${ok ? "✓" : k + 1}</span><span class="ps-t">${esc(lpSecTitulo(d))}</span></button></li>`;
+  }).join("") + ($("opc-head") ? `<li><button type="button" class="ps-opc" data-paso="opc" aria-label="Más opciones"><span class="ps-n" aria-hidden="true">+</span><span class="ps-t">Más opciones</span></button></li>` : "");
+  secs.forEach((d, k) => {
+    const body = d.querySelector(".sec-body"); if (!body) return;
+    let pie = body.querySelector(":scope > .paso-pie");
+    if (!pie){ pie = document.createElement("div"); pie.className = "paso-pie"; body.appendChild(pie); }
+    const ant = secs[k - 1], sig = secs[k + 1];
+    pie.innerHTML = (ant ? `<button type="button" class="btn btn-sm" data-paso-ir="${ant.id}">Anterior</button>` : "<span></span>") +
+      (sig ? `<button type="button" class="btn btn-sm btn-primary" data-paso-ir="${sig.id}">Siguiente: ${esc(lpSecTitulo(sig))}</button>`
+           : `<button type="button" class="btn btn-sm btn-primary" data-proxy="btn-ver">Listo: ver el documento</button>`);
+  });
+  document.querySelectorAll("#form-secs details.sec.esen").forEach(d => { if (!secs.includes(d)){ const p = d.querySelector(".sec-body > .paso-pie"); if (p) p.remove(); } });
+}
+function progresoFormulario(){
+  progresoFormularioV63();
+  try { renderPasos(); } catch (e) { registrarError("renderPasos", e, "aviso"); }
+}
+
+/* ---------- Vista previa en hoja A4 ---------- */
+const LP_MM = 96 / 25.4;
+const LP_A4 = {w:210, h:297, mx:16, my:18};
+function lpAltoBloques(cont){
+  const hijos = [...cont.children], base = cont.getBoundingClientRect();
+  return hijos.map((n, k) => {
+    const r = n.getBoundingClientRect(), sig = hijos[k + 1];
+    return {n, h: (sig ? sig.getBoundingClientRect().top : base.bottom) - r.top};
+  });
+}
+/* Parte una tabla o una lista larga en trozos que entren en el espacio disponible */
+function lpPartir(n, libre, lleno){
+  const tabla = n.tagName === "TABLE", lista = /^(UL|OL)$/.test(n.tagName);
+  if (!tabla && !lista) return null;
+  const filas = tabla ? [...n.querySelectorAll(":scope > tbody > tr, :scope > tr")] : [...n.children].filter(x => x.tagName === "LI");
+  if (filas.length < 2) return null;
+  const thead = tabla ? n.querySelector(":scope > thead") : null, hCab = thead ? thead.getBoundingClientRect().height : 0;
+  const trozos = []; let act = [], usado = hCab, cupo = libre;
+  filas.forEach(f => {
+    const h = f.getBoundingClientRect().height;
+    if (usado + h > cupo && (act.length || cupo < lleno)){ trozos.push({fs:act, h:usado}); act = []; usado = hCab; cupo = lleno; }
+    act.push(f); usado += h;
+  });
+  if (act.length) trozos.push({fs:act, h:usado});
+  let inicio = n.tagName === "OL" ? (+n.getAttribute("start") || 1) : 1;
+  return trozos.map(({fs, h}) => {
+    if (!fs.length) return {html:"", h:0};
+    const c = n.cloneNode(false);
+    if (tabla){
+      [...n.children].filter(x => x.tagName === "CAPTION" || x.tagName === "COLGROUP").forEach(x => c.appendChild(x.cloneNode(true)));
+      if (thead) c.appendChild(thead.cloneNode(true));
+      const tb = document.createElement("tbody"); fs.forEach(f => tb.appendChild(f.cloneNode(true))); c.appendChild(tb);
+    } else {
+      if (n.tagName === "OL"){ c.setAttribute("start", String(inicio)); inicio += fs.length; }
+      fs.forEach(f => c.appendChild(f.cloneNode(true)));
+    }
+    return {html:c.outerHTML, h: h + 8};
+  });
+}
+async function lpPaginar(){
+  const doc = $("doc");
+  const med = document.createElement("div");
+  med.className = "paper a4-med"; med.dataset.font = doc.dataset.font || "serif";
+  med.style.cssText = `position:absolute;left:-20000px;top:0;width:${(LP_A4.w - 2 * LP_A4.mx) * LP_MM}px;visibility:hidden`;
+  med.innerHTML = doc.innerHTML;
+  med.querySelectorAll("[id]").forEach(x => x.removeAttribute("id"));
+  /* la vista previa es para mirar: los atajos al formulario quedan como texto */
+  med.querySelectorAll("[data-goto], .goto, button.falta").forEach(x => { ["data-goto", "tabindex", "role", "title"].forEach(a => x.removeAttribute(a)); x.classList.remove("goto"); if (x.tagName === "BUTTON"){ const sp = document.createElement("span"); sp.className = x.className; sp.innerHTML = x.innerHTML; x.replaceWith(sp); } });
+  document.body.appendChild(med);
+  try {
+    await Promise.all([...med.querySelectorAll("img")].map(im => im.decode ? im.decode().catch(() => {}) : null));
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    const ALTO = (LP_A4.h - 2 * LP_A4.my) * LP_MM;
+    const pags = [[]]; let usado = 0;
+    const esTitulo = n => /^H[1-4]$/.test(n.tagName) || n.classList.contains("d-title");
+    const poner = (html, h, tit) => { if (!html) return; pags[pags.length - 1].push({html, h, tit}); usado += h; };
+    const nueva = () => {
+      /* un título no queda solo al pie de la hoja: pasa con lo que sigue */
+      const pg = pags[pags.length - 1], arrastre = [];
+      while (pg.length > 1 && pg[pg.length - 1].tit) arrastre.unshift(pg.pop());
+      pags.push(arrastre); usado = arrastre.reduce((a, x) => a + x.h, 0);
+    };
+    lpAltoBloques(med).forEach(({n, h}) => {
+      const tit = esTitulo(n);
+      if (usado + h <= ALTO){ poner(n.outerHTML, h, tit); return; }
+      const trozos = lpPartir(n, ALTO - usado, ALTO);
+      if (trozos && trozos.length > 1){
+        trozos.forEach((t, k) => { if (k) nueva(); poner(t.html, t.h, false); });
+        return;
+      }
+      if (pags[pags.length - 1].length) nueva();
+      poner(n.outerHTML, h, tit);
+    });
+    return pags.filter(p => p.length).map(p => p.map(x => x.html));
+  } finally { med.remove(); }
+}
+function lpDlgA4(){
+  let d = $("a4dlg"); if (d) return d;
+  document.body.insertAdjacentHTML("beforeend", `<dialog class="a4dlg" id="a4dlg" aria-labelledby="a4-t">
+    <div class="a4-in">
+      <div class="a4-head"><div><h2 id="a4-t">Vista previa en hoja A4</h2><p class="hint" id="a4-n" aria-live="polite"></p></div>
+        <div class="a4-acc"><button type="button" class="btn btn-primary btn-sm" id="a4-imp">Imprimir</button><button type="button" class="btn btn-sm" id="a4-pdf">Descargar PDF</button><button type="button" class="linkbtn" id="a4-cerrar">Cerrar</button></div></div>
+      <div class="a4-scroll" id="a4-scroll" tabindex="0" aria-label="Hojas del documento"><div class="a4-pags" id="a4-pags"></div></div>
+      <p class="hint a4-nota">Márgenes de 18 mm arriba y abajo y 16 mm a los costados, como al imprimir. Según el navegador, algún corte puede correrse un renglón.</p>
+    </div></dialog>`);
+  d = $("a4dlg");
+  const cerrar = () => { if (d.open){ if (d.close) d.close(); else d.removeAttribute("open"); } };
+  $("a4-cerrar").addEventListener("click", cerrar);
+  $("a4-imp").addEventListener("click", () => { cerrar(); imprimirDoc(); });
+  $("a4-pdf").addEventListener("click", () => { cerrar(); const b = $("btn-pdf"); if (b) b.click(); });
+  d.addEventListener("click", e => { if (e.target === d) cerrar(); });
+  d.addEventListener("close", () => { $("app").appendChild($("toast")); });
+  addEventListener("resize", () => { if (d.open) lpZoomA4(); });
+  return d;
+}
+function lpZoomA4(){
+  const sc = $("a4-scroll"), P = $("a4-pags"); if (!sc || !P) return;
+  const ancho = LP_A4.w * LP_MM + 24, z = Math.min(1, Math.max(0.3, (sc.clientWidth - 8) / ancho));
+  P.style.zoom = String(Math.round(z * 1000) / 1000);
+}
+async function abrirVistaA4(){
+  if (vistaEfectiva() === "slides"){ toast("La presentación para el aula no se arma en hojas A4. Elegí otra vista para verla así."); return; }
+  try {
+    renderDoc();
+    const d = lpDlgA4(), P = $("a4-pags");
+    P.innerHTML = `<p class="a4-cargando">Armando las hojas…</p>`;
+    d.appendChild($("toast"));
+    if (d.showModal) d.showModal(); else d.setAttribute("open", "");
+    const pags = await lpPaginar(), N = pags.length;
+    const pie = esc(temaVisible() || "");
+    const fuente = $("doc").dataset.font || "serif";
+    P.innerHTML = pags.map((p, i) => `<section class="a4-pag" aria-label="Hoja ${i + 1} de ${N}"><div class="paper a4-cont" data-font="${fuente}">${p.join("")}</div><footer class="a4-pie"><span>${pie}</span><span>Página ${i + 1} de ${N}</span></footer></section>`).join("");
+    $("a4-n").textContent = N === 1 ? "Entra en 1 hoja." : `Ocupa ${N} hojas.`;
+    lpZoomA4();
+    $("a4-scroll").scrollTop = 0;
+  } catch (e) { registrarError("abrirVistaA4", e); toast("No se pudo armar la vista previa. Probá con «Imprimir» o «PDF»."); }
+}
+function renderDoc(){
+  renderDocV63();
+  try { const sl = vistaEfectiva() === "slides"; ["btn-a4", "btn-a4m"].forEach(id => { const b = $(id); if (b) b.hidden = sl; }); } catch (e) { logSilencioso(e); }
+}
+
+/* ---------- Mis planificaciones: estado, buscador y filtros ---------- */
+const LP_EST_KEY = "lapacho-estados-v1";
+const LP_ESTADOS = [["borrador", "Borrador"], ["lista", "Lista"], ["entregada", "Entregada"]];
+function lpEstados(){ try { const o = JSON.parse(localStorage.getItem(LP_EST_KEY) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+function lpEstado(id){ const e = lpEstados()[id]; return LP_ESTADOS.some(x => x[0] === e) ? e : "borrador"; }
+function lpEstadoSet(id, v){ try { const o = lpEstados(); if (v === "borrador") delete o[id]; else o[id] = v; localStorage.setItem(LP_EST_KEY, JSON.stringify(o)); } catch (e) { toast("No se pudo guardar el estado: el navegador no deja guardar."); } }
+const LP_TIPOS = [["", "Todos los tipos"], ["clase", "Clase"], ["secuencia", "Secuencia"], ["proyecto", "Proyecto"], ["anual", "Anual"]];
+const lpTipo = d => ({proyecto:"proyecto", secuencia:"secuencia", anual:"anual"}[d.modo] || "clase");
+function lpFiltrosHTML(lib){
+  const F = state.libF || (state.libF = {q:"", tipo:"", mat:"", est:""});
+  const mats = [...new Set(lib.map(e => e.data.v && e.data.v.materia).filter(Boolean))].map(m => [m, nombreMateria(m) || m]).sort((a, b) => a[1].localeCompare(b[1], "es"));
+  const opt = (L, v) => L.map(([k, t]) => `<option value="${esc(k)}"${k === v ? " selected" : ""}>${esc(t)}</option>`).join("");
+  return `<div class="lib-filtros" id="lib-filtros" role="search">
+    <label class="lf-q"><span class="sr-only">Buscar en mis planificaciones</span><input type="search" id="lf-q" placeholder="Buscar por tema, espacio o curso" value="${esc(F.q)}" autocomplete="off"></label>
+    <label><span class="sr-only">Tipo</span><select id="lf-tipo">${opt(LP_TIPOS, F.tipo)}</select></label>
+    <label><span class="sr-only">Espacio curricular</span><select id="lf-mat">${opt([["", "Todos los espacios"], ...mats], F.mat)}</select></label>
+    <label><span class="sr-only">Estado</span><select id="lf-est">${opt([["", "Todos los estados"], ...LP_ESTADOS], F.est)}</select></label>
+  </div><p class="lib-cuenta" id="lib-cuenta" aria-live="polite"></p>`;
+}
+function renderLib(){
+  const box = $("lib-list"); if (!box) return renderLibV63();
+  try {
+    const lib = libLeer().sort((a, b) => b.upd - a.upd), borrados = Object.values(state.libBorrados || {});
+    const F = state.libF || (state.libF = {q:"", tipo:"", mat:"", est:""});
+    let fb = $("lib-filtros");
+    if (lib.length > 1 || F.q || F.tipo || F.mat || F.est){
+      if (!fb){ box.insertAdjacentHTML("beforebegin", lpFiltrosHTML(lib)); fb = $("lib-filtros"); lpBindFiltros(); }
+      else { const sel = $("lf-mat"), v = sel.value; const tmp = document.createElement("div"); tmp.innerHTML = lpFiltrosHTML(lib); sel.innerHTML = tmp.querySelector("#lf-mat").innerHTML; sel.value = v; }
+    } else if (fb){ fb.remove(); const c = $("lib-cuenta"); if (c) c.remove(); }
+    if (!lib.length && !borrados.length){ renderLibV63(); return; }
+    const q = norm(F.q.trim());
+    const vis = lib.filter(e => {
+      const d = e.data, v = d.v || {};
+      if (F.tipo && lpTipo(d) !== F.tipo) return false;
+      if (F.mat && v.materia !== F.mat) return false;
+      if (F.est && lpEstado(e.id) !== F.est) return false;
+      if (q && !norm([tituloPlan(d), nombreMateria(v.materia), v.curso, anioSec(v.anio), v.tema, v.escuela].filter(Boolean).join(" ")).includes(q)) return false;
+      return true;
+    });
+    const cuenta = $("lib-cuenta");
+    if (cuenta) cuenta.textContent = vis.length === lib.length ? `${lib.length} planificaciones` : `Se ven ${vis.length} de ${lib.length}`;
+    box.innerHTML = borrados.map(e => `<div class="lib-item del"><span>Borraste «${esc(tituloPlan(e.data))}».</span><button type="button" class="linkbtn" data-lib-undo="${e.id}">Deshacer</button></div>`).join("") +
+      (lib.length && !vis.length ? `<div class="lib-vacio"><p>Ninguna planificación coincide con lo que elegiste.</p><button type="button" class="btn btn-sm" id="lf-limpiar">Ver todas</button></div>` : "") +
+      vis.map(e => {
+        const d = e.data, v = d.v, actual = e.id === state.planId, est = lpEstado(e.id);
+        const meta = [nombreMateria(v.materia), v.curso || anioSec(v.anio), ({proyecto:"Proyecto", secuencia:"Secuencia", anual:"Anual"}[d.modo] || "Clase"), "editada " + fechaCorta(e.upd)].filter(Boolean).join(" · ");
+        return `<div class="lib-item${actual ? " on" : ""}" data-est="${est}"><div class="lib-txt"><b>${esc(tituloPlan(d))}</b><small>${esc(meta)}</small></div>` +
+          `<div class="lib-act"><label class="lib-est"><span class="sr-only">Estado de «${esc(tituloPlan(d))}»</span><select data-lib-estado="${e.id}">${LP_ESTADOS.map(([k, t]) => `<option value="${k}"${k === est ? " selected" : ""}>${t}</option>`).join("")}</select></label>` +
+          `${actual ? `<span class="lib-tag">Abierta</span>` : `<button type="button" class="btn btn-sm" data-lib-abrir="${e.id}">Abrir</button>`}` +
+          `<button type="button" class="btn btn-sm" data-lib-dup="${e.id}">Duplicar</button>` +
+          (actual ? "" : `<button type="button" class="btn btn-sm lib-del" data-lib-del="${e.id}">Borrar</button>`) + `</div></div>`;
+      }).join("");
+  } catch (e) { registrarError("renderLib64", e, "aviso"); renderLibV63(); }
+}
+function lpBindFiltros(){
+  const F = () => state.libF || (state.libF = {q:"", tipo:"", mat:"", est:""});
+  let t = 0;
+  $("lf-q").addEventListener("input", e => { F().q = e.target.value; clearTimeout(t); t = setTimeout(renderLib, 120); });
+  [["lf-tipo", "tipo"], ["lf-mat", "mat"], ["lf-est", "est"]].forEach(([id, k]) => $(id).addEventListener("change", e => { F()[k] = e.target.value; renderLib(); }));
+}
+
+/* ---------- Inicio: seguí donde dejaste ---------- */
+function lpRecientesHTML(){
+  const L = libLeer().sort((a, b) => b.upd - a.upd).slice(0, 3);
+  if (!L.length) return "";
+  const nom = Object.fromEntries(LP_ESTADOS);
+  return `<section class="pn-rec" aria-labelledby="pn-rec-t"><div class="pn-rec-h"><h2 id="pn-rec-t">Seguí donde dejaste</h2><button type="button" class="linkbtn" data-proxy="btn-lib">Ver todas</button></div><ul>${L.map(e => {
+    const d = e.data, v = d.v || {}, est = lpEstado(e.id);
+    return `<li><div><b>${esc(tituloPlan(d))}</b><small>${esc([nombreMateria(v.materia), v.curso || anioSec(v.anio), "editada " + fechaCorta(e.upd)].filter(Boolean).join(" · "))}</small></div><span class="lp-est" data-est="${est}">${nom[est]}</span><button type="button" class="btn btn-sm" data-rec-abrir="${e.id}">${e.id === state.planId ? "Seguir" : "Abrir"}</button></li>`;
+  }).join("")}</ul></section>`;
+}
+function renderPanel(){
+  renderPanelV63();
+  try {
+    const P = $("panel"); if (!P) return;
+    P.querySelectorAll(".pn-rec").forEach(n => n.remove());
+    const acc = P.querySelector(".pn-acc"); if (!acc) return;
+    const h = lpRecientesHTML(); if (h) acc.insertAdjacentHTML("afterend", h);
+    const L = libLeer(); if (!L.length) return;
+    const borr = L.filter(e => lpEstado(e.id) === "borrador").length;
+    const s = acc.querySelector('[data-proxy="btn-lib"] small');
+    if (s && borr && borr < L.length) s.textContent += ` · ${borr} en borrador`;
+  } catch (e) { registrarError("renderPanel64", e, "aviso"); }
+}
+
+function init74(){
+  try {
+    /* Vista A4: un botón en la barra del documento y otro en «Más» */
+    const pdf = $("btn-pdf");
+    if (pdf && !$("btn-a4")) pdf.insertAdjacentHTML("afterend", `<button type="button" class="btn" id="btn-a4">Vista A4</button>`);
+    const pop = document.querySelector("#m-copiar .menu-pop");
+    if (pop && !$("btn-a4m")) pop.insertAdjacentHTML("afterbegin", `<button type="button" role="menuitem" id="btn-a4m"><b>Vista previa en hoja A4</b><small>Cómo queda impreso, hoja por hoja</small></button>`);
+    ["btn-a4", "btn-a4m"].forEach(id => { const b = $(id); if (b) b.addEventListener("click", abrirVistaA4); });
+    /* Pasos */
+    const fs = $("form-secs");
+    if (fs){
+      fs.addEventListener("toggle", e => {
+        const d = e.target; if (!d.matches || !d.matches("details.sec") || !d.open) return;
+        if (d.classList.contains("esen")) lpPasoActual = d.id;
+        /* solo cuando la abrió la persona (no al cargar ni cuando otra función la abre) */
+        if (lpPasoUno() && lpToque.d === d && Date.now() - lpToque.t < 1500) document.querySelectorAll("#form-secs details.sec[open]").forEach(o => { if (o !== d) o.open = false; });
+        renderPasos();
+      }, true);
+      fs.addEventListener("click", e => { const s = e.target.closest("details.sec > summary"); if (s) lpToque = {d:s.parentElement, t:Date.now()}; }, true);
+    }
+    document.addEventListener("click", e => {
+      const p = e.target.closest("[data-paso]"); if (p){ e.preventDefault(); lpIrPaso(p.dataset.paso, true); return; }
+      const g = e.target.closest("[data-paso-ir]"); if (g){ e.preventDefault(); lpIrPaso(g.dataset.pasoIr, true); return; }
+      const r = e.target.closest("[data-rec-abrir]");
+      if (r){ const x = libLeer().find(y => y.id === r.dataset.recAbrir); if (!x) return; if (x.id === state.planId){ if (document.querySelector(".app.nav-desk")) irDesk("plan"); setView("form"); return; } save(); cargarPlan(x, x.id); toast(`Abriste «${tituloPlan(x.data)}».`); return; }
+      if (e.target.closest("#lf-limpiar")){ state.libF = {q:"", tipo:"", mat:"", est:""}; const f = $("lib-filtros"); if (f) f.remove(); const c = $("lib-cuenta"); if (c) c.remove(); renderLib(); }
+    });
+    document.addEventListener("change", e => {
+      const s = e.target.closest && e.target.closest("[data-lib-estado]"); if (!s) return;
+      lpEstadoSet(s.dataset.libEstado, s.value);
+      const it = s.closest(".lib-item"); if (it) it.dataset.est = s.value;
+      if (state.libF && state.libF.est) renderLib();
+    });
+    progresoFormulario();
+    renderDoc();
+  } catch (e) { registrarError("init74", e, "aviso"); }
 }
 
 /* ============================================================
@@ -27162,7 +27570,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
