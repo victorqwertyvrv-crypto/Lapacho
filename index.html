@@ -2432,6 +2432,46 @@ details.sec[open] .sec-ic{background:var(--accent);color:var(--on-accent)}
 @media (max-width:760px){.gr-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.gr-tv{font-size:20px}}
 @media print{.gr-datos,.gr-per{display:none!important}.gr-fig{break-inside:avoid}}
 
+/* ---------- Versión 70: impresión idéntica a la vista A4 y letra del celular ---------- */
+#a4-imp-c{display:none}
+@media print{
+  @page a4exacta{size:A4;margin:0;@bottom-right{content:none}}
+  body.imp-a4>:not(#a4-imp-c){display:none!important}
+  body.imp-a4 #a4-imp-c{display:block!important}
+  body.imp-a4 #a4-imp-c .a4-pag{page:a4exacta;box-shadow:none!important;border-radius:0!important;margin:0!important;width:210mm!important;height:297mm!important;min-height:0!important;overflow:hidden;break-after:page;page-break-after:always;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.imp-a4 #a4-imp-c .a4-pag:last-child{break-after:auto;page-break-after:auto}
+  body.imp-a4.imp-gris #a4-imp-c{filter:grayscale(1)}
+}
+/* Celular: letra base de 16 px (la interfaz se agranda un 6,7 % sobre lo que elijas en «Tamaño de letra») */
+@media (max-width:760px){.app{zoom:calc(var(--zoom,1) * 1.0667)}}
+/* Con la letra agrandada (aquí o con «Tamaño de letra»), las ventanas a lo ancho no se salen de la pantalla:
+   dentro de .app el zoom también agranda los vw, así que el tope se divide por el zoom efectivo. */
+.app{--zoom-ef:var(--zoom,1)}
+@media (max-width:760px){.app{--zoom-ef:calc(var(--zoom,1) * 1.0667)}}
+.app dialog[open]{max-width:calc(100vw / var(--zoom-ef))!important;max-height:calc(100dvh / var(--zoom-ef))!important}
+@media (max-width:560px){.app dialog.lib[open]{max-height:calc(94dvh / var(--zoom-ef))!important}}
+.app .menu-pop{max-width:calc((100vw - 32px) / var(--zoom-ef))!important}
+
+/* ---------- Versión 70: uso de IA en las consignas ---------- */
+.ia-resp{display:flex;flex-direction:column;gap:10px;margin:4px 0 14px;padding:14px;border:1px solid var(--line);border-radius:var(--radius-m,10px);background:var(--surface)}
+.ia-resp h3{margin:0;font-size:16px}
+.ia-resp .hint{margin:0}
+.ia-act{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:start;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-m,10px);background:var(--surface-2)}
+.ia-act-h small{color:var(--muted);font-size:12.5px;font-weight:600}
+.ia-act-h p{margin:2px 0 0;font-size:14px}
+.ia-niv select{min-height:40px;font-size:14px;padding:6px 10px;width:auto;max-width:100%}
+.ia-dl{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:2px 0 0}
+.ia-dl div{min-width:0}
+.ia-dl dt{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ia-dl dd{margin:2px 0 0;font-size:13.5px}
+.ia-mas>summary{cursor:pointer;font-weight:600;font-size:14px;min-height:40px;display:flex;align-items:center;color:var(--acc-texto,var(--accent))}
+.ia-mas h4{margin:10px 0 4px;font-size:14px}
+.ia-mas ul{margin:0;padding-left:20px;font-size:13.5px}
+.ia-rub{border-collapse:collapse;width:100%;font-size:13px}
+.ia-rub th,.ia-rub td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.ia-rub thead th{background:var(--surface-2)}
+@media (max-width:760px){.ia-act{grid-template-columns:minmax(0,1fr)}.ia-dl{grid-template-columns:minmax(0,1fr)}.ia-niv select{width:100%}}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -5425,6 +5465,12 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-21a", fecha:"2026-11-21", items:[
+    "«Imprimir» y «Guardar como PDF» desde «Vista A4» sacan exactamente esas hojas, con su número de página. La impresión queda en «Actividad reciente», y la copia de tus planificaciones guarda también la actividad.",
+    "En el celular la letra es un poco más grande (base de 16 px), y las ventanas ya no se salen de la pantalla aunque agrandes la letra en Ajustes.",
+    "Mi curso arma la «Ficha de trayectoria» de cada estudiante para el equipo de conducción o el gabinete: asistencia y notas por período, conducta, señales de riesgo e intervenciones. No incluye salud, diagnósticos ni datos de contacto. Está en «Para entregar» y en «Esta semana».",
+    "En «IA en el aula», para cada actividad elegís cuánto puede intervenir la IA (cinco niveles), con qué hace el estudiante y cómo muestra que el trabajo es suyo. Suma criterios de autoría y una rúbrica de pensamiento crítico, y se puede pasar a la planificación o a Word."
+  ]},
   {id:"2026-11-15g", fecha:"2026-11-15", items:[
     "Arreglo: una clase nueva no aparecía en «Mi curso» hasta marcarla a mano en «Datos del curso». Ahora, si tiene el mismo espacio curricular y el mismo curso (aunque lo escribas «3.º B», «3° B» o «3ro B»), aparece sola en el modo aula, el libro de temas y la carpeta didáctica.",
     "Si la desmarcás en «Datos del curso», queda desmarcada: no vuelve a sumarse sola."
@@ -8283,7 +8329,7 @@ async function exportarLib(){
   save();
   const lib = libLeer();
   if (!lib.length){ toast("Todavía no hay planificaciones para descargar."); return; }
-  const data = JSON.stringify({app:"planificador-clases", version:2, exportado:new Date().toISOString(), planes:lib, banco:bancoLeer(), estados:lpEstados()}, null, 1);
+  const data = JSON.stringify({app:"planificador-clases", version:2, exportado:new Date().toISOString(), planes:lib, banco:bancoLeer(), estados:lpEstados(), actividad:lpActividad()}, null, 1);
   const hoy = new Date().toISOString().slice(0, 10);
   await guardarArchivo(`planificaciones-${hoy}.json`, new Blob([data], {type:"application/json"}), lib.length === 1 ? "Se descargó 1 planificación." : `Se descargaron ${lib.length} planificaciones.`);
 }
@@ -8311,6 +8357,7 @@ function importarLib(file){
     });
     libGuardar(lib);
     lpEstadosImportar(entrada && entrada.estados, lib);
+    lpActividadImportar(entrada && entrada.actividad);
     renderLib();
     toast(n ? (n === 1 ? "Se importó 1 planificación." : `Se importaron ${n} planificaciones.`) : "Esas planificaciones ya estaban guardadas.");
   };
@@ -8767,7 +8814,7 @@ const IA_ACT = [
   {id:"ia-borrador", n:"De borrador a versión propia", m:"cierre",
    c:"De borrador a versión propia: a partir de un texto sobre {t} generado con IA, los estudiantes lo reescriben con sus palabras, agregan un ejemplo propio y marcan qué datos verificaron y dónde."}
 ];
-function renderIA(){
+function renderIAV69(){
   const t = temaParaRutina(), sinDest = !destinosBanco().length;
   $("ia-crit").innerHTML = IA_CRITERIOS.map(([h, p]) => `<li><b>${esc(h)}.</b> ${esc(p)}</li>`).join("");
   $("ia-list").innerHTML = IA_ACT.map(r => `<div class="lib-item banco-item rut"><div class="lib-txt"><b>${esc(r.n)}</b><small>${esc(MOM_RUT[r.m])}</small><pre>${esc(fill([r.c], t)[0])}</pre></div>
@@ -9777,7 +9824,7 @@ function htmlPrevias(c){
 
 /* ---------- Para entregar ---------- */
 const COLS_PREC = [["parciales", "Notas parciales"], ["prom", "Promedio"], ["cond", "Ajuste por conducta"], ["nota", "Nota del período"], ["rec", "Recuperatorio"], ["faltas", "Inasistencias"], ["tardes", "Tardanzas"], ["obs", "Observaciones"]];
-function htmlEntregar(c){
+function htmlEntregarV69(c){
   if (CUR.entP == null) CUR.entP = periodoActual(c);
   const cols = CUR.entCols || (CUR.entCols = c.colsPrec || ["nota", "faltas", "tardes", "obs"]);
   const p = CUR.entP;
@@ -10585,7 +10632,7 @@ async function confirmarPIN(){
 }
 function exigirPIN(){ if (!leerPref().pin || pinOk) return Promise.resolve(true); return dialogoPIN("pedir"); }
 function renderAjustesPIN(){ const b = $("btn-pin"); if (b) b.querySelector("b").textContent = leerPref().pin ? "Quitar el PIN" : "Proteger con PIN"; try { renderAjustes37(); renderPanel(); } catch (e) { logSilencioso(e); } }
-function imprimirDoc(){ document.body.classList.add("imprimiendo"); document.body.classList.toggle("imp-gris", !!leerPref().impGris); setTimeout(() => { try { window.print(); } catch (e) { toast("Este navegador no permite imprimir desde acá. Probá con Word o PDF."); } setTimeout(() => document.body.classList.remove("imprimiendo"), 500); }, 50); }
+function imprimirDocV69(){ document.body.classList.add("imprimiendo"); document.body.classList.toggle("imp-gris", !!leerPref().impGris); setTimeout(() => { try { window.print(); } catch (e) { toast("Este navegador no permite imprimir desde acá. Probá con Word o PDF."); } setTimeout(() => document.body.classList.remove("imprimiendo"), 500); }, 50); }
 
 /* ============================================================
    Código QR (generador incluido, funciona sin internet)
@@ -13671,7 +13718,7 @@ function riesgoAlumnos(c){
   });
   return out;
 }
-function htmlRiesgo(c){
+function htmlRiesgoV69(c){
   const R = riesgoAlumnos(c);
   if (!R.length) return "";
   return `<section class="rs-b rs-riesgo"><h3>Señales de riesgo <span>${R.length}</span></h3><ul>${R.map(x => `<li>${esc(x.a.n)}<small>${esc(x.m.join(", "))}</small><button type="button" class="linkbtn" data-rsint="${x.a.id}">Registrar una intervención</button></li>`).join("")}</ul><p class="hint">Dos o más señales juntas (faltas, notas, tareas o conducta). Mejor actuar ahora que al cierre del período.</p></section>`;
@@ -17212,7 +17259,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "69 (15/11/2026)";
+const LAPACHO_VERSION = "70 (21/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -27090,15 +27137,15 @@ function lpDlgA4(){
   document.body.insertAdjacentHTML("beforeend", `<dialog class="a4dlg" id="a4dlg" aria-labelledby="a4-t">
     <div class="a4-in">
       <div class="a4-head"><div><h2 id="a4-t">Vista previa en hoja A4</h2><p class="hint" id="a4-n" aria-live="polite"></p></div>
-        <div class="a4-acc"><button type="button" class="btn btn-primary btn-sm" id="a4-imp">Imprimir</button><button type="button" class="btn btn-sm" id="a4-pdf">Descargar PDF</button><button type="button" class="linkbtn" id="a4-cerrar">Cerrar</button></div></div>
+        <div class="a4-acc"><button type="button" class="btn btn-primary btn-sm" id="a4-imp">Imprimir</button><button type="button" class="btn btn-sm" id="a4-pdf">Guardar como PDF</button><button type="button" class="linkbtn" id="a4-cerrar">Cerrar</button></div></div>
       <div class="a4-scroll" id="a4-scroll" tabindex="0" aria-label="Hojas del documento"><div class="a4-pags" id="a4-pags"></div></div>
-      <p class="hint a4-nota">Márgenes de 18 mm arriba y abajo y 16 mm a los costados, como al imprimir. Según el navegador, algún corte puede correrse un renglón.</p>
+      <p class="hint a4-nota">Márgenes de 18 mm arriba y abajo y 16 mm a los costados. «Imprimir» y «Guardar como PDF» sacan exactamente estas hojas; para el PDF, elegí «Guardar como PDF» en la ventana de impresión.</p>
     </div></dialog>`);
   d = $("a4dlg");
   const cerrar = () => { if (d.open){ if (d.close) d.close(); else d.removeAttribute("open"); } };
   $("a4-cerrar").addEventListener("click", cerrar);
-  $("a4-imp").addEventListener("click", () => { cerrar(); imprimirDoc(); });
-  $("a4-pdf").addEventListener("click", () => { cerrar(); const b = $("btn-pdf"); if (b) b.click(); });
+  $("a4-imp").addEventListener("click", () => lpImprimirA4(false));
+  $("a4-pdf").addEventListener("click", () => lpImprimirA4(true));
   d.addEventListener("click", e => { if (e.target === d) cerrar(); });
   d.addEventListener("close", () => { $("app").appendChild($("toast")); });
   addEventListener("resize", () => { if (d.open) lpZoomA4(); });
@@ -27287,6 +27334,7 @@ function lpActTexto(a){
     case "entregada": return `Marcaste ${t} como entregada`;
     case "borrador": return `Volviste ${t} a borrador`;
     case "pdf": return a.det ? `Descargaste ${a.det} de ${t} en PDF` : `Descargaste el PDF de ${t}`;
+    case "impresion": return a.det === "pdf" ? `Abriste «Guardar como PDF» de ${t}` : `Abriste la impresión de ${t}`;
     case "word": return a.det ? `Descargaste ${a.det} de ${t} en Word` : `Descargaste el Word de ${t}`;
     default: return t;
   }
@@ -27900,6 +27948,247 @@ function init79(){
 }
 
 /* ============================================================
+   Versión 70 (parte 1): cierre del rediseño
+   - «Imprimir» y «Guardar como PDF» desde «Vista A4» imprimen esas mismas hojas (página con nombre a4exacta, sin
+     márgenes extra): lo que sale es idéntico a la vista, con su «Página N de M». El PDF se guarda con la opción
+     «Guardar como PDF» de la ventana de impresión del navegador; el botón «PDF» de la barra sigue armando el suyo.
+   - La impresión queda en «Actividad reciente» como «Abriste la impresión»: el navegador no avisa si se imprimió.
+   - La copia .json lleva también la actividad; al importarla se suma sin duplicar.
+   ============================================================ */
+function lpPrepararA4(){
+  const P = $("a4-pags"); if (!P || !P.querySelector(".a4-pag")) return null;
+  let C = $("a4-imp-c"); if (C) C.remove();
+  C = document.createElement("div"); C.id = "a4-imp-c"; C.setAttribute("aria-hidden", "true");
+  C.innerHTML = P.innerHTML; document.body.appendChild(C);
+  document.body.classList.add("imp-a4"); document.body.classList.toggle("imp-gris", !!leerPref().impGris);
+  return () => { document.body.classList.remove("imp-a4"); C.remove(); };
+}
+function lpImprimirA4(pdf){
+  const fin = lpPrepararA4(); if (!fin){ toast("Primero abrí la vista A4."); return; }
+  const d = $("a4dlg"); if (d && d.open){ if (d.close) d.close(); else d.removeAttribute("open"); }
+  if (pdf) toast("En la ventana de impresión, elegí «Guardar como PDF» como impresora.");
+  try { lpAnotar("impresion", state.planId, pdf ? "pdf" : ""); } catch (e) { logSilencioso(e); }
+  let hecho = false; const cerrar = () => { if (hecho) return; hecho = true; fin(); removeEventListener("afterprint", cerrar); };
+  addEventListener("afterprint", cerrar);
+  setTimeout(() => { try { window.print(); } catch (e) { cerrar(); toast("Este navegador no permite imprimir desde acá. Usá «PDF»."); } setTimeout(cerrar, 60000); }, 80);
+}
+function imprimirDoc(){
+  try { lpAnotar("impresion", state.planId, ""); } catch (e) { logSilencioso(e); }
+  return imprimirDocV69();
+}
+function lpActividadImportar(A){
+  try {
+    if (!Array.isArray(A) || !A.length) return;
+    const yo = lpActividad(), clave = x => [x.t, x.ev, x.id, x.det || ""].join("|"), ya = new Set(yo.map(clave));
+    const nuevos = A.filter(x => x && x.t && x.ev && typeof x.t === "number" && !ya.has(clave(x))).map(x => ({t:x.t, ev:String(x.ev), id:String(x.id || ""), tit:String(x.tit || "").slice(0, 200), det:String(x.det || "").slice(0, 80)}));
+    if (!nuevos.length) return;
+    localStorage.setItem(LP_ACT_KEY, JSON.stringify([...yo, ...nuevos].sort((a, b) => b.t - a.t).slice(0, LP_ACT_MAX)));
+  } catch (e) { logSilencioso(e); }
+}
+
+/* ============================================================
+   Versión 70 (parte 2): ficha de trayectoria para el equipo directivo
+   Un informe breve por estudiante, armado con lo que el docente ya cargó en Mi curso: asistencia y notas por período,
+   conducta, señales de riesgo, intervenciones con la familia y fortalezas. No incluye salud, diagnósticos, PPI,
+   teléfonos ni observaciones privadas. Se descarga en Word o PDF desde «Esta semana» (estudiantes con señales de
+   riesgo) y desde «Para entregar» (cualquier estudiante).
+   ============================================================ */
+function modeloTrayectoria(c, aid){
+  const a = (c.alumnos || []).find(x => x.id === aid) || {n:""};
+  const ps = c.periodos || [], ap = aprobC(c), lim = +c.limiteFaltas || 20, pAct = periodoActual(c);
+  const pctF = r => r.clases ? `${r.pct} %` : "—";
+  /* asistencia por período y del año */
+  const filasA = ps.map((_, i) => { const r = asisResumen(c, aid, i); return [cap(nombrePeriodo(c, i)), String(r.clases), String(r.P || 0), String(r.A || 0), String(r.T || 0), String(r.R || 0), pctF(r)]; });
+  const rA = asisResumen(c, aid, null);
+  filasA.push(["Año", String(rA.clases), String(rA.P || 0), String(rA.A || 0), String(rA.T || 0), String(rA.R || 0), pctF(rA)]);
+  /* notas por período */
+  const filasN = ps.map((_, i) => { const evs = evalsDe(c, i), ns = evs.map(e => notaEval(c, aid, e.id)).filter(x => x != null), pr = promPeriodo(c, aid, i);
+    return [cap(nombrePeriodo(c, i)), `${ns.length} de ${evs.length}`, pr == null ? "—" : fmtN(Math.round(pr * 100) / 100), pr == null ? "Sin notas" : pr >= ap ? "Aprueba" : "Por debajo de " + fmtN(ap)]; });
+  let cond = null; try { cond = condicion(c, aid); } catch (e) { logSilencioso(e); }
+  /* conducta del año */
+  const cd = condDeC(c, aid, null), cuenta = L => { const m = {}; L.forEach(k => { m[k.t] = (m[k.t] || 0) + 1; }); return Object.entries(m).sort((x, y) => y[1] - x[1]).slice(0, 3).map(([t, n]) => `${t} (${n})`); };
+  const conducta = [`Registros positivos: ${cd.pos.length}${cd.pos.length ? ". Detalle: " + cuenta(cd.pos).join(", ") : ""}.`, `Registros a mejorar: ${cd.neg.length}${cd.neg.length ? ". Detalle: " + cuenta(cd.neg).join(", ") : ""}.`];
+  /* señales de riesgo del período actual */
+  let senales = []; try { const r = riesgoAlumnos(c).find(x => x.a.id === aid); if (r) senales = r.m; } catch (e) { logSilencioso(e); }
+  const rP = asisResumen(c, aid, pAct), prP = promPeriodo(c, aid, pAct);
+  /* intervenciones registradas */
+  const iv = (c.interv || []).filter(x => x.aid === aid).sort((p, q) => (p.f || "").localeCompare(q.f || ""));
+  const F = (c.fichas || {})[aid] || {};
+  /* puntos para conversar: solo hechos de los datos, sin interpretaciones */
+  const conv = [];
+  if (rA.clases >= 4 && rA.pct >= lim) conv.push(`Inasistencias: ${rA.pct} % en el año, por encima del límite de ${lim} % que usa el curso.`);
+  else if (rP.clases >= 4 && rP.pct >= 15) conv.push(`Inasistencias del período actual: ${rP.pct} %.`);
+  if (prP != null && prP < ap) conv.push(`Promedio del período actual: ${fmtN(Math.round(prP * 100) / 100)}, por debajo de ${fmtN(ap)}.`);
+  if (cond && /dic|feb|previa/.test(cond.k)) conv.push(`Situación al cierre: ${cond.t}.`);
+  if (cd.neg.length >= 3) conv.push(`Hay ${cd.neg.length} registros de conducta a mejorar.`);
+  if (!iv.length && (senales.length || conv.length)) conv.push("Todavía no hay intervenciones con la familia registradas en Lapacho.");
+  return {inst:c.escuela || val("institucion") || "", titulo:"Ficha de trayectoria escolar", subtitulo:a.n || "", faltaSub:"Estudiante",
+    datos:[["Curso", c.curso || ""], ["Espacio curricular", nombreMateria(c.materia) || ""], ["Docente", c.docente || val("docente") || ""], ["Ciclo lectivo", c.ciclo || ""], ["Fecha del informe", fechaCortaIso(hoyIso())]],
+    secs:[
+      {h:"Asistencia", tableOnly:true, table:{head:["Período", "Clases", "Presente", "Ausente", "Tarde", "Retiro", "Faltas"], w:[1900, 1000, 1100, 1100, 1000, 1000, 1970], rows:filasA}},
+      {h:"Calificaciones", tableOnly:true, table:{head:["Período", "Evaluaciones con nota", "Promedio", "Situación"], w:[2100, 2300, 1500, 3170], rows:filasN}},
+      {h:"Situación en el año", body:cond ? (cond.anual != null ? `Nota anual: ${fmtN(cond.anual)}. ${cond.t}.` : `${cond.t}: todavía faltan notas de algún período.`) : "Sin datos suficientes."},
+      {h:"Conducta y trabajo en clase", body:toList(conducta)},
+      {h:"Señales de riesgo en el período actual", body:senales.length ? toList(senales.map(cap)) : "No tiene dos señales de riesgo a la vez en el período actual."},
+      {h:"Intervenciones registradas", ...(iv.length ? {tableOnly:true, table:{head:["Fecha", "Con quién", "Qué se hizo", "Acuerdos"], w:[1300, 1700, 3200, 2870], rows:iv.map(x => [fechaCortaIso(x.f), x.con || "", x.que || "", x.acu || ""])}} : {body:"Sin intervenciones registradas."})},
+      ...(F.intereses ? [{h:"Fortalezas e intereses", body:F.intereses}] : []),
+      {h:"Para conversar con el equipo", body:conv.length ? toList(conv) : "Los datos registrados no muestran alertas."},
+      {h:"Propuesta de acompañamiento", body:"Acuerdos con el equipo de conducción o el gabinete:\n\n.................................................................................................................................\n\n.................................................................................................................................\n\nPróxima revisión: ...... / ...... / ........"},
+      {h:"Aclaración", body:"Informe armado con los datos que el docente registró en Lapacho (asistencia, notas, conducta e intervenciones). No incluye información de salud, diagnósticos ni datos de contacto. Para uso interno del equipo de conducción y del gabinete."}
+    ],
+    firmas:[[c.docente || val("docente") || "", "Docente"], ["", "Equipo de conducción"]]};
+}
+async function bajarTrayectoria(aid, formato){
+  const c = cursoSel(); if (!c) return;
+  const a = (c.alumnos || []).find(x => x.id === aid); if (!a){ toast("Elegí un estudiante."); return; }
+  await bajarDoc(modeloTrayectoria(c, aid), `trayectoria-${slug(a.n || "estudiante")}`, formato || "docx", formato === "pdf" ? "Ficha de trayectoria descargada en PDF." : "Ficha de trayectoria descargada.");
+}
+function htmlRiesgo(c){
+  return htmlRiesgoV69(c).replace(/(<button type="button" class="linkbtn" data-rsint="([^"]+)">Registrar una intervención<\/button>)/g, `$1<button type="button" class="linkbtn" data-trayec="$2">Ficha de trayectoria</button>`);
+}
+function htmlEntregar(c){
+  const al = alumnosActivos(c);
+  let enRiesgo = new Set(); try { enRiesgo = new Set(riesgoAlumnos(c).map(x => x.a.id)); } catch (e) { logSilencioso(e); }
+  const card = `<div class="ent-card" id="ent-trayec"><h3>Ficha de trayectoria</h3><p class="hint">Un informe breve por estudiante para el equipo de conducción o el gabinete: asistencia, notas, conducta, señales de riesgo e intervenciones. No incluye salud, diagnósticos ni datos de contacto.</p>${al.length ? `<div class="cur-bar"><label class="sr-only" for="tr-aid">Estudiante</label><select id="tr-aid">${al.map(a => `<option value="${a.id}">${esc(a.n)}${enRiesgo.has(a.id) ? " · con señales de riesgo" : ""}</option>`).join("")}</select><button type="button" class="btn btn-sm btn-primary" data-trayec-sel="docx">Word</button><button type="button" class="btn btn-sm" data-trayec-sel="pdf">PDF</button></div>` : `<p class="lib-empty">Cargá la lista del curso para armar la ficha.</p>`}</div>`;
+  return htmlEntregarV69(c).replace('<div class="ent-card"><h3>Otros documentos</h3>', card + '<div class="ent-card"><h3>Otros documentos</h3>');
+}
+function init81(){
+  try {
+    document.addEventListener("click", e => {
+      const t = e.target.closest("[data-trayec]"); if (t){ e.preventDefault(); bajarTrayectoria(t.dataset.trayec, "docx"); return; }
+      const s = e.target.closest("[data-trayec-sel]"); if (s){ e.preventDefault(); const sel = $("tr-aid"); if (sel) bajarTrayectoria(sel.value, s.dataset.trayecSel); }
+    });
+  } catch (e) { registrarError("init81", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 70 (parte 3): uso responsable de la IA en las consignas («IA en el aula»)
+   - Para cada actividad de la planificación abierta, el docente elige cuánto puede intervenir la IA, con los cinco
+     niveles de la Escala de Evaluación con IA (AIAS, versión revisada: Perkins, Roe y Furze, 2024): sin IA,
+     planificación con IA, tarea con apoyo de IA, IA completa y exploración con IA.
+   - Cada nivel dice qué hace el estudiante, qué puede hacer la IA y cómo muestra que el trabajo es suyo.
+   - Criterios de autoría y una rúbrica de pensamiento crítico al usar IA; se puede sumar a la planificación o
+     descargar en Word. Los niveles elegidos se guardan por planificación (lapacho-ia-niveles-v1).
+   - Marco: principios rectores de PaideIA (Ministerio de Capital Humano), citados tal como figuran en su página.
+   ============================================================ */
+const LP_IA_KEY = "lapacho-ia-niveles-v1";
+const LP_IA_NIV = [
+  {n:1, t:"Sin IA", est:"Resuelve la actividad solo o con su grupo, sin herramientas de IA.", ia:"No se usa.", aut:"Lo produce en clase, a mano o en la carpeta; el docente ve el proceso."},
+  {n:2, t:"Planificar con IA", est:"Usa la IA solo para buscar ideas, ordenar un plan o preparar preguntas, y después produce todo con sus palabras.", ia:"Propone ideas, preguntas o un esquema inicial.", aut:"Entrega el plan o las ideas que le dio la IA y señala qué tomó, qué descartó y por qué."},
+  {n:3, t:"Tarea con apoyo de IA", est:"Hace la tarea y usa la IA para revisar, explicar un paso o mejorar lo que escribió, sin que la IA haga la parte principal.", ia:"Explica, revisa, da devoluciones o sugiere mejoras sobre lo que hizo el estudiante.", aut:"Muestra la versión anterior y la final, y explica oralmente o por escrito qué cambió y por qué."},
+  {n:4, t:"IA completa", est:"Dirige a la IA para resolver la tarea y evalúa críticamente lo que produce.", ia:"Puede producir buena parte del trabajo.", aut:"Entrega las consignas que le dio a la IA, las correcciones que hizo y una verificación con fuentes o con la experiencia."},
+  {n:5, t:"Explorar con IA", est:"Usa la IA de formas nuevas para investigar un problema o crear algo que sin ella no podría hacer.", ia:"Es parte del objeto de estudio: se analiza qué hace bien, qué hace mal y por qué.", aut:"Presenta el proceso completo y una reflexión sobre los aportes y los límites de la IA."}
+];
+const LP_IA_AUTORIA = [
+  "Declarar siempre si usó IA, cuál y para qué parte de la actividad.",
+  "Guardar las consignas (prompts) que le dio a la IA y las respuestas, para mostrarlas si se las piden.",
+  "Lo entregado tiene que poder explicarlo con sus palabras: el docente puede pedir que lo defienda oralmente.",
+  "Verificar los datos, las fórmulas y las citas con una fuente confiable o con la experiencia: la IA se equivoca.",
+  "No cargar en la IA datos personales propios ni de compañeros, ni fotos de otras personas."
+];
+const LP_IA_RUB = {head:["Criterio", "Logrado", "En proceso", "Inicial"], rows:[
+  ["Verifica lo que dice la IA", "Comprueba los datos con fuentes o con la experiencia y corrige los errores que encuentra", "Comprueba algunos datos, sin corregir todo", "Copia la respuesta sin verificarla"],
+  ["Explica con sus palabras", "Explica el resultado y el procedimiento sin leer, con ejemplos propios", "Explica parte, con ayuda", "No puede explicar lo que entregó"],
+  ["Declara el uso de IA", "Dice qué herramienta usó, para qué y muestra las consignas", "Dice que usó IA pero no para qué", "No declara el uso"],
+  ["Reconoce límites y sesgos", "Señala errores, omisiones o sesgos de la respuesta y propone cómo mejorarla", "Reconoce que puede haber errores, sin señalar cuáles", "Toma la respuesta como correcta y completa"]
+]};
+const LP_PAIDEIA = {u:"https://www.argentina.gob.ar/capital-humano/educacion/paideia/inteligencia-artificial-paideia", p:[
+  "Las inteligencias artificiales son extensión de la racionalidad humana.",
+  "Las inteligencias artificiales son aliadas colaborativas.",
+  "Las inteligencias artificiales no son infalibles ni neutrales.",
+  "Las inteligencias artificiales no reemplazan al docente."
+]};
+const LP_AIAS_U = "https://arxiv.org/abs/2412.09029";
+function lpIaActividades(){
+  const out = [];
+  try {
+    destinosBanco().filter(d => d !== "ficha").forEach(d => {
+      itemsLista(val(d)).map(x => String(x).replace(/^[-•\s]+/, "").trim()).filter(x => x.length > 3).forEach(x => out.push({d, mom:etiquetaCampo(d), t:x}));
+    });
+  } catch (e) { logSilencioso(e); }
+  return out.slice(0, 12);
+}
+function lpIaNiveles(){ try { const o = JSON.parse(localStorage.getItem(LP_IA_KEY) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+function lpIaClave(a){ return norm(a.t).replace(/[^a-z0-9]/g, "").slice(0, 60); }
+/* sugerencia de partida: buscar o investigar → planificar con IA; redactar o revisar → apoyo; lo demás, sin IA */
+function lpIaSugerido(t){ const n = norm(t); return /(investig|busc|indag|consult|averig|explor)/.test(n) ? 2 : /(redact|escrib|revis|corrig|informe|resumen)/.test(n) ? 3 : 1; }
+function lpIaNivelDe(a){ const pl = lpIaNiveles()[state.planId || "_"] || {}, v = +pl[lpIaClave(a)]; return v >= 1 && v <= 5 ? v : lpIaSugerido(a.t); }
+function htmlIaResponsable(){
+  const acts = lpIaActividades();
+  const sel = (a, i) => `<label class="ia-niv"><span class="sr-only">Uso de IA en «${esc(a.t.slice(0, 60))}»</span><select data-ianiv="${i}">${LP_IA_NIV.map(v => `<option value="${v.n}"${v.n === lpIaNivelDe(a) ? " selected" : ""}>${v.n}. ${esc(v.t)}</option>`).join("")}</select></label>`;
+  const filas = acts.map((a, i) => { const v = LP_IA_NIV[lpIaNivelDe(a) - 1];
+    return `<div class="ia-act"><div class="ia-act-h"><small>${esc(a.mom)}</small><p>${esc(a.t)}</p></div>${sel(a, i)}<dl class="ia-dl"><div><dt>Estudiante</dt><dd>${esc(v.est)}</dd></div><div><dt>IA</dt><dd>${esc(v.ia)}</dd></div><div><dt>Autoría</dt><dd>${esc(v.aut)}</dd></div></dl></div>`; }).join("");
+  return `<section class="ia-resp" id="ia-resp" aria-labelledby="ia-resp-t"><h3 id="ia-resp-t">Uso de la IA en tus consignas</h3>
+    <p class="hint">Para cada actividad de la planificación abierta, elegí cuánto puede intervenir la IA. Los niveles son los de la Escala de Evaluación con IA (AIAS, versión revisada de Perkins, Roe y Furze). La sugerencia inicial sale del verbo de la actividad: revisala.</p>
+    ${acts.length ? filas : `<p class="lib-empty">Cuando la planificación tenga actividades en inicio, desarrollo y cierre, acá vas a poder decidir el uso de IA en cada una.</p>`}
+    <details class="ia-mas"><summary>Criterios de autoría y rúbrica de pensamiento crítico</summary>
+      <h4>Criterios de autoría para los estudiantes</h4><ul>${LP_IA_AUTORIA.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <h4>Rúbrica: pensamiento crítico al usar IA</h4><div class="gr-tw"><table class="ia-rub"><thead><tr>${LP_IA_RUB.head.map(h => `<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${LP_IA_RUB.rows.map(r => `<tr><th scope="row">${esc(r[0])}</th>${r.slice(1).map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+      <h4>Principios rectores de PaideIA</h4><ul>${LP_PAIDEIA.p.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <p class="hint">Fuentes: <a href="${LP_PAIDEIA.u}" target="_blank" rel="noopener">PaideIA, Ministerio de Capital Humano</a> · <a href="${LP_AIAS_U}" target="_blank" rel="noopener">Perkins, Roe y Furze, «The AI Assessment Scale Revisited» (2024)</a>.</p>
+    </details>
+    <div class="lib-foot">${acts.length ? `<button type="button" class="btn btn-sm btn-primary" data-ia-sumar="1">Sumar a la planificación</button>` : ""}<button type="button" class="btn btn-sm" data-ia-rub="1">Sumar la rúbrica a Instrumentos</button><button type="button" class="btn btn-sm" data-ia-word="1">Descargar en Word</button></div>
+  </section>`;
+}
+function lpIaTextoActividades(){
+  return lpIaActividades().map(a => { const v = LP_IA_NIV[lpIaNivelDe(a) - 1]; return `Uso de IA en «${a.t.length > 70 ? a.t.slice(0, 69) + "…" : a.t}» (${a.mom}): nivel ${v.n} (${v.t}). ${v.aut}`; });
+}
+function modeloIaResponsable(){
+  const acts = lpIaActividades();
+  return {inst:val("institucion") || "", titulo:"Uso de la IA en las consignas", subtitulo:temaVisible() || "", faltaSub:"Tema",
+    datos:[["Espacio curricular", labelOf("materia") || ""], ["Curso", val("curso") || anioSec(val("anio")) || ""], ["Docente", val("docente") || ""]],
+    secs:[
+      ...(acts.length ? [{h:"Nivel de uso de IA en cada actividad", tableOnly:true, table:{head:["Actividad", "Nivel", "Qué hace el estudiante", "Cómo muestra su autoría"], w:[2700, 1500, 2500, 2370], rows:acts.map(a => { const v = LP_IA_NIV[lpIaNivelDe(a) - 1]; return [`${a.mom}: ${a.t}`, `${v.n}. ${v.t}`, v.est, v.aut]; })}}] : []),
+      {h:"Niveles de uso de IA", tableOnly:true, table:{head:["Nivel", "Estudiante", "IA"], w:[2000, 3800, 3270], rows:LP_IA_NIV.map(v => [`${v.n}. ${v.t}`, v.est, v.ia])}},
+      {h:"Criterios de autoría", body:toList(LP_IA_AUTORIA)},
+      {h:"Rúbrica: pensamiento crítico al usar IA", tableOnly:true, table:{head:LP_IA_RUB.head, w:[2100, 2400, 2300, 2270], rows:LP_IA_RUB.rows}},
+      {h:"Marco", body:toList([...LP_PAIDEIA.p.map(x => "PaideIA: " + x), "Niveles basados en la Escala de Evaluación con IA (AIAS), versión revisada: Perkins, M., Roe, J. y Furze, L. (2024). The AI Assessment Scale Revisited."])}
+    ]};
+}
+function lpIaPintar(){
+  const box = $("ia-resp-box"); if (!box) return;
+  box.innerHTML = htmlIaResponsable();
+}
+function renderIA(){
+  renderIAV69();
+  try {
+    let box = $("ia-resp-box");
+    if (!box){ const c = $("ia-crit"); if (!c) return; c.insertAdjacentHTML("beforebegin", `<div id="ia-resp-box"></div>`); box = $("ia-resp-box"); }
+    lpIaPintar();
+  } catch (e) { registrarError("renderIA70", e, "aviso"); }
+}
+function init82(){
+  try {
+    document.addEventListener("change", e => {
+      const s = e.target.closest && e.target.closest("[data-ianiv]"); if (!s) return;
+      const a = lpIaActividades()[+s.dataset.ianiv]; if (!a) return;
+      const o = lpIaNiveles(), k = state.planId || "_"; o[k] = {...(o[k] || {}), [lpIaClave(a)]:+s.value};
+      try { localStorage.setItem(LP_IA_KEY, JSON.stringify(o)); } catch (er) { logSilencioso(er); }
+      lpIaPintar();
+      const n = document.querySelector(`[data-ianiv="${s.dataset.ianiv}"]`); if (n) n.focus();
+    });
+    document.addEventListener("click", e => {
+      if (e.target.closest("[data-ia-sumar]")){
+        const L = lpIaTextoActividades(); if (!L.length) return;
+        const dest = $("formativa") ? "formativa" : "criterios";
+        const ya = norm(val(dest)), nuevos = L.filter(x => !ya.includes(norm(x.slice(0, 40))));
+        if (!nuevos.length){ toast("Ya estaba en la planificación."); return; }
+        if (agregarEnCampo(dest, nuevos.join("\n"))) toast(`Se sumó a «${dest === "formativa" ? "Evaluación formativa" : "Criterios de evaluación"}»: el uso de IA de cada actividad y cómo se muestra la autoría.`);
+        return;
+      }
+      if (e.target.closest("[data-ia-rub]")){
+        const filas = LP_IA_RUB.rows.map(r => r.join(" | ")), act = val("rubrica");
+        if (filas.every(f => act.includes(f.split(" | ")[0]))){ toast("La rúbrica ya estaba en Instrumentos."); return; }
+        const txt = act.trim() ? filas.join("\n") : [LP_IA_RUB.head.join(" | "), ...filas].join("\n");
+        if (agregarEnCampo("rubrica", txt)) toast("Rúbrica sumada en «Instrumentos de evaluación».");
+        return;
+      }
+      if (e.target.closest("[data-ia-word]")) bajarDoc(modeloIaResponsable(), `uso-de-ia-${slug(temaVisible() || "consignas")}`, "docx", "Documento de uso de IA descargado.");
+    });
+  } catch (e) { registrarError("init82", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -28356,7 +28645,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
