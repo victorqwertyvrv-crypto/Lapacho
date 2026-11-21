@@ -2528,6 +2528,53 @@ dialog.sv-grande .btn:disabled{opacity:.4}
 
 .aula-acc{display:flex;gap:8px;align-items:center}
 
+/* ---------- Versión 72: cierre del año, avisos y PPI ---------- */
+dialog.cierredlg{width:min(820px,calc(100vw - 24px));max-height:min(92vh,980px)}
+#ci-panel{display:flex;flex-direction:column;gap:10px;overflow:auto;min-height:0}
+#ci-panel .hint{margin:0}
+.ci-cuenta{margin:0;padding:12px 14px;border-radius:var(--radius-m,10px);background:var(--accent-soft);font-size:15px}
+.ci-cuenta b{font-size:22px}
+.ci-tab{border-collapse:collapse;width:100%;font-size:14px}
+.ci-tab th,.ci-tab td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+.ci-tab thead th{color:var(--muted);font-size:13px}
+.ci-tab td small{display:block;margin-top:3px;font-size:12.5px}
+.ci-est{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 8px;border:1px solid var(--line);white-space:nowrap}
+.ci-est[data-est="oficial"]{background:var(--accent-soft);border-color:transparent}
+.ci-est[data-est="periodistico"]{background:color-mix(in srgb,#d9a400 18%,var(--surface))}
+.ci-est[data-est="verificar"]{background:var(--surface-2)}
+.ci-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px}
+.ci-grid input{min-height:42px}
+.ci-tareas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.ci-tareas li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.ci-tareas label{display:flex;align-items:center;gap:10px;font-size:14px;min-height:36px;cursor:pointer}
+.ci-tareas input{width:20px;height:20px;margin:0;flex:none;accent-color:var(--accent)}
+.ci-2027{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.ci-td{margin:8px 0 0;font-size:14px;padding:8px 10px;border-radius:var(--radius-m,10px);background:var(--accent-soft)}
+.ppi-aviso{margin:0;padding:10px 12px;border-radius:var(--radius-m,10px);border:1px solid color-mix(in srgb,#d9a400 50%,var(--line));background:color-mix(in srgb,#d9a400 12%,var(--surface));font-size:13.5px}
+@media (max-width:760px){.ci-grid{grid-template-columns:minmax(0,1fr)}}
+#ci-panel .gr-tw{max-height:none;overflow:visible}
+
+/* ---------- Versión 72: diagnóstico de Física ---------- */
+.df{display:flex;flex-direction:column;gap:12px}
+.df .hint{margin:0}
+.df-f{display:inline-flex;align-items:center;gap:6px;font-size:14px}
+.df-f input{min-height:38px;width:auto}
+.df-lista{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.df-fila{display:grid;grid-template-columns:minmax(120px,1fr) minmax(150px,220px) 64px;gap:8px;align-items:center;padding:3px 0;border-bottom:1px solid var(--line)}
+.df-fila label{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.df-fila input{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;min-height:40px}
+.df-fila small{font-size:12.5px;color:var(--muted)}
+.df-ideas{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.df-ideas small{display:block;color:var(--muted);font-size:12.5px}
+.df-grupos{margin:0;padding-left:24px;font-size:14px;display:flex;flex-direction:column;gap:3px}
+.df-tab{border-collapse:collapse;width:100%;font-size:13px}
+.df-tab th,.df-tab td{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;white-space:nowrap}
+.df-niv[data-niv="bajo"]{border-left:4px solid color-mix(in srgb,var(--accent) 25%,var(--surface))}
+.df-niv[data-niv="basico"]{border-left:4px solid color-mix(in srgb,var(--accent) 50%,var(--surface))}
+.df-niv[data-niv="satis"]{border-left:4px solid color-mix(in srgb,var(--accent) 75%,var(--surface))}
+.df-niv[data-niv="avanz"]{border-left:4px solid var(--accent)}
+@media (max-width:760px){.df-fila{grid-template-columns:minmax(0,1fr) 64px}.df-fila input{grid-column:1/-1;grid-row:2}}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -2600,6 +2647,7 @@ dialog.sv-grande .btn:disabled{opacity:.4}
           <button type="button" role="menuitem" id="btn-muestra"><b>Muestra de la escuela</b><small>Proyecto, fichas de stand, invitación, valoración y lista del día</small></button>
           <button type="button" role="menuitem" id="btn-conv"><b>Convivencia: qué hacer</b><small>Cómo actuar y a quién acudir ante cada situación, según los acuerdos de convivencia</small></button>
           <button type="button" role="menuitem" id="btn-diasesc"><b>Días sin clases de tu escuela</b><small>Asuetos y jornadas institucionales: Lapacho los saltea al contar tus clases</small></button>
+          <button type="button" role="menuitem" id="btn-cierre"><b>Cierre del año</b><small>Fechas de diciembre y febrero, lo que falta entregar y lo que se sabe de 2027</small></button>
           <button type="button" role="menuitem" id="btn-salidas"><b>Salidas educativas</b><small>Autorizaciones y planilla del día</small></button>
           <button type="button" role="menuitem" id="btn-actos"><b>Actos y efemérides</b><small>Calendario y guion del acto</small></button>
           <button type="button" role="menuitem" id="btn-actas"><b>Actas de reunión</b><small>Con familias, de área o institucionales</small></button>
@@ -4889,13 +4937,13 @@ function etapasSemanas(N){
 const semLabel = ([s, e]) => s === e ? `Semana ${s}` : `Semanas ${s} a ${e}`;
 /* ============================================================
    Calendario escolar de Tucumán y feriados
-   Fuentes: Ministerio de Educación de Tucumán (inicio, receso y cierre 2026,
-   difundidos en febrero de 2026) y feriados nacionales 2026 (BCRA, Com. "C" 101352).
+   Fuentes: Ministerio de Educación de Tucumán (Res. 0030/5 MEd: receso y cierre 2026; Res. 409/5 MEd del 27/02/2026:
+   inicio el martes 3 de marzo) y feriados nacionales 2026 (BCRA, Com. "C" 101352).
    El 24 de septiembre es feriado provincial (Batalla de Tucumán).
    ============================================================ */
 const CAL = {
   2026: {
-    inicio:"2026-03-02", fin:"2026-12-18", receso:["2026-07-13", "2026-07-24"],
+    inicio:"2026-03-03", fin:"2026-12-18", receso:["2026-07-13", "2026-07-24"],
     feriados:{
       "2026-01-01":"Año Nuevo", "2026-02-16":"Carnaval", "2026-02-17":"Carnaval",
       "2026-03-23":"día no laborable", "2026-03-24":"Día Nacional de la Memoria por la Verdad y la Justicia",
@@ -5522,6 +5570,12 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-21c", fecha:"2026-11-21", items:[
+    "«Cierre del año» (en «Para la escuela»): el fin de clases del viernes 18 de diciembre (Res. 0030/5 MEd), lo que se sabe del acompañamiento, las escuelas de verano y 2027, cada dato con su fuente y marcado como oficial, anuncio periodístico o a verificar. Cargás las fechas que fija tu escuela y tildás lo que te falta entregar.",
+    "Mi curso › Cierre: «Aviso a las familias», una hoja por estudiante que va a diciembre o a febrero, con los contenidos a recuperar, las fechas y la firma de la familia.",
+    "Mi curso › Diagnóstico: doce preguntas de Física sobre ideas previas (fuerza y movimiento, energía, calor y temperatura, electricidad). Imprimís la prueba, cargás las respuestas y ves los niveles, qué ideas previas trabajar y grupos sugeridos.",
+    "«Clase sin voz» suma qué hacer si faltás (SeSOP y certificado). En PPI, el aviso del nuevo marco federal de Educación Especial. El inicio de clases 2026 quedó en el 3 de marzo (Res. 409/5 MEd)."
+  ]},
   {id:"2026-11-21b", fecha:"2026-11-21", items:[
     "Nueva herramienta «Clase sin voz», para cuando estás disfónico o afónico. Empieza con dos preguntas de salud: si corresponde no dar clase, te lo dice y te lleva a las licencias.",
     "Trae tarjetas de frases para mostrar en pantalla grande y leer en voz alta con la voz del dispositivo, tu clase escrita paso a paso con temporizador, un acuerdo de señales, roles para los estudiantes y qué actividades conviene cambiar.",
@@ -17321,7 +17375,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "71 (21/11/2026)";
+const LAPACHO_VERSION = "72 (21/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -27995,7 +28049,7 @@ function libActualizar(){
     if (r.length) toast(`Esta planificación ya aparece en «Mi curso» de ${[...new Set(r.map(x => x.c.curso || "tu curso"))].join(" y ")}.`);
   } catch (e) { logSilencioso(e); }
 }
-function renderCurTab(t){
+function renderCurTabV72(t){
   try {
     const r = lpAutoVincular();
     if (r.length){
@@ -28460,7 +28514,7 @@ function svHtmlSenales(){
     <h3 class="sv-g">Roles</h3><ul class="sv-roles">${SV_ROLES.map(([r, d]) => `<li><b>${esc(r)}:</b> ${esc(d)}</li>`).join("")}</ul>
     ${al.length >= SV_ROLES.length ? `<div class="cur-bar"><button type="button" class="btn btn-sm" data-sv="sortear">Sortear roles en ${esc(c.curso || "el curso")}</button></div><div id="sv-sorteo" aria-live="polite"></div>` : ""}`;
 }
-function svHtmlSalud(){
+function svHtmlSaludV71(){
   return `<div class="sv-tips"><h3>Cuándo consultar</h3><ul>
       <li>Ya, sin esperar: dificultad para respirar o tragar, dolor fuerte, tos con sangre o un bulto en el cuello.</li>
       <li>Si la voz no mejora en dos semanas: turno con otorrino.</li>
@@ -28534,6 +28588,326 @@ function init84(){
   } catch (e) { registrarError("init84", e, "aviso"); }
 }
 CT_RUTAS.push({id:"sinvoz", t:"Clase sin voz", d:"Cómo dar la clase si estás disfónico o afónico, y cuándo pedir licencia.", a:ctBtn("btn-sinvoz"), p:[[/sin voz|\bafon\w*|disfon\w*|perdi la voz|me quede sin voz|no tengo voz|ronquera|laringitis|no puedo hablar/, 8]]});
+
+/* ============================================================
+   Versión 72: cierre del ciclo 2026 e inicio de 2027, avisos a las familias, ajustes de licencia y PPI
+   - «Cierre del año»: fechas con su estado (oficial, periodístico, a verificar) y su fuente; las fechas que fija cada
+     escuela (acompañamiento, mesas, entrega de notas) las carga el docente; lista de tareas de cierre que se tilda.
+     Datos en lapacho-cierre-v1. Fuentes leídas el 21/11/2026.
+   - Mi curso › Cierre: «Aviso a las familias» (Word) para cada estudiante que va a diciembre o a febrero, con los
+     contenidos a recuperar y las fechas cargadas en «Cierre del año».
+   - «Clase sin voz» › Salud y licencia: qué hacer si faltás (SeSOP: presentación, código de inasistencia, certificado).
+   - PPI: aviso del nuevo marco federal de Educación Especial (CFE, asamblea 157, 6/11/2026; resolución sin publicar).
+   ============================================================ */
+LP_ICS.cierre = '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="m8.5 14.5 2.3 2.3 4.7-4.6"/>';
+LP_IC_ID["btn-cierre"] = "cierre";
+const CI_KEY = "lapacho-cierre-v1";
+const CI_FUENTES = {
+  cal26:["Calendario escolar 2026 (Res. 0030/5 MEd)", "https://www.educaciontuc.gov.ar/2026/01/22/conoce-el-calendario-escolar-2026-de-tucuman/"],
+  ini26:["Inicio del ciclo 2026 (Res. 409/5 MEd)", "https://www.educaciontuc.gov.ar/2026/02/27/educacion-informa-sobre-el-inicio-del-ciclo-lectivo/"],
+  lv12:["La ministra Montaldo sobre el fin de clases (LV12, oct. 2026)", "https://www.lv12.com.ar/susana-montaldo/susana-montaldo-confirmo-cuando-terminaran-las-clases-n205714"],
+  verano:["Escuelas de verano 2026-2027 (Ministerio, 18/11/2026)", "https://www.educaciontuc.gov.ar/2026/11/18/capacitan-a-docentes-para-las-escuelas-de-verano-2026-2027/"],
+  ctx:["Cierre 2026 y anuncios para 2027 (Contexto Tucumán, nov. 2026)", "https://www.contextotucuman.com/nota/427370/tucuman-cierra-el-ciclo-lectivo-con-mas-de-180-dias-de-clases-y-montaldo-proyecta-sumar-horas-en-2027.html"],
+  cfe:["Consejo Federal de Educación, asamblea 157 (6/11/2026)", "https://www.argentina.gob.ar/noticias/nuevo-consejo-federal-de-educacion"],
+  sec:["Dirección de Educación Secundaria: circulares y normativa", "http://www.educaciontuc.gov.ar/a/direcciones/educacion-secundaria/"],
+  sinide:["Comunicados oficiales (Circular 02/2026: SInIDE-SGE obligatorio)", "https://www.educaciontuc.gov.ar/a/comunicados-oficiales/"]
+};
+const CI_FIJAS = [
+  {t:"Fin de clases 2026", f:"2026-12-18", est:"oficial", fu:"cal26"},
+  {t:"Trimestrales del 3.er trimestre", txt:"Desde mediados de noviembre", est:"periodistico", fu:"lv12"},
+  {t:"Período de acompañamiento de diciembre", txt:"Antes del 18/12; los días los fija la escuela", est:"verificar", fu:"lv12"},
+  {t:"Escuelas de verano", txt:"15/12/2026 al 26/02/2027", est:"oficial", fu:"verano"},
+  {t:"Calendario escolar 2027", txt:"Todavía no publicado", est:"verificar", fu:"cfe"},
+  {t:"Inicio de clases 2027", f:"2027-03-01", est:"periodistico", fu:"ctx"}
+];
+const CI_EDIT = [
+  ["acoDicD", "Acompañamiento de diciembre: desde"], ["acoDicH", "Acompañamiento de diciembre: hasta"], ["mesaDic", "Mesa de diciembre"],
+  ["notas", "Entrega de notas a preceptoría"], ["acoFebD", "Acompañamiento de febrero: desde"], ["acoFebH", "Acompañamiento de febrero: hasta"], ["mesaFeb", "Mesa de febrero o marzo"]
+];
+const CI_TAREAS = [
+  ["sinide", "Cargar las notas del 3.er trimestre en SInIDE-SGE", ""],
+  ["prec", "Entregar la planilla a preceptoría", "cur:entregar"],
+  ["recup", "Armar los trabajos de recuperación", "cur:cierre"],
+  ["familias", "Avisar a las familias de quienes van a diciembre o a febrero", "cur:cierre"],
+  ["acomp", "Organizar los encuentros del acompañamiento", "cur:cierre"],
+  ["actas", "Preparar las actas de examen", "cur:cierre"],
+  ["respaldo", "Descargar una copia de seguridad de tus datos", "lib"],
+  ["marzo", "Pensar el diagnóstico de marzo", ""]
+];
+const CI_EST = {oficial:"Oficial", periodistico:"Anuncio periodístico", verificar:"A verificar"};
+function ciLeer(){ try { const o = JSON.parse(localStorage.getItem(CI_KEY) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+function ciSet(k, v){ try { const o = ciLeer(); o[k] = v; localStorage.setItem(CI_KEY, JSON.stringify(o)); } catch (e) { logSilencioso(e); } }
+const ciFecha = iso => { if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || "")) return ""; const d = fechaDe(iso); return d.toLocaleDateString("es-AR", {weekday:"long", day:"numeric", month:"numeric", year:"numeric"}); };
+function ciRango(d, h){ const a = ciFecha(d), b = ciFecha(h); return a && b ? `del ${a} al ${b}` : a ? `desde el ${a}` : b ? `hasta el ${b}` : ""; }
+function ciFaltan(){ try { const r = diasDeClaseRestantes(); return r && !r.antes && !r.despues ? r : null; } catch (e) { return null; } }
+function htmlCierreAnio(){
+  const D = ciLeer(), T = D.tareas || {}, r = ciFaltan();
+  const fu = k => { const f = CI_FUENTES[k]; return f ? `<a href="${esc(f[1])}" target="_blank" rel="noopener">${esc(f[0])}</a>` : ""; };
+  const hechas = CI_TAREAS.filter(([k]) => T[k]).length;
+  return `${r ? `<p class="ci-cuenta"><b>${r.n}</b> ${r.n === 1 ? "día de clase" : "días de clase"} hasta el viernes 18 de diciembre${r.mios != null ? `, ${r.mios} con tus cursos` : ""}.</p>` : ""}
+    <h3 class="sv-g">Fechas</h3>
+    <div class="gr-tw"><table class="ci-tab"><thead><tr><th scope="col">Qué</th><th scope="col">Cuándo</th><th scope="col">Estado</th></tr></thead><tbody>
+      ${CI_FIJAS.map(x => `<tr><th scope="row">${esc(x.t)}</th><td>${esc(x.f ? ciFecha(x.f) : x.txt)}</td><td><span class="ci-est" data-est="${x.est}">${CI_EST[x.est]}</span><small>${fu(x.fu)}</small></td></tr>`).join("")}
+    </tbody></table></div>
+    <h3 class="sv-g">Las fechas de tu escuela</h3>
+    <p class="hint">El acompañamiento, las mesas y la entrega de notas los fija cada escuela y no están publicados por el Ministerio. Cargalos acá: se usan en los avisos a las familias.</p>
+    <div class="ci-grid">${CI_EDIT.map(([k, l]) => `<div class="f"><label for="ci-${k}">${esc(l)}</label><input type="date" id="ci-${k}" data-ci="${k}" value="${esc(D[k] || "")}"></div>`).join("")}</div>
+    <h3 class="sv-g">Lo que falta (${hechas} de ${CI_TAREAS.length})</h3>
+    <ul class="ci-tareas">${CI_TAREAS.map(([k, t, ir]) => `<li><label><input type="checkbox" data-citarea="${k}"${T[k] ? " checked" : ""}> ${esc(t)}</label>${ir ? `<button type="button" class="linkbtn" data-ciir="${ir}">Ir</button>` : ""}</li>`).join("")}</ul>
+    <h3 class="sv-g">2027</h3>
+    <ul class="ci-2027">
+      <li>El calendario escolar 2027 de Tucumán todavía no se publicó (al 21/11/2026). El de 2026 se difundió el 22 de enero.</li>
+      <li>El Consejo Federal de Educación aprobó el 6/11/2026 el marco del calendario 2027: un piso de 190 días de clase, o 900 horas reloj en secundaria. La resolución se publica en diciembre. ${fu("cfe")}</li>
+      <li>Anunciado por la ministra (periodístico, a verificar): inicio el 1 de marzo de 2027 y más horas en escuelas primarias. ${fu("ctx")}</li>
+    </ul>
+    <p class="hint">Normativa de evaluación y promoción de secundaria (Res. 1222, 1223 y 1224/5 MEd y modificatorias): ${fu("sec")}. Escala, nota de aprobación y tope de inasistencias se configuran en cada curso (Mi curso › Datos del curso): confirmalos con tu escuela.</p>`;
+}
+function ciDlg(){
+  let d = $("cierreanio"); if (d) return d;
+  $("app").insertAdjacentHTML("beforeend", `<dialog class="lib cierredlg" id="cierreanio" aria-labelledby="ci-t"><div class="lib-in">
+    <div class="lib-head"><h2 id="ci-t">Cierre del año 2026</h2><button type="button" class="linkbtn" data-cerrar="cierreanio">Cerrar</button></div>
+    <div id="ci-panel"></div></div></dialog>`);
+  d = $("cierreanio");
+  d.addEventListener("close", () => { $("app").appendChild($("toast")); });
+  return d;
+}
+function abrirCierreAnio(){
+  const d = ciDlg(); $("ci-panel").innerHTML = htmlCierreAnio();
+  d.appendChild($("toast"));
+  if (!d.open){ if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }
+  const h = d.querySelector(".lib-head h2"); if (h){ h.tabIndex = -1; h.focus({preventScroll:true}); }
+}
+/* Tu día: un recordatorio del cierre, del 1/11 al 18/12 */
+function renderTuDia(){
+  renderTuDiaV71();
+  try {
+    const T = $("tudia"); if (!T || T.hidden) return;
+    const hoy = hoyIso(); if (hoy < "2026-11-01" || hoy > "2026-12-18") return;
+    if (T.querySelector(".ci-td")) return;
+    const r = ciFaltan(), D = ciLeer(), hechas = CI_TAREAS.filter(([k]) => (D.tareas || {})[k]).length;
+    T.insertAdjacentHTML("beforeend", `<p class="ci-td">Cierre del año: ${r ? `faltan ${r.n} ${r.n === 1 ? "día" : "días"} de clase` : "terminan las clases"} (18/12) · ${hechas} de ${CI_TAREAS.length} tareas hechas. <button type="button" class="linkbtn" data-proxy="btn-cierre">Ver qué falta</button></p>`);
+  } catch (e) { logSilencioso(e); }
+}
+/* ---------- avisos a las familias (Mi curso › Cierre) ---------- */
+function modeloAvisoFamilias(c, inst){
+  const D = ciLeer(), dic = inst === "dic";
+  const al = alumnosActivos(c).filter(a => { try { return condicion(c, a.id).k === inst; } catch (e) { return false; } });
+  const aco = dic ? ciRango(D.acoDicD, D.acoDicH) : ciRango(D.acoFebD, D.acoFebH), mesa = ciFecha(dic ? D.mesaDic : D.mesaFeb);
+  const secs = al.map((a, k) => {
+    const cont = itemsLista(((c.recup || {})[a.id] || {}).cont || "").filter(Boolean), lista = cont.length ? cont : contenidosSugeridos(c);
+    return {h:a.n, pageBreak:k > 0, lead:`${nombreMateria(c.materia)} · ${c.curso} · Ciclo lectivo ${c.ciclo || ""}`,
+      body:[`Señora, señor, familia de ${a.n}:`, "",
+        `Les informamos que ${a.n} todavía no aprobó ${nombreMateria(c.materia)} y la tiene que completar en la instancia de ${dic ? "diciembre" : "febrero y marzo"}.`,
+        `Período de acompañamiento: ${aco || "las fechas las confirma la escuela"}.`,
+        `Evaluación: ${mesa ? "el " + mesa : "la fecha la confirma la escuela"}.`, "",
+        "Contenidos que tiene que recuperar:", toList(lista), "",
+        "Le pedimos que asista a todos los encuentros y que traiga la carpeta. Cualquier consulta, acérquense a la escuela.", "",
+        "Firma del docente: ............................................     Firma de la familia (notificada): ............................................"].join("\n")};
+  });
+  return {inst:c.escuela, titulo:"Aviso a la familia", subtitulo:`Instancia de ${dic ? "diciembre" : "febrero y marzo"}`, faltaSub:"Instancia",
+    datos:[["Espacio curricular", nombreMateria(c.materia)], ["Curso", c.curso], ["Docente", c.docente || val("docente") || ""]], secs, firmas:null};
+}
+function htmlCierre(c){
+  const h = htmlCierreV71(c);
+  try {
+    if (!alumnosActivos(c).length) return h;
+    const n = k => alumnosActivos(c).filter(a => { try { return condicion(c, a.id).k === k; } catch (e) { return false; } }).length, nD = n("dic"), nF = n("feb");
+    const D = ciLeer(), faltan = !(D.acoDicD || D.mesaDic);
+    return h + `<details class="cur-sub" id="ci-fam"><summary>Aviso a las familias (diciembre y febrero)</summary>
+      <p class="hint">Una hoja por estudiante, con los contenidos a recuperar, las fechas del acompañamiento y de la evaluación, y un espacio para la firma de la familia.${faltan ? ` Las fechas se toman de <button type="button" class="linkbtn" data-proxy="btn-cierre">Cierre del año</button>: si no las cargaste, dice que las confirma la escuela.` : ""}</p>
+      <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-cifam="dic"${nD ? "" : " disabled"}>Diciembre (${nD})</button><button type="button" class="btn btn-sm" data-cifam="feb"${nF ? "" : " disabled"}>Febrero (${nF})</button></div></details>`;
+  } catch (e) { registrarError("htmlCierre72", e, "aviso"); return h; }
+}
+/* ---------- Clase sin voz: si faltás ---------- */
+function svHtmlSalud(){
+  return svHtmlSaludV71() + `<div class="sv-tips" id="sv-sesop"><h3>Si faltás por enfermedad</h3><ul>
+      <li>Presentate en el Servicio de Salud Ocupacional (SeSOP) el primer día de la inasistencia, con el certificado.</li>
+      <li>Si no podés ir: gestioná el código de inasistencia en la web del SeSOP o pedí médico a domicilio al 0381 421-6009.</li>
+      <li>El certificado tiene que ser original (no se aceptan fotocopias) y llevar membrete, el diagnóstico o su código, los días de reposo en números y letras, tu DNI y la matrícula del médico, entre otros datos que pide el SeSOP.</li></ul>
+      <p class="hint">Fuente: <a href="https://www.sesop.gov.ar/novedadesweb/index" target="_blank" rel="noopener">SeSOP, Gobierno de Tucumán</a> (consultado el 21/11/2026). Revisá la lista completa de requisitos antes de ir.</p></div>`;
+}
+function init85(){
+  try {
+    const b = $("btn-cierre"); if (b) b.addEventListener("click", abrirCierreAnio);
+    /* PPI: aviso del marco federal nuevo */
+    const h = document.querySelector("#ppi .lib-in > p.hint");
+    if (h && !$("ppi-cfe157")) h.insertAdjacentHTML("afterend", `<p class="ppi-aviso" id="ppi-cfe157"><b>Novedad federal (6/11/2026):</b> el Consejo Federal de Educación aprobó un nuevo marco de Educación Especial que elimina la certificación diferenciada para estudiantes con discapacidad en escuelas comunes. La resolución todavía no se publicó; hasta entonces rige la Res. CFE 311/16. <a href="https://www.argentina.gob.ar/noticias/nuevo-consejo-federal-de-educacion" target="_blank" rel="noopener">Fuente</a></p>`);
+    document.addEventListener("click", e => {
+      const t = e.target;
+      if (t.closest("#cierreanio [data-cerrar]")){ cerrarDialogo("cierreanio"); return; }
+      const ir = t.closest("[data-ciir]");
+      if (ir){ const [a, b2] = ir.dataset.ciir.split(":"); cerrarDialogo("cierreanio");
+        if (a === "lib") abrirLib(); else if (a === "cur"){ const bc = $("btn-curso"); if (bc) bc.click(); setTimeout(() => { try { setTab("cur", b2); } catch (er) { logSilencioso(er); } }, 150); }
+        return; }
+      const f = t.closest("[data-cifam]");
+      if (f){ const c = cursoSel(); if (!c) return; const M = modeloAvisoFamilias(c, f.dataset.cifam); if (!M.secs.length){ toast("No hay estudiantes en esa instancia."); return; }
+        bajarDoc(M, `aviso-familias-${f.dataset.cifam === "dic" ? "diciembre" : "febrero"}-${slug(c.curso)}`, "docx", "Avisos a las familias descargados."); }
+    });
+    document.addEventListener("change", e => {
+      const t = e.target;
+      if (t.dataset && t.dataset.ci){ ciSet(t.dataset.ci, t.value); return; }
+      if (t.dataset && t.dataset.citarea){ const T = ciLeer().tareas || {}; T[t.dataset.citarea] = t.checked; ciSet("tareas", T);
+        const h3 = [...document.querySelectorAll("#ci-panel h3")].find(x => /^Lo que falta/.test(x.textContent)); if (h3) h3.textContent = `Lo que falta (${CI_TAREAS.filter(([k]) => T[k]).length} de ${CI_TAREAS.length})`; }
+    });
+  } catch (e) { registrarError("init85", e, "aviso"); }
+}
+CT_RUTAS.push({id:"cierre26", t:"Cierre del año", d:"Fechas de diciembre y febrero, lo que falta entregar y lo que se sabe de 2027.", a:ctBtn("btn-cierre"), p:[[/cierre del (ano|ciclo)|fin de (clases|ano|ciclo)|cuando terminan las clases|calendario (escolar )?2027|cuando empiezan las clases/, 7]]});
+
+/* ============================================================
+   Versión 72 (parte 2): diagnóstico de entrada de Física por niveles (Mi curso › Diagnóstico)
+   - 12 preguntas propias de Lapacho (no son del FCI, PISA ni TIMSS, que no se pueden publicar), en cuatro ejes:
+     fuerza y movimiento, energía, calor y temperatura, y electricidad. Cada opción incorrecta corresponde a una idea
+     previa documentada, para saber qué trabajar.
+   - El docente imprime la prueba (Word), carga las respuestas de cada estudiante como 12 letras y ve el resultado en
+     los cuatro niveles de Aprender (por debajo del básico, básico, satisfactorio, avanzado). Los cortes son de Lapacho
+     y no oficiales: hasta 40 %, hasta 60 %, hasta 85 % y más de 85 % de respuestas correctas.
+   - Sugiere grupos heterogéneos para trabajar en equipo y grupos por idea previa para intervenir.
+   Las respuestas se guardan en el curso (c.diagFis); no cambia nada más.
+   ============================================================ */
+const DF_EJES = {mov:"Fuerza y movimiento", ene:"Energía", cal:"Calor y temperatura", ele:"Electricidad"};
+const DF_ITEMS = [
+  {id:"m1", e:"mov", q:"Pateás una pelota hacia arriba. Mientras sube (sin tener en cuenta el aire), ¿qué fuerzas actúan sobre ella?",
+    o:["Solo su peso, hacia abajo.", "La fuerza de la patada hacia arriba y el peso hacia abajo.", "Una fuerza hacia arriba que es mayor que el peso.", "Ninguna fuerza."], ok:0,
+    idea:"Cree que para que algo se mueva tiene que haber una fuerza en el sentido del movimiento (la patada «sigue» empujando)."},
+  {id:"m2", e:"mov", q:"Un disco se desliza sobre un hielo tan liso que no hay rozamiento. ¿Qué pasa con su velocidad?",
+    o:["Disminuye hasta que se frena.", "Aumenta poco a poco.", "Se frena de golpe cuando se termina la fuerza del golpe.", "Se mantiene constante."], ok:3,
+    idea:"Cree que el movimiento se «gasta» solo, sin que nada lo frene (no reconoce la inercia)."},
+  {id:"m3", e:"mov", q:"Un camión choca de frente con un auto chico. Durante el choque, ¿cómo son las fuerzas que se hacen uno al otro?",
+    o:["El camión le hace más fuerza al auto.", "El auto le hace más fuerza al camión.", "Las dos fuerzas son iguales en intensidad y de sentido contrario.", "Solo el camión le hace fuerza al auto."], ok:2,
+    idea:"Cree que el cuerpo más grande o más rápido hace más fuerza (no aplica la tercera ley de Newton)."},
+  {id:"m4", e:"mov", q:"Se sueltan al mismo tiempo, desde 1 metro de altura, dos bolitas del mismo tamaño: una de acero y otra de vidrio, más liviana. Sin tener en cuenta el aire, ¿cuál llega primero al piso?",
+    o:["La de acero, porque es más pesada.", "La de vidrio, porque es más liviana.", "Depende de quién las suelte.", "Llegan al mismo tiempo."], ok:3,
+    idea:"Cree que los cuerpos más pesados caen más rápido."},
+  {id:"e1", e:"ene", q:"Una pelota cae desde una mesa. Mientras cae, ¿qué pasa con la energía?",
+    o:["La energía de movimiento aumenta y la que depende de la altura disminuye.", "Las dos aumentan.", "Se crea energía nueva al caer.", "La energía se gasta y desaparece."], ok:0,
+    idea:"No reconoce que la energía se transforma: piensa que se crea o que desaparece."},
+  {id:"e2", e:"ene", q:"Cuando una pila se «agota» después de encender una linterna, ¿qué pasó con la energía?",
+    o:["Se destruyó.", "Se transformó en luz y calor.", "Se quedó guardada en los cables.", "Volvió a la pila."], ok:1,
+    idea:"Cree que la energía se consume y deja de existir, en lugar de transformarse."},
+  {id:"e3", e:"ene", q:"Un auto frena hasta quedar quieto. ¿Qué pasó con su energía de movimiento?",
+    o:["Desapareció.", "Se guardó en el motor para la próxima vez.", "Se transformó sobre todo en calor en los frenos y las ruedas.", "Se convirtió en energía de altura."], ok:2,
+    idea:"No identifica en qué se transforma la energía: piensa que «se pierde»."},
+  {id:"c1", e:"cal", q:"Una cuchara de metal y una de madera están desde hace horas sobre la misma mesa. Al tocarlas, la de metal se siente más fría. ¿Cómo son sus temperaturas?",
+    o:["La de metal está más fría.", "La de madera está más fría.", "Son iguales: el metal se siente más frío porque conduce mejor el calor.", "No se puede saber sin un termómetro."], ok:2,
+    idea:"Confunde la sensación al tocar con la temperatura: cree que el metal está más frío."},
+  {id:"c2", e:"cal", q:"¿Por qué una campera de abrigo nos mantiene calientes?",
+    o:["Porque hace que el cuerpo pierda menos calor.", "Porque produce calor.", "Porque absorbe el frío de afuera.", "Porque le pasa su calor a la piel."], ok:0,
+    idea:"Cree que la ropa da calor o que el «frío» es algo que entra (calor y frío como sustancias)."},
+  {id:"c3", e:"cal", q:"Se mezcla 1 litro de agua a 20 °C con 1 litro de agua a 60 °C. Si no hay pérdidas, ¿qué temperatura tiene la mezcla?",
+    o:["80 °C, porque las temperaturas se suman.", "60 °C, porque gana la más caliente.", "20 °C, porque gana la más fría.", "40 °C."], ok:3,
+    idea:"Trata la temperatura como algo que se suma o en el que «gana» un cuerpo (confunde temperatura y calor)."},
+  {id:"l1", e:"ele", q:"Tenés una pila, una lamparita y un solo cable. ¿Se puede encender la lamparita?",
+    o:["No: hacen falta dos cables.", "Sí: la base de la lamparita toca un polo de la pila y el cable une el otro polo con el costado de la lamparita, y queda un circuito cerrado.", "Sí: alcanza con unir un polo de la pila con la lamparita.", "Sí: de cualquier forma, si la pila está cargada."], ok:1,
+    idea:"No reconoce que la corriente necesita un circuito cerrado (cree que alcanza con «llevar» la electricidad a la lamparita)."},
+  {id:"l2", e:"ele", q:"En un circuito con una pila y una lamparita encendida, ¿cómo es la corriente que entra a la lamparita comparada con la que sale?",
+    o:["La que sale es menor, porque la lamparita gasta corriente.", "Son iguales.", "La que sale es mayor.", "No sale corriente: se queda en la lamparita."], ok:1,
+    idea:"Cree que la corriente se consume en la lamparita (confunde corriente y energía)."}
+];
+const DF_LETRAS = "ABCD";
+const DF_NIV = [["bajo", "Por debajo del básico", 0.4], ["basico", "Básico", 0.6], ["satis", "Satisfactorio", 0.85], ["avanz", "Avanzado", 1.01]];
+function dfNivel(p){ return DF_NIV.find(n => p <= n[2] + 1e-9) || DF_NIV[DF_NIV.length - 1]; }
+function dfParse(s){ return String(s || "").toUpperCase().replace(/[^ABCD\-_?]/g, "").slice(0, DF_ITEMS.length).split("").map(x => DF_LETRAS.includes(x) ? x : ""); }
+function dfResultados(c){
+  const D = c.diagFis || {}, R = D.resp || {}, out = [];
+  alumnosActivos(c).forEach(a => {
+    const r = dfParse(R[a.id]); if (!r.some(Boolean)) return;
+    const ok = DF_ITEMS.map((it, i) => r[i] === DF_LETRAS[it.ok]);
+    const ejes = {}; Object.keys(DF_EJES).forEach(k => { const ix = DF_ITEMS.map((it, i) => it.e === k ? i : -1).filter(i => i >= 0); ejes[k] = ix.filter(i => ok[i]).length / ix.length; });
+    const n = ok.filter(Boolean).length, p = n / DF_ITEMS.length;
+    out.push({a, r, ok, n, p, niv:dfNivel(p), ejes});
+  });
+  return out;
+}
+function dfGrupos(res){
+  /* grupos heterogéneos de 4: se ordenan por puntaje y se reparten en zigzag */
+  const ord = res.slice().sort((x, y) => y.n - x.n), G = Math.max(1, Math.round(ord.length / 4)), gr = Array.from({length:G}, () => []);
+  ord.forEach((x, i) => { const v = Math.floor(i / G), k = v % 2 ? G - 1 - (i % G) : i % G; gr[k].push(x.a.n); });
+  /* grupos por idea previa: quienes eligieron alguna opción incorrecta en cada pregunta */
+  const ideas = DF_ITEMS.map((it, i) => ({it, quienes:res.filter(x => x.r[i] && !x.ok[i]).map(x => x.a.n)})).filter(x => x.quienes.length >= 2).sort((a, b) => b.quienes.length - a.quienes.length);
+  return {gr, ideas};
+}
+function htmlDiagFis(c){
+  const D = c.diagFis || {}, R = D.resp || {}, al = alumnosActivos(c), res = dfResultados(c);
+  const fis = /f[ií]sica|naturales|ciencias|qu[ií]mica/i.test(nombreMateria(c.materia) || "");
+  let h = `<div class="df">
+    <p class="hint">Doce preguntas de opción múltiple sobre ideas previas en cuatro ejes: fuerza y movimiento, energía, calor y temperatura, y electricidad. Pensado para 1.º a 3.º año${fis ? "" : " de Física o Ciencias Naturales"}. Son preguntas propias de Lapacho: cada opción incorrecta corresponde a una idea previa frecuente.</p>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-df="prueba">Prueba para imprimir (Word)</button>${res.length ? `<button type="button" class="btn btn-sm" data-df="informe">Informe de resultados (Word)</button>` : ""}<label class="df-f">Fecha <input type="date" data-df-fecha value="${esc(D.fecha || "")}"></label></div>`;
+  if (!al.length) return h + `<p class="lib-empty">Cargá la lista del curso para registrar las respuestas.</p></div>`;
+  h += `<details class="cur-sub" id="df-carga"${res.length ? "" : " open"}><summary>Cargar respuestas (${res.length} de ${al.length})</summary>
+    <p class="hint">Escribí las 12 respuestas de cada estudiante en orden, por ejemplo «ABCC ABBC BBBB». Un guion (-) si dejó una sin contestar. Se guarda al salir del campo.</p>
+    <div class="df-lista">${al.map(a => { const r = dfParse(R[a.id]), n = r.filter(Boolean).length; return `<div class="df-fila"><label for="df-${a.id}">${esc(a.n)}</label><input id="df-${a.id}" data-dfa="${a.id}" value="${esc(r.map(x => x || "-").join("").replace(/-+$/, ""))}" maxlength="20" autocomplete="off" spellcheck="false" inputmode="text" aria-describedby="dfn-${a.id}"><small id="dfn-${a.id}">${n ? `${n} respondidas` : ""}</small></div>`; }).join("")}</div></details>`;
+  if (!res.length) return h + `</div>`;
+  const cnt = DF_NIV.map(([k, t]) => [k, t, res.filter(x => x.niv[0] === k).length]);
+  const ejeProm = Object.keys(DF_EJES).map(k => [k, res.reduce((s, x) => s + x.ejes[k], 0) / res.length]);
+  const itemProm = DF_ITEMS.map((it, i) => res.filter(x => x.ok[i]).length / res.length);
+  const G = dfGrupos(res);
+  h += `<div class="gr-tiles">${cnt.map(([k, t, n]) => `<div class="gr-tile df-niv" data-niv="${k}"><span class="gr-tl">${esc(t)}</span><b class="gr-tv">${n}</b><small>${Math.round(n / res.length * 100)} % del curso</small></div>`).join("")}</div>
+    <p class="hint">Niveles con los nombres de Aprender. Los cortes son de Lapacho, no oficiales: hasta 40 %, hasta 60 %, hasta 85 % y más de 85 % de respuestas correctas.</p>
+    <div class="gr-grid2">
+      ${lpFigura("Cómo le fue al curso en cada eje", "Porcentaje de respuestas correctas", lpGrafLugar({tipo:"h", datos:ejeProm.map(([k, p]) => ({et:DF_EJES[k], v:Math.round(p * 100), tip:`${DF_EJES[k]}: ${Math.round(p * 100)} %`})), max:100, fmt:v => v + " %", resumen:`Por eje: ${ejeProm.map(([k, p]) => `${DF_EJES[k]} ${Math.round(p * 100)} %`).join(", ")}.`}),
+        lpTablaDatos(["Eje", "Correctas"], ejeProm.map(([k, p]) => [DF_EJES[k], Math.round(p * 100) + " %"])))}
+      ${lpFigura("Cada pregunta", "Porcentaje del curso que la respondió bien", lpGrafLugar({datos:DF_ITEMS.map((it, i) => ({et:String(i + 1), v:Math.round(itemProm[i] * 100), tip:`Pregunta ${i + 1}: ${Math.round(itemProm[i] * 100)} %`})), min:0, max:100, ticks:[0, 50, 100], fmt:t => t + " %", alto:170, resumen:`Pregunta con menos aciertos: ${itemProm.indexOf(Math.min(...itemProm)) + 1}.`}),
+        lpTablaDatos(["Pregunta", "Correctas"], DF_ITEMS.map((it, i) => [String(i + 1), Math.round(itemProm[i] * 100) + " %"])))}
+    </div>
+    <h3 class="sv-g">Ideas previas para trabajar</h3>
+    ${G.ideas.length ? `<ul class="df-ideas">${G.ideas.slice(0, 6).map(x => `<li><b>${esc(DF_EJES[x.it.e])} (pregunta ${DF_ITEMS.indexOf(x.it) + 1}):</b> ${esc(x.it.idea)} <small>${x.quienes.length} estudiantes: ${esc(x.quienes.join(", "))}</small></li>`).join("")}</ul>` : `<p class="hint">Ninguna idea previa se repite en dos o más estudiantes.</p>`}
+    <h3 class="sv-g">Grupos heterogéneos para trabajar en equipo</h3>
+    <ol class="df-grupos">${G.gr.map(g => `<li>${esc(g.join(", "))}</li>`).join("")}</ol>
+    <div class="gr-tw" tabindex="0" role="region" aria-label="Resultados por estudiante"><table class="df-tab"><thead><tr><th scope="col">Estudiante</th><th scope="col">Correctas</th><th scope="col">Nivel</th>${Object.values(DF_EJES).map(t => `<th scope="col">${esc(t)}</th>`).join("")}</tr></thead><tbody>
+      ${res.slice().sort((x, y) => y.n - x.n).map(x => `<tr><th scope="row">${esc(x.a.n)}</th><td>${x.n} de ${DF_ITEMS.length}</td><td>${esc(x.niv[1])}</td>${Object.keys(DF_EJES).map(k => `<td>${Math.round(x.ejes[k] * 100)} %</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+  </div>`;
+  return h;
+}
+function modeloDiagFisPrueba(c){
+  return {inst:c.escuela || "", titulo:"Diagnóstico de Física", subtitulo:"¿Qué sabemos antes de empezar?", faltaSub:"",
+    datos:[["Nombre y apellido", ""], ["Curso", c.curso || ""], ["Fecha", ""]],
+    secs:[{h:"Consigna", body:"Leé cada pregunta y marcá con una cruz la opción que te parece correcta. No es una prueba con nota: sirve para saber de dónde partimos. Si no sabés, elegí la que te parezca más razonable."},
+      ...DF_ITEMS.map((it, i) => ({h:`${i + 1}. ${it.q}`, body:it.o.map((o, j) => `${DF_LETRAS[j]}) ${o}`).join("\n")}))],
+    firmas:null};
+}
+function modeloDiagFisInforme(c){
+  const res = dfResultados(c), G = dfGrupos(res);
+  return {inst:c.escuela || "", titulo:"Diagnóstico de Física: resultados", subtitulo:nombreCurso(c), faltaSub:"Curso",
+    datos:[["Fecha", (c.diagFis || {}).fecha ? fechaCortaIso(c.diagFis.fecha) : ""], ["Estudiantes evaluados", String(res.length)], ["Docente", c.docente || val("docente") || ""]],
+    secs:[
+      {h:"Niveles", tableOnly:true, table:{head:["Nivel", "Estudiantes"], w:[5000, 4070], rows:DF_NIV.map(([k, t]) => [t, String(res.filter(x => x.niv[0] === k).length)])}},
+      {h:"Por estudiante", tableOnly:true, table:{head:["Estudiante", "Correctas", "Nivel", ...Object.values(DF_EJES)], w:[2300, 1000, 1500, 1100, 1000, 1100, 1070], rows:res.slice().sort((x, y) => y.n - x.n).map(x => [x.a.n, `${x.n}/${DF_ITEMS.length}`, x.niv[1], ...Object.keys(DF_EJES).map(k => Math.round(x.ejes[k] * 100) + " %")])}},
+      {h:"Ideas previas para trabajar", body:G.ideas.length ? toList(G.ideas.map(x => `${DF_EJES[x.it.e]} (pregunta ${DF_ITEMS.indexOf(x.it) + 1}): ${x.it.idea} Estudiantes: ${x.quienes.join(", ")}.`)) : "Ninguna idea previa se repite en dos o más estudiantes."},
+      {h:"Grupos heterogéneos sugeridos", body:toList(G.gr.map((g, i) => `Grupo ${i + 1}: ${g.join(", ")}`))},
+      {h:"Aclaración", body:"Preguntas propias de Lapacho sobre ideas previas. Los niveles usan los nombres de Aprender, pero los cortes (40 %, 60 % y 85 % de respuestas correctas) son de Lapacho y no oficiales."}
+    ], firmas:null};
+}
+function renderCurTab(t){
+  if (t !== "diag") return renderCurTabV72(t);
+  state.tabs.cur = t;
+  const c = cursoSel(); renderCurTop();
+  if (!c) return renderCurTabV72("config");
+  const P = $("cur-panel"); P.innerHTML = htmlDiagFis(c);
+  requestAnimationFrame(() => lpGrafActivar(P));
+}
+let DF_T = 0;
+function init86(){
+  try {
+    const tabs = $("cur-tabs");
+    if (tabs && !tabs.querySelector('[data-tab="diag"]')){ const ref = tabs.querySelector('[data-tab="asis"]'); (ref || tabs.lastElementChild).insertAdjacentHTML(ref ? "beforebegin" : "afterend", `<button type="button" data-tab="diag" aria-pressed="false">Diagnóstico</button>`); }
+    document.addEventListener("change", e => {
+      const t = e.target, c = (t.dataset && (t.dataset.dfa || t.hasAttribute("data-df-fecha"))) ? cursoSel() : null; if (!c) return;
+      c.diagFis = c.diagFis || {resp:{}}; c.diagFis.resp = c.diagFis.resp || {};
+      if (t.hasAttribute("data-df-fecha")){ c.diagFis.fecha = t.value; cguardar(); return; }
+      const r = dfParse(t.value); c.diagFis.resp[t.dataset.dfa] = r.map(x => x || "-").join("").replace(/-+$/, "");
+      if (cguardar()){
+        /* se vuelve a dibujar después del cambio de foco, para no reemplazar el campo mientras lo deja */
+        const ab = $("df-carga") && $("df-carga").open, id = t.id, foco = document.activeElement && document.activeElement.id;
+        clearTimeout(DF_T); DF_T = setTimeout(() => { if (!$("cur-panel") || state.tabs.cur !== "diag") return; renderCurTab("diag"); const d = $("df-carga"); if (d && ab) d.open = true; const n = $(foco && foco.startsWith("df-") ? foco : id); if (n && foco && foco.startsWith("df-")) n.focus(); }, 0);
+      }
+    });
+    document.addEventListener("click", e => {
+      const b = e.target.closest("[data-df]"); if (!b) return; const c = cursoSel(); if (!c) return;
+      if (b.dataset.df === "prueba") bajarDoc(modeloDiagFisPrueba(c), `diagnostico-fisica-${slug(c.curso)}`, "docx", "Prueba de diagnóstico descargada.");
+      if (b.dataset.df === "informe") bajarDoc(modeloDiagFisInforme(c), `diagnostico-fisica-resultados-${slug(c.curso)}`, "docx", "Informe del diagnóstico descargado.");
+    });
+  } catch (e) { registrarError("init86", e, "aviso"); }
+}
 
 /* ============================================================
    Inicio
@@ -28862,7 +29236,7 @@ function renderMuestra(){
 function planParaRepasar(c){
   try { const s = claseDeHoy(c), e = libLeer().find(x => x.id === s.planId); return e && ["clase", "secuencia"].includes(e.data.modo) ? e : null; } catch (e) { logSilencioso(e); return null; }
 }
-function renderTuDia(){
+function renderTuDiaV71(){
   renderTuDiaBase();
   try {
     const ul = document.querySelector("#tudia .td-clases"); if (!ul) return;
@@ -28881,7 +29255,7 @@ function repasarDeHoy(cid){
 /* ---------- 6. Mi curso › Cierre: período de acompañamiento ---------- */
 var ACP = {inst:"dic", desde:"", hasta:""};
 function acpAlumnos(c, inst){ return alumnosActivos(c).filter(a => condicion(c, a.id).k === inst); }
-function htmlCierre(c){
+function htmlCierreV71(c){
   const base = htmlCierreBase(c);
   if (!alumnosActivos(c).length) return base;
   const fin = (CAL[+c.ciclo] || CAL[new Date().getFullYear()] || {}).fin;
@@ -28992,7 +29366,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
