@@ -2472,6 +2472,62 @@ details.sec[open] .sec-ic{background:var(--accent);color:var(--on-accent)}
 .ia-rub thead th{background:var(--surface-2)}
 @media (max-width:760px){.ia-act{grid-template-columns:minmax(0,1fr)}.ia-dl{grid-template-columns:minmax(0,1fr)}.ia-niv select{width:100%}}
 
+/* ---------- Versión 71: Clase sin voz ---------- */
+dialog.sinvozdlg{width:min(860px,calc(100vw - 24px));max-height:min(92vh,980px)}
+#sv-tabs{flex-wrap:wrap}
+#sv-panel{display:flex;flex-direction:column;gap:10px;min-height:0;overflow:auto}
+#sv-panel .hint{margin:0}
+.sv-q{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--radius-m,10px);background:var(--surface-2)}
+.sv-q p{margin:0;flex:1 1 260px;font-size:14.5px}
+.sv-q .seg button{min-width:64px}
+.sv-alerta,.sv-aviso,.sv-ok{padding:12px 14px;border-radius:var(--radius-m,10px);font-size:14.5px}
+.sv-alerta{background:color-mix(in srgb,#c0392b 14%,var(--surface));border:1px solid color-mix(in srgb,#c0392b 50%,var(--line))}
+.sv-aviso{background:color-mix(in srgb,#d9a400 16%,var(--surface));border:1px solid color-mix(in srgb,#d9a400 50%,var(--line))}
+.sv-ok{background:var(--accent-soft);border:1px solid var(--line)}
+.sv-tips{padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-m,10px);background:var(--surface)}
+.sv-tips h3{margin:0 0 6px;font-size:15px}
+.sv-tips ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.sv-g{margin:6px 0 0;font-size:14px;font-weight:700}
+.sv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.sv-t{display:flex;gap:4px;min-width:0}
+.sv-tb{flex:1 1 auto;min-width:0;text-align:left;font:inherit;font-size:14.5px;font-weight:600;line-height:1.3;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m,10px);padding:10px 12px;min-height:48px;cursor:pointer}
+.sv-tb:hover{border-color:var(--accent)}
+.sv-leer{flex:none;width:48px;min-height:48px;font-size:18px;border:1px solid var(--line);border-radius:var(--radius-m,10px);background:var(--accent-soft);cursor:pointer}
+.sv-tb:focus-visible,.sv-leer:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sv-escribir label{font-weight:600;font-size:14px}
+.sv-escribir input{flex:1 1 220px;min-height:44px}
+.sv-cfg>summary{cursor:pointer;font-weight:600;font-size:14px;min-height:40px;display:flex;align-items:center;color:var(--acc-texto,var(--accent))}
+.sv-cfg select{width:auto;max-width:100%;min-height:40px}
+.sv-vel{display:inline-flex;align-items:center;gap:6px;font-size:14px}
+.sv-pasos{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:6px}
+.sv-pasos li{font-size:14px}
+.sv-pasos small{display:block;color:var(--muted);font-weight:600}
+.sv-pasos .linkbtn{margin-left:6px}
+.sv-cambios,.sv-senales,.sv-roles{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.sv-pie{display:flex;justify-content:flex-end;padding-top:6px;border-top:1px solid var(--line)}
+.btn.sv-alto{background:#b3261e;border-color:#b3261e;color:#fff;font-weight:700}
+.btn.sv-alto:hover{background:#8c1d18}
+/* pantalla grande */
+dialog.sv-grande{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;padding:0;border:0;background:#0d1f17;color:#fff}
+dialog.sv-grande::backdrop{background:#000}
+dialog.sv-grande.alto{background:#b3261e}
+.sv-g-in{height:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px 20px calc(18px + env(safe-area-inset-bottom,0px))}
+.sv-g-n{margin:0;font:600 clamp(14px,2vw,20px)/1.2 var(--f-ui,system-ui,sans-serif);color:#bfe3d0;letter-spacing:.04em;text-transform:uppercase}
+dialog.sv-grande.alto .sv-g-n{color:#ffe0dc}
+.sv-g-t{margin:0;flex:1 1 auto;display:flex;align-items:center;justify-content:center;text-align:center;font:700 clamp(32px,7vw,104px)/1.15 var(--f-ui,system-ui,sans-serif);max-width:1400px;overflow-wrap:anywhere;overflow:auto}
+.sv-g-reloj{margin:0;font:700 clamp(36px,8vw,96px)/1 var(--f-ui,system-ui,sans-serif);font-variant-numeric:tabular-nums;color:#ffd76a}
+.sv-g-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}
+.sv-g-bar .btn{min-height:48px;font-size:16px}
+.sv-g-bar .linkbtn{color:#fff;font-size:16px;min-height:48px;padding:0 10px}
+.sv-g-tim{display:inline-flex;gap:4px}
+.sv-g-tim .btn{min-height:44px;font-size:14px}
+dialog.sv-grande .btn:not(.btn-primary):not(.sv-alto){background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
+dialog.sv-grande .btn:disabled{opacity:.4}
+@media (max-width:760px){.sv-grid{grid-template-columns:minmax(0,1fr)}.sv-g-bar .btn{flex:1 1 120px}}
+@media print{dialog.sv-grande,dialog.sinvozdlg{display:none!important}}
+
+.aula-acc{display:flex;gap:8px;align-items:center}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -2531,6 +2587,7 @@ details.sec[open] .sec-ic{background:var(--accent);color:var(--on-accent)}
           <span class="menu-g">Para la clase</span>
           <button type="button" role="menuitem" id="btn-repaso"><b>Repasar la clase</b><small>El libreto de tu planificación: qué hacer y qué decir, minuto a minuto</small></button>
           <button type="button" role="menuitem" id="btn-ausencia"><b>Actividades para cuando no estés</b><small>Si adelantás una hora o faltás: una hoja para que el curso avance solo</small></button>
+          <button type="button" role="menuitem" id="btn-sinvoz"><b>Clase sin voz</b><small>Si estás disfónico: tarjetas en grande, lectura en voz alta y la clase escrita</small></button>
           <button type="button" role="menuitem" id="btn-libreto"><b>Clases desde un libreto</b><small>Pegá el texto o subí PDF, Word o fotos: arma la secuencia con los NAP</small></button>
           <button type="button" role="menuitem" id="btn-banco"><b>Banco de actividades</b><small>Las actividades que guardaste</small></button>
           <button type="button" role="menuitem" id="btn-preg"><b>Preguntas y pruebas</b><small>Armá evaluaciones con versión A y B y la clave</small></button>
@@ -2863,7 +2920,7 @@ details.sec[open] .sec-ic{background:var(--accent);color:var(--on-accent)}
   <div class="aula" id="aula" hidden="" role="dialog" aria-modal="true" aria-labelledby="aula-t">
     <div class="aula-head">
       <div class="aula-tt"><h2 id="aula-t">Modo aula</h2><span id="aula-sub"></span></div>
-      <button type="button" class="btn btn-sm" id="aula-cerrar">Salir</button>
+      <span class="aula-acc"><button type="button" class="btn btn-sm" id="aula-sinvoz" data-proxy="btn-sinvoz">Sin voz</button><button type="button" class="btn btn-sm" id="aula-cerrar">Salir</button></span>
     </div>
     <div class="seg tabs aula-tabs" role="group" aria-label="Sección del modo aula" data-tabs="aula">
       <button type="button" data-tab="clase" aria-pressed="true">La clase</button>
@@ -5465,6 +5522,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-21b", fecha:"2026-11-21", items:[
+    "Nueva herramienta «Clase sin voz», para cuando estás disfónico o afónico. Empieza con dos preguntas de salud: si corresponde no dar clase, te lo dice y te lleva a las licencias.",
+    "Trae tarjetas de frases para mostrar en pantalla grande y leer en voz alta con la voz del dispositivo, tu clase escrita paso a paso con temporizador, un acuerdo de señales, roles para los estudiantes y qué actividades conviene cambiar.",
+    "Está en «Para la clase», en el modo aula (botón «Sin voz») y en «Contame qué pasa» («me quedé sin voz»)."
+  ]},
   {id:"2026-11-21a", fecha:"2026-11-21", items:[
     "«Imprimir» y «Guardar como PDF» desde «Vista A4» sacan exactamente esas hojas, con su número de página. La impresión queda en «Actividad reciente», y la copia de tus planificaciones guarda también la actividad.",
     "En el celular la letra es un poco más grande (base de 16 px), y las ventanas ya no se salen de la pantalla aunque agrandes la letra en Ajustes.",
@@ -17259,7 +17321,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "70 (21/11/2026)";
+const LAPACHO_VERSION = "71 (21/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -28189,6 +28251,291 @@ function init82(){
 }
 
 /* ============================================================
+   Versión 71: «Clase sin voz»
+   Para cuando el docente está disfónico o afónico y decide dar clase igual (o quiere cuidar la voz).
+   - Primero, un control de salud: con dificultad para respirar o tragar, dolor fuerte o fiebre, la indicación es no dar
+     clase y consultar; con más de 2 semanas de disfonía, otorrino (a las 4 semanas, laringoscopía: guía AAO-HNS 2018).
+   - Tarjetas de frases listas para mostrar en pantalla grande y leer en voz alta con la voz del dispositivo
+     (speechSynthesis: funciona sin internet con las voces instaladas; cada lectura arranca con un toque).
+   - La clase escrita paso a paso, desde inicio, desarrollo y cierre de la planificación abierta, con temporizador.
+   - Acuerdo de señales, roles de estudiantes (con sorteo si hay lista del curso) y cambios sugeridos de actividades.
+   - Salud vocal y licencia: Dec. 505/14 (MGEyJ) art. 10 inc. a, y Dec. 658/96 (enfermedad profesional), con enlaces.
+   Preferencias en lapacho-sinvoz-v1 (voz, velocidad, frases propias). No cambia ningún otro dato.
+   ============================================================ */
+LP_ICS.sinvoz = '<path d="M4 5h16v11H9l-5 4z"/><path d="m9.5 8.5 5 5M14.5 8.5l-5 5"/>';
+LP_IC_ID["btn-sinvoz"] = "sinvoz";
+LP_IC_ID["aula-sinvoz"] = "sinvoz";
+const SV_KEY = "lapacho-sinvoz-v1";
+const SV_FRASES = [
+  ["Atención", ["Silencio, por favor.", "Miren la pantalla.", "Hoy no tengo voz: todo va a estar escrito. Gracias por la paciencia.", "Cuando vean mi mano levantada, levanten la suya y hagan silencio."]],
+  ["Organización", ["Trabajen de a dos.", "Armen grupos de cuatro.", "Cada grupo elige un moderador o una moderadora.", "Vuelvan a sus lugares.", "Pasen al pizarrón.", "Saquen la carpeta.", "Lean la consigna 1 en voz alta."]],
+  ["Tiempo", ["Tienen 10 minutos.", "Faltan 5 minutos.", "Último minuto: terminen la idea.", "Se terminó el tiempo: lápices abajo."]],
+  ["Participación", ["Levanten la mano si están de acuerdo.", "Voten A, B, C o D con los dedos.", "Busquen a alguien que votó distinto y convénzanlo.", "Antes de preguntarme, pregúntenle a tres compañeros.", "Anoten la duda en el estacionamiento de dudas.", "Expliquen con sus palabras, no con la fórmula."]],
+  ["Física y ciencias", ["Dibujen el diagrama de fuerzas.", "Escriban los datos con sus unidades.", "Estimen primero: ¿el resultado tiene sentido?", "Comparen su resultado con el del otro grupo."]],
+  ["Convivencia", ["Bajen el volumen, por favor.", "Hablen solo dentro del grupo.", "Gracias por cuidar el clima de trabajo."]],
+  ["Cierre", ["Completen el ticket de salida.", "Escriban una cosa que aprendieron y una duda.", "La tarea está en el pizarrón.", "Ordenen y dejen las sillas arriba. ¡Gracias!"]]
+];
+const SV_ALTO = "¡ALTO! Todos quietos y en silencio.";
+const SV_SENALES = [
+  ["Mano en alto del profe", "Paren, hagan silencio y levanten la mano también. Nadie habla hasta que todas las manos estén arriba."],
+  ["Campanita o dos aplausos", "Cambio de actividad: miren la pantalla."],
+  ["Luces que se apagan y prenden", "Silencio total ya."],
+  ["Pulgar arriba, abajo o puño", "«Entendí», «no entendí» o «más o menos»."],
+  ["Un dedo en alto (estudiante)", "Tengo una pregunta. Dos dedos: necesito ir al baño."],
+  ["El profe señala un grupo y la pantalla", "A ese grupo le toca leer la consigna en voz alta."],
+  ["Dedo en los labios y mano que baja", "Bajen el volumen."],
+  ["Silbato largo", "¡ALTO! Todos quietos (solo por seguridad)."]
+];
+const SV_ROLES = [
+  ["Voz del profe", "Lee en voz alta cada consigna que aparece en la pantalla."],
+  ["Moderador o moderadora de grupo", "Reparte los turnos para hablar y cuida que todos participen."],
+  ["Tiempo", "Mira el temporizador y avisa «faltan 2 minutos»."],
+  ["Secretario o secretaria de dudas", "Anota las preguntas que el grupo no puede resolver."],
+  ["Materiales", "Reparte y junta las hojas y los elementos de trabajo."]
+];
+const SV_CAMBIOS = [
+  [/(explica|exposic|expone|expong|clase magistral|presenta el tema|el docente desarrolla)/, "Explicación oral", "Reemplazala por un texto breve o un video con subtítulos y una guía de preguntas, o por un problema resuelto paso a paso proyectado."],
+  [/(debate|puesta en comun|plenario|discusion grupal|socializ)/, "Debate o puesta en común", "Hacé una galería de afiches con post-its, o una votación con tarjetas A, B, C o D y discusión de a pares."],
+  [/(dicta|dictado)/, "Dictado", "Pasalo a una guía impresa, a un código QR o a una foto del pizarrón."],
+  [/(laboratorio|experiment|experiencia|mechero|circuito)/, "Laboratorio o experimento", "Armalo en estaciones con consignas escritas y roles. Si hay fuego, vidrio o electricidad, posponelo o mostrá un video: sin voz no podés dar una orden rápida."],
+  [/(correc\w* oral|corrig\w* en el pizarron|correccion en voz alta)/, "Corrección oral", "Proyectá las respuestas para que se autocorrijan con códigos: ✓ correcto, ? revisá el paso, → seguí."],
+  [/(lectura en voz alta|el docente lee|leer en voz alta)/, "Lectura del docente", "Que la lea un estudiante (rol «voz del profe»)."]
+];
+const SV_FUENTES = [
+  ["Guía de práctica clínica de disfonía (AAO-HNS, 2018)", "https://aao-hnsfjournals.onlinelibrary.wiley.com/doi/10.1177/0194599817751030"],
+  ["Laringitis (NHS)", "https://www.nhs.uk/conditions/laryngitis/"],
+  ["Cuidar la voz en la escuela (ASHA, 2025)", "https://www.asha.org/news/2025/protect-your-voice-this-back-to-school-season/"],
+  ["Decreto 505/14 (MGEyJ) de 1996: licencias docentes de Tucumán", "http://rig.tucuman.gov.ar/leyes/scan/scan/decretos/1996/D-505-14-MGEyJ-26031996.pdf"],
+  ["Decreto 658/96: listado de enfermedades profesionales", "https://servicios.infoleg.gob.ar/infolegInternet/anexos/35000-39999/37572/texact.htm"]
+];
+const SV = {tab:"inicio", triage:null, grande:null, timer:0, fin:0};
+function svPref(){ try { const o = JSON.parse(localStorage.getItem(SV_KEY) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+function svPrefSet(k, v){ try { const o = svPref(); o[k] = v; localStorage.setItem(SV_KEY, JSON.stringify(o)); } catch (e) { logSilencioso(e); } }
+/* ---------- voz del dispositivo ---------- */
+const svTTS = () => { try { return !!window.speechSynthesis && typeof window.speechSynthesis.speak === "function" && typeof SpeechSynthesisUtterance !== "undefined"; } catch (e) { return false; } };
+function svVoces(){
+  if (!svTTS()) return [];
+  const L = speechSynthesis.getVoices().map(v => ({v, lang:String(v.lang || "").replace("_", "-").toLowerCase()})).filter(x => x.lang.startsWith("es"));
+  const rango = l => l === "es-ar" ? 0 : (l === "es-us" || l === "es-419") ? 1 : l === "es-mx" ? 2 : l === "es-es" ? 3 : 4;
+  return L.sort((a, b) => rango(a.lang) - rango(b.lang) || (b.v.localService === true) - (a.v.localService === true)).map(x => x.v);
+}
+function svVoz(){ const L = svVoces(), n = svPref().voz; return L.find(v => v.name === n) || L[0] || null; }
+function svLeer(t){
+  if (!svTTS()){ toast("Este navegador no puede leer en voz alta. Usá la pantalla grande."); return false; }
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(t || "")), v = svVoz();
+    if (v){ u.voice = v; u.lang = v.lang; } else u.lang = "es-AR";
+    u.rate = +svPref().vel || 0.95; u.volume = 1;
+    u.onerror = e => { if (e && e.error && e.error !== "interrupted" && e.error !== "canceled") toast("No se pudo leer en voz alta. Revisá el volumen del dispositivo."); };
+    speechSynthesis.speak(u);
+    return true;
+  } catch (e) { registrarError("svLeer", e, "aviso"); return false; }
+}
+function svPitido(largo){
+  try {
+    const C = window.AudioContext || window.webkitAudioContext; if (!C) return;
+    const ac = new C(), o = ac.createOscillator(), g = ac.createGain();
+    o.type = "square"; o.frequency.value = largo ? 880 : 660; g.gain.value = 0.25;
+    o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime + (largo ? 0.9 : 0.35));
+    o.onended = () => ac.close();
+  } catch (e) { logSilencioso(e); }
+}
+/* ---------- la clase escrita ---------- */
+function svPasos(){
+  const out = [];
+  try {
+    destinosBanco().filter(d => d !== "ficha").forEach(d => {
+      itemsLista(val(d)).map(x => String(x).replace(/^[-•\s]+/, "").trim()).filter(x => x.length > 2).forEach(x => out.push({mom:etiquetaCampo(d), t:x}));
+    });
+  } catch (e) { logSilencioso(e); }
+  return out.slice(0, 20);
+}
+function svCambios(){
+  const txt = norm(svPasos().map(p => p.t).join("\n")), out = [];
+  SV_CAMBIOS.forEach(([re, t, d]) => { if (re.test(txt)) out.push([t, d]); });
+  return out;
+}
+/* ---------- pantalla grande ---------- */
+function svGrandeDlg(){
+  let d = $("sv-grande"); if (d) return d;
+  document.body.insertAdjacentHTML("beforeend", `<dialog class="sv-grande" id="sv-grande" aria-labelledby="sv-g-t">
+    <div class="sv-g-in"><p class="sv-g-n" id="sv-g-n"></p><p class="sv-g-t" id="sv-g-t" aria-live="polite"></p><p class="sv-g-reloj" id="sv-g-reloj" hidden></p>
+      <div class="sv-g-bar"><button type="button" class="btn" id="sv-g-ant">Anterior</button><button type="button" class="btn btn-primary" id="sv-g-leer">Leer en voz alta</button><button type="button" class="btn" id="sv-g-sig">Siguiente</button>
+        <span class="sv-g-tim" role="group" aria-label="Temporizador">${[1, 3, 5, 10].map(m => `<button type="button" class="btn btn-sm" data-svmin="${m}">${m} min</button>`).join("")}</span>
+        <button type="button" class="btn sv-alto" id="sv-g-alto">¡ALTO!</button><button type="button" class="linkbtn" id="sv-g-cerrar">Cerrar</button></div></div></dialog>`);
+  d = $("sv-grande");
+  $("sv-g-ant").addEventListener("click", () => svMover(-1));
+  $("sv-g-sig").addEventListener("click", () => svMover(1));
+  $("sv-g-leer").addEventListener("click", () => { const G = SV.grande; if (G) svLeer(G.L[G.i]); });
+  $("sv-g-alto").addEventListener("click", () => svAlto());
+  $("sv-g-cerrar").addEventListener("click", () => d.close());
+  d.querySelectorAll("[data-svmin]").forEach(b => b.addEventListener("click", () => svTimer(+b.dataset.svmin)));
+  d.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight"){ e.preventDefault(); svMover(1); }
+    else if (e.key === "ArrowLeft"){ e.preventDefault(); svMover(-1); }
+    else if (e.key === " " && !e.target.closest("button")){ e.preventDefault(); const G = SV.grande; if (G) svLeer(G.L[G.i]); }
+  });
+  d.addEventListener("close", () => { try { if (svTTS()) speechSynthesis.cancel(); } catch (e) { logSilencioso(e); } d.classList.remove("alto"); });
+  return d;
+}
+function svPintarGrande(){
+  const G = SV.grande; if (!G) return;
+  $("sv-g-t").textContent = G.L[G.i];
+  $("sv-g-n").textContent = G.L.length > 1 ? `${G.titulo ? G.titulo + " · " : ""}${G.i + 1} de ${G.L.length}` : (G.titulo || "");
+  $("sv-g-ant").disabled = G.i === 0; $("sv-g-sig").disabled = G.i >= G.L.length - 1;
+  $("sv-g-leer").hidden = !svTTS();
+  $("sv-g-t").style.fontSize = G.L[G.i].length > 90 ? "clamp(26px,4.6vw,64px)" : "clamp(32px,7vw,104px)";
+}
+function svGrande(L, i, titulo){
+  SV.grande = {L, i:i || 0, titulo:titulo || ""};
+  const d = svGrandeDlg(); d.classList.remove("alto");
+  if (!d.open){ if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }
+  svPintarGrande();
+  $("sv-g-sig").focus();
+}
+function svMover(n){ const G = SV.grande; if (!G) return; G.i = Math.max(0, Math.min(G.L.length - 1, G.i + n)); svPintarGrande(); }
+function svAlto(){ svGrande([SV_ALTO], 0, ""); $("sv-grande").classList.add("alto"); svPitido(true); svLeer(SV_ALTO); }
+function svTimer(min){
+  clearInterval(SV.timer); SV.fin = Date.now() + min * 60000;
+  const R = $("sv-g-reloj"); R.hidden = false;
+  const paso = () => { const s = Math.max(0, Math.round((SV.fin - Date.now()) / 1000)); R.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; if (!s){ clearInterval(SV.timer); R.textContent = "¡Tiempo!"; svPitido(false); } };
+  paso(); SV.timer = setInterval(paso, 500);
+}
+/* ---------- ventana principal ---------- */
+function svDlg(){
+  let d = $("sinvoz"); if (d) return d;
+  $("app").insertAdjacentHTML("beforeend", `<dialog class="lib sinvozdlg" id="sinvoz" aria-labelledby="sinvoz-t"><div class="lib-in">
+    <div class="lib-head"><h2 id="sinvoz-t">Clase sin voz</h2><button type="button" class="linkbtn" data-cerrar="sinvoz">Cerrar</button></div>
+    <div class="seg tabs" role="group" aria-label="Sección" id="sv-tabs">${[["inicio", "Antes de empezar"], ["tarjetas", "Tarjetas"], ["clase", "Mi clase escrita"], ["senales", "Señales y roles"], ["salud", "Salud y licencia"]].map(([k, t]) => `<button type="button" data-svtab="${k}" aria-pressed="false">${t}</button>`).join("")}</div>
+    <div id="sv-panel"></div>
+    <div class="sv-pie"><button type="button" class="btn sv-alto" data-sv="alto">¡ALTO! Todos quietos</button></div>
+  </div></dialog>`);
+  d = $("sinvoz");
+  d.addEventListener("close", () => { $("app").appendChild($("toast")); try { if (svTTS()) speechSynthesis.cancel(); } catch (e) { logSilencioso(e); } });
+  return d;
+}
+function svHtmlInicio(){
+  const T = SV.triage;
+  const preg = (k, t) => `<div class="sv-q"><p>${t}</p><div class="seg" role="group" aria-label="${esc(t)}"><button type="button" data-svq="${k}:si" aria-pressed="${T && T[k] === "si"}">Sí</button><button type="button" data-svq="${k}:no" aria-pressed="${T && T[k] === "no"}">No</button></div></div>`;
+  let r = "";
+  if (T && T.a === "si") r = `<div class="sv-alerta"><b>Hoy no des clase: consultá.</b> Con dificultad para respirar o tragar, dolor fuerte o fiebre, lo indicado es ir al médico y pedir licencia por enfermedad. <button type="button" class="linkbtn" data-proxy="btn-licalc">Ver licencias</button></div>`;
+  else if (T && T.b === "si") r = `<div class="sv-aviso"><b>Pedí turno con otorrino.</b> Si la voz no mejora en dos semanas hay que consultar, y a las cuatro semanas sin mejora corresponde una laringoscopía (guía AAO-HNS 2018). Mientras tanto podés usar esta herramienta.</div>`;
+  else if (T && T.a === "no" && T.b === "no") r = `<div class="sv-ok">Podés dar la clase cuidando la voz. Empezá por <button type="button" class="linkbtn" data-svtab="senales">el acuerdo de señales</button> y seguí con <button type="button" class="linkbtn" data-svtab="clase">tu clase escrita</button>.</div>`;
+  return `<p class="hint">Dos preguntas antes de entrar al aula. Esta herramienta es para disfonía leve o para cuidar la voz: si estás realmente enfermo o enferma, lo que corresponde es la licencia.</p>
+    ${preg("a", "¿Tenés dificultad para respirar o para tragar, dolor fuerte o fiebre?")}${preg("b", "¿Hace más de dos semanas que estás disfónico o disfónica?")}${r}
+    <div class="sv-tips"><h3>Durante la clase</h3><ul><li>No susurres ni grites: las dos cosas fuerzan la voz. Si tenés que hablar, hacelo suave y poco; mejor, escribilo.</li><li>Tomá agua seguido y hacé pausas sin hablar.</li><li>Pedí que un estudiante sea la «voz del profe» y lea cada consigna.</li><li>Elegí actividades donde hablen los estudiantes: de a pares, estaciones, votación con tarjetas.</li></ul></div>`;
+}
+function svHtmlTarjetas(){
+  const P = svPref(), propias = Array.isArray(P.propias) ? P.propias : [];
+  const voces = svVoces();
+  const vozCfg = svTTS() ? `<details class="sv-cfg"><summary>Voz para leer en voz alta</summary>
+      ${voces.length ? `<div class="cur-bar"><label class="sr-only" for="sv-voz">Voz</label><select id="sv-voz">${voces.map(v => `<option value="${esc(v.name)}"${svVoz() && svVoz().name === v.name ? " selected" : ""}>${esc(v.name)} (${esc(v.lang)})${v.localService ? "" : " · con internet"}</option>`).join("")}</select>
+        <label class="sv-vel">Velocidad <select id="sv-vel">${[["0.8", "Lenta"], ["0.95", "Normal"], ["1.1", "Rápida"]].map(([k, t]) => `<option value="${k}"${String(P.vel || "0.95") === k ? " selected" : ""}>${t}</option>`).join("")}</select></label>
+        <button type="button" class="btn btn-sm" data-sv="probar">Probar</button></div>
+        <p class="hint">La voz es la del dispositivo y funciona sin internet. Revisá el volumen: si el celular está en silencio no se escucha. En el aula conviene un parlante.</p>`
+      : `<p class="hint">Tu dispositivo no tiene una voz en español instalada: usá la pantalla grande o instalá una voz en español en los ajustes del sistema.</p>`}</details>`
+    : `<p class="hint">Este navegador no puede leer en voz alta: las tarjetas se muestran en pantalla grande.</p>`;
+  const tarjeta = (t, g, i) => `<div class="sv-t"><button type="button" class="sv-tb" data-svg="${g}" data-svi="${i}">${esc(t)}</button>${svTTS() ? `<button type="button" class="sv-leer" data-svleer="${esc(t)}" aria-label="Leer en voz alta: ${esc(t)}">🔊</button>` : ""}</div>`;
+  return `${vozCfg}
+    <div class="sv-escribir"><label for="sv-libre">Escribí lo que querés decir</label><div class="cur-bar"><input id="sv-libre" maxlength="200" placeholder="Ej.: Hoy terminamos el práctico 3" autocomplete="off"><button type="button" class="btn btn-sm btn-primary" data-sv="libre-grande">Mostrar en grande</button>${svTTS() ? `<button type="button" class="btn btn-sm" data-sv="libre-leer">Leer</button>` : ""}<button type="button" class="btn btn-sm" data-sv="libre-guardar">Guardar como tarjeta</button></div></div>
+    ${propias.length ? `<h3 class="sv-g">Mis tarjetas</h3><div class="sv-grid">${propias.map((t, i) => tarjeta(t, "p", i)).join("")}</div>` : ""}
+    ${SV_FRASES.map(([g, L], gi) => `<h3 class="sv-g">${esc(g)}</h3><div class="sv-grid">${L.map((t, i) => tarjeta(t, gi, i)).join("")}</div>`).join("")}
+    ${propias.length ? `<p class="hint"><button type="button" class="linkbtn" data-sv="borrar-propias">Borrar mis tarjetas</button></p>` : ""}`;
+}
+function svHtmlClase(){
+  const P = svPasos(), C = svCambios();
+  if (!P.length) return `<p class="lib-empty">Abrí una planificación con inicio, desarrollo y cierre: acá aparece como consignas escritas, una por pantalla, con temporizador.</p>`;
+  return `<p class="hint">Tu planificación abierta como consignas, una por pantalla. Mostralas en grande con el proyector o el celular; un estudiante las lee en voz alta.</p>
+    <div class="cur-bar"><button type="button" class="btn btn-primary" data-sv="clase-grande">Mostrar la clase en grande</button><button type="button" class="btn btn-sm" data-sv="guia-word">Guía para imprimir (Word)</button></div>
+    <ol class="sv-pasos">${P.map((p, i) => `<li><small>${esc(p.mom)}</small><span>${esc(p.t)}</span><button type="button" class="linkbtn" data-svpaso="${i}">Mostrar</button></li>`).join("")}</ol>
+    ${C.length ? `<h3 class="sv-g">Conviene cambiar</h3><ul class="sv-cambios">${C.map(([t, d]) => `<li><b>${esc(t)}.</b> ${esc(d)}</li>`).join("")}</ul>` : `<p class="hint">No encontré actividades que necesiten mucha voz.</p>`}
+    <p class="hint">Para que las preguntas no te lleguen todas a vos: «antes de preguntarme, pregúntenle a tres compañeros», y lo que no se resuelve va al «estacionamiento de dudas» del pizarrón.</p>`;
+}
+function svHtmlSenales(){
+  const c = typeof cursoSel === "function" ? cursoSel() : null, al = c ? alumnosActivos(c) : [];
+  return `<p class="hint">Proyectalo al empezar y pedí que un estudiante lo lea en voz alta. Si el curso elige alguna señal, mejor.</p>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-sv="senales-grande">Mostrar las señales en grande</button><button type="button" class="btn btn-sm" data-sv="roles-grande">Mostrar los roles</button></div>
+    <ol class="sv-senales">${SV_SENALES.map(([s, d]) => `<li><b>${esc(s)}:</b> ${esc(d)}</li>`).join("")}</ol>
+    <h3 class="sv-g">Roles</h3><ul class="sv-roles">${SV_ROLES.map(([r, d]) => `<li><b>${esc(r)}:</b> ${esc(d)}</li>`).join("")}</ul>
+    ${al.length >= SV_ROLES.length ? `<div class="cur-bar"><button type="button" class="btn btn-sm" data-sv="sortear">Sortear roles en ${esc(c.curso || "el curso")}</button></div><div id="sv-sorteo" aria-live="polite"></div>` : ""}`;
+}
+function svHtmlSalud(){
+  return `<div class="sv-tips"><h3>Cuándo consultar</h3><ul>
+      <li>Ya, sin esperar: dificultad para respirar o tragar, dolor fuerte, tos con sangre o un bulto en el cuello.</li>
+      <li>Si la voz no mejora en dos semanas: turno con otorrino.</li>
+      <li>Si a las cuatro semanas sigue igual: corresponde una laringoscopía (guía AAO-HNS 2018).</li>
+      <li>No tomes antibióticos sin indicación médica: la misma guía desaconseja darlos de rutina por la disfonía.</li></ul></div>
+    <div class="sv-tips"><h3>Licencia en Tucumán</h3><ul>
+      <li>Enfermedad de corto tratamiento: hasta 30 días corridos por año, seguidos o no, con goce íntegro de haberes (Decreto 505/14 MGEyJ de 1996, art. 10 inc. a).</li>
+      <li>Avisá a la escuela dentro de las dos primeras horas y presentate en Inspección Médica el mismo día (arts. 54 y 55).</li>
+      <li>Si la disfonía se repite, Junta Médica puede indicar un cambio de funciones de hasta dos años (art. 15); el trámite usa el formulario F534.</li>
+      <li>La disfonía y los nódulos de las cuerdas vocales de los docentes están en el listado nacional de enfermedades profesionales (Decreto 658/96).</li></ul>
+      <p class="hint">Confirmá los detalles con Recursos Humanos o con tu gremio: los artículos se leyeron sobre el texto escaneado del registro oficial.</p>
+      <div class="cur-bar"><button type="button" class="btn btn-sm" data-proxy="btn-licalc">Licencias y feriados</button></div></div>
+    <p class="hint">Fuentes: ${SV_FUENTES.map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(" · ")}.</p>`;
+}
+function svPintar(){
+  const P = $("sv-panel"); if (!P) return;
+  document.querySelectorAll("#sv-tabs [data-svtab]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.svtab === SV.tab)));
+  P.innerHTML = {inicio:svHtmlInicio, tarjetas:svHtmlTarjetas, clase:svHtmlClase, senales:svHtmlSenales, salud:svHtmlSalud}[SV.tab]();
+}
+function abrirSinVoz(tab){
+  const d = svDlg(); SV.tab = tab || SV.tab || "inicio";
+  svPintar();
+  d.appendChild($("toast"));
+  if (!d.open){ if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }
+  const h = d.querySelector(".lib-head h2"); if (h){ h.tabIndex = -1; h.focus({preventScroll:true}); }
+}
+function modeloSinVoz(){
+  const P = svPasos();
+  return {inst:val("institucion") || "", titulo:"Clase sin voz", subtitulo:temaVisible() || "", faltaSub:"Tema",
+    datos:[["Espacio curricular", labelOf("materia") || ""], ["Curso", val("curso") || anioSec(val("anio")) || ""], ["Docente", val("docente") || ""]],
+    secs:[
+      {h:"Hoy el profe no tiene voz", body:"La clase igual va: todo está escrito. Lean cada consigna en voz alta, trabajen en grupo y, antes de preguntarme, pregúntenle a tres compañeros. Las dudas que no se resuelven van al estacionamiento de dudas del pizarrón."},
+      ...(P.length ? [{h:"Consignas de la clase", tableOnly:true, table:{head:["N.º", "Momento", "Consigna"], w:[700, 1600, 6770], rows:P.map((p, i) => [String(i + 1), p.mom, p.t])}}] : []),
+      {h:"Señales", tableOnly:true, table:{head:["Señal", "Qué significa"], w:[3000, 6070], rows:SV_SENALES}},
+      {h:"Roles", tableOnly:true, table:{head:["Rol", "Qué hace"], w:[3000, 6070], rows:SV_ROLES}}
+    ]};
+}
+function init84(){
+  try {
+    const b = $("btn-sinvoz"); if (b) b.addEventListener("click", () => abrirSinVoz());
+    if (svTTS() && window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener("voiceschanged", () => { if ($("sinvoz") && $("sinvoz").open && SV.tab === "tarjetas") svPintar(); });
+    document.addEventListener("click", e => {
+      const t = e.target;
+      if (t.closest("#sinvoz [data-cerrar]")){ cerrarDialogo("sinvoz"); return; }
+      const tab = t.closest("[data-svtab]"); if (tab){ SV.tab = tab.dataset.svtab; svPintar(); const n = document.querySelector(`#sv-tabs [data-svtab="${SV.tab}"]`); if (n) n.focus(); return; }
+      const q = t.closest("[data-svq]"); if (q){ const [k, v] = q.dataset.svq.split(":"); SV.triage = {...(SV.triage || {}), [k]:v}; svPintar(); const n = document.querySelector(`[data-svq="${q.dataset.svq}"]`); if (n) n.focus(); return; }
+      const g = t.closest("[data-svg]"); if (g){ const gi = g.dataset.svg, i = +g.dataset.svi; if (gi === "p") svGrande(svPref().propias || [], i, "Mis tarjetas"); else svGrande(SV_FRASES[+gi][1], i, SV_FRASES[+gi][0]); return; }
+      const l = t.closest("[data-svleer]"); if (l){ svLeer(l.dataset.svleer); return; }
+      const p = t.closest("[data-svpaso]"); if (p){ svGrande(svPasos().map((x, i) => `${i + 1}. ${x.t}`), +p.dataset.svpaso, "Consigna"); return; }
+      const a = t.closest("[data-sv]"); if (!a) return;
+      const libre = () => ($("sv-libre") || {}).value ? $("sv-libre").value.trim() : "";
+      switch (a.dataset.sv){
+        case "alto": svAlto(); break;
+        case "probar": svLeer("Silencio, por favor."); break;
+        case "libre-grande": if (libre()) svGrande([libre()], 0, ""); else toast("Escribí algo primero."); break;
+        case "libre-leer": if (libre()) svLeer(libre()); else toast("Escribí algo primero."); break;
+        case "libre-guardar": { const x = libre(); if (!x){ toast("Escribí algo primero."); break; } const L = svPref().propias || []; if (!L.includes(x)){ svPrefSet("propias", [x, ...L].slice(0, 30)); svPintar(); toast("Tarjeta guardada."); } break; }
+        case "borrar-propias": svPrefSet("propias", []); svPintar(); toast("Se borraron tus tarjetas."); break;
+        case "clase-grande": { const P = svPasos(); if (P.length) svGrande(P.map((x, i) => `${i + 1}. ${x.t}`), 0, "Consigna"); break; }
+        case "senales-grande": svGrande(SV_SENALES.map(([s, d]) => `${s}: ${d}`), 0, "Señales"); break;
+        case "roles-grande": svGrande(SV_ROLES.map(([r, d]) => `${r}: ${d}`), 0, "Roles"); break;
+        case "guia-word": bajarDoc(modeloSinVoz(), `clase-sin-voz-${slug(temaVisible() || "clase")}`, "docx", "Guía de la clase sin voz descargada."); break;
+        case "sortear": { const c = cursoSel(); if (!c) break; const al = alumnosActivos(c).slice(); for (let i = al.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [al[i], al[j]] = [al[j], al[i]]; }
+          const R = $("sv-sorteo"); if (R) R.innerHTML = `<ul class="sv-roles">${SV_ROLES.map(([r], i) => `<li><b>${esc(r)}:</b> ${esc(al[i].n)}</li>`).join("")}</ul>`; break; }
+      }
+    });
+    document.addEventListener("change", e => {
+      if (e.target.id === "sv-voz") svPrefSet("voz", e.target.value);
+      if (e.target.id === "sv-vel") svPrefSet("vel", e.target.value);
+    });
+  } catch (e) { registrarError("init84", e, "aviso"); }
+}
+CT_RUTAS.push({id:"sinvoz", t:"Clase sin voz", d:"Cómo dar la clase si estás disfónico o afónico, y cuándo pedir licencia.", a:ctBtn("btn-sinvoz"), p:[[/sin voz|\bafon\w*|disfon\w*|perdi la voz|me quede sin voz|no tengo voz|ronquera|laringitis|no puedo hablar/, 8]]});
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -28645,7 +28992,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>
