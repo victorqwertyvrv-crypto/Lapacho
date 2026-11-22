@@ -1783,6 +1783,9 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-22d", fecha:"2026-11-22", items:[
+    "Al proyectar preguntas conceptuales, Lapacho anota cómo le fue al curso con cada una, sin nombres. Al terminar te muestra cuáles retomar, y en «Dinámicas › Lo que más costó» ves todas tus clases juntas y podés volver a proyectar las que costaron."
+  ]},
   {id:"2026-11-22c", fecha:"2026-11-22", items:[
     "Grupos: en «No juntar, apoyos y conducta» podés pedir que se repartan entre grupos quienes tienen dos o más registros «a mejorar» este período. Vale también para los grupos «Para acompañarse» del modo aula."
   ]},
@@ -13621,7 +13624,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "78 (22/11/2026)";
+const LAPACHO_VERSION = "79 (22/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -17306,7 +17309,7 @@ function pcLista(){
   return PREG_CONC.filter(x => x.g === DN.g);
 }
 function pcSeleccion(){ const L = pcLista(); if (!DN.sel) DN.sel = new Set(L.map(x => x.id)); return L.filter(x => DN.sel.has(x.id)).map(x => x.id); }
-function renderDinam(){
+function renderDinamV78(){
   const box = $("dinam-panel"); if (!box) return;
   const sinDest = !destinosBanco().length, t = temaParaRutina();
   const cards = DINAM.map(d => `<div class="lib-item banco-item rut"><div class="lib-txt"><b>${esc(d.n)}</b><small>${esc(MOM_RUT[d.m])} · ${esc(d.min)}</small>
@@ -17362,7 +17365,7 @@ function bindDinam(){
 
 /* ---------- Proyección: instrucción entre pares y juego por equipos ---------- */
 const PI = {qs:[], i:0, fase:"voto", modo:"pares", pts:[], ac:new Set(), vuelta:1, tm:null, fin:0, res:[]};
-function piAbrir(modo){
+function piAbrirV78(modo){
   const ids = pcSeleccion();
   if (!ids.length){ toast("Elegí al menos una pregunta."); return; }
   Object.assign(PI, {qs:ids, i:0, modo, fase:modo === "juego" ? "equipos" : "voto", pts:[], ac:new Set(), vuelta:1, res:[]});
@@ -17383,7 +17386,7 @@ function piReloj(seg){
 }
 function piTiempo(){ clearInterval(PI.tm); if (PI.fase === "discute") piReloj(120); else if (PI.fase === "voto" && PI.modo === "juego") piReloj(60); }
 function piTablero(){ return PI.modo === "juego" && PI.pts.length ? `<ul class="pi-tab">${PI.pts.map((p, k) => `<li>Equipo ${k + 1}: <b>${p}</b></li>`).join("")}</ul>` : ""; }
-function piHTML(){
+function piHTMLV78(){
   const N = PI.qs.length;
   if (PI.fase === "equipos") return `<h2>Juego de preguntas</h2><p>¿Cuántos equipos juegan?</p><div class="pi-ctrl">${[2, 3, 4, 5, 6].map(n => `<button type="button" class="btn" data-pieqn="${n}">${n} equipos</button>`).join("")}</div>`;
   if (PI.fase === "fin"){
@@ -17414,7 +17417,7 @@ function piHTML(){
   return h;
 }
 function piRender(){ const b = $("grande-in"); if (b) b.innerHTML = piHTML(); piTiempo(); }
-function piSumar(){ if (PI.modo === "juego") PI.ac.forEach(k => { PI.pts[k] = (PI.pts[k] || 0) + 1; }); PI.ac = new Set(); }
+function piSumarV78(){ if (PI.modo === "juego") PI.ac.forEach(k => { PI.pts[k] = (PI.pts[k] || 0) + 1; }); PI.ac = new Set(); }
 function bindPI(){
   const G = $("grande"); if (!G || G.dataset.pi) return; G.dataset.pi = "1";
   G.addEventListener("click", e => {
@@ -25429,6 +25432,81 @@ function init92(){
 }
 
 /* ============================================================
+   Versión 79: qué preguntas costaron más
+   Al proyectar preguntas conceptuales (instrucción entre pares o juego por equipos), Lapacho guarda cómo le fue al
+   curso con cada pregunta, sin nombres: «costó» (menos de un tercio acertó), «a medias» o «salió bien». En el juego,
+   sale de cuántos equipos acertaron. Al terminar muestra cuáles costaron más, y en «Dinámicas» junta todas las clases
+   para ver qué ideas hay que retomar. Se guarda en lapacho-votos-v1 (entra en la copia de seguridad) y se puede borrar.
+   ============================================================ */
+const VOT_KEY = "lapacho-votos-v1", VOT_MAX = 200;
+const VOT_PESO = {bajo:2, medio:1, alto:0}, VOT_TXT = {bajo:"Costó", medio:"A medias", alto:"Salió bien"};
+try { if (!CLAVES_RESPALDO.includes(VOT_KEY)) CLAVES_RESPALDO.push(VOT_KEY); if (typeof LDB_CLAVES !== "undefined") LDB_CLAVES.add(VOT_KEY); } catch (e) { logSilencioso(e); }
+function votLeer(){ try { const a = JSON.parse(localStorage.getItem(VOT_KEY) || "[]"); return Array.isArray(a) ? a.filter(x => x && x.r && typeof x.r === "object") : []; } catch (e) { return []; } }
+function votGuardar(L){ try { localStorage.setItem(VOT_KEY, JSON.stringify(L.slice(-VOT_MAX))); } catch (e) { logSilencioso(e); } }
+function piSumar(){
+  if (PI.modo === "juego" && PI.pts.length && PI.qs[PI.i] != null && PI.res[PI.i] == null){
+    const fr = PI.ac.size / PI.pts.length; PI.res[PI.i] = fr < 1 / 3 ? "bajo" : fr < 2 / 3 ? "medio" : "alto";
+  }
+  piSumarV78();
+}
+function piAbrir(modo){ PI.guardado = false; return piAbrirV78(modo); }
+function votRegistrarSesion(){
+  if (PI.guardado) return; PI.guardado = true;
+  const r = {}; PI.qs.forEach((id, i) => { const v = PI.res[i]; if (v && VOT_PESO[v] != null) r[id] = v; });
+  if (!Object.keys(r).length) return;
+  let curso = ""; try { const c = cursoSel(); curso = c ? (c.curso || "") : (val("curso") || ""); } catch (e) { logSilencioso(e); }
+  const L = votLeer(); L.push({f:hoyIso(), ts:Date.now(), modo:PI.modo, curso, r}); votGuardar(L);
+}
+function votResumen(L){
+  const m = new Map();
+  (L || votLeer()).forEach(s => Object.entries(s.r).forEach(([id, v]) => { const x = m.get(id) || {id, n:0, bajo:0, medio:0, alto:0, ult:""}; x.n++; x[v]++; if ((s.f || "") > x.ult) x.ult = s.f || ""; m.set(id, x); }));
+  return [...m.values()].map(x => ({...x, dif:(x.bajo * 2 + x.medio) / (2 * x.n)})).sort((a, b) => b.dif - a.dif || b.n - a.n);
+}
+function piHTML(){
+  const h = piHTMLV78();
+  if (PI.fase !== "fin") return h;
+  try {
+    votRegistrarSesion();
+    const dif = PI.qs.map((id, i) => ({p:pcPorId(id), v:PI.res[i]})).filter(x => x.p && x.v && x.v !== "alto").sort((a, b) => VOT_PESO[b.v] - VOT_PESO[a.v]).slice(0, 3);
+    const bloque = dif.length ? `<div class="pi-costo"><h3>Para retomar</h3><ul>${dif.map(x => `<li><span class="vot-chip vot-${x.v}">${VOT_TXT[x.v]}</span> ${esc(x.p.q)}</li>`).join("")}</ul><p class="pi-sub">Quedó guardado, sin nombres, en «Dinámicas › Lo que más costó».</p></div>`
+      : (PI.res.some(Boolean) ? `<p class="pi-sub">Todas salieron bien. Quedó guardado en «Dinámicas › Lo que más costó».</p>` : "");
+    return h.replace(/(<div class="pi-ctrl">)(?![\s\S]*<div class="pi-ctrl">)/, bloque + "$1");
+  } catch (e) { logSilencioso(e); return h; }
+}
+function renderDinam(){
+  renderDinamV78();
+  try {
+    const box = $("dinam-panel"); if (!box) return;
+    const R = votResumen(), L = votLeer();
+    const filas = R.filter(x => x.dif > 0).slice(0, 8).map(x => { const p = pcPorId(x.id); if (!p) return "";
+      const ult = x.ult ? fechaCortaIso(x.ult) : "";
+      return `<li><div class="vot-q">${esc(p.q)}<small>${esc(p.g || "")}${ult ? ` · última vez ${esc(ult)}` : ""}</small></div><div class="vot-bar" role="img" aria-label="${x.bajo} veces costó, ${x.medio} a medias y ${x.alto} salió bien, en ${x.n} ${x.n === 1 ? "clase" : "clases"}">${["bajo", "medio", "alto"].map(k => x[k] ? `<span class="vot-${k}" style="flex:${x[k]}">${x[k]}</span>` : "").join("")}</div></li>`; }).join("");
+    const html = `<h3 class="lic-h" id="vot-h">Lo que más costó</h3>
+      <p class="hint">Cada vez que proyectás preguntas, Lapacho anota cómo le fue al curso con cada una, sin nombres. ${L.length ? `Hay ${L.length} ${L.length === 1 ? "clase registrada" : "clases registradas"}.` : ""}</p>
+      ${filas ? `<div class="vot-ley" aria-hidden="true"><span class="vot-chip vot-bajo">Costó</span><span class="vot-chip vot-medio">A medias</span><span class="vot-chip vot-alto">Salió bien</span></div><ol class="vot-list">${filas}</ol>`
+        : `<p class="lib-empty">${L.length ? "Hasta ahora todas las preguntas salieron bien." : "Todavía no proyectaste preguntas. Al terminar una proyección, acá vas a ver cuáles costaron más."}</p>`}
+      ${L.length ? `<div class="cur-bar"><button type="button" class="btn btn-sm" data-votsel="1"${filas ? "" : " disabled"}>Elegir las que costaron para volver a proyectar</button><button type="button" class="linkbtn" data-votborrar="1">Borrar este registro</button></div>` : ""}`;
+    const fuente = box.querySelector(".dn-fuente");
+    if (fuente) fuente.insertAdjacentHTML("beforebegin", html); else box.insertAdjacentHTML("beforeend", html);
+  } catch (e) { registrarError("renderDinam", e, "aviso"); }
+}
+function init93(){
+  try {
+    document.addEventListener("click", e => {
+      const b = e.target.closest && e.target.closest("[data-votborrar], [data-votsel]"); if (!b) return;
+      if (b.dataset.votborrar){ if (!confirm("¿Borrar el registro de cómo le fue al curso con cada pregunta?")) return; try { localStorage.removeItem(VOT_KEY); } catch (er) { logSilencioso(er); } renderDinam(); toast("Registro borrado."); return; }
+      const ids = votResumen().filter(x => x.dif > 0).slice(0, 8).map(x => x.id).filter(id => pcPorId(id));
+      if (!ids.length) return;
+      const g = pcPorId(ids[0]).g; if (g && PC_GRUPOS.includes(g)) DN.g = g;
+      DN.sel = new Set(ids); renderDinam();
+      const lista = pcLista().map(p => p.id), fuera = ids.filter(id => !lista.includes(id)).length;
+      toast(fuera ? `Elegidas las del tema «${g}». Las de otros temas están en su propia lista.` : "Elegidas las preguntas que costaron. Ya podés proyectarlas.");
+      const h = $("pc-h"); if (h && h.scrollIntoView) h.scrollIntoView({block:"start"});
+    });
+  } catch (e) { registrarError("init93", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -25885,4 +25963,4 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); init93(); } finally { ocultarSplash(); }
