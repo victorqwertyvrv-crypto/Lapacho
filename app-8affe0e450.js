@@ -1783,6 +1783,9 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-22j", fecha:"2026-11-22", items:[
+    "Los libros de Historia y su enseñanza ya están en tu carpeta «Libros» de Drive: cada ficha tiene «Abrir en Drive», también en «Para leer más» de las fichas de Historia."
+  ]},
   {id:"2026-11-22i", fecha:"2026-11-22", items:[
     "Para citar tus libros: en cada idea de la Biblioteca, «Copiar cita» (con autor, año y página, más la referencia en APA 7) y «A la fundamentación», que la suma citada y agrega el libro a la bibliografía.",
     "Esquemas propios a partir de tus libros (Ausubel, Vygotsky, Driver, Kuhn, Bunge, Wagensberg, Funes y la cronología de Hewitt): se suman a la planificación o se descargan como imagen con la nota de procedencia. Están en la pestaña «Esquemas para citar».",
@@ -13643,7 +13646,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "84 (22/11/2026)";
+const LAPACHO_VERSION = "85 (22/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -26663,7 +26666,7 @@ function htmlHisFicha(T, enDialogo){
     <div class="cur-bar"><button type="button" class="btn btn-sm" data-his-preg="${T.id}">Agregar las preguntas al inicio</button></div>
     <p class="bib-h">Actividades con fuentes</p><ul class="his-act">${T.act.map((a, i) => `<li><span>${esc(a)}</span><button type="button" class="btn btn-sm" data-his-act="${T.id}|${i}" aria-label="Agregar al desarrollo: ${esc(a)}">Al desarrollo</button></li>`).join("")}</ul>
     ${figs.length ? `<p class="bib-h">Figuras</p><ul class="ft-l">${figs.map(f => { const ya = ftYaEsta(f); return `<li class="ft-it"><img src="${svgSrc(f.svg())}" alt="" width="120" height="75" loading="lazy"><span class="ft-t">${esc(f.t)}</span>${ya ? `<span class="ft-ya">Agregada</span>` : `<button type="button" class="btn btn-sm" data-ftadd="${f.id}" aria-label="Agregar la figura: ${esc(f.t)}">Agregar</button>`}</li>`; }).join("")}</ul>` : ""}
-    <p class="bib-h">Para leer más</p><ul class="his-fu">${T.fuentes.map(([l, p]) => { const L = hisLibro(l); return L ? `<li><b>${esc(L.t)}</b> <small class="bib-d">${esc(L.a)}: ${esc(p)}</small> <button type="button" class="linkbtn" data-bib-ref="${L.id}" data-his-ref="${L.id}">Agregar a la bibliografía</button></li>` : ""; }).join("")}</ul>
+    <p class="bib-h">Para leer más</p><ul class="his-fu">${T.fuentes.map(([l, p]) => { const L = hisLibro(l); return L ? `<li><b>${esc(L.t)}</b> <small class="bib-d">${esc(L.a)}: ${esc(p)}</small> <button type="button" class="linkbtn" data-bib-ref="${L.id}" data-his-ref="${L.id}">Agregar a la bibliografía</button>${L.url ? ` · <a class="linkbtn" href="${esc(L.url)}" target="_blank" rel="noopener">Abrir en Drive</a>` : ""}</li>` : ""; }).join("")}</ul>
     <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-his-usar="${T.id}">Usar en la planificación</button><button type="button" class="btn btn-sm" data-his-copiar="${T.id}">Copiar la ficha</button>${enDialogo ? "" : ""}</div>
     <p class="hint">Síntesis propia de Lapacho a partir de tus libros. Antes de citar una página marcada «aprox.», revisala en el libro.</p>
   </div>`;
@@ -27067,6 +27070,16 @@ function init98(){
 }
 /* El epígrafe de un esquema de la biblioteca lleva la nota de procedencia */
 function ftImagen(f){ const im = ftImagenV83(f); if (f && f.bib) im.caption = `${f.t}. ${bibEsqNota(f)}`; return im; }
+
+/* ============================================================
+   Versión 85: los libros de Historia y su enseñanza, en tu carpeta «Libros» de Drive (22/11/2026)
+   Víctor subió los PDF a la carpeta; cada ficha tiene ahora «Abrir en Drive», también en «Para leer más».
+   ============================================================ */
+(() => {
+  const D = id => `https://drive.google.com/file/d/${id}/view`;
+  const U = {"his-min":"1j8h04dAq9scSK8GiacUKmZV4RvnykjP5", "his-aique":"1wXrnXnl7xSlWOqdg0Zz-1ZYae4Udv9FI", "his-kap":"1rncyTYiFF-PRznRKXBj00sL34lJqQk5a", "his-egg":"1gcJ1p8XhE8EUe-EWGscmKDMWe0imesmF", "his-santi":"1sNA7SWpuPHkSu5BGRP2zZWraybO178Vc", "his-bravo":"1LwCkE_AQ81bEtzwO4jLcTWb6pnlotQSA", "funes":"16gCTBxy8lNe7VwNpHM2zqoM2VmMCqFFl", "efemerides":"1s-1FtL2KkrP80KrRF2luezIVQfKx_8sU"};
+  Object.entries(U).forEach(([id, f]) => { const L = BIB_LIBROS.find(x => x.id === id); if (L){ L.url = D(f); L.arch = String(L.arch || "").replace(/ que pasaste el 22\/11\/2026/, "") + " Está en tu carpeta «Libros» de Drive."; } });
+})();
 
 /* ============================================================
    Inicio
