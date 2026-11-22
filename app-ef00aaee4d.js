@@ -1783,6 +1783,25 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-22i", fecha:"2026-11-22", items:[
+    "Para citar tus libros: en cada idea de la Biblioteca, «Copiar cita» (con autor, año y página, más la referencia en APA 7) y «A la fundamentación», que la suma citada y agrega el libro a la bibliografía.",
+    "Esquemas propios a partir de tus libros (Ausubel, Vygotsky, Driver, Kuhn, Bunge, Wagensberg, Funes y la cronología de Hewitt): se suman a la planificación o se descargan como imagen con la nota de procedencia. Están en la pestaña «Esquemas para citar».",
+    "Fichas más completas de Hewitt, Vygotsky, Ausubel, Wagensberg y el libro de Kapelusz (Fisicoquímica. Nuevos desafíos), y dos libros nuevos: Funes sobre historia reciente y Guralnik y otros sobre efemérides, con su ficha de tema y el calendario de actos."
+  ]},
+  {id:"2026-11-22h", fecha:"2026-11-22", items:[
+    "Historia: tus seis libros de Historia ya están en la Biblioteca, con su mirada y cómo citarlos (Ministerio de Educación, Aique, Kapelusz, Eggers-Brass, Santillana y el libro de Bravo sobre el cierre de ingenios en Tucumán).",
+    "Fichas de Historia por tema, de los pueblos originarios a la Argentina reciente, con un apartado para el Tucumán azucarero: síntesis con libro y página, conceptos, fechas, preguntas y actividades con fuentes. Aparecen debajo del tema y en la Biblioteca, pestaña «Historia».",
+    "Líneas de tiempo y esquemas propios para cada tema de Historia, como las figuras de Física. «Usar en la planificación» suma de una vez la bibliografía, las preguntas y la línea de tiempo."
+  ]},
+  {id:"2026-11-22g", fecha:"2026-11-22", items:[
+    "Figuras de acuerdo al tema: cuando escribís el tema, debajo aparecen figuras didácticas de Lapacho que corresponden (fuerzas, MRU y MRUV, caída libre, tiro oblicuo, energía, palanca, Arquímedes, calor, temperatura, estados de la materia, circuitos, cargas, imanes, ondas, sonido, luz, lentes, espectro, fases de la Luna y el átomo). Con «Agregar» van a la planificación, la ficha, Word y PDF. Al armar una planificación nueva se suma sola la que mejor coincide."
+  ]},
+  {id:"2026-11-22f", fecha:"2026-11-22", items:[
+    "Cuadros y gráficos para tus planificaciones (en la sección «Imágenes» de la planificación, botón «Cuadro o gráfico»): tablas de datos, cuadros comparativos o de doble entrada, gráficos de datos con recta de ajuste, gráficos de funciones (MRU, MRUV, caída libre, ley de Ohm, lineales, cuadráticas o tu fórmula) y ejes con cuadrícula para completar. Salen en la ficha, Word, PDF y A4, y se pueden volver a editar."
+  ]},
+  {id:"2026-11-22e", fecha:"2026-11-22", items:[
+    "Modo aula: en «La clase», «Ver el libreto» te muestra qué hacer y qué decir minuto a minuto, sin salir del aula."
+  ]},
   {id:"2026-11-22d", fecha:"2026-11-22", items:[
     "Al proyectar preguntas conceptuales, Lapacho anota cómo le fue al curso con cada una, sin nombres. Al terminar te muestra cuáles retomar, y en «Dinámicas › Lo que más costó» ves todas tus clases juntas y podés volver a proyectar las que costaron."
   ]},
@@ -4321,13 +4340,13 @@ function crearMapa(silencioso){
   return {id:newId(), kind:"mapa", src:svgSrc(svg), w:800, h:540, caption:"Mapa conceptual: " + tema, momento:val("img-momento") || "cierre"};
 }
 
-function kindLabel(img){
+function kindLabelV80(img){
   if (img.kind === "ai") return "Generada con Claude · " + (TIPOS_IMG.find(t => t[0] === img.tipo) || ["", "Imagen"])[1];
   if (img.kind === "mapa") return "Mapa conceptual automático";
   return "Imagen subida";
 }
 function canDownload(){ return !!caps.downloads || !caps.inClaude; }
-function renderGallery(){
+function renderGalleryV80(){
   const g = $("gallery");
   if (!g) return;
   g.innerHTML = state.images.map((img, i) => `
@@ -4350,7 +4369,7 @@ function renderGallery(){
       </div>
     </div>`).join("");
 }
-function imagesChanged(){ renderGallery(); renderDoc(); scheduleSave(); }
+function imagesChangedV81(){ renderGallery(); renderDoc(); scheduleSave(); }
 function addImage(img){
   state.images.push(img);
   imagesChanged();
@@ -6424,7 +6443,7 @@ function renderAula(t){
   requestAnimationFrame(() => { growAll(P); ponerMics(P); if (t === "cierre") pintarFotosAula(c); });
   pintarTimer();
 }
-function htmlAulaClase(c){
+function htmlAulaClaseV79(c){
   const planes = planesDelCurso(c), d = planAula();
   const opciones = planes.map(e => `<option value="${e.id}"${e.id === AULA.planId ? " selected" : ""}>${esc(tituloPlan(e.data))}</option>`).join("");
   const N = d && d.modo === "secuencia" ? +d.v.nclases || 5 : 0;
@@ -13624,7 +13643,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "79 (22/11/2026)";
+const LAPACHO_VERSION = "84 (22/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -19215,7 +19234,7 @@ const PED = {abierto:{}};
 function pedEstado(){ if (!state.ped || typeof state.ped !== "object") state.ped = {bloom:{}, barreras:[]}; state.ped.bloom = state.ped.bloom || {}; state.ped.barreras = Array.isArray(state.ped.barreras) ? state.ped.barreras : []; return state.ped; }
 const claveObj = o => norm(o).replace(/[^a-z0-9ñ ]/g, "").replace(/\s+/g, " ").trim().slice(0, 80);
 function foto(){ const f = fotoV43(); f.ped = JSON.parse(JSON.stringify(pedEstado())); return f; }
-function aplicar(saved){ const r = aplicarV43(saved); state.ped = saved && saved.ped && typeof saved.ped === "object" ? JSON.parse(JSON.stringify(saved.ped)) : {bloom:{}, barreras:[]}; return r; }
+function aplicarV81(saved){ const r = aplicarV43(saved); state.ped = saved && saved.ped && typeof saved.ped === "object" ? JSON.parse(JSON.stringify(saved.ped)) : {bloom:{}, barreras:[]}; return r; }
 function objetivosPed(){ return [...(state.modo === "secuencia" ? itemsLista(val("objgen")).map(o => ({o, id:"objgen"})) : []), ...itemsLista(val("objetivos")).map(o => ({o, id:"objetivos"}))]; }
 function momentosPed(){
   const m = state.modo;
@@ -21283,7 +21302,7 @@ function bibRevision(){
   return r;
 }
 function bibBotonesRef(L){ return `<button type="button" class="btn btn-sm" data-bib-ref="${esc(L.id)}">Agregar a la bibliografía</button>`; }
-function htmlBibFicha(L, abierto){
+function htmlBibFichaV83(L, abierto){
   const n = bibPref().notas[L.id] || "";
   const tipo = L.propio ? "Agregado por vos" : BIB_TIPOS[L.tipo];
   return `<details class="bib-l"${abierto ? " open" : ""} data-bib-id="${esc(L.id)}"><summary><b>${esc(L.t)}</b><small>${esc(L.a || "")} · ${esc(tipo)}</small></summary><div class="bib-b">
@@ -21309,7 +21328,7 @@ function htmlBibProb(x){
   return `<li class="bib-p"><b>${esc(x.t)}</b><span>${esc(x.q)}</span><small class="bib-d">Perelman, Física recreativa, libro ${x.l}, cap. ${x.cap}</small>
     <div class="cur-bar"><button type="button" class="btn btn-sm" data-bib-prob="${BIB_PROB.indexOf(x)}">Agregar al inicio</button></div></li>`;
 }
-function htmlBiblio(){
+function htmlBiblioV82(){
   const P = bibPref();
   if (BIB.tab === "libros"){
     const q = norm(BIB.q).trim();
@@ -25507,6 +25526,1549 @@ function init93(){
 }
 
 /* ============================================================
+   Versión 80: el libreto desde el modo aula
+   En «La clase» del modo aula, «Ver el libreto» muestra qué hacer y qué decir minuto a minuto, sin salir del aula.
+   Si la planificación elegida en el aula no es la que está abierta en «Planificar», primero se abre (lo escrito
+   antes queda guardado, como al abrir una desde «Mis planificaciones»). Se lee con su propio estilo (docHTML de
+   exportación) en una ventana encima del aula.
+   Arreglo: el botón «Cerrar» de «Llegó algo para Lapacho» (versión 77) no cerraba, porque la ventana se crea después
+   del arranque; ahora las dos ventanas nuevas se cierran con su botón.
+   ============================================================ */
+function htmlAulaClase(c){
+  const h = htmlAulaClaseV79(c);
+  try {
+    const d = planAula();
+    if (!d || !(d.modo === "clase" || d.modo === "secuencia")) return h;
+    return h + `<button type="button" class="btn btn-sm aula-libb" data-aulalib="1">${lpSvg("libro", "lp-ic")}Ver el libreto: qué hacer y qué decir</button>`;
+  } catch (e) { logSilencioso(e); return h; }
+}
+function aulaVerLibreto(){
+  try {
+    if (AULA.planId && AULA.planId !== state.planId){
+      const e = libLeer().find(x => x.id === AULA.planId);
+      if (!e){ toast("No se encontró esa planificación."); return; }
+      try { save(); } catch (er) { logSilencioso(er); }
+      cargarPlanBase(e, e.id);
+    }
+    if (!(state.modo === "clase" || state.modo === "secuencia")){ toast("El libreto se arma para una clase o una secuencia didáctica."); return; }
+    let D = $("aula-lib");
+    if (!D){
+      document.body.insertAdjacentHTML("beforeend", `<dialog class="lib aulalibdlg" id="aula-lib" aria-labelledby="aula-lib-t"><div class="lib-in"><div class="lib-head"><h2 id="aula-lib-t">Libreto de la clase</h2><button type="button" class="linkbtn" data-cerrar="aula-lib">Volver al aula</button></div><div class="aula-lib-doc" id="aula-lib-doc"></div></div></dialog>`);
+      D = $("aula-lib");
+    }
+    const M = modeloLibreto();
+    $("aula-lib-t").textContent = "Libreto" + (M.subtitulo ? `: ${M.subtitulo}` : "");
+    $("aula-lib-doc").innerHTML = docHTML(true, M);
+    abrirDialogo("aula-lib");
+    const s = D.querySelector(".lib-in"); if (s) s.scrollTop = 0;
+  } catch (e) { registrarError("aulaVerLibreto", e, "aviso"); toast("No se pudo armar el libreto."); }
+}
+function init94(){
+  try {
+    document.addEventListener("click", e => {
+      const b = e.target.closest && e.target.closest("[data-aulalib]"); if (b){ aulaVerLibreto(); return; }
+      /* «Cerrar» de las ventanas que se crean después del arranque (el enlace de data-cerrar se hace al iniciar) */
+      const x = e.target.closest && e.target.closest('[data-cerrar="aula-lib"], [data-cerrar="compartido"]'); if (x) cerrarDialogo(x.dataset.cerrar);
+    });
+  }
+  catch (e) { registrarError("init94", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 81: cuadros y gráficos para las planificaciones
+   En la sección «Imágenes» del formulario, «Cuadro o gráfico» arma, sin conexión y sin IA:
+   - Tabla de datos (para registrar mediciones, vacía o con datos),
+   - Cuadro comparativo o de doble entrada (filas y columnas con encabezados, celdas para completar o con texto),
+   - Gráfico de datos (puntos, línea o barras), con recta de ajuste opcional (pendiente, ordenada y R²),
+   - Gráfico de una función (fórmula libre o modelos de Física y Matemática: MRU, MRUV, proporcionalidad...),
+   - Ejes y cuadrícula vacíos para que los estudiantes grafiquen a mano.
+   Cada uno es una figura más (SVG que se pasa a PNG): sale en la vista previa, la ficha, Word, PDF y A4, con su
+   epígrafe y el momento de la clase. Guarda sus datos (img.spec), así se puede volver a editar.
+   La fórmula se lee con un intérprete propio (sin eval): números, x o t, + − · / ^, paréntesis, π, e y
+   sen, cos, tan, raíz, abs, ln, log, exp. Acepta coma decimal.
+   ============================================================ */
+const CG_TIPOS = [["tabla", "Tabla de datos"], ["cuadro", "Cuadro comparativo o de doble entrada"], ["datos", "Gráfico de datos"], ["funcion", "Gráfico de una función"], ["ejes", "Ejes y cuadrícula para completar"]];
+const CG_MODELOS = {
+  libre:{t:"Fórmula libre", f:"", p:[], x:["x", ""], y:["y", ""]},
+  lineal:{t:"Función lineal: y = m·x + b", f:"m*x+b", p:[["m", "Pendiente (m)", "2"], ["b", "Ordenada al origen (b)", "1"]], x:["x", ""], y:["y", ""]},
+  cuadratica:{t:"Función cuadrática: y = a·x² + b·x + c", f:"a*x^2+b*x+c", p:[["a", "a", "1"], ["b", "b", "0"], ["c", "c", "0"]], x:["x", ""], y:["y", ""]},
+  directa:{t:"Proporcionalidad directa: y = k·x", f:"k*x", p:[["k", "Constante (k)", "3"]], x:["x", ""], y:["y", ""]},
+  inversa:{t:"Proporcionalidad inversa: y = k / x", f:"k/x", p:[["k", "Constante (k)", "12"]], x:["x", ""], y:["y", ""]},
+  mru:{t:"MRU: x(t) = x₀ + v·t", f:"x0+v*x", p:[["x0", "Posición inicial x₀ (m)", "0"], ["v", "Velocidad v (m/s)", "5"]], x:["Tiempo", "s"], y:["Posición", "m"]},
+  mruvx:{t:"MRUV: x(t) = x₀ + v₀·t + ½·a·t²", f:"x0+v0*x+a*x^2/2", p:[["x0", "Posición inicial x₀ (m)", "0"], ["v0", "Velocidad inicial v₀ (m/s)", "0"], ["a", "Aceleración a (m/s²)", "2"]], x:["Tiempo", "s"], y:["Posición", "m"]},
+  mruvv:{t:"MRUV: v(t) = v₀ + a·t", f:"v0+a*x", p:[["v0", "Velocidad inicial v₀ (m/s)", "0"], ["a", "Aceleración a (m/s²)", "2"]], x:["Tiempo", "s"], y:["Velocidad", "m/s"]},
+  caida:{t:"Caída libre: y(t) = h − ½·g·t²", f:"h-g*x^2/2", p:[["h", "Altura inicial h (m)", "20"], ["g", "g (m/s²)", "9,8"]], x:["Tiempo", "s"], y:["Altura", "m"]},
+  ohm:{t:"Ley de Ohm: I = V / R", f:"x/R", p:[["R", "Resistencia R (Ω)", "100"]], x:["Tensión", "V"], y:["Corriente", "A"]}
+};
+const CGQ = {spec:null, editId:""};
+const CG_TINTA = "#1d2a24", CG_SUAVE = "#5b6762", CG_GRILLA = "#dfe5e2", CG_SERIE = "#1f6b52", CG_AJUSTE = "#b83c74", CG_FONDO = "#e9f2ed";
+/* ---------- números ---------- */
+function cgNum(s){
+  let t = String(s == null ? "" : s).trim().replace(/\s+/g, "").replace(/−/g, "-");
+  if (!t) return NaN;
+  if (t.includes(",") && t.includes(".")) t = t.replace(/\./g, "").replace(",", ".");
+  else t = t.replace(",", ".");
+  return /^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(t) ? parseFloat(t) : NaN;
+}
+function cgFmt(v, dec){
+  if (!isFinite(v)) return "";
+  const a = Math.abs(v), d = dec != null ? dec : a >= 1000 ? 0 : a >= 100 ? 1 : a >= 10 ? 2 : a >= 1 ? 2 : a >= 0.01 ? 3 : 4;
+  return (Math.round(v * 10 ** d) / 10 ** d).toLocaleString("es-AR", {maximumFractionDigits:d, useGrouping:false}).replace(/^-/, "−");
+}
+/* separa una línea de datos: tab, punto y coma o espacios; si queda un solo trozo con comas, separa por comas */
+function cgCampos(l){
+  let p = l.split(/\t|;/).map(x => x.trim()).filter(x => x !== "");
+  if (p.length < 2) p = l.trim().split(/\s+/).filter(Boolean);
+  if (p.length < 2 && /,/.test(l)) p = l.split(",").map(x => x.trim()).filter(Boolean);
+  return p;
+}
+function cgLineas(t){ return String(t || "").split(/\r?\n/).map(x => x.trim()).filter(Boolean); }
+/* ---------- intérprete de fórmulas (sin eval) ---------- */
+const CG_FUN = {sen:Math.sin, sin:Math.sin, cos:Math.cos, tan:Math.tan, tg:Math.tan, raiz:Math.sqrt, sqrt:Math.sqrt, abs:Math.abs, ln:Math.log, log:Math.log10, exp:Math.exp};
+function cgCompilar(src, params){
+  const s = String(src || "").toLowerCase().replace(/\s+/g, "").replace(/·|×/g, "*").replace(/÷/g, "/").replace(/−/g, "-").replace(/π/g, "pi").replace(/√/g, "raiz").replace(/²/g, "^2").replace(/³/g, "^3").replace(/,/g, ".");
+  if (!s) throw new Error("Escribí la fórmula.");
+  if (s.length > 200) throw new Error("La fórmula es demasiado larga.");
+  const P = Object.fromEntries(Object.entries(params || {}).map(([k, v]) => [k.toLowerCase(), v]));
+  const tk = []; let i = 0;
+  while (i < s.length){
+    const c = s[i];
+    if (/[0-9.]/.test(c)){ let j = i; while (j < s.length && /[0-9.]/.test(s[j])) j++; const n = parseFloat(s.slice(i, j)); if (!isFinite(n)) throw new Error("Hay un número mal escrito."); tk.push({t:"n", v:n}); i = j; continue; }
+    if (/[a-z]/.test(c)){ let j = i; while (j < s.length && /[a-z0-9]/.test(s[j])) j++; let w = s.slice(i, j);
+      /* nombres pegados (2x, ab) se separan si no son una función o un parámetro conocido */
+      while (w){
+        const k = [...Object.keys(CG_FUN), ...Object.keys(P), "pi", "x", "t", "e"].filter(n => w.startsWith(n)).sort((a, b) => b.length - a.length)[0];
+        if (!k) throw new Error(`No conozco «${w}». Usá x o t, números y funciones como sen, cos o raiz.`);
+        tk.push({t:"id", v:k}); w = w.slice(k.length);
+      }
+      i = j; continue; }
+    if ("+-*/^()".includes(c)){ tk.push({t:c}); i++; continue; }
+    throw new Error(`No entiendo el signo «${c}».`);
+  }
+  /* multiplicación implícita: 2x, 2(x+1), )(, x(… */
+  const T = [];
+  tk.forEach((a, k) => { const b = T[T.length - 1]; if (b && (b.t === "n" || (b.t === "id" && !CG_FUN[b.v]) || b.t === ")") && (a.t === "n" || a.t === "id" || a.t === "(")) T.push({t:"*"}); T.push(a); });
+  let p = 0;
+  const ver = () => T[p], toma = t => { if (T[p] && T[p].t === t){ p++; return true; } return false; };
+  const expr = () => { let f = term(); for (;;){ if (toma("+")){ const a = f, b = term(); f = x => a(x) + b(x); } else if (toma("-")){ const a = f, b = term(); f = x => a(x) - b(x); } else return f; } };
+  const term = () => { let f = unario(); for (;;){ if (toma("*")){ const a = f, b = unario(); f = x => a(x) * b(x); } else if (toma("/")){ const a = f, b = unario(); f = x => a(x) / b(x); } else return f; } };
+  const unario = () => { if (toma("-")){ const a = unario(); return x => -a(x); } if (toma("+")) return unario(); return potencia(); };
+  const potencia = () => { const a = primario(); if (toma("^")){ const b = unario(); return x => Math.pow(a(x), b(x)); } return a; };
+  const primario = () => {
+    const a = ver(); if (!a) throw new Error("La fórmula está incompleta.");
+    if (a.t === "n"){ p++; return () => a.v; }
+    if (a.t === "("){ p++; const f = expr(); if (!toma(")")) throw new Error("Falta cerrar un paréntesis."); return f; }
+    if (a.t === "id"){
+      p++;
+      if (CG_FUN[a.v]){ const fn = CG_FUN[a.v]; if (!toma("(")) throw new Error(`Después de ${a.v} van paréntesis: ${a.v}(x).`); const f = expr(); if (!toma(")")) throw new Error("Falta cerrar un paréntesis."); return x => fn(f(x)); }
+      if (a.v === "x" || a.v === "t") return x => x;
+      if (a.v === "pi") return () => Math.PI;
+      if (a.v === "e" && !(a.v in P)) return () => Math.E;
+      if (a.v in P){ const v = P[a.v]; return () => v; }
+    }
+    throw new Error("La fórmula tiene un error.");
+  };
+  const f = expr(); if (p < T.length) throw new Error("Sobra algo al final de la fórmula.");
+  return f;
+}
+/* ---------- escalas ---------- */
+function cgTicks(a, b, n){
+  if (!(isFinite(a) && isFinite(b))) return {min:0, max:1, step:0.2, ticks:[0, 0.2, 0.4, 0.6, 0.8, 1]};
+  if (a === b){ const d = Math.abs(a) || 1; a -= d / 2; b += d / 2; }
+  const raw = (b - a) / (n || 6), m = 10 ** Math.floor(Math.log10(raw)), f = raw / m, step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * m;
+  const min = Math.floor(a / step + 1e-9) * step, max = Math.ceil(b / step - 1e-9) * step, ticks = [];
+  for (let v = min; v <= max + step / 2; v += step) ticks.push(Math.abs(v) < step / 1e6 ? 0 : +v.toPrecision(12));
+  return {min, max, step, ticks};
+}
+const cgE = s => esc(String(s == null ? "" : s));
+const cgEje = (n, u) => (n || "") + (u ? ` (${u})` : "");
+function cgTextoMultilinea(x, y, txt, max, maxL, attrs){
+  const L = wrapWords(txt, max, maxL); return L.map((l, i) => `<text x="${x}" y="${y + i * 20}" ${attrs}>${cgE(l)}</text>`).join("");
+}
+/* ---------- tablas y cuadros ---------- */
+function cgSvgTabla(S){
+  const W = 800, pad = 24, cols = S.cols.length ? S.cols : ["Columna 1", "Columna 2"], nc = cols.length;
+  const first = S.tipo === "cuadro" ? Math.min(0.34, Math.max(0.22, 1 / (nc + 1))) : 0, wFirst = (W - 2 * pad) * first;
+  const wCol = (W - 2 * pad - wFirst) / nc;
+  const filas = S.filas;
+  const chars = w => Math.max(6, Math.floor(w / 9));
+  const altoCelda = (txt, w) => Math.max(1, wrapWords(String(txt || " "), chars(w), 6).length);
+  const headH = 18 + 20 * Math.max(...cols.map(c => altoCelda(c, wCol)), S.tipo === "cuadro" ? altoCelda(S.esquina || "", wFirst) : 1);
+  const rowH = filas.map(r => Math.max(S.alto || 40, 16 + 20 * Math.max(S.tipo === "cuadro" ? altoCelda(r.h, wFirst) : 1, ...r.c.map(v => altoCelda(v, wCol)))));
+  const top = S.titulo ? 56 : 20, H = top + headH + rowH.reduce((a, b) => a + b, 0) + pad;
+  let y = top, out = `<rect width="${W}" height="${H}" fill="#ffffff"/>`;
+  if (S.titulo) out += `<text x="${W / 2}" y="34" text-anchor="middle" font-size="21" font-weight="700" fill="${CG_TINTA}">${cgE(S.titulo)}</text>`;
+  const x0 = pad, xs = [x0, ...(first ? [x0 + wFirst] : []), ...cols.map((_, j) => x0 + wFirst + wCol * (j + 1))];
+  out += `<rect x="${x0}" y="${y}" width="${W - 2 * pad}" height="${headH}" fill="${CG_FONDO}"/>`;
+  if (first) out += cgTextoMultilinea(x0 + 10, y + 26, S.esquina || "", chars(wFirst), 6, `font-size="16" font-weight="700" fill="${CG_TINTA}"`);
+  cols.forEach((c, j) => { out += cgTextoMultilinea(x0 + wFirst + wCol * j + wCol / 2, y + 26, c, chars(wCol), 6, `font-size="16" font-weight="700" text-anchor="middle" fill="${CG_TINTA}"`); });
+  y += headH;
+  filas.forEach((r, i) => {
+    if (first){ out += `<rect x="${x0}" y="${y}" width="${wFirst}" height="${rowH[i]}" fill="${CG_FONDO}"/>`; out += cgTextoMultilinea(x0 + 10, y + 26, r.h, chars(wFirst), 6, `font-size="16" font-weight="700" fill="${CG_TINTA}"`); }
+    r.c.forEach((v, j) => { if (String(v || "").trim()) out += cgTextoMultilinea(x0 + wFirst + wCol * j + (S.tipo === "tabla" ? wCol / 2 : 10), y + 26, v, chars(wCol), 6, `font-size="16" fill="${CG_TINTA}"${S.tipo === "tabla" ? ' text-anchor="middle"' : ""}`); });
+    y += rowH[i];
+  });
+  /* bordes */
+  const yTop = top, yBot = y;
+  out += `<rect x="${x0}" y="${yTop}" width="${W - 2 * pad}" height="${yBot - yTop}" fill="none" stroke="#3c4a44" stroke-width="1.6"/>`;
+  xs.slice(1, -1).forEach(x => { out += `<line x1="${x}" y1="${yTop}" x2="${x}" y2="${yBot}" stroke="#3c4a44" stroke-width="1.2"/>`; });
+  let yy = yTop + headH; out += `<line x1="${x0}" y1="${yy}" x2="${W - pad}" y2="${yy}" stroke="#3c4a44" stroke-width="1.6"/>`;
+  rowH.slice(0, -1).forEach(h => { yy += h; out += `<line x1="${x0}" y1="${yy}" x2="${W - pad}" y2="${yy}" stroke="#3c4a44" stroke-width="1"/>`; });
+  return {svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" font-family="Arial, Helvetica, sans-serif">${out}</svg>`, w:W, h:H};
+}
+/* ---------- gráficos ---------- */
+function cgMarco(S, X, Y, extra){
+  const W = 800, H = 540, L = 92, R = 34, T = S.titulo ? 62 : 28, B = 78, pw = W - L - R, ph = H - T - B;
+  const sx = v => L + (v - X.min) / (X.max - X.min) * pw, sy = v => T + ph - (v - Y.min) / (Y.max - Y.min) * ph;
+  let o = `<rect width="${W}" height="${H}" fill="#ffffff"/>`;
+  if (S.titulo) o += `<text x="${W / 2}" y="36" text-anchor="middle" font-size="21" font-weight="700" fill="${CG_TINTA}">${cgE(S.titulo)}</text>`;
+  if (!extra || !extra.sinGrilla){
+    (extra && extra.fina ? (() => { const a = []; for (let v = X.min; v <= X.max + 1e-9; v += X.step / 5) a.push(v); return a; })() : []).forEach(v => { o += `<line x1="${sx(v)}" y1="${T}" x2="${sx(v)}" y2="${T + ph}" stroke="${CG_GRILLA}" stroke-width="0.6"/>`; });
+    (extra && extra.fina ? (() => { const a = []; for (let v = Y.min; v <= Y.max + 1e-9; v += Y.step / 5) a.push(v); return a; })() : []).forEach(v => { o += `<line x1="${L}" y1="${sy(v)}" x2="${L + pw}" y2="${sy(v)}" stroke="${CG_GRILLA}" stroke-width="0.6"/>`; });
+    if (!(extra && extra.sinX)) X.ticks.forEach(v => { o += `<line x1="${sx(v)}" y1="${T}" x2="${sx(v)}" y2="${T + ph}" stroke="${extra && extra.fina ? "#b9c4bf" : CG_GRILLA}" stroke-width="1"/>`; });
+    Y.ticks.forEach(v => { o += `<line x1="${L}" y1="${sy(v)}" x2="${L + pw}" y2="${sy(v)}" stroke="${extra && extra.fina ? "#b9c4bf" : CG_GRILLA}" stroke-width="1"/>`; });
+  }
+  /* ejes: pasan por el cero si está a la vista; si no, por el borde */
+  const ex = Y.min <= 0 && Y.max >= 0 ? sy(0) : T + ph, ey = X.min <= 0 && X.max >= 0 && !(extra && extra.sinX) ? sx(0) : L;
+  o += `<line x1="${L}" y1="${ex}" x2="${L + pw + 8}" y2="${ex}" stroke="${CG_TINTA}" stroke-width="1.8"/><path d="M${L + pw + 14} ${ex} l-9 -5 v10 z" fill="${CG_TINTA}"/>`;
+  o += `<line x1="${ey}" y1="${T + ph}" x2="${ey}" y2="${T - 8}" stroke="${CG_TINTA}" stroke-width="1.8"/><path d="M${ey} ${T - 14} l-5 9 h10 z" fill="${CG_TINTA}"/>`;
+  if (!(extra && extra.sinNumeros)){
+    if (!(extra && extra.sinX)) X.ticks.forEach(v => { o += `<text x="${sx(v)}" y="${T + ph + 24}" text-anchor="middle" font-size="16" fill="${CG_SUAVE}">${cgFmt(v)}</text>`; });
+    Y.ticks.forEach(v => { o += `<text x="${L - 10}" y="${sy(v) + 5}" text-anchor="end" font-size="16" fill="${CG_SUAVE}">${cgFmt(v)}</text>`; });
+  }
+  o += `<text x="${L + pw / 2}" y="${H - 22}" text-anchor="middle" font-size="18" font-weight="600" fill="${CG_TINTA}">${cgE(cgEje(S.xn, S.xu))}</text>`;
+  o += `<text transform="translate(26 ${T + ph / 2}) rotate(-90)" text-anchor="middle" font-size="18" font-weight="600" fill="${CG_TINTA}">${cgE(cgEje(S.yn, S.yu))}</text>`;
+  return {W, H, L, R, T, B, pw, ph, sx, sy, o};
+}
+function cgAjuste(P){
+  const n = P.length; if (n < 2) return null;
+  const mx = P.reduce((a, p) => a + p.x, 0) / n, my = P.reduce((a, p) => a + p.y, 0) / n;
+  const sxx = P.reduce((a, p) => a + (p.x - mx) ** 2, 0), sxy = P.reduce((a, p) => a + (p.x - mx) * (p.y - my), 0), syy = P.reduce((a, p) => a + (p.y - my) ** 2, 0);
+  if (!sxx) return null;
+  const m = sxy / sxx, b = my - m * mx, r2 = syy ? (sxy * sxy) / (sxx * syy) : 1;
+  return {m, b, r2};
+}
+function cgUnidadPendiente(S){ return S.yu && S.xu ? `${S.yu}/${S.xu}` : S.yu || ""; }
+function cgSvgDatos(S){
+  if (S.estilo === "barras"){
+    const D = S.puntos; if (!D.length) throw new Error("Cargá al menos un dato: una categoría y su valor por renglón.");
+    const vmax = Math.max(0, ...D.map(d => d.y)), vmin = Math.min(0, ...D.map(d => d.y)), Y = cgTicks(vmin, vmax, 6);
+    const X = {min:0, max:D.length, step:1, ticks:[]};
+    const F = cgMarco(S, X, Y, {sinX:true});
+    let o = F.o; const bw = F.pw / D.length, w = Math.min(90, bw * 0.62);
+    D.forEach((d, i) => {
+      const cx = F.L + bw * (i + 0.5), y0 = F.sy(0), y1 = F.sy(d.y), top = Math.min(y0, y1), h = Math.max(1, Math.abs(y1 - y0));
+      o += `<rect x="${cx - w / 2}" y="${top}" width="${w}" height="${h}" rx="4" fill="${CG_SERIE}"/>`;
+      o += `<text x="${cx}" y="${(d.y >= 0 ? top - 8 : top + h + 20)}" text-anchor="middle" font-size="16" font-weight="600" fill="${CG_TINTA}">${cgFmt(d.y)}</text>`;
+      o += cgTextoMultilinea(cx, F.T + F.ph + 24, d.lab, Math.max(6, Math.floor(bw / 9)), 2, `text-anchor="middle" font-size="15" fill="${CG_SUAVE}"`);
+    });
+    return {svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${F.W} ${F.H}" font-family="Arial, Helvetica, sans-serif">${o}</svg>`, w:F.W, h:F.H};
+  }
+  const P = S.puntos; if (P.length < 1) throw new Error("Cargá al menos un par de valores: x e y por renglón.");
+  const X = cgTicks(Math.min(...P.map(p => p.x), S.desde0 ? 0 : Infinity), Math.max(...P.map(p => p.x)), 7);
+  const fit = S.ajuste ? cgAjuste(P) : null;
+  const ys = P.map(p => p.y); if (fit) ys.push(fit.m * X.min + fit.b, fit.m * X.max + fit.b);
+  const Y = cgTicks(Math.min(...ys, S.desde0 ? 0 : Infinity), Math.max(...ys), 6);
+  const F = cgMarco(S, X, Y); let o = F.o;
+  if (fit){ o += `<line x1="${F.sx(X.min)}" y1="${F.sy(fit.m * X.min + fit.b)}" x2="${F.sx(X.max)}" y2="${F.sy(fit.m * X.max + fit.b)}" stroke="${CG_AJUSTE}" stroke-width="2.2" stroke-dasharray="9 6"/>`; }
+  if (S.estilo !== "puntos"){ const Q = [...P].sort((a, b) => a.x - b.x); o += `<polyline points="${Q.map(p => `${F.sx(p.x).toFixed(1)},${F.sy(p.y).toFixed(1)}`).join(" ")}" fill="none" stroke="${CG_SERIE}" stroke-width="2.4" stroke-linejoin="round"/>`; }
+  P.forEach(p => { o += `<circle cx="${F.sx(p.x).toFixed(1)}" cy="${F.sy(p.y).toFixed(1)}" r="5.5" fill="${CG_SERIE}" stroke="#ffffff" stroke-width="2"/>`; });
+  if (fit){
+    const u = cgUnidadPendiente(S), eq = `y = ${cgFmt(fit.m)}·x ${fit.b < 0 ? "−" : "+"} ${cgFmt(Math.abs(fit.b))}   (R² = ${cgFmt(fit.r2, 3)})`;
+    const lab = `Recta de ajuste: ${eq}${u ? ` · pendiente ${cgFmt(fit.m)} ${u}` : ""}`;
+    o += `<rect x="${F.L + 10}" y="${F.T + 6}" width="${Math.min(F.pw - 20, lab.length * 8.6 + 40)}" height="30" rx="6" fill="#ffffff" stroke="${CG_GRILLA}"/><line x1="${F.L + 20}" y1="${F.T + 21}" x2="${F.L + 44}" y2="${F.T + 21}" stroke="${CG_AJUSTE}" stroke-width="2.2" stroke-dasharray="7 5"/><text x="${F.L + 52}" y="${F.T + 27}" font-size="15" fill="${CG_TINTA}">${cgE(lab)}</text>`;
+  }
+  return {svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${F.W} ${F.H}" font-family="Arial, Helvetica, sans-serif">${o}</svg>`, w:F.W, h:F.H, fit};
+}
+function cgSvgFuncion(S){
+  const M = CG_MODELOS[S.modelo] || CG_MODELOS.libre, params = {};
+  (M.p || []).forEach(([k]) => { const v = cgNum((S.params || {})[k]); if (!isFinite(v)) throw new Error(`Falta el valor de ${k}.`); params[k] = v; });
+  const f = cgCompilar(S.modelo === "libre" ? S.formula : M.f, params);
+  const a = cgNum(S.desde), b = cgNum(S.hasta);
+  if (!(isFinite(a) && isFinite(b)) || a >= b) throw new Error("Revisá el intervalo: «desde» tiene que ser menor que «hasta».");
+  const N = 240, pts = [];
+  for (let i = 0; i <= N; i++){ const x = a + (b - a) * i / N; let y; try { y = f(x); } catch (e) { y = NaN; } pts.push({x, y}); }
+  const ok = pts.filter(p => isFinite(p.y));
+  if (ok.length < 2) throw new Error("La función no tiene valores en ese intervalo.");
+  /* recorte de extremos muy grandes (asíntotas) */
+  const ord = ok.map(p => p.y).sort((u, v) => u - v), q = k => ord[Math.min(ord.length - 1, Math.max(0, Math.round(k * (ord.length - 1))))];
+  let ymin = Math.min(q(0.02), 0 <= q(0.98) && 0 >= q(0.02) ? 0 : q(0.02)), ymax = q(0.98);
+  if (S.desde0) ymin = Math.min(ymin, 0);
+  const X = cgTicks(a, b, 7), Y = cgTicks(ymin, ymax, 6);
+  const F = cgMarco(S, X, Y); let o = F.o, d = "", sigue = false;
+  pts.forEach((p, i) => {
+    const dentro = isFinite(p.y) && p.y >= Y.min - (Y.max - Y.min) * 0.5 && p.y <= Y.max + (Y.max - Y.min) * 0.5;
+    const salto = i && isFinite(pts[i - 1].y) && isFinite(p.y) && Math.abs(p.y - pts[i - 1].y) > (Y.max - Y.min) * 2;
+    if (!dentro || salto){ sigue = false; if (!dentro) return; }
+    const yy = Math.max(F.T - 2, Math.min(F.T + F.ph + 2, F.sy(p.y)));
+    d += `${sigue ? "L" : "M"}${F.sx(p.x).toFixed(1)} ${yy.toFixed(1)} `; sigue = true;
+  });
+  o += `<clipPath id="cgc"><rect x="${F.L}" y="${F.T}" width="${F.pw}" height="${F.ph}"/></clipPath><path d="${d}" fill="none" stroke="${CG_SERIE}" stroke-width="2.6" stroke-linejoin="round" clip-path="url(#cgc)"/>`;
+  const lindo = f => String(f || "").replace(/\s*\^\s*2\b/g, "²").replace(/\s*\^\s*3\b/g, "³").replace(/\*/g, "·").replace(/-/g, "−");
+  const etiqueta = S.etiqueta || (S.modelo === "libre" ? `y = ${lindo(S.formula)}` : M.t.replace(/^[^:]*:\s*/, ""));
+  if (etiqueta) o += `<rect x="${F.L + 10}" y="${F.T + 6}" width="${Math.min(F.pw - 20, etiqueta.length * 9 + 24)}" height="30" rx="6" fill="#ffffff" stroke="${CG_GRILLA}"/><text x="${F.L + 22}" y="${F.T + 27}" font-size="16" font-weight="600" fill="${CG_SERIE}">${cgE(etiqueta)}</text>`;
+  return {svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${F.W} ${F.H}" font-family="Arial, Helvetica, sans-serif">${o}</svg>`, w:F.W, h:F.H};
+}
+function cgSvgEjes(S){
+  const x0 = cgNum(S.xmin), x1 = cgNum(S.xmax), y0 = cgNum(S.ymin), y1 = cgNum(S.ymax);
+  const X = cgTicks(isFinite(x0) ? x0 : 0, isFinite(x1) ? x1 : 10, 10), Y = cgTicks(isFinite(y0) ? y0 : 0, isFinite(y1) ? y1 : 10, 8);
+  const F = cgMarco(S, X, Y, {fina:true, sinNumeros:!S.numeros});
+  return {svg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${F.W} ${F.H}" font-family="Arial, Helvetica, sans-serif">${F.o}</svg>`, w:F.W, h:F.H};
+}
+/* ---------- de lo que escribe el docente a la especificación ---------- */
+function cgLista(t){ return String(t || "").split(/\n|;|\|/).map(x => x.trim()).filter(Boolean).slice(0, 12); }
+function cgDesdeForm(){
+  const v = id => ($("cgx-" + id) || {}).value || "", ch = id => !!($("cgx-" + id) || {}).checked;
+  const S = {tipo:v("tipo") || "tabla", titulo:v("titulo").trim(), momento:v("momento") || "desarrollo"};
+  if (S.tipo === "tabla"){
+    S.cols = cgLista(v("cols").replace(/,(?=\s*[^\d\s])/g, ";"));
+    const datos = cgLineas(v("datos")).map(cgCampos);
+    const n = Math.max(0, Math.min(30, parseInt(v("nfilas"), 10) || 0));
+    S.filas = datos.map(r => ({c:S.cols.map((_, j) => r[j] || "")}));
+    while (S.filas.length < n) S.filas.push({c:S.cols.map(() => "")});
+    if (!S.filas.length) S.filas = Array.from({length:6}, () => ({c:S.cols.map(() => "")}));
+    S.texto = v("datos"); S.nfilas = n;
+  } else if (S.tipo === "cuadro"){
+    S.cols = cgLista(v("ccols")); S.esquina = v("esquina").trim();
+    const fs = cgLista(v("cfilas"));
+    S.filas = fs.map(h => ({h, c:S.cols.map(() => "")}));
+    S.alto = Math.max(40, Math.min(160, (parseInt(v("calto"), 10) || 2) * 30));
+    S.ccols = v("ccols"); S.cfilas = v("cfilas"); S.calto = v("calto");
+  } else if (S.tipo === "datos"){
+    S.estilo = v("estilo") || "puntos"; S.xn = v("xn"); S.xu = v("xu"); S.yn = v("yn"); S.yu = v("yu"); S.ajuste = ch("ajuste") && S.estilo !== "barras"; S.desde0 = ch("desde0"); S.texto = v("pares");
+    const L = cgLineas(S.texto).map(cgCampos);
+    if (S.estilo === "barras") S.puntos = L.map(r => ({lab:r.slice(0, -1).join(" ") || r[0], y:cgNum(r[r.length - 1])})).filter(d => isFinite(d.y)).slice(0, 16);
+    else S.puntos = L.map(r => ({x:cgNum(r[0]), y:cgNum(r[1])})).filter(p => isFinite(p.x) && isFinite(p.y)).slice(0, 200);
+    S.descartados = cgLineas(S.texto).length - S.puntos.length;
+  } else if (S.tipo === "funcion"){
+    S.modelo = v("modelo") || "libre"; S.formula = v("formula"); S.desde = v("desde"); S.hasta = v("hasta"); S.desde0 = ch("desde0");
+    S.xn = v("xn"); S.xu = v("xu"); S.yn = v("yn"); S.yu = v("yu"); S.params = {};
+    (CG_MODELOS[S.modelo].p || []).forEach(([k]) => { S.params[k] = v("p-" + k); });
+  } else {
+    S.xn = v("xn"); S.xu = v("xu"); S.yn = v("yn"); S.yu = v("yu"); S.xmin = v("xmin"); S.xmax = v("xmax"); S.ymin = v("ymin"); S.ymax = v("ymax"); S.numeros = ch("numeros");
+  }
+  return S;
+}
+/* el título va como epígrafe de la figura (abajo, «Figura N. …»), así que no se repite dentro del dibujo */
+function cgArmar(S0){
+  const S = {...S0, titulo:""};
+  if (S.tipo === "tabla" || S.tipo === "cuadro"){
+    if (!S.cols.length) throw new Error(S.tipo === "tabla" ? "Escribí las columnas de la tabla (por ejemplo: Tiempo (s); Posición (m))." : "Escribí las columnas del cuadro.");
+    if (S.tipo === "cuadro" && !S.filas.length) throw new Error("Escribí las filas del cuadro, una por renglón.");
+    return cgSvgTabla(S);
+  }
+  if (S.tipo === "datos") return cgSvgDatos(S);
+  if (S.tipo === "funcion") return cgSvgFuncion(S);
+  return cgSvgEjes(S);
+}
+/* ---------- ventana ---------- */
+function cgCampo(id, label, html, cls){ return `<div class="f${cls ? " " + cls : ""}"><label for="cgx-${id}">${label}</label>${html}</div>`; }
+const cgIn = (id, val, attrs) => `<input id="cgx-${id}" type="text" autocomplete="off" value="${esc(val || "")}"${attrs || ""}>`;
+const cgNumIn = (id, val) => `<input id="cgx-${id}" type="text" inputmode="decimal" autocomplete="off" value="${esc(val == null ? "" : val)}">`;
+function cgEjesCampos(S, dx, dy){
+  return `<div class="cgx-2">${cgCampo("xn", "Eje horizontal: magnitud", cgIn("xn", S.xn ?? dx[0]))}${cgCampo("xu", "Unidad", cgIn("xu", S.xu ?? dx[1], ' placeholder="s"'))}</div>
+    <div class="cgx-2">${cgCampo("yn", "Eje vertical: magnitud", cgIn("yn", S.yn ?? dy[0]))}${cgCampo("yu", "Unidad", cgIn("yu", S.yu ?? dy[1], ' placeholder="m"'))}</div>`;
+}
+function cgCamposTipo(S){
+  const t = S.tipo;
+  if (t === "tabla") return `${cgCampo("cols", "Columnas (separadas por punto y coma)", cgIn("cols", (S.cols || ["Tiempo (s)", "Posición (m)"]).join("; ")))}
+    ${cgCampo("datos", "Datos (opcional): un renglón por fila, valores separados por espacio, tab o punto y coma", `<textarea id="cgx-datos" rows="4" placeholder="0  0&#10;1  2,1&#10;2  3,9">${esc(S.texto || "")}</textarea>`)}
+    ${cgCampo("nfilas", "Filas en total (las que falten quedan vacías para completar)", `<input id="cgx-nfilas" type="number" min="0" max="30" inputmode="numeric" value="${S.nfilas ?? 8}">`)}`;
+  if (t === "cuadro") return `${cgCampo("ccols", "Columnas (separadas por punto y coma)", cgIn("ccols", S.ccols ?? "Conductores; Aislantes"))}
+    ${cgCampo("cfilas", "Filas: una por renglón", `<textarea id="cgx-cfilas" rows="4">${esc(S.cfilas ?? "Qué son\nEjemplos\nUsos")}</textarea>`)}
+    <div class="cgx-2">${cgCampo("esquina", "Texto de la esquina (opcional)", cgIn("esquina", S.esquina || ""))}${cgCampo("calto", "Renglones para escribir en cada celda", `<input id="cgx-calto" type="number" min="1" max="5" inputmode="numeric" value="${esc(S.calto ?? "2")}">`)}</div>`;
+  if (t === "datos") return `${cgCampo("estilo", "Tipo de gráfico", `<select id="cgx-estilo">${[["puntos", "Puntos (dispersión)"], ["linea", "Puntos unidos por una línea"], ["barras", "Barras"]].map(([v, l]) => `<option value="${v}"${S.estilo === v ? " selected" : ""}>${l}</option>`).join("")}</select>`)}
+    ${cgCampo("pares", S.estilo === "barras" ? "Datos: un renglón por barra, la categoría y su valor" : "Datos: un renglón por punto, x e y separados por espacio, tab o punto y coma", `<textarea id="cgx-pares" rows="6" placeholder="${S.estilo === "barras" ? "Fútbol 12&#10;Vóley 7&#10;Básquet 5" : "0  0&#10;1  2,1&#10;2  3,9&#10;3  6,2"}">${esc(S.texto ?? (S.estilo === "barras" ? "" : "0 0\n1 2,1\n2 3,9\n3 6,2\n4 7,8"))}</textarea>`)}
+    ${cgEjesCampos(S, ["Tiempo", "s"], ["Posición", "m"])}
+    <label class="cond-check"><input type="checkbox" id="cgx-ajuste"${S.ajuste !== false ? " checked" : ""}${S.estilo === "barras" ? " disabled" : ""}> Recta de ajuste (pendiente, ordenada y R²)</label>
+    <label class="cond-check"><input type="checkbox" id="cgx-desde0"${S.desde0 ? " checked" : ""}> Que los ejes empiecen en cero</label>`;
+  if (t === "funcion"){
+    const M = CG_MODELOS[S.modelo || "mru"] || CG_MODELOS.libre;
+    return `${cgCampo("modelo", "Modelo", `<select id="cgx-modelo">${Object.entries(CG_MODELOS).map(([k, m]) => `<option value="${k}"${(S.modelo || "mru") === k ? " selected" : ""}>${esc(m.t)}</option>`).join("")}</select>`)}
+      ${(S.modelo || "mru") === "libre" ? cgCampo("formula", "Fórmula: y = (usá x; también sen, cos, raiz, ^ para potencias)", cgIn("formula", S.formula ?? "x^2 - 4", ' placeholder="2x + 1"')) : `<div class="cgx-params">${M.p.map(([k, l, d]) => cgCampo("p-" + k, esc(l), cgNumIn("p-" + k, (S.params || {})[k] ?? d))).join("")}</div>`}
+      <div class="cgx-2">${cgCampo("desde", "Desde", cgNumIn("desde", S.desde ?? (M.x[1] === "s" ? "0" : "-5")))}${cgCampo("hasta", "Hasta", cgNumIn("hasta", S.hasta ?? (M.x[1] === "s" ? "10" : "5")))}</div>
+      ${cgEjesCampos(S, M.x, M.y)}
+      <label class="cond-check"><input type="checkbox" id="cgx-desde0"${S.desde0 ? " checked" : ""}> Que el eje vertical incluya el cero</label>`;
+  }
+  return `${cgEjesCampos(S, ["Tiempo", "s"], ["Posición", "m"])}
+    <div class="cgx-2">${cgCampo("xmin", "Eje horizontal desde", cgNumIn("xmin", S.xmin ?? "0"))}${cgCampo("xmax", "hasta", cgNumIn("xmax", S.xmax ?? "10"))}</div>
+    <div class="cgx-2">${cgCampo("ymin", "Eje vertical desde", cgNumIn("ymin", S.ymin ?? "0"))}${cgCampo("ymax", "hasta", cgNumIn("ymax", S.ymax ?? "50"))}</div>
+    <label class="cond-check"><input type="checkbox" id="cgx-numeros"${S.numeros !== false ? " checked" : ""}> Con números en los ejes</label>`;
+}
+function cgRender(){
+  const S = CGQ.spec, P = $("cgx-panel"); if (!P) return;
+  const momOpts = MOMENTOS.map(([v]) => `<option value="${v}"${(S.momento || "desarrollo") === v ? " selected" : ""}>${esc(momLabel(v))}</option>`).join("");
+  P.innerHTML = `<div class="cgx-grid"><div class="cgx-form">
+      ${cgCampo("tipo", "Qué querés armar", `<select id="cgx-tipo">${CG_TIPOS.map(([v, l]) => `<option value="${v}"${S.tipo === v ? " selected" : ""}>${l}</option>`).join("")}</select>`)}
+      ${cgCampo("titulo", "Título (también es el epígrafe de la figura)", cgIn("titulo", S.titulo ?? ""))}
+      ${cgCampo("momento", "Dónde va en la clase", `<select id="cgx-momento">${momOpts}</select>`)}
+      <div id="cgx-campos">${cgCamposTipo(S)}</div>
+    </div><div class="cgx-vista"><p class="cgx-vt">Vista previa</p><div class="cgx-prev" id="cgx-prev" role="img" aria-label="Vista previa"></div><p class="cgx-cap" id="cgx-cap"></p><p class="cgx-msg" id="cgx-msg" role="status" aria-live="polite"></p></div></div>
+    <div class="lib-foot cgx-foot"><button type="button" class="btn btn-primary" data-cg="guardar">${CGQ.editId ? "Guardar cambios" : "Agregar a la planificación"}</button><button type="button" class="btn" data-cerrar-cg="1">Cancelar</button></div>`;
+  cgPrevia();
+}
+function cgPrevia(){
+  const S = cgDesdeForm(); CGQ.spec = {...CGQ.spec, ...S};
+  const box = $("cgx-prev"), msg = $("cgx-msg"); if (!box) return null;
+  try {
+    const R = cgArmar(S);
+    box.innerHTML = R.svg; const cap = $("cgx-cap"); if (cap) cap.textContent = "Figura: " + (S.titulo || (CG_TIPOS.find(x => x[0] === S.tipo) || ["", ""])[1]);
+    box.setAttribute("aria-label", "Vista previa: " + (S.titulo || CG_TIPOS.find(x => x[0] === S.tipo)[1]));
+    let m = "";
+    if (S.tipo === "datos" && S.descartados > 0) m = `${S.descartados} ${S.descartados === 1 ? "renglón no se pudo leer y quedó afuera" : "renglones no se pudieron leer y quedaron afuera"}.`;
+    if (R.fit){ const u = cgUnidadPendiente(S); m = (m ? m + " " : "") + `Pendiente: ${cgFmt(R.fit.m)}${u ? " " + u : ""}. Ordenada: ${cgFmt(R.fit.b)}${S.yu ? " " + S.yu : ""}. R² = ${cgFmt(R.fit.r2, 3)}.`; }
+    msg.textContent = m; msg.classList.remove("cgx-err");
+    return R;
+  } catch (e) { box.innerHTML = ""; msg.textContent = e.message || "No se pudo armar."; msg.classList.add("cgx-err"); return null; }
+}
+function abrirCuadros(id){
+  let D = $("cuadros");
+  if (!D){
+    document.body.insertAdjacentHTML("beforeend", `<dialog class="lib bancodlg" id="cuadros" aria-labelledby="cuadros-t"><div class="lib-in"><div class="lib-head"><h2 id="cuadros-t">Cuadros y gráficos</h2><button type="button" class="linkbtn" data-cerrar-cg="1">Cerrar</button></div><p class="hint">Se arman en el momento, sin conexión. Salen en la planificación, la ficha, Word, PDF y A4, con su título como epígrafe.</p><div id="cgx-panel"></div></div></dialog>`);
+    D = $("cuadros");
+    let tm = 0;
+    D.addEventListener("input", e => { if (e.target.id === "cgx-tipo" || e.target.id === "cgx-modelo" || e.target.id === "cgx-estilo") return; clearTimeout(tm); tm = setTimeout(cgPrevia, 150); });
+    D.addEventListener("change", e => {
+      const id2 = e.target.id;
+      if (id2 === "cgx-tipo" || id2 === "cgx-modelo" || id2 === "cgx-estilo"){
+        let S = cgDesdeForm();
+        if (id2 === "cgx-modelo"){ const M = CG_MODELOS[S.modelo]; S = {tipo:"funcion", titulo:S.titulo, momento:S.momento, modelo:S.modelo, xn:M.x[0], xu:M.x[1], yn:M.y[0], yu:M.y[1], desde0:S.desde0}; }
+        if (id2 === "cgx-tipo") S = {tipo:S.tipo, titulo:S.titulo, momento:S.momento};
+        if (id2 === "cgx-estilo") S = {tipo:"datos", titulo:S.titulo, momento:S.momento, estilo:S.estilo, xn:S.xn, xu:S.xu, yn:S.yn, yu:S.yu, ajuste:S.estilo !== "barras", desde0:S.desde0 || S.estilo === "barras"};
+        CGQ.spec = S; const c = $("cgx-campos"); if (c) c.innerHTML = cgCamposTipo(S); cgPrevia();
+      } else cgPrevia();
+    });
+    D.addEventListener("click", e => {
+      if (e.target.closest("[data-cerrar-cg]")){ cerrarDialogo("cuadros"); return; }
+      if (e.target.closest('[data-cg="guardar"]')) cgGuardar();
+    });
+  }
+  const img = id ? state.images.find(x => x.id === id) : null;
+  CGQ.editId = img && img.spec ? img.id : "";
+  CGQ.spec = img && img.spec ? JSON.parse(JSON.stringify(img.spec)) : {tipo:"datos", titulo:"", momento:"desarrollo", estilo:"puntos", ajuste:true};
+  $("cuadros-t").textContent = CGQ.editId ? "Editar cuadro o gráfico" : "Cuadros y gráficos";
+  cgRender();
+  abrirDialogo("cuadros");
+}
+function cgGuardar(){
+  const R = cgPrevia(); if (!R){ toast("Revisá los datos: falta algo para armarlo."); return; }
+  const S = CGQ.spec, tipoT = (CG_TIPOS.find(x => x[0] === S.tipo) || ["", ""])[1];
+  const img = {id:CGQ.editId || newId(), kind:S.tipo === "tabla" || S.tipo === "cuadro" ? "cuadro" : "grafico", src:svgSrc(R.svg), w:R.w, h:R.h, caption:S.titulo || tipoT, momento:S.momento || "desarrollo", spec:JSON.parse(JSON.stringify(S))};
+  if (CGQ.editId){ const prev = state.images.find(x => x.id === CGQ.editId); replaceImage(CGQ.editId, img); const nu = state.images.find(x => x.id === CGQ.editId); if (nu){ nu.momento = S.momento || (prev && prev.momento) || "desarrollo"; nu.caption = img.caption; imagesChanged(); } }
+  else addImage(img);
+  cerrarDialogo("cuadros");
+  toast(CGQ.editId ? "Cambios guardados." : `${img.kind === "cuadro" ? "Cuadro agregado" : "Gráfico agregado"} a la planificación.`);
+}
+function kindLabelV81(img){
+  if (img && img.kind === "grafico") return "Gráfico";
+  if (img && img.kind === "cuadro") return "Cuadro";
+  return kindLabelV80(img);
+}
+function renderGallery(){
+  renderGalleryV80();
+  try {
+    state.images.filter(im => im.spec && (im.kind === "grafico" || im.kind === "cuadro")).forEach(im => {
+      const a = document.querySelector(`#gallery .gcard[data-card="${im.id}"] .gactions`);
+      if (a && !a.querySelector("[data-cgedit]")) a.insertAdjacentHTML("afterbegin", `<button type="button" class="btn" data-cgedit="${im.id}">Editar</button>`);
+    });
+  } catch (e) { logSilencioso(e); }
+}
+function cgPonerBoton(){
+  const b = $("img-mapa"); if (!b || $("img-cg")) return;
+  b.insertAdjacentHTML("beforebegin", `<button type="button" class="btn" id="img-cg">Cuadro o gráfico</button>`);
+}
+function init95(){
+  try {
+    cgPonerBoton();
+    new MutationObserver(() => { if ($("img-mapa") && !$("img-cg")) cgPonerBoton(); }).observe(document.body, {childList:true, subtree:true});
+    document.addEventListener("click", e => {
+      if (e.target.closest && e.target.closest("#img-cg")){ abrirCuadros(); return; }
+      const ed = e.target.closest && e.target.closest("[data-cgedit]"); if (ed) abrirCuadros(ed.dataset.cgedit);
+    });
+    renderGallery();
+  } catch (e) { registrarError("init95", e, "aviso"); }
+}
+
+/* ============================================================
+   Versión 82: figuras de acuerdo al tema
+   Biblioteca propia de 24 figuras didácticas de Física (y el átomo, compartido con Química), dibujadas con código:
+   sin conexión, sin IA y sin derechos de autor de terceros. Lapacho lee el tema, los contenidos y los saberes de la
+   planificación y sugiere las que corresponden:
+   - debajo del campo «Tema», con miniaturas y «Agregar» (siempre a la vista),
+   - en la sección «Imágenes», con todas las que coinciden,
+   - y al armar la planificación desde «Armá tu primera planificación», suma sola la que mejor coincide.
+   Cada figura entra como imagen (kind "tema"): sale en la planificación, la ficha, Word, PDF y A4, con epígrafe.
+   ============================================================ */
+const FT_TINTA = "#1d2a24", FT_SUAVE = "#5b6762", FT_AZUL = "#245d9c", FT_ROJO = "#b3261e", FT_VERDE = "#1f6b52", FT_NARANJA = "#b36b00", FT_VIOLETA = "#6a49b8", FT_GRIS = "#8a948f";
+const ftT = (x, y, s, o) => `<text x="${x}" y="${y}" font-size="${(o && o.fs) || 18}"${o && o.a ? ` text-anchor="${o.a}"` : ""}${o && o.b ? ' font-weight="700"' : ""} fill="${(o && o.c) || FT_TINTA}"${o && o.it ? ' font-style="italic"' : ""}>${esc(s)}</text>`;
+function ftFlecha(x1, y1, x2, y2, c, w){
+  const a = Math.atan2(y2 - y1, x2 - x1), L = 14 + (w || 3) * 1.5, s = 0.42;
+  const bx = x2 - L * Math.cos(a), by = y2 - L * Math.sin(a);
+  return `<line x1="${x1}" y1="${y1}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke="${c}" stroke-width="${w || 3}" stroke-linecap="round"/><path d="M${x2} ${y2} L${(x2 - L * Math.cos(a - s)).toFixed(1)} ${(y2 - L * Math.sin(a - s)).toFixed(1)} L${(x2 - L * Math.cos(a + s)).toFixed(1)} ${(y2 - L * Math.sin(a + s)).toFixed(1)} Z" fill="${c}"/>`;
+}
+const ftSvg = (inner, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 ${h || 500}" font-family="Arial, Helvetica, sans-serif"><rect width="800" height="${h || 500}" fill="#ffffff"/>${inner}</svg>`;
+/* mini gráfico para MRU y MRUV */
+function ftPlot(x, y, w, h, path, xl, yl, c){
+  return `<line x1="${x}" y1="${y + h}" x2="${x + w + 10}" y2="${y + h}" stroke="${FT_TINTA}" stroke-width="2"/><path d="M${x + w + 16} ${y + h} l-10 -5 v10z" fill="${FT_TINTA}"/>
+    <line x1="${x}" y1="${y + h}" x2="${x}" y2="${y - 10}" stroke="${FT_TINTA}" stroke-width="2"/><path d="M${x} ${y - 16} l-5 10 h10z" fill="${FT_TINTA}"/>
+    <path d="${path}" fill="none" stroke="${c || FT_VERDE}" stroke-width="3.5" stroke-linecap="round"/>
+    ${ftT(x + w + 10, y + h + 28, xl, {a:"end"})}${ftT(x - 12, y - 18, yl, {a:"start"})}`;
+}
+const FIG_TEMA = [
+  {id:"dcl", t:"Diagrama de cuerpo libre de un bloque que se arrastra sobre una mesa", k:/\bnewton|fuerza|dinamica|rozamiento|friccion|cuerpo libre|inercia|segunda ley|primera ley/, svg:() => ftSvg(`
+    <rect x="80" y="330" width="640" height="26" fill="#d9cbb3"/><line x1="80" y1="330" x2="720" y2="330" stroke="${FT_TINTA}" stroke-width="2.5"/>
+    <rect x="320" y="230" width="160" height="100" rx="6" fill="#e9f2ed" stroke="${FT_TINTA}" stroke-width="2.5"/>${ftT(340, 256, "m", {a:"middle", it:true, fs:22})}
+    ${ftFlecha(400, 280, 400, 450, FT_ROJO, 4)}${ftT(415, 445, "P (peso)", {c:FT_ROJO, b:true})}
+    ${ftFlecha(400, 280, 400, 110, FT_AZUL, 4)}${ftT(415, 125, "N (normal)", {c:FT_AZUL, b:true})}
+    ${ftFlecha(400, 280, 640, 280, FT_VERDE, 4)}${ftT(560, 268, "F (aplicada)", {c:FT_VERDE, b:true, a:"middle"})}
+    ${ftFlecha(400, 300, 210, 300, FT_NARANJA, 4)}${ftT(250, 290, "Fr (rozamiento)", {c:FT_NARANJA, b:true, a:"middle"})}
+    ${ftFlecha(560, 190, 680, 190, FT_GRIS, 2.5)}${ftT(620, 178, "sentido del movimiento", {a:"middle", c:FT_SUAVE, fs:16})}
+    ${ftT(400, 485, "Todas las fuerzas se dibujan desde el cuerpo", {a:"middle", c:FT_SUAVE, fs:16})}`)},
+  {id:"plano", t:"Fuerzas sobre un cuerpo apoyado en un plano inclinado", k:/plano inclinado|rampa|pendiente de una rampa/, svg:() => ftSvg(`
+    <path d="M90 420 L710 420 L710 160 Z" fill="#efe7d8" stroke="${FT_TINTA}" stroke-width="2.5"/>
+    <path d="M190 420 A100 100 0 0 0 186 392" fill="none" stroke="${FT_TINTA}" stroke-width="2"/>${ftT(205, 405, "α", {fs:22, it:true})}
+    <g transform="translate(470 282) rotate(-22.75)"><rect x="-60" y="-70" width="120" height="70" rx="6" fill="#e9f2ed" stroke="${FT_TINTA}" stroke-width="2.5"/></g>
+    ${ftFlecha(456, 252, 456, 400, FT_ROJO, 4)}${ftT(470, 392, "P", {c:FT_ROJO, b:true, fs:22})}
+    ${ftFlecha(456, 252, 396, 109, FT_AZUL, 4)}${ftT(360, 120, "N", {c:FT_AZUL, b:true, fs:22})}
+    ${ftFlecha(456, 252, 600, 192, FT_NARANJA, 4)}${ftT(610, 186, "Fr", {c:FT_NARANJA, b:true, fs:22})}
+    ${ftT(90, 470, "P: peso · N: fuerza normal, perpendicular al plano · Fr: rozamiento, opuesto al deslizamiento", {fs:16, c:FT_SUAVE})}`)},
+  {id:"mru", t:"MRU: gráficos de posición y de velocidad en función del tiempo", k:/\bmru\b|rectilineo uniforme|velocidad constante|cinematica|movimiento rectilineo/, svg:() => ftSvg(`
+    ${ftT(210, 50, "Posición en función del tiempo", {a:"middle", b:true})}${ftT(600, 50, "Velocidad en función del tiempo", {a:"middle", b:true})}
+    ${ftPlot(60, 100, 300, 300, "M60 360 L360 130", "t (s)", "x (m)")}${ftT(110, 365, "x₀", {fs:18, c:FT_SUAVE})}
+    ${ftPlot(450, 100, 300, 300, "M450 230 L750 230", "t (s)", "v (m/s)", FT_AZUL)}<path d="M450 230 L750 230 L750 400 L450 400 Z" fill="${FT_AZUL}" opacity=".12"/>
+    ${ftT(600, 330, "área = desplazamiento", {a:"middle", fs:16, c:FT_AZUL})}
+    ${ftT(400, 470, "En el MRU la velocidad no cambia: la posición crece en forma lineal con el tiempo.", {a:"middle", fs:16, c:FT_SUAVE})}`)},
+  {id:"mruv", t:"MRUV: gráficos de posición y de velocidad en función del tiempo", k:/\bmruv\b|uniformemente variado|aceleracion|acelerado|movimiento variado/, svg:() => ftSvg(`
+    ${ftT(210, 50, "Posición en función del tiempo", {a:"middle", b:true})}${ftT(600, 50, "Velocidad en función del tiempo", {a:"middle", b:true})}
+    ${ftPlot(60, 100, 300, 300, "M60 380 Q150 340 360 120", "t (s)", "x (m)")}
+    ${ftPlot(450, 100, 300, 300, "M450 360 L750 140", "t (s)", "v (m/s)", FT_AZUL)}${ftT(500, 352, "v₀", {fs:18, c:FT_SUAVE})}
+    <path d="M620 235 L700 235 L700 176" fill="none" stroke="${FT_GRIS}" stroke-width="2" stroke-dasharray="6 5"/>${ftT(712, 214, "a = Δv / Δt", {fs:16, c:FT_SUAVE})}
+    ${ftT(400, 470, "Con aceleración constante, la velocidad cambia en forma lineal y la posición describe una parábola.", {a:"middle", fs:16, c:FT_SUAVE})}`)},
+  {id:"caida", t:"Caída libre: posición del cuerpo a intervalos iguales de tiempo", k:/caida libre|aceleracion de la gravedad|tiro vertical|gravedad\b/, svg:() => { let o = "", y = 60; const ys = [0, 1, 4, 9, 16].map(n => 40 + n * 24);
+    ys.forEach((yy, i) => { o += `<circle cx="300" cy="${yy}" r="11" fill="${i ? "#e9f2ed" : FT_VERDE}" stroke="${FT_VERDE}" stroke-width="2.5"/>${ftT(340, yy + 6, `t = ${i} Δt`, {fs:16, c:FT_SUAVE})}`; });
+    o += `<line x1="210" y1="40" x2="210" y2="424" stroke="${FT_TINTA}" stroke-width="2"/>`; for (let k = 0; k <= 16; k++){ o += `<line x1="200" y1="${40 + k * 24}" x2="${k % 2 ? 210 : 220}" y2="${40 + k * 24}" stroke="${FT_TINTA}" stroke-width="1.5"/>`; }
+    o += ftFlecha(560, 120, 560, 300, FT_ROJO, 4) + ftT(580, 220, "g ≈ 9,8 m/s²", {c:FT_ROJO, b:true}) + ftT(480, 380, "En cada intervalo recorre más distancia:", {fs:16, c:FT_SUAVE}) + ftT(480, 404, "la velocidad aumenta 9,8 m/s cada segundo.", {fs:16, c:FT_SUAVE});
+    return ftSvg(o); }},
+  {id:"tiro", t:"Tiro oblicuo: trayectoria parabólica y componentes de la velocidad", k:/tiro oblicuo|proyectil|parabolico|tiro horizontal|lanzamiento/, svg:() => { const P = t => [80 + t * 620, 420 - 1100 * t * (1 - t)]; let d = ""; for (let i = 0; i <= 40; i++){ const [x, y] = P(i / 40); d += `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)} `; }
+    let o = `<line x1="60" y1="420" x2="740" y2="420" stroke="${FT_TINTA}" stroke-width="2.5"/><path d="${d}" fill="none" stroke="${FT_GRIS}" stroke-width="2.5" stroke-dasharray="8 6"/>`;
+    [0, 0.25, 0.5, 0.75].forEach(t => { const [x, y] = P(t), vy = -124 * (1 - 2 * t); o += `<circle cx="${x}" cy="${y}" r="9" fill="${FT_VERDE}"/>` + ftFlecha(x, y, x + 70, y, FT_AZUL, 3) + (Math.abs(vy) > 5 ? ftFlecha(x, y, x, y + vy, FT_ROJO, 3) : ""); });
+    o += ftT(520, 60, "vₓ: constante", {c:FT_AZUL, b:true}) + ftT(520, 90, "vᵧ: cambia por la gravedad", {c:FT_ROJO, b:true}) + ftT(420, 470, "alcance", {a:"middle", c:FT_SUAVE, fs:16}) + ftT(390, 128, "altura máxima: vᵧ = 0", {a:"middle", c:FT_SUAVE, fs:16});
+    return ftSvg(o); }},
+  {id:"tercera", t:"Tercera ley de Newton: fuerzas de acción y reacción", k:/tercera ley|accion y reaccion|interaccion entre cuerpos/, svg:() => ftSvg(`
+    <line x1="60" y1="360" x2="740" y2="360" stroke="${FT_TINTA}" stroke-width="2.5"/>
+    <rect x="200" y="240" width="170" height="120" rx="8" fill="#e9f2ed" stroke="${FT_TINTA}" stroke-width="2.5"/>${ftT(285, 310, "A", {a:"middle", b:true, fs:28})}
+    <rect x="430" y="240" width="170" height="120" rx="8" fill="#efe7f7" stroke="${FT_TINTA}" stroke-width="2.5"/>${ftT(515, 310, "B", {a:"middle", b:true, fs:28})}
+    ${ftFlecha(430, 200, 610, 200, FT_AZUL, 4)}${ftT(520, 186, "F de A sobre B", {a:"middle", c:FT_AZUL, b:true})}
+    ${ftFlecha(370, 200, 190, 200, FT_ROJO, 4)}${ftT(280, 186, "F de B sobre A", {a:"middle", c:FT_ROJO, b:true})}
+    ${ftT(400, 420, "Igual intensidad, igual dirección y sentidos opuestos.", {a:"middle"})}${ftT(400, 450, "Actúan sobre cuerpos distintos: no se anulan.", {a:"middle", c:FT_SUAVE, fs:16})}`)},
+  {id:"energia", t:"Energía mecánica en un péndulo: potencial y cinética", k:/energia|potencial gravitatoria|cinetica|conservacion de la energia|pendulo|trabajo mecanico/, svg:() => { const O = [400, 60], L = 260, pos = [-38, 0, 38];
+    let o = `<line x1="300" y1="60" x2="500" y2="60" stroke="${FT_TINTA}" stroke-width="4"/>`;
+    pos.forEach((g, i) => { const r = g * Math.PI / 180, x = O[0] + L * Math.sin(r), y = O[1] + L * Math.cos(r); o += `<line x1="400" y1="60" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="${i === 1 ? FT_TINTA : FT_GRIS}" stroke-width="2" ${i === 1 ? "" : 'stroke-dasharray="6 5"'}/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="20" fill="${i === 1 ? FT_VERDE : "#e9f2ed"}" stroke="${FT_VERDE}" stroke-width="2.5"/>`; });
+    const barra = (x, ep, ec, lab) => `<rect x="${x}" y="${470 - ep}" width="26" height="${ep}" fill="${FT_AZUL}"/><rect x="${x + 30}" y="${470 - ec}" width="26" height="${ec}" fill="${FT_NARANJA}"/>${ftT(x + 28, 492, lab, {a:"middle", fs:15, c:FT_SUAVE})}`;
+    o += `<path d="M${400 + L * Math.sin(-38 * Math.PI / 180)} ${60 + L * Math.cos(38 * Math.PI / 180)} Q400 ${60 + L + 40} ${400 + L * Math.sin(38 * Math.PI / 180)} ${60 + L * Math.cos(38 * Math.PI / 180)}" fill="none" stroke="${FT_GRIS}" stroke-width="1.5" stroke-dasharray="3 5"/>`;
+    o += barra(110, 90, 0, "arriba") + barra(372, 0, 90, "abajo") + barra(630, 90, 0, "arriba");
+    o += `<rect x="560" y="80" width="16" height="16" fill="${FT_AZUL}"/>${ftT(584, 94, "Energía potencial", {fs:16})}<rect x="560" y="106" width="16" height="16" fill="${FT_NARANJA}"/>${ftT(584, 120, "Energía cinética", {fs:16})}${ftT(560, 150, "Sin rozamiento,", {fs:15, c:FT_SUAVE})}${ftT(560, 170, "la suma se conserva.", {fs:15, c:FT_SUAVE})}`;
+    return ftSvg(o, 500); }},
+  {id:"palanca", t:"Palanca: punto de apoyo, potencia y resistencia", k:/palanca|maquinas simples|momento de una fuerza|torque|equilibrio de rotacion/, svg:() => ftSvg(`
+    <path d="M400 330 L360 400 L440 400 Z" fill="#d9cbb3" stroke="${FT_TINTA}" stroke-width="2.5"/>${ftT(400, 430, "apoyo", {a:"middle", c:FT_SUAVE, fs:16})}
+    <rect x="110" y="316" width="580" height="14" rx="4" fill="#c9a46a" stroke="${FT_TINTA}" stroke-width="2"/>
+    <rect x="140" y="250" width="70" height="66" fill="#efe7f7" stroke="${FT_TINTA}" stroke-width="2"/>${ftFlecha(175, 260, 175, 200 + 160, FT_ROJO, 4)}${ftT(120, 240, "R (resistencia)", {c:FT_ROJO, b:true})}
+    ${ftFlecha(650, 230, 650, 312, FT_VERDE, 4)}${ftT(570, 215, "F (potencia)", {c:FT_VERDE, b:true})}
+    <path d="M175 370 L400 370" stroke="${FT_ROJO}" stroke-width="2" stroke-dasharray="6 4"/>${ftT(287, 392, "brazo de la resistencia", {a:"middle", fs:15, c:FT_ROJO})}
+    <path d="M400 290 L650 290" stroke="${FT_VERDE}" stroke-width="2" stroke-dasharray="6 4"/>${ftT(525, 282, "brazo de la potencia", {a:"middle", fs:15, c:FT_VERDE})}
+    ${ftT(400, 475, "En equilibrio: F · brazo de F = R · brazo de R", {a:"middle", b:true})}`)},
+  {id:"arquimedes", t:"Principio de Arquímedes: peso y empuje sobre un cuerpo sumergido", k:/arquimedes|empuje|flotacion|\bflota|\bfluidos?\b|hidrostatica|\bpresion|\bdensidad/, svg:() => ftSvg(`
+    <path d="M180 120 L180 440 L620 440 L620 120" fill="none" stroke="${FT_TINTA}" stroke-width="3"/><rect x="182" y="180" width="436" height="258" fill="#cfe3f5"/>
+    <path d="M182 180 q30 -8 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t76 0" fill="none" stroke="${FT_AZUL}" stroke-width="2"/>
+    <rect x="340" y="260" width="120" height="90" rx="6" fill="#e9f2ed" stroke="${FT_TINTA}" stroke-width="2.5"/>
+    ${ftFlecha(400, 305, 400, 430, FT_ROJO, 4)}${ftT(415, 425, "P (peso)", {c:FT_ROJO, b:true})}
+    ${ftFlecha(400, 305, 400, 200, FT_AZUL, 4)}${ftT(415, 215, "E (empuje)", {c:FT_AZUL, b:true})}
+    ${ftT(400, 70, "E = ρ · g · V   (V: volumen de líquido desalojado)", {a:"middle", b:true})}
+    ${ftT(400, 480, "Si E > P el cuerpo sube y flota; si E < P, se hunde.", {a:"middle", fs:16, c:FT_SUAVE})}`)},
+  {id:"calor", t:"Formas de transmisión del calor: conducción, convección y radiación", k:/calor|conduccion|conveccion|radiacion termica|transmision del calor|transferencia de energia|termico/, svg:() => ftSvg(`
+    ${ftT(135, 50, "Conducción", {a:"middle", b:true})}${ftT(400, 50, "Convección", {a:"middle", b:true})}${ftT(665, 50, "Radiación", {a:"middle", b:true})}
+    <rect x="40" y="200" width="190" height="22" rx="4" fill="#9aa6a1" stroke="${FT_TINTA}" stroke-width="2"/><path d="M60 270 q10 -30 20 -40 q0 25 12 30 q4 -18 14 -24 q6 28 -6 34 Z" fill="${FT_NARANJA}"/>
+    ${ftFlecha(90, 190, 210, 190, FT_ROJO, 3)}${ftT(135, 160, "por contacto", {a:"middle", fs:15, c:FT_SUAVE})}
+    <path d="M320 140 L320 300 L480 300 L480 140" fill="none" stroke="${FT_TINTA}" stroke-width="3"/><rect x="322" y="160" width="156" height="138" fill="#cfe3f5"/>
+    <path d="M400 280 C350 280 350 180 400 180 C450 180 450 280 400 280" fill="none" stroke="${FT_ROJO}" stroke-width="3"/><path d="M394 180 l12 -6 v12z" fill="${FT_ROJO}"/>
+    <path d="M370 340 q10 -30 20 -40 q0 25 12 30 q4 -18 14 -24 q6 28 -6 34 Z" fill="${FT_NARANJA}"/>${ftT(400, 380, "el fluido circula", {a:"middle", fs:15, c:FT_SUAVE})}
+    <circle cx="600" cy="200" r="34" fill="#f2b84b"/>${[0, 1, 2].map(i => `<path d="M645 ${180 + i * 20} q15 -8 30 0 t30 0 t30 0" fill="none" stroke="${FT_NARANJA}" stroke-width="3"/>`).join("")}
+    ${ftT(665, 300, "sin necesidad de", {a:"middle", fs:15, c:FT_SUAVE})}${ftT(665, 320, "un medio material", {a:"middle", fs:15, c:FT_SUAVE})}
+    ${ftT(400, 460, "El calor pasa siempre del cuerpo más caliente al más frío.", {a:"middle"})}`)},
+  {id:"termometro", t:"Escalas de temperatura: Celsius, Kelvin y Fahrenheit", k:/temperatura|termometro|celsius|kelvin|fahrenheit|escalas? termometric/, svg:() => { const term = (x, nom, a, b) => `<rect x="${x - 14}" y="80" width="28" height="300" rx="14" fill="#ffffff" stroke="${FT_TINTA}" stroke-width="2.5"/><circle cx="${x}" cy="395" r="26" fill="${FT_ROJO}"/><rect x="${x - 6}" y="200" width="12" height="190" fill="${FT_ROJO}"/>
+      <line x1="${x + 18}" y1="120" x2="${x + 40}" y2="120" stroke="${FT_TINTA}" stroke-width="2"/>${ftT(x + 46, 126, b, {b:true})}<line x1="${x + 18}" y1="320" x2="${x + 40}" y2="320" stroke="${FT_TINTA}" stroke-width="2"/>${ftT(x + 46, 326, a, {b:true})}${ftT(x, 460, nom, {a:"middle", b:true})}`;
+    return ftSvg(`${term(220, "Celsius", "0 °C", "100 °C")}${term(440, "Kelvin", "273 K", "373 K")}${term(650, "Fahrenheit", "32 °F", "212 °F")}
+      <line x1="60" y1="120" x2="760" y2="120" stroke="${FT_GRIS}" stroke-width="1.5" stroke-dasharray="6 6"/><line x1="60" y1="320" x2="760" y2="320" stroke="${FT_GRIS}" stroke-width="1.5" stroke-dasharray="6 6"/>
+      ${ftT(20, 110, "ebullición", {fs:15, c:FT_SUAVE})}${ftT(20, 128, "del agua", {fs:15, c:FT_SUAVE})}${ftT(20, 310, "fusión", {fs:15, c:FT_SUAVE})}${ftT(20, 328, "del hielo", {fs:15, c:FT_SUAVE})}${ftT(400, 492, "T(K) = T(°C) + 273   ·   T(°F) = 1,8 · T(°C) + 32", {a:"middle", fs:16, c:FT_SUAVE})}`, 500); }},
+  {id:"estados", t:"Estados de la materia y cambios de estado", k:/estados de (la )?materia|cambios? de estado|fusion|evaporacion|vaporizacion|condensacion|solidificacion|sublimacion|modelo de particulas|particulas/, svg:() => { const caja = (x, y, tipo, nom) => { let p = ""; if (tipo === 0){ for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) p += `<circle cx="${x + 22 + i * 22}" cy="${y + 22 + j * 22}" r="9" fill="${FT_AZUL}"/>`; } else if (tipo === 1){ [[20, 70], [44, 80], [70, 72], [96, 78], [30, 46], [58, 50], [86, 52], [40, 94], [66, 96], [92, 98], [18, 96]].forEach(([a, b]) => { p += `<circle cx="${x + a}" cy="${y + b}" r="9" fill="${FT_AZUL}"/>`; }); } else { [[20, 22], [80, 30], [50, 64], [98, 90], [24, 100], [70, 108]].forEach(([a, b]) => { p += `<circle cx="${x + a}" cy="${y + b}" r="9" fill="${FT_AZUL}"/>`; }); }
+      return `<rect x="${x}" y="${y}" width="120" height="120" rx="8" fill="#f4f8fb" stroke="${FT_TINTA}" stroke-width="2"/>${p}${ftT(x + 60, y + 146, nom, {a:"middle", b:true})}`; };
+    return ftSvg(`${caja(60, 300, 0, "Sólido")}${caja(340, 40, 1, "Líquido")}${caja(620, 300, 2, "Gaseoso")}
+      ${ftFlecha(190, 330, 330, 150, FT_ROJO, 3)}${ftT(200, 220, "fusión", {c:FT_ROJO, b:true})}${ftFlecha(345, 175, 205, 355, FT_AZUL, 3)}${ftT(285, 300, "solidificación", {c:FT_AZUL, b:true})}
+      ${ftFlecha(470, 150, 610, 330, FT_ROJO, 3)}${ftT(560, 215, "vaporización", {c:FT_ROJO, b:true})}${ftFlecha(605, 355, 465, 175, FT_AZUL, 3)}${ftT(445, 300, "condensación", {c:FT_AZUL, b:true})}
+      ${ftFlecha(190, 400, 610, 400, FT_ROJO, 3)}${ftT(400, 390, "sublimación", {a:"middle", c:FT_ROJO, b:true})}${ftFlecha(610, 425, 190, 425, FT_AZUL, 3)}${ftT(400, 452, "sublimación inversa", {a:"middle", c:FT_AZUL, b:true})}
+      ${ftT(400, 492, "Rojo: absorbe energía · Azul: libera energía", {a:"middle", fs:15, c:FT_SUAVE})}`, 500); }},
+  {id:"seriepar", t:"Lámparas conectadas en serie y en paralelo", k:/\bserie\b|paralelo|asociacion de resistencias|resistencias en/, svg:() => { const lamp = (x, y) => `<circle cx="${x}" cy="${y}" r="20" fill="#fff7d6" stroke="${FT_TINTA}" stroke-width="2.5"/><path d="M${x - 14} ${y - 14} L${x + 14} ${y + 14} M${x + 14} ${y - 14} L${x - 14} ${y + 14}" stroke="${FT_TINTA}" stroke-width="2.5"/>`;
+    const pila = (x, y) => `<rect x="${x - 20}" y="${y - 30}" width="40" height="60" fill="#ffffff"/><line x1="${x - 18}" y1="${y - 8}" x2="${x + 18}" y2="${y - 8}" stroke="${FT_TINTA}" stroke-width="3.5"/><line x1="${x - 10}" y1="${y + 8}" x2="${x + 10}" y2="${y + 8}" stroke="${FT_TINTA}" stroke-width="6"/>`;
+    return ftSvg(`${ftT(200, 50, "En serie", {a:"middle", b:true})}${ftT(600, 50, "En paralelo", {a:"middle", b:true})}
+      <path d="M60 120 L340 120 L340 360 L60 360 Z" fill="none" stroke="${FT_TINTA}" stroke-width="3"/>${pila(60, 240)}${lamp(150, 120)}${lamp(250, 120)}
+      ${ftT(200, 410, "Un solo camino: la misma corriente", {a:"middle", fs:15, c:FT_SUAVE})}${ftT(200, 432, "pasa por las dos lámparas.", {a:"middle", fs:15, c:FT_SUAVE})}
+      <path d="M460 120 L740 120 L740 360 L460 360 Z M600 120 L600 360" fill="none" stroke="${FT_TINTA}" stroke-width="3"/>${pila(460, 240)}${lamp(600, 240)}${lamp(740, 240)}
+      ${ftT(600, 410, "Cada lámpara tiene su propio camino:", {a:"middle", fs:15, c:FT_SUAVE})}${ftT(600, 432, "si una se quema, la otra sigue encendida.", {a:"middle", fs:15, c:FT_SUAVE})}`); }},
+  {id:"circuito", t:"Circuito eléctrico simple: pila, interruptor y lámpara", k:/circuito|corriente electrica|pila|bateria|lampara|resistencia electrica|ley de ohm|electricidad|tension electrica|intensidad de corriente/, svg:() => ftSvg(`
+    <path d="M150 140 L650 140 L650 380 L150 380 Z" fill="none" stroke="${FT_TINTA}" stroke-width="3.5"/>
+    <rect x="120" y="215" width="60" height="90" fill="#ffffff"/><line x1="125" y1="240" x2="175" y2="240" stroke="${FT_TINTA}" stroke-width="4"/><line x1="135" y1="262" x2="165" y2="262" stroke="${FT_TINTA}" stroke-width="7"/>${ftT(100, 250, "+", {fs:24, b:true})}${ftT(100, 275, "−", {fs:24, b:true})}${ftT(60, 330, "pila", {fs:17})}
+    <circle cx="650" cy="260" r="34" fill="#fff7d6" stroke="${FT_TINTA}" stroke-width="3"/><path d="M626 236 L674 284 M674 236 L626 284" stroke="${FT_TINTA}" stroke-width="3"/>${ftT(700, 266, "lámpara", {fs:17})}
+    <rect x="360" y="120" width="90" height="40" fill="#ffffff"/><circle cx="370" cy="140" r="6" fill="${FT_TINTA}"/><circle cx="440" cy="140" r="6" fill="${FT_TINTA}"/><line x1="370" y1="140" x2="432" y2="110" stroke="${FT_TINTA}" stroke-width="3.5"/>${ftT(405, 100, "interruptor", {a:"middle", fs:17})}
+    ${ftFlecha(250, 140, 320, 140, FT_ROJO, 3)}${ftFlecha(540, 380, 470, 380, FT_ROJO, 3)}${ftT(400, 415, "sentido convencional de la corriente (de + a −)", {a:"middle", c:FT_ROJO, fs:16})}
+    ${ftT(400, 470, "Al cerrar el interruptor, el circuito se completa y la lámpara enciende.", {a:"middle", fs:16, c:FT_SUAVE})}`)},
+  {id:"cargas", t:"Cargas eléctricas y líneas de campo eléctrico", k:/carga electrica|cargas electricas|electrostatica|campo electrico|coulomb|electrizacion/, svg:() => { const rad = (x, y, sale, c) => { let o = ""; for (let i = 0; i < 12; i++){ const a = i * Math.PI / 6, x1 = x + 34 * Math.cos(a), y1 = y + 34 * Math.sin(a), x2 = x + 140 * Math.cos(a), y2 = y + 140 * Math.sin(a); o += sale ? ftFlecha(x1, y1, x2, y2, c, 2.5) : ftFlecha(x2, y2, x1, y1, c, 2.5); } return o; };
+    return ftSvg(`${rad(220, 240, true, FT_ROJO)}<circle cx="220" cy="240" r="28" fill="${FT_ROJO}"/>${ftT(220, 250, "+", {a:"middle", fs:30, b:true, c:"#ffffff"})}
+      ${rad(580, 240, false, FT_AZUL)}<circle cx="580" cy="240" r="28" fill="${FT_AZUL}"/>${ftT(580, 250, "−", {a:"middle", fs:30, b:true, c:"#ffffff"})}
+      ${ftT(220, 425, "Carga positiva: las líneas salen", {a:"middle", fs:16})}${ftT(580, 425, "Carga negativa: las líneas entran", {a:"middle", fs:16})}
+      ${ftT(400, 470, "Cargas de igual signo se repelen; de distinto signo se atraen.", {a:"middle", fs:16, c:FT_SUAVE})}`); }},
+  {id:"espectro", t:"Espectro electromagnético", k:/espectro|electromagnetic|rayos x|infrarroj|ultraviolet|microondas|ondas de radio|radiacion electromagnetica/, svg:() => { const B = [["Radio", "#8a948f"], ["Microondas", "#6f7f78"], ["Infrarrojo", "#b3261e"], ["Visible", "url(#vis)"], ["Ultravioleta", "#6a49b8"], ["Rayos X", "#3c4a9a"], ["Gamma", "#1d2a24"]];
+    let o = `<defs><linearGradient id="vis"><stop offset="0" stop-color="#d7263d"/><stop offset=".2" stop-color="#f28c28"/><stop offset=".4" stop-color="#f2d22e"/><stop offset=".6" stop-color="#3bb273"/><stop offset=".8" stop-color="#2e86de"/><stop offset="1" stop-color="#7b3fe4"/></linearGradient></defs>`;
+    B.forEach(([n, c], i) => { const x = 40 + i * 103; o += `<rect x="${x}" y="200" width="100" height="70" fill="${c}"/>${ftT(x + 50, 300, n, {a:"middle", fs:15, b:true})}`; });
+    let d = "", fase = 0; for (let i = 0; i <= 720; i++){ const x = 40 + i, f = 0.03 + (i / 720) ** 2 * 0.55; fase += f; d += `${i ? "L" : "M"}${x} ${(140 + 40 * Math.sin(fase)).toFixed(1)} `; }
+    o += `<path d="${d}" fill="none" stroke="${FT_AZUL}" stroke-width="2.5"/>${ftFlecha(60, 370, 740, 370, FT_TINTA, 2.5)}${ftT(400, 400, "mayor frecuencia y energía · menor longitud de onda", {a:"middle", fs:16})}${ftT(400, 460, "La luz visible es una parte muy pequeña del espectro.", {a:"middle", fs:16, c:FT_SUAVE})}`;
+    return ftSvg(o); }},
+  {id:"iman", t:"Imán de barra y líneas de campo magnético", k:/\biman|\bimanes|\bmagnetismo|\bmagnetic|\bbrujula|\belectroiman|campo magnetico/, svg:() => { let o = `<rect x="280" y="215" width="120" height="70" fill="${FT_ROJO}"/><rect x="400" y="215" width="120" height="70" fill="${FT_AZUL}"/>${ftT(340, 260, "N", {a:"middle", fs:30, b:true, c:"#ffffff"})}${ftT(460, 260, "S", {a:"middle", fs:30, b:true, c:"#ffffff"})}`;
+    [40, 80, 125, 175].forEach(h => { o += `<path d="M282 250 C200 ${250 - h * 1.4} 600 ${250 - h * 1.4} 518 250" fill="none" stroke="${FT_GRIS}" stroke-width="2.2"/><path d="M282 250 C200 ${250 + h * 1.4} 600 ${250 + h * 1.4} 518 250" fill="none" stroke="${FT_GRIS}" stroke-width="2.2"/>`; const yT = 250 - h * 1.05, yB = 250 + h * 1.05; o += `<path d="M406 ${yT} l-12 -6 v12z" fill="${FT_TINTA}"/><path d="M406 ${yB} l-12 -6 v12z" fill="${FT_TINTA}"/>`; });
+    o += ftT(400, 470, "Por fuera del imán, las líneas van del polo norte al polo sur.", {a:"middle", fs:16, c:FT_SUAVE});
+    return ftSvg(o); }},
+  {id:"onda", t:"Onda transversal: amplitud y longitud de onda", k:/\bondas?\b|amplitud|longitud de onda|frecuencia|periodo de una onda|transversal/, svg:() => { let d = ""; for (let i = 0; i <= 200; i++){ const x = 60 + i * 3.4, y = 250 - 110 * Math.sin(i / 200 * 4 * Math.PI); d += `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)} `; }
+    return ftSvg(`<line x1="50" y1="250" x2="760" y2="250" stroke="${FT_GRIS}" stroke-width="1.5" stroke-dasharray="6 6"/><path d="${d}" fill="none" stroke="${FT_AZUL}" stroke-width="3.5"/>
+      <line x1="145" y1="140" x2="485" y2="140" stroke="${FT_ROJO}" stroke-width="2"/><path d="M145 140 l12 -6 v12z M485 140 l-12 -6 v12z" fill="${FT_ROJO}"/>${ftT(315, 125, "λ (longitud de onda)", {a:"middle", c:FT_ROJO, b:true})}
+      ${ftFlecha(130, 250, 130, 146, FT_VERDE, 2.5)}${ftT(60, 200, "A", {c:FT_VERDE, b:true, fs:22})}${ftT(655, 395, "valle", {a:"middle", c:FT_SUAVE, fs:16})}${ftT(530, 128, "cresta", {a:"middle", c:FT_SUAVE, fs:16})}
+      ${ftT(400, 450, "v = λ · f   (velocidad = longitud de onda × frecuencia)", {a:"middle", b:true})}`); }},
+  {id:"sonido", t:"Onda longitudinal (sonido): compresiones y rarefacciones", k:/sonido|longitudinal|acustica|ondas sonoras/, svg:() => { let o = ""; for (let i = 0; i < 70; i++){ const x = 70 + i * 9.5 + 18 * Math.sin(i / 70 * 6 * Math.PI); o += `<line x1="${x.toFixed(1)}" y1="160" x2="${x.toFixed(1)}" y2="300" stroke="${FT_AZUL}" stroke-width="2.4"/>`; }
+    return ftSvg(`<rect x="20" y="170" width="40" height="120" rx="6" fill="#9aa6a1"/>${ftT(40, 330, "fuente", {a:"middle", fs:16, c:FT_SUAVE})}${o}
+      ${ftT(205, 140, "compresión", {a:"middle", b:true, c:FT_ROJO})}${ftT(320, 345, "rarefacción", {a:"middle", b:true, c:FT_VERDE})}
+      ${ftFlecha(560, 380, 720, 380, FT_TINTA, 3)}${ftT(640, 410, "propagación", {a:"middle", fs:16})}
+      ${ftT(400, 460, "Las partículas del aire oscilan en la misma dirección en que viaja la onda.", {a:"middle", fs:16, c:FT_SUAVE})}`); }},
+  {id:"luz", t:"Reflexión y refracción de la luz", k:/\bluz\b|reflexion|refraccion|optica|snell|espejos?|indice de refraccion/, svg:() => ftSvg(`
+    <rect x="60" y="250" width="680" height="200" fill="#cfe3f5"/><line x1="60" y1="250" x2="740" y2="250" stroke="${FT_TINTA}" stroke-width="2.5"/>${ftT(80, 235, "aire", {c:FT_SUAVE, fs:16})}${ftT(80, 285, "agua", {c:FT_SUAVE, fs:16})}
+    <line x1="400" y1="60" x2="400" y2="440" stroke="${FT_GRIS}" stroke-width="2" stroke-dasharray="8 6"/>${ftT(410, 80, "normal", {fs:16, c:FT_SUAVE})}
+    ${ftFlecha(220, 70, 398, 248, "#d97706", 3.5)}${ftT(205, 62, "rayo incidente", {a:"end", fs:16, b:true})}
+    ${ftFlecha(402, 248, 580, 70, "#d97706", 3)}${ftT(595, 62, "rayo reflejado", {fs:16, b:true})}
+    ${ftFlecha(402, 252, 500, 430, FT_AZUL, 3.5)}${ftT(510, 425, "rayo refractado", {fs:16, b:true, c:FT_AZUL})}
+    <path d="M400 190 A60 60 0 0 0 358 207" fill="none" stroke="${FT_TINTA}" stroke-width="2"/>${ftT(362, 182, "θ₁", {fs:18, it:true})}
+    <path d="M400 320 A70 70 0 0 0 434 312" fill="none" stroke="${FT_TINTA}" stroke-width="2"/>${ftT(418, 345, "θ₂", {fs:18, it:true})}
+    ${ftT(400, 485, "Al pasar a un medio más denso, la luz se acerca a la normal.", {a:"middle", fs:16, c:FT_SUAVE})}`, 500)},
+  {id:"lentes", t:"Lentes convergente y divergente", k:/\blentes?\b|\bconvergente|\bdivergente|distancia focal|\bfoco\b|\blupa/, svg:() => ftSvg(`
+    ${ftT(200, 50, "Convergente", {a:"middle", b:true})}${ftT(600, 50, "Divergente", {a:"middle", b:true})}
+    <path d="M200 110 Q240 240 200 370 Q160 240 200 110 Z" fill="#cfe3f5" stroke="${FT_AZUL}" stroke-width="2.5"/><line x1="40" y1="240" x2="370" y2="240" stroke="${FT_GRIS}" stroke-width="1.5" stroke-dasharray="6 5"/>
+    ${[170, 240, 310].map(y => `<line x1="50" y1="${y}" x2="200" y2="${y}" stroke="#d97706" stroke-width="3"/>` + ftFlecha(200, y, 330, y + (240 - y) * 1.3, "#d97706", 3)).join("")}<circle cx="300" cy="240" r="6" fill="${FT_ROJO}"/>${ftT(300, 275, "F", {a:"middle", b:true, c:FT_ROJO})}
+    <path d="M580 110 L620 110 Q590 240 620 370 L580 370 Q610 240 580 110 Z" fill="#cfe3f5" stroke="${FT_AZUL}" stroke-width="2.5"/><line x1="440" y1="240" x2="770" y2="240" stroke="${FT_GRIS}" stroke-width="1.5" stroke-dasharray="6 5"/>
+    ${[170, 310].map(y => `<line x1="450" y1="${y}" x2="600" y2="${y}" stroke="#d97706" stroke-width="3"/>` + ftFlecha(600, y, 740, y + (y - 240) * 1.4, "#d97706", 3) + `<line x1="600" y1="${y}" x2="500" y2="240" stroke="#d97706" stroke-width="1.6" stroke-dasharray="5 5"/>`).join("")}<line x1="450" y1="240" x2="760" y2="240" stroke="#d97706" stroke-width="3"/><circle cx="500" cy="240" r="6" fill="${FT_ROJO}"/>${ftT(500, 275, "F", {a:"middle", b:true, c:FT_ROJO})}
+    ${ftT(400, 450, "La convergente junta los rayos en el foco; la divergente los separa.", {a:"middle", fs:16, c:FT_SUAVE})}`)},
+  {id:"fases", t:"Fases de la Luna según su posición alrededor de la Tierra", k:/\bluna\b|\bfases\b|\beclipse|sistema solar|astronomia|sol tierra luna/, svg:() => { let o = `<circle cx="400" cy="250" r="36" fill="${FT_AZUL}"/>${ftT(400, 256, "Tierra", {a:"middle", fs:14, b:true, c:"#ffffff"})}<circle cx="400" cy="250" r="160" fill="none" stroke="${FT_GRIS}" stroke-width="1.5" stroke-dasharray="5 6"/>`;
+    o += [0, 1, 2].map(i => ftFlecha(30, 150 + i * 100, 120, 150 + i * 100, "#d97706", 3)).join("") + ftT(30, 120, "luz del Sol", {fs:16, c:"#b36b00", b:true});
+    [["Llena", 180], ["Cuarto creciente", 270], ["Nueva", 0], ["Cuarto menguante", 90]].forEach(([n, ang]) => { const r = ang * Math.PI / 180, x = 400 - 160 * Math.cos(r), y = 250 - 160 * Math.sin(r);
+      o += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="22" fill="#2b2b2b"/><path d="M${x.toFixed(1)} ${(y - 22).toFixed(1)} A22 22 0 0 0 ${x.toFixed(1)} ${(y + 22).toFixed(1)} Z" fill="#f4f1e6"/>${ftT(x, y + (ang === 90 ? 50 : ang === 270 ? -32 : 48), n, {a:"middle", fs:15, b:true})}`; });
+    o += ftT(400, 485, "La mitad iluminada siempre mira al Sol; desde la Tierra vemos distintas partes de esa mitad.", {a:"middle", fs:15, c:FT_SUAVE});
+    return ftSvg(o); }},
+  {id:"atomo", t:"Modelo atómico de Bohr (esquema): núcleo y electrones en niveles de energía", k:/\batomo|atomico|electron|proton|neutron|nucleo atomico|bohr|estructura de la materia|modelo atomico/, svg:() => { let o = "";
+    [70, 130, 190].forEach((r, i) => { o += `<circle cx="330" cy="250" r="${r}" fill="none" stroke="${FT_GRIS}" stroke-width="2"/>`; const n = [2, 8, 1][i]; for (let k = 0; k < n; k++){ const a = k * 2 * Math.PI / n + i; o += `<circle cx="${(330 + r * Math.cos(a)).toFixed(1)}" cy="${(250 + r * Math.sin(a)).toFixed(1)}" r="9" fill="${FT_AZUL}"/>`; } });
+    [[-10, -8, 1], [10, -6, 0], [0, 10, 1], [-12, 10, 0], [12, 12, 1], [0, -16, 0]].forEach(([dx, dy, p]) => { o += `<circle cx="${330 + dx}" cy="${250 + dy}" r="11" fill="${p ? FT_ROJO : FT_GRIS}"/>`; });
+    o += `<circle cx="590" cy="150" r="10" fill="${FT_ROJO}"/>${ftT(610, 156, "protón (+)", {fs:17})}<circle cx="590" cy="190" r="10" fill="${FT_GRIS}"/>${ftT(610, 196, "neutrón", {fs:17})}<circle cx="590" cy="230" r="9" fill="${FT_AZUL}"/>${ftT(610, 236, "electrón (−)", {fs:17})}`;
+    o += ftT(560, 300, "Los electrones ocupan", {fs:16, c:FT_SUAVE}) + ftT(560, 322, "niveles de energía", {fs:16, c:FT_SUAVE}) + ftT(560, 344, "alrededor del núcleo.", {fs:16, c:FT_SUAVE});
+    return ftSvg(o); }}
+];
+const FT_AUTO = new Set();
+const ftNorm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+function figurasTema(){
+  const tema = ftNorm(val("tema")), extra = ftNorm([val("contenidos"), val("nombre"), (state.lista || []).filter((_, i) => (state.saberesSel || state.lastAuto || []).includes(i)).join(" ")].join(" "));
+  if (!tema.trim() && !extra.trim()) return [];
+  const cont = ftNorm(val("contenidos"));
+  /* los saberes del diseño suman, pero solos no alcanzan: tiene que coincidir el tema o lo que escribió el docente en contenidos */
+  return FIG_TEMA.map(f => ({f, p:(f.k.test(tema) ? 3 : 0) + (f.k.test(extra) ? 1 : 0), base:f.k.test(tema) || f.k.test(cont)})).filter(x => x.base).sort((a, b) => b.p - a.p).map(x => x.f);
+}
+function ftYaEsta(f){ return state.images.some(im => im.kind === "tema" && im.fig === f.id); }
+function ftImagenV83(f){ return {id:newId(), kind:"tema", fig:f.id, src:svgSrc(f.svg()), w:800, h:500, caption:f.t, momento:"desarrollo"}; }
+function ftAgregar(id, silencio){
+  const f = FIG_TEMA.find(x => x.id === id); if (!f || ftYaEsta(f)) return false;
+  addImage(ftImagen(f)); if (!silencio) toast("Figura agregada. La ves en el documento y en «Imágenes».");
+  ftRender(); return true;
+}
+let FT_PEND = 0;
+function ftRenderV82(){
+  clearTimeout(FT_PEND);
+  FT_PEND = setTimeout(() => {
+    try {
+      const L = figurasTema(), tema = $("tema"); if (!tema) return;
+      const campo = tema.closest(".f") || tema.parentElement;
+      let box = $("ft-sug");
+      if (!L.length || state.modo === "anual"){ if (box) box.remove(); const g = $("ft-sug-img"); if (g) g.remove(); return; }
+      const fila = (fs, max) => fs.slice(0, max).map(f => { const ya = ftYaEsta(f); return `<li class="ft-it"><img src="${svgSrc(f.svg())}" alt="" width="120" height="75" loading="lazy"><span class="ft-t">${esc(f.t)}</span>${ya ? `<span class="ft-ya">Agregada</span>` : `<button type="button" class="btn btn-sm" data-ftadd="${f.id}" aria-label="Agregar la figura: ${esc(f.t)}">Agregar</button>`}</li>`; }).join("");
+      const html = `<p class="ft-h">${lpSvg("imagen", "lp-ic")}Figuras para este tema</p><ul class="ft-l">${fila(L, 3)}</ul>${L.length > 3 ? `<button type="button" class="linkbtn" data-ftver="1">Ver las ${L.length} figuras</button>` : ""}`;
+      if (!box){ campo.insertAdjacentHTML("afterend", `<div class="ft-sug f full" id="ft-sug" role="region" aria-label="Figuras para este tema"></div>`); box = $("ft-sug"); }
+      if (box.innerHTML !== html) box.innerHTML = html;
+      const gal = $("gallery");
+      if (gal){
+        let g = $("ft-sug-img");
+        const h2 = `<p class="ft-h">${lpSvg("imagen", "lp-ic")}Figuras de Lapacho para «${esc(val("tema") || "este tema")}»</p><ul class="ft-l">${fila(L, 12)}</ul>`;
+        if (!g){ gal.insertAdjacentHTML("beforebegin", `<div class="ft-sug ft-sug-img" id="ft-sug-img"></div>`); g = $("ft-sug-img"); }
+        if (g.innerHTML !== h2) g.innerHTML = h2;
+      }
+    } catch (e) { logSilencioso(e); }
+  }, 120);
+}
+function ftVerTodas(){
+  try {
+    const g = $("ft-sug-img") || $("gallery"); if (!g) return;
+    const det = g.closest("details"); if (det) det.open = true;
+    const opc = $("opc-head"); if (opc && g.offsetParent === null && typeof state === "object"){ state.opcAbiertas = true; try { aplicarOpc(); } catch (e) { logSilencioso(e); } }
+    setTimeout(() => { const t = $("ft-sug-img") || $("gallery"); if (t && t.scrollIntoView) t.scrollIntoView({block:"start", behavior:"smooth"}); }, 120);
+  } catch (e) { logSilencioso(e); }
+}
+function init96(){
+  try {
+    const re = () => ftRender();
+    ["tema", "contenidos", "materia", "anio"].forEach(id => { const el = $(id); if (el){ el.addEventListener("input", re); el.addEventListener("change", re); } });
+    document.addEventListener("click", e => {
+      const a = e.target.closest && e.target.closest("[data-ftadd]"); if (a){ ftAgregar(a.dataset.ftadd); return; }
+      if (e.target.closest && e.target.closest("[data-ftver]")) ftVerTodas();
+      /* «Armar mi planificación»: suma sola la figura que mejor coincide (si el docente no puso ninguna) */
+      if (e.target.closest && e.target.closest("#empezar")) setTimeout(() => { try { const L = figurasTema(); if (L.length && !state.images.some(im => im.kind === "tema")){ ftAgregar(L[0].id, true); toast("Planificación armada, con una figura del tema. Lo resaltado en amarillo es lo que falta completar."); } } catch (er) { logSilencioso(er); } }, 700);
+    });
+    ftRender();
+  } catch (e) { registrarError("init96", e, "aviso"); }
+}
+function imagesChanged(){ imagesChangedV81(); ftRender(); }
+function aplicar(saved){ const r = aplicarV81(saved); ftRender(); return r; }
+function kindLabel(img){ return img && img.kind === "tema" ? "Figura de Lapacho" : kindLabelV81(img); }
+
+/* ============================================================
+   Versión 83: Historia
+   Seis libros de Historia que Víctor pasó el 22/11/2026, convertidos en material para planificar:
+   - fichas de los seis libros en la Biblioteca (tipo «Historia argentina»), con su mirada y cómo citarlos;
+   - una ficha por tema, de los pueblos originarios a la Argentina reciente, con un apartado para el Tucumán
+     azucarero: síntesis propia con libro y páginas, conceptos, fechas, preguntas y actividades con fuentes;
+   - figuras propias (líneas de tiempo y esquemas) que aparecen debajo del tema, igual que las de Física;
+   - en la planificación, «Usar en la planificación» suma de una vez la bibliografía, las preguntas y la línea de tiempo.
+   Nada de esto copia texto ni imágenes de los libros: las síntesis son propias y citan dónde leer más.
+   ============================================================ */
+BIB_TIPOS.his = "Historia argentina";
+const HIS_LIBROS = [
+  {id:"his-min", tipo:"his", t:"Historia argentina", a:"Ministerio de Educación de la Nación (equipo pedagógico de la Dirección Nacional de Fortalecimiento y Ampliación de Derechos Educativos)",
+    ref:"Ministerio de Educación de la Nación (2015). Historia argentina. Buenos Aires: Ministerio de Educación de la Nación.",
+    arch:"PDF completo que pasaste el 22/11/2026. La numeración impresa va dos páginas detrás de la del PDF.", lect:"Leí el índice completo y las seis unidades; tomé las páginas de los apartados principales.",
+    porque:"Es un manual pensado para adultos que terminan la secundaria (Plan FinES): texto corto, láminas y actividades al final de cada unidad. Va de la Revolución de Mayo a 2015.",
+    ideas:[
+      ["Unidad 1: la Revolución de Mayo y la independencia.", "pp. 11-37"],
+      ["Unidad 2: oligarquía, modelo agroexportador e inmigración.", "pp. 39-75 (modelo agroexportador p. 50; inmigración p. 52; república conservadora p. 54)"],
+      ["Unidad 3: del golpe de 1930 a 1943.", "pp. 77-101 (golpe de Uriburu p. 82; década infame p. 85)"],
+      ["Unidad 4: los años peronistas.", "pp. 103-133 (17 de octubre p. 109; Perón presidente p. 112; golpe de 1955 p. 122)"],
+      ["Unidad 5: represión y neoliberalismo, de 1976 a 2001.", "pp. 135-173 (terrorismo de Estado p. 136; dictadura p. 146; Malvinas p. 154; democracia p. 155)"],
+      ["Unidad 6: los gobiernos de 2003 a 2015.", "pp. 175-205"]],
+    aula:["Cada unidad cierra con una lámina: sirve para abrir la clase con una imagen y preguntas.", "El lenguaje es accesible para 4.º y 5.º año y para adultos."],
+    ojo:"Es un material oficial de 2015 y su mirada es la del gobierno de ese momento: las unidades 5 y 6 valoran de forma muy positiva las gestiones de 2003 a 2015. Para esos temas, sumá una fuente con otra mirada.",
+    tags:"historia argentina revolucion de mayo independencia agroexportador inmigracion oligarquia decada infame peronismo dictadura terrorismo de estado malvinas democracia neoliberalismo kirchner",
+    anios:["9", "10", "11", "12"]},
+  {id:"his-aique", tipo:"his", t:"Historia argentina 1976-2013. Proyectos de país en pugna", a:"María Ernestina Alonso, Enrique C. Vázquez y Julia Rosenberg",
+    ref:"Alonso, M. E., Vázquez, E. C. y Rosenberg, J. (2013). Historia argentina: proyectos de país en pugna. De la última dictadura cívico-militar al kirchnerismo, 1976-2013. Buenos Aires: Aique.",
+    arch:"PDF completo que pasaste el 22/11/2026. La numeración impresa va una página detrás de la del PDF.", lect:"Leí el índice y los tres capítulos; anoté las páginas de cada etapa y de las fuentes.",
+    porque:"El más completo de tus libros para la historia reciente. Cada capítulo trae «voces» de historiadores y una sección de fuentes para trabajar en clase.",
+    ideas:[
+      ["La dictadura de 1976-1983: terrorismo de Estado y concentración económica.", "cap. 1, pp. 14-73"],
+      ["La crisis del régimen militar y Malvinas.", "cap. 1, pp. 41-59"],
+      ["Fuentes de la dictadura: Walsh, Madres, Abuelas y Malvinas.", "cap. 1, pp. 60-67"],
+      ["Alfonsín, Juicio a las Juntas, Plan Austral e hiperinflación.", "cap. 2, pp. 74-90"],
+      ["Menem, De la Rúa y la crisis de 2001.", "cap. 2, pp. 91-109; fuentes pp. 110-117"],
+      ["Duhalde, Néstor Kirchner y Cristina Fernández de Kirchner.", "cap. 3, pp. 118-155"]],
+    aula:["Las secciones de fuentes están listas para trabajar en grupo: quién habla, cuándo, para quién y qué quiere lograr.", "La introducción sobre historia y memoria sirve para empezar el año con 5.º o 6.º."],
+    ojo:"El subtítulo lo dice: lee el período como una pugna entre proyectos de país, y el capítulo 3 es favorable a los gobiernos kirchneristas. Para 2003-2013 conviene contrastar con otras fuentes.",
+    tags:"dictadura terrorismo de estado desaparecidos madres abuelas malvinas alfonsin juicio a las juntas menem convertibilidad privatizaciones de la rua 2001 duhalde kirchner historia reciente memoria",
+    anios:["11", "12"]},
+  {id:"his-kap", tipo:"his", t:"Historia de la Argentina. Desde los pueblos originarios hasta la actualidad", a:"Victoria Basualdo, Diego Bentivegna, Roberto Elisalde, Mariana Pérez, Valeria Snitcofsky y otros",
+    ref:"Basualdo, V. y otros (2013). Historia de la Argentina. Desde los pueblos originarios hasta la actualidad. Buenos Aires: Kapelusz.",
+    arch:"PDF escaneado que pasaste el 22/11/2026.", lect:"El escaneo no trae texto: leí el índice con reconocimiento de caracteres. Por eso las fichas lo citan por capítulo y no por página.",
+    porque:"Es el que cubre todo el recorrido, en quince capítulos: de los pueblos originarios a 2011. Suma arte, cultura y vida cotidiana en cada etapa.",
+    ideas:[
+      ["Caps. 1 y 2: pueblos originarios, Conquista y sociedad colonial (hasta 1806).", "según el índice"],
+      ["Caps. 3 a 6: revolución, independencia, unitarios y federales, formación del Estado (1806-1880).", "según el índice"],
+      ["Caps. 7 a 10: economía agroexportadora, radicalismo, restauración oligárquica y peronismo (1880-1955).", "según el índice"],
+      ["Caps. 11 a 15: de 1955 a 2011, con el terrorismo de Estado en el cap. 13.", "según el índice"]],
+    aula:["Los apartados «El arte, la historia y la gente» y «En palabras de…» sirven como fuentes para abrir o cerrar un tema."],
+    ojo:"Las páginas del índice escaneado no se leen bien: antes de citar una página, revisala en el libro.",
+    tags:"historia argentina pueblos originarios conquista colonia virreinato revolucion de mayo independencia rosas unitarios federales organizacion nacional agroexportador radicalismo yrigoyen decada infame peronismo onganiato dictadura democracia",
+    anios:["8", "9", "10", "11", "12"]},
+  {id:"his-egg", tipo:"his", t:"Historia argentina contemporánea 1810-2002", a:"Teresa Eggers-Brass",
+    ref:"Eggers-Brass, T. (2002). Historia argentina contemporánea 1810-2002. Ituzaingó: Maipue.",
+    arch:"PDF escaneado que pasaste el 22/11/2026.", lect:"Leí el índice con reconocimiento de caracteres. Las páginas son aproximadas.",
+    porque:"Un manual clásico de la secundaria, muy ordenado por subtemas. Cada etapa argentina tiene al lado un apartado «¿Qué pasaba en el mundo?».",
+    ideas:[
+      ["De 1810 a 1852, en el capítulo I.", "según el índice"],
+      ["Las primeras presidencias radicales.", "pp. 121-129 aprox."],
+      ["La década infame (1930-1943).", "pp. 147-165 aprox."],
+      ["El proyecto peronista (1943-1955): 17 de octubre, voto de la mujer, reforma constitucional.", "pp. 167-200 aprox."],
+      ["De 1955 a 1976.", "pp. 203-273 aprox."],
+      ["La dictadura (1976-1983) y de 1983 a 2002.", "pp. 275-347 aprox."]],
+    aula:["Al presentar cada etapa trae varias interpretaciones («versiones») de un mismo hecho: sirven para trabajar la multiperspectividad."],
+    ojo:"Es de 2002: termina con la crisis de 2001 y no llega a lo que vino después.",
+    tags:"historia argentina contemporanea revolucion independencia rosas radicales yrigoyen decada infame peronismo 17 de octubre voto femenino onganiato cordobazo dictadura democracia 2001",
+    anios:["10", "11", "12"]},
+  {id:"his-santi", tipo:"his", t:"Historia argentina y el mundo. La primera mitad del siglo XX", a:"Andrea N. Andújar, María Morichetti, Alejandra G. Pasino, Valeria S. Pita, Victoria M. Vissani y Cecilia Wahren",
+    ref:"Andújar, A. N., Morichetti, M., Pasino, A. G., Pita, V. S., Vissani, V. M. y Wahren, C. (s. f.). Historia argentina y el mundo. La primera mitad del siglo XX. Buenos Aires: Santillana (Saberes clave).",
+    arch:"PDF escaneado que pasaste el 22/11/2026. No encontré el año de edición.", lect:"Leí el índice con reconocimiento de caracteres. Las páginas son aproximadas.",
+    porque:"Pone la Argentina en contexto mundial: imperialismo, América Latina, Revolución Mexicana, las dos guerras, la Revolución Rusa, la crisis del 30 y los totalitarismos.",
+    ideas:[
+      ["Imperialismo y América Latina a comienzos del siglo XX.", "pp. 10-31 aprox."],
+      ["Revolución Mexicana.", "pp. 44-51 aprox."],
+      ["De la Primera Guerra Mundial a la crisis del 30.", "pp. 54 y siguientes"],
+      ["Yrigoyen y la política argentina.", "pp. 128-133 aprox."],
+      ["Segunda Guerra Mundial y la Argentina ante la guerra.", "pp. 160-190 aprox."],
+      ["El peronismo y «Memoria, verdad y justicia».", "pp. 194-204 y 225-233 aprox."]],
+    aula:["Ideal para 4.º año: cada tema argentino tiene su contexto mundial en el mismo libro.", "Las secciones «En profundidad» sirven para trabajos en grupo."],
+    ojo:"Revisá en el libro las páginas antes de citarlas: salen de un índice escaneado.",
+    tags:"historia mundial imperialismo america latina revolucion mexicana primera guerra mundial revolucion rusa crisis del 29 totalitarismos fascismo nazismo segunda guerra mundial yrigoyen decada infame peronismo",
+    anios:["9", "10", "11"]},
+  {id:"his-bravo", tipo:"his", t:"Los pueblos azucareros frente al colapso. Resistencias locales al cierre de ingenios en Tucumán", a:"María Celia Bravo (coord.), Leandro Lichtmajer, Florencia Gutiérrez, Lucía Santos Lepera e Ignacio Sánchez",
+    ref:"Bravo, M. C. (coord.) (2022). Los pueblos azucareros frente al colapso. Resistencias locales al cierre de ingenios en Tucumán. Buenos Aires: Teseo.",
+    arch:"PDF completo que pasaste el 22/11/2026. Las páginas coinciden con las del PDF.", lect:"Leí la introducción completa y ubiqué los cuatro capítulos y los datos principales.",
+    porque:"Investigación de historiadores de la UNT y el CONICET sobre el cierre de ingenios de 1966. Mira cada pueblo por separado: por qué algunos resistieron y otros no. Es historia de Tucumán, cerca de tus alumnos.",
+    ideas:[
+      ["En agosto de 1966, el decreto-ley 16.926 intervino siete ingenios para desmantelarlos: Bella Vista, Esperanza, La Florida, Lastenia, La Trinidad, Nueva Baviera y Santa Ana.", "Introducción, p. 28"],
+      ["El cierre de once ingenios hizo caer cerca del 30 % de la producción, dejó sin cupo a miles de cañeros y sin trabajo a miles de obreros.", "Introducción, p. 29"],
+      ["Santa Ana cerró en 1966; Bella Vista revirtió el cierre por la movilización de su comunidad; en San Pablo la racionalización desató un fuerte conflicto laboral.", "Introducción, pp. 11-12"],
+      ["Surgieron actores nuevos, como las comisiones pro defensa y las cooperativas, mientras la FOTIA se debilitaba.", "Introducción, p. 12"],
+      ["En 1967 fue asesinada en Bella Vista la dirigente peronista Hilda Guerrero de Molina.", "cap. 2, p. 124"]],
+    aula:["Con 4.º o 5.º año: entrevistas a familiares sobre la zafra y los ingenios, y comparación entre pueblos.", "La tapa (machetas zafreras grabadas con el retrato de Hilda Guerrero de Molina) sirve para abrir el tema."],
+    ojo:"Es un libro académico: para los chicos conviene leer fragmentos breves elegidos por vos, con un glosario (cupo, racionalización, cañero, zafra).",
+    tags:"tucuman ingenio ingenios azucar azucarero zafra canero caneros fotia onganiato onganía cierre de ingenios bella vista santa ana san pablo operativo tucuman tucumanazo historia local historia regional",
+    anios:["10", "11", "12"]}
+];
+BIB_LIBROS.push(...HIS_LIBROS);
+
+/* ---------- Fichas por tema ---------- */
+const HIS_TEMAS = [
+  {id:"originarios", t:"Pueblos originarios, conquista y sociedad colonial", per:"hasta 1806",
+    k:/pueblos originarios|\bconquista (espanola|de america)|sociedad colonial|epoca colonial|\bcolonia\b|virreinato|encomienda|\bmita\b|diaguita|calchaqui|quilmes|\bincas?\b|tawantinsuyu|ibatin/,
+    sint:[["Antes de la conquista, en el actual territorio argentino vivían pueblos muy distintos: agricultores del noroeste (diaguitas-calchaquíes), zonas integradas al Tawantinsuyu incaico y cazadores-recolectores en la llanura y la Patagonia.", "his-kap", "cap. 1"],
+      ["La conquista avanzó en el siglo XVI desde el Perú y Chile, fundando ciudades. San Miguel de Tucumán se fundó en 1565 en Ibatín y se trasladó en 1685 a su lugar actual.", "his-kap", "caps. 1 y 2"],
+      ["La economía colonial giró alrededor de la plata de Potosí: trabajo indígena forzado (encomienda, mita) y regiones que la abastecían con mulas, tejidos y alimentos.", "his-kap", "cap. 2"],
+      ["Los pueblos calchaquíes resistieron más de un siglo (guerras calchaquíes, 1560-1667); vencidos, muchos fueron trasladados lejos, como los quilmes a Buenos Aires.", "his-kap", "cap. 1"],
+      ["En 1776 se creó el Virreinato del Río de la Plata, con capital en Buenos Aires, y el comercio libre de 1778 fortaleció el puerto.", "his-kap", "cap. 2"]],
+    conceptos:["pueblos originarios", "conquista", "encomienda y mita", "economía colonial", "resistencia indígena", "virreinato"],
+    fechas:[["1536", "Primera fundación de Buenos Aires"], ["1565", "Fundación de San Miguel de Tucumán en Ibatín"], ["1667", "Fin de las guerras calchaquíes"], ["1685", "Tucumán se traslada a su sitio actual"], ["1776", "Virreinato del Río de la Plata"], ["1778", "Reglamento de comercio libre"]],
+    preg:["¿Quiénes vivían en los valles de Tucumán antes de la llegada de los españoles y cómo lo sabemos?", "¿Por qué la plata de Potosí cambió la vida de regiones que estaban a cientos de kilómetros?", "¿Qué nombres de lugares de la provincia vienen de lenguas originarias?"],
+    act:["Mapa de la provincia con pueblos originarios, la primera Tucumán (Ibatín) y la ciudad actual.", "Comparar dos relatos de la conquista: uno escrito por un conquistador y otro desde la mirada indígena.", "Visita o recorrido virtual por las ruinas de Quilmes o de Ibatín: qué cuentan los restos materiales."],
+    fuentes:[["his-kap", "caps. 1 y 2"]]},
+  {id:"mayo", t:"La Revolución de Mayo", per:"1806-1813",
+    k:/revolucion de mayo|semana de mayo|\b1810\b|primera junta|cabildo abierto|invasiones inglesas|25 de mayo|revolucion rioplatense/,
+    sint:[["Las invasiones inglesas (1806 y 1807) mostraron la debilidad del poder español y armaron milicias criollas que pasaron a pesar en la política de Buenos Aires.", "his-kap", "cap. 3"],
+      ["En 1808 Napoleón ocupó España y el rey Fernando VII quedó preso. Cuando cayó la Junta de Sevilla (1810), en Buenos Aires se discutió quién podía gobernar: si no había rey, el poder volvía a los pueblos.", "his-min", "Unidad 1, pp. 11-20"],
+      ["El cabildo abierto del 22 de mayo destituyó al virrey Cisneros, y el 25 asumió la Primera Junta presidida por Cornelio Saavedra, con Mariano Moreno y Juan José Paso como secretarios.", "his-min", "Unidad 1, pp. 20-25"],
+      ["La Junta juró en nombre de Fernando VII, pero abrió una guerra con los realistas y una disputa con las provincias sobre cómo organizar el poder: Junta Grande, triunviratos y Asamblea del Año XIII.", "his-egg", "cap. I"]],
+    conceptos:["soberanía", "criollos y peninsulares", "milicias", "cabildo abierto", "revolución", "centralismo"],
+    fechas:[["1806", "Primera invasión inglesa"], ["1807", "Segunda invasión inglesa"], ["1808", "Napoleón ocupa España"], ["1810", "Cabildo abierto y Primera Junta"], ["1811", "Junta Grande y Primer Triunvirato"], ["1813", "Asamblea del Año XIII"]],
+    preg:["Si la Primera Junta juraba fidelidad al rey Fernando VII, ¿por qué decimos que en 1810 empezó una revolución?", "¿Quiénes participaron del cabildo abierto y quiénes quedaron afuera?", "¿Qué cambió y qué siguió igual después de 1810 para un peón, un comerciante y una persona esclavizada?"],
+    act:["Leer un fragmento del acta del cabildo del 25 de mayo: quién habla, en nombre de quién y qué decide.", "Cuadro de causas externas e internas, y debate sobre cuál pesó más.", "Comparar la imagen escolar del 25 de mayo (paraguas, escarapelas) con lo que dicen los documentos."],
+    fuentes:[["his-min", "Unidad 1, pp. 11-37"], ["his-kap", "cap. 3"], ["his-egg", "cap. I"]]},
+  {id:"indep", t:"Guerras de independencia y Congreso de Tucumán", per:"1810-1820",
+    k:/declaracion de la independencia|congreso de tucuman|\b1816\b|9 de julio|san martin|belgrano|guemes|cruce de los andes|exodo jujeno|batalla de tucuman|guerras? de (la )?independencia|independencia argentina|ejercito de los andes/,
+    sint:[["Entre 1810 y 1820 la revolución se sostuvo con la guerra: expediciones al Alto Perú, al Paraguay y a la Banda Oriental, y la defensa del norte.", "his-kap", "cap. 4"],
+      ["En el norte, Belgrano ordenó el Éxodo Jujeño y ganó en Tucumán (1812) y en Salta (1813). Después, Güemes y sus gauchos frenaron a los realistas con la guerra de guerrillas.", "his-kap", "cap. 4"],
+      ["El Congreso reunido en San Miguel de Tucumán declaró la independencia el 9 de julio de 1816, cuando en Europa volvía el absolutismo. Las provincias del Litoral y la Banda Oriental, enfrentadas con Buenos Aires, no participaron.", "his-min", "Unidad 1, p. 27"],
+      ["San Martín armó el Ejército de los Andes en Cuyo, cruzó la cordillera en 1817, ganó en Chacabuco y Maipú, y siguió por mar hacia Lima.", "his-egg", "cap. I"],
+      ["La guerra se pagó con levas, impuestos y vidas, y creció el rechazo al centralismo porteño: en 1820 cayó el Directorio.", "his-kap", "cap. 4"]],
+    conceptos:["independencia", "guerra de guerrillas", "realistas y patriotas", "centralismo", "soberanía"],
+    fechas:[["1812", "Éxodo Jujeño y batalla de Tucumán"], ["1813", "Batalla de Salta"], ["1816", "Declaración de la independencia en Tucumán"], ["1817", "Cruce de los Andes y Chacabuco"], ["1818", "Batalla de Maipú"], ["1820", "Cae el Directorio"]],
+    preg:["¿Por qué el Congreso se reunió en Tucumán y no en Buenos Aires?", "¿Qué significaba declararse independiente en 1816, si en Europa los reyes estaban recuperando el poder?", "¿Quiénes pusieron el cuerpo en la guerra y qué ganaron o perdieron?"],
+    act:["Leer el acta del 9 de julio y buscar qué provincias firmaron y cuáles no.", "Recorrido por la Casa Histórica (presencial o virtual) con una guía de observación.", "Línea de tiempo de las campañas militares sobre un mapa de Sudamérica."],
+    fuentes:[["his-min", "Unidad 1, pp. 26-29"], ["his-kap", "cap. 4"], ["his-egg", "cap. I"]]},
+  {id:"federal", t:"Unitarios, federales y la época de Rosas", per:"1820-1852",
+    k:/unitarios|federales|\brosas\b|caudillos|anarquia del ano 20|confederacion argentina|pacto federal|caseros|facundo|quiroga|restaurador|vuelta de obligado|rivadavia/,
+    sint:[["Desde 1820 no hubo un gobierno central: cada provincia se gobernó por su cuenta y se vinculó con las otras por pactos, como el Pacto Federal de 1831.", "his-kap", "cap. 5"],
+      ["Los unitarios querían un poder central fuerte con capital en Buenos Aires; los federales, autonomía para las provincias. Las provincias rechazaron la Constitución unitaria de 1826.", "his-egg", "cap. I"],
+      ["Rosas gobernó Buenos Aires (1829-1832 y 1835-1852) con la suma del poder público y manejó las relaciones exteriores de la Confederación. Su federalismo protegió sobre todo el puerto y la aduana porteña.", "his-kap", "cap. 5"],
+      ["Persiguió a los opositores con la Mazorca y enfrentó los bloqueos francés y anglofrancés (Vuelta de Obligado, 1845). Urquiza, gobernador de Entre Ríos, lo derrotó en Caseros en 1852.", "his-egg", "cap. I"]],
+    conceptos:["caudillo", "federalismo", "unitarismo", "aduana", "suma del poder público", "confederación"],
+    fechas:[["1820", "Cae el poder central"], ["1826", "Constitución unitaria"], ["1829", "Rosas, gobernador"], ["1831", "Pacto Federal"], ["1835", "Suma del poder público"], ["1845", "Vuelta de Obligado"], ["1852", "Batalla de Caseros"]],
+    preg:["¿Por qué la aduana de Buenos Aires era el centro de la pelea entre provincias?", "¿Qué tenía de federal el gobierno de Rosas y qué no?", "¿Qué caudillos tuvo el Norte y qué defendían?"],
+    act:["Debate en dos grupos, unitarios y federales, con fuentes de cada lado.", "Leer un fragmento de Facundo de Sarmiento: cómo describe a los caudillos y desde qué lugar escribe.", "Cuadro comparativo de los proyectos de país."],
+    fuentes:[["his-kap", "cap. 5"], ["his-egg", "cap. I"]]},
+  {id:"estado", t:"La organización del Estado nacional", per:"1852-1880",
+    k:/organizacion nacional|organizacion del estado|constitucion de 1853|\bpavon\b|guerra del paraguay|triple alianza|\bmitre\b|sarmiento|avellaneda|estado nacional|conquista del desierto|campana del desierto|federalizacion/,
+    sint:[["La Constitución de 1853 organizó una república representativa y federal. Buenos Aires se separó y se incorporó después de Cepeda (1859) y Pavón (1861).", "his-kap", "cap. 6"],
+      ["Mitre, Sarmiento y Avellaneda construyeron el Estado: ejército nacional, justicia federal, escuelas, ferrocarriles y el primer censo nacional (1869).", "his-kap", "cap. 6"],
+      ["El Estado se impuso contra resistencias: los levantamientos federales del interior (Peñaloza, Varela) y la guerra de la Triple Alianza contra el Paraguay (1865-1870).", "his-kap", "cap. 6"],
+      ["Las campañas militares sobre la Pampa y la Patagonia (desde 1878) sometieron a los pueblos originarios; sus tierras pasaron a pocos propietarios.", "his-kap", "cap. 6"],
+      ["En 1880 se federalizó la ciudad de Buenos Aires y Roca llegó a la presidencia: se cerraba la organización nacional.", "his-kap", "cap. 6"]],
+    conceptos:["Estado nacional", "constitución", "monopolio de la fuerza", "frontera", "federalización"],
+    fechas:[["1852", "Caseros"], ["1853", "Constitución nacional"], ["1861", "Batalla de Pavón"], ["1865", "Guerra de la Triple Alianza"], ["1869", "Primer censo nacional"], ["1879", "Campaña de Roca al sur"], ["1880", "Federalización de Buenos Aires"]],
+    preg:["¿Qué necesita un Estado para existir: territorio, leyes, ejército, impuestos?", "¿Qué significó la «Conquista del Desierto» para los pueblos que vivían allí? ¿Por qué se discute ese nombre?", "¿Por qué Buenos Aires no quería ser parte de la Confederación?"],
+    act:["Leer artículos de la Constitución de 1853 y buscar cuáles siguen vigentes.", "Comparar dos imágenes de la campaña de 1879: la pintura oficial y un testimonio indígena.", "Mapa del territorio antes y después de 1880."],
+    fuentes:[["his-kap", "cap. 6"]]},
+  {id:"agro", t:"Modelo agroexportador, inmigración y orden conservador", per:"1880-1916",
+    k:/agroexportador|inmigracion|inmigrantes|generacion del 80|orden conservador|republica conservadora|oligarqui|ley saenz pena|conventillo|division internacional del trabajo|granero del mundo|ley de residencia/,
+    sint:[["La Argentina se integró a la división internacional del trabajo como productora de carnes, cereales y lanas, sobre todo para Gran Bretaña, que aportaba capitales, ferrocarriles y manufacturas.", "his-min", "Unidad 2, p. 50"],
+      ["Llegaron millones de inmigrantes europeos, en su mayoría italianos y españoles. En 1914, cerca de un tercio de la población había nacido en otro país; muchos vivían en conventillos de las ciudades del Litoral.", "his-min", "Unidad 2, p. 52"],
+      ["Gobernaba una élite (el PAN) que controlaba las elecciones con voto cantado y fraude: una república conservadora.", "his-min", "Unidad 2, p. 54"],
+      ["Hubo oposición: la Revolución del Parque (1890), la Unión Cívica Radical, y anarquistas y socialistas entre los trabajadores. El Estado respondió con la Ley de Residencia (1902) y la represión.", "his-kap", "cap. 7"],
+      ["En Tucumán, la llegada del ferrocarril (1876) impulsó la industria azucarera, protegida para el mercado interno.", "his-bravo", "Introducción, pp. 15-16"],
+      ["La Ley Sáenz Peña (1912) estableció el voto secreto y obligatorio para los varones argentinos.", "his-min", "Unidad 2, pp. 56-64"]],
+    conceptos:["modelo agroexportador", "división internacional del trabajo", "inmigración", "oligarquía", "fraude electoral", "movimiento obrero"],
+    fechas:[["1876", "El ferrocarril llega a Tucumán"], ["1880", "Roca, presidente"], ["1890", "Revolución del Parque"], ["1902", "Ley de Residencia"], ["1912", "Ley Sáenz Peña"], ["1914", "Un tercio de la población es inmigrante"]],
+    preg:["¿Quiénes ganaban y quiénes perdían con el modelo agroexportador?", "¿Por qué el Estado quería inmigrantes y después sancionó una ley para expulsarlos?", "¿De dónde vinieron las familias de tu barrio? ¿Hay apellidos de inmigrantes en el curso?"],
+    act:["Esquema de lo que la Argentina vendía y compraba, y a quién.", "Analizar fotos de conventillos y avisos de la época: cómo vivían los recién llegados.", "Árbol genealógico simple con el origen de la familia, para ver la inmigración en el curso."],
+    fuentes:[["his-min", "Unidad 2, pp. 39-75"], ["his-kap", "cap. 7"], ["his-santi", "América Latina y la economía agroexportadora, pp. 26-31 aprox."]]},
+  {id:"radical", t:"Los gobiernos radicales", per:"1916-1930",
+    k:/radicalismo|gobiernos? radical|\byrigoyen|\balvear\b|semana tragica|patagonia rebelde|reforma universitaria|\b1916\b|\bucr\b/,
+    sint:[["Con la Ley Sáenz Peña, en 1916 ganó Hipólito Yrigoyen (UCR): el primer presidente elegido con voto secreto y obligatorio masculino.", "his-egg", "pp. 121-123 aprox."],
+      ["Yrigoyen gobernó con minoría en el Congreso, intervino provincias y mantuvo la neutralidad en la Primera Guerra Mundial.", "his-egg", "pp. 123-129 aprox."],
+      ["Con los trabajadores combinó el arbitraje en algunos conflictos con represiones muy duras: la Semana Trágica (1919) y las huelgas de la Patagonia (1920-1922).", "his-kap", "cap. 8"],
+      ["La Reforma Universitaria (Córdoba, 1918) reclamó autonomía, cogobierno y libertad de cátedra, y se extendió por América Latina.", "his-egg", "p. 127 aprox."],
+      ["Siguió Alvear (1922-1928) y volvió Yrigoyen (1928). La crisis mundial de 1929 y el golpe de 1930 cortaron el ciclo.", "his-santi", "pp. 128-133 aprox."]],
+    conceptos:["democracia ampliada", "sufragio universal masculino", "conflicto obrero", "reforma universitaria", "neutralidad"],
+    fechas:[["1912", "Ley Sáenz Peña"], ["1916", "Yrigoyen, presidente"], ["1918", "Reforma Universitaria"], ["1919", "Semana Trágica"], ["1922", "Alvear, presidente"], ["1928", "Yrigoyen vuelve"], ["1930", "Golpe de Estado"]],
+    preg:["¿Alcanza con votar para que haya democracia? ¿Quiénes seguían sin votar después de 1912?", "¿Por qué un gobierno elegido por el pueblo reprimió huelgas obreras?", "¿Qué pedían los estudiantes de 1918 y qué queda hoy de eso en la universidad?"],
+    act:["Leer fragmentos del Manifiesto Liminar de 1918 y relacionarlos con la universidad actual.", "Comparar dos versiones de la Semana Trágica: un diario de la época y un relato de los obreros.", "Gráfico de cuántas personas votaron antes y después de 1912."],
+    fuentes:[["his-egg", "pp. 121-129 aprox."], ["his-kap", "cap. 8"], ["his-santi", "pp. 128-133 aprox."]]},
+  {id:"mundo", t:"El mundo en la primera mitad del siglo XX", per:"1870-1945",
+    k:/primera guerra mundial|gran guerra|segunda guerra mundial|revolucion rusa|totalitarism|fascismo|nazismo|crisis del (29|30)|crisis de 1929|\bcrack\b|imperialismo|revolucion mexicana|entreguerras|holocausto/,
+    sint:[["Entre 1870 y 1914 las potencias industriales se repartieron África y Asia; América Latina quedó como proveedora de materias primas.", "his-santi", "pp. 10-31 aprox."],
+      ["La Primera Guerra Mundial (1914-1918) fue la primera guerra total. En 1917 la Revolución Rusa creó el primer Estado socialista.", "his-santi", "pp. 54-63 aprox."],
+      ["La crisis de 1929, iniciada en la bolsa de Nueva York, llevó al mundo al desempleo, al proteccionismo y a la caída del comercio.", "his-santi", "secc. 2"],
+      ["En entreguerras llegaron los totalitarismos: el fascismo en Italia (1922), el nazismo en Alemania (1933) y el estalinismo en la URSS.", "his-egg", "pp. 145-146 y 165-166 aprox."],
+      ["La Segunda Guerra Mundial (1939-1945) dejó decenas de millones de muertos y el Holocausto, y terminó con las bombas atómicas sobre Hiroshima y Nagasaki.", "his-santi", "pp. 160-179 aprox."]],
+    conceptos:["imperialismo", "guerra total", "revolución", "crisis económica", "totalitarismo", "genocidio"],
+    fechas:[["1910", "Revolución Mexicana"], ["1914", "Primera Guerra Mundial"], ["1917", "Revolución Rusa"], ["1929", "Crisis mundial"], ["1933", "Hitler llega al poder"], ["1939", "Segunda Guerra Mundial"], ["1945", "Fin de la guerra"]],
+    preg:["¿Cómo llegaba a la Argentina lo que pasaba en Europa? ¿Qué se vendía y qué dejaba de comprarse?", "¿Por qué millones de personas apoyaron a gobiernos totalitarios?", "¿Qué tiene que ver la crisis de 1929 con la industria argentina de los años 30?"],
+    act:["Línea de tiempo doble: el mundo arriba y la Argentina abajo, en el mismo período.", "Analizar afiches de propaganda de la guerra: a quién hablan y qué quieren provocar.", "Leer un testimonio del Holocausto y trabajar la idea de genocidio."],
+    fuentes:[["his-santi", "secciones 1 a 3; Segunda Guerra Mundial pp. 160-179 aprox."], ["his-egg", "«¿Qué pasaba en el mundo?», pp. 145-146 y 165-166 aprox."]]},
+  {id:"d30", t:"La década infame", per:"1930-1943",
+    k:/decada infame|restauracion conservadora|golpe de 1930|uriburu|\bjusto\b|fraude patriotico|roca.runciman|concordancia|sustitucion de importaciones|\bisi\b|decada del 30/,
+    sint:[["El 6 de septiembre de 1930 el general Uriburu derrocó a Yrigoyen: fue el primer golpe de Estado del siglo XX en la Argentina.", "his-min", "Unidad 3, p. 82"],
+      ["Volvieron al poder los conservadores (la Concordancia) con el llamado «fraude patriótico»: por eso el período se conoce como década infame.", "his-min", "Unidad 3, p. 85"],
+      ["Ante la crisis mundial, el Estado intervino en la economía: juntas reguladoras, Banco Central (1935) y el pacto Roca-Runciman (1933), que aseguró la venta de carne a Gran Bretaña con concesiones a los frigoríficos británicos.", "his-min", "Unidad 3, pp. 89-91"],
+      ["Como se importaba menos, creció la industria que sustituía importaciones, y llegaron a las ciudades migrantes del interior.", "his-egg", "pp. 147-165 aprox."],
+      ["El golpe del 4 de junio de 1943 cerró la etapa.", "his-kap", "cap. 9"]],
+    conceptos:["golpe de Estado", "fraude electoral", "intervención del Estado", "sustitución de importaciones", "migración interna"],
+    fechas:[["1930", "Golpe de Uriburu"], ["1932", "Justo, presidente"], ["1933", "Pacto Roca-Runciman"], ["1935", "Banco Central"], ["1938", "Ortiz, presidente"], ["1943", "Golpe del 4 de junio"]],
+    preg:["¿Por qué un golpe militar tuvo apoyo de una parte de la sociedad en 1930?", "¿A quién beneficiaba el pacto Roca-Runciman?", "¿Por qué la crisis de 1929 terminó impulsando fábricas en la Argentina?"],
+    act:["Esquema de causas y consecuencias de la sustitución de importaciones.", "Leer las denuncias de Lisandro de la Torre sobre el comercio de carnes y armar una línea de argumentos.", "Buscar fotos de elecciones de los años 30: qué muestran del fraude."],
+    fuentes:[["his-min", "Unidad 3, pp. 77-101"], ["his-kap", "cap. 9"], ["his-egg", "cap. IV, pp. 147-165 aprox."]]},
+  {id:"peronismo", t:"El peronismo", per:"1943-1955",
+    k:/peronismo|\bperon\b|\bevita\b|eva peron|17 de octubre|justicialismo|constitucion de 1949|fundacion eva peron|voto femenino|primer peronismo|bombardeo de (la )?plaza/,
+    sint:[["Desde la Secretaría de Trabajo y Previsión (1943), Perón impulsó leyes laborales y ganó el apoyo de los sindicatos.", "his-min", "Unidad 4, pp. 103-108"],
+      ["El 17 de octubre de 1945, miles de trabajadores llegaron a la Plaza de Mayo para pedir su libertad. En 1946 ganó las elecciones presidenciales.", "his-min", "Unidad 4, pp. 109-112"],
+      ["Su gobierno nacionalizó ferrocarriles y servicios, creó el IAPI para comerciar las cosechas, impulsó la industria y amplió derechos sociales: vacaciones pagas, aguinaldo, jubilaciones.", "his-egg", "pp. 189-190 aprox."],
+      ["Con el impulso de Eva Perón se sancionó el voto femenino (1947); las mujeres votaron por primera vez en 1951. La Constitución de 1949 sumó los derechos del trabajador y permitió la reelección.", "his-min", "Unidad 4, pp. 119-120"],
+      ["La oposición denunció el autoritarismo: control de la prensa, persecución de opositores. En 1955, después del bombardeo a la Plaza de Mayo (16 de junio), un golpe militar lo derrocó en septiembre.", "his-min", "Unidad 4, pp. 122-124"]],
+    conceptos:["Estado de bienestar", "justicia social", "sindicatos", "derechos sociales", "voto femenino", "polarización política"],
+    fechas:[["1943", "Golpe y Secretaría de Trabajo"], ["1945", "17 de octubre"], ["1946", "Perón, presidente"], ["1947", "Ley de voto femenino"], ["1949", "Reforma constitucional"], ["1951", "Primer voto de las mujeres"], ["1955", "Bombardeo y golpe"]],
+    preg:["¿Qué derechos laborales de hoy aparecieron en esos años?", "¿Por qué el peronismo despertó tanta adhesión y tanto rechazo a la vez?", "¿Qué cambió en la vida de las mujeres con el voto de 1947?"],
+    act:["Comparar dos fuentes del 17 de octubre: una crónica favorable y una opositora. Qué palabras usa cada una.", "Entrevista a abuelos o vecinos sobre lo que les contaron de esos años.", "Leer artículos de la Constitución de 1949 y compararlos con el 14 bis de 1957."],
+    fuentes:[["his-min", "Unidad 4, pp. 103-133"], ["his-kap", "cap. 10"], ["his-egg", "pp. 167-200 aprox."], ["his-santi", "pp. 194-204 aprox."]]},
+  {id:"prosc", t:"Proscripción, inestabilidad y movilización", per:"1955-1976",
+    k:/revolucion libertadora|proscripcion|resistencia peronista|frondizi|\billia\b|onganiato|ongania|cordobazo|tucumanazo|bastones largos|lanusse|camporismo|\bcampora\b|tercer peronismo|ezeiza|triple a|operativo independencia/,
+    sint:[["Desde 1955 el peronismo estuvo proscripto: no podía presentarse a elecciones. Los presidentes civiles elegidos con esa restricción, Frondizi e Illia, fueron derrocados (1962 y 1966).", "his-kap", "cap. 11"],
+      ["Onganía (1966) prohibió los partidos, intervino las universidades (Noche de los Bastones Largos) y aplicó una política económica que golpeó a economías regionales como la tucumana.", "his-kap", "cap. 12"],
+      ["Creció la protesta obrera y estudiantil: el Cordobazo (1969) y, en Tucumán, el Tucumanazo (1970).", "his-bravo", "Introducción, pp. 31 y 90"],
+      ["Aparecieron organizaciones armadas. En 1973 volvió el peronismo con Cámpora y luego con Perón, que murió en 1974.", "his-min", "Unidad 5, p. 144"],
+      ["Con Isabel Perón se agravaron la crisis y la violencia paraestatal (Triple A). En 1975 empezó en Tucumán el Operativo Independencia, antecedente directo del terrorismo de Estado.", "his-min", "Unidad 5, p. 146"]],
+    conceptos:["proscripción", "inestabilidad política", "dictadura", "movilización social", "violencia política"],
+    fechas:[["1955", "Golpe: Revolución Libertadora"], ["1958", "Frondizi, presidente"], ["1963", "Illia, presidente"], ["1966", "Golpe de Onganía"], ["1969", "Cordobazo"], ["1970", "Tucumanazo"], ["1973", "Vuelve Perón"], ["1975", "Operativo Independencia"]],
+    preg:["¿Puede haber democracia si el partido más votado no puede presentarse?", "¿Por qué en 1969 y 1970 obreros y estudiantes salieron juntos a la calle?", "¿Qué pasó en Tucumán en esos años que no pasó en otras provincias?"],
+    act:["Línea de tiempo de presidentes: civiles en un color, militares en otro. Qué patrón aparece.", "Fotos del Cordobazo y del Tucumanazo: quiénes aparecen y qué reclaman.", "Leer fragmentos de diarios tucumanos de 1970 (hemeroteca o archivo de La Gaceta)."],
+    fuentes:[["his-kap", "caps. 11 y 12"], ["his-egg", "pp. 203-273 aprox."], ["his-min", "Unidad 5, pp. 136-146"]]},
+  {id:"ingenios", t:"Tucumán: el cierre de los ingenios", per:"1966-1970",
+    k:/ingenios?\b|azucar|azucarer|\bzafra|\bfotia\b|caneros?\b|16\.?926|bella vista|santa ana|san pablo|operativo tucuman|economia tucumana|historia de tucuman|pueblos? azucarer/,
+    sint:[["En agosto de 1966 la dictadura de Onganía dictó el decreto-ley 16.926, que intervino siete ingenios tucumanos para desmantelarlos: Bella Vista, Esperanza, La Florida, Lastenia, La Trinidad, Nueva Baviera y Santa Ana.", "his-bravo", "p. 28"],
+      ["Hacia 1968 eran once las fábricas cerradas. Cayó cerca del 30 % de la producción azucarera, miles de cañeros perdieron su cupo y miles de obreros su trabajo; cerraron también comercios y talleres ligados al azúcar.", "his-bravo", "pp. 29 y 146"],
+      ["El libro propone mirar pueblo por pueblo: Santa Ana cerró en 1966; Bella Vista revirtió el cierre gracias a la movilización de su comunidad; en San Pablo, sin amenaza de cierre, la racionalización desató un fuerte conflicto laboral.", "his-bravo", "pp. 11-12"],
+      ["Junto a una FOTIA debilitada aparecieron actores nuevos: comisiones pro defensa, cooperativas, curas párrocos, comerciantes y mujeres de los pueblos.", "his-bravo", "pp. 11-14"],
+      ["En 1967, durante las protestas, fue asesinada en las calles de Bella Vista la dirigente peronista Hilda Guerrero de Molina.", "his-bravo", "p. 124"],
+      ["Como «atenuantes», el Estado lanzó el Operativo Tucumán para diversificar la producción y creó en 1970 la empresa estatal CONASA.", "his-bravo", "p. 29"]],
+    conceptos:["monoproducción", "cupo de producción", "racionalización", "diversificación productiva", "pueblo azucarero", "historia local"],
+    fechas:[["1966", "Decreto-ley 16.926: siete ingenios intervenidos"], ["1966", "Cierra el ingenio Santa Ana"], ["1967", "Asesinato de Hilda Guerrero de Molina"], ["1968", "Once ingenios cerrados; conflicto en San Pablo"], ["1969", "Ocupación del ingenio Bella Vista"], ["1970", "CONASA y Tucumanazo"]],
+    preg:["¿Por qué el cierre de un ingenio afectaba a todo el pueblo y no solo a los obreros?", "¿Por qué Bella Vista pudo resistir el cierre y Santa Ana no?", "¿Qué saben en tu familia de la zafra y de los ingenios? ¿Qué quedó de esos pueblos?"],
+    act:["Entrevista a un familiar o vecino sobre la zafra y los ingenios, con un guion armado en clase.", "Mapa de la provincia con los ingenios cerrados en 1966-1968 y los que siguen funcionando.", "En grupos, un pueblo cada uno (Santa Ana, Bella Vista, San Pablo): qué pasó, quiénes actuaron, cómo terminó. Puesta en común.", "Analizar la tapa del libro de Bravo: machetas zafreras grabadas con el retrato de Hilda Guerrero de Molina. ¿Por qué el artista eligió ese objeto?"],
+    fuentes:[["his-bravo", "Introducción, pp. 11-40; Santa Ana, p. 41; Bella Vista, p. 89; San Pablo, p. 137; Comisión Pro Defensa, p. 181"], ["his-kap", "cap. 12"]]},
+  {id:"dictadura", t:"Terrorismo de Estado y última dictadura", per:"1976-1983",
+    k:/ultima dictadura|dictadura (militar|civico.militar) de 1976|dictadura de 1976|terrorismo de estado|proceso de reorganizacion|golpe de 1976|24 de marzo|desaparecidos|madres de plaza de mayo|abuelas de plaza de mayo|\bvidela\b|martinez de hoz|centros clandestinos|memoria,? verdad y justicia/,
+    sint:[["El 24 de marzo de 1976 una Junta Militar (Videla, Massera y Agosti) derrocó a Isabel Perón y se llamó a sí misma Proceso de Reorganización Nacional.", "his-aique", "cap. 1, pp. 14-22"],
+      ["Aplicó un plan sistemático de represión: secuestros, centros clandestinos de detención, torturas, asesinatos, desaparición de personas y apropiación de niños. La Justicia y la historiografía lo llaman terrorismo de Estado.", "his-min", "Unidad 5, pp. 136 y 146-150"],
+      ["La política económica de Martínez de Hoz abrió la economía, favoreció la especulación financiera, golpeó a la industria y multiplicó la deuda externa.", "his-min", "Unidad 5, p. 151"],
+      ["Hubo resistencia: las Madres de Plaza de Mayo (desde 1977), las Abuelas, los organismos de derechos humanos y la Carta Abierta de Rodolfo Walsh (1977).", "his-aique", "cap. 1, fuentes pp. 60-67"],
+      ["La derrota en Malvinas (1982) aceleró la salida. Hubo elecciones el 30 de octubre de 1983.", "his-aique", "cap. 1, pp. 41-73"]],
+    conceptos:["terrorismo de Estado", "desaparición forzada", "derechos humanos", "deuda externa", "memoria, verdad y justicia"],
+    fechas:[["1976", "Golpe del 24 de marzo"], ["1977", "Primeras rondas de las Madres"], ["1978", "Mundial de fútbol"], ["1979", "Visita de la CIDH"], ["1982", "Guerra de Malvinas"], ["1983", "Elecciones del 30 de octubre"]],
+    preg:["¿Qué diferencia hay entre un gobierno que comete delitos y el terrorismo de Estado?", "¿Por qué las Madres caminaban en ronda los jueves?", "¿Qué sitios de memoria hay en Tucumán y qué funcionaba allí?"],
+    act:["Leer la Carta Abierta de Walsh (fragmentos): qué denuncia y con qué datos.", "Visita o recorrido virtual a un sitio de memoria de Tucumán (ex Jefatura de Policía, ex Arsenal Miguel de Azcuénaga).", "Trabajo con el informe Nunca Más: un capítulo por grupo, con acompañamiento y cuidado de los temas sensibles."],
+    fuentes:[["his-aique", "cap. 1, pp. 14-73"], ["his-min", "Unidad 5, pp. 146-155"], ["his-kap", "cap. 13"], ["his-egg", "cap. VIII, pp. 275-291 aprox."], ["his-santi", "«Memoria, verdad y justicia», pp. 225-233 aprox."]]},
+  {id:"malvinas", t:"La guerra de Malvinas", per:"1833-1994",
+    k:/malvinas|atlantico sur|2 de abril|ex combatientes|veteranos de guerra|crucero general belgrano|\bgaltieri\b|thatcher/,
+    sint:[["Gran Bretaña ocupa las Malvinas desde 1833 y la Argentina nunca dejó de reclamar su soberanía; en 1965 la ONU pidió a los dos países que negociaran.", "his-kap", "cap. 13"],
+      ["El 2 de abril de 1982 la Junta encabezada por Galtieri desembarcó en las islas, en medio de una crisis económica y de protestas crecientes contra la dictadura.", "his-aique", "cap. 1, pp. 41-50"],
+      ["Gran Bretaña envió una flota con apoyo de Estados Unidos. La guerra terminó con la rendición argentina el 14 de junio; murieron 649 argentinos.", "his-min", "Unidad 5, p. 154"],
+      ["Muchos soldados eran conscriptos de 18 a 20 años, mal equipados; hubo maltratos de sus propios superiores, que hoy se investigan.", "his-aique", "cap. 1, fuentes pp. 60-67"],
+      ["La derrota precipitó el fin de la dictadura. La Constitución de 1994 incluyó el reclamo de soberanía.", "his-aique", "cap. 1, pp. 70-73"]],
+    conceptos:["soberanía", "colonialismo", "conscripción", "memoria de la guerra", "veteranos"],
+    fechas:[["1833", "Ocupación británica"], ["1965", "Resolución 2065 de la ONU"], ["2/4/1982", "Desembarco argentino"], ["2/5/1982", "Hundimiento del crucero General Belgrano"], ["14/6/1982", "Rendición argentina"], ["1994", "El reclamo, en la Constitución"]],
+    preg:["¿Por qué una dictadura que reprimía decidió una guerra que tuvo apoyo popular?", "¿Qué vivieron los soldados de 18 años? ¿Hay veteranos tucumanos cerca de la escuela?", "¿Qué significa hoy reclamar la soberanía por la vía diplomática?"],
+    act:["Charla con un veterano de Malvinas preparada con preguntas del curso.", "Comparar las tapas de revistas de abril y de junio de 1982: qué decían y qué ocultaban.", "Mapa del Atlántico Sur con las islas, la plataforma continental y las distancias."],
+    fuentes:[["his-aique", "cap. 1, pp. 41-67"], ["his-min", "Unidad 5, p. 154"], ["his-kap", "cap. 13"]]},
+  {id:"democracia", t:"Democracia, neoliberalismo y crisis", per:"1983-2001",
+    k:/alfonsin|retorno de la democracia|recuperacion democratica|\bconadep\b|juicio a las juntas|plan austral|hiperinflacion|\bmenem|convertibilidad|privatizacion|neoliberal|de la rua|crisis de 2001|\b2001\b|corralito|cacerolazo|piquete|punto final|obediencia debida|reforma constitucional de 1994/,
+    sint:[["Raúl Alfonsín (UCR) asumió el 10 de diciembre de 1983. La CONADEP reunió testimonios en el informe Nunca Más (1984) y en 1985 se juzgó a las Juntas militares.", "his-aique", "cap. 2, pp. 74-83"],
+      ["Bajo presión militar se dictaron las leyes de Punto Final (1986) y Obediencia Debida (1987).", "his-aique", "cap. 2, pp. 81-88"],
+      ["La deuda y la inflación no se resolvieron (Plan Austral, 1985). La hiperinflación de 1989 adelantó el traspaso del mando a Carlos Menem (PJ).", "his-aique", "cap. 2, pp. 84-90"],
+      ["Menem indultó a los condenados, aplicó la convertibilidad (un peso igual a un dólar, 1991), privatizó empresas públicas y abrió la economía: bajó la inflación, pero subieron el desempleo y la pobreza.", "his-aique", "cap. 2, pp. 91-103"],
+      ["La reforma constitucional de 1994 permitió la reelección y dio rango constitucional a los tratados de derechos humanos.", "his-kap", "cap. 14"],
+      ["De la Rúa (Alianza, 1999) mantuvo la convertibilidad. En diciembre de 2001, con el corralito, saqueos y movilizaciones, renunció; la represión del 19 y 20 de diciembre dejó decenas de muertos.", "his-aique", "cap. 2, pp. 104-109"]],
+    conceptos:["transición democrática", "derechos humanos", "deuda externa", "neoliberalismo", "privatización", "crisis de representación"],
+    fechas:[["1983", "Alfonsín, presidente"], ["1984", "Informe Nunca Más"], ["1985", "Juicio a las Juntas"], ["1989", "Hiperinflación; asume Menem"], ["1991", "Convertibilidad"], ["1994", "Reforma constitucional"], ["2001", "Crisis y renuncia de De la Rúa"]],
+    preg:["¿Qué significó juzgar a las Juntas en 1985, cuando en otros países no se hizo?", "¿Por qué la convertibilidad tuvo tanto apoyo al principio y terminó en crisis?", "¿Qué recuerdan tus familiares de diciembre de 2001?"],
+    act:["Ver un fragmento del alegato de Strassera en el Juicio a las Juntas y analizar sus argumentos.", "Gráfico de inflación y desempleo de 1983 a 2001: qué muestran juntos.", "Entrevistas a adultos sobre 2001: el corralito, el trabajo, el barrio."],
+    fuentes:[["his-aique", "cap. 2, pp. 74-117"], ["his-min", "Unidad 5, pp. 155-173"], ["his-kap", "cap. 14"], ["his-egg", "pp. 292-347 aprox."]]},
+  {id:"reciente", t:"La Argentina reciente", per:"2002-2015",
+    k:/\bduhalde|kirchner|kirchnerismo|cristina fernandez|resolucion 125|conflicto (con el|del) campo|asignacion universal|matrimonio igualitario|ley de medios|servicios de comunicacion audiovisual|reapertura de los juicios|argentina reciente|historia reciente/,
+    sint:[["Después de la crisis, Eduardo Duhalde (2002-2003) salió de la convertibilidad con una fuerte devaluación y amplió los planes sociales (Jefes y Jefas de Hogar).", "his-aique", "cap. 3, pp. 118-123"],
+      ["Néstor Kirchner (2003-2007) renegoció la deuda e impulsó la anulación de las leyes de Punto Final y Obediencia Debida (2003); en 2005 la Corte Suprema las declaró inconstitucionales y se reabrieron los juicios por crímenes de lesa humanidad.", "his-aique", "cap. 3, pp. 124-135"],
+      ["Con Cristina Fernández de Kirchner (2007-2015): conflicto con las entidades del campo por las retenciones móviles (2008), fin de las AFJP (2008), Asignación Universal por Hijo (2009), ley de Servicios de Comunicación Audiovisual (2009) y matrimonio igualitario (2010).", "his-aique", "cap. 3, pp. 136-155"],
+      ["Es historia reciente y en disputa. Para unos, fueron años de crecimiento y ampliación de derechos; para otros, de inflación, conflicto institucional y estadísticas oficiales cuestionadas. Conviene trabajar con fuentes de distintas posiciones.", "his-min", "Unidad 6, pp. 175-205"]],
+    conceptos:["historia reciente", "derechos humanos", "políticas sociales", "conflicto distributivo", "ampliación de derechos"],
+    fechas:[["2001", "Crisis de diciembre"], ["2002", "Fin de la convertibilidad"], ["2003", "Néstor Kirchner, presidente"], ["2005", "La Corte anula las leyes de impunidad"], ["2008", "Conflicto por la resolución 125"], ["2009", "Asignación Universal por Hijo"], ["2010", "Matrimonio igualitario"]],
+    preg:["¿Se puede estudiar como historia algo que vivieron nuestros padres?", "¿Qué derechos de hoy se sancionaron en esos años?", "¿Por qué las opiniones sobre esta etapa están tan divididas?"],
+    act:["Comparar dos editoriales de diarios con miradas opuestas sobre un mismo hecho (por ejemplo, el conflicto de 2008).", "Línea de tiempo de leyes y derechos, con la fuente de cada una.", "Entrevista a un adulto sobre cómo vivió un hecho de esos años."],
+    fuentes:[["his-aique", "cap. 3, pp. 118-155"], ["his-min", "Unidad 6, pp. 175-205"], ["his-kap", "cap. 15"]]}
+];
+const hisLibro = id => HIS_LIBROS.find(L => L.id === id);
+const hisCorto = id => ({"funes":"Funes (s. f.)", "efemerides":"Guralnik, Silber y Moszkowicz Rubel (s. f.)", "his-min":"Ministerio de Educación (2015)", "his-aique":"Alonso, Vázquez y Rosenberg (2013)", "his-kap":"Basualdo y otros (2013)", "his-egg":"Eggers-Brass (2002)", "his-santi":"Andújar y otras (s. f.)", "his-bravo":"Bravo (coord.) (2022)"})[id] || "";
+
+/* ---------- Figuras de Historia: líneas de tiempo y esquemas propios ---------- */
+const HIS_COL = [FT_AZUL, FT_VERDE, FT_NARANJA, FT_VIOLETA, FT_ROJO];
+const HIS_CLARO = {azul:"#e6eef8", verde:"#e5f2ec", naranja:"#fbefdc", rojo:"#f8e3e1", violeta:"#eee8f8", gris:"#f0f2f1"};
+function hisWrap(s, n){
+  const out = []; let l = "";
+  String(s).split(/\s+/).forEach(w => { if ((l + " " + w).trim().length > n && l){ out.push(l); l = w; } else l = (l + " " + w).trim(); });
+  if (l) out.push(l); return out;
+}
+function hisTxtLineas(x, y, lines, o){ return lines.map((t, i) => ftT(x, y + i * ((o && o.lh) || 19), t, o)).join(""); }
+function hisCaja(x, y, w, h, fondo, borde, lines, o){
+  const fs = (o && o.fs) || 16, lh = fs + 3, y0 = y + h / 2 - (lines.length - 1) * lh / 2 + fs * 0.35;
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${fondo}" stroke="${borde}" stroke-width="2"/>` + lines.map((t, i) => ftT(x + w / 2, y0 + i * lh, t, {a:"middle", fs:o && o.b1 && i < o.b1 ? fs + 2 : fs, b:(o && o.b) || (o && o.b1 && i < o.b1)})).join("");
+}
+function hisLinea(T){
+  const F = T.fechas, n = F.length, x0 = 112, x1 = 688, dx = n > 1 ? (x1 - x0) / (n - 1) : 0, eje = 285;
+  const ancho = Math.max(14, Math.min(22, Math.floor(2 * dx / 9.2)));
+  let o = ftT(40, 50, "Línea de tiempo: " + T.t, {fs:hisWrap(T.t, 40).length > 1 ? 20 : 23, b:true}) + ftT(40, 80, T.per, {fs:17, c:FT_SUAVE});
+  o += `<line x1="50" y1="${eje}" x2="742" y2="${eje}" stroke="${FT_TINTA}" stroke-width="3"/><path d="M758 ${eje} l-16 -8 v16z" fill="${FT_TINTA}"/>`;
+  F.forEach(([a, h], i) => {
+    const x = n > 1 ? x0 + i * dx : 400, arriba = i % 2 === 0, c = HIS_COL[i % HIS_COL.length];
+    const L = hisWrap(h, ancho).slice(0, 4);
+    o += `<circle cx="${x.toFixed(1)}" cy="${eje}" r="9" fill="${c}" stroke="#fff" stroke-width="2"/>`;
+    if (arriba){
+      const yA = eje - 40, yT = yA - 30 - (L.length - 1) * 21;
+      o += `<line x1="${x.toFixed(1)}" y1="${eje - 10}" x2="${x.toFixed(1)}" y2="${yA + 8}" stroke="${c}" stroke-width="2"/>`;
+      o += ftT(x, yA, a, {a:"middle", b:true, fs:a.length > 6 ? 17 : 22, c}) + hisTxtLineas(x, yT, L, {a:"middle", fs:17, lh:21});
+    } else {
+      const yA = eje + 56;
+      o += `<line x1="${x.toFixed(1)}" y1="${eje + 10}" x2="${x.toFixed(1)}" y2="${yA - 22}" stroke="${c}" stroke-width="2"/>`;
+      o += ftT(x, yA, a, {a:"middle", b:true, fs:a.length > 6 ? 17 : 22, c}) + hisTxtLineas(x, yA + 30, L, {a:"middle", fs:17, lh:21});
+    }
+  });
+  o += ftT(40, 482, "Esquema de Lapacho. Las distancias entre fechas no son proporcionales al tiempo.", {fs:13, c:FT_SUAVE});
+  return ftSvg(o);
+}
+const HIS_ESQ = {
+  mayo:{t:"Causas de la Revolución de Mayo: externas e internas", svg:() => {
+    let o = ftT(400, 44, "¿Por qué hubo una revolución en 1810?", {a:"middle", fs:23, b:true});
+    o += ftT(205, 92, "Causas externas", {a:"middle", b:true, c:FT_AZUL}) + ftT(595, 92, "Causas internas", {a:"middle", b:true, c:FT_VERDE});
+    ["Napoleón ocupa España y el rey queda preso (1808)", "Ideas de la Ilustración", "Independencia de EE. UU. y Revolución Francesa"].forEach((s, i) => { o += hisCaja(40, 108 + i * 72, 330, 60, HIS_CLARO.azul, FT_AZUL, hisWrap(s, 34), {fs:16}); });
+    ["Invasiones inglesas y milicias criollas (1806-1807)", "Comerciantes que piden comercio libre", "Criollos relegados de los cargos de gobierno"].forEach((s, i) => { o += hisCaja(430, 108 + i * 72, 330, 60, HIS_CLARO.verde, FT_VERDE, hisWrap(s, 34), {fs:16}); });
+    o += ftFlecha(205, 330, 320, 382, FT_AZUL, 3) + ftFlecha(595, 330, 480, 382, FT_VERDE, 3);
+    o += hisCaja(200, 386, 400, 74, HIS_CLARO.naranja, FT_NARANJA, ["Mayo de 1810:", "cabildo abierto y Primera Junta"], {fs:18, b:true});
+    return ftSvg(o + ftT(40, 488, "Esquema de Lapacho para discutir en clase: ¿cuál de las causas pesó más?", {fs:13, c:FT_SUAVE})); }},
+  agro:{t:"El modelo agroexportador: qué vendía y qué compraba la Argentina", svg:() => {
+    let o = ftT(400, 44, "El modelo agroexportador (1880-1930)", {a:"middle", fs:23, b:true});
+    o += hisCaja(30, 120, 200, 220, HIS_CLARO.verde, FT_VERDE, ["Argentina", "", "Tierras de la", "pampa húmeda", "Estancias y chacras", "Puertos y ferrocarriles"], {fs:16, b1:1});
+    o += hisCaja(570, 120, 200, 220, HIS_CLARO.azul, FT_AZUL, ["Gran Bretaña", "y Europa", "", "Fábricas", "Bancos", "Población que emigra"], {fs:16, b1:2});
+    o += ftFlecha(240, 175, 560, 175, FT_VERDE, 4) + ftT(400, 162, "Exporta: carnes, cereales y lanas", {a:"middle", fs:16, b:true, c:FT_VERDE});
+    o += ftFlecha(560, 240, 240, 240, FT_AZUL, 4) + ftT(400, 227, "Importa: manufacturas y capitales", {a:"middle", fs:16, b:true, c:FT_AZUL}) + ftT(400, 262, "(ferrocarriles, frigoríficos, préstamos)", {a:"middle", fs:14, c:FT_SUAVE});
+    o += ftFlecha(560, 310, 240, 310, FT_NARANJA, 4) + ftT(400, 297, "Llegan inmigrantes: mano de obra", {a:"middle", fs:16, b:true, c:FT_NARANJA});
+    o += hisTxtLineas(400, 400, ["División internacional del trabajo: la Argentina vende materias primas", "y compra productos industriales. ¿Qué pasa si los compradores dejan de comprar?"], {a:"middle", fs:16, lh:24});
+    return ftSvg(o + ftT(40, 488, "Esquema de Lapacho.", {fs:13, c:FT_SUAVE})); }},
+  d30:{t:"La sustitución de importaciones después de la crisis de 1929", svg:() => {
+    let o = ftT(400, 44, "De la crisis de 1929 a la industria nacional", {a:"middle", fs:23, b:true});
+    const B = [[30, 90, "Crisis mundial de 1929", HIS_CLARO.rojo, FT_ROJO], [290, 90, "Caen las exportaciones y entran menos divisas", HIS_CLARO.naranja, FT_NARANJA], [550, 90, "Se importa menos: faltan productos industriales", HIS_CLARO.naranja, FT_NARANJA], [160, 300, "Crecen fábricas locales que sustituyen lo que antes se importaba", HIS_CLARO.verde, FT_VERDE], [440, 300, "Migración del interior a las ciudades: nuevos obreros", HIS_CLARO.azul, FT_AZUL]];
+    B.forEach(([x, y, s, f, c]) => { o += hisCaja(x, y, 220, 110, f, c, hisWrap(s, 22), {fs:16}); });
+    o += ftFlecha(252, 145, 286, 145, FT_TINTA, 3) + ftFlecha(512, 145, 546, 145, FT_TINTA, 3);
+    o += `<path d="M660 202 C660 260 300 250 275 292" fill="none" stroke="${FT_TINTA}" stroke-width="3"/><path d="M270 298 l1 -16 l12 9z" fill="${FT_TINTA}"/>`;
+    o += ftFlecha(382, 355, 436, 355, FT_TINTA, 3);
+    o += ftT(400, 448, "Esto se llama industrialización por sustitución de importaciones.", {a:"middle", fs:16, b:true});
+    return ftSvg(o + ftT(40, 488, "Esquema de Lapacho.", {fs:13, c:FT_SUAVE})); }},
+  ingenios:{t:"Actores del cierre de ingenios en Tucumán (1966-1968)", svg:() => {
+    let o = ftT(400, 36, "El cierre de ingenios en Tucumán: quiénes actuaron", {a:"middle", fs:22, b:true});
+    const A = [[30, 62, "Estado nacional: decreto-ley 16.926 (1966)"], [570, 62, "Industriales: cierres y racionalización"], [20, 215, "Obreros y FOTIA"], [580, 215, "Cañeros que pierden su cupo"], [30, 368, "Comisiones pro defensa y cooperativas"], [570, 368, "Curas párrocos, comerciantes y mujeres"]];
+    A.forEach(([x, y]) => { o += `<line x1="400" y1="250" x2="${x + 100}" y2="${y + 35}" stroke="${FT_GRIS}" stroke-width="2"/>`; });
+    A.forEach(([x, y, s], i) => { o += hisCaja(x, y, 200, 70, i < 2 ? HIS_CLARO.gris : HIS_CLARO.azul, i < 2 ? FT_SUAVE : FT_AZUL, hisWrap(s, 24), {fs:15}); });
+    o += hisCaja(265, 205, 270, 90, HIS_CLARO.rojo, FT_ROJO, ["Cierre de ingenios", "en Tucumán (1966-1968)"], {fs:18, b:true});
+    o += ftT(400, 470, "7 ingenios intervenidos en agosto de 1966 → 11 cerrados hacia 1968", {a:"middle", fs:16, b:true, c:FT_ROJO});
+    return ftSvg(o + ftT(40, 492, "Esquema de Lapacho a partir de Bravo (coord.), 2022, pp. 11-29.", {fs:13, c:FT_SUAVE})); }}
+};
+/* Las figuras de Historia entran en la misma lista que las de Física: aparecen debajo del tema y en «Imágenes» */
+HIS_TEMAS.forEach(T => {
+  FIG_TEMA.push({id:"h-" + T.id, t:`Línea de tiempo: ${T.t} (${T.per})`, k:T.k, his:T.id, svg:() => hisLinea(T)});
+  if (HIS_ESQ[T.id]) FIG_TEMA.push({id:"h-esq-" + T.id, t:HIS_ESQ[T.id].t, k:T.k, his:T.id, svg:HIS_ESQ[T.id].svg});
+});
+
+/* ---------- Qué tema de Historia corresponde a la planificación ---------- */
+function hisTemas(){
+  const tema = ftNorm(val("tema")), cont = ftNorm([val("contenidos"), val("nombre")].join(" "));
+  if (!tema.trim() && !cont.trim()) return [];
+  return HIS_TEMAS.map(T => ({T, p:(T.k.test(tema) ? 3 : 0) + (T.k.test(cont) ? 1 : 0)})).filter(x => x.p > 0).sort((a, b) => b.p - a.p).map(x => x.T);
+}
+/* Agrega texto a un campo sin avisar (el aviso lo da quien llama). Devuelve "ok", "ya" o "no". */
+function hisCampo(id, texto){
+  const el = $(id);
+  if (!el || el.closest("[hidden]") || (!el.getClientRects().length && !el.closest("details:not([open])"))) return "no";
+  const v = el.value.trim();
+  if (v && norm(v).includes(norm(texto).slice(0, 60))) return "ya";
+  const guion = id === "bibliografia" && /^- /m.test(v) && !/^- /.test(texto) ? "- " : "";
+  el.value = v ? `${v}\n${guion}${texto}` : texto;
+  el.dispatchEvent(new Event("input", {bubbles:true}));
+  return "ok";
+}
+function hisPreguntasTexto(T){ return `Preguntas para abrir el tema (${T.t}):\n${T.preg.map(q => "- " + q).join("\n")}`; }
+function hisUsar(id){
+  const T = HIS_TEMAS.find(x => x.id === id); if (!T) return;
+  let nb = 0, ya = 0; const falta = [];
+  T.fuentes.forEach(([lid]) => { const L = hisLibro(lid); if (!L) return; const r = hisCampo("bibliografia", L.ref); if (r === "ok") nb++; else if (r === "ya") ya++; else if (!falta.includes("Bibliografía")) falta.push("Bibliografía"); });
+  let rp = hisCampo("inicio", hisPreguntasTexto(T)), dondeP = "el inicio";
+  if (rp === "no"){ rp = hisCampo("diagnostica", hisPreguntasTexto(T)); dondeP = "la diagnóstica"; }
+  if (rp === "no") falta.push("Inicio");
+  const fig = ftAgregar("h-" + T.id, true) || state.images.some(im => im.kind === "tema" && im.fig === "h-" + T.id);
+  const partes = [];
+  if (nb) partes.push(nb === 1 ? "un libro a la bibliografía" : `${nb} libros a la bibliografía`);
+  if (rp === "ok") partes.push(`las preguntas en ${dondeP}`);
+  if (fig) partes.push("la línea de tiempo");
+  if (falta.length){ try { navigator.clipboard.writeText(hisFichaTexto(T)); } catch (e) { logSilencioso(e); } }
+  toast(partes.length ? `Listo: se sumaron ${partes.join(", ").replace(/, ([^,]*)$/, " y $1")}.${falta.length ? ` Esta planificación no tiene «${falta.join("» ni «")}»: copié la ficha para que la pegues.` : ""}` : "Todo eso ya estaba en la planificación.");
+  hisRender();
+}
+function hisFichaTexto(T){
+  return [`${T.t} (${T.per})`, "", "Síntesis:", ...T.sint.map(([s, l, p]) => `- ${s} (${hisCorto(l)}, ${p})`), "", "Conceptos: " + T.conceptos.join(", ") + ".", "", "Fechas:", ...T.fechas.map(([a, h]) => `- ${a}: ${h}`), "", "Preguntas:", ...T.preg.map(q => "- " + q), "", "Actividades con fuentes:", ...T.act.map(a => "- " + a), "", "Para leer más:", ...T.fuentes.map(([l, p]) => `- ${(hisLibro(l) || {}).ref} ${p}.`)].join("\n");
+}
+function htmlHisFicha(T, enDialogo){
+  const figs = FIG_TEMA.filter(f => f.his === T.id);
+  return `<div class="his-f">
+    <p class="bib-h">Síntesis</p><ul class="his-sint">${T.sint.map(([s, l, p]) => `<li>${esc(s)} <small class="bib-d">(${esc(hisCorto(l))}, ${esc(p)})</small></li>`).join("")}</ul>
+    <p class="bib-h">Conceptos</p><ul class="his-con">${T.conceptos.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
+    <p class="bib-h">Fechas</p><ol class="his-fe">${T.fechas.map(([a, h]) => `<li><b>${esc(a)}</b> ${esc(h)}</li>`).join("")}</ol>
+    <p class="bib-h">Preguntas para abrir el tema</p><ul>${T.preg.map(q => `<li>${esc(q)}</li>`).join("")}</ul>
+    <div class="cur-bar"><button type="button" class="btn btn-sm" data-his-preg="${T.id}">Agregar las preguntas al inicio</button></div>
+    <p class="bib-h">Actividades con fuentes</p><ul class="his-act">${T.act.map((a, i) => `<li><span>${esc(a)}</span><button type="button" class="btn btn-sm" data-his-act="${T.id}|${i}" aria-label="Agregar al desarrollo: ${esc(a)}">Al desarrollo</button></li>`).join("")}</ul>
+    ${figs.length ? `<p class="bib-h">Figuras</p><ul class="ft-l">${figs.map(f => { const ya = ftYaEsta(f); return `<li class="ft-it"><img src="${svgSrc(f.svg())}" alt="" width="120" height="75" loading="lazy"><span class="ft-t">${esc(f.t)}</span>${ya ? `<span class="ft-ya">Agregada</span>` : `<button type="button" class="btn btn-sm" data-ftadd="${f.id}" aria-label="Agregar la figura: ${esc(f.t)}">Agregar</button>`}</li>`; }).join("")}</ul>` : ""}
+    <p class="bib-h">Para leer más</p><ul class="his-fu">${T.fuentes.map(([l, p]) => { const L = hisLibro(l); return L ? `<li><b>${esc(L.t)}</b> <small class="bib-d">${esc(L.a)}: ${esc(p)}</small> <button type="button" class="linkbtn" data-bib-ref="${L.id}" data-his-ref="${L.id}">Agregar a la bibliografía</button></li>` : ""; }).join("")}</ul>
+    <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-his-usar="${T.id}">Usar en la planificación</button><button type="button" class="btn btn-sm" data-his-copiar="${T.id}">Copiar la ficha</button>${enDialogo ? "" : ""}</div>
+    <p class="hint">Síntesis propia de Lapacho a partir de tus libros. Antes de citar una página marcada «aprox.», revisala en el libro.</p>
+  </div>`;
+}
+function abrirHisFicha(id){
+  const T = HIS_TEMAS.find(x => x.id === id); if (!T) return;
+  if (!$("his-ficha")) document.body.insertAdjacentHTML("beforeend", `<dialog class="lib bancodlg" id="his-ficha" aria-labelledby="his-ficha-t"><div class="lib-in"><div class="lib-head"><h2 id="his-ficha-t">Ficha de Historia</h2><button type="button" class="linkbtn" data-cerrar="his-ficha">Cerrar</button></div><p class="hint" id="his-ficha-per"></p><div id="his-ficha-doc"></div></div></dialog>`);
+  $("his-ficha").dataset.tema = id;
+  $("his-ficha-t").textContent = T.t;
+  $("his-ficha-per").textContent = `${T.per}. Para Historia, Formación Ética y Ciudadana o Ciencias Sociales.`;
+  $("his-ficha-doc").innerHTML = htmlHisFicha(T, true);
+  abrirDialogo("his-ficha");
+}
+let HIS_PEND = 0;
+function hisRender(){
+  clearTimeout(HIS_PEND);
+  HIS_PEND = setTimeout(() => {
+    try {
+      const tema = $("tema"); if (!tema) return;
+      const L = hisTemas(); let box = $("his-sug");
+      if (!L.length || state.modo === "anual"){ if (box) box.remove(); return; }
+      const T = L[0];
+      const html = `<p class="ft-h">${lpSvg("libro", "lp-ic")}Ficha de Historia: ${esc(T.t)} <small>(${esc(T.per)})</small></p>
+        <p class="his-res">${esc(T.sint[0][0])}</p>
+        <p class="hint">Síntesis, fechas, preguntas y actividades con fuentes de tus libros de Historia.</p>
+        <div class="cur-bar"><button type="button" class="btn btn-sm btn-primary" data-his-usar="${T.id}">Usar en la planificación</button><button type="button" class="btn btn-sm" data-his-ver="${T.id}">Ver la ficha</button></div>
+        ${L.length > 1 ? `<p class="his-otras">También puede servir: ${L.slice(1, 4).map(o => `<button type="button" class="linkbtn" data-his-ver="${o.id}">${esc(o.t)}</button>`).join(" · ")}</p>` : ""}`;
+      if (!box){
+        const ref = $("ft-sug") || tema.closest(".f") || tema.parentElement;
+        ref.insertAdjacentHTML("afterend", `<div class="ft-sug his-sug f full" id="his-sug" role="region" aria-label="Ficha de Historia para este tema"></div>`); box = $("his-sug");
+      } else {
+        const ft = $("ft-sug"); if (ft && box.previousElementSibling !== ft) ft.insertAdjacentElement("afterend", box);
+      }
+      if (box.innerHTML !== html) box.innerHTML = html;
+    } catch (e) { logSilencioso(e); }
+  }, 180);
+}
+function ftRender(){ ftRenderV82(); hisRender(); }
+
+/* ---------- Biblioteca: pestaña «Historia» y fichas en «Para esta planificación» ---------- */
+BIB_TABS.push(["his", "Historia"]);
+const BIBH = {abierto:""};
+function htmlBiblioV83(){
+  if (BIB.tab === "his"){
+    const L = hisTemas();
+    return `<p class="hint">Una ficha por tema, de los pueblos originarios a la Argentina reciente, armada con tus seis libros de Historia: síntesis con libro y página, conceptos, fechas, preguntas y actividades con fuentes. Los libros están en «Libros», tipo «Historia argentina».</p>
+      ${HIS_TEMAS.map(T => `<details class="bib-l"${T.id === BIBH.abierto || (!BIBH.abierto && L[0] === T) ? " open" : ""} data-his-det="${T.id}"><summary><b>${esc(T.t)}</b><small>${esc(T.per)} · ${T.fuentes.map(([l]) => esc(hisCorto(l))).join("; ")}</small></summary><div class="bib-b">${htmlHisFicha(T)}</div></details>`).join("")}`;
+  }
+  let h = htmlBiblioV82();
+  if (BIB.tab === "clase"){
+    const L = hisTemas();
+    if (L.length) h = `<h3 class="lic-h">Fichas de Historia para este tema</h3>${L.slice(0, 2).map((T, i) => `<details class="bib-l"${i === 0 ? " open" : ""}><summary><b>${esc(T.t)}</b><small>${esc(T.per)}</small></summary><div class="bib-b">${htmlHisFicha(T)}</div></details>`).join("")}` + h;
+  }
+  return h;
+}
+function init97(){
+  try {
+    const tabs = document.querySelector('#biblio [data-tabs="bib"]');
+    if (tabs && !tabs.querySelector('[data-tab="his"]')) tabs.insertAdjacentHTML("beforeend", `<button type="button" data-tab="his" aria-pressed="${BIB.tab === "his"}">Historia</button>`);
+    if (init97.ok) return; init97.ok = true;
+    document.addEventListener("click", e => {
+      const t = e.target; if (!t.closest) return;
+      const u = t.closest("[data-his-usar]"); if (u){ hisUsar(u.dataset.hisUsar); hisRefrescarFicha(); return; }
+      const v = t.closest("[data-his-ver]"); if (v){ abrirHisFicha(v.dataset.hisVer); return; }
+      const p = t.closest("[data-his-preg]"); if (p){ const T = HIS_TEMAS.find(x => x.id === p.dataset.hisPreg); if (T){ const r = hisCampo("inicio", hisPreguntasTexto(T)); if (r === "no") bibAgregar("diagnostica", hisPreguntasTexto(T), "Diagnóstica"); else toast(r === "ok" ? "Listo: las preguntas quedaron en «Inicio»." : "Las preguntas ya estaban en «Inicio»."); } return; }
+      const a = t.closest("[data-his-act]"); if (a){ const [id, i] = a.dataset.hisAct.split("|"); const T = HIS_TEMAS.find(x => x.id === id); if (T) bibAgregar("desarrollo", `- Actividad con fuentes: ${T.act[+i]}`, "Desarrollo"); return; }
+      const c = t.closest("[data-his-copiar]"); if (c){ const T = HIS_TEMAS.find(x => x.id === c.dataset.hisCopiar); if (T){ try { navigator.clipboard.writeText(hisFichaTexto(T)); toast("Copié la ficha completa."); } catch (er) { logSilencioso(er); toast("No pude copiar la ficha en este navegador."); } } return; }
+      /* «Agregar a la bibliografía» fuera del diálogo de la Biblioteca (en la ficha que se abre desde el tema) */
+      const r = t.closest("[data-his-ref]"); if (r && !r.closest("#biblio")){ const L = hisLibro(r.dataset.hisRef); if (L) bibAgregar("bibliografia", L.ref, "Bibliografía"); return; }
+      if (t.closest('[data-cerrar="his-ficha"]')) cerrarDialogo("his-ficha");
+      if (t.closest("#his-ficha [data-ftadd]")) setTimeout(hisRefrescarFicha, 60);
+    });
+    document.addEventListener("toggle", e => { const d = e.target; if (d && d.dataset && d.dataset.hisDet && d.open) BIBH.abierto = d.dataset.hisDet; }, true);
+    hisRender();
+  } catch (e) { registrarError("init97", e, "aviso"); }
+}
+function hisRefrescarFicha(){ const D = $("his-ficha"); if (D && D.open){ const T = HIS_TEMAS.find(x => x.id === D.dataset.tema); if (T) $("his-ficha-doc").innerHTML = htmlHisFicha(T, true); } }
+CT_RUTAS.push({id:"historia", t:"Fichas de Historia", d:"Síntesis, fechas, preguntas y actividades con fuentes para cada tema de Historia argentina.", a:() => abrirBiblio("his"), p:[[/\b(fichas? de historia|historia argentina|linea de tiempo de historia|ingenios|cierre de ingenios|revolucion de mayo|peronismo|dictadura|malvinas)\b/, 3]]});
+
+/* ============================================================
+   Versión 84: tus libros para citar (22/11/2026)
+   Víctor volvió a pasar los libros de su Biblioteca, más dos nuevos, «para citarlos en trabajos y planificación».
+   - Fichas más completas donde ahora se pudo leer más: Hewitt (índice por reconocimiento de caracteres), el libro de
+     Kapelusz (era «Fisicoquímica. Nuevos desafíos», de Bazo y otros), Vygotsky y Ausubel (páginas exactas) y Wagensberg.
+   - Dos libros nuevos de Historia y su enseñanza: Funes (historia reciente) y Guralnik, Silber y Moszkowicz Rubel (efemérides).
+   - Para citar: en cada idea, «Copiar cita» (paráfrasis con autor, año y página, más la referencia) y «A la fundamentación».
+     Cada ficha muestra la cita en el texto según APA 7.
+   - Esquemas propios hechos a partir de los libros (Ausubel, Vygotsky, Driver, Kuhn, Bunge, Wagensberg, Funes, Hewitt):
+     se suman a la planificación o se descargan como imagen, con la nota «Elaboración propia a partir de…».
+   ============================================================ */
+BIB_TIPOS.his = "Historia y su enseñanza";
+function bibActualizar(id, c){ const L = BIB_LIBROS.find(x => x.id === id); if (L) Object.assign(L, c); return L; }
+bibActualizar("hewitt", {
+  arch:"Libro completo escaneado como imágenes (821 páginas). Leí con reconocimiento de caracteres las primeras 16 páginas: la cronología de la física y el índice.",
+  lect:"Leí el índice completo y la cronología «Algunas fechas importantes en la historia de la Física».",
+  ideas:[
+    ["Cap. 1, «Acerca de la ciencia»: cómo se midieron el tamaño de la Tierra y de la Luna y la distancia al Sol, el método y la actitud científica, ciencia y tecnología.", "cap. 1, pp. 2-17"],
+    ["Cap. 2: la primera ley de Newton contada desde Aristóteles, Copérnico y los planos inclinados de Galileo.", "cap. 2, pp. 22-36"],
+    ["Caps. 3 a 5: movimiento rectilíneo y caída libre, segunda ley (fricción, masa y peso) y tercera ley.", "pp. 41-90"],
+    ["Cap. 7, energía: energía mecánica, conservación, máquinas, eficiencia, energía para la vida y fuentes de energía.", "cap. 7, pp. 110-123"],
+    ["Calor (caps. 15 a 18): temperatura, calor específico, dilatación, conducción, convección, radiación, cambios de fase y termodinámica.", "pp. 290-360"],
+    ["Electricidad y magnetismo (caps. 22 a 25) y luz (caps. 26 a 31).", "pp. 410-618"],
+    ["Al comienzo trae una cronología de la física, de Aristóteles a fines del siglo XX: sirve para una línea de tiempo de la historia de la ciencia.", "páginas preliminares"]],
+  ojo:"Las páginas salen del índice escaneado: revisalas en el libro antes de citar."
+});
+bibActualizar("kapelusz", {
+  t:"Fisicoquímica. Nuevos desafíos", a:"Raúl Bazo, Paula Briuolo, Hugo Labate y Sergio Silvestri",
+  ref:"Bazo, R., Briuolo, P., Labate, H. y Silvestri, S. (2012). Fisicoquímica. Nuevos desafíos. Buenos Aires: Kapelusz.",
+  arch:"Libro escolar escaneado (160 páginas). El archivo se llama «Fisicoquímica en la vida cotidiana», pero la portada dice «Fisicoquímica. Nuevos desafíos» (1.ª edición de 2012, 2.ª reimpresión de 2015).",
+  lect:"Leí con reconocimiento de caracteres los créditos, «Cómo es este libro» y el índice.",
+  porque:"Libro escolar argentino que arranca cada tema desde la vida cotidiana: pregunta disparadora, «La cocina de la ciencia», experiencias para observar y pensar, noticias CTS de la Argentina, redes conceptuales y proyectos.",
+  ideas:[
+    ["Cap. 1 (Silvestri): el conocimiento científico, los modelos del universo, ciencia y tecnología en la Argentina (un satélite hecho en el país).", "cap. 1"],
+    ["Cap. 2 (Briuolo): propiedades de los materiales, modelo de partículas, estados de agregación, densidad y leyes de los gases.", "cap. 2"],
+    ["Cap. 3 (Labate): sistemas materiales y cómo separar sus componentes.", "cap. 3, p. 54 y siguientes"],
+    ["Cap. 4 (Silvestri): fuerzas como vectores, tercera ley, presión, campos magnético, gravitatorio y eléctrico. Abre con el mate tereré.", "cap. 4, pp. 61-84"],
+    ["Cap. 6 (Bazo): la energía y los cambios; conducción y convección, conservación de la energía.", "cap. 6, pp. 102-116 (conducción y convección p. 108; conservación p. 114)"],
+    ["Cap. 8 (Bazo): la corriente eléctrica; una pila con limones y los circuitos, y el costo de enfriar las bebidas.", "cap. 8, pp. 135-144"]],
+  aula:["Abrí el tema con su pregunta disparadora o con «La cocina de la ciencia».", "Los proyectos de cierre (globo aerostático, composición de una bebida cola, uso racional de la electricidad) sirven como trabajo final de unidad."],
+  ojo:"Tiene prohibida la fotocopia: tomá ideas y consignas citando el libro, sin copiar las páginas.",
+  tags:"fisicoquimica materia materiales modelo de particulas estados de agregacion densidad gases boyle charles sistemas materiales separacion fuerza vectores presion campo magnetico gravitatorio cargas energia conduccion conveccion cambios quimicos corriente electrica circuito pila"
+});
+(() => { const L = BIB_LIBROS.find(x => x.id === "vygotsky"); if (!L) return;
+  L.lect = "Leí el índice y los capítulos 1 y 6 (en esta edición, el 6 va de la p. 119 a la 158).";
+  L.ideas = [
+    L.ideas[0],
+    ["Dos chicos con la misma edad mental (8 años) rinden distinto con ayuda: uno resuelve problemas pensados para 12 años y el otro no pasa de los de 9. Esa distancia es la zona de desarrollo próximo.", "cap. 6, p. 141"],
+    ["El chico con una zona de desarrollo próximo más amplia rinde mejor en la escuela: medirla dice más que medir solo lo que ya hace solo.", "cap. 6, p. 141"],
+    ["La enseñanza tiene que mirar hacia adelante: dar solo problemas que el chico resuelve sin ayuda es enseñar hacia su debilidad y no hacia su fortaleza.", "cap. 6, pp. 142-143"],
+    L.ideas[3]];
+})();
+(() => { const L = BIB_LIBROS.find(x => x.id === "ausubel02"); if (!L) return;
+  L.lect = "Leí el prólogo y el capítulo 1 completos, y busqué en el resto los conceptos clave (organizador previo, aprendizaje subordinado, asimilación obliteradora).";
+  L.ideas = [
+    L.ideas[0],
+    ["El aprendizaje por recepción significativo es activo: el alumno busca qué sabe que se relacione, concilia lo nuevo con lo que ya sabe (parecidos, diferencias, contradicciones) y lo reformula con sus palabras.", "cap. 1, p. 32"],
+    ["Lo nuevo se relaciona de tres maneras: subordinado (se ancla en una idea más general que ya tiene), de orden superior (una idea más general reúne varias que ya tenía) o combinatorio.", "cap. 1, p. 28"],
+    L.ideas[1], L.ideas[2], L.ideas[3],
+    ["El organizador previo se da antes del material: es más general, inclusivo y abstracto que lo que viene, y tiende el puente entre lo que el alumno sabe y lo que necesita saber.", "cap. 1, pp. 40-42"],
+    ["Con el tiempo, lo aprendido se va confundiendo con su idea de anclaje (asimilación obliteradora): se pierden los detalles y queda la idea general.", "pp. 112-114"]];
+})();
+bibActualizar("wagensberg", {
+  arch:"El PDF trae el índice y el capítulo 1 de Wagensberg (pp. 11-17). Lo que sigue son otros textos pegados en el mismo archivo: uno sobre las raíces del diseño, otro sobre la revolución industrial y otro sobre la industria en Colombia.",
+  lect:"Leí el índice y el capítulo 1 completo.",
+  ideas:[
+    ["Desde Galileo, Descartes y Newton la física eligió objetos y leyes simples. Ese «amor por lo simple» explica su prestigio y sus límites.", "cap. 1, p. 11"],
+    ["La ciencia avanza en círculos que no se cierran: el punto de llegada enriquece la definición de partida y empieza otra vuelta. Es una espiral, un círculo virtuoso.", "cap. 1, p. 13"],
+    ["El conocimiento empieza con una inquietud que trae un estímulo (de otra persona, «blando», o de la propia perplejidad, «duro»), y se calma cuando logra formularse como pregunta.", "cap. 1, pp. 15-17"],
+    ["La ciencia no descubre leyes ya escritas: las propone, y la naturaleza «se deja» o no. Toda búsqueda está condicionada por lo que se espera encontrar.", "cap. 1, p. 16"],
+    ["El cambio, la adaptación y la autoorganización son claves para entender lo complejo; hay un azar que es ignorancia y otro absoluto.", "caps. 2 y 3, pp. 21-70 (según el índice)"],
+    ["Ver, mirar, observar, experimentar y simular son maneras distintas de conocer.", "cap. 5, p. 89 (según el índice)"]],
+  aula:["Para abrir una unidad: un fenómeno que inquiete (estímulo «duro») y tiempo para que el curso lo convierta en pregunta.", "Para 5.º y 6.º: debate sobre si todo se puede predecir (el clima, una moneda, un péndulo doble).", "La distinción entre observar, experimentar y simular sirve para justificar el uso de simuladores como PhET."],
+  ojo:"El PDF solo trae el capítulo 1 del libro; los textos que siguen no son de Wagensberg y no hay que citarlos como parte del libro.",
+  tags:"complejidad azar caos determinismo simulacion simulador observacion experimento pregunta curiosidad inquietud conocimiento cientifico ciencia y arte"
+});
+const BIB_NUEVOS = [
+  {id:"funes", tipo:"his", t:"La enseñanza de la historia reciente/presente", a:"Alicia Graciela Funes (Universidad Nacional del Comahue)",
+    ref:"Funes, A. G. (s. f.). La enseñanza de la historia reciente/presente [artículo]. Universidad Nacional del Comahue.",
+    arch:"Artículo completo (9 páginas), sin los datos de la revista donde se publicó.", lect:"Leí el artículo completo.",
+    porque:"Investigación con profesores y estudiantes de secundaria de Neuquén (2002-2005) sobre cómo se enseña lo reciente. Sirve para fundamentar por qué y cómo dar historia reciente.",
+    ideas:[
+      ["Enseñar el pasado reciente necesita las herramientas del oficio del historiador, para llegar a verdades «controversiales, provisorias e históricamente condicionadas»; no alcanza con la opinión.", "apartado «Por qué investigar la enseñanza de la historia reciente»"],
+      ["Las luchas por el pasado son luchas por el presente: por eso la historia reciente es un lugar de disputa, con dimensiones éticas y políticas.", "apartado «Algunos resultados»"],
+      ["A los estudiantes la historia reciente les resulta atractiva por su relación con la actualidad, la variedad de fuentes y la presencia de los medios.", "apartado «Algunos resultados»"],
+      ["Muchas veces lo reciente queda como motivación inicial o como efeméride, y no se enseña como contenido con la profundidad de otros períodos.", "apartado «Algunos resultados»"],
+      ["Los docentes vinculan lo reciente con el tiempo de cuatro maneras: relación presente-pasado, actualidad-realidad, emergencia del presente y coyunturización.", "apartado «Algunos resultados»"],
+      ["Riesgo: cuando el presente pesa demasiado, cuesta argumentar en términos históricos; se parte de la opinión y se llega a la opinión.", "apartado «Algunos resultados»"],
+      ["El saber del profesor de historia junta tres tipos: los académicos (disciplinares y didácticos), los de la experiencia y las rutinas o guiones de acción.", "apartado «Qué y cómo investigamos»"]],
+    aula:["Partí de un hecho actual, pero llevá la clase a fuentes y argumentos históricos: que no termine en la opinión.", "Contrastá visiones con fuentes de distintas posiciones: diarios, entrevistas, documentos.", "Usá entrevistas a familiares como fuente, con las preguntas preparadas en clase."],
+    ojo:"Es de mediados de los 2000 y toma posición sobre los años 90 y la crisis de 2001. Citá sus ideas sobre la enseñanza; para los hechos, usá las fichas de cada tema.",
+    tags:"historia reciente historia del presente memoria ensenanza de la historia dictadura 2001 crisis democracia fuentes entrevistas actualidad",
+    anios:["10", "11", "12"]},
+  {id:"efemerides", tipo:"his", t:"Efemérides: ¿rutina o desafío? (capítulo 1)", a:"Alba Guralnik, Eduardo Silber y Ana Moszkowicz Rubel",
+    ref:"Guralnik, A., Silber, E. y Moszkowicz Rubel, A. (s. f.). Efemérides: ¿rutina o desafío? Obras de teatro, guiones y recursos para actos escolares. Buenos Aires: Novedades Educativas.",
+    arch:"Solo el capítulo 1, «Algunas premisas de trabajo» (pp. 17-24), escaneado. No figura el año de edición.", lect:"Leí el capítulo completo con reconocimiento de caracteres.",
+    porque:"Propone que los actos patrios sigan, pero como proyecto de enseñanza con los enfoques actuales de las Ciencias Sociales, y no como una rutina de «héroes» y estampas.",
+    ideas:[
+      ["Los actos deberían trabajar procesos, actores sociales diversos (no solo los «héroes», también los invisibilizados), la multicausalidad y las dimensiones política, económica, social y cultural.", "cap. 1, p. 17"],
+      ["Una dramatización mal pensada enseña otra cosa: si los chicos «hacen de» esclavos vendiendo empanadas con pregones, construyen el concepto de vendedor ambulante, no el de esclavitud.", "cap. 1, p. 19"],
+      ["El acto puede ser un proyecto entre áreas: Ciencias Sociales, Lengua, Plástica, Música, Expresión corporal y Teatro, cada una con sus contenidos.", "cap. 1, p. 20"],
+      ["Un hilo conductor para todas las efemérides del año evita que aparezcan desconectadas y ayuda a ver causas, cambios y permanencias; la vida cotidiana es una buena puerta de entrada.", "cap. 1, pp. 21-22"],
+      ["Preparar el acto no es perder tiempo si se seleccionan contenidos, se articulan entre años sin repetirlos y los ensayos se usan para discutir lo que se dice.", "cap. 1, pp. 22-23"],
+      ["Mostrar a las figuras históricas con virtudes, defectos y contradicciones permite trabajar valores (justicia, libertad, solidaridad) comparando aquella época con la actual.", "cap. 1, pp. 23-24"]],
+    aula:["Elegí con el equipo un hilo conductor anual (el trabajo, la vida cotidiana) y armá cada acto desde ahí.", "Revisá el guion con las preguntas de la p. 21: ¿aparecen las personas comunes? ¿se muestran conflictos o hechos encadenados como si fueran naturales?", "Convertí los ensayos en clase: que discutan y reescriban el texto que van a decir."],
+    ojo:"Está pensado sobre todo para la primaria; en la secundaria sirve para los actos y para proyectos entre materias.",
+    tags:"efemerides actos escolares acto patrio acto escolar dramatizacion teatro proyecto institucional interdisciplinario ciencias sociales",
+    anios:[]}
+];
+BIB_LIBROS.push(...BIB_NUEVOS);
+HIS_LIBROS.push(...BIB_NUEVOS);
+/* Los nuevos, en las fichas de Historia que corresponden */
+(() => {
+  const add = (tid, f) => { const T = HIS_TEMAS.find(x => x.id === tid); if (T && !T.fuentes.some(x => x[0] === f[0])) T.fuentes.push(f); };
+  ["reciente", "democracia", "dictadura", "malvinas"].forEach(t => add(t, ["funes", "para enseñarlo: todo el artículo"]));
+  ["mayo", "indep"].forEach(t => add(t, ["efemerides", "para el acto: cap. 1, pp. 17-24"]));
+  const T = {id:"efem", t:"Efemérides y actos escolares", per:"calendario escolar",
+    k:/efemerides|actos? (escolar|patrio)|acto del|calendario escolar|fechas patrias/,
+    sint:[["Los actos patrios pueden seguir, pero resignificados: con procesos, actores sociales diversos y no solo «héroes», multicausalidad y las dimensiones política, económica, social y cultural.", "efemerides", "cap. 1, p. 17"],
+      ["Lo que se dramatiza tiene que ser coherente con lo que se enseña: una escena pintoresca puede dejar un concepto equivocado.", "efemerides", "cap. 1, p. 19"],
+      ["Un hilo conductor anual une las efemérides y ayuda a ver causas, cambios y permanencias; la vida cotidiana es una buena puerta de entrada.", "efemerides", "cap. 1, pp. 21-22"],
+      ["El acto puede ser un proyecto institucional entre áreas, y los ensayos, tiempo de enseñanza.", "efemerides", "cap. 1, pp. 20-23"]],
+    conceptos:["actores sociales", "multicausalidad", "cambios y permanencias", "hilo conductor", "proyecto institucional"],
+    fechas:[["24/3", "Memoria por la Verdad y la Justicia"], ["2/4", "Veteranos y Caídos en Malvinas"], ["25/5", "Revolución de Mayo"], ["20/6", "Día de la Bandera"], ["9/7", "Independencia"], ["17/8", "San Martín"], ["12/10", "Respeto a la Diversidad Cultural"], ["20/11", "Soberanía Nacional"]],
+    preg:["¿Qué queremos que aprendan con este acto, además de recordar la fecha?", "¿Quiénes aparecen en el guion y quiénes faltan?", "¿Qué tiene que ver esta fecha con nuestra vida de hoy?"],
+    act:["Elegir con el equipo un hilo conductor anual para los actos y armar el calendario.", "Revisar el guion del acto con las preguntas de Gojman y Segal antes de ensayar.", "Proyecto entre áreas: Historia investiga, Lengua adapta el texto teatral, Música y Plástica preparan el resto."],
+    fuentes:[["efemerides", "cap. 1, pp. 17-24"]]};
+  HIS_TEMAS.push(T);
+  FIG_TEMA.push({id:"h-efem", t:"Línea de tiempo: Efemérides del calendario escolar", k:T.k, his:"efem", svg:() => hisLinea(T)});
+})();
+
+/* ---------- Citas (APA 7) ---------- */
+function bibAnio(L){ const m = /\((\d{4}[a-z]?|s\. f\.)\)/.exec(L.ref || ""); return m ? m[1] : "s. f."; }
+function bibAutores(L){
+  if (L.cita) return L.cita;
+  const r = String(L.ref || ""), antes = r.split(/\s\((?:\d{4}|s\. f\.)/)[0];
+  const ap = [...antes.matchAll(/([A-ZÁÉÍÓÚÑ][A-Za-zÁÉÍÓÚÑáéíóúñü'-]+(?:[ -][A-ZÁÉÍÓÚÑ][a-záéíóúñü'-]+)?), (?:[A-ZÁÉÍÓÚÑ]\.\s?)+/g)].map(m => m[1]);
+  if (!ap.length) return antes.replace(/\s*\(coord\.\)/, "").trim() || L.a || L.t;
+  if (/y otros|et al/.test(antes) || ap.length >= 3) return `${ap[0]} et al.`;
+  return ap.length === 2 ? `${ap[0]} y ${ap[1]}` : ap[0];
+}
+function bibPag(s){ const m = /(?:^|[\s,(])(pp?\.\s?\d+(?:-\d+)?)/.exec(String(s || "")); return m ? m[1].replace(/\s+/, " ") : ""; }
+function bibCita(L, pag){ return `(${bibAutores(L)}, ${bibAnio(L)}${pag ? ", " + pag : ""})`; }
+function bibCitaNarr(L){ return `${bibAutores(L)} (${bibAnio(L)})`; }
+function bibIdeaCita(L, i){ const x = L.ideas[i]; const t = Array.isArray(x) ? x[0] : x, p = Array.isArray(x) ? bibPag(x[1]) : ""; return `${t.replace(/\.$/, "")} ${bibCita(L, p)}.`; }
+function copiarTexto(t, ok){ try { navigator.clipboard.writeText(t).then(() => toast(ok), () => toast("No pude copiar en este navegador. Mantené apretado el texto para copiarlo.")); } catch (e) { logSilencioso(e); toast("No pude copiar en este navegador."); } }
+
+/* ---------- Esquemas propios a partir de los libros ---------- */
+function bEsqPie(s){ return ftT(30, 490, s, {fs:13, c:FT_SUAVE}); }
+function bCiclo(cx, cy, r, nodos, o){
+  const n = nodos.length, w = (o && o.w) || 180, h = (o && o.h) || 56, P = nodos.map((_, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n; return [cx + r * 1.25 * Math.cos(a), cy + r * Math.sin(a)]; });
+  let s = "";
+  P.forEach(([x, y], i) => { const [x2, y2] = P[(i + 1) % n], dx = x2 - x, dy = y2 - y, d = Math.hypot(dx, dy);
+    const tb = Math.min(dx ? (w / 2) / Math.abs(dx) : 9, dy ? (h / 2) / Math.abs(dy) : 9), m = 6 / d;
+    const a = tb + m, b = 1 - tb - m;
+    if ((b - a) * d > 16) s += ftFlecha(+(x + dx * a).toFixed(1), +(y + dy * a).toFixed(1), +(x + dx * b).toFixed(1), +(y + dy * b).toFixed(1), FT_GRIS, 3); });
+  P.forEach(([x, y], i) => { const c = HIS_COL[i % HIS_COL.length], f = [HIS_CLARO.azul, HIS_CLARO.verde, HIS_CLARO.naranja, HIS_CLARO.violeta, HIS_CLARO.rojo][i % 5]; s += hisCaja(x - w / 2, y - h / 2, w, h, f, c, hisWrap(nodos[i], (o && o.wrap) || 22), {fs:(o && o.fs) || 15}); });
+  return s;
+}
+const BIB_ESQ = [
+  {id:"b-aus-dim", bib:"ausubel78", pag:"pp. 36-37", t:"Dos dimensiones del aprendizaje: recepción o descubrimiento, memorístico o significativo",
+    k:/aprendizaje significativo|ausubel|organizador previo|aprendizaje por (recepcion|descubrimiento)|teorias? del aprendizaje/, svg:() => {
+    let o = ftT(400, 40, "Dos dimensiones independientes del aprendizaje", {a:"middle", fs:22, b:true});
+    o += `<line x1="140" y1="420" x2="752" y2="420" stroke="${FT_TINTA}" stroke-width="2.5"/><path d="M768 420 l-16 -8 v16z" fill="${FT_TINTA}"/><line x1="140" y1="420" x2="140" y2="86" stroke="${FT_TINTA}" stroke-width="2.5"/><path d="M140 70 l-8 16 h16z" fill="${FT_TINTA}"/>`;
+    o += ftT(150, 448, "Por recepción", {fs:16, b:true}) + ftT(760, 448, "Por descubrimiento", {a:"end", fs:16, b:true});
+    o += ftT(128, 96, "Significativo", {a:"end", fs:15, b:true, c:FT_VERDE}) + ftT(128, 412, "Memorístico", {a:"end", fs:15, b:true, c:FT_ROJO});
+    o += hisCaja(170, 100, 260, 100, HIS_CLARO.verde, FT_VERDE, hisWrap("Explicación del docente que se apoya en lo que el curso ya sabe", 28), {fs:15});
+    o += hisCaja(470, 100, 260, 100, HIS_CLARO.verde, FT_VERDE, hisWrap("Indagación: el curso formula su conjetura y la pone a prueba", 28), {fs:15});
+    o += hisCaja(170, 300, 260, 100, HIS_CLARO.rojo, FT_ROJO, hisWrap("Repetir la fórmula de memoria sin saber qué significa", 28), {fs:15});
+    o += hisCaja(470, 300, 260, 100, HIS_CLARO.rojo, FT_ROJO, hisWrap("Seguir la receta del laboratorio sin saber para qué", 28), {fs:15});
+    o += hisTxtLineas(450, 240, ["Recibir una explicación no obliga a aprender de memoria,", "y descubrir no garantiza que se aprenda con significado."], {a:"middle", fs:15, lh:21, c:FT_SUAVE});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir de Ausubel (1978, pp. 36-37). Los ejemplos son de Lapacho.")); }},
+  {id:"b-aus-cond", bib:"ausubel02", pag:"pp. 28-42", t:"Aprendizaje significativo: condiciones, tipos y organizador previo",
+    k:/aprendizaje significativo|ausubel|organizador previo|teorias? del aprendizaje/, svg:() => {
+    let o = ftT(400, 36, "Aprendizaje significativo (Ausubel)", {a:"middle", fs:22, b:true});
+    [["Material potencialmente|significativo", "se puede relacionar con lo que sabe"], ["Ideas de anclaje", "conocimientos previos pertinentes"], ["Disposición del alumno", "a relacionar, no a repetir"]].forEach(([a, b], i) => { const hs = a.split("|"); o += hisCaja(25 + i * 260, 58, 230, 86, HIS_CLARO.azul, FT_AZUL, [...hs, ...hisWrap(b, 28)], {fs:15, b1:hs.length}); });
+    o += ftFlecha(140, 148, 330, 196, FT_GRIS, 3) + ftFlecha(400, 148, 400, 194, FT_GRIS, 3) + ftFlecha(660, 148, 470, 196, FT_GRIS, 3);
+    o += hisCaja(250, 200, 300, 56, HIS_CLARO.verde, FT_VERDE, ["Aprendizaje significativo"], {fs:19, b:true});
+    o += ftT(400, 290, "Lo nuevo se relaciona con lo que ya sabe de tres maneras:", {a:"middle", fs:15, c:FT_SUAVE});
+    [["Subordinado", "se ancla en una idea más general"], ["De orden superior", "una idea nueva reúne varias"], ["Combinatorio", "se relaciona con un fondo amplio"]].forEach(([a, b], i) => { o += hisCaja(25 + i * 260, 304, 230, 74, HIS_CLARO.naranja, FT_NARANJA, [a, ...hisWrap(b, 30)], {fs:15, b1:1}); });
+    o += hisTxtLineas(400, 410, ["Organizador previo: un texto o esquema breve, más general que el tema,", "que se da antes para tender el puente entre lo que sabe y lo nuevo."], {a:"middle", fs:15, lh:21});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir de Ausubel (2002, pp. 28-42).")); }},
+  {id:"b-vyg-zdp", bib:"vygotsky", pag:"pp. 141-142", t:"Zona de desarrollo próximo, con el ejemplo de Vygotsky",
+    k:/vygotsky|vigotsky|zona de desarrollo|andamiaje|sociocultural|teorias? del aprendizaje/, svg:() => {
+    let o = ftT(400, 36, "Zona de desarrollo próximo (Vygotsky)", {a:"middle", fs:22, b:true});
+    o += `<circle cx="200" cy="282" r="175" fill="#f4f5f4" stroke="${FT_GRIS}" stroke-width="2"/><circle cx="200" cy="282" r="120" fill="${HIS_CLARO.verde}" stroke="${FT_VERDE}" stroke-width="2.5"/><circle cx="200" cy="282" r="50" fill="${HIS_CLARO.azul}" stroke="${FT_AZUL}" stroke-width="2.5"/>`;
+    o += hisTxtLineas(200, 278, ["Lo que", "hace solo"], {a:"middle", fs:15, lh:19, b:true}) + hisTxtLineas(200, 190, ["Con ayuda:", "zona de desarrollo", "próximo"], {a:"middle", fs:14, lh:17, b:true, c:FT_VERDE}) + hisTxtLineas(200, 135, ["Todavía no"], {a:"middle", fs:14, c:FT_SUAVE});
+    o += ftT(420, 96, "Ejemplo del libro: dos chicos de 8 años", {fs:15, b:true}) + ftT(420, 118, "de edad mental, con una pequeña ayuda", {fs:15});
+    const x0 = 430, u = 42, ej = v => x0 + (v - 6) * u;
+    for (let v = 6; v <= 13; v++){ o += `<line x1="${ej(v)}" y1="150" x2="${ej(v)}" y2="330" stroke="#e1e5e3" stroke-width="1"/>` + ftT(ej(v), 352, String(v), {a:"middle", fs:14, c:FT_SUAVE}); }
+    o += ftT(ej(9.5), 376, "edad de los problemas que resuelve (años)", {a:"middle", fs:13, c:FT_SUAVE});
+    [[12, "Chico A", 175], [9, "Chico B", 265]].forEach(([fin, n, y]) => {
+      o += ftT(ej(6), y - 12, n, {fs:15, b:true}) + `<rect x="${ej(6)}" y="${y}" width="${ej(8) - ej(6)}" height="34" fill="${FT_AZUL}"/><rect x="${ej(8)}" y="${y}" width="${ej(fin) - ej(8)}" height="34" fill="${HIS_CLARO.verde}" stroke="${FT_VERDE}" stroke-width="2"/>`;
+      const lab = `ZDP: ${fin - 8} ${fin - 8 === 1 ? "año" : "años"}`;
+      o += fin - 8 >= 2 ? ftT((ej(8) + ej(fin)) / 2, y + 23, lab, {a:"middle", fs:14, b:true, c:FT_VERDE}) : ftT(ej(fin) + 8, y + 23, lab, {fs:14, b:true, c:FT_VERDE});
+    });
+    o += hisTxtLineas(420, 404, ["Solos, los dos llegan a 8 (azul).", "Con ayuda, uno llega a 12 y el otro a 9.", "Enseñar es trabajar en esa zona."], {fs:15, lh:21});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir de Vygotsky (1995, pp. 141-142).")); }},
+  {id:"b-drv-cc", bib:"driver", pag:"pp. 156-163", t:"Cambio conceptual: de la idea previa a la idea científica",
+    k:/ideas previas|concepciones alternativas|cambio conceptual|conflicto cognitivo|teorias? del aprendizaje/, svg:() => {
+    let o = ftT(400, 40, "Del conocimiento previo a la idea científica", {a:"middle", fs:22, b:true});
+    const B = [["Idea previa", "sale de la experiencia diaria y es estable"], ["Insatisfacción", "la predicción falla y se discute por qué"], ["Idea nueva", "inteligible, plausible y provechosa"], ["Usarla en otro|contexto", "días después, para que no vuelva la previa"]];
+    B.forEach(([a, b], i) => { const hs = a.split("|"); o += hisCaja(18 + i * 196, 120, 176, 140, [HIS_CLARO.naranja, HIS_CLARO.rojo, HIS_CLARO.verde, HIS_CLARO.azul][i], [FT_NARANJA, FT_ROJO, FT_VERDE, FT_AZUL][i], [...hs, "", ...hisWrap(b, 20)], {fs:15, b1:hs.length}); if (i < 3) o += ftFlecha(196 + i * 196, 190, 212 + i * 196, 190, FT_TINTA, 3); });
+    o += hisCaja(120, 300, 560, 64, HIS_CLARO.gris, FT_SUAVE, ["Estrategia: predecir, observar y explicar,", "con discusión entre compañeros"], {fs:16});
+    o += hisTxtLineas(400, 410, ["El conflicto solo no alcanza: hace falta discusión", "para que la idea nueva resulte inteligible, plausible y provechosa (Hewson)."], {a:"middle", fs:15, lh:21, c:FT_SUAVE});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir de Driver, Guesne y Tiberghien (1992, pp. 156-163).")); }},
+  {id:"b-kuhn", bib:"kuhn", pag:"", nota:"Nota. Elaboración propia a partir de un ensayo sobre Kuhn (1971). En un trabajo, citá el libro si lo leíste.", t:"El ciclo de la ciencia según Kuhn: ciencia normal, crisis y revolución",
+    k:/\bkuhn|paradigma|revoluci(on|ones) cientificas?|historia de la ciencia|epistemolog|naturaleza de la ciencia/, svg:() => {
+    let o = ftT(400, 34, "Cómo cambia la ciencia según Kuhn", {a:"middle", fs:22, b:true});
+    o += bCiclo(400, 270, 165, ["Ciencia normal: un paradigma, resolver enigmas", "Aparecen anomalías", "Crisis: el paradigma no alcanza", "Revolución científica", "Nuevo paradigma"], {w:190, h:62, wrap:22});
+    o += hisTxtLineas(400, 262, ["Ejemplos: de Ptolomeo", "a Copérnico; de Newton", "a Einstein"], {a:"middle", fs:14, lh:19, c:FT_SUAVE});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir del ensayo sobre Kuhn de tu biblioteca. En un trabajo, citá el libro: Kuhn (1971).")); }},
+  {id:"b-bunge", bib:"bunge", pag:"cap. 1", t:"El ciclo de la investigación científica según Bunge",
+    k:/metodo cientifico|investigacion cientifica|\bbunge|indagacion|naturaleza de la ciencia|epistemolog/, svg:() => {
+    let o = ftT(400, 34, "El ciclo de la investigación (Bunge)", {a:"middle", fs:22, b:true});
+    const F1 = ["Problema bien planteado", "Conjetura contrastable", "Deducir consecuencias", "Diseñar cómo probarlas"], F2 = ["Contrastar", "Evaluar", "Nuevos problemas"];
+    const cF = [HIS_CLARO.azul, HIS_CLARO.verde, HIS_CLARO.naranja, HIS_CLARO.violeta], bF = [FT_AZUL, FT_VERDE, FT_NARANJA, FT_VIOLETA];
+    F1.forEach((t, i) => { o += hisCaja(20 + i * 195, 90, 175, 70, cF[i], bF[i], hisWrap(t, 18), {fs:15}); if (i < 3) o += ftFlecha(197 + i * 195, 125, 213 + i * 195, 125, FT_TINTA, 3); });
+    o += ftFlecha(692, 162, 692, 240, FT_TINTA, 3);
+    F2.forEach((t, i) => { const x = 605 - i * 195; o += hisCaja(x, 244, 175, 70, [HIS_CLARO.rojo, HIS_CLARO.gris, HIS_CLARO.azul][i], [FT_ROJO, FT_SUAVE, FT_AZUL][i], hisWrap(t, 18), {fs:15}); if (i < 2) o += ftFlecha(x - 2, 279, x - 18, 279, FT_TINTA, 3); });
+    o += `<path d="M215 279 C110 279 108 210 108 166" fill="none" stroke="${FT_VERDE}" stroke-width="3" stroke-dasharray="7 6"/><path d="M108 160 l-8 16 h16z" fill="${FT_VERDE}"/>`;
+    o += hisTxtLineas(400, 375, ["La investigación siempre parte de lo que ya se sabe y termina", "abriendo nuevos problemas. No es una receta de cinco pasos."], {a:"middle", fs:16, lh:23});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir de Bunge (1969, cap. 1, apartado 1.2).")); }},
+  {id:"b-wag", bib:"wagensberg", pag:"pp. 13-17", t:"Cómo empieza el conocimiento: de la inquietud a la pregunta (Wagensberg)",
+    k:/wagensberg|complejidad|conocimiento cientifico|construccion del conocimiento|curiosidad/, svg:() => {
+    let o = ftT(400, 40, "De la inquietud a la pregunta (Wagensberg)", {a:"middle", fs:22, b:true});
+    const B = [["Estímulo", "«blando»: de otra persona; «duro»: la propia perplejidad"], ["Inquietud", "algo que no sabemos nombrar"], ["Pregunta", "la inquietud se calma al formularla"], ["Respuesta|provisional", "y nuevas inquietudes"]];
+    B.forEach(([a, b], i) => { const hs = a.split("|"); o += hisCaja(18 + i * 196, 110, 176, 130, [HIS_CLARO.gris, HIS_CLARO.naranja, HIS_CLARO.verde, HIS_CLARO.azul][i], [FT_SUAVE, FT_NARANJA, FT_VERDE, FT_AZUL][i], [...hs, "", ...hisWrap(b, 20)], {fs:15, b1:hs.length}); if (i < 3) o += ftFlecha(196 + i * 196, 175, 212 + i * 196, 175, FT_TINTA, 3); });
+    o += `<path d="M694 244 C694 330 300 330 300 250" fill="none" stroke="${FT_VERDE}" stroke-width="3" stroke-dasharray="7 6"/><path d="M300 244 l-8 16 h16z" fill="${FT_VERDE}"/>`;
+    o += ftT(497, 334, "círculo virtuoso: la espiral no se cierra", {a:"middle", fs:15, b:true, c:FT_VERDE});
+    o += hisTxtLineas(400, 400, ["Crear es traducir inquietudes en problemas.", "Para la clase: dar tiempo a que la inquietud se vuelva pregunta."], {a:"middle", fs:15, lh:21});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir de Wagensberg (2003, pp. 13-17).")); }},
+  {id:"b-funes", bib:"funes", pag:"", t:"Historia reciente en el aula: cuatro maneras de relacionarla con el tiempo (Funes)",
+    k:/historia reciente|historia del presente|ensenanza de la historia|memoria,? verdad/, svg:() => {
+    let o = ftT(400, 36, "La historia reciente en el aula (Funes)", {a:"middle", fs:22, b:true});
+    const A = [[30, 62, "Presente y pasado", "comparar hechos de hoy con los del pasado"], [450, 62, "Actualidad y realidad", "lo que los chicos viven: el trabajo, la crisis"], [30, 290, "Emergencia del presente", "la vida cotidiana para entender lo abstracto"], [450, 290, "Coyunturización", "arrancar de una noticia de esta semana"]];
+    A.forEach(([x, y]) => { o += `<line x1="400" y1="232" x2="${x + 160}" y2="${y + 50}" stroke="${FT_GRIS}" stroke-width="2"/>`; });
+    A.forEach(([x, y, a, b]) => { o += hisCaja(x, y, 320, 100, HIS_CLARO.azul, FT_AZUL, [a, ...hisWrap(b, 36)], {fs:15, b1:1}); });
+    o += hisCaja(285, 200, 230, 64, HIS_CLARO.verde, FT_VERDE, ["Historia reciente", "en la clase"], {fs:17, b:true});
+    o += ftT(400, 428, "Riesgo: partir de la opinión y llegar a la opinión.", {a:"middle", fs:16, b:true, c:FT_ROJO}) + ftT(400, 452, "Hacen falta fuentes y argumentos históricos.", {a:"middle", fs:15});
+    return ftSvg(o + bEsqPie("Elaboración propia a partir de Funes (s. f.), apartado «Algunos resultados».")); }},
+  {id:"b-hew-hist", bib:"hewitt", pag:"cronología inicial", t:"Línea de tiempo: historia de la física, de Copérnico a Rutherford",
+    k:/historia de la (fisica|ciencia)|grandes fisicos|cientificos famosos|naturaleza de la ciencia/, svg:() => hisLinea({t:"Historia de la física", per:"Fechas de la cronología de Hewitt", fechas:[["1543", "Copérnico: sistema heliocéntrico"], ["1609", "Galileo usa el telescopio"], ["1687", "Newton publica los Principia"], ["1831", "Faraday: inducción electromagnética"], ["1865", "Maxwell: la luz es electromagnética"], ["1895", "Röntgen descubre los rayos X"], ["1905", "Einstein: relatividad especial"], ["1911", "Rutherford: el núcleo atómico"]]})}
+];
+BIB_ESQ.forEach(e => FIG_TEMA.push(e));
+const bibEsqDe = id => BIB_ESQ.filter(e => e.bib === id);
+function bibEsqNota(e){ if (e.nota) return e.nota; const L = bibPorId(e.bib); return `Nota. Elaboración propia a partir de ${L ? bibCitaNarr(L).replace(/\)$/, e.pag ? `, ${e.pag})` : ")") : "la bibliografía"}.`; }
+async function bibEsqPng(id){
+  const e = FIG_TEMA.find(x => x.id === id); if (!e) return;
+  try {
+    const img = new Image(); img.src = svgSrc(e.svg()); await img.decode();
+    const c = document.createElement("canvas"); c.width = 1600; c.height = 1000; const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, 1600, 1000); g.drawImage(img, 0, 0, 1600, 1000);
+    const b = await new Promise(r => c.toBlob(r, "image/png")); const a = document.createElement("a");
+    a.href = URL.createObjectURL(b); a.download = "lapacho-" + id + ".png"; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    toast("Imagen descargada. Al pie del trabajo, poné la nota que dice de qué libro sale.");
+  } catch (er) { logSilencioso(er); toast("No pude armar la imagen en este navegador."); }
+}
+function htmlBibEsq(e){
+  const ya = ftYaEsta(e);
+  return `<li class="ft-it bib-esq"><img src="${svgSrc(e.svg())}" alt="" width="160" height="100" loading="lazy"><span class="ft-t">${esc(e.t)}</span><small class="bib-d">${esc(bibEsqNota(e))}</small>
+    <span class="bib-esq-b">${ya ? `<span class="ft-ya">Agregado</span>` : `<button type="button" class="btn btn-sm" data-ftadd="${e.id}" aria-label="Agregar a la planificación: ${esc(e.t)}">A la planificación</button>`}<button type="button" class="btn btn-sm" data-bib-png="${e.id}" aria-label="Descargar como imagen: ${esc(e.t)}">Descargar imagen</button><button type="button" class="linkbtn" data-bib-fnota="${e.id}" aria-label="Copiar la nota de la figura: ${esc(e.t)}">Copiar nota</button></span></li>`;
+}
+
+/* ---------- Ficha del libro con citas ---------- */
+function htmlBibFicha(L, abierto){
+  const n = bibPref().notas[L.id] || "";
+  const tipo = L.propio ? "Agregado por vos" : BIB_TIPOS[L.tipo];
+  const es = L.propio ? [] : bibEsqDe(L.id);
+  return `<details class="bib-l"${abierto ? " open" : ""} data-bib-id="${esc(L.id)}"><summary><b>${esc(L.t)}</b><small>${esc(L.a || "")} · ${esc(tipo)}</small></summary><div class="bib-b">
+    ${L.porque ? `<p>${esc(L.porque)}</p>` : ""}
+    ${L.arch || L.lect ? `<p class="hint"><b>Tu archivo:</b> ${esc([L.arch, L.lect].filter(Boolean).join(" "))}</p>` : ""}
+    ${L.ideas && L.ideas.length ? `<p class="bib-h">Ideas clave</p><ul class="bib-ideas">${L.ideas.map((i, k) => `<li>${Array.isArray(i) ? `${esc(i[0])} <small class="bib-d">(${esc(i[1])})</small>` : esc(i)}${L.ref ? ` <span class="bib-cit"><button type="button" class="linkbtn" data-bib-cita="${esc(L.id)}|${k}">Copiar cita</button> · <button type="button" class="linkbtn" data-bib-fundi="${esc(L.id)}|${k}">A la fundamentación</button></span>` : ""}</li>`).join("")}</ul>` : ""}
+    ${L.aula && L.aula.length ? `<p class="bib-h">En tu clase</p><ul>${L.aula.map(i => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}
+    ${L.ojo ? `<p class="bib-ojo"><b>Ojo:</b> ${esc(L.ojo)}</p>` : ""}
+    ${es.length ? `<p class="bib-h">Esquemas para tus trabajos</p><ul class="ft-l bib-esql">${es.map(htmlBibEsq).join("")}</ul>` : ""}
+    ${L.ref ? `<div class="bib-ref"><p><b>Cómo citarlo (APA 7).</b> Referencia: ${esc(L.ref)}</p><p>En el texto: ${esc(bibCita(L))} o «${esc(bibCitaNarr(L))} sostiene que…». Con página: ${esc(bibCita(L, "p. 00"))}.</p></div>` : ""}
+    <div class="f"><label for="bib-n-${esc(L.id)}">Mis notas</label><textarea id="bib-n-${esc(L.id)}" data-bib-nota="${esc(L.id)}" rows="2" placeholder="Qué te sirvió, en qué página, con qué curso lo usaste">${esc(n)}</textarea></div>
+    <div class="cur-bar">${L.ref ? bibBotonesRef(L) + `<button type="button" class="btn btn-sm" data-bib-copref="${esc(L.id)}">Copiar referencia</button>` : ""}${L.url ? `<a class="btn btn-sm" href="${esc(L.url)}" target="_blank" rel="noopener">Abrir en Drive</a>` : ""}${L.propio ? `<button type="button" class="btn btn-sm" data-bib-borrar="${esc(L.id)}">Quitar de la biblioteca</button>` : ""}</div>
+  </div></details>`;
+}
+
+/* ---------- Biblioteca: pestaña «Esquemas» ---------- */
+BIB_TABS.push(["esq", "Esquemas para citar"]);
+function htmlBiblio(){
+  if (BIB.tab === "esq"){
+    const grupos = [...new Set(BIB_ESQ.map(e => e.bib))].map(id => ({L:bibPorId(id), es:bibEsqDe(id)})).filter(g => g.L);
+    return `<p class="hint">Esquemas dibujados por Lapacho a partir de tus libros. Sumalos a la planificación o descargalos como imagen para un trabajo; al pie va la nota «Elaboración propia a partir de…», que ya trae autor, año y página.</p>
+      ${grupos.map(g => `<h3 class="lic-h">${esc(g.L.t)} <small class="bib-d">${esc(bibCitaNarr(g.L))}</small></h3><ul class="ft-l bib-esql">${g.es.map(htmlBibEsq).join("")}</ul>`).join("")}
+      <p class="hint">Las líneas de tiempo y los esquemas de Historia están en la pestaña «Historia», dentro de cada ficha.</p>`;
+  }
+  return htmlBiblioV83();
+}
+/* Una idea citada a la fundamentación: la epistemológica para los libros de naturaleza de la ciencia, la didáctica para el resto */
+function bibAFund(L, i){
+  const txt = bibIdeaCita(L, i), D = [["fundsec", "Fundamentación didáctica"], ["fundepi", "Fundamentación epistemológica"]];
+  if (L.tipo === "epi") D.reverse();
+  for (const [id, nom] of D){
+    const r = hisCampo(id, txt);
+    if (r === "no") continue;
+    if (r === "ya"){ toast(`Esa idea ya está en «${nom}».`); return; }
+    const rb = hisCampo("bibliografia", L.ref);
+    toast(`Listo: la idea quedó en «${nom}», citada${rb === "ok" ? ", y el libro en la bibliografía" : ""}.`); return;
+  }
+  copiarTexto(`${txt}\n\nReferencia:\n${L.ref}`, "Esta planificación no tiene fundamentación. Copié la idea citada para que la pegues donde quieras.");
+}
+function bibRefrescarVista(){ try { if ($("biblio") && $("biblio").open){ const y = $("bib-panel") ? $("bib-panel").scrollTop : 0; renderBiblio(); if ($("bib-panel")) $("bib-panel").scrollTop = y; } } catch (e) { logSilencioso(e); } }
+function init98(){
+  try {
+    const tabs = document.querySelector('#biblio [data-tabs="bib"]');
+    if (tabs && !tabs.querySelector('[data-tab="esq"]')) tabs.insertAdjacentHTML("beforeend", `<button type="button" data-tab="esq" aria-pressed="${BIB.tab === "esq"}">Esquemas para citar</button>`);
+    if (init98.ok) return; init98.ok = true;
+    document.addEventListener("click", e => {
+      const t = e.target; if (!t.closest) return;
+      const c = t.closest("[data-bib-cita]"); if (c){ const [id, i] = c.dataset.bibCita.split("|"); const L = bibPorId(id); if (L) copiarTexto(`${bibIdeaCita(L, +i)}\n\nReferencia:\n${L.ref}`, "Copié la cita con autor, año y página, y la referencia completa."); return; }
+      const f = t.closest("[data-bib-fundi]"); if (f){ const [id, i] = f.dataset.bibFundi.split("|"); const L = bibPorId(id); if (L) bibAFund(L, +i); return; }
+      const r = t.closest("[data-bib-copref]"); if (r){ const L = bibPorId(r.dataset.bibCopref); if (L) copiarTexto(L.ref, "Copié la referencia."); return; }
+      const p = t.closest("[data-bib-png]"); if (p){ bibEsqPng(p.dataset.bibPng); return; }
+      const n = t.closest("[data-bib-fnota]"); if (n){ const es = FIG_TEMA.find(x => x.id === n.dataset.bibFnota); if (es) copiarTexto(`Figura. ${es.t}.\n${bibEsqNota(es)}`, "Copié el título y la nota de la figura."); return; }
+      if (t.closest("#biblio [data-ftadd]")) setTimeout(bibRefrescarVista, 80);
+    });
+  } catch (e) { registrarError("init98", e, "aviso"); }
+}
+/* El epígrafe de un esquema de la biblioteca lleva la nota de procedencia */
+function ftImagen(f){ const im = ftImagenV83(f); if (f && f.bib) im.caption = `${f.t}. ${bibEsqNota(f)}`; return im; }
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -25963,4 +27525,4 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); init93(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); init93(); init94(); init95(); init96(); init97(); init98(); } finally { ocultarSplash(); }
