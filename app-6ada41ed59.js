@@ -1783,6 +1783,9 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-22k", fecha:"2026-11-22", items:[
+    "Si cambiás el tema de una planificación, Lapacho saca las figuras y el mapa conceptual que había dibujado para el tema anterior (con «Deshacer» por si las querías). Tus fotos, cuadros y gráficos no se tocan."
+  ]},
   {id:"2026-11-22j", fecha:"2026-11-22", items:[
     "Los libros de Historia y su enseñanza ya están en tu carpeta «Libros» de Drive: cada ficha tiene «Abrir en Drive», también en «Para leer más» de las fichas de Historia."
   ]},
@@ -13646,7 +13649,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "85 (22/11/2026)";
+const LAPACHO_VERSION = "86 (22/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -26239,7 +26242,7 @@ function init96(){
   } catch (e) { registrarError("init96", e, "aviso"); }
 }
 function imagesChanged(){ imagesChangedV81(); ftRender(); }
-function aplicar(saved){ const r = aplicarV81(saved); ftRender(); return r; }
+function aplicarV85(saved){ const r = aplicarV81(saved); ftRender(); return r; }
 function kindLabel(img){ return img && img.kind === "tema" ? "Figura de Lapacho" : kindLabelV81(img); }
 
 /* ============================================================
@@ -27082,6 +27085,43 @@ function ftImagen(f){ const im = ftImagenV83(f); if (f && f.bib) im.caption = `$
 })();
 
 /* ============================================================
+   Versión 86: al cambiar de tema no quedan las imágenes del tema anterior (22/11/2026)
+   Víctor: «Cada vez que genero otra planificación quedan las imágenes precargadas».
+   Cuando el tema cambia, Lapacho saca solo lo que él mismo dibujó para el tema anterior y ya no corresponde:
+   las figuras del tema (Física, Historia, esquemas de la Biblioteca) y el mapa conceptual de otro tema.
+   Lo que subió o armó el docente (fotos, cuadros y gráficos) no se toca. Con «Deshacer» vuelven.
+   ============================================================ */
+let IMGV_TEMA = null;
+function imgViejas(){
+  const tema = norm(val("tema")).trim(); if (!tema) return [];
+  const ok = new Set(figurasTema().map(f => f.id));
+  return state.images.filter(im => (im.kind === "tema" && im.fig && !ok.has(im.fig)) ||
+    (im.kind === "mapa" && /^Mapa conceptual: /.test(im.caption || "") && (m => m && !tema.includes(m) && !m.includes(tema))(norm(im.caption.replace(/^Mapa conceptual: /, "")).trim())));
+}
+function imgLimpiarViejas(){
+  try {
+    const tema = norm(val("tema")).trim();
+    if (!tema || tema === IMGV_TEMA) return;
+    const antes = IMGV_TEMA; IMGV_TEMA = tema;
+    if (antes === null) return;
+    const V = imgViejas(); if (!V.length) return;
+    const quitar = new Set(V.map(x => x.id)), copia = state.images.map(x => x);
+    state.images = state.images.filter(x => !quitar.has(x.id));
+    imagesChanged();
+    toast(V.length === 1 ? "Saqué una imagen que era del tema anterior." : `Saqué ${V.length} imágenes que eran del tema anterior.`, {label:"Deshacer", fn:() => { state.images = copia; imagesChanged(); }});
+  } catch (e) { logSilencioso(e); }
+}
+function aplicar(saved){ const r = aplicarV85(saved); IMGV_TEMA = norm(val("tema")).trim(); return r; }
+function init100(){
+  try {
+    IMGV_TEMA = norm(val("tema")).trim();
+    const t = $("tema");
+    if (t && !t.dataset.imgv){ t.dataset.imgv = "1"; t.addEventListener("change", imgLimpiarViejas); t.addEventListener("blur", imgLimpiarViejas); }
+    const n = $("btn-nueva"); if (n && !n.dataset.imgv){ n.dataset.imgv = "1"; n.addEventListener("click", () => { IMGV_TEMA = ""; }); }
+  } catch (e) { registrarError("init100", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -27538,4 +27578,4 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); init93(); init94(); init95(); init96(); init97(); init98(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); init93(); init94(); init95(); init96(); init97(); init98(); init100(); } finally { ocultarSplash(); }
