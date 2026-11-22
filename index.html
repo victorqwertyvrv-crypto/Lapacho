@@ -2733,6 +2733,26 @@ dialog#contame{--gr:var(--g-plan)}
 :root{--gn-plan:#7fdcb0;--gn-clase:#8ec2ff;--gn-evaluar:#c4a8ff;--gn-escuela:#ff97c6;--gn-carrera:#ffc85a}
 .app.nav-desk .sidenav .sn-i[data-gr]:not([data-gr=""]):hover .lp-ic{filter:brightness(1.12)}
 
+/* ---------- Versión 76: más fácil en el celular ---------- */
+html,body{overscroll-behavior-y:contain}
+.lista-asis li[data-aid] .la-nom,#aula li[data-aid] .la-nom{cursor:pointer;-webkit-tap-highlight-color:color-mix(in srgb,var(--g-clase) 18%,transparent);border-radius:8px}
+@media (hover:hover){.lista-asis li[data-aid] .la-nom:hover,#aula li[data-aid] .la-nom:hover{background:color-mix(in srgb,var(--g-clase) 8%,transparent)}}
+#aula .aula-pant{display:inline-flex;align-items:center;gap:5px;margin-top:4px;padding:2px 9px 2px 7px;border-radius:999px;font-size:12px;font-weight:600;color:var(--ink);background:color-mix(in srgb,#f2b84b 22%,var(--surface));border:1px solid color-mix(in srgb,#f2b84b 55%,var(--line))}
+#aula .aula-pant[hidden]{display:none}
+.aula-pant .lp-ic{width:14px;height:14px;color:#a86b00}
+:root[data-theme="dark"] .aula-pant .lp-ic{color:#f2b84b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .aula-pant .lp-ic{color:#f2b84b}}
+.lp-dicta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 10px;padding:9px 12px;border-radius:var(--radius-m,10px);background:color-mix(in srgb,var(--g-plan) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--g-plan) 25%,var(--line));font-size:14px}
+.lp-dicta span{flex:1 1 200px;min-width:0}
+.lp-dicta .lp-ic{width:18px;height:18px;color:var(--g-plan);flex:none}
+.lp-dicta .linkbtn{min-height:44px}
+#aula .aula-acc .btn{white-space:nowrap}
+/* Las pestañas entran con un deslizamiento mínimo en lugar de un fundido: el texto nunca queda con poco contraste mientras aparece */
+@keyframes lpDesliza{from{transform:translateY(4px)}to{transform:none}}
+@media (prefers-reduced-motion:no-preference){.tab-panel:not([hidden]),#cur-panel>*,#sv-panel>*{animation-name:lpDesliza}}
+/* El aviso breve entra deslizándose, sin fundido, para que su texto siempre tenga buen contraste */
+@keyframes lpToast{from{transform:translate(-50%,12px)}to{transform:translate(-50%,0)}}
+
 @media (max-width:999px){.linkbtn{min-height:24px}.pn-tile{min-height:72px}}
 
 @media (max-width:999px){
@@ -5728,6 +5748,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-22a", fecha:"2026-11-22", items:[
+    "Pasar lista con una mano: tocá el nombre del estudiante y cambia al estado siguiente (P, A, T, R). Los botones siguen igual.",
+    "Si instalaste Lapacho, mantené apretado el ícono: aparecen atajos para «Pasar lista», «Modo aula» y «Nueva planificación».",
+    "En el modo aula, un aviso te muestra cuando la pantalla queda encendida. Tirar hacia abajo ya no recarga la página por accidente, y en el celular aparece un consejo para dictar con el micrófono del teclado."
+  ]},
   {id:"2026-11-21e", fecha:"2026-11-21", items:[
     "Cada ventana lleva arriba una franja con el color de su grupo, y sus dibujos usan ese mismo color.",
     "Mi curso tiene sus pestañas con ícono y en violeta; el modo aula, en azul y con íconos más grandes en el celular.",
@@ -9677,7 +9702,7 @@ function htmlAsis(c){
   const pres = als.filter(a => m[a.id] === "P" || m[a.id] === "T").length, marc = als.filter(a => m[a.id]).length;
   return `<div class="cur-bar"><div class="f fx"><label for="as-f">Fecha</label><input type="date" id="as-f" data-in="asisF" value="${f}"></div>
       <button type="button" class="btn btn-sm" data-act="asis-todos">Todos presentes</button>
-      <span class="hint" id="as-res">${marc ? `${pres} de ${als.length} presentes` : "Tocá P, A, T o R en cada fila."}</span></div>
+      <span class="hint" id="as-res">${marc ? `${pres} de ${als.length} presentes` : "Tocá P, A, T o R, o tocá el nombre para pasar al estado siguiente."}</span></div>
     ${e && e !== "fin de semana" ? `<p class="aviso-c">Esa fecha figura como ${esc(e)} en el calendario escolar.</p>` : e === "fin de semana" ? `<p class="aviso-c">Esa fecha cae en fin de semana.</p>` : ""}
     <ul class="lista-asis">${als.map((a, i) => { const r = asisResumen(c, a.id); return `<li data-aid="${a.id}"><span class="la-n">${i + 1}</span><span class="la-nom">${esc(a.n)}<small class="la-est${r.alerta ? " alerta" : ""}" id="las-${a.id}">${textoFaltas(r)}</small></span>
       <span class="asis-btns" role="group" aria-label="Asistencia de ${esc(a.n)}">${ASIS.map(([k, l]) => `<button type="button" class="ab ab-${k}" data-asis="${a.id}:${k}" aria-pressed="${m[a.id] === k}" title="${l}">${k}</button>`).join("")}</span></li>`; }).join("")}</ul>
@@ -14363,7 +14388,7 @@ function marcarUno(k){
   AULA.uno++; renderAula("lista");
 }
 let wakeAula = null;
-async function pantallaEncendida(on){
+async function pantallaEncendidaV75(on){
   try {
     if (on && "wakeLock" in navigator && !wakeAula){ wakeAula = await navigator.wakeLock.request("screen"); wakeAula.addEventListener("release", () => { wakeAula = null; }); }
     if (!on && wakeAula){ await wakeAula.release(); wakeAula = null; }
@@ -17543,7 +17568,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "75 (21/11/2026)";
+const LAPACHO_VERSION = "76 (22/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -29148,6 +29173,74 @@ function renderBienv(){
 }
 
 /* ============================================================
+   Versión 76: más fácil en el celular
+   - Lista: tocar el nombre de un estudiante pasa al estado siguiente (P → A → T → R → P). Los botones P, A, T y R
+     siguen igual; es un atajo más para pasar lista con una mano.
+   - Atajos del ícono: la app instalada abre directo «Pasar lista», «Modo aula» o «Nueva planificación»
+     (?abrir=lista | aula | nueva | hoy; los define manifest.json). Sin el parámetro, todo igual.
+   - Modo aula: un aviso «Pantalla encendida» cuando el celular no se va a apagar solo.
+   - Consejo para dictar con el micrófono del teclado en los campos largos (solo pantallas táctiles, se puede cerrar).
+   - Tirar hacia abajo ya no recarga la página por accidente (overscroll-behavior en p90.css).
+   ============================================================ */
+const LP_ASIS_CICLO = ["P", "A", "T", "R"];
+const LP_TIP_DICTAR = "lapacho-tip-dictar-v1";
+function lpAsisSiguiente(li){
+  const bs = [...li.querySelectorAll(".asis-btns [data-asis]")]; if (!bs.length) return;
+  const act = bs.find(b => b.getAttribute("aria-pressed") === "true"), k = act ? act.dataset.asis.split(":")[1] : "";
+  const sig = LP_ASIS_CICLO[(LP_ASIS_CICLO.indexOf(k) + 1) % LP_ASIS_CICLO.length];
+  const b = bs.find(x => x.dataset.asis.endsWith(":" + sig)); if (b) b.click();
+}
+async function pantallaEncendida(on){
+  await pantallaEncendidaV75(on);
+  lpChipPantalla();
+}
+function lpChipPantalla(){
+  try {
+    const tt = document.querySelector("#aula .aula-tt"); if (!tt) return;
+    let ch = $("aula-pantalla");
+    if (!ch){ tt.insertAdjacentHTML("beforeend", `<span class="aula-pant" id="aula-pantalla" hidden>${lpSvg("sol", "lp-ic")}Pantalla encendida</span>`); ch = $("aula-pantalla"); }
+    ch.hidden = !(typeof wakeAula !== "undefined" && wakeAula && !wakeAula.released && !$("aula").hidden);
+  } catch (e) { logSilencioso(e); }
+}
+function lpTipDictar(){
+  try {
+    if (!matchMedia("(pointer:coarse)").matches) return;
+    let visto = false; try { visto = !!localStorage.getItem(LP_TIP_DICTAR); } catch (e) { visto = true; }
+    const F = $("form-secs"); if (visto || !F || $("lp-dicta")) return;
+    F.insertAdjacentHTML("afterbegin", `<p class="lp-dicta" id="lp-dicta">${lpSvg("chat", "lp-ic")}<span>En los campos largos podés dictar: tocá el micrófono del teclado y hablá.</span><button type="button" class="linkbtn" data-dicta="ok">Entendido</button></p>`);
+  } catch (e) { logSilencioso(e); }
+}
+function lpAbrirAtajo(){
+  let q = ""; try { q = new URLSearchParams(location.search).get("abrir") || ""; } catch (e) { return; }
+  if (!/^(lista|aula|nueva|hoy)$/.test(q)) return;
+  try { const p = new URLSearchParams(location.search); p.delete("abrir"); const s = p.toString(); history.replaceState(history.state, "", location.pathname + (s ? "?" + s : "") + location.hash); } catch (e) { logSilencioso(e); }
+  setTimeout(async () => {
+    try {
+      if (q === "hoy"){ try { irSeccion("inicio"); } catch (e) { logSilencioso(e); } return; }
+      if (q === "nueva"){ const b = $("btn-nueva"); if (b) b.click(); return; }
+      const c = cursoSel();
+      if (q === "aula" && c && typeof abrirAula === "function"){ abrirAula(); return; }
+      await abrirMiCurso(c ? "asis" : undefined);
+      if (!c) toast("Primero creá tu curso para pasar lista.");
+    } catch (e) { registrarError("lpAbrirAtajo", e, "aviso"); }
+  }, 450);
+}
+function init90(){
+  try {
+    document.addEventListener("click", e => {
+      const n = e.target.closest && e.target.closest("li[data-aid] .la-nom");
+      if (n && n.closest(".lista-asis, #aula")){ const li = n.closest("li[data-aid]"); if (li && li.querySelector(".asis-btns")) lpAsisSiguiente(li); return; }
+      const d = e.target.closest && e.target.closest('[data-dicta="ok"]');
+      if (d){ try { localStorage.setItem(LP_TIP_DICTAR, "1"); } catch (er) { logSilencioso(er); } const p = $("lp-dicta"); if (p) p.remove(); }
+    });
+    lpTipDictar();
+    document.addEventListener("visibilitychange", () => setTimeout(lpChipPantalla, 300));
+    const au = $("aula"); if (au) new MutationObserver(() => setTimeout(lpChipPantalla, 300)).observe(au, {attributes:true, attributeFilter:["hidden"]});
+    lpAbrirAtajo();
+  } catch (e) { registrarError("init90", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -29604,7 +29697,7 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); } finally { ocultarSplash(); }
 </script>
 <script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>
 </body>

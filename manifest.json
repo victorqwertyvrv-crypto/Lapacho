@@ -28,5 +28,61 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pasar lista",
+      "short_name": "Pasar lista",
+      "description": "Abre Mi curso en la asistencia de hoy",
+      "url": "./?abrir=lista",
+      "icons": [
+        {
+          "src": "icon-atajo-lista-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        },
+        {
+          "src": "icon-atajo-lista-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Modo aula",
+      "short_name": "Modo aula",
+      "description": "Abre la clase de hoy en pantalla completa",
+      "url": "./?abrir=aula",
+      "icons": [
+        {
+          "src": "icon-atajo-aula-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        },
+        {
+          "src": "icon-atajo-aula-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Nueva planificación",
+      "short_name": "Planificar",
+      "description": "Empieza una planificación nueva",
+      "url": "./?abrir=nueva",
+      "icons": [
+        {
+          "src": "icon-atajo-nueva-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        },
+        {
+          "src": "icon-atajo-nueva-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }
