@@ -1783,6 +1783,9 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-22c", fecha:"2026-11-22", items:[
+    "Grupos: en «No juntar, apoyos y conducta» podés pedir que se repartan entre grupos quienes tienen dos o más registros «a mejorar» este período. Vale también para los grupos «Para acompañarse» del modo aula."
+  ]},
   {id:"2026-11-22b", fecha:"2026-11-22", items:[
     "Lapacho abre más rápido: las librerías de PDF se leen al final y la fecha de «Tu día» se arma sin cálculos pesados.",
     "Al pasar lista, un pie fijo abajo muestra cuántos hay presentes, ausentes y sin marcar, con «Siguiente sin marcar» para ir directo al que falta.",
@@ -13618,7 +13621,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "77 (22/11/2026)";
+const LAPACHO_VERSION = "78 (22/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -16642,14 +16645,14 @@ function gpNotaX(c, aid, base){
   return gpNota(c, aid, base);
 }
 /* ---------- Mejora del armado: menos repeticiones, sin pares prohibidos, apoyos repartidos ---------- */
-function gpPenalidad(g, H, NJ, AP){
+function gpPenalidadV77(g, H, NJ, AP){
   const ids = [...g.acomp, ...g.acompanados].map(a => a.id); let p = 0, ap = 0;
   for (let i = 0; i < ids.length; i++){ if (AP.has(ids[i])) ap++; for (let j = i + 1; j < ids.length; j++){ const k = gpPar(ids[i], ids[j]); if (NJ.has(k)) p += 1000; p += (H.get(k) || 0) * 10; } }
   if (ap > 1) p += 60 * (ap - 1);
   if (ap && !g.acomp.length) p += 40;
   return p;
 }
-function gpOptimizar(grupos, c, pos){
+function gpOptimizarV77(grupos, c, pos){
   const D = gpDatos(c), H = new Map(), NJ = new Set(D.noJuntar.map(x => gpPar(x[0], x[1]))), AP = gpApoyos(c);
   D.hist.slice(-6).forEach((h, i, arr) => { const w = i === arr.length - 1 ? 3 : 1; (h.g || []).forEach(gr => { const ids = [...(gr.a || []), ...(gr.b || [])]; for (let x = 0; x < ids.length; x++) for (let y = x + 1; y < ids.length; y++){ const k = gpPar(ids[x], ids[y]); H.set(k, (H.get(k) || 0) + w); } }); });
   const n = pos.size, lim = Math.max(2, Math.round(n / 4));
@@ -16770,7 +16773,7 @@ function htmlSeguimiento(c){
   }).join("");
 }
 /* ---------- No juntar y apoyos ---------- */
-function htmlRestricciones(c){
+function htmlRestriccionesV77(c){
   const D = gpDatos(c), al = alumnosActivos(c), nom = id => { const a = al.find(x => x.id === id) || (c.alumnos || []).find(x => x.id === id); return a ? gpNombre(a.n) : "—"; };
   const opts = al.map(a => `<option value="${esc(a.id)}">${esc(gpNombre(a.n))}</option>`).join(""), AP = gpApoyos(c), ppi = [...AP].filter(id => !D.apoyo.includes(id));
   return `<div class="gp-nj"><p class="hint">Solo lo ves vos. Lapacho evita juntar a estas personas en el mismo grupo.</p>
@@ -16810,7 +16813,7 @@ function htmlGrupos(){
     <details class="cur-sub gp-pasos"><summary>Cómo se trabaja: ${esc(E.t.toLowerCase())}</summary><ol>${GP_PASOS[GP.est].map(p => `<li>${esc(p)}</li>`).join("")}</ol></details>
     <div class="cur-bar"><button type="button" class="btn btn-sm" data-gp="otra">Otra combinación</button><button type="button" class="btn btn-sm btn-primary" data-gp="proyectar">Mostrar al curso</button><button type="button" class="btn btn-sm" data-gp="aula">Llevar al modo aula</button><button type="button" class="btn btn-sm" data-gp="word">Descargar para el aula</button><button type="button" class="btn btn-sm" data-gp="autoeval">Autoevaluación del grupo</button></div>
     <p class="hint">Lo que se muestra al curso o se descarga lleva solo los nombres y los roles: ni notas ni quién acompaña a quién.</p>
-    <details class="cur-sub" id="gp-restr"${GP.abrirRestr ? " open" : ""}><summary>No juntar y apoyos</summary>${htmlRestricciones(c)}</details>
+    <details class="cur-sub" id="gp-restr"${GP.abrirRestr ? " open" : ""}><summary>No juntar, apoyos y conducta</summary>${htmlRestricciones(c)}</details>
     <details class="cur-sub"${GP.abrirSeg ? " open" : ""} id="gp-seg"><summary>Seguimiento: ¿les sirvió?</summary>${htmlSeguimiento(c)}</details>`;
 }
 function bindGrupos(){
@@ -25377,6 +25380,55 @@ function init91(){
 }
 
 /* ============================================================
+   Versión 78: grupos que también miran la conducta
+   Opción del curso (c.grupos.condSep, entra en la copia de seguridad): repartir entre grupos a quienes tienen dos o
+   más registros «a mejorar» en el período actual, para que no queden varios en el mismo grupo. Es una preferencia
+   más del armado (penalidad 50 por cada uno de más en un grupo), por debajo de «No juntar» (1000) y de los apoyos.
+   Vale en «Grupos» y en el modo aula («Para acompañarse»). Lo que no se pudo evitar se avisa, como con «No juntar».
+   ============================================================ */
+let LP_CN = new Set();
+const LP_CN_MIN = 2;
+function gpConductaNeg(c){
+  const s = new Set(); if (!c) return s;
+  let p = null; try { p = periodoActual(c); } catch (e) { logSilencioso(e); }
+  alumnosActivos(c).forEach(a => { try { if (condDeC(c, a.id, p).neg.length >= LP_CN_MIN) s.add(a.id); } catch (e) { logSilencioso(e); } });
+  return s;
+}
+function gpPenalidad(g, H, NJ, AP){
+  let p = gpPenalidadV77(g, H, NJ, AP);
+  if (LP_CN.size){ const n = [...g.acomp, ...g.acompanados].filter(a => LP_CN.has(a.id)).length; if (n > 1) p += 50 * (n - 1); }
+  return p;
+}
+function gpOptimizar(grupos, c, pos){
+  LP_CN = c && gpDatos(c).condSep ? gpConductaNeg(c) : new Set();
+  try {
+    const av = gpOptimizarV77(grupos, c, pos);
+    if (LP_CN.size){
+      const nombre = id => { const a = (c.alumnos || []).find(x => x.id === id); return a ? gpNombre(a.n) : id; };
+      grupos.forEach((g, i) => { const ids = [...g.acomp, ...g.acompanados].map(a => a.id).filter(id => LP_CN.has(id)); if (ids.length > 1) av.push(`En el grupo ${i + 1} quedaron juntos ${ids.map(nombre).join(" y ")}, que tienen registros a mejorar: no alcanzaron los grupos para separarlos sin juntar extremos.`); });
+    }
+    return av;
+  } finally { LP_CN = new Set(); }
+}
+function htmlRestricciones(c){
+  const h = htmlRestriccionesV77(c), D = gpDatos(c), CN = gpConductaNeg(c);
+  const nom = id => { const a = (c.alumnos || []).find(x => x.id === id); return a ? gpNombre(a.n) : "—"; };
+  return `<div class="gp-nj gp-cond"><label class="cond-check"><input type="checkbox" data-gpcond="1"${D.condSep ? " checked" : ""}> Repartir entre grupos a quienes tienen ${LP_CN_MIN} o más registros «a mejorar» este período</label>
+    <p class="hint">${CN.size ? `Hoy son: ${[...CN].map(nom).map(esc).join(", ")}.` : "Por ahora nadie tiene esa cantidad de registros."} Sale de lo que cargás en «Conducta». Solo lo ves vos.</p></div>` + h;
+}
+function init92(){
+  try {
+    const D = $("grdlg"); if (!D) return;
+    D.addEventListener("change", e => {
+      const t = e.target; if (!t || !t.dataset || !t.dataset.gpcond) return;
+      const c = cursoSel(); if (!c) return;
+      gpDatos(c).condSep = t.checked; cguardar(); GP.var = 0; GP.abrirRestr = true; gpArmar();
+      toast(t.checked ? "Listo: los grupos reparten a quienes tienen registros a mejorar." : "Los grupos ya no miran la conducta.");
+    });
+  } catch (e) { registrarError("init92", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -25833,4 +25885,4 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); } finally { ocultarSplash(); }
