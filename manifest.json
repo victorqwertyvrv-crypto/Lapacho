@@ -84,5 +84,14 @@
         }
       ]
     }
-  ]
+  ],
+  "share_target": {
+    "action": "./",
+    "method": "GET",
+    "params": {
+      "title": "lp_titulo",
+      "text": "lp_texto",
+      "url": "lp_url"
+    }
+  }
 }

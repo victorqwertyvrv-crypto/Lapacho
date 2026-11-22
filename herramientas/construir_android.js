@@ -1,7 +1,8 @@
 /* Arma el index.html de la aplicación instalada (Android) a partir de la página publicada como artifact.
    Uso:  node herramientas/construir_android.js <pagina-del-artifact.html> <salida/index.html>
    Pasos: (1) abre la página con Chromium, (2) usa su propia función «descargarSinConexion» para incluir jsPDF y pdf.js,
-   (3) le suma el manifest, el ícono, el archivo de configuración y el registro del service worker.
+   (3) le suma el manifest, el ícono, el archivo de configuración y el registro del service worker y
+   (4) saca el programa principal a app-<código>.js (borra el de la versión anterior).
    Necesita: Node, Playwright con Chromium (ya instalado en el entorno de Claude) y acceso a npm. */
 const { execSync } = require('child_process');
 const fs = require('fs'), os = require('os'), path = require('path');
@@ -33,5 +34,17 @@ try { playwright = require('playwright'); } catch (e) { playwright = require('/o
   s = s.slice(0, i) + '<title>Lapacho, planificador docente</title>\n<meta name="theme-color" content="#1F6B52">\n<link rel="manifest" href="manifest.json">\n<link rel="icon" href="icon-192.png">\n<link rel="apple-touch-icon" href="icon-192.png">\n<script src="lapacho-config.js"></script>' + s.slice(j);
   const k = s.lastIndexOf('</body>'); if (k < 0) throw new Error('No se encontró </body>');
   s = s.slice(0, k) + '<script>if ("serviceWorker" in navigator && location.protocol !== "file:" && window.isSecureContext) navigator.serviceWorker.register("sw.js").catch(e => console.warn("sw", e));</script>\n' + s.slice(k);
-  fs.writeFileSync(salida, s); console.log('index.html listo:', s.length, 'caracteres');
+  /* El programa principal va en un archivo aparte, con el código de su contenido en el nombre (app-xxxxxxxx.js).
+     Así el celular guarda el programa ya compilado y Lapacho abre bastante más rápido desde la segunda vez,
+     y cada versión nueva tiene su propio archivo (nunca se mezcla una página nueva con un programa viejo). */
+  const scripts = [...s.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+  const prin = scripts.reduce((a, m) => (!a || m[1].length > a[1].length ? m : a), null);
+  if (!prin || prin[1].length < 500000) throw new Error('No se encontró el programa principal');
+  const cod = prin[1];
+  const hash = require('crypto').createHash('sha256').update(cod).digest('hex').slice(0, 10);
+  const dir = path.dirname(path.resolve(salida)), nombre = `app-${hash}.js`;
+  for (const f of fs.readdirSync(dir)) if (/^app-[0-9a-f]+\.js$/.test(f) && f !== nombre) fs.unlinkSync(path.join(dir, f));
+  fs.writeFileSync(path.join(dir, nombre), cod);
+  s = s.slice(0, prin.index) + `<script src="${nombre}"></script>` + s.slice(prin.index + prin[0].length);
+  fs.writeFileSync(salida, s); console.log('index.html listo:', s.length, 'caracteres; programa en', nombre, cod.length, 'caracteres');
 })().catch(e => { console.error(e); process.exit(3); });
