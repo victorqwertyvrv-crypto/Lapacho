@@ -1783,6 +1783,11 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-28b", fecha:"2026-11-28", items:[
+    "Fórmulas como imagen: en «Imágenes», el botón «Fórmula» las escribe con fracciones, potencias, subíndices, raíces y letras griegas, y las guarda como imagen para que en Word y en el PDF se vean sin errores. Debajo del tema, «Fórmulas para este tema» sugiere las de Física, Química y Matemática con qué es cada letra.",
+    "Bibliografía en APA: «Ordenar (APA)» saca las repetidas y la ordena alfabéticamente, y en el documento, Word y PDF sale con sangría francesa.",
+    "Figuras nuevas para Formación Ética (división de poderes, niveles de gobierno), Educación Tecnológica (sistema entrada-proceso-salida, fuentes de energía) y Educación Física (zonas de frecuencia cardíaca, momentos de la clase)."
+  ]},
   {id:"2026-11-28a", fecha:"2026-11-28", items:[
     "Figuras de acuerdo al tema también para Química (sistemas materiales, separación de fases, enlaces, reacción química, pH y tabla periódica), Biología (célula, fotosíntesis, cadena trófica y niveles de organización), Matemática (fracciones, Pitágoras, función lineal y cuadrática, ángulos, trigonometría y estadística) y Geografía (ciclo del agua, coordenadas, capas de la Tierra, estaciones y atmósfera)."
   ]},
@@ -3720,7 +3725,7 @@ function gotoFor(h){
   const m = k.match(/^(\d)\. /);
   return m ? "etapa" + m[1] : "";
 }
-function docHTML(exp, M){
+function docHTMLV88(exp, M){
   M = M || modeloActual();
   const S = exp ? k => ` style="${EXP[k]}"` : () => "";
   const F = (txt, id) => exp ? `[${esc(txt)}]` : id ? `<button type="button" class="falta" data-goto="${id}" title="Completar en el formulario">${esc(txt)}</button>` : `<span class="falta">${esc(txt)}</span>`;
@@ -13652,7 +13657,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "88 (28/11/2026)";
+const LAPACHO_VERSION = "89 (28/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -25973,7 +25978,7 @@ function kindLabelV81(img){
   if (img && img.kind === "cuadro") return "Cuadro";
   return kindLabelV80(img);
 }
-function renderGallery(){
+function renderGalleryV88(){
   renderGalleryV80();
   try {
     state.images.filter(im => im.spec && (im.kind === "grafico" || im.kind === "cuadro")).forEach(im => {
@@ -26186,7 +26191,7 @@ const FIG_TEMA = [
 ];
 const FT_AUTO = new Set();
 const ftNorm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-function figurasTema(){
+function figurasTemaV88(){
   const tema = ftNorm(val("tema")), extra = ftNorm([val("contenidos"), val("nombre"), (state.lista || []).filter((_, i) => (state.saberesSel || state.lastAuto || []).includes(i)).join(" ")].join(" "));
   if (!tema.trim() && !extra.trim()) return [];
   const cont = ftNorm(val("contenidos"));
@@ -26246,7 +26251,7 @@ function init96(){
 }
 function imagesChanged(){ imagesChangedV81(); ftRender(); }
 function aplicarV85(saved){ const r = aplicarV81(saved); ftRender(); return r; }
-function kindLabel(img){ return img && img.kind === "tema" ? "Figura de Lapacho" : kindLabelV81(img); }
+function kindLabelV88(img){ return img && img.kind === "tema" ? "Figura de Lapacho" : kindLabelV81(img); }
 
 /* ============================================================
    Versión 83: Historia
@@ -26710,7 +26715,7 @@ function hisRender(){
     } catch (e) { logSilencioso(e); }
   }, 180);
 }
-function ftRender(){ ftRenderV82(); hisRender(); }
+function ftRenderV88(){ ftRenderV82(); hisRender(); }
 
 /* ---------- Biblioteca: pestaña «Historia» y fichas en «Para esta planificación» ---------- */
 BIB_TABS.push(["his", "Historia"]);
@@ -27393,6 +27398,364 @@ const FIG_MAS = [
 FIG_MAS.forEach(f => FIG_TEMA.push(f));
 
 /* ============================================================
+   Versión 89 (28/11/2026)
+   1. Fórmulas como imagen: un editor sencillo (con botones para fracción, potencia, subíndice, raíz y letras
+      griegas) que dibuja la fórmula como imagen. Así se copia a Word y al PDF sin errores, como pide Víctor
+      para sus trabajos. Debajo del tema, «Fórmulas para este tema» sugiere las de Física, Química y Matemática.
+   2. Bibliografía en APA: «Ordenar (APA)» saca duplicados y ordena alfabéticamente; en el documento, Word y
+      PDF la bibliografía sale con sangría francesa.
+   3. Figuras para Formación Ética y Ciudadana, Educación Tecnológica y Educación Física.
+   ============================================================ */
+
+/* ---------- 1. Motor de fórmulas ---------- */
+const FX_GRIEGAS = {alpha:"α", beta:"β", gamma:"γ", delta:"δ", Delta:"Δ", epsilon:"ε", theta:"θ", lambda:"λ", mu:"μ", pi:"π", rho:"ρ", sigma:"σ", Sigma:"Σ", tau:"τ", phi:"φ", omega:"ω", Omega:"Ω", eta:"η"};
+const FX_SIMB = {cdot:"·", times:"×", div:"÷", pm:"±", to:"→", approx:"≈", leq:"≤", geq:"≥", neq:"≠", infty:"∞", deg:"°"};
+const FX_FUN = new Set(["sen", "sin", "cos", "tg", "tan", "log", "ln", "pH"]);
+const FX_FONT = "'Times New Roman', 'Liberation Serif', 'Noto Serif', serif";
+let FX_CTX = null;
+function fxMedir(t, fs, it){
+  try { if (!FX_CTX) FX_CTX = document.createElement("canvas").getContext("2d"); FX_CTX.font = `${it ? "italic " : ""}${fs}px ${FX_FONT}`; return FX_CTX.measureText(t).width; }
+  catch (e) { return t.length * fs * 0.55; }
+}
+/* Lector: devuelve una lista de nodos */
+function fxParse(src){
+  let i = 0; const s = String(src || "");
+  const grupo = cierre => { const out = []; while (i < s.length && s[i] !== cierre) out.push(...unidad()); if (s[i] === cierre) i++; return out; };
+  const arg = () => { while (s[i] === " ") i++; if (s[i] === "{"){ i++; return grupo("}"); } if (s[i] === "("){ i++; return grupo(")"); } return unidad(); };
+  const script = () => { while (s[i] === " ") i++; if (s[i] === "{"){ i++; return grupo("}"); } if (s[i] === "("){ i++; return grupo(")"); }
+    if (i >= s.length) return []; const m = /^(\\[A-Za-z]+|[0-9]+|[A-Za-zÁÉÍÓÚáéíóúñ]+|.)/.exec(s.slice(i)); i += m[0].length; return fxParse(m[0]); };
+  function unidad(){
+    const r = s.slice(i);
+    let m;
+    if ((m = /^\s+/.exec(r))){ i += m[0].length; return []; }
+    if (r.startsWith("\\frac")){ i += 5; const a = arg(), b = arg(); return [{t:"frac", a, b}]; }
+    if (r.startsWith("\\sqrt") || r[0] === "√"){ i += r[0] === "√" ? 1 : 5; return [{t:"sqrt", a:arg()}]; }
+    if ((m = /^\\([A-Za-z]+)/.exec(r))){ i += m[0].length; const n = m[1];
+      if (FX_GRIEGAS[n]) return [{t:"txt", v:FX_GRIEGAS[n], it:n === n.toLowerCase() && n !== "pi"}];
+      if (FX_SIMB[n]) return [{t:"op", v:FX_SIMB[n]}];
+      return [{t:"txt", v:n === "sin" ? "sen" : n === "tan" ? "tg" : n, it:false, fun:true}]; }
+    if (r[0] === "{"){ i++; return [{t:"grp", a:grupo("}")}]; }
+    if (r[0] === "("){ i++; return [{t:"par", a:grupo(")"), o:"(", c:")"}]; }
+    if (r[0] === "["){ i++; return [{t:"par", a:grupo("]"), o:"[", c:"]"}]; }
+    if (r[0] === "^"){ i++; return [{t:"sup", a:script()}]; }
+    if (r[0] === "_"){ i++; return [{t:"sub", a:script()}]; }
+    if (r[0] === "/"){ i++; return [{t:"slash"}]; }
+    if ((m = /^[0-9]+(?:[.,][0-9]+)?/.exec(r))){ i += m[0].length; return [{t:"txt", v:m[0].replace(".", ","), it:false}]; }
+    if ((m = /^[A-Za-zÁÉÍÓÚáéíóúñ]+/.exec(r))){ i += m[0].length; const w = m[0];
+      if (FX_FUN.has(w)) return [{t:"txt", v:w, it:false, fun:true}];
+      if (w.length >= 3) return [{t:"txt", v:w, it:false, fun:true}];
+      return w.length === 1 ? [{t:"txt", v:w, it:true}] : w.split("").map(ch => ({t:"txt", v:ch, it:true})); }
+    if ((m = /^(->|<=|>=|\+-|\*)/.exec(r))){ i += m[0].length; return [{t:"op", v:{"->":"→", "<=":"≤", ">=":"≥", "+-":"±", "*":"·"}[m[0]]}]; }
+    if ("=+-−·×÷→±≈<>≤≥≠".includes(r[0])){ i++; return [{t:"op", v:r[0] === "-" ? "−" : r[0]}]; }
+    i++; return [{t:"txt", v:r[0], it:/[α-ωΑ-Ω]/.test(r[0]) && !/[ΔΣΩπ]/.test(r[0])}];
+  }
+  const out = []; while (i < s.length) out.push(...unidad());
+  return fxFracciones(out);
+}
+/* «a/b» con un elemento a cada lado (o un paréntesis) se vuelve fracción */
+function fxFracciones(L){
+  L.forEach(n => { if (n.a) n.a = fxFracciones(n.a); if (n.b) n.b = fxFracciones(n.b); });
+  const out = [];
+  for (let k = 0; k < L.length; k++){
+    if (L[k].t === "slash" && out.length && L[k + 1]){
+      let izq = [out.pop()]; while (out.length && (izq[0].t === "sup" || izq[0].t === "sub")) izq.unshift(out.pop());
+      if (out.length && out[out.length - 1].t === "txt" && out[out.length - 1].v === "Δ") izq.unshift(out.pop());
+      let der = [L[++k]]; if (der[0].t === "txt" && der[0].v === "Δ" && L[k + 1]) der.push(L[++k]);
+      while (L[k + 1] && (L[k + 1].t === "sup" || L[k + 1].t === "sub")) der.push(L[++k]);
+      const sin = g => g.length === 1 && g[0].t === "par" && g[0].o === "(" ? g[0].a : g;
+      out.push({t:"frac", a:sin(izq), b:sin(der)});
+    } else out.push(L[k]);
+  }
+  return out.map(n => n.t === "slash" ? {t:"op", v:"/"} : n);
+}
+/* Diagramación: cada caja tiene ancho, altura sobre la base (a) y debajo (d), y una función que dibuja */
+function fxCaja(L, fs){
+  const items = []; let x = 0, a = fs * 0.72, d = fs * 0.24;
+  const add = (bx, sep) => { if (sep) x += sep; items.push({bx, x}); x += bx.w; if (sep) x += sep; a = Math.max(a, bx.a); d = Math.max(d, bx.d); };
+  L.forEach((n, k) => {
+    if (n.t === "txt"){ const w = fxMedir(n.v, fs, n.it); const sep = n.fun ? fs * 0.12 : 0; add({w, a:fs * 0.72, d:fs * 0.24, dib:(X, Y) => `<text x="${X.toFixed(1)}" y="${Y.toFixed(1)}" font-size="${fs.toFixed(1)}"${n.it ? ' font-style="italic"' : ""} textLength="${w.toFixed(1)}" lengthAdjust="spacingAndGlyphs">${esc(n.v)}</text>`}, sep); }
+    else if (n.t === "op"){ const unario = "−+".includes(n.v) && (k === 0 || L[k - 1].t === "op"); const w = fxMedir(n.v, fs), sep = n.v === "·" ? fs * 0.08 : n.v === "/" || unario ? fs * 0.02 : fs * 0.22; add({w, a:fs * 0.72, d:fs * 0.24, dib:(X, Y) => `<text x="${X.toFixed(1)}" y="${Y.toFixed(1)}" font-size="${fs.toFixed(1)}">${esc(n.v)}</text>`}, sep); }
+    else if (n.t === "grp"){ add(fxCaja(n.a, fs)); }
+    else if (n.t === "sup" || n.t === "sub"){
+      const c = fxCaja(n.a, fs * 0.7), base = items[items.length - 1], up = n.t === "sup";
+      const dy = up ? -fs * 0.42 : fs * 0.2;
+      add({w:c.w + fs * 0.04, a:up ? c.a - dy : fs * 0.4, d:up ? 0 : c.d + dy, dib:(X, Y) => c.dib(X + fs * 0.02, Y + dy)});
+      if (base) a = Math.max(a, up ? c.a - dy : a);
+    }
+    else if (n.t === "frac"){
+      const fs2 = fs * 0.92, A = fxCaja(n.a, fs2), B = fxCaja(n.b, fs2), w = Math.max(A.w, B.w) + fs * 0.24, eje = fs * 0.3, g = fs * 0.14, gr = Math.max(1.2, fs * 0.05);
+      add({w, a:eje + g + A.d + A.a, d:-eje + g + B.a + B.d, dib:(X, Y) => `<rect x="${X.toFixed(1)}" y="${(Y - eje - gr / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${gr.toFixed(1)}" fill="#111"/>` + A.dib(X + (w - A.w) / 2, Y - eje - g - A.d) + B.dib(X + (w - B.w) / 2, Y - eje + g + B.a)}, fs * 0.06);
+    }
+    else if (n.t === "sqrt"){
+      const C = fxCaja(n.a, fs), r = fs * 0.62, t = fs * 0.08, w = C.w + r + fs * 0.12, top = C.a + t + fs * 0.04;
+      add({w, a:top + fs * 0.04, d:C.d, dib:(X, Y) => `<path d="M${X.toFixed(1)} ${(Y - fs * 0.28).toFixed(1)} l${(fs * 0.12).toFixed(1)} -${(fs * 0.06).toFixed(1)} l${(fs * 0.18).toFixed(1)} ${(fs * 0.28 + C.d).toFixed(1)} l${(r - fs * 0.3).toFixed(1)} -${(top + C.d).toFixed(1)} h${(C.w + fs * 0.12).toFixed(1)}" fill="none" stroke="#111" stroke-width="${Math.max(1.2, fs * 0.045).toFixed(1)}" stroke-linejoin="round"/>` + C.dib(X + r, Y)});
+    }
+    else if (n.t === "par"){
+      const C = fxCaja(n.a, fs), h = Math.max(C.a + C.d, fs * 0.96), pw = fs * 0.3, sw = Math.max(1.2, fs * 0.05);
+      const curva = (X0, Y, izq) => { const top = Y - C.a, bot = Y + C.d, mid = (top + bot) / 2, bx = izq ? X0 + pw * 0.85 : X0 + pw * 0.15, cx = izq ? X0 + pw * 0.1 : X0 + pw * 0.9;
+        const vx = izq ? X0 + pw * 0.3 : X0 + pw * 0.7, sx = izq ? X0 + pw * 0.85 : X0 + pw * 0.15;
+        return n.o === "[" ? `<path d="M${sx.toFixed(1)} ${top.toFixed(1)} H${vx.toFixed(1)} V${bot.toFixed(1)} H${sx.toFixed(1)}" fill="none" stroke="#111" stroke-width="${sw.toFixed(1)}"/>`
+          : `<path d="M${bx.toFixed(1)} ${top.toFixed(1)} Q${cx.toFixed(1)} ${mid.toFixed(1)} ${bx.toFixed(1)} ${bot.toFixed(1)}" fill="none" stroke="#111" stroke-width="${sw.toFixed(1)}"/>`; };
+      add({w:C.w + 2 * pw, a:Math.max(C.a, h * 0.7), d:Math.max(C.d, h * 0.3), dib:(X, Y) => curva(X, Y, true) + C.dib(X + pw, Y) + curva(X + pw + C.w, Y, false)});
+    }
+  });
+  return {w:x, a, d, dib:(X, Y) => items.map(it => it.bx.dib(X + it.x, Y)).join("")};
+}
+function fxSvg(src, fs){
+  fs = fs || 44;
+  const C = fxCaja(fxParse(src), fs), pad = fs * 0.4, h = C.a + C.d + 2 * pad, wf = C.w + 2 * pad, W = Math.max(wf, h * 4.2);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W.toFixed(0)} ${h.toFixed(0)}" font-family="${FX_FONT.replace(/'/g, "&apos;")}" fill="#111"><rect width="${W.toFixed(0)}" height="${h.toFixed(0)}" fill="#ffffff"/>${C.dib((W - C.w) / 2, pad + C.a)}</svg>`;
+  return {svg, w:Math.round(W), h:Math.round(h)};
+}
+/* ---------- Fórmulas sugeridas por tema ---------- */
+const FX_TEMA = [
+  ["mru", "Velocidad en el MRU", "v = d/t", "v: velocidad (m/s) · d: distancia (m) · t: tiempo (s)"],
+  ["mru", "Posición en el MRU", "x = x_0 + v·t", "x: posición (m) · x₀: posición inicial (m) · v: velocidad (m/s) · t: tiempo (s)"],
+  ["mruv", "Aceleración media", "a = \\Delta v/\\Delta t", "a: aceleración (m/s²) · Δv: cambio de velocidad (m/s) · Δt: intervalo de tiempo (s)"],
+  ["mruv", "Velocidad en el MRUV", "v_f = v_i + a·t", "vf: velocidad final · vi: velocidad inicial (m/s) · a: aceleración (m/s²) · t: tiempo (s)"],
+  ["mruv", "Desplazamiento en el MRUV", "d = v_i·t + \\frac{1}{2}·a·t^2", "d: desplazamiento (m) · vi: velocidad inicial (m/s) · a: aceleración (m/s²) · t: tiempo (s)"],
+  ["caida", "Caída libre: altura", "h = \\frac{1}{2}·g·t^2", "h: altura (m) · g: aceleración de la gravedad (9,8 m/s²) · t: tiempo (s)"],
+  ["caida", "Caída libre: velocidad", "v = g·t", "v: velocidad (m/s) · g: 9,8 m/s² · t: tiempo (s)"],
+  ["tiro", "Tiro oblicuo: alcance horizontal", "x = v_0·\\cos\\alpha·t", "x: distancia horizontal (m) · v₀: velocidad inicial (m/s) · α: ángulo de lanzamiento · t: tiempo (s)"],
+  ["dcl", "Segunda ley de Newton", "F = m·a", "F: fuerza neta (N) · m: masa (kg) · a: aceleración (m/s²)"],
+  ["dcl", "Peso", "P = m·g", "P: peso (N) · m: masa (kg) · g: 9,8 m/s²"],
+  ["dcl", "Fuerza de rozamiento", "F_r = \\mu·N", "Fr: rozamiento (N) · μ: coeficiente de rozamiento · N: fuerza normal (N)"],
+  ["energia", "Energía cinética", "E_c = \\frac{1}{2}·m·v^2", "Ec: energía cinética (J) · m: masa (kg) · v: velocidad (m/s)"],
+  ["energia", "Energía potencial gravitatoria", "E_p = m·g·h", "Ep: energía potencial (J) · m: masa (kg) · g: 9,8 m/s² · h: altura (m)"],
+  ["energia", "Energía mecánica", "E_m = E_c + E_p", "Em: energía mecánica (J)"],
+  ["energia", "Trabajo mecánico", "W = F·d·\\cos\\alpha", "W: trabajo (J) · F: fuerza (N) · d: desplazamiento (m) · α: ángulo entre F y d"],
+  ["energia", "Potencia", "P = W/t", "P: potencia (W) · W: trabajo (J) · t: tiempo (s)"],
+  ["palanca", "Ley de la palanca", "F_1·d_1 = F_2·d_2", "F: fuerzas (N) · d: distancias al punto de apoyo (m)"],
+  ["arquimedes", "Presión", "p = F/A", "p: presión (Pa) · F: fuerza (N) · A: área (m²)"],
+  ["arquimedes", "Densidad", "\\rho = m/V", "ρ: densidad (kg/m³) · m: masa (kg) · V: volumen (m³)"],
+  ["arquimedes", "Empuje (principio de Arquímedes)", "E = \\rho_l·g·V_s", "E: empuje (N) · ρl: densidad del líquido · g: 9,8 m/s² · Vs: volumen sumergido (m³)"],
+  ["arquimedes", "Presión hidrostática", "p = \\rho·g·h", "p: presión (Pa) · ρ: densidad (kg/m³) · h: profundidad (m)"],
+  ["calor", "Calor sensible", "Q = m·c·\\Delta T", "Q: calor (J o cal) · m: masa · c: calor específico · ΔT: cambio de temperatura"],
+  ["termometro", "Celsius a Kelvin", "T_K = T_C + 273", "TK: temperatura en kelvin · TC: temperatura en grados Celsius"],
+  ["termometro", "Celsius a Fahrenheit", "T_F = \\frac{9}{5}·T_C + 32", "TF: grados Fahrenheit · TC: grados Celsius"],
+  ["circuito", "Ley de Ohm", "V = I·R", "V: tensión (V) · I: intensidad (A) · R: resistencia (Ω)"],
+  ["circuito", "Potencia eléctrica", "P = V·I", "P: potencia (W) · V: tensión (V) · I: intensidad (A)"],
+  ["seriepar", "Resistencias en serie", "R_T = R_1 + R_2 + R_3", "RT: resistencia total (Ω)"],
+  ["seriepar", "Resistencias en paralelo", "1/R_T = 1/R_1 + 1/R_2", "RT: resistencia total (Ω)"],
+  ["cargas", "Ley de Coulomb", "F = k·\\frac{q_1·q_2}{d^2}", "F: fuerza (N) · k: 9·10⁹ N·m²/C² · q: cargas (C) · d: distancia (m)"],
+  ["onda", "Velocidad de una onda", "v = \\lambda·f", "v: velocidad (m/s) · λ: longitud de onda (m) · f: frecuencia (Hz)"],
+  ["onda", "Período y frecuencia", "T = 1/f", "T: período (s) · f: frecuencia (Hz)"],
+  ["sonido", "Velocidad del sonido", "v = \\lambda·f", "En el aire, a 20 °C, v ≈ 343 m/s"],
+  ["luz", "Ley de Snell", "n_1·sen \\theta_1 = n_2·sen \\theta_2", "n: índices de refracción · θ: ángulos con la normal"],
+  ["luz", "Índice de refracción", "n = c/v", "n: índice de refracción · c: velocidad de la luz en el vacío · v: velocidad en el medio"],
+  ["lentes", "Ecuación de las lentes", "1/f = 1/d_o + 1/d_i", "f: distancia focal · do: distancia al objeto · di: distancia a la imagen"],
+  ["q-sistemas", "Concentración en masa", "C = m_{soluto}/V_{solución}", "C: concentración (g/L) · m: masa de soluto (g) · V: volumen de solución (L)"],
+  ["q-reaccion", "Cantidad de sustancia", "n = m/M", "n: moles · m: masa (g) · M: masa molar (g/mol)"],
+  ["q-ph", "pH", "pH = −log[H^+]", "[H⁺]: concentración de iones hidrógeno (mol/L)"],
+  ["m-pitagoras", "Teorema de Pitágoras", "a^2 + b^2 = c^2", "a, b: catetos · c: hipotenusa"],
+  ["m-cuadratica", "Fórmula resolvente", "x = \\frac{−b \\pm \\sqrt{b^2 − 4·a·c}}{2·a}", "para a·x² + b·x + c = 0"],
+  ["m-lineal", "Función lineal", "y = m·x + b", "m: pendiente · b: ordenada al origen"],
+  ["m-trigo", "Seno de un ángulo", "sen \\alpha = \\frac{cateto opuesto}{hipotenusa}", ""],
+  ["m-tendencia", "Media aritmética", "media = \\frac{x_1 + x_2 + … + x_n}{n}", "n: cantidad de datos"]
+].map(([fig, t, f, vars]) => ({fig, t, f, vars}));
+function fxDelTema(){
+  const ids = figurasTema().map(f => f.id);
+  return FX_TEMA.filter(x => ids.includes(x.fig)).sort((a, b) => ids.indexOf(a.fig) - ids.indexOf(b.fig));
+}
+function fxYaEsta(src){ return state.images.some(im => im.kind === "formula" && im.spec && im.spec.f === src); }
+function fxImagen(f, titulo, vars, momento, id){
+  const R = fxSvg(f);
+  return {id:id || newId(), kind:"formula", src:svgSrc(R.svg), w:R.w, h:R.h, caption:[titulo || "Fórmula", vars].filter(Boolean).join(". "), momento:momento || "desarrollo", spec:{f, titulo:titulo || "", vars:vars || ""}};
+}
+function fxAgregarTema(k){
+  const x = FX_TEMA[k]; if (!x || fxYaEsta(x.f)) return;
+  addImage(fxImagen(x.f, x.t, x.vars)); toast("Fórmula agregada como imagen: se copia a Word y al PDF sin errores."); fxRender();
+}
+let FX_PEND = 0;
+function fxRender(){
+  clearTimeout(FX_PEND);
+  FX_PEND = setTimeout(() => {
+    try {
+      const L = fxDelTema(), tema = $("tema"); if (!tema) return;
+      let box = $("fx-sug");
+      if (!L.length || state.modo === "anual"){ if (box) box.remove(); return; }
+      const html = `<p class="ft-h">${lpSvg("imagen", "lp-ic")}Fórmulas para este tema</p><p class="hint">Se agregan como imagen: en Word y en el PDF se ven igual que acá.</p><ul class="fx-l">${L.slice(0, 6).map(x => { const k = FX_TEMA.indexOf(x), R = fxSvg(x.f, 30); return `<li class="fx-it"><img src="${svgSrc(R.svg)}" alt="${esc(x.t + ": " + x.f)}" width="${R.w}" height="${R.h}"><span class="ft-t">${esc(x.t)}</span>${fxYaEsta(x.f) ? `<span class="ft-ya">Agregada</span>` : `<button type="button" class="btn btn-sm" data-fxadd="${k}" aria-label="Agregar la fórmula: ${esc(x.t)}">Agregar</button>`}</li>`; }).join("")}</ul>
+        <button type="button" class="linkbtn" data-fxnueva="1">Escribir otra fórmula</button>`;
+      if (!box){ const ref = $("his-sug") || $("ft-sug") || tema.closest(".f") || tema.parentElement; ref.insertAdjacentHTML("afterend", `<div class="ft-sug fx-sug f full" id="fx-sug" role="region" aria-label="Fórmulas para este tema"></div>`); box = $("fx-sug"); }
+      else { const ref = $("his-sug") || $("ft-sug"); if (ref && box.previousElementSibling !== ref) ref.insertAdjacentElement("afterend", box); }
+      if (box.innerHTML !== html) box.innerHTML = html;
+    } catch (e) { logSilencioso(e); }
+  }, 220);
+}
+/* ---------- Editor de fórmulas ---------- */
+const FX_BOTONES = [["Fracción", "\\frac{a}{b}"], ["Potencia", "^2"], ["Subíndice", "_0"], ["Raíz", "\\sqrt{x}"], ["·", "·"], ["Δ", "\\Delta "], ["α", "\\alpha "], ["θ", "\\theta "], ["λ", "\\lambda "], ["ρ", "\\rho "], ["μ", "\\mu "], ["π", "\\pi "], ["±", "\\pm "], ["→", "\\to "], ["≈", "\\approx "]];
+const FXQ = {editId:""};
+function abrirFormula(id){
+  let D = $("formula");
+  if (!D){
+    document.body.insertAdjacentHTML("beforeend", `<dialog class="lib bancodlg" id="formula" aria-labelledby="formula-t"><div class="lib-in">
+      <div class="lib-head"><h2 id="formula-t">Fórmula como imagen</h2><button type="button" class="linkbtn" data-cerrar-fx="1">Cerrar</button></div>
+      <p class="hint">Escribila como en el pizarrón. <b>a/b</b> o el botón «Fracción» hacen una fracción; <b>^</b> sube (v^2) y <b>_</b> baja (v_0). Se guarda como imagen, así se copia a Word y al PDF sin errores.</p>
+      <div class="f"><label for="fx-src">Fórmula</label><input id="fx-src" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ej.: E_c = \\frac{1}{2}·m·v^2"></div>
+      <div class="fx-bar" role="group" aria-label="Insertar símbolos">${FX_BOTONES.map(([n, v], k) => `<button type="button" class="btn btn-sm" data-fxins="${k}">${esc(n)}</button>`).join("")}</div>
+      <div class="fx-prev" id="fx-prev" aria-live="polite"></div>
+      <div class="cfg-grid"><div class="f"><label for="fx-tit">Nombre (sale en el epígrafe)</label><input id="fx-tit" type="text" autocomplete="off" placeholder="Ej.: Energía cinética"></div>
+        <div class="f"><label for="fx-mom">Momento de la clase</label><select id="fx-mom"><option value="inicio">Inicio</option><option value="desarrollo" selected>Desarrollo</option><option value="cierre">Cierre</option></select></div></div>
+      <div class="f"><label for="fx-vars">Qué es cada letra (opcional)</label><input id="fx-vars" type="text" autocomplete="off" placeholder="Ej.: m: masa (kg) · v: velocidad (m/s)"></div>
+      <div class="cur-bar"><button type="button" class="btn btn-primary" data-fx="guardar">Agregar a la planificación</button><button type="button" class="btn" data-fx="png">Descargar imagen</button></div>
+    </div></dialog>`);
+    D = $("formula");
+    D.addEventListener("input", e => { if (e.target.id === "fx-src") fxPrevia(); });
+    D.addEventListener("click", e => {
+      const t = e.target;
+      if (t.closest("[data-cerrar-fx]")){ cerrarDialogo("formula"); return; }
+      const b = t.closest("[data-fxins]"); if (b){ const v = FX_BOTONES[+b.dataset.fxins][1], el = $("fx-src"), a = el.selectionStart ?? el.value.length, z = el.selectionEnd ?? a; el.value = el.value.slice(0, a) + v + el.value.slice(z); el.focus(); const p = a + v.length; try { el.setSelectionRange(p, p); } catch (er) {} fxPrevia(); return; }
+      if (t.closest('[data-fx="guardar"]')) fxGuardar();
+      if (t.closest('[data-fx="png"]')) fxPng();
+    });
+  }
+  const img = id ? state.images.find(x => x.id === id && x.kind === "formula") : null;
+  FXQ.editId = img ? img.id : "";
+  $("formula-t").textContent = img ? "Editar fórmula" : "Fórmula como imagen";
+  $("fx-src").value = img ? img.spec.f : ""; $("fx-tit").value = img ? img.spec.titulo : ""; $("fx-vars").value = img ? img.spec.vars : ""; $("fx-mom").value = img ? img.momento || "desarrollo" : "desarrollo";
+  fxPrevia(); abrirDialogo("formula");
+  setTimeout(() => { try { $("fx-src").focus(); } catch (e) {} }, 60);
+}
+function fxPrevia(){ const P = $("fx-prev"), v = $("fx-src").value.trim(); if (!P) return; if (!v){ P.innerHTML = `<p class="hint">Acá vas a ver la fórmula.</p>`; return; } const R = fxSvg(v, 40); P.innerHTML = `<img src="${svgSrc(R.svg)}" alt="Vista previa de la fórmula" width="${R.w}" height="${R.h}">`; }
+function fxGuardar(){
+  const f = $("fx-src").value.trim(); if (!f){ toast("Escribí la fórmula."); $("fx-src").focus(); return; }
+  const img = fxImagen(f, $("fx-tit").value.trim(), $("fx-vars").value.trim(), $("fx-mom").value, FXQ.editId || undefined);
+  if (FXQ.editId) replaceImage(FXQ.editId, img); else addImage(img);
+  const nu = state.images.find(x => x.id === img.id); if (nu){ nu.momento = img.momento; imagesChanged(); }
+  cerrarDialogo("formula"); toast(FXQ.editId ? "Fórmula actualizada." : "Fórmula agregada como imagen a la planificación."); fxRender();
+}
+async function fxPng(){
+  const f = $("fx-src").value.trim(); if (!f){ toast("Escribí la fórmula."); return; }
+  try {
+    const R = fxSvg(f, 88), im = new Image(); im.src = svgSrc(R.svg); await im.decode();
+    const c = document.createElement("canvas"); c.width = R.w; c.height = R.h; const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, R.w, R.h); g.drawImage(im, 0, 0);
+    const bl = await new Promise(r => c.toBlob(r, "image/png")), a = document.createElement("a"); a.href = URL.createObjectURL(bl); a.download = "formula.png"; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+    toast("Imagen de la fórmula descargada.");
+  } catch (e) { logSilencioso(e); toast("No pude armar la imagen en este navegador."); }
+}
+
+/* ---------- 2. Bibliografía en APA ---------- */
+function bibOrdenarTexto(t){
+  const vistos = new Set();
+  return String(t || "").split("\n").map(l => l.replace(/^\s*(?:[-*·•]|\d+[.)])\s+/, "").trim()).filter(Boolean)
+    .filter(l => { const k = norm(l).replace(/[^a-z0-9]/g, ""); if (vistos.has(k)) return false; vistos.add(k); return true; })
+    .sort((a, b) => a.localeCompare(b, "es", {sensitivity:"base"})).join("\n");
+}
+function bibOrdenar(){
+  const el = $("bibliografia"); if (!el) return;
+  const antes = el.value, nuevo = bibOrdenarTexto(antes);
+  if (!nuevo){ toast("La bibliografía está vacía."); return; }
+  if (nuevo === antes.trim()){ toast("Ya estaba ordenada."); return; }
+  const n0 = antes.split("\n").filter(l => l.trim()).length, n1 = nuevo.split("\n").length;
+  el.value = nuevo; el.dispatchEvent(new Event("input", {bubbles:true}));
+  toast(`Bibliografía ordenada alfabéticamente${n0 > n1 ? `; saqué ${n0 - n1 === 1 ? "una repetida" : `${n0 - n1} repetidas`}` : ""}.`, {label:"Deshacer", fn:() => { el.value = antes; el.dispatchEvent(new Event("input", {bubbles:true})); }});
+}
+function docHTML(exp, M){
+  let h = docHTMLV88(exp, M);
+  try {
+    const i = h.search(/<h2[^>]*>Bibliografía<\/h2>/); if (i < 0) return h;
+    const fin = h.indexOf("<h2", i + 10), j = fin < 0 ? h.length : fin;
+    let seg = h.slice(i, j);
+    const sang = "padding-left:1.27cm;text-indent:-1.27cm";
+    seg = seg.replace(/<ul(\s+class="[^"]*")?(\s+style="([^"]*)")?/g, (m, cl, _s, st) => `<ul${cl || ""} style="${st ? st + ";" : ""}list-style:none;padding-left:0;margin-left:0"`)
+      .replace(/<(li|p)(\s+class="[^"]*")?(\s+style="([^"]*)")?(?=[\s>])/g, (m, tag, cl, _s, st) => `<${tag}${cl || ""} style="${st ? st + ";" : ""}${sang}"`);
+    seg = seg.replace(/(<li[^>]*>)\s*(?:[-•·]\s+)/g, "$1");
+    h = h.slice(0, i) + seg + h.slice(j);
+  } catch (e) { logSilencioso(e); }
+  return h;
+}
+
+/* ---------- 3. Figuras de Formación Ética, Tecnología y Educación Física ---------- */
+const FIG_MAS2 = [
+  {id:"e-poderes", mat:"etica", t:"División de poderes en la Argentina (Constitución Nacional)", k:/division de poderes|poderes del estado|poder (ejecutivo|legislativo|judicial)|republica representativa|forma de gobierno|constitucion nacional/, svg:() => {
+    let o = ftT(400, 38, "División de poderes", {a:"middle", fs:24, b:true});
+    o += hisCaja(250, 62, 300, 56, HIS_CLARO.gris, FT_SUAVE, ["Constitución Nacional", "república representativa y federal"], {fs:15, b1:1});
+    o += NF.l(400, 118, 400, 140) + NF.l(140, 140, 660, 140) + [140, 400, 660].map(x => ftFlecha(x, 140, x, 166, FT_TINTA, 2)).join("");
+    const P = [["Legislativo", "hace las leyes", "Congreso: Diputados y Senado", HIS_CLARO.azul, FT_AZUL], ["Ejecutivo", "administra y aplica las leyes", "Presidente o presidenta", HIS_CLARO.naranja, FT_NARANJA], ["Judicial", "resuelve conflictos según las leyes", "Corte Suprema y tribunales", HIS_CLARO.verde, FT_VERDE]];
+    P.forEach(([n, q, quien, f, c], i) => { const x = 25 + i * 260; o += NF.r(x, 170, 230, 190, f, c, 12) + ftT(x + 115, 204, n, {a:"middle", fs:20, b:true}) + hisTxtLineas(x + 115, 240, hisWrap(q, 24), {a:"middle", fs:15, lh:20}) + hisTxtLineas(x + 115, 310, hisWrap(quien, 24), {a:"middle", fs:14, lh:19, c:FT_SUAVE}); });
+    o += ftT(400, 400, "Cada poder controla a los otros: ninguno concentra todo el poder.", {a:"middle", fs:16, b:true});
+    o += ftT(400, 428, "En Tucumán hay la misma división: gobernador, Legislatura y Poder Judicial provincial.", {a:"middle", fs:14, c:FT_SUAVE});
+    return ftSvg(o + NF.pie()); }},
+  {id:"e-federal", mat:"etica", t:"Organización federal: Nación, provincias y municipios", k:/federalismo|organizacion federal|sistema federal|autonomia (provincial|municipal)|niveles de gobierno|municipios?/, svg:() => {
+    let o = ftT(400, 38, "Tres niveles de gobierno", {a:"middle", fs:24, b:true});
+    const N = [["Nación", "defensa, moneda, relaciones exteriores", 170, HIS_CLARO.azul, FT_AZUL], ["Provincias (23 y la Ciudad Autónoma)", "educación, salud, seguridad, justicia propia", 290, HIS_CLARO.verde, FT_VERDE], ["Municipios y comunas", "calles, alumbrado, residuos, servicios del barrio", 410, HIS_CLARO.naranja, FT_NARANJA]];
+    N.forEach(([n, d, w, f, c], i) => { const y = 70 + i * 120, x = 400 - (w + 200) / 2; o += NF.r(x, y, w + 200, 96, f, c, 12) + ftT(400, y + 36, n, {a:"middle", fs:18, b:true}) + ftT(400, y + 66, d, {a:"middle", fs:15}); });
+    o += ftT(400, 452, "Ejemplo: Argentina → Tucumán → San Miguel de Tucumán", {a:"middle", fs:15, b:true, c:FT_SUAVE});
+    return ftSvg(o + NF.pie("Figura de Lapacho. Ejemplos de competencias, no la lista completa.")); }},
+  {id:"t-sistema", mat:"tecnologia", t:"Sistema: entradas, proceso y salidas", k:/sistemas? (tecnologicos?|de control)|entradas?,? procesos?|caja negra|procesos? tecnologicos?|analisis de productos|automatizacion/, svg:() => {
+    let o = ftT(400, 40, "Un sistema: entrada, proceso y salida", {a:"middle", fs:23, b:true});
+    o += hisCaja(30, 150, 190, 110, HIS_CLARO.azul, FT_AZUL, ["Entradas", "materia, energía,", "información"], {fs:16, b1:1});
+    o += hisCaja(305, 130, 190, 150, HIS_CLARO.gris, FT_SUAVE, ["Proceso", "lo que el sistema", "transforma"], {fs:17, b1:1});
+    o += hisCaja(580, 150, 190, 110, HIS_CLARO.verde, FT_VERDE, ["Salidas", "productos, energía,", "información"], {fs:16, b1:1});
+    o += ftFlecha(222, 205, 300, 205, FT_TINTA, 4) + ftFlecha(497, 205, 576, 205, FT_TINTA, 4);
+    o += `<path d="M675 262 C675 340 400 345 400 285" fill="none" stroke="${FT_NARANJA}" stroke-width="3" stroke-dasharray="7 5"/><path d="M400 282 l-8 15 h16z" fill="${FT_NARANJA}"/>` + ftT(540, 345, "control (realimentación)", {a:"middle", fs:15, b:true, c:FT_NARANJA});
+    o += hisCaja(130, 380, 540, 70, HIS_CLARO.naranja, FT_NARANJA, ["Ejemplo: una pava eléctrica", "agua y electricidad → calentar → agua caliente; el termostato la corta"], {fs:15, b1:1});
+    return ftSvg(o + NF.pie()); }},
+  {id:"t-energias", mat:"tecnologia", t:"Fuentes de energía renovables y no renovables", k:/fuentes de energia|energias? renovables?|no renovables?|energia (solar|eolica|hidraulica)|combustibles fosiles|matriz energetica/, svg:() => {
+    let o = ftT(400, 40, "Fuentes de energía", {a:"middle", fs:24, b:true});
+    o += NF.r(30, 70, 360, 330, HIS_CLARO.verde, FT_VERDE, 14) + ftT(210, 104, "Renovables", {a:"middle", fs:20, b:true, c:FT_VERDE}) + ftT(210, 128, "se reponen en poco tiempo", {a:"middle", fs:14, c:FT_SUAVE});
+    o += NF.r(410, 70, 360, 330, HIS_CLARO.rojo, FT_ROJO, 14) + ftT(590, 104, "No renovables", {a:"middle", fs:20, b:true, c:FT_ROJO}) + ftT(590, 128, "se agotan: tardaron millones de años", {a:"middle", fs:14, c:FT_SUAVE});
+    ["Solar (paneles)", "Eólica (viento)", "Hidráulica (diques)", "Biomasa (bagazo de caña)", "Geotérmica"].forEach((s, i) => { o += NF.c(60, 166 + i * 46, 6, FT_VERDE, FT_VERDE) + ftT(76, 172 + i * 46, s, {fs:16}); });
+    ["Petróleo", "Gas natural", "Carbón", "Uranio (nuclear)"].forEach((s, i) => { o += NF.c(440, 166 + i * 46, 6, FT_ROJO, FT_ROJO) + ftT(456, 172 + i * 46, s, {fs:16}); });
+    o += ftT(400, 440, "En Tucumán, los ingenios queman bagazo para generar energía.", {a:"middle", fs:15, c:FT_SUAVE});
+    return ftSvg(o + NF.pie()); }},
+  {id:"ef-fc", mat:"educacion_fisica", t:"Zonas de frecuencia cardíaca para el entrenamiento", k:/frecuencia cardiaca|pulsaciones|zonas de (entrenamiento|esfuerzo)|resistencia aerobica|capacidades condicionales|intensidad del esfuerzo/, svg:() => {
+    let o = ftT(400, 38, "Zonas de frecuencia cardíaca", {a:"middle", fs:24, b:true});
+    o += ftT(400, 70, "Frecuencia cardíaca máxima estimada: FC máx ≈ 220 − edad (ej.: 15 años → 205)", {a:"middle", fs:15});
+    const Z = [["50-60 %", "Muy suave", "entrada en calor, vuelta a la calma", "103-123", "#9fd0b4"], ["60-70 %", "Suave", "resistencia aeróbica básica", "123-144", "#c5e1a5"], ["70-80 %", "Moderada", "mejora de la resistencia", "144-164", "#ffe082"], ["80-90 %", "Intensa", "trabajos cortos con pausas", "164-185", "#ffb74d"], ["90-100 %", "Máxima", "esfuerzos muy breves", "185-205", "#e57373"]];
+    Z.forEach(([p, n, d, lpm, c], i) => { const y = 100 + (4 - i) * 66; o += `<rect x="60" y="${y}" width="${380 + i * 70}" height="56" rx="8" fill="${c}" stroke="#7a8a82"/>` + ftT(76, y + 24, `${p} · ${n}`, {fs:16, b:true}) + ftT(76, y + 45, d, {fs:13}) + ftT(60 + 380 + i * 70 - 12, y + 35, `${lpm} lpm`, {a:"end", fs:14, b:true}); });
+    o += ftT(400, 452, "Se mide el pulso 15 segundos y se multiplica por 4. Valores orientativos, no reemplazan un control médico.", {a:"middle", fs:12, c:FT_SUAVE});
+    return ftSvg(o + NF.pie("Figura de Lapacho. lpm: latidos por minuto, con el ejemplo de 15 años.")); }},
+  {id:"ef-clase", mat:"educacion_fisica", t:"Momentos de una clase de Educación Física", k:/entrada en calor|vuelta a la calma|calentamiento|momentos de la clase de educacion fisica|estiramiento/, svg:() => {
+    let o = ftT(400, 40, "Momentos de la clase", {a:"middle", fs:24, b:true});
+    const M = [["Entrada en calor", "10 a 15 min", "movilidad articular, trote suave, juegos de activación", HIS_CLARO.naranja, FT_NARANJA], ["Parte central", "25 a 40 min", "contenido de la clase: técnica, juego, deporte, capacidades", HIS_CLARO.azul, FT_AZUL], ["Vuelta a la calma", "5 a 10 min", "caminata, respiración, estiramientos, cierre grupal", HIS_CLARO.verde, FT_VERDE]];
+    M.forEach(([n, t, d, f, c], i) => { const x = 25 + i * 260; o += NF.r(x, 80, 230, 280, f, c, 14) + ftT(x + 115, 118, n, {a:"middle", fs:19, b:true}) + ftT(x + 115, 148, t, {a:"middle", fs:15, c:FT_SUAVE}) + hisTxtLineas(x + 115, 196, hisWrap(d, 22), {a:"middle", fs:15, lh:22}); if (i < 2) o += ftFlecha(x + 232, 220, x + 258, 220, FT_TINTA, 3); });
+    o += ftT(400, 410, "La intensidad sube en la parte central y baja al final.", {a:"middle", fs:16, b:true});
+    o += `<path d="M60 465 C200 465 250 425 400 422 C550 420 600 465 740 465" fill="none" stroke="${FT_ROJO}" stroke-width="3"/>`;
+    return ftSvg(o + NF.pie("Figura de Lapacho. Tiempos orientativos para un módulo de 80 minutos.")); }}
+];
+FIG_MAS2.forEach(f => FIG_TEMA.push(f));
+
+/* «frecuencia» sola también es de Educación Física: la figura de ondas pide ondas */
+(() => { const f = FIG_TEMA.find(x => x.id === "onda"); if (f) f.k = /\bondas?\b|amplitud|longitud de onda|frecuencia de (una |la )?onda|periodo de una onda|transversal/; })();
+/* Si el tema coincide con figuras de varias materias, primero las de la materia de la planificación */
+function figurasTema(){
+  const L = figurasTemaV88(), m = val("materia"), tema = ftNorm(val("tema"));
+  const prop = f => !m ? true : f.mat ? f.mat === m : f.his ? m === "historia" || m === "etica" : !f.bib && (m === "fisica" || m === "quimica");
+  /* Si el tema nombra la figura con más palabras (p. ej. «fuentes de energía» frente a «energía»), va primero */
+  const largo = f => { try { const r = f.k && f.k.exec(tema); return r ? r[0].length : 0; } catch (e) { return 0; } };
+  const espec = f => largo(f) >= 12 ? largo(f) : 0;
+  return L.map((f, i) => { const e = espec(f); return {f, i, e, p:e ? 0 : prop(f) ? 1 : 2}; }).sort((a, b) => a.p - b.p || b.e - a.e || a.i - b.i).map(x => x.f);
+}
+/* ---------- Enganches ---------- */
+function ftRender(){ ftRenderV88(); fxRender(); }
+function kindLabel(img){ return img && img.kind === "formula" ? "Fórmula" : kindLabelV88(img); }
+function renderGallery(){
+  renderGalleryV88();
+  try { state.images.filter(im => im.kind === "formula" && im.spec).forEach(im => { const a = document.querySelector(`#gallery .gcard[data-card="${im.id}"] .gactions`); if (a && !a.querySelector("[data-fxedit]")) a.insertAdjacentHTML("afterbegin", `<button type="button" class="btn" data-fxedit="${im.id}">Editar</button>`); }); } catch (e) { logSilencioso(e); }
+}
+function fxPonerBoton(){ const b = $("img-mapa"); if (b && !$("img-fx")) b.insertAdjacentHTML("afterend", `<button type="button" class="btn" id="img-fx">Fórmula</button>`); }
+function bibPonerBoton(){
+  const el = $("bibliografia"), lab = el && el.closest(".f") && el.closest(".f").querySelector("label");
+  if (lab && !lab.parentElement.querySelector("[data-bib-apa]")) lab.insertAdjacentHTML("afterend", `<button type="button" class="linkbtn bib-btn" data-bib-apa="1">Ordenar (APA)</button>`);
+}
+function init102(){
+  try {
+    fxPonerBoton(); bibPonerBoton();
+    if (init102.ok) return; init102.ok = true;
+    new MutationObserver(() => { if ($("img-mapa") && !$("img-fx")) fxPonerBoton(); if ($("bibliografia") && !document.querySelector("[data-bib-apa]")) bibPonerBoton(); }).observe(document.body, {childList:true, subtree:true});
+    document.addEventListener("click", e => {
+      const t = e.target; if (!t.closest) return;
+      if (t.closest("#img-fx") || t.closest("[data-fxnueva]")){ abrirFormula(); return; }
+      const ed = t.closest("[data-fxedit]"); if (ed){ abrirFormula(ed.dataset.fxedit); return; }
+      const ad = t.closest("[data-fxadd]"); if (ad){ fxAgregarTema(+ad.dataset.fxadd); return; }
+      if (t.closest("[data-bib-apa]")) bibOrdenar();
+    });
+    fxRender();
+  } catch (e) { registrarError("init102", e, "aviso"); }
+}
+
+/* ============================================================
    Inicio
    ============================================================ */
 function init(){
@@ -27849,4 +28212,4 @@ function init59(){
   } catch (e) { registrarError("init59", e, "aviso"); }
 }
 
-try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); init93(); init94(); init95(); init96(); init97(); init98(); init100(); } finally { ocultarSplash(); }
+try { init(); init37(); init371(); init39(); init40(); init41(); init42(); init43(); init44(); init46(); init47(); init48(); init50(); init51(); init52(); init53(); init54(); init55(); init56(); init57(); init58(); init59(); init60(); init61(); init62(); init63(); init64(); init65(); init66(); init67(); init69(); init70(); init71(); init72(); init73(); init74(); init75(); init76(); init77(); init78(); init79(); init81(); init82(); init84(); init85(); init86(); init90(); init91(); init92(); init93(); init94(); init95(); init96(); init97(); init98(); init100(); init102(); } finally { ocultarSplash(); }
