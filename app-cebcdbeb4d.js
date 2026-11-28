@@ -1783,6 +1783,9 @@ function sugerenciasProyecto(ctx, g, t, L){
    Registro de actualizaciones (se revisa cada tres meses)
    ============================================================ */
 const NOVEDADES = [
+  {id:"2026-11-28a", fecha:"2026-11-28", items:[
+    "Figuras de acuerdo al tema también para Química (sistemas materiales, separación de fases, enlaces, reacción química, pH y tabla periódica), Biología (célula, fotosíntesis, cadena trófica y niveles de organización), Matemática (fracciones, Pitágoras, función lineal y cuadrática, ángulos, trigonometría y estadística) y Geografía (ciclo del agua, coordenadas, capas de la Tierra, estaciones y atmósfera)."
+  ]},
   {id:"2026-11-22k", fecha:"2026-11-22", items:[
     "Si cambiás el tema de una planificación, Lapacho saca las figuras y el mapa conceptual que había dibujado para el tema anterior (con «Deshacer» por si las querías). Tus fotos, cuadros y gráficos no se tocan."
   ]},
@@ -13649,7 +13652,7 @@ function modeloSuplente(sinTec){ return modeloSuplente2(sinTec); }
 /* ============================================================
    Versión 37: seguridad, diagnóstico, copias cifradas, panel principal y navegación de escritorio
    ============================================================ */
-const LAPACHO_VERSION = "87 (22/11/2026)";
+const LAPACHO_VERSION = "88 (28/11/2026)";
 
 /* ---------- Registro de errores ----------
    Autocontenido (sin constantes externas) porque se usa desde cualquier punto del script, incluso durante la carga.
@@ -27120,6 +27123,274 @@ function init100(){
     const n = $("btn-nueva"); if (n && !n.dataset.imgv){ n.dataset.imgv = "1"; n.addEventListener("click", () => { IMGV_TEMA = ""; }); }
   } catch (e) { registrarError("init100", e, "aviso"); }
 }
+
+/* ============================================================
+   Versión 88: figuras de acuerdo al tema para Química, Biología, Matemática y Geografía (28/11/2026)
+   Sigue el pedido «que las planificaciones tengan imágenes de acuerdo al tema» (22/11/2026), que hasta ahora
+   cubría Física e Historia. Mismo criterio: dibujadas con código, sin conexión, sin IA y sin derechos de terceros;
+   aparecen debajo del tema y en «Imágenes», y salen en Word, PDF y A4.
+   ============================================================ */
+/* «fases» también es un concepto de Química (sistemas heterogéneos): la figura de la Luna pide la Luna */
+(() => { const f = FIG_TEMA.find(x => x.id === "fases"); if (f) f.k = /\bluna\b|fases de la luna|fases lunares|\beclipse|sistema solar|astronomia|sol tierra luna/; })();
+const NF = {
+  c:(cx, cy, r, f, s, w) => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${f}" stroke="${s || FT_TINTA}" stroke-width="${w || 2}"/>`,
+  r:(x, y, w, h, f, s, rx) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx || 0}" fill="${f}" stroke="${s || FT_TINTA}" stroke-width="2"/>`,
+  l:(x1, y1, x2, y2, c, w, da) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c || FT_TINTA}" stroke-width="${w || 2}"${da ? ` stroke-dasharray="${da}"` : ""}/>`,
+  pie:s => ftT(30, 488, s || "Figura de Lapacho.", {fs:13, c:FT_SUAVE})
+};
+const FIG_MAS = [
+  /* ---------- Química ---------- */
+  {id:"q-sistemas", mat:"quimica", t:"Sistemas materiales: homogéneos y heterogéneos", k:/sistemas? materiales|mezclas?\b|soluciones?\b|sustancias? puras?|homogene|heterogene|soluto|solvente/, svg:() => {
+    let o = ftT(400, 40, "Sistemas materiales", {a:"middle", fs:24, b:true});
+    o += hisCaja(300, 62, 200, 50, HIS_CLARO.gris, FT_SUAVE, ["Sistema material"], {fs:18, b:true});
+    o += NF.l(400, 112, 400, 130) + NF.l(205, 130, 595, 130) + ftFlecha(205, 130, 205, 158, FT_TINTA, 2) + ftFlecha(595, 130, 595, 158, FT_TINTA, 2);
+    o += hisCaja(85, 158, 240, 76, HIS_CLARO.azul, FT_AZUL, ["Homogéneo", "una sola fase: se ve", "igual en todas partes"], {fs:14, b1:1});
+    o += hisCaja(475, 160, 240, 72, HIS_CLARO.naranja, FT_NARANJA, ["Heterogéneo", "dos o más fases a simple vista"], {fs:15, b1:1});
+    o += NF.l(205, 232, 205, 252) + NF.l(95, 252, 315, 252) + ftFlecha(95, 252, 95, 276, FT_TINTA, 2) + ftFlecha(315, 252, 315, 276, FT_TINTA, 2);
+    o += hisCaja(20, 278, 170, 80, HIS_CLARO.verde, FT_VERDE, ["Sustancia pura", "agua destilada,", "hierro, oxígeno"], {fs:14, b1:1});
+    o += hisCaja(230, 278, 170, 80, HIS_CLARO.verde, FT_VERDE, ["Solución", "agua con sal o azúcar,", "el aire"], {fs:14, b1:1});
+    o += hisCaja(475, 278, 240, 80, HIS_CLARO.naranja, FT_NARANJA, ["Ejemplos", "agua y aceite, arena y agua,", "granito"], {fs:14, b1:1});
+    /* vasos */
+    o += NF.r(120, 380, 70, 80, "#e8f1fb", FT_TINTA, 4) + NF.r(122, 400, 66, 58, "#bcd7f1", "none", 2) + ftT(155, 476, "una fase", {a:"middle", fs:13});
+    o += NF.r(560, 380, 70, 80, "#e8f1fb", FT_TINTA, 4) + NF.r(562, 400, 66, 24, "#f3d98b", "none") + NF.r(562, 424, 66, 34, "#bcd7f1", "none") + ftT(595, 476, "dos fases", {a:"middle", fs:13});
+    return ftSvg(o); }},
+  {id:"q-separacion", mat:"quimica", t:"Métodos de separación de fases y de componentes", k:/separacion de (fases|mezclas|componentes|sistemas)|metodos de separacion|filtracion|decantacion|destilacion|tamizacion|cromatografia|imantacion/, svg:() => {
+    let o = ftT(400, 38, "¿Cómo separo lo que está mezclado?", {a:"middle", fs:23, b:true});
+    const M = [["Tamización", "sólidos de distinto tamaño", "arena y piedras"], ["Imantación", "un sólido magnético de otro que no lo es", "limaduras de hierro y arena"], ["Filtración", "un sólido que no se disuelve, de un líquido", "arena y agua"],
+      ["Decantación", "dos líquidos que no se mezclan, o sólido y líquido", "agua y aceite"], ["Evaporación", "el sólido disuelto en un líquido", "sal del agua de mar"], ["Destilación", "líquidos mezclados, por su punto de ebullición", "agua y alcohol"]];
+    M.forEach(([n, q, e], i) => { const x = 25 + (i % 3) * 255, y = 64 + Math.floor(i / 3) * 196;
+      o += NF.r(x, y, 240, 180, i < 3 ? HIS_CLARO.naranja : HIS_CLARO.azul, i < 3 ? FT_NARANJA : FT_AZUL, 12) + ftT(x + 120, y + 32, n, {a:"middle", fs:19, b:true});
+      o += hisTxtLineas(x + 120, y + 64, ["Separa:", ...hisWrap(q, 26)], {a:"middle", fs:14, lh:19}) + hisTxtLineas(x + 120, y + 150, ["Ej.: " + e], {a:"middle", fs:14, c:FT_SUAVE, it:true}); });
+    o += ftT(400, 470, "Fases (heterogéneos) arriba · componentes de una solución abajo", {a:"middle", fs:14, c:FT_SUAVE});
+    return ftSvg(o); }},
+  {id:"q-enlace", mat:"quimica", t:"Enlace iónico y enlace covalente (estructuras de Lewis)", k:/enlaces? quimicos?|enlace ionico|enlace covalente|regla del octeto|estructuras? de lewis|electrones de valencia/, svg:() => {
+    let o = ftT(400, 38, "Dos maneras de unirse los átomos", {a:"middle", fs:23, b:true});
+    const pts = (cx, cy, n, r, c) => { let s = ""; for (let i = 0; i < n; i++){ const a = -Math.PI / 2 + i * 2 * Math.PI / 8 + (i % 2 ? 0.25 : -0.25); s += NF.c((cx + r * Math.cos(a)).toFixed(1), (cy + r * Math.sin(a)).toFixed(1), 5, c, c, 1); } return s; };
+    o += ftT(200, 84, "Enlace iónico (NaCl)", {a:"middle", fs:18, b:true, c:FT_ROJO});
+    o += NF.c(110, 190, 34, "#f6dede", FT_ROJO) + ftT(110, 197, "Na", {a:"middle", fs:20, b:true}) + NF.c(146, 162, 5, FT_ROJO, FT_ROJO, 1);
+    o += NF.c(290, 190, 34, "#dff0e7", FT_VERDE) + ftT(290, 197, "Cl", {a:"middle", fs:20, b:true}) + pts(290, 190, 7, 44, FT_VERDE);
+    o += `<path d="M150 158 C190 120 230 120 252 152" fill="none" stroke="${FT_ROJO}" stroke-width="2.5"/><path d="M256 158 l-4 -15 l-9 9z" fill="${FT_ROJO}"/>`;
+    o += ftT(200, 268, "El sodio cede un electrón al cloro", {a:"middle", fs:14});
+    o += NF.c(130, 340, 30, "#f6dede", FT_ROJO) + ftT(130, 347, "Na⁺", {a:"middle", fs:19, b:true}) + NF.c(270, 340, 36, "#dff0e7", FT_VERDE) + ftT(270, 347, "Cl⁻", {a:"middle", fs:19, b:true}) + pts(270, 340, 8, 46, FT_VERDE);
+    o += ftT(200, 420, "Iones de carga opuesta se atraen", {a:"middle", fs:14});
+    o += NF.l(400, 70, 400, 450, FT_GRIS, 1.5, "6 6");
+    o += ftT(600, 84, "Enlace covalente (Cl₂)", {a:"middle", fs:18, b:true, c:FT_AZUL});
+    o += NF.c(560, 220, 38, "#e6eef8", FT_AZUL) + NF.c(640, 220, 38, "#e6eef8", FT_AZUL) + ftT(560, 227, "Cl", {a:"middle", fs:20, b:true}) + ftT(640, 227, "Cl", {a:"middle", fs:20, b:true});
+    o += NF.c(600, 212, 5, FT_ROJO, FT_ROJO, 1) + NF.c(600, 228, 5, FT_ROJO, FT_ROJO, 1);
+    [[520, 220], [560, 172], [560, 268]].forEach(([x, y]) => { o += NF.c(x - (x === 520 ? 0 : 7), y, 4.5, FT_AZUL, FT_AZUL, 1) + NF.c(x + (x === 520 ? 0 : 7), y + (x === 520 ? 14 : 0), 4.5, FT_AZUL, FT_AZUL, 1); });
+    [[680, 220], [640, 172], [640, 268]].forEach(([x, y]) => { o += NF.c(x - (x === 680 ? 0 : 7), y, 4.5, FT_AZUL, FT_AZUL, 1) + NF.c(x + (x === 680 ? 0 : 7), y + (x === 680 ? 14 : 0), 4.5, FT_AZUL, FT_AZUL, 1); });
+    o += hisTxtLineas(600, 320, ["Comparten un par de electrones (rojo):", "cada átomo completa 8 electrones", "en su última capa (regla del octeto)."], {a:"middle", fs:14, lh:20});
+    return ftSvg(o + NF.pie("Figura de Lapacho. Los puntos son electrones de la última capa.")); }},
+  {id:"q-reaccion", mat:"quimica", t:"Reacción química: reactivos, productos y conservación de la masa (combustión del metano)", k:/reaccion(es)? quimicas?|ecuacion(es)? quimicas?|balanceo|conservacion de la masa|lavoisier|combustion|reactivos|productos de (la|una) reaccion|cambios? quimicos?/, svg:() => {
+    const at = (x, y, el) => { const C = {C:["#3b3b3b", "#fff"], O:["#d0453b", "#fff"], H:["#f2f2f2", FT_TINTA]}[el]; return `<circle cx="${x}" cy="${y}" r="${el === "H" ? 11 : 17}" fill="${C[0]}" stroke="${FT_TINTA}" stroke-width="1.5"/>${ftT(x, y + 5, el, {a:"middle", fs:el === "H" ? 12 : 15, b:true, c:C[1]})}`; };
+    let o = ftT(400, 38, "Combustión del metano", {a:"middle", fs:23, b:true});
+    o += at(95, 170, "C") + at(95, 138, "H") + at(95, 202, "H") + at(63, 170, "H") + at(127, 170, "H");
+    o += ftT(185, 178, "+", {a:"middle", fs:30, b:true});
+    [140, 205].forEach(y => { o += at(250, y, "O") + at(282, y, "O"); });
+    o += ftT(220, 260, "2", {a:"middle", fs:16, c:FT_SUAVE}) + ftFlecha(330, 172, 440, 172, FT_TINTA, 3);
+    o += at(500, 172, "C") + at(468, 172, "O") + at(532, 172, "O") + ftT(600, 178, "+", {a:"middle", fs:30, b:true});
+    [130, 215].forEach(y => { o += at(690, y, "O") + at(668, y + 16, "H") + at(712, y + 16, "H"); });
+    o += ftT(95, 260, "metano", {a:"middle", fs:15}) + ftT(266, 280, "oxígeno", {a:"middle", fs:15}) + ftT(500, 260, "dióxido de carbono", {a:"middle", fs:15}) + ftT(690, 280, "agua", {a:"middle", fs:15});
+    o += ftT(190, 318, "Reactivos", {a:"middle", fs:17, b:true, c:FT_AZUL}) + ftT(590, 318, "Productos", {a:"middle", fs:17, b:true, c:FT_VERDE});
+    o += ftT(400, 360, "CH₄ + 2 O₂ → CO₂ + 2 H₂O", {a:"middle", fs:24, b:true});
+    o += hisCaja(130, 386, 540, 60, HIS_CLARO.gris, FT_SUAVE, ["Antes y después hay 1 C, 4 H y 4 O: los átomos se reacomodan,", "no se crean ni se destruyen (la masa se conserva)."], {fs:15});
+    return ftSvg(o + NF.pie()); }},
+  {id:"q-ph", mat:"quimica", t:"Escala de pH con ejemplos de la vida cotidiana", k:/\bph\b|acidos? y bases|acidez|basicidad|neutralizacion|indicadores? (acido|de ph)|sustancias acidas|sustancias basicas/, svg:() => {
+    const col = ["#c0392b", "#d35400", "#e67e22", "#f39c12", "#f1c40f", "#b7cc2e", "#7cb342", "#43a047", "#26a69a", "#1e88e5", "#3949ab", "#5e35b1", "#7b1fa2", "#8e24aa", "#6a1b9a"];
+    let o = ftT(400, 40, "Escala de pH", {a:"middle", fs:24, b:true});
+    for (let i = 0; i <= 14; i++){ const x = 40 + i * 48; o += `<rect x="${x}" y="190" width="48" height="56" fill="${col[i]}"/>` + ftT(x + 24, 226, String(i), {a:"middle", fs:18, b:true, c:i >= 4 && i <= 8 ? FT_TINTA : "#fff"}); }
+    o += NF.r(40, 190, 720, 56, "none", FT_TINTA);
+    o += ftT(140, 172, "← más ácido", {a:"middle", fs:16, b:true, c:FT_ROJO}) + ftT(400, 172, "neutro", {a:"middle", fs:16, b:true}) + ftT(660, 172, "más básico →", {a:"middle", fs:16, b:true, c:FT_VIOLETA});
+    const E = [[2, "jugo de limón"], [3, "vinagre"], [7, "agua pura"], [8.5, "bicarbonato"], [12.5, "lavandina"]];
+    E.forEach(([v, n], i) => { const x = 40 + v * 48 + 24, y = i % 2 ? 330 : 290; o += NF.l(x, 248, x, y - 18, FT_SUAVE, 1.5) + ftT(x, y, n, {a:"middle", fs:15}) + ftT(x, y + 20, "pH ≈ " + String(v).replace(".", ","), {a:"middle", fs:13, c:FT_SUAVE}); });
+    o += hisTxtLineas(400, 400, ["Cada número hacia abajo es diez veces más ácido.", "Con jugo de repollo morado se arma un indicador casero."], {a:"middle", fs:15, lh:22});
+    return ftSvg(o + NF.pie("Figura de Lapacho. Valores aproximados.")); }},
+  {id:"q-tabla", mat:"quimica", t:"Tabla periódica: grupos, períodos y tipos de elementos", k:/tabla periodica|elementos quimicos|grupos y periodos|metales y no metales|gases nobles|mendeleiev/, svg:() => {
+    const T = ["H................He", "LiBe..........BCNOFNe", "NaMg..........AlSiPSClAr", "KCaScTiVCrMnFeCoNiCuZnGaGeAsSeBrKr", "RbSrYZrNbMoTcRuRhPdAgCdInSnSbTeIXe", "CsBa*HfTaWReOsIrPtAuHgTlPbBiPoAtRn", "FrRa*RfDbSgBhHsMtDsRgCnNhFlMcLvTsOg"];
+    const parse = s => { const out = []; let i = 0; while (i < s.length){ if (s[i] === "." || s[i] === "*"){ out.push(s[i] === "*" ? "*" : ""); i++; continue; } let m = s[i]; i++; if (i < s.length && /[a-z]/.test(s[i])){ m += s[i]; i++; } out.push(m); } return out; };
+    const noMet = new Set(["H", "C", "N", "O", "P", "S", "Se"]), hal = new Set(["F", "Cl", "Br", "I", "At", "Ts"]), nob = new Set(["He", "Ne", "Ar", "Kr", "Xe", "Rn", "Og"]), semi = new Set(["B", "Si", "Ge", "As", "Sb", "Te", "Po"]);
+    let o = ftT(400, 34, "Tabla periódica (esquema)", {a:"middle", fs:22, b:true});
+    const w = 40, h = 40, x0 = 40, y0 = 78;
+    for (let g = 1; g <= 18; g++) o += ftT(x0 + (g - 1) * w + w / 2, y0 - 8, String(g), {a:"middle", fs:11, c:FT_SUAVE});
+    T.forEach((fila, p) => { o += ftT(x0 - 12, y0 + p * h + 25, String(p + 1), {a:"middle", fs:11, c:FT_SUAVE}); parse(fila).forEach((el, g) => { if (!el) return;
+      const f = el === "*" ? "#eeeeee" : nob.has(el) ? "#e1d8f3" : hal.has(el) ? "#d9efe2" : noMet.has(el) ? "#d2ecf7" : semi.has(el) ? "#f6ecc9" : "#f5dccf";
+      o += `<rect x="${x0 + g * w}" y="${y0 + p * h}" width="${w - 2}" height="${h - 2}" fill="${f}" stroke="#9aa59f" stroke-width="1"/>` + ftT(x0 + g * w + (w - 2) / 2, y0 + p * h + 25, el === "*" ? "…" : el, {a:"middle", fs:13, b:true}); }); });
+    const L = [["#f5dccf", "Metales"], ["#f6ecc9", "Semimetales"], ["#d2ecf7", "No metales"], ["#d9efe2", "Halógenos"], ["#e1d8f3", "Gases nobles"]];
+    L.forEach(([c, n], i) => { const x = 40 + i * 148; o += `<rect x="${x}" y="384" width="22" height="22" fill="${c}" stroke="#9aa59f"/>` + ftT(x + 30, 401, n, {fs:14}); });
+    o += hisTxtLineas(400, 438, ["Columnas: grupos (propiedades parecidas). Filas: períodos (cantidad de capas de electrones).", "«…»: lantánidos y actínidos, que van aparte."], {a:"middle", fs:13, lh:19, c:FT_SUAVE});
+    return ftSvg(o + NF.pie()); }},
+  /* ---------- Biología ---------- */
+  {id:"bio-celula", mat:"biologia", t:"Célula animal y célula vegetal: partes principales", k:/\bcelulas?\b|celular|organelas?|organulos?|eucariota|procariota|teoria celular/, svg:() => {
+    const num = (x, y, n) => NF.c(x, y, 12, "#ffffff", FT_TINTA, 1.5) + ftT(x, y + 5, String(n), {a:"middle", fs:13, b:true});
+    let o = ftT(400, 36, "Célula animal y célula vegetal", {a:"middle", fs:23, b:true});
+    o += `<ellipse cx="200" cy="200" rx="150" ry="115" fill="#fbeee6" stroke="${FT_NARANJA}" stroke-width="3"/>`;
+    o += NF.c(200, 200, 40, "#e9d9f5", FT_VIOLETA, 2.5) + NF.c(210, 195, 11, "#c7a8e3", FT_VIOLETA, 1.5);
+    o += `<ellipse cx="115" cy="160" rx="26" ry="13" fill="#f8d2b8" stroke="${FT_ROJO}" stroke-width="2"/><ellipse cx="285" cy="245" rx="26" ry="13" fill="#f8d2b8" stroke="${FT_ROJO}" stroke-width="2"/>`;
+    o += num(200, 86, 1) + num(270, 165, 2) + num(200, 200, 3) + num(115, 160, 4);
+    o += ftT(200, 344, "Célula animal", {a:"middle", fs:18, b:true});
+    o += hisTxtLineas(70, 376, ["1 Membrana", "2 Citoplasma", "3 Núcleo", "4 Mitocondria"], {fs:14, lh:21});
+    o += NF.r(450, 85, 300, 230, "#e3f2e5", FT_VERDE, 6) + NF.r(462, 97, 276, 206, "#f5fbf5", FT_VERDE, 4);
+    o += NF.r(580, 120, 140, 160, "#d6ecf7", FT_AZUL, 30) + NF.c(520, 150, 32, "#e9d9f5", FT_VIOLETA, 2.5) + NF.c(526, 146, 9, "#c7a8e3", FT_VIOLETA, 1.5);
+    [[500, 250], [540, 285], [690, 295], [495, 205]].forEach(([x, y]) => { o += `<ellipse cx="${x}" cy="${y}" rx="17" ry="9" fill="#7cc17f" stroke="${FT_VERDE}" stroke-width="1.5"/>`; });
+    o += num(456, 300, 1) + num(470, 112, 2) + num(520, 150, 3) + num(650, 200, 4) + num(540, 285, 5);
+    o += ftT(600, 344, "Célula vegetal", {a:"middle", fs:18, b:true});
+    o += hisTxtLineas(470, 376, ["1 Pared celular", "2 Membrana", "3 Núcleo", "4 Vacuola", "5 Cloroplasto"], {fs:14, lh:21});
+    return ftSvg(o + NF.pie("Figura de Lapacho. Esquema simplificado, sin escala.")); }},
+  {id:"bio-fotosintesis", mat:"biologia", t:"Fotosíntesis: qué entra y qué sale de la hoja", k:/fotosintesis|nutricion (de las plantas|vegetal|autotrofa)|cloroplastos?|clorofila|plantas? autotrofas?/, svg:() => {
+    let o = ftT(400, 38, "Fotosíntesis", {a:"middle", fs:24, b:true});
+    o += NF.c(90, 100, 36, "#fde68a", "#d4a514", 2.5); for (let i = 0; i < 8; i++){ const a = i * Math.PI / 4; o += NF.l((90 + 44 * Math.cos(a)).toFixed(1), (100 + 44 * Math.sin(a)).toFixed(1), (90 + 58 * Math.cos(a)).toFixed(1), (100 + 58 * Math.sin(a)).toFixed(1), "#d4a514", 3); }
+    o += `<path d="M400 440 C400 360 395 300 400 200" fill="none" stroke="#6b4f2a" stroke-width="10"/><path d="M400 440 l-50 30 M400 440 l40 35 M400 440 l-10 40" stroke="#6b4f2a" stroke-width="4"/>`;
+    o += `<path d="M400 250 C330 180 270 210 250 250 C300 280 360 280 400 250z" fill="#7cc17f" stroke="${FT_VERDE}" stroke-width="2.5"/><path d="M400 210 C470 140 540 170 560 210 C510 245 450 240 400 210z" fill="#7cc17f" stroke="${FT_VERDE}" stroke-width="2.5"/>`;
+    o += ftFlecha(140, 140, 290, 220, "#d4a514", 3.5) + ftT(160, 210, "luz del Sol", {fs:16, b:true, c:"#9a7a0c"});
+    o += ftFlecha(700, 150, 560, 200, FT_GRIS, 3.5) + ftT(610, 120, "dióxido de carbono (CO₂)", {fs:15, b:true});
+    o += ftFlecha(560, 225, 700, 290, FT_AZUL, 3.5) + ftT(605, 320, "oxígeno (O₂)", {fs:15, b:true, c:FT_AZUL});
+    o += ftFlecha(440, 455, 440, 300, "#2f7fbf", 3) + ftT(452, 400, "agua (H₂O)", {fs:15, b:true, c:"#2f7fbf"}) + ftT(452, 420, "desde la raíz", {fs:14, c:"#2f7fbf"});
+    o += hisCaja(30, 320, 260, 70, HIS_CLARO.verde, FT_VERDE, ["En los cloroplastos se fabrica", "glucosa: alimento de la planta"], {fs:14});
+    o += ftT(770, 470, "CO₂ + H₂O + luz → glucosa + O₂", {a:"end", fs:16, b:true});
+    return ftSvg(o + NF.pie()); }},
+  {id:"bio-cadena", mat:"biologia", t:"Cadena trófica: productores, consumidores y descomponedores", k:/cadenas? (trofica|alimentaria)s?|redes? troficas?|tramas? troficas?|ecosistemas?|productores|consumidores|descomponedores|niveles troficos/, svg:() => {
+    let o = ftT(400, 38, "Cadena trófica", {a:"middle", fs:24, b:true});
+    const N = [["Productor", "pasto", HIS_CLARO.verde, FT_VERDE], ["Consumidor primario", "saltamontes", HIS_CLARO.naranja, FT_NARANJA], ["Consumidor secundario", "rana", HIS_CLARO.azul, FT_AZUL], ["Consumidor terciario", "serpiente", HIS_CLARO.violeta, FT_VIOLETA]];
+    N.forEach(([a, b, f, c], i) => { const x = 18 + i * 196; o += hisCaja(x, 90, 176, 110, f, c, [...hisWrap(a, 14), "", b], {fs:16, b1:hisWrap(a, 14).length}); if (i < 3) o += ftFlecha(x + 178, 145, x + 194, 145, FT_TINTA, 3); });
+    o += ftT(400, 232, "La flecha indica hacia dónde pasa la energía: «es comido por».", {a:"middle", fs:15, c:FT_SUAVE});
+    o += hisCaja(220, 300, 360, 80, HIS_CLARO.gris, FT_SUAVE, ["Descomponedores (hongos y bacterias)", "transforman los restos en nutrientes del suelo"], {fs:15, b1:1});
+    [106, 302, 498, 694].forEach(x => { o += `<path d="M${x} 202 C${x} 260 400 250 400 296" fill="none" stroke="${FT_GRIS}" stroke-width="2" stroke-dasharray="5 5"/>`; });
+    o += `<path d="M220 360 C80 360 60 300 90 206" fill="none" stroke="${FT_VERDE}" stroke-width="2.5"/><path d="M90 200 l-8 15 h15z" fill="${FT_VERDE}"/>` + ftT(40, 420, "los nutrientes vuelven a las plantas", {fs:14, c:FT_VERDE});
+    return ftSvg(o + NF.pie()); }},
+  {id:"bio-niveles", mat:"biologia", t:"Niveles de organización de los seres vivos", k:/niveles de organizacion|tejidos?\b|organos y sistemas|celula,? tejido|poblacion,? comunidad/, svg:() => {
+    let o = ftT(400, 36, "Niveles de organización", {a:"middle", fs:23, b:true});
+    const N = ["Célula", "Tejido", "Órgano", "Sistema de órganos", "Organismo", "Población", "Comunidad", "Ecosistema"], E = ["neurona", "tejido nervioso", "cerebro", "sistema nervioso", "una persona", "personas de un lugar", "seres vivos de un lugar", "seres vivos y ambiente"];
+    N.forEach((n, i) => { const y = 66 + i * 50, w = 230 + i * 50, x = 400 - w / 2; o += NF.r(x, y, w, 42, ["#eef6f0", "#e4f1e8", "#d9ecdf", "#cfe6d6", "#e6eef8", "#dce7f5", "#d2e0f2", "#c8d9ef"][i], i < 4 ? FT_VERDE : FT_AZUL, 10) + ftT(400, y + 20, n, {a:"middle", fs:16, b:true}) + ftT(400, y + 36, E[i], {a:"middle", fs:12, c:FT_SUAVE}); });
+    o += ftFlecha(60, 440, 60, 80, FT_TINTA, 2.5) + hisTxtLineas(70, 260, ["más", "complejo"], {fs:13, c:FT_SUAVE});
+    return ftSvg(o + NF.pie()); }},
+  /* ---------- Matemática ---------- */
+  {id:"m-fracciones", mat:"matematica", t:"Fracciones equivalentes: 1/2 = 2/4 = 4/8", k:/fracci(on|ones)|numeros racionales|fracciones equivalentes|equivalencia de fracciones/, svg:() => {
+    let o = ftT(400, 40, "Fracciones equivalentes", {a:"middle", fs:24, b:true});
+    [[2, 1], [4, 2], [8, 4]].forEach(([d, n], k) => { const y = 90 + k * 110, w = 560 / d;
+      for (let i = 0; i < d; i++) o += `<rect x="${120 + i * w}" y="${y}" width="${w}" height="64" fill="${i < n ? "#9fd0b4" : "#ffffff"}" stroke="${FT_TINTA}" stroke-width="2"/>`;
+      o += ftT(70, y + 30, `${n}`, {a:"middle", fs:24, b:true}) + NF.l(52, y + 38, 88, y + 38, FT_TINTA, 2.5) + ftT(70, y + 62, `${d}`, {a:"middle", fs:24, b:true}); });
+    o += ftT(400, 440, "La parte pintada es la misma: 1/2 = 2/4 = 4/8", {a:"middle", fs:18, b:true});
+    o += ftT(400, 466, "Se obtienen multiplicando numerador y denominador por el mismo número.", {a:"middle", fs:14, c:FT_SUAVE});
+    return ftSvg(o + NF.pie()); }},
+  {id:"m-pitagoras", mat:"matematica", t:"Teorema de Pitágoras con el triángulo 3-4-5", k:/pitagoras|triangulos? rectangulos?|hipotenusa|catetos?/, svg:() => {
+    const u = 30, A = [250, 330], B = [250 + 4 * u, 330], C = [250, 330 - 3 * u];
+    let o = ftT(400, 36, "Teorema de Pitágoras", {a:"middle", fs:24, b:true});
+    o += `<rect x="${A[0]}" y="${A[1]}" width="${4 * u}" height="${4 * u}" fill="#e6eef8" stroke="${FT_AZUL}" stroke-width="2"/>`;
+    o += `<rect x="${A[0] - 3 * u}" y="${C[1]}" width="${3 * u}" height="${3 * u}" fill="#fbefdc" stroke="${FT_NARANJA}" stroke-width="2"/>`;
+    const dx = B[0] - C[0], dy = B[1] - C[1];
+    o += `<polygon points="${C[0]},${C[1]} ${B[0]},${B[1]} ${B[0] + dy},${B[1] - dx} ${C[0] + dy},${C[1] - dx}" fill="#e5f2ec" stroke="${FT_VERDE}" stroke-width="2"/>`;
+    o += `<polygon points="${A.join(",")} ${B.join(",")} ${C.join(",")}" fill="#ffffff" stroke="${FT_TINTA}" stroke-width="3"/><path d="M${A[0]} ${A[1] - 14} h14 v14" fill="none" stroke="${FT_TINTA}" stroke-width="1.5"/>`;
+    o += ftT(A[0] + 2 * u, A[1] + 2 * u + 6, "16", {a:"middle", fs:22, b:true, c:FT_AZUL}) + ftT(A[0] - 1.5 * u, C[1] + 1.5 * u + 6, "9", {a:"middle", fs:22, b:true, c:FT_NARANJA});
+    o += ftT((C[0] + B[0] + dy) / 2, (C[1] + B[1] - dx) / 2 + 8, "25", {a:"middle", fs:22, b:true, c:FT_VERDE});
+    o += ftT(A[0] + 2 * u, A[1] - 8, "4", {a:"middle", fs:16, b:true}) + ftT(A[0] + 10, A[1] - 1.5 * u + 6, "3", {fs:16, b:true}) + ftT((B[0] + C[0]) / 2 - 10, (B[1] + C[1]) / 2 + 18, "5", {a:"middle", fs:16, b:true});
+    o += hisTxtLineas(560, 380, ["3² + 4² = 5²", "9 + 16 = 25"], {a:"middle", fs:22, lh:32, b:true});
+    o += hisTxtLineas(560, 450, ["En un triángulo rectángulo, el área del cuadrado", "sobre la hipotenusa = la suma de las otras dos."], {a:"middle", fs:13, lh:18, c:FT_SUAVE});
+    return ftSvg(o + NF.pie()); }},
+  {id:"m-lineal", mat:"matematica", t:"Función lineal y = 2x + 1: pendiente y ordenada al origen", k:/funcion(es)? lineal(es)?|pendiente de (la|una) recta|ordenada al origen|ecuacion de la recta|rectas? en el plano|proporcionalidad directa/, svg:() => {
+    const x0 = 400, y0 = 330, u = 40, P = (x, y) => [x0 + x * u, y0 - y * u];
+    let o = ftT(400, 34, "Función lineal: y = 2x + 1", {a:"middle", fs:22, b:true});
+    for (let i = -8; i <= 8; i++){ o += NF.l(x0 + i * u, 60, x0 + i * u, 470, "#e6ebe8", 1); } for (let j = -3; j <= 6; j++){ o += NF.l(60, y0 - j * u, 740, y0 - j * u, "#e6ebe8", 1); }
+    o += ftFlecha(60, y0, 750, y0, FT_TINTA, 2) + ftFlecha(x0, 470, x0, 56, FT_TINTA, 2) + ftT(740, y0 + 24, "x", {fs:16, it:true}) + ftT(x0 + 12, 70, "y", {fs:16, it:true});
+    for (let i = -3; i <= 3; i++) if (i) o += ftT(x0 + i * u, y0 + 20, String(i), {a:"middle", fs:12, c:FT_SUAVE});
+    const [a1, b1] = P(-2.2, -3.4), [a2, b2] = P(2.6, 6.2); o += NF.l(a1, b1, a2, b2, FT_VERDE, 3.5);
+    const [qx, qy] = P(0, 1), [rx, ry] = P(1, 1), [sx, sy] = P(1, 3);
+    o += NF.l(qx, qy, rx, ry, FT_NARANJA, 3, "6 4") + NF.l(rx, ry, sx, sy, FT_NARANJA, 3, "6 4") + ftT((qx + rx) / 2, qy + 20, "1", {a:"middle", fs:15, b:true, c:FT_NARANJA}) + ftT(rx + 10, (ry + sy) / 2 + 5, "2", {fs:15, b:true, c:FT_NARANJA});
+    o += NF.c(qx, qy, 6, FT_ROJO, FT_ROJO) + ftT(qx - 10, qy - 8, "(0; 1)", {a:"end", fs:14, b:true, c:FT_ROJO});
+    o += hisCaja(500, 380, 250, 76, HIS_CLARO.gris, FT_SUAVE, ["Pendiente 2: por cada 1 en x,", "y sube 2. Ordenada al origen 1:", "corta al eje y en 1."], {fs:13});
+    return ftSvg(o + NF.pie()); }},
+  {id:"m-cuadratica", mat:"matematica", t:"Función cuadrática y = x² − 2x − 3: raíces, vértice y eje de simetría", k:/funcion(es)? cuadratica|parabolas?\b(?!.*tiro)|vertice de la parabola|raices de (la|una) (funcion|ecuacion)|ecuacion(es)? de segundo grado/, svg:() => {
+    const x0 = 330, y0 = 250, u = 36, P = (x, y) => [x0 + x * u, y0 - y * u];
+    let o = ftT(400, 32, "Función cuadrática: y = x² − 2x − 3", {a:"middle", fs:22, b:true});
+    for (let i = -4; i <= 6; i++) o += NF.l(x0 + i * u, 50, x0 + i * u, 470, "#e6ebe8", 1); for (let j = -5; j <= 5; j++) o += NF.l(170, y0 - j * u, 560, y0 - j * u, "#e6ebe8", 1);
+    o += ftFlecha(170, y0, 570, y0, FT_TINTA, 2) + ftFlecha(x0, 470, x0, 46, FT_TINTA, 2);
+    let d = ""; for (let x = -1.9; x <= 3.95; x += 0.05){ const [px, py] = P(x, x * x - 2 * x - 3); d += (d ? " L" : "M") + px.toFixed(1) + " " + py.toFixed(1); }
+    o += `<path d="${d}" fill="none" stroke="${FT_AZUL}" stroke-width="3.5"/>`;
+    const [vx, vy] = P(1, -4); o += NF.l(vx, 50, vx, 470, FT_VIOLETA, 2, "7 5") + NF.c(vx, vy, 6, FT_VIOLETA, FT_VIOLETA) + ftT(vx + 10, vy + 20, "vértice (1; −4)", {fs:14, b:true, c:FT_VIOLETA});
+    [[-1, 0], [3, 0]].forEach(([x]) => { const [px, py] = P(x, 0); o += NF.c(px, py, 6, FT_ROJO, FT_ROJO) + ftT(px, py - 12, `x = ${String(x).replace("-", "−")}`, {a:"middle", fs:14, b:true, c:FT_ROJO}); });
+    const [cx, cy] = P(0, -3); o += NF.c(cx, cy, 5, FT_NARANJA, FT_NARANJA) + ftT(cx - 8, cy + 4, "(0; −3)", {a:"end", fs:13, b:true, c:FT_NARANJA});
+    o += hisCaja(585, 120, 190, 190, HIS_CLARO.gris, FT_SUAVE, ["Raíces: −1 y 3", "(donde corta al eje x)", "", "Vértice: (1; −4)", "", "Eje de simetría:", "x = 1"], {fs:14});
+    return ftSvg(o + NF.pie()); }},
+  {id:"m-angulos", mat:"matematica", t:"Clasificación de ángulos: agudo, recto, obtuso y llano", k:/tipos de angulos|clasificacion de (los )?angulos|angulos? (agudos?|rectos?|obtusos?|llanos?|complementarios|suplementarios)|transportador/, svg:() => {
+    let o = ftT(400, 40, "Clasificación de ángulos", {a:"middle", fs:24, b:true});
+    const A = [["Agudo", 50, "menos de 90°"], ["Recto", 90, "90°"], ["Obtuso", 135, "más de 90° y menos de 180°"], ["Llano", 180, "180°"]];
+    A.forEach(([n, g, d], i) => { const cx = 40 + (i % 2) * 400 + 120, cy = 180 + Math.floor(i / 2) * 200, r = 110, a = g * Math.PI / 180;
+      o += NF.l(cx, cy, cx + r, cy, FT_TINTA, 3) + NF.l(cx, cy, (cx + r * Math.cos(a)).toFixed(1), (cy - r * Math.sin(a)).toFixed(1), FT_TINTA, 3);
+      o += g === 90 ? `<path d="M${cx + 24} ${cy} v-24 h-24" fill="none" stroke="${FT_ROJO}" stroke-width="2.5"/>` : `<path d="M${cx + 34} ${cy} A34 34 0 0 0 ${(cx + 34 * Math.cos(a)).toFixed(1)} ${(cy - 34 * Math.sin(a)).toFixed(1)}" fill="none" stroke="${FT_ROJO}" stroke-width="2.5"/>`;
+      o += ftT(cx + 150, cy - 50, n, {fs:20, b:true}) + hisTxtLineas(cx + 150, cy - 24, hisWrap(d, 16), {fs:14, c:FT_SUAVE, lh:18}); });
+    return ftSvg(o + NF.pie()); }},
+  {id:"m-trigo", mat:"matematica", t:"Razones trigonométricas en el triángulo rectángulo", k:/trigonometr|razones trigonometricas|\bseno\b|\bcoseno\b|\btangente de/, svg:() => {
+    let o = ftT(400, 36, "Razones trigonométricas", {a:"middle", fs:24, b:true});
+    const A = [110, 380], B = [470, 380], C = [470, 140];
+    o += `<polygon points="${A.join(",")} ${B.join(",")} ${C.join(",")}" fill="#f5fbf7" stroke="${FT_TINTA}" stroke-width="3"/><path d="M${B[0] - 18} ${B[1]} v-18 h18" fill="none" stroke="${FT_TINTA}" stroke-width="1.5"/>`;
+    o += `<path d="M${A[0] + 60} ${A[1]} A60 60 0 0 0 ${(A[0] + 60 * Math.cos(Math.atan2(240, 360))).toFixed(1)} ${(A[1] - 60 * Math.sin(Math.atan2(240, 360))).toFixed(1)}" fill="none" stroke="${FT_ROJO}" stroke-width="2.5"/>` + ftT(A[0] + 72, A[1] - 12, "α", {fs:20, b:true, c:FT_ROJO});
+    o += ftT(290, 410, "cateto adyacente", {a:"middle", fs:15, b:true, c:FT_AZUL}) + ftT(485, 265, "cateto", {fs:15, b:true, c:FT_VERDE}) + ftT(485, 284, "opuesto", {fs:15, b:true, c:FT_VERDE}) + ftT(270, 240, "hipotenusa", {a:"middle", fs:15, b:true, c:FT_VIOLETA});
+    o += hisCaja(560, 120, 220, 230, HIS_CLARO.gris, FT_SUAVE, ["sen α = opuesto / hipotenusa", "", "cos α = adyacente / hipotenusa", "", "tg α = opuesto / adyacente"], {fs:14});
+    return ftSvg(o + NF.pie()); }},
+  {id:"m-tendencia", mat:"matematica", t:"Medidas de tendencia central: media, mediana y moda", k:/tendencia central|\bmediana\b|\bmoda\b|estadistica descriptiva|promedio de (los )?datos/, svg:() => {
+    let o = ftT(400, 36, "Media, mediana y moda", {a:"middle", fs:24, b:true});
+    o += ftT(400, 76, "Notas de 7 alumnos: 4, 6, 6, 6, 7, 8, 9", {a:"middle", fs:17});
+    const x = v => 120 + (v - 3) * 85, cnt = {4:1, 6:3, 7:1, 8:1, 9:1};
+    o += NF.l(90, 330, 710, 330, FT_TINTA, 2); for (let v = 3; v <= 10; v++) o += NF.l(x(v), 330, x(v), 338) + ftT(x(v), 358, String(v), {a:"middle", fs:14});
+    Object.entries(cnt).forEach(([v, n]) => { for (let k = 0; k < n; k++) o += NF.c(x(+v), 310 - k * 34, 14, "#9fd0b4", FT_VERDE); });
+    const media = 46 / 7, mx = x(media).toFixed(1);
+    o += NF.l(mx, 120, mx, 330, FT_ROJO, 2.5, "6 4") + ftT(+mx - 8, 136, "media ≈ 6,6", {a:"end", fs:15, b:true, c:FT_ROJO});
+    o += ftT(x(6) - 26, 247, "moda = 6 (la que más se repite)", {a:"end", fs:15, b:true, c:FT_VERDE});
+    o += ftT(x(6), 400, "mediana = 6 (el valor del medio: 4, 6, 6, [6], 7, 8, 9)", {a:"middle", fs:15, b:true, c:FT_AZUL});
+    o += ftT(400, 440, "media = suma de los datos ÷ cantidad de datos = 46 ÷ 7", {a:"middle", fs:14, c:FT_SUAVE});
+    return ftSvg(o + NF.pie("Figura de Lapacho. Datos de ejemplo.")); }},
+  /* ---------- Geografía y Ciencias de la Tierra ---------- */
+  {id:"g-agua", mat:"geografia", t:"Ciclo del agua", k:/ciclo del agua|ciclo hidrologico|precipitaciones?|escorrentia|infiltracion|aguas subterraneas/, svg:() => {
+    let o = ftT(400, 36, "El ciclo del agua", {a:"middle", fs:24, b:true});
+    o += NF.c(90, 90, 34, "#fde68a", "#d4a514", 2.5);
+    o += `<path d="M0 470 L0 380 Q120 360 240 385 L240 470z" fill="#bcd7f1" stroke="none"/><path d="M240 470 L240 385 Q330 360 420 300 L520 200 L600 260 L700 230 L800 290 L800 470z" fill="#cfe3c4" stroke="${FT_VERDE}" stroke-width="2"/>`;
+    const nube = (x, y, c) => `<g fill="${c}" stroke="#8a948f" stroke-width="1.5"><circle cx="${x}" cy="${y}" r="26"/><circle cx="${x + 30}" cy="${y - 12}" r="30"/><circle cx="${x + 62}" cy="${y}" r="24"/><rect x="${x}" y="${y}" width="62" height="24" stroke="none"/></g>`;
+    o += nube(330, 110, "#ffffff") + nube(560, 100, "#d6dde3");
+    o += ftFlecha(120, 360, 300, 150, "#d0453b", 3) + ftT(40, 300, "evaporación", {fs:15, b:true, c:"#d0453b"});
+    o += ftFlecha(395, 112, 520, 102, FT_SUAVE, 3) + ftT(410, 80, "condensación", {fs:15, b:true});
+    for (let i = 0; i < 6; i++) o += NF.l(565 + i * 12, 140, 555 + i * 12, 175, "#2f7fbf", 2.5);
+    o += ftT(640, 195, "precipitación", {fs:15, b:true, c:"#2f7fbf"});
+    o += ftFlecha(540, 260, 330, 380, "#2f7fbf", 3) + ftT(420, 350, "escurrimiento", {fs:15, b:true, c:"#2f7fbf"});
+    o += ftFlecha(640, 300, 640, 400, "#6b4f2a", 2.5) + ftT(650, 380, "infiltración", {fs:15, b:true, c:"#6b4f2a"});
+    o += ftT(110, 430, "mar, ríos, lagos", {fs:14, c:FT_TINTA});
+    return ftSvg(o + NF.pie()); }},
+  {id:"g-coordenadas", mat:"geografia", t:"Coordenadas geográficas: paralelos, meridianos, latitud y longitud", k:/coordenadas geograficas|latitud|longitud(?! de onda)|paralelos\b|meridianos?|husos? horarios?|greenwich/, svg:() => {
+    let o = ftT(400, 34, "Coordenadas geográficas", {a:"middle", fs:24, b:true});
+    const cx = 260, cy = 270, R = 190;
+    o += NF.c(cx, cy, R, "#e3f0fa", FT_AZUL, 2.5);
+    [-60, -30, 30, 60].forEach(lat => { const y = cy - R * Math.sin(lat * Math.PI / 180), rx = R * Math.cos(lat * Math.PI / 180); o += `<ellipse cx="${cx}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${(rx * 0.12).toFixed(1)}" fill="none" stroke="${FT_GRIS}" stroke-width="1.5"/>`; });
+    o += `<ellipse cx="${cx}" cy="${cy}" rx="${R}" ry="${R * 0.12}" fill="none" stroke="${FT_ROJO}" stroke-width="3"/>`;
+    [-60, -30, 30, 60].forEach(lon => { o += `<ellipse cx="${cx}" cy="${cy}" rx="${(R * Math.abs(Math.sin(lon * Math.PI / 180))).toFixed(1)}" ry="${R}" fill="none" stroke="${FT_GRIS}" stroke-width="1.5"/>`; });
+    o += NF.l(cx, cy - R, cx, cy + R, FT_VERDE, 3);
+    o += ftT(cx + R + 12, cy + 5, "Ecuador (0°)", {fs:15, b:true, c:FT_ROJO}) + ftT(cx + 8, cy - R - 10, "Meridiano de Greenwich (0°)", {fs:15, b:true, c:FT_VERDE});
+    const ty = cy + R * Math.sin(26.8 * Math.PI / 180), tx = cx - R * Math.cos(26.8 * Math.PI / 180) * Math.sin(65.2 * Math.PI / 180);
+    o += NF.c(tx.toFixed(1), ty.toFixed(1), 7, FT_NARANJA, FT_TINTA, 1.5) + ftT(tx - 10, ty + 26, "Tucumán", {a:"end", fs:14, b:true, c:FT_NARANJA});
+    o += hisCaja(500, 300, 280, 150, HIS_CLARO.gris, FT_SUAVE, ["Latitud: distancia al Ecuador", "(paralelos, 0° a 90° N o S)", "Longitud: distancia a Greenwich", "(meridianos, 0° a 180° E u O)", "Tucumán: 26,8° S · 65,2° O"], {fs:14});
+    return ftSvg(o + NF.pie("Figura de Lapacho. Coordenadas aproximadas de San Miguel de Tucumán.")); }},
+  {id:"g-capas", mat:"geografia", t:"Estructura interna de la Tierra: corteza, manto y núcleo", k:/estructura interna de la tierra|capas de la tierra|corteza terrestre|\bmanto\b|nucleo (terrestre|de la tierra|externo|interno)|placas tectonicas|tectonica|sismos?|volcanes/, svg:() => {
+    let o = ftT(400, 36, "Estructura interna de la Tierra", {a:"middle", fs:23, b:true});
+    const cx = 250, cy = 465;
+    [[355, "#8d6e63"], [345, "#e07a3f"], [190, "#f2a541"], [105, "#f7d154"]].forEach(([r, c]) => { o += `<path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy}z" fill="${c}" stroke="${FT_TINTA}" stroke-width="1.5"/>`; });
+    const lab = (r, ang, y, n, d) => { const a = ang * Math.PI / 180, px = cx + r * Math.cos(a), py = cy - r * Math.sin(a); return NF.l(px.toFixed(1), py.toFixed(1), 618, y, FT_TINTA, 1.2) + ftT(626, y + 5, n, {fs:16, b:true}) + ftT(626, y + 24, d, {fs:13, c:FT_SUAVE}); };
+    o += lab(350, 60, 100, "Corteza", "5 a 70 km de espesor") + lab(270, 40, 200, "Manto", "hasta unos 2900 km") + lab(150, 30, 300, "Núcleo externo", "líquido: hierro y níquel") + lab(60, 20, 400, "Núcleo interno", "sólido, unos 5000 °C");
+    return ftSvg(o + NF.pie("Figura de Lapacho. Sin escala; valores aproximados.")); }},
+  {id:"g-estaciones", mat:"geografia", t:"Estaciones del año en el hemisferio sur: traslación e inclinación del eje", k:/estaciones del ano|solsticios?|equinoccios?|movimientos? de (la tierra|traslacion|rotacion)|traslacion de la tierra/, svg:() => {
+    let o = ftT(400, 34, "Las estaciones (hemisferio sur)", {a:"middle", fs:23, b:true});
+    o += `<ellipse cx="400" cy="265" rx="290" ry="115" fill="none" stroke="${FT_GRIS}" stroke-width="2" stroke-dasharray="6 6"/>`;
+    o += NF.c(400, 265, 42, "#fde68a", "#d4a514", 2.5) + ftT(400, 271, "Sol", {a:"middle", fs:15, b:true});
+    const T = (x, y, f, txt, abajo) => NF.c(x, y, 24, "#cfe3f5", FT_AZUL, 2) + `<line x1="${x - 9}" y1="${y - 30}" x2="${x + 9}" y2="${y + 30}" stroke="${FT_TINTA}" stroke-width="2"/>`
+      + ftT(x, abajo ? y + 50 : y - 56, f, {a:"middle", fs:14, b:true}) + ftT(x, abajo ? y + 68 : y - 38, txt, {a:"middle", fs:13});
+    o += T(110, 265, "21 de diciembre", "verano en el sur", true) + T(690, 265, "21 de junio", "invierno en el sur", true) + T(400, 150, "21 de septiembre", "primavera en el sur", false) + T(400, 380, "21 de marzo", "otoño en el sur", true);
+    o += ftT(400, 480, "El eje está inclinado unos 23,5°: por eso cambia cuánto Sol recibe cada hemisferio.", {a:"middle", fs:13, c:FT_SUAVE});
+    return ftSvg(o); }},
+  {id:"g-atmosfera", mat:"geografia", t:"Capas de la atmósfera", k:/atmosfera|capas de la atmosfera|capa de ozono|troposfera|estratosfera/, svg:() => {
+    let o = ftT(400, 34, "Capas de la atmósfera", {a:"middle", fs:24, b:true});
+    const C = [["Exosfera", "más de 600 km", "#eef0fb"], ["Termosfera", "85 a 600 km · auroras", "#e1e6f7"], ["Mesosfera", "50 a 85 km · se queman los meteoros", "#d3dcf3"], ["Estratosfera", "12 a 50 km · capa de ozono", "#c3d2ef"], ["Troposfera", "0 a 12 km · clima, nubes, vida", "#b2c7ea"]];
+    C.forEach(([n, d, f], i) => { const y = 60 + i * 80; o += `<rect x="60" y="${y}" width="680" height="80" fill="${f}" stroke="#8fa3c6" stroke-width="1"/>` + ftT(90, y + 36, n, {fs:19, b:true}) + ftT(90, y + 60, d, {fs:14, c:FT_SUAVE}); });
+    o += `<rect x="60" y="${60 + 3 * 80 + 52}" width="680" height="10" fill="#9fd0b4" opacity=".8"/>` + ftT(728, 60 + 3 * 80 + 48, "ozono", {a:"end", fs:13, b:true, c:FT_VERDE});
+    o += `<path d="M560 460 L600 420 L630 440 L670 395 L740 460z" fill="#8d6e63"/>` + ftT(500, 455, "Aconquija: 5550 m", {a:"end", fs:13, c:FT_TINTA});
+    return ftSvg(o + NF.pie("Figura de Lapacho. Alturas aproximadas; sin escala.")); }}
+];
+FIG_MAS.forEach(f => FIG_TEMA.push(f));
 
 /* ============================================================
    Inicio
